@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FORTREX — Trade Real. Win Real.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cinzel:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #06070A;
+  --bg-2: #0A0C12;
+  --gold: #D4AF37;
+  --gold-bright: #F4D03F;
+  --emerald: #10B981;
+  --emerald-dim: #059669;
+  --text: #E8E8E8;
+  --text-dim: #888892;
+  --text-faint: #4A4A52;
+  --glass: rgba(15, 17, 24, 0.55);
+  --glass-border: rgba(212, 175, 55, 0.15);
+  --glass-border-hover: rgba(212, 175, 55, 0.35);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+#three-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== NAV ===== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 40px;
+  background: linear-gradient(180deg, rgba(6,7,10,0.85) 0%, transparent 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 22px; font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-shadow: 0 0 20px rgba(212,175,55,0.3);
+}
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  color: var(--text-dim); text-decoration: none;
+  font-size: 14px; font-weight: 500;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-cta {
+  padding: 10px 24px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-bright) 100%);
+  color: #06070A;
+  border: none; border-radius: 8px;
+  font-size: 14px; font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 0 20px rgba(212,175,55,0.2);
+}
+.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 4px 30px rgba(212,175,55,0.4); }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center;
+  padding: 80px 20px;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px;
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.3);
+  border-radius: 100px;
+  font-size: 13px; color: var(--emerald);
+  margin-bottom: 32px;
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+@keyframes pulse-badge {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.2); }
+  50% { box-shadow: 0 0 0 8px rgba(16,185,129,0); }
+}
+.hero-badge .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 10px var(--emerald);
+}
+.hero h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 900;
+  letter-spacing: 2px;
+  line-height: 1.05;
+  margin-bottom: 20px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #D4AF37 60%, #8B7218 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-tagline {
+  font-size: clamp(18px, 3vw, 28px);
+  font-weight: 300;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+.hero-sub {
+  font-size: 16px; color: var(--text-faint);
+  max-width: 560px; line-height: 1.7; margin-bottom: 40px;
+}
+.hero-cta-group { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+.btn-primary {
+  padding: 16px 40px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-bright) 100%);
+  color: #06070A; border: none; border-radius: 12px;
+  font-size: 16px; font-weight: 700;
+  cursor: pointer; transition: all 0.3s;
+  box-shadow: 0 0 30px rgba(212,175,55,0.25);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 40px rgba(212,175,55,0.4); }
+.btn-secondary {
+  padding: 16px 40px;
+  background: var(--glass); color: var(--text);
+  border: 1px solid var(--glass-border); border-radius: 12px;
+  font-size: 16px; font-weight: 600;
+  cursor: pointer; transition: all 0.3s;
+  backdrop-filter: blur(10px);
+}
+.btn-secondary:hover { border-color: var(--glass-border-hover); background: rgba(15,17,24,0.8); }
+
+/* Live counter */
+.hero-stats {
+  display: flex; gap: 48px; margin-top: 56px;
+  flex-wrap: wrap; justify-content: center;
+}
+.stat { text-align: center; }
+.stat-num {
+  font-family: 'Cinzel', serif;
+  font-size: 36px; font-weight: 800;
+  color: var(--gold);
+  text-shadow: 0 0 20px rgba(212,175,55,0.2);
+}
+.stat-label { font-size: 12px; color: var(--text-faint); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; }
+
+/* ===== SECTIONS ===== */
+.section {
+  min-height: 100vh;
+  padding: 100px 40px;
+  display: flex; flex-direction: column; justify-content: center;
+  max-width: 1200px; margin: 0 auto;
+}
+.section-tag {
+  display: inline-block; align-self: flex-start;
+  font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
+  padding: 4px 12px; border: 1px solid var(--glass-border); border-radius: 4px;
+}
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800; margin-bottom: 16px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #A0A0A8 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.section-sub {
+  font-size: 17px; color: var(--text-dim); margin-bottom: 48px; max-width: 600px; line-height: 1.7;
+}
+
+/* ===== TOURNAMENT CARDS ===== */
+.arena-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+.arena-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 28px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.arena-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0; transition: opacity 0.4s;
+}
+.arena-card:hover {
+  border-color: var(--glass-border-hover);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 30px rgba(212,175,55,0.08);
+}
+.arena-card:hover::before { opacity: 1; }
+.arena-status {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; margin-bottom: 16px;
+}
+.arena-status.live { color: var(--emerald); }
+.arena-status.locked { color: var(--text-faint); }
+.arena-status .dot { width: 6px; height: 6px; border-radius: 50%; }
+.arena-status.live .dot { background: var(--emerald); box-shadow: 0 0 8px var(--emerald); animation: blink 1.5s infinite; }
+.arena-status.locked .dot { background: var(--text-faint); }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.arena-name { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+.arena-desc { font-size: 14px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.6; }
+.arena-prize {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.05);
+}
+.arena-prize-label { font-size: 12px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 1px; }
+.arena-prize-value { font-size: 20px; font-weight: 800; color: var(--gold); }
+.arena-progress { margin-top: 16px; }
+.progress-bar {
+  height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+  border-radius: 3px; transition: width 1s ease;
+  box-shadow: 0 0 10px rgba(212,175,55,0.3);
+}
+.progress-label { font-size: 11px; color: var(--text-faint); margin-top: 6px; display: flex; justify-content: space-between; }
+
+/* ===== HOW IT WORKS ===== */
+.steps {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.step {
+  text-align: center; padding: 36px 24px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  transition: all 0.4s;
+}
+.step:hover { border-color: var(--glass-border-hover); transform: translateY(-4px); }
+.step-num {
+  font-family: 'Cinzel', serif;
+  font-size: 48px; font-weight: 900;
+  color: var(--gold); opacity: 0.3;
+  margin-bottom: 12px;
+}
+.step-icon { font-size: 32px; margin-bottom: 16px; }
+.step h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+.step p { font-size: 14px; color: var(--text-dim); line-height: 1.6; }
+
+/* ===== REX CURRENCY ===== */
+.rex-section {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+}
+.rex-coin {
+  width: 200px; height: 200px; margin: 0 auto;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--gold-bright), var(--gold) 40%, #8B7218 80%);
+  box-shadow: 0 0 60px rgba(212,175,55,0.3), inset 0 0 30px rgba(0,0,0,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif; font-size: 48px; font-weight: 900; color: #06070A;
+  animation: float-coin 4s ease-in-out infinite;
+}
+@keyframes float-coin {
+  0%, 100% { transform: translateY(0) rotateY(0deg); }
+  50% { transform: translateY(-10px) rotateY(8deg); }
+}
+.rex-earn, .rex-spend { margin-top: 24px; }
+.rex-earn h4, .rex-spend h4 {
+  font-size: 14px; color: var(--emerald); margin-bottom: 12px;
+  text-transform: uppercase; letter-spacing: 1.5px;
+}
+.rex-spend h4 { color: var(--gold); }
+.rex-list { list-style: none; }
+.rex-list li {
+  padding: 10px 0; font-size: 14px; color: var(--text-dim);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.rex-list li span:last-child { color: var(--gold); font-weight: 600; }
+
+/* ===== LEADERBOARD ===== */
+.leaderboard {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 16px; overflow: hidden; backdrop-filter: blur(12px);
+}
+.lb-header {
+  display: grid; grid-template-columns: 60px 1fr 100px 120px 100px;
+  padding: 16px 24px; font-size: 12px; color: var(--text-faint);
+  text-transform: uppercase; letter-spacing: 1.5px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.lb-row {
+  display: grid; grid-template-columns: 60px 1fr 100px 120px 100px;
+  padding: 18px 24px; align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  transition: background 0.3s;
+}
+.lb-row:hover { background: rgba(212,175,55,0.03); }
+.lb-row:last-child { border-bottom: none; }
+.lb-rank {
+  font-family: 'Cinzel', serif; font-size: 18px; font-weight: 800;
+}
+.lb-rank.gold { color: var(--gold); }
+.lb-rank.silver { color: #C0C0C0; }
+.lb-rank.bronze { color: #CD7F32; }
+.lb-name { font-weight: 600; font-size: 15px; }
+.lb-bracket { font-size: 13px; color: var(--text-dim); }
+.lb-score { font-size: 15px; font-weight: 700; color: var(--emerald); }
+.lb-rex { font-size: 14px; color: var(--gold); font-weight: 600; }
+
+/* ===== CALCULATOR ===== */
+.calc-card {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 16px; padding: 36px; backdrop-filter: blur(12px);
+  max-width: 600px;
+}
+.calc-row { margin-bottom: 24px; }
+.calc-label { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; display: block; }
+.calc-select, .calc-input {
+  width: 100%; padding: 14px 16px;
+  background: rgba(6,7,10,0.6); color: var(--text);
+  border: 1px solid var(--glass-border); border-radius: 10px;
+  font-size: 15px; font-family: 'Inter', sans-serif;
+  outline: none; transition: border-color 0.3s;
+}
+.calc-select:focus, .calc-input:focus { border-color: var(--gold); }
+.calc-slider {
+  width: 100%; -webkit-appearance: none; appearance: none;
+  height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; outline: none;
+}
+.calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--gold); cursor: pointer;
+  box-shadow: 0 0 10px rgba(212,175,55,0.4);
+}
+.calc-slider::-moz-range-thumb {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--gold); cursor: pointer; border: none;
+  box-shadow: 0 0 10px rgba(212,175,55,0.4);
+}
+.calc-result {
+  background: rgba(6,7,10,0.6); border: 1px solid var(--glass-border);
+  border-radius: 12px; padding: 24px; margin-top: 8px;
+}
+.calc-result-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 14px; }
+.calc-result-row span:first-child { color: var(--text-dim); }
+.calc-result-row span:last-child { font-weight: 700; }
+.calc-result-total {
+  border-top: 1px solid rgba(255,255,255,0.08); margin-top: 8px; padding-top: 16px;
+}
+.calc-result-total span:last-child { color: var(--emerald); font-size: 18px; }
+
+/* ===== DISCORD CTA ===== */
+.discord-cta {
+  text-align: center; padding: 80px 40px;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 20px; backdrop-filter: blur(12px);
+}
+.discord-cta h2 {
+  font-family: 'Cinzel', serif; font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800; margin-bottom: 16px;
+  background: linear-gradient(180deg, #FFF 0%, var(--gold) 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.discord-cta p { font-size: 16px; color: var(--text-dim); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
+.discord-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 40px;
+  background: linear-gradient(135deg, #5865F2 0%, #4752C4 100%);
+  color: #FFF; border: none; border-radius: 12px;
+  font-size: 16px; font-weight: 700; cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 0 30px rgba(88,101,242,0.3);
+}
+.discord-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 40px rgba(88,101,242,0.4); }
+
+/* ===== FAQ ===== */
+.faq-item {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 12px; margin-bottom: 12px; overflow: hidden;
+  backdrop-filter: blur(8px); transition: border-color 0.3s;
+}
+.faq-item:hover { border-color: var(--glass-border-hover); }
+.faq-q {
+  padding: 20px 24px; font-size: 16px; font-weight: 600;
+  cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  transition: color 0.3s;
+}
+.faq-q:hover { color: var(--gold); }
+.faq-q .arrow { transition: transform 0.3s; font-size: 14px; }
+.faq-q.open .arrow { transform: rotate(180deg); }
+.faq-a {
+  max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+}
+.faq-a-inner { padding: 0 24px 20px; font-size: 15px; color: var(--text-dim); line-height: 1.7; }
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: 40px; text-align: center;
+  border-top: 1px solid var(--glass-border);
+  margin-top: 60px;
+}
+.footer-logo { font-family: 'Cinzel', serif; font-size: 20px; font-weight: 800; color: var(--gold); letter-spacing: 3px; margin-bottom: 8px; }
+.footer p { font-size: 13px; color: var(--text-faint); }
+.footer-disclaimer { max-width: 700px; margin: 16px auto 0; font-size: 12px; color: var(--text-faint); line-height: 1.6; }
+
+/* ===== SCROLL REVEAL ===== */
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.23,1,0.32,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .hero-stats { gap: 24px; }
+  .stat-num { font-size: 28px; }
+  .rex-section { grid-template-columns: 1fr; }
+  .lb-header, .lb-row { grid-template-columns: 40px 1fr 80px 80px; font-size: 12px; }
+  .lb-header span:nth-child(4), .lb-row .lb-bracket { display: none; }
+  .section { padding: 60px 20px; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="three-canvas"></canvas>
+
+<nav class="nav">
+  <div class="nav-logo">FORTREX</div>
+  <div class="nav-links">
+    <a href="#arenas">Arenas</a>
+    <a href="#how">How It Works</a>
+    <a href="#rex">Rex</a>
+    <a href="#leaderboard">Rankings</a>
+    <a href="#calculator">Tools</a>
+    <a href="#faq">FAQ</a>
+    <button class="nav-cta">Get Verified</button>
+  </div>
+</nav>
+
+<div class="content">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    <span class="dot"></span>
+    <span>Pre-Launch — Registration Open</span>
+  </div>
+  <h1>Trade Real.<br>Win Real.</h1>
+  <p class="hero-tagline">The Ultimate Trading Arena</p>
+  <p class="hero-sub">Open an account with our partner broker. Get verified. Compete in skill-based tournaments for cash rewards and funded accounts. Earn $3 back on every lot you trade.</p>
+  <div class="hero-cta-group">
+    <button class="btn-primary">Claim Your Spot</button>
+    <button class="btn-secondary">View Live Arenas</button>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num" id="stat-registered">0</div>
+      <div class="stat-label">Traders Registered</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="stat-verified">0</div>
+      <div class="stat-label">Verified Traders</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="stat-og">1,000</div>
+      <div class="stat-label">OG Spots Left</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="stat-rebate">$3</div>
+      <div class="stat-label">Per Lot Rebate</div>
+    </div>
+  </div>
+</section>
+
+<!-- ARENAS -->
+<section class="section" id="arenas">
+  <span class="section-tag reveal">Live Competitions</span>
+  <h2 class="section-title reveal">Live Arenas</h2>
+  <p class="section-sub reveal">Verified traders. Real accounts. Skill-based competition. Every two weeks, a new arena opens.</p>
+  <div class="arena-grid">
+    <div class="arena-card reveal">
+      <div class="arena-status live"><span class="dot"></span> Live Now</div>
+      <h3 class="arena-name">Opening Arena — Season 1</h3>
+      <p class="arena-desc">First ever FORTREX tournament. All verified traders compete across 3 weight brackets. Composite scoring: ROI, consistency, risk management.</p>
+      <div class="arena-prize">
+        <span class="arena-prize-label">Prize Pool</span>
+        <span class="arena-prize-value">$15,000 + Funded Accounts</span>
+      </div>
+      <div class="arena-progress">
+        <div class="progress-bar"><div class="progress-fill" style="width: 73%"></div></div>
+        <div class="progress-label"><span>1,460 / 2,000 entries</span><span>73%</span></div>
+      </div>
+    </div>
+    <div class="arena-card reveal">
+      <div class="arena-status live"><span class="dot"></span> Starting Soon</div>
+      <h3 class="arena-name">Funded Account Arena</h3>
+      <p class="arena-desc">Buy a funded account with our partner code. Compete for free funded accounts. Prop firm evaluation-based scoring.</p>
+      <div class="arena-prize">
+        <span class="arena-prize-label">Prize</span>
+        <span class="arena-prize-value">5× $100K Funded Accounts</span>
+      </div>
+      <div class="arena-progress">
+        <div class="progress-bar"><div class="progress-fill" style="width: 41%"></div></div>
+        <div class="progress-label"><span>820 / 2,000 entries</span><span>41%</span></div>
+      </div>
+    </div>
+    <div class="arena-card reveal">
+      <div class="arena-status locked"><span class="dot"></span> Locked</div>
+      <h3 class="arena-name">Mega Arena — Season Finale</h3>
+      <p class="arena-desc">The biggest arena of Season 1. Unlock requires 5,000 verified traders. Massive prize pool. Season champions crowned.</p>
+      <div class="arena-prize">
+        <span class="arena-prize-label">Prize Pool</span>
+        <span class="arena-prize-value">$50,000+ TBA</span>
+      </div>
+      <div class="arena-progress">
+        <div class="progress-bar"><div class="progress-fill" style="width: 28%"></div></div>
+        <div class="progress-label"><span>Unlocks at 5,000 verified</span><span>1,400 / 5,000</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <span class="section-tag reveal">Getting Started</span>
+  <h2 class="section-title reveal">Three Steps to the Arena</h2>
+  <p class="section-sub reveal">No complexity. No confusion. Register, verify, compete.</p>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">01</div>
+      <div class="step-icon">🔑</div>
+      <h3>Open & Verify</h3>
+      <p>Open a broker account with our partner link. Deposit $100. Complete verification. You're now an official FORTREX trader.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">02</div>
+      <div class="step-icon">⚔️</div>
+      <h3>Enter & Compete</h3>
+      <p>Join active tournaments. Trade your strategy. Your performance is scored on ROI, consistency, and risk management. Skill decides the winner.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">03</div>
+      <div class="step-icon">🏆</div>
+      <h3>Win & Earn</h3>
+      <p>Cash rewards. Free funded accounts. Plus $3 back on every lot you trade. The more you trade, the more you earn. Win-win.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REX CURRENCY -->
+<section class="section" id="rex">
+  <span class="section-tag reveal">FORTREX Currency</span>
+  <h2 class="section-title reveal">Earn Your Rex</h2>
+  <p class="section-sub reveal">Rex is the FORTREX loyalty reward. Earn it through engagement. Redeem it for value. No purchase necessary.</p>
+  <div class="rex-section">
+    <div class="reveal" style="text-align: center;">
+      <div class="rex-coin">R</div>
+      <p style="margin-top: 20px; color: var(--text-dim); font-size: 14px; max-width: 280px; margin-left: auto; margin-right: auto;">Rex is a closed-loop loyalty reward point. Not a cryptocurrency. Not transferable. Not redeemable for cash.</p>
+    </div>
+    <div>
+      <div class="rex-earn reveal">
+        <h4>✦ Earn Rex</h4>
+        <ul class="rex-list">
+          <li><span>Daily login streak (Day 1-30)</span><span>10-300 Rex</span></li>
+          <li><span>Each verified referral</span><span>500 Rex</span></li>
+          <li><span>Instagram post with #FORTREX</span><span>100 Rex</span></li>
+          <li><span>Complete trading quizzes</span><span>50-200 Rex</span></li>
+          <li><span>Tournament participation</span><span>100-1000 Rex</span></li>
+        </ul>
+      </div>
+      <div class="rex-spend reveal">
+        <h4>✦ Redeem Rex</h4>
+        <ul class="rex-list">
+          <li><span>Lucky draw ticket (free entry)</span><span>200 Rex</span></li>
+          <li><span>Tournament entry pass</span><span>500 Rex</span></li>
+          <li><span>Premium Discord role (30 days)</span><span>1,000 Rex</span></li>
+          <li><span>Free funded account entry</span><span>5,000 Rex</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERBOARD -->
+<section class="section" id="leaderboard">
+  <span class="section-tag reveal">Live Rankings</span>
+  <h2 class="section-title reveal">The Leaderboard</h2>
+  <p class="section-sub reveal">Real-time rankings. Updated as trades are verified. Skill determines position — not account size.</p>
+  <div class="leaderboard reveal">
+    <div class="lb-header">
+      <span>Rank</span>
+      <span>Trader</span>
+      <span>Bracket</span>
+      <span>Score</span>
+      <span>Rex</span>
+    </div>
+    <div class="lb-row">
+      <div class="lb-rank gold">01</div>
+      <div class="lb-name">@alex_goldfx</div>
+      <div class="lb-bracket">Heavyweight</div>
+      <div class="lb-score">94.7</div>
+      <div class="lb-rex">12,450</div>
+    </div>
+    <div class="lb-row">
+      <div class="lb-rank silver">02</div>
+      <div class="lb-name">@sara_trades</div>
+      <div class="lb-bracket">Middleweight</div>
+      <div class="lb-score">91.2</div>
+      <div class="lb-rex">10,820</div>
+    </div>
+    <div class="lb-row">
+      <div class="lb-rank bronze">03</div>
+      <div class="lb-name">@nikhil_pips</div>
+      <div class="lb-bracket">Lightweight</div>
+      <div class="lb-score">88.9</div>
+      <div class="lb-rex">9,340</div>
+    </div>
+    <div class="lb-row">
+      <div class="lb-rank">04</div>
+      <div class="lb-name">@dubai_scalper</div>
+      <div class="lb-bracket">Heavyweight</div>
+      <div class="lb-score">85.3</div>
+      <div class="lb-rex">7,910</div>
+    </div>
+    <div class="lb-row">
+      <div class="lb-rank">05</div>
+      <div class="lb-name">@maya_fx</div>
+      <div class="lb-bracket">Middleweight</div>
+      <div class="lb-score">83.1</div>
+      <div class="lb-rex">6,450</div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="section" id="calculator">
+  <span class="section-tag reveal">Trader's Arsenal</span>
+  <h2 class="section-title reveal">Lot Size Calculator</h2>
+  <p class="section-sub reveal">Calculate your position size, risk, and rebate earnings. Real numbers, real fast.</p>
+  <div class="calc-card reveal">
+    <div class="calc-row">
+      <label class="calc-label">Account Size (USD)</label>
+      <select class="calc-select" id="calc-account">
+        <option value="100">$100</option>
+        <option value="500">$500</option>
+        <option value="1000" selected>$1,000</option>
+        <option value="5000">$5,000</option>
+        <option value="10000">$10,000</option>
+        <option value="50000">$50,000</option>
+        <option value="100000">$100,000</option>
+      </select>
+    </div>
+    <div class="calc-row">
+      <label class="calc-label">Risk Per Trade (%)</label>
+      <input type="range" class="calc-slider" id="calc-risk" min="0.5" max="10" step="0.5" value="2">
+      <span id="calc-risk-val" style="color: var(--gold); font-weight: 600;">2%</span>
+    </div>
+    <div class="calc-row">
+      <label class="calc-label">Currency Pair</label>
+      <select class="calc-select" id="calc-pair">
+        <option value="100000">EUR/USD</option>
+        <option value="100000">GBP/USD</option>
+        <option value="150000">USD/JPY</option>
+        <option value="1300">XAU/USD (Gold)</option>
+        <option value="1">BTC/USD</option>
+        <option value="1000">ETH/USD</option>
+      </select>
+    </div>
+    <div class="calc-row">
+      <label class="calc-label">Stop Loss (pips)</label>
+      <input type="number" class="calc-input" id="calc-sl" value="20" min="1">
+    </div>
+    <div class="calc-result">
+      <div class="calc-result-row"><span>Risk Amount</span><span id="result-risk">$20.00</span></div>
+      <div class="calc-result-row"><span>Pip Value</span><span id="result-pip">$1.00/pip</span></div>
+      <div class="calc-result-row"><span>Position Size</span><span id="result-lots">1.00 lots</span></div>
+      <div class="calc-result-row calc-result-total"><span>Rex Rebate (per trade)</span><span id="result-rebate">$3.00</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DISCORD CTA -->
+<section class="section">
+  <div class="discord-cta reveal">
+    <h2>Join FORTREX Citadel</h2>
+    <p>The real community lives on Discord. Tournament reveals, prize pool announcements, trader discussions — all in one place. Verified traders only.</p>
+    <button class="discord-btn">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.35 16.35 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09-.01-.02-.04-.03-.07-.03-1.5.26-2.93.71-4.27 1.33-.01 0-.02.01-.03.02-2.72 4.07-3.47 8.03-3.1 11.95 0 .02.01.04.03.05 1.8 1.32 3.53 2.12 5.24 2.65.03.01.06 0 .07-.02.4-.55.76-1.13 1.07-1.74.02-.04 0-.08-.04-.09-.57-.22-1.11-.48-1.64-.78-.04-.02-.04-.08-.01-.11.11-.08.22-.17.33-.25.02-.02.05-.02.07-.01 3.44 1.57 7.15 1.57 10.55 0 .02-.01.05-.01.07.01.11.09.22.17.33.26.04.03.04.09-.01.11-.52.31-1.07.56-1.64.78-.04.01-.05.06-.04.09.32.61.68 1.19 1.07 1.74.03.02.06.03.09.02 1.72-.53 3.45-1.33 5.25-2.65.02-.01.03-.03.03-.05.44-4.53-.73-8.46-3.1-11.95-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12 0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12 0 1.17-.83 2.12-1.89 2.12z"/></svg>
+      Join FORTREX Citadel
+    </button>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <span class="section-tag reveal">Questions, Answered</span>
+  <h2 class="section-title reveal">FAQ</h2>
+  <div style="max-width: 800px;">
+    <div class="faq-item reveal">
+      <div class="faq-q">What is FORTREX? <span class="arrow">▼</span></div>
+      <div class="faq-a"><div class="faq-a-inner">FORTREX is a professional trading community that organizes skill-based competitions for verified traders. We partner with brokers and prop firms to offer real rewards — cash and funded accounts — to traders who demonstrate superior trading skill.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">How do I enter a competition? <span class="arrow">▼</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Open a broker account using our partner link, deposit $100, and complete verification. Once verified, you can join any live arena. For prop firm arenas, purchase a funded account using our partner code.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">How are winners decided? <span class="arrow">▼</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Winners are determined by a composite score: 40% ROI (percentage-based, not raw profit), 30% consistency (daily returns, win rate, profit factor), and 30% risk management (drawdown adherence, lot size discipline). This ensures fair competition across different account sizes.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">What is the $3/lot rebate? <span class="arrow">▼</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Every verified FORTREX trader earns $3 back for every lot they trade. This is funded by our broker partnership — we share our affiliate commission with you. Trade more, earn more. No cap. No catch.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">What is Rex? <span class="arrow">▼</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Rex is FORTREX's loyalty reward point system. Earn Rex through daily logins, referrals, quizzes, and tournament participation. Redeem Rex for lucky draw tickets, tournament passes, and more. Rex is not a cryptocurrency and cannot be converted to cash.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Is this gambling? <span class="arrow">▼</span></div>
+      <div class="faq-a"><div class="faq-a-inner">No. FORTREX competitions are skill-based — winners are determined by trading performance metrics (ROI, consistency, risk management), not by chance. Users are responsible for complying with their local jurisdiction's laws.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">How often do tournaments run? <span class="arrow">▼</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Tournaments run every two weeks — two per month. Each tournament has its own prize pool, brackets, and rules. Season finales bring the biggest rewards.</div></div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Why do I need to join Discord? <span class="arrow">▼</span></div>
+      <div class="faq-a"><div class="faq-a-inner">FORTREX Citadel on Discord is our community hub. Tournament prize pool reveals, live announcements, trader discussions, and support all happen there. Your FORTREX identity and Rex balance sync across both platforms.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">FORTREX</div>
+  <p>Trade Real. Win Real.</p>
+  <p class="footer-disclaimer">FORTREX is a professional trading community and competition platform. We do not provide broker services, investment advice, or financial recommendations. Users are responsible for complying with their local jurisdiction's laws. FORTREX does not facilitate trading — it is a community and referral platform. All competitions are skill-based. Rex is a closed-loop loyalty reward point, not a cryptocurrency or financial instrument.</p>
+</footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ===== THREE.JS SCENE =====
+const canvas = document.getElementById('three-canvas');
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x06070A, 0.035);
+
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 0, 14);
+
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setClearColor(0x06070A, 1);
+
+// ===== LIGHTING =====
+const ambient = new THREE.AmbientLight(0x1a1a2e, 0.5);
+scene.add(ambient);
+
+const goldLight = new THREE.PointLight(0xD4AF37, 2.5, 50);
+goldLight.position.set(5, 8, 6);
+scene.add(goldLight);
+
+const emeraldLight = new THREE.PointLight(0x10B981, 1.5, 40);
+emeraldLight.position.set(-6, -3, 4);
+scene.add(emeraldLight);
+
+const rimLight = new THREE.DirectionalLight(0x4A4A6E, 0.8);
+rimLight.position.set(-5, 5, -8);
+scene.add(rimLight);
+
+// ===== CENTRAL STRUCTURE - Crystalline Monolith =====
+const structureGroup = new THREE.Group();
+
+// Core crystal - icosahedron
+const coreGeo = new THREE.IcosahedronGeometry(2.5, 0);
+const coreMat = new THREE.MeshStandardMaterial({
+  color: 0x0A0C14,
+  metalness: 0.9,
+  roughness: 0.2,
+  flatShading: true
+});
+const core = new THREE.Mesh(coreGeo, coreMat);
+structureGroup.add(core);
+
+// Gold wireframe overlay
+const wireGeo = new THREE.IcosahedronGeometry(2.52, 0);
+const wireMat = new THREE.MeshBasicMaterial({
+  color: 0xD4AF37,
+  wireframe: true,
+  transparent: true,
+  opacity: 0.4
+});
+const wireframe = new THREE.Mesh(wireGeo, wireMat);
+structureGroup.add(wireframe);
+
+// Inner glowing core
+const innerGeo = new THREE.IcosahedronGeometry(1.2, 1);
+const innerMat = new THREE.MeshStandardMaterial({
+  color: 0xD4AF37,
+  emissive: 0xD4AF37,
+  emissiveIntensity: 0.5,
+  transparent: true,
+  opacity: 0.3
+});
+const innerCore = new THREE.Mesh(innerGeo, innerMat);
+structureGroup.add(innerCore);
+
+// Orbiting shards
+const shards = [];
+for (let i = 0; i < 8; i++) {
+  const size = 0.2 + Math.random() * 0.3;
+  const shardGeo = new THREE.OctahedronGeometry(size, 0);
+  const shardMat = new THREE.MeshStandardMaterial({
+    color: i % 2 === 0 ? 0xD4AF37 : 0x10B981,
+    metalness: 0.8,
+    roughness: 0.3,
+    emissive: i % 2 === 0 ? 0xD4AF37 : 0x10B981,
+    emissiveIntensity: 0.2
+  });
+  const shard = new THREE.Mesh(shardGeo, shardMat);
+  const angle = (i / 8) * Math.PI * 2;
+  shard.userData = {
+    radius: 4 + Math.random() * 2,
+    angle: angle,
+    speed: 0.3 + Math.random() * 0.4,
+    yOffset: (Math.random() - 0.5) * 4
+  };
+  shards.push(shard);
+  structureGroup.add(shard);
+}
+
+scene.add(structureGroup);
+
+// ===== PARTICLES =====
+const particleCount = 800;
+const particleGeo = new THREE.BufferGeometry();
+const positions = new Float32Array(particleCount * 3);
+const particleColors = new Float32Array(particleCount * 3);
+const particleSizes = new Float32Array(particleCount);
+
+for (let i = 0; i < particleCount; i++) {
+  positions[i * 3] = (Math.random() - 0.5) * 40;
+  positions[i * 3 + 1] = (Math.random() - 0.5) * 40;
+  positions[i * 3 + 2] = (Math.random() - 0.5) * 40;
+  
+  const isGold = Math.random() > 0.3;
+  if (isGold) {
+    particleColors[i * 3] = 0.83; particleColors[i * 3 + 1] = 0.69; particleColors[i * 3 + 2] = 0.22;
+  } else {
+    particleColors[i * 3] = 0.06; particleColors[i * 3 + 1] = 0.73; particleColors[i * 3 + 2] = 0.51;
+  }
+  particleSizes[i] = Math.random() * 0.08 + 0.02;
+}
+
+particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+particleGeo.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
+
+const particleMat = new THREE.PointsMaterial({
+  size: 0.08,
+  vertexColors: true,
+  transparent: true,
+  opacity: 0.6,
+  blending: THREE.AdditiveBlending,
+  depthWrite: false
+});
+
+const particles = new THREE.Points(particleGeo, particleMat);
+scene.add(particles);
+
+// ===== FLOOR REFLECTION =====
+const floorGeo = new THREE.PlaneGeometry(60, 60);
+const floorMat = new THREE.MeshStandardMaterial({
+  color: 0x06070A,
+  metalness: 0.9,
+  roughness: 0.4,
+  transparent: true,
+  opacity: 0.5
+});
+const floor = new THREE.Mesh(floorGeo, floorMat);
+floor.rotation.x = -Math.PI / 2;
+floor.position.y = -6;
+scene.add(floor);
+
+// ===== MOUSE & SCROLL =====
+let mouseX = 0, mouseY = 0;
+let targetX = 0, targetY = 0;
+let scrollY = 0;
+
+window.addEventListener('mousemove', (e) => {
+  mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+  mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+});
+
+window.addEventListener('scroll', () => {
+  scrollY = window.scrollY;
+});
+
+// ===== RESIZE =====
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+});
+
+// ===== ANIMATION LOOP =====
+const clock = new THREE.Clock();
+
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+
+  // Smooth mouse follow
+  targetX += (mouseX - targetX) * 0.05;
+  targetY += (mouseY - targetY) * 0.05;
+
+  // Scroll-driven camera movement
+  const scrollProgress = Math.min(scrollY / window.innerHeight, 3);
+  
+  camera.position.x = targetX * 2;
+  camera.position.y = -targetY * 1.5 - scrollProgress * 0.3;
+  camera.position.z = 14 - scrollProgress * 2;
+  
+  // Rotate structure based on mouse + auto-rotation
+  structureGroup.rotation.y = t * 0.15 + targetX * 0.5;
+  structureGroup.rotation.x = targetY * 0.3 + scrollProgress * 0.2;
+  
+  // Inner core pulse
+  const pulse = 1 + Math.sin(t * 2) * 0.05;
+  innerCore.scale.set(pulse, pulse, pulse);
+  innerMat.emissiveIntensity = 0.3 + Math.sin(t * 2) * 0.2;
+  
+  // Orbiting shards
+  shards.forEach((shard, i) => {
+    const data = shard.userData;
+    data.angle += data.speed * 0.01;
+    shard.position.x = Math.cos(data.angle) * data.radius;
+    shard.position.z = Math.sin(data.angle) * data.radius;
+    shard.position.y = data.yOffset + Math.sin(t * 0.5 + i) * 0.5;
+    shard.rotation.x = t * 0.5;
+    shard.rotation.y = t * 0.3;
+  });
+  
+  // Floating particles
+  particles.rotation.y = t * 0.02;
+  const posAttr = particles.geometry.attributes.position;
+  for (let i = 0; i < particleCount; i++) {
+    posAttr.array[i * 3 + 1] += Math.sin(t * 0.5 + i) * 0.002;
+  }
+  posAttr.needsUpdate = true;
+  
+  // Light movement
+  goldLight.position.x = Math.sin(t * 0.3) * 8;
+  goldLight.position.z = Math.cos(t * 0.3) * 8;
+  
+  camera.lookAt(0, 0, 0);
+  renderer.render(scene, camera);
+}
+animate();
+
+// ===== LIVE COUNTER ANIMATION =====
+function animateCounter(el, target, duration = 2000) {
+  let start = 0;
+  const startTime = Date.now();
+  function update() {
+    const elapsed = Date.now() - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(start + (target - start) * eased);
+    el.textContent = current.toLocaleString();
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  update();
+}
+
+setTimeout(() => {
+  animateCounter(document.getElementById('stat-registered'), 3247);
+  animateCounter(document.getElementById('stat-verified'), 1406);
+}, 500);
+
+// ===== CALCULATOR =====
+function calcLot() {
+  const account = parseFloat(document.getElementById('calc-account').value);
+  const riskPct = parseFloat(document.getElementById('calc-risk').value);
+  const pair = parseFloat(document.getElementById('calc-pair').value);
+  const sl = parseFloat(document.getElementById('calc-sl').value) || 20;
+  
+  document.getElementById('calc-risk-val').textContent = riskPct + '%';
+  
+  const riskAmount = account * (riskPct / 100);
+  const pipValue = (pair / 100000);
+  const lots = riskAmount / (sl * pipValue);
+  const rebate = lots * 3;
+  
+  document.getElementById('result-risk').textContent = '$' + riskAmount.toFixed(2);
+  document.getElementById('result-pip').textContent = '$' + pipValue.toFixed(2) + '/pip';
+  document.getElementById('result-lots').textContent = lots.toFixed(2) + ' lots';
+  document.getElementById('result-rebate').textContent = '$' + rebate.toFixed(2);
+}
+
+document.getElementById('calc-account').addEventListener('change', calcLot);
+document.getElementById('calc-risk').addEventListener('input', calcLot);
+document.getElementById('calc-pair').addEventListener('change', calcLot);
+document.getElementById('calc-sl').addEventListener('input', calcLot);
+calcLot();
+
+// ===== FAQ ACCORDION =====
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const a = q.nextElementSibling;
+    const isOpen = a.style.maxHeight && a.style.maxHeight !== '0px';
+    document.querySelectorAll('.faq-a').forEach(item => item.style.maxHeight = '0px');
+    document.querySelectorAll('.faq-q').forEach(item => item.classList.remove('open'));
+    if (!isOpen) {
+      a.style.maxHeight = a.scrollHeight + 'px';
+      q.classList.add('open');
+    }
+  });
+});
+
+// ===== SCROLL REVEAL =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
