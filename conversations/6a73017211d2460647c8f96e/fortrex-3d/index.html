@@ -3,25 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FORTREX — Trade Real. Win Real.</title>
+<title>FORTREX — Your Edge. Your Arena. Your Legacy.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #050507;
   --bg-2: #0A0C14;
-  --teal: #2DD4BF;
-  --teal-dim: #14B8A6;
   --cyan: #22D3EE;
+  --blue: #60A5FA;
   --indigo: #818CF8;
+  --teal: #2DD4BF;
   --emerald: #10B981;
-  --crimson: #EF4444;
-  --text: #F8FAFC;
+  --text: #FFFFFF;
   --text-dim: #94A3B8;
   --text-faint: #475569;
-  --glass: rgba(10, 12, 20, 0.5);
-  --glass-border: rgba(255, 255, 255, 0.05);
-  --glass-border-hover: rgba(45, 212, 191, 0.18);
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.06);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -37,131 +35,155 @@ body {
 #three-canvas {
   position: fixed; top: 0; left: 0;
   width: 100%; height: 100%; z-index: 0; pointer-events: none;
+  opacity: 0.6;
 }
-
 .content { position: relative; z-index: 1; }
+
+/* ===== SHARED ===== */
+.gradient-text {
+  background: linear-gradient(90deg, var(--cyan), var(--blue), var(--indigo));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.mono { font-family: 'JetBrains Mono', monospace; }
+.glass {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+}
+.glass-hover { transition: all 0.4s cubic-bezier(0.23,1,0.32,1); }
+.glass-hover:hover {
+  border-color: rgba(34,211,238,0.15);
+  background: rgba(255,255,255,0.04);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
 
 /* ===== NAV ===== */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
-  padding: 16px 40px;
-  background: linear-gradient(180deg, rgba(5,5,7,0.9) 0%, rgba(5,5,7,0.3) 70%, transparent 100%);
+  padding: 20px 40px;
+  background: linear-gradient(180deg, rgba(5,5,7,0.8) 0%, rgba(5,5,7,0.2) 70%, transparent 100%);
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
 }
-.nav-brand { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+.nav-brand {
+  display: flex; align-items: center; gap: 10px; cursor: pointer;
+}
 .nav-logo {
-  width: 36px; height: 36px; border-radius: 8px; object-fit: cover;
-  filter: drop-shadow(0 0 12px rgba(45, 212, 191, 0.2));
-  transition: filter 0.4s;
+  width: 32px; height: 32px; border-radius: 6px; object-fit: cover;
+  filter: drop-shadow(0 0 10px rgba(34,211,238,0.15));
 }
-.nav-brand:hover .nav-logo { filter: drop-shadow(0 0 20px rgba(45, 212, 191, 0.4)); }
 .nav-text {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 19px; font-weight: 700; color: var(--text);
-  letter-spacing: 3px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px; font-weight: 700; color: #FFF;
+  letter-spacing: 4px; text-transform: uppercase;
 }
-.nav-text span { color: var(--teal); }
-.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links { display: flex; gap: 32px; align-items: center; }
 .nav-links a {
-  color: var(--text-dim); text-decoration: none;
-  font-size: 13px; font-weight: 500; transition: color 0.3s;
+  color: #94A3B8; text-decoration: none;
+  font-size: 14px; font-weight: 500; transition: color 0.3s;
 }
-.nav-links a:hover { color: var(--teal); }
+.nav-links a:hover { color: var(--cyan); }
+.nav-actions { display: flex; align-items: center; gap: 24px; }
+.nav-signin { font-size: 14px; font-weight: 600; color: #94A3B8; text-decoration: none; transition: color 0.3s; }
+.nav-signin:hover { color: #FFF; }
 .nav-cta {
-  padding: 9px 22px;
-  background: linear-gradient(135deg, var(--teal) 0%, var(--cyan) 100%);
-  color: #050507; border: none; border-radius: 8px;
-  font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s;
-  box-shadow: 0 0 20px rgba(45, 212, 191, 0.1);
+  padding: 10px 24px;
+  background: #FFF; color: #000; border: none;
+  border-radius: 100px; font-size: 14px; font-weight: 700;
+  cursor: pointer; transition: all 0.3s;
+  letter-spacing: -0.3px;
 }
-.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 4px 25px rgba(45, 212, 191, 0.25); }
+.nav-cta:hover { background: var(--cyan); transform: scale(1.05); }
 
 /* ===== HERO ===== */
 .hero {
   min-height: 100vh;
-  display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
-  text-align: center; padding: 100px 20px 80px;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
 }
-.hero-emblem {
-  width: 90px; height: 90px; border-radius: 16px; margin-bottom: 28px;
-  filter: drop-shadow(0 0 30px rgba(45, 212, 191, 0.2));
-  animation: emblem-float 4s ease-in-out infinite;
+.hero-content {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center; padding: 100px 20px 40px;
+  max-width: 800px; margin: 0 auto;
 }
-@keyframes emblem-float {
-  0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 30px rgba(45, 212, 191, 0.15)); }
-  50% { transform: translateY(-6px); filter: drop-shadow(0 0 45px rgba(45, 212, 191, 0.3)); }
-}
-.hero-badge {
+.hero-pill {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 5px 14px;
-  background: rgba(16, 185, 129, 0.06);
-  border: 1px solid rgba(16, 185, 129, 0.15);
-  border-radius: 100px;
-  font-size: 12px; color: var(--emerald); margin-bottom: 24px;
-  font-weight: 500;
+  padding: 6px 16px; border-radius: 100px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  margin-bottom: 32px;
 }
-.hero-badge .dot {
+.hero-pill .dot {
   width: 7px; height: 7px; border-radius: 50%;
-  background: var(--emerald); box-shadow: 0 0 8px var(--emerald);
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
   animation: blink 2s infinite;
 }
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.hero-pill span:last-child {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; color: #67E8F9;
+}
 .hero h1 {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(44px, 7.5vw, 88px);
-  font-weight: 700; letter-spacing: -1px; line-height: 1.05; margin-bottom: 14px;
-  background: linear-gradient(180deg, #F8FAFC 0%, #CBD5E1 50%, #64748B 100%);
-  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  font-size: clamp(36px, 6.5vw, 76px);
+  font-weight: 700; letter-spacing: -1.5px;
+  line-height: 1; text-transform: uppercase;
+  margin-bottom: 24px; color: #FFF;
 }
-.hero h1 .accent {
-  background: linear-gradient(135deg, var(--teal) 0%, var(--cyan) 100%);
-  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-}
-.hero-tagline {
-  font-size: clamp(15px, 2.2vw, 19px);
-  font-weight: 300; color: var(--text-dim); margin-bottom: 10px; letter-spacing: 1px;
-}
+.hero h1 .accent { display: inline; }
 .hero-sub {
-  font-size: 15px; color: var(--text-faint);
-  max-width: 520px; line-height: 1.7; margin-bottom: 36px;
+  font-size: clamp(15px, 2.2vw, 20px);
+  font-weight: 300; color: #CBD5E1;
+  max-width: 560px; line-height: 1.65; margin-bottom: 36px;
 }
-.hero-cta-group { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
-.btn-primary {
-  padding: 15px 36px;
-  background: linear-gradient(135deg, var(--teal) 0%, var(--cyan) 100%);
-  color: #050507; border: none; border-radius: 10px;
-  font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s;
-  box-shadow: 0 0 25px rgba(45, 212, 191, 0.12);
+.hero-cta-group { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+.btn-pill-primary {
+  padding: 16px 36px;
+  background: #FFF; color: #000;
+  border: none; border-radius: 100px;
+  font-size: 16px; font-weight: 700; letter-spacing: -0.3px;
+  cursor: pointer; transition: all 0.3s;
+  box-shadow: 0 4px 30px rgba(34,211,238,0.08);
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 35px rgba(45, 212, 191, 0.25); }
-.btn-secondary {
-  padding: 15px 36px;
-  background: rgba(255,255,255,0.03); color: var(--text);
-  border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;
-  font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.3s;
+.btn-pill-primary:hover {
+  background: var(--cyan); transform: scale(1.05);
+  box-shadow: 0 8px 35px rgba(34,211,238,0.2);
+}
+.btn-pill-secondary {
+  padding: 16px 36px;
+  background: rgba(255,255,255,0.03); color: #FFF;
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 100px;
+  font-size: 16px; font-weight: 600;
+  cursor: pointer; transition: all 0.3s;
   backdrop-filter: blur(8px);
 }
-.btn-secondary:hover { border-color: var(--glass-border-hover); background: rgba(45,212,191,0.04); }
+.btn-pill-secondary:hover { border-color: rgba(34,211,238,0.15); background: rgba(34,211,238,0.04); }
 
-.hero-stats {
-  display: flex; gap: 36px; margin-top: 48px; flex-wrap: wrap; justify-content: center;
+/* Hero bottom strip */
+.hero-strip {
+  width: 100%;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+  padding: 16px 40px;
 }
-.stat { text-align: center; }
-.stat-num {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 28px; font-weight: 700; color: var(--text); line-height: 1;
+.hero-strip-inner {
+  max-width: 900px; margin: 0 auto;
+  display: flex; flex-wrap: wrap;
+  justify-content: space-around; align-items: center; gap: 16px;
 }
-.stat-num.accent { color: var(--teal); }
-.stat-label {
-  font-size: 10px; color: var(--text-faint); letter-spacing: 1.5px;
-  text-transform: uppercase; margin-top: 6px; font-weight: 500;
+.hero-strip-item {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: #64748B;
+  letter-spacing: 1px; text-transform: uppercase;
+  display: flex; align-items: center; gap: 6px;
 }
-.scroll-ind {
-  margin-top: 36px; color: var(--text-faint); font-size: 11px; letter-spacing: 2px;
-  animation: bounce 2s infinite; font-weight: 500;
-}
-@keyframes bounce { 0%, 100% { transform: translateY(0); opacity: 0.5; } 50% { transform: translateY(6px); opacity: 1; } }
+.hero-strip-item .check { color: var(--emerald); font-size: 14px; }
 
 /* ===== SECTIONS ===== */
 .section {
@@ -170,274 +192,272 @@ body {
   max-width: 1100px; margin: 0 auto;
 }
 .section-tag {
-  display: inline-flex; align-items: gap: 8px; align-self: flex-start;
-  font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
-  color: var(--teal); margin-bottom: 14px; font-weight: 600;
-  padding: 5px 12px; border: 1px solid rgba(45,212,191,0.12);
-  border-radius: 4px; background: rgba(45,212,191,0.03);
+  display: inline-flex; align-items: center; gap: 8px; align-self: flex-start;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 16px; font-weight: 500;
+  padding: 5px 12px; border: 1px solid rgba(34,211,238,0.1);
+  border-radius: 4px; background: rgba(34,211,238,0.02);
 }
 .section-title {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(32px, 5vw, 56px);
+  font-size: clamp(30px, 5vw, 56px);
   font-weight: 700; margin-bottom: 14px; line-height: 1.1;
-  color: var(--text);
+  color: #FFF; letter-spacing: -0.5px;
 }
 .section-sub {
-  font-size: 16px; color: var(--text-dim); margin-bottom: 44px;
-  max-width: 560px; line-height: 1.7; font-weight: 300;
+  font-size: 16px; color: var(--text-dim); margin-bottom: 48px;
+  max-width: 560px; line-height: 1.65; font-weight: 300;
 }
 
 /* ===== ARENA CARDS ===== */
 .arena-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;
 }
 .arena-card {
-  background: var(--glass); border: 1px solid var(--glass-border);
-  border-radius: 14px; padding: 26px;
-  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  border-radius: 16px; padding: 28px;
   position: relative; overflow: hidden;
 }
 .arena-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--teal), transparent);
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
   opacity: 0; transition: opacity 0.5s;
 }
-.arena-card::after {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(circle at 50% 0%, rgba(45,212,191,0.04), transparent 60%);
-  opacity: 0; transition: opacity 0.5s; pointer-events: none;
-}
-.arena-card:hover {
-  border-color: var(--glass-border-hover); transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(45,212,191,0.08);
-}
-.arena-card:hover::before, .arena-card:hover::after { opacity: 1; }
+.arena-card:hover::before { opacity: 1; }
 .arena-status {
   display: inline-flex; align-items: center; gap: 6px;
-  font-size: 11px; font-weight: 600; margin-bottom: 14px; letter-spacing: 0.5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 500; margin-bottom: 16px;
+  letter-spacing: 1px; text-transform: uppercase;
 }
-.arena-status.live { color: var(--emerald); }
-.arena-status.soon { color: var(--teal); }
-.arena-status.locked { color: var(--text-faint); }
 .arena-status .dot { width: 6px; height: 6px; border-radius: 50%; }
+.arena-status.live { color: var(--emerald); }
 .arena-status.live .dot { background: var(--emerald); box-shadow: 0 0 6px var(--emerald); animation: blink 1.5s infinite; }
-.arena-status.soon .dot { background: var(--teal); box-shadow: 0 0 6px var(--teal); }
+.arena-status.soon { color: var(--cyan); }
+.arena-status.soon .dot { background: var(--cyan); box-shadow: 0 0 6px var(--cyan); }
+.arena-status.locked { color: var(--text-faint); }
 .arena-status.locked .dot { background: var(--text-faint); }
-.arena-name { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
-.arena-desc { font-size: 13px; color: var(--text-dim); margin-bottom: 18px; line-height: 1.6; font-weight: 300; }
+.arena-name { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 10px; color: #FFF; }
+.arena-desc { font-size: 13px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.6; font-weight: 300; }
 .arena-prize {
   display: flex; justify-content: space-between; align-items: center;
   padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.04);
 }
-.arena-prize-label { font-size: 10px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; }
-.arena-prize-value { font-size: 16px; font-weight: 600; color: var(--teal); font-family: 'Space Grotesk', sans-serif; }
-.arena-progress { margin-top: 14px; }
-.progress-bar { height: 4px; background: rgba(255,255,255,0.04); border-radius: 2px; overflow: hidden; }
-.progress-fill {
-  height: 100%; background: linear-gradient(90deg, var(--teal-dim), var(--teal), var(--cyan));
-  border-radius: 2px; transition: width 1s ease; box-shadow: 0 0 8px rgba(45,212,191,0.2);
+.arena-prize-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--text-faint);
+  text-transform: uppercase; letter-spacing: 1px;
 }
-.progress-label { font-size: 10px; color: var(--text-faint); margin-top: 6px; display: flex; justify-content: space-between; font-weight: 500; }
+.arena-prize-value { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: var(--cyan); }
+.arena-progress { margin-top: 16px; }
+.progress-bar { height: 3px; background: rgba(255,255,255,0.04); border-radius: 2px; overflow: hidden; }
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--cyan), var(--blue));
+  border-radius: 2px; box-shadow: 0 0 6px rgba(34,211,238,0.15);
+}
+.progress-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--text-faint); margin-top: 8px;
+  display: flex; justify-content: space-between;
+}
 
 /* ===== STEPS ===== */
-.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
 .step {
-  text-align: center; padding: 36px 26px;
-  background: var(--glass); border: 1px solid var(--glass-border);
-  border-radius: 14px; backdrop-filter: blur(16px); transition: all 0.5s;
-  position: relative; overflow: hidden;
+  text-align: center; padding: 40px 28px;
+  border-radius: 16px; position: relative; overflow: hidden;
 }
 .step::before {
-  content: ''; position: absolute; top: 0; left: 50%; width: 50%; height: 1px;
-  transform: translateX(-50%); background: linear-gradient(90deg, transparent, var(--teal), transparent);
-  opacity: 0.25;
+  content: ''; position: absolute; top: 0; left: 50%; width: 40%; height: 1px;
+  transform: translateX(-50%); background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0.2;
 }
-.step:hover { border-color: var(--glass-border-hover); transform: translateY(-4px); }
 .step-num {
-  font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700;
-  color: var(--teal); opacity: 0.15; margin-bottom: 6px; line-height: 1;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 48px; font-weight: 700;
+  color: var(--cyan); opacity: 0.12; margin-bottom: 8px; line-height: 1;
 }
-.step h3 { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 600; margin-bottom: 10px; color: var(--text); }
+.step h3 { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 600; margin-bottom: 12px; color: #FFF; }
 .step p { font-size: 13px; color: var(--text-dim); line-height: 1.6; font-weight: 300; }
-.step-line {
-  width: 1px; height: 24px; margin: 0 auto;
-  background: linear-gradient(180deg, var(--teal), transparent); opacity: 0.2;
-}
 
 /* ===== REX ===== */
 .rex-section { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
 .rex-holo {
-  background: linear-gradient(135deg, rgba(45,212,191,0.06) 0%, rgba(129,140,248,0.06) 100%);
-  border: 1px solid rgba(45,212,191,0.12);
-  border-radius: 20px; padding: 40px 30px; text-align: center;
+  border-radius: 20px; padding: 44px 32px; text-align: center;
   position: relative; overflow: hidden;
-  backdrop-filter: blur(16px);
+  background: linear-gradient(135deg, rgba(34,211,238,0.04) 0%, rgba(129,140,248,0.04) 100%);
+  border: 1px solid rgba(34,211,238,0.1);
 }
 .rex-holo::before {
   content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-  background: conic-gradient(from 0deg, transparent, rgba(45,212,191,0.03), transparent, rgba(129,140,248,0.03), transparent);
+  background: conic-gradient(from 0deg, transparent, rgba(34,211,238,0.02), transparent, rgba(129,140,248,0.02), transparent);
   animation: rotate-bg 8s linear infinite; pointer-events: none;
 }
 @keyframes rotate-bg { to { transform: rotate(360deg); } }
 .rex-symbol {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 48px; font-weight: 700;
-  background: linear-gradient(135deg, var(--teal) 0%, var(--indigo) 100%);
-  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  font-family: 'Space Grotesk', sans-serif; font-size: 52px; font-weight: 700;
   margin-bottom: 8px; position: relative;
 }
 .rex-label {
+  font-family: 'JetBrains Mono', monospace;
   font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--text-dim); margin-bottom: 20px; font-weight: 500; position: relative;
+  color: var(--text-dim); margin-bottom: 24px; position: relative;
 }
 .rex-balance {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 36px; font-weight: 700; color: var(--text); position: relative;
+  font-size: 40px; font-weight: 700; color: #FFF; position: relative;
 }
-.rex-balance-label { font-size: 11px; color: var(--text-faint); margin-top: 4px; position: relative; }
+.rex-balance-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--text-faint);
+  margin-top: 6px; position: relative; letter-spacing: 1px;
+}
 .rex-note {
-  font-size: 12px; color: var(--text-faint); margin-top: 20px; line-height: 1.6;
-  position: relative; font-weight: 300;
+  font-size: 12px; color: var(--text-faint); margin-top: 24px;
+  line-height: 1.6; position: relative; font-weight: 300;
 }
 .rex-earn h4, .rex-spend h4 {
-  font-size: 12px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; margin-bottom: 12px;
+  text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;
 }
 .rex-earn h4 { color: var(--emerald); }
 .rex-spend h4 { color: var(--indigo); }
 .rex-list { list-style: none; }
 .rex-list li {
-  padding: 11px 0; font-size: 13px; color: var(--text-dim);
+  padding: 12px 0; font-size: 13px; color: var(--text-dim);
   border-bottom: 1px solid rgba(255,255,255,0.03);
   display: flex; justify-content: space-between; align-items: center; font-weight: 300;
 }
-.rex-list li span:last-child { color: var(--teal); font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
+.rex-list li span:last-child {
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--cyan); font-weight: 600;
+}
 
 /* ===== LEADERBOARD ===== */
-.leaderboard {
-  background: var(--glass); border: 1px solid var(--glass-border);
-  border-radius: 14px; overflow: hidden; backdrop-filter: blur(16px);
-}
+.leaderboard { border-radius: 16px; overflow: hidden; }
 .lb-header, .lb-row {
   display: grid; grid-template-columns: 50px 1fr 100px 90px 80px;
   padding: 14px 24px; align-items: center;
 }
 .lb-header {
+  font-family: 'JetBrains Mono', monospace;
   font-size: 10px; color: var(--text-faint); text-transform: uppercase;
-  letter-spacing: 1.5px; border-bottom: 1px solid rgba(255,255,255,0.04); font-weight: 600;
+  letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.04); font-weight: 500;
 }
 .lb-row { border-bottom: 1px solid rgba(255,255,255,0.02); transition: background 0.3s; }
-.lb-row:hover { background: rgba(45,212,191,0.02); }
+.lb-row:hover { background: rgba(34,211,238,0.02); }
 .lb-row:last-child { border-bottom: none; }
 .lb-rank { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; }
-.lb-rank.gold { color: var(--teal); }
+.lb-rank.gold { color: var(--cyan); }
 .lb-rank.silver { color: #CBD5E1; }
 .lb-rank.bronze { color: #B45309; }
-.lb-name { font-weight: 500; font-size: 14px; color: var(--text); }
-.lb-bracket { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+.lb-name { font-weight: 500; font-size: 14px; color: #FFF; }
+.lb-bracket { font-size: 12px; color: var(--text-dim); }
 .lb-score { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; color: var(--emerald); }
 .lb-rex { font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--indigo); font-weight: 600; }
 
 /* ===== CALCULATOR ===== */
-.calc-card {
-  background: var(--glass); border: 1px solid var(--glass-border);
-  border-radius: 14px; padding: 32px; backdrop-filter: blur(16px); max-width: 520px;
+.calc-card { border-radius: 16px; padding: 36px; max-width: 520px; }
+.calc-row { margin-bottom: 24px; }
+.calc-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--text-dim); margin-bottom: 8px;
+  display: block; letter-spacing: 0.5px;
 }
-.calc-row { margin-bottom: 22px; }
-.calc-label { font-size: 12px; color: var(--text-dim); margin-bottom: 8px; display: block; font-weight: 500; }
 .calc-select, .calc-input {
-  width: 100%; padding: 12px 14px; background: rgba(5,5,7,0.6); color: var(--text);
-  border: 1px solid rgba(255,255,255,0.06); border-radius: 8px;
+  width: 100%; padding: 13px 16px; background: rgba(5,5,7,0.6); color: #FFF;
+  border: 1px solid rgba(255,255,255,0.06); border-radius: 10px;
   font-size: 14px; font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.3s;
 }
-.calc-select:focus, .calc-input:focus { border-color: var(--teal); }
+.calc-select:focus, .calc-input:focus { border-color: var(--cyan); }
 .calc-slider {
-  width: 100%; -webkit-appearance: none; height: 4px;
+  width: 100%; -webkit-appearance: none; height: 3px;
   background: rgba(255,255,255,0.06); border-radius: 2px; outline: none;
 }
 .calc-slider::-webkit-slider-thumb {
   -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%;
-  background: var(--teal); cursor: pointer; box-shadow: 0 0 8px rgba(45,212,191,0.3);
+  background: var(--cyan); cursor: pointer; box-shadow: 0 0 8px rgba(34,211,238,0.3);
 }
 .calc-slider::-moz-range-thumb {
-  width: 16px; height: 16px; border-radius: 50%; background: var(--teal);
-  cursor: pointer; border: none; box-shadow: 0 0 8px rgba(45,212,191,0.3);
+  width: 16px; height: 16px; border-radius: 50%; background: var(--cyan);
+  cursor: pointer; border: none; box-shadow: 0 0 8px rgba(34,211,238,0.3);
 }
 .calc-result {
   background: rgba(5,5,7,0.5); border: 1px solid rgba(255,255,255,0.04);
-  border-radius: 10px; padding: 20px; margin-top: 8px;
+  border-radius: 12px; padding: 22px;
 }
-.calc-result-row { display: flex; justify-content: space-between; padding: 7px 0; font-size: 13px; }
-.calc-result-row span:first-child { color: var(--text-dim); font-weight: 400; }
-.calc-result-row span:last-child { font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
-.calc-result-total { border-top: 1px solid rgba(255,255,255,0.06); margin-top: 6px; padding-top: 14px; }
-.calc-result-total span:last-child { color: var(--emerald); font-size: 17px; }
+.calc-result-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 13px; }
+.calc-result-row span:first-child { color: var(--text-dim); }
+.calc-result-row span:last-child { font-family: 'Space Grotesk', sans-serif; font-weight: 600; }
+.calc-result-total { border-top: 1px solid rgba(255,255,255,0.06); margin-top: 8px; padding-top: 16px; }
+.calc-result-total span:last-child { color: var(--emerald); font-size: 18px; }
 
-/* ===== DISCORD CTA ===== */
+/* ===== DISCORD ===== */
 .discord-cta {
   text-align: center; padding: 64px 40px;
-  background: var(--glass); border: 1px solid var(--glass-border);
-  border-radius: 18px; backdrop-filter: blur(16px);
-  position: relative; overflow: hidden;
+  border-radius: 20px; position: relative; overflow: hidden;
 }
 .discord-cta::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--teal), transparent);
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
 }
 .discord-cta h2 {
-  font-family: 'Space Grotesk', sans-serif; font-size: clamp(26px, 4vw, 40px);
-  font-weight: 700; margin-bottom: 14px; color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight: 700; margin-bottom: 14px; color: #FFF; letter-spacing: -0.5px;
 }
 .discord-cta p { font-size: 15px; color: var(--text-dim); margin: 0 auto 28px; max-width: 460px; font-weight: 300; }
 .discord-btn {
   display: inline-flex; align-items: center; gap: 10px;
-  padding: 14px 36px;
-  background: linear-gradient(135deg, #5865F2 0%, #4752C4 100%);
-  color: #FFF; border: none; border-radius: 10px;
-  font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s;
-  box-shadow: 0 0 25px rgba(88,101,242,0.15);
+  padding: 15px 36px;
+  background: #FFF; color: #000; border: none; border-radius: 100px;
+  font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.3s;
 }
-.discord-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(88,101,242,0.25); }
+.discord-btn:hover { transform: scale(1.05); }
 
 /* ===== FAQ ===== */
-.faq-item {
-  background: var(--glass); border: 1px solid var(--glass-border);
-  border-radius: 10px; margin-bottom: 10px; overflow: hidden;
-  backdrop-filter: blur(8px); transition: border-color 0.3s;
-}
-.faq-item:hover { border-color: var(--glass-border-hover); }
+.faq-item { border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
 .faq-q {
-  padding: 18px 22px; font-size: 15px; font-weight: 500;
+  padding: 20px 24px; font-size: 15px; font-weight: 500;
   cursor: pointer; display: flex; justify-content: space-between; align-items: center;
-  transition: color 0.3s; color: var(--text);
+  transition: color 0.3s; color: #FFF;
 }
-.faq-q:hover { color: var(--teal); }
+.faq-q:hover { color: var(--cyan); }
 .faq-q .arrow { transition: transform 0.3s; font-size: 12px; color: var(--text-faint); }
 .faq-q.open .arrow { transform: rotate(180deg); }
 .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-.faq-a-inner { padding: 0 22px 18px; font-size: 14px; color: var(--text-dim); line-height: 1.7; font-weight: 300; }
+.faq-a-inner { padding: 0 24px 20px; font-size: 14px; color: var(--text-dim); line-height: 1.7; font-weight: 300; }
 
 /* ===== FOOTER ===== */
-.footer { padding: 44px 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.04); margin-top: 60px; }
-.footer-brand { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; }
-.footer-logo { width: 32px; height: 32px; border-radius: 6px; }
-.footer-text { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: 2px; }
-.footer-text span { color: var(--teal); }
-.footer-tag { font-size: 12px; color: var(--text-faint); margin-bottom: 10px; font-weight: 300; }
-.footer-disclaimer { max-width: 660px; margin: 10px auto 0; font-size: 11px; color: var(--text-faint); line-height: 1.6; font-weight: 300; }
+.footer { padding: 48px 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.04); margin-top: 60px; }
+.footer-brand { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; }
+.footer-logo { width: 28px; height: 28px; border-radius: 5px; }
+.footer-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px; font-weight: 700; color: #FFF; letter-spacing: 4px;
+}
+.footer-tag { font-size: 13px; color: var(--text-faint); margin-bottom: 12px; font-weight: 300; }
+.footer-disclaimer {
+  max-width: 660px; margin: 8px auto 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--text-faint); line-height: 1.6; font-weight: 400;
+}
 
-/* ===== REVEAL ===== */
+/* ===== ANIMATIONS ===== */
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.23,1,0.32,1); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
-  .nav { padding: 14px 16px; } .nav-links { display: none; }
-  .hero { padding: 80px 16px 60px; } .hero-stats { gap: 18px; } .stat-num { font-size: 22px; }
+  .nav { padding: 16px 16px; } .nav-links { display: none; } .nav-actions .nav-signin { display: none; }
+  .hero-content { padding: 80px 16px 20px; }
   .rex-section { grid-template-columns: 1fr; }
   .lb-header, .lb-row { grid-template-columns: 36px 1fr 70px; font-size: 12px; padding: 12px 14px; }
   .lb-header span:nth-child(3), .lb-header span:nth-child(4), .lb-row .lb-bracket, .lb-row .lb-rex { display: none; }
   .section { padding: 80px 20px; }
+  .hero-strip-inner { flex-direction: column; gap: 10px; }
 }
 </style>
 </head>
@@ -448,16 +468,18 @@ body {
 <nav class="nav">
   <div class="nav-brand">
     <img src="https://media.base44.com/images/public/6a73016f9b626430a0d26f88/033deb0ff_generated_image.png" alt="FORTREX" class="nav-logo">
-    <span class="nav-text">FORT<span>REX</span></span>
+    <span class="nav-text">FORTREX</span>
   </div>
   <div class="nav-links">
-    <a href="#arenas">Arenas</a>
+    <a href="#arenas">Live Arenas</a>
+    <a href="#rebates">Rebates</a>
     <a href="#how">How It Works</a>
-    <a href="#rex">Rex</a>
     <a href="#leaderboard">Rankings</a>
-    <a href="#calculator">Tools</a>
     <a href="#faq">FAQ</a>
-    <button class="nav-cta">Get Verified</button>
+  </div>
+  <div class="nav-actions">
+    <a href="#signin" class="nav-signin">Sign in</a>
+    <button class="nav-cta">Get Started</button>
   </div>
 </nav>
 
@@ -465,22 +487,26 @@ body {
 
 <!-- HERO -->
 <section class="hero">
-  <img src="https://media.base44.com/images/public/6a73016f9b626430a0d26f88/033deb0ff_generated_image.png" alt="FORTREX" class="hero-emblem">
-  <div class="hero-badge"><span class="dot"></span><span>Pre-Launch — Registration Open</span></div>
-  <h1>Trade Real.<br><span class="accent">Win Real.</span></h1>
-  <p class="hero-tagline">The Ultimate Trading Arena</p>
-  <p class="hero-sub">Open an account with our partner broker. Get verified. Compete in skill-based tournaments for cash rewards and funded accounts. Earn $3 back on every lot you trade.</p>
-  <div class="hero-cta-group">
-    <button class="btn-primary">Claim Your Spot</button>
-    <button class="btn-secondary">View Live Arenas</button>
+  <div class="hero-content">
+    <div class="hero-pill">
+      <span class="dot"></span>
+      <span>Founder Passes Active • Limited Access</span>
+    </div>
+    <h1>Your Edge.<br><span class="accent gradient-text">Your Arena.</span> Your Legacy.</h1>
+    <p class="hero-sub">Deposit $100. Trade your edge. Win cash prizes, earn free funded accounts, and get paid a $3/lot rebate on every single order.</p>
+    <div class="hero-cta-group">
+      <button class="btn-pill-primary">Enter FORTREX Citadel</button>
+      <button class="btn-pill-secondary">View Live Arenas</button>
+    </div>
   </div>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-num" id="stat-registered">0</div><div class="stat-label">Traders Registered</div></div>
-    <div class="stat"><div class="stat-num" id="stat-verified">0</div><div class="stat-label">Verified Traders</div></div>
-    <div class="stat"><div class="stat-num accent">1,000</div><div class="stat-label">OG Spots Left</div></div>
-    <div class="stat"><div class="stat-num accent">$3</div><div class="stat-label">Per Lot Rebate</div></div>
+  <div class="hero-strip">
+    <div class="hero-strip-inner">
+      <div class="hero-strip-item"><span class="check">✓</span> Verified Traders Only</div>
+      <div class="hero-strip-item"><span class="check">✓</span> $3/Lot Automated Rebate</div>
+      <div class="hero-strip-item"><span class="check">✓</span> Free Funded Accounts</div>
+      <div class="hero-strip-item"><span class="check">✓</span> Skill-Based Competition</div>
+    </div>
   </div>
-  <div class="scroll-ind">SCROLL TO EXPLORE ▼</div>
 </section>
 
 <!-- ARENAS -->
@@ -489,7 +515,7 @@ body {
   <h2 class="section-title reveal">Live Arenas</h2>
   <p class="section-sub reveal">Verified traders. Real accounts. Skill-based competition. Every two weeks, a new arena opens.</p>
   <div class="arena-grid">
-    <div class="arena-card reveal">
+    <div class="arena-card glass glass-hover reveal">
       <div class="arena-status live"><span class="dot"></span> Live Now</div>
       <h3 class="arena-name">Opening Arena — Season 1</h3>
       <p class="arena-desc">First ever FORTREX tournament. All verified traders compete across 3 weight brackets. Composite scoring: ROI, consistency, risk management.</p>
@@ -499,7 +525,7 @@ body {
         <div class="progress-label"><span>1,460 / 2,000 entries</span><span>73%</span></div>
       </div>
     </div>
-    <div class="arena-card reveal">
+    <div class="arena-card glass glass-hover reveal">
       <div class="arena-status soon"><span class="dot"></span> Starting Soon</div>
       <h3 class="arena-name">Funded Account Arena</h3>
       <p class="arena-desc">Buy a funded account with our partner code. Compete for free funded accounts. Prop firm evaluation-based scoring.</p>
@@ -509,7 +535,7 @@ body {
         <div class="progress-label"><span>820 / 2,000 entries</span><span>41%</span></div>
       </div>
     </div>
-    <div class="arena-card reveal">
+    <div class="arena-card glass glass-hover reveal">
       <div class="arena-status locked"><span class="dot"></span> Locked</div>
       <h3 class="arena-name">Mega Arena — Season Finale</h3>
       <p class="arena-desc">The biggest arena of Season 1. Unlock requires 5,000 verified traders. Massive prize pool. Season champions crowned.</p>
@@ -528,20 +554,49 @@ body {
   <h2 class="section-title reveal">Three Steps to the Arena</h2>
   <p class="section-sub reveal">No complexity. No confusion. Register, verify, compete.</p>
   <div class="steps">
-    <div class="step reveal">
+    <div class="step glass glass-hover reveal">
       <div class="step-num">01</div>
       <h3>Open & Verify</h3>
       <p>Open a broker account with our partner link. Deposit $100. Complete verification. You're now an official FORTREX trader.</p>
     </div>
-    <div class="step reveal">
+    <div class="step glass glass-hover reveal">
       <div class="step-num">02</div>
       <h3>Enter & Compete</h3>
       <p>Join active tournaments. Trade your strategy. Your performance is scored on ROI, consistency, and risk management. Skill decides the winner.</p>
     </div>
-    <div class="step reveal">
+    <div class="step glass glass-hover reveal">
       <div class="step-num">03</div>
       <h3>Win & Earn</h3>
       <p>Cash rewards. Free funded accounts. Plus $3 back on every lot you trade. The more you trade, the more you earn.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REBATES -->
+<section class="section" id="rebates">
+  <span class="section-tag reveal">Automated Rebates</span>
+  <h2 class="section-title reveal">$3 Per Lot. Every Trade.</h2>
+  <p class="section-sub reveal">Every verified FORTREX trader earns $3 back for every lot they trade. Funded by our broker partnership — we share our affiliate commission with you. No cap. No catch.</p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+    <div class="glass glass-hover reveal" style="border-radius: 16px; padding: 28px; text-align: center;">
+      <div class="mono" style="font-size: 11px; color: var(--text-faint); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;">Per Lot Rebate</div>
+      <div style="font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; color: var(--cyan);">$3</div>
+      <div style="font-size: 12px; color: var(--text-dim); margin-top: 8px;">On every single order</div>
+    </div>
+    <div class="glass glass-hover reveal" style="border-radius: 16px; padding: 28px; text-align: center;">
+      <div class="mono" style="font-size: 11px; color: var(--text-faint); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;">Monthly Cap</div>
+      <div style="font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; color: #FFF;">None</div>
+      <div style="font-size: 12px; color: var(--text-dim); margin-top: 8px;">Trade more, earn more</div>
+    </div>
+    <div class="glass glass-hover reveal" style="border-radius: 16px; padding: 28px; text-align: center;">
+      <div class="mono" style="font-size: 11px; color: var(--text-faint); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;">Payout</div>
+      <div style="font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; color: #FFF;">Auto</div>
+      <div style="font-size: 12px; color: var(--text-dim); margin-top: 8px;">No manual claims</div>
+    </div>
+    <div class="glass glass-hover reveal" style="border-radius: 16px; padding: 28px; text-align: center;">
+      <div class="mono" style="font-size: 11px; color: var(--text-faint); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;">Eligibility</div>
+      <div style="font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; color: #FFF;">$100+</div>
+      <div style="font-size: 12px; color: var(--text-dim); margin-top: 8px;">Min deposit required</div>
     </div>
   </div>
 </section>
@@ -554,10 +609,10 @@ body {
   <div class="rex-section">
     <div class="reveal">
       <div class="rex-holo">
-        <div class="rex-symbol">R</div>
+        <div class="rex-symbol gradient-text">R</div>
         <div class="rex-label">Rex — Loyalty Reward</div>
         <div class="rex-balance">12,450</div>
-        <div class="rex-balance-label">Your Balance</div>
+        <div class="rex-balance-label">YOUR BALANCE</div>
         <div class="rex-note">Rex is a closed-loop loyalty reward point. Not a cryptocurrency. Not transferable. Not redeemable for cash.</div>
       </div>
     </div>
@@ -590,7 +645,7 @@ body {
   <span class="section-tag reveal">Live Rankings</span>
   <h2 class="section-title reveal">The Leaderboard</h2>
   <p class="section-sub reveal">Real-time rankings. Updated as trades are verified. Skill determines position — not account size.</p>
-  <div class="leaderboard reveal">
+  <div class="leaderboard glass reveal">
     <div class="lb-header"><span>Rank</span><span>Trader</span><span>Bracket</span><span>Score</span><span>Rex</span></div>
     <div class="lb-row"><div class="lb-rank gold">01</div><div class="lb-name">@alex_goldfx</div><div class="lb-bracket">Heavyweight</div><div class="lb-score">94.7</div><div class="lb-rex">12,450</div></div>
     <div class="lb-row"><div class="lb-rank silver">02</div><div class="lb-name">@sara_trades</div><div class="lb-bracket">Middleweight</div><div class="lb-score">91.2</div><div class="lb-rex">10,820</div></div>
@@ -605,23 +660,23 @@ body {
   <span class="section-tag reveal">Trader's Arsenal</span>
   <h2 class="section-title reveal">Lot Size Calculator</h2>
   <p class="section-sub reveal">Calculate your position size, risk, and rebate earnings. Real numbers, real fast.</p>
-  <div class="calc-card reveal">
-    <div class="calc-row"><label class="calc-label">Account Size (USD)</label>
+  <div class="calc-card glass reveal">
+    <div class="calc-row"><label class="calc-label">ACCOUNT SIZE (USD)</label>
       <select class="calc-select" id="calc-account">
         <option value="100">$100</option><option value="500">$500</option>
         <option value="1000" selected>$1,000</option><option value="5000">$5,000</option>
         <option value="10000">$10,000</option><option value="50000">$50,000</option><option value="100000">$100,000</option>
       </select></div>
-    <div class="calc-row"><label class="calc-label">Risk Per Trade (%)</label>
+    <div class="calc-row"><label class="calc-label">RISK PER TRADE (%)</label>
       <input type="range" class="calc-slider" id="calc-risk" min="0.5" max="10" step="0.5" value="2">
-      <span id="calc-risk-val" style="color: var(--teal); font-weight: 600; font-size: 13px;">2%</span></div>
-    <div class="calc-row"><label class="calc-label">Currency Pair</label>
+      <span id="calc-risk-val" style="color: var(--cyan); font-weight: 600; font-size: 13px; font-family: 'JetBrains Mono', monospace;">2%</span></div>
+    <div class="calc-row"><label class="calc-label">CURRENCY PAIR</label>
       <select class="calc-select" id="calc-pair">
         <option value="100000">EUR/USD</option><option value="100000">GBP/USD</option>
         <option value="150000">USD/JPY</option><option value="1300">XAU/USD (Gold)</option>
         <option value="1">BTC/USD</option><option value="1000">ETH/USD</option>
       </select></div>
-    <div class="calc-row"><label class="calc-label">Stop Loss (pips)</label>
+    <div class="calc-row"><label class="calc-label">STOP LOSS (PIPS)</label>
       <input type="number" class="calc-input" id="calc-sl" value="20" min="1"></div>
     <div class="calc-result">
       <div class="calc-result-row"><span>Risk Amount</span><span id="result-risk">$20.00</span></div>
@@ -634,7 +689,7 @@ body {
 
 <!-- DISCORD -->
 <section class="section">
-  <div class="discord-cta reveal">
+  <div class="discord-cta glass reveal">
     <h2>Join FORTREX Citadel</h2>
     <p>The real community lives on Discord. Tournament reveals, prize pool announcements, trader discussions — all in one place. Verified traders only.</p>
     <button class="discord-btn">
@@ -649,23 +704,23 @@ body {
   <span class="section-tag reveal">Questions, Answered</span>
   <h2 class="section-title reveal">FAQ</h2>
   <div style="max-width: 760px;">
-    <div class="faq-item reveal"><div class="faq-q">What is FORTREX? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">FORTREX is a professional trading community that organizes skill-based competitions for verified traders. We partner with brokers and prop firms to offer real rewards — cash and funded accounts — to traders who demonstrate superior trading skill.</div></div></div>
-    <div class="faq-item reveal"><div class="faq-q">How do I enter a competition? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">Open a broker account using our partner link, deposit $100, and complete verification. Once verified, you can join any live arena. For prop firm arenas, purchase a funded account using our partner code.</div></div></div>
-    <div class="faq-item reveal"><div class="faq-q">How are winners decided? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">Winners are determined by a composite score: 40% ROI (percentage-based, not raw profit), 30% consistency (daily returns, win rate, profit factor), and 30% risk management (drawdown adherence, lot size discipline). This ensures fair competition across different account sizes.</div></div></div>
-    <div class="faq-item reveal"><div class="faq-q">What is the $3/lot rebate? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">Every verified FORTREX trader earns $3 back for every lot they trade. This is funded by our broker partnership — we share our affiliate commission with you. Trade more, earn more. No cap. No catch.</div></div></div>
-    <div class="faq-item reveal"><div class="faq-q">What is Rex? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">Rex is FORTREX's loyalty reward point system. Earn Rex through daily logins, referrals, quizzes, and tournament participation. Redeem Rex for lucky draw tickets, tournament passes, and more. Rex is not a cryptocurrency and cannot be converted to cash.</div></div></div>
-    <div class="faq-item reveal"><div class="faq-q">Is this gambling? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">No. FORTREX competitions are skill-based — winners are determined by trading performance metrics (ROI, consistency, risk management), not by chance. Users are responsible for complying with their local jurisdiction's laws.</div></div></div>
-    <div class="faq-item reveal"><div class="faq-q">How often do tournaments run? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">Tournaments run every two weeks — two per month. Each tournament has its own prize pool, brackets, and rules. Season finales bring the biggest rewards.</div></div></div>
-    <div class="faq-item reveal"><div class="faq-q">Why do I need to join Discord? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">FORTREX Citadel on Discord is our community hub. Tournament prize pool reveals, live announcements, trader discussions, and support all happen there. Your FORTREX identity and Rex balance sync across both platforms.</div></div></div>
+    <div class="faq-item glass reveal"><div class="faq-q">What is FORTREX? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">FORTREX is a professional trading community that organizes skill-based competitions for verified traders. We partner with brokers and prop firms to offer real rewards — cash and funded accounts — to traders who demonstrate superior trading skill.</div></div></div>
+    <div class="faq-item glass reveal"><div class="faq-q">How do I enter a competition? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">Open a broker account using our partner link, deposit $100, and complete verification. Once verified, you can join any live arena. For prop firm arenas, purchase a funded account using our partner code.</div></div></div>
+    <div class="faq-item glass reveal"><div class="faq-q">How are winners decided? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">Winners are determined by a composite score: 40% ROI (percentage-based, not raw profit), 30% consistency (daily returns, win rate, profit factor), and 30% risk management (drawdown adherence, lot size discipline). This ensures fair competition across different account sizes.</div></div></div>
+    <div class="faq-item glass reveal"><div class="faq-q">What is the $3/lot rebate? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">Every verified FORTREX trader earns $3 back for every lot they trade. This is funded by our broker partnership — we share our affiliate commission with you. Trade more, earn more. No cap. No catch.</div></div></div>
+    <div class="faq-item glass reveal"><div class="faq-q">What is Rex? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">Rex is FORTREX's loyalty reward point system. Earn Rex through daily logins, referrals, quizzes, and tournament participation. Redeem Rex for lucky draw tickets, tournament passes, and more. Rex is not a cryptocurrency and cannot be converted to cash.</div></div></div>
+    <div class="faq-item glass reveal"><div class="faq-q">Is this gambling? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">No. FORTREX competitions are skill-based — winners are determined by trading performance metrics (ROI, consistency, risk management), not by chance. Users are responsible for complying with their local jurisdiction's laws.</div></div></div>
+    <div class="faq-item glass reveal"><div class="faq-q">How often do tournaments run? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">Tournaments run every two weeks — two per month. Each tournament has its own prize pool, brackets, and rules. Season finales bring the biggest rewards.</div></div></div>
+    <div class="faq-item glass reveal"><div class="faq-q">Why do I need to join Discord? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">FORTREX Citadel on Discord is our community hub. Tournament prize pool reveals, live announcements, trader discussions, and support all happen there. Your FORTREX identity and Rex balance sync across both platforms.</div></div></div>
   </div>
 </section>
 
 <footer class="footer">
   <div class="footer-brand">
     <img src="https://media.base44.com/images/public/6a73016f9b626430a0d26f88/033deb0ff_generated_image.png" alt="FORTREX" class="footer-logo">
-    <span class="footer-text">FORT<span>REX</span></span>
+    <span class="footer-text">FORTREX</span>
   </div>
-  <p class="footer-tag">Trade Real. Win Real.</p>
+  <p class="footer-tag">Your Edge. Your Arena. Your Legacy.</p>
   <p class="footer-disclaimer">FORTREX is a professional trading community and competition platform. We do not provide broker services, investment advice, or financial recommendations. Users are responsible for complying with their local jurisdiction's laws. All competitions are skill-based. Rex is a closed-loop loyalty reward point, not a cryptocurrency or financial instrument.</p>
 </footer>
 
@@ -673,10 +728,10 @@ body {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-// ===== THREE.JS — FORTREX FORTRESS (MIDNIGHT CHROME) =====
+// ===== THREE.JS — FORTREX FORTRESS =====
 const canvas = document.getElementById('three-canvas');
 const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x050507, 0.022);
+scene.fog = new THREE.FogExp2(0x050507, 0.02);
 
 const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
 camera.position.set(0, 8, 22);
@@ -686,89 +741,69 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setClearColor(0x050507, 1);
 
-// ===== LIGHTING =====
-scene.add(new THREE.AmbientLight(0x0F1525, 0.5));
+// Lighting
+scene.add(new THREE.AmbientLight(0x0F1525, 0.4));
 
-const tealKey = new THREE.SpotLight(0x2DD4BF, 2.5, 70, Math.PI / 4, 0.5, 1);
-tealKey.position.set(8, 20, 12);
-tealKey.target.position.set(0, 2, 0);
-scene.add(tealKey); scene.add(tealKey.target);
+const cyanKey = new THREE.SpotLight(0x22D3EE, 2, 70, Math.PI / 4, 0.5, 1);
+cyanKey.position.set(8, 20, 12);
+cyanKey.target.position.set(0, 2, 0);
+scene.add(cyanKey); scene.add(cyanKey.target);
 
-const indigoFill = new THREE.PointLight(0x818CF8, 1, 35);
+const indigoFill = new THREE.PointLight(0x818CF8, 0.8, 35);
 indigoFill.position.set(-10, 4, 8);
 scene.add(indigoFill);
 
-const emeraldAccent = new THREE.PointLight(0x10B981, 0.8, 25);
+const emeraldAccent = new THREE.PointLight(0x10B981, 0.6, 25);
 emeraldAccent.position.set(6, -2, -6);
 scene.add(emeraldAccent);
 
-const moonLight = new THREE.DirectionalLight(0x4A5568, 0.4);
-moonLight.position.set(-5, 10, -12);
-scene.add(moonLight);
+const dirLight = new THREE.DirectionalLight(0x4A5568, 0.3);
+dirLight.position.set(-5, 10, -12);
+scene.add(dirLight);
 
-// ===== MATERIALS =====
+// Materials
 const fortMat = new THREE.MeshStandardMaterial({ color: 0x0A0D14, metalness: 0.9, roughness: 0.3, flatShading: true });
 const fortMatDark = new THREE.MeshStandardMaterial({ color: 0x070910, metalness: 0.95, roughness: 0.35, flatShading: true });
-const tealEdgeMat = new THREE.LineBasicMaterial({ color: 0x2DD4BF, transparent: true, opacity: 0.4 });
-const tealMat = new THREE.MeshStandardMaterial({ color: 0x2DD4BF, metalness: 1, roughness: 0.1, emissive: 0x2DD4BF, emissiveIntensity: 0.2 });
+const edgeMat = new THREE.LineBasicMaterial({ color: 0x22D3EE, transparent: true, opacity: 0.3 });
+const accentMat = new THREE.MeshStandardMaterial({ color: 0x22D3EE, metalness: 1, roughness: 0.1, emissive: 0x22D3EE, emissiveIntensity: 0.2 });
 
-function addEdges(mesh, mat = tealEdgeMat) {
+function addEdges(mesh, mat = edgeMat) {
   const edges = new THREE.EdgesGeometry(mesh.geometry);
   mesh.add(new THREE.LineSegments(edges, mat));
 }
 
-// ===== FORTRESS =====
+// Fortress
 const fortress = new THREE.Group();
 
-// Foundation
-const baseGeo = new THREE.CylinderGeometry(9, 10, 1.5, 8);
-const base = new THREE.Mesh(baseGeo, fortMatDark);
-base.position.y = -0.75;
-addEdges(base);
-fortress.add(base);
+const base = new THREE.Mesh(new THREE.CylinderGeometry(9, 10, 1.5, 8), fortMatDark);
+base.position.y = -0.75; addEdges(base); fortress.add(base);
 
-// Central Keep
-const keepGeo = new THREE.BoxGeometry(3.5, 7, 3.5);
-const keep = new THREE.Mesh(keepGeo, fortMat);
-keep.position.y = 4;
-addEdges(keep);
-fortress.add(keep);
+const keep = new THREE.Mesh(new THREE.BoxGeometry(3.5, 7, 3.5), fortMat);
+keep.position.y = 4; addEdges(keep); fortress.add(keep);
 
 // Battlements
 for (let i = 0; i < 10; i++) {
   if (i % 2 !== 0) continue;
   const angle = (i / 10) * Math.PI * 2;
-  const bGeo = new THREE.BoxGeometry(0.5, 0.7, 0.5);
-  const b = new THREE.Mesh(bGeo, fortMat);
+  const b = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.7, 0.5), fortMat);
   b.position.set(Math.cos(angle) * 2.1, 7.85, Math.sin(angle) * 2.1);
-  addEdges(b);
-  fortress.add(b);
+  addEdges(b); fortress.add(b);
 }
 
 // Door
-const doorGeo = new THREE.BoxGeometry(1.2, 2, 0.3);
-const door = new THREE.Mesh(doorGeo, new THREE.MeshStandardMaterial({ color: 0x0A1A18, metalness: 0.7, roughness: 0.4, emissive: 0x2DD4BF, emissiveIntensity: 0.08 }));
-door.position.set(0, 1.5, 1.8);
-fortress.add(door);
+const door = new THREE.Mesh(new THREE.BoxGeometry(1.2, 2, 0.3),
+  new THREE.MeshStandardMaterial({ color: 0x0A1A18, metalness: 0.7, roughness: 0.4, emissive: 0x22D3EE, emissiveIntensity: 0.06 }));
+door.position.set(0, 1.5, 1.8); fortress.add(door);
 
 // Side towers
 [{x:-5,z:-1},{x:5,z:-1},{x:-4,z:4},{x:4,z:4}].forEach((pos, i) => {
   const h = 4.5 + (i % 2) * 1.2;
-  const tGeo = new THREE.CylinderGeometry(1.2, 1.5, h, 6);
-  const t = new THREE.Mesh(tGeo, fortMat);
-  t.position.set(pos.x, h/2, pos.z);
-  addEdges(t);
-  fortress.add(t);
-
-  const rGeo = new THREE.ConeGeometry(1.4, 1.5, 6);
-  const r = new THREE.Mesh(rGeo, fortMatDark);
-  r.position.set(pos.x, h + 0.75, pos.z);
-  addEdges(r);
-  fortress.add(r);
-
-  const tip = new THREE.Mesh(new THREE.SphereGeometry(0.12, 6, 6), tealMat);
-  tip.position.set(pos.x, h + 1.6, pos.z);
-  fortress.add(tip);
+  const t = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 1.5, h, 6), fortMat);
+  t.position.set(pos.x, h/2, pos.z); addEdges(t); fortress.add(t);
+  const r = new THREE.Mesh(new THREE.ConeGeometry(1.4, 1.5, 6), fortMatDark);
+  r.position.set(pos.x, h + 0.75, pos.z); addEdges(r); fortress.add(r);
+  const tip = new THREE.Mesh(new THREE.SphereGeometry(0.12, 6, 6), accentMat);
+  tip.position.set(pos.x, h + 1.6, pos.z); fortress.add(tip);
 });
 
 // Walls
@@ -776,49 +811,36 @@ fortress.add(door);
   {x:-3.2,z:1.5,w:3,h:3.5,d:0.4,rot:0.3},{x:3.2,z:1.5,w:3,h:3.5,d:0.4,rot:-0.3},
   {x:-2.5,z:3.5,w:4,h:3,d:0.4,rot:0.6},{x:2.5,z:3.5,w:4,h:3,d:0.4,rot:-0.6}
 ].forEach(wc => {
-  const wGeo = new THREE.BoxGeometry(wc.w, wc.h, wc.d);
-  const w = new THREE.Mesh(wGeo, fortMat);
-  w.position.set(wc.x, wc.h/2, wc.z);
-  w.rotation.y = wc.rot;
-  addEdges(w);
-  fortress.add(w);
-
+  const w = new THREE.Mesh(new THREE.BoxGeometry(wc.w, wc.h, wc.d), fortMat);
+  w.position.set(wc.x, wc.h/2, wc.z); w.rotation.y = wc.rot;
+  addEdges(w); fortress.add(w);
   for (let j = 0; j < 5; j++) {
     const wb = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.4, 0.45), fortMat);
     const lx = -wc.w/2 + 0.5 + j * (wc.w - 1) / 4;
     wb.position.set(wc.x + Math.cos(wc.rot) * lx, wc.h + 0.2, wc.z + Math.sin(wc.rot) * lx);
-    wb.rotation.y = wc.rot;
-    addEdges(wb);
-    fortress.add(wb);
+    wb.rotation.y = wc.rot; addEdges(wb); fortress.add(wb);
   }
 });
 
 // Flag
-const flagPole = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 2.5, 4), tealMat);
-flagPole.position.set(0, 9, 0);
-fortress.add(flagPole);
-
-const flag = new THREE.Mesh(
-  new THREE.PlaneGeometry(1.3, 0.9),
-  new THREE.MeshStandardMaterial({ color: 0x2DD4BF, metalness: 0.8, roughness: 0.15, side: THREE.DoubleSide, emissive: 0x2DD4BF, emissiveIntensity: 0.15 })
-);
-flag.position.set(0.65, 9.5, 0);
-fortress.add(flag);
+const flagPole = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 2.5, 4), accentMat);
+flagPole.position.set(0, 9, 0); fortress.add(flagPole);
+const flag = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 0.9),
+  new THREE.MeshStandardMaterial({ color: 0x22D3EE, metalness: 0.8, roughness: 0.15, side: THREE.DoubleSide, emissive: 0x22D3EE, emissiveIntensity: 0.1 }));
+flag.position.set(0.65, 9.5, 0); fortress.add(flag);
 
 // Gate torches
 [-0.8, 0.8].forEach(tx => {
   const torch = new THREE.Mesh(new THREE.SphereGeometry(0.12, 6, 6),
-    new THREE.MeshStandardMaterial({ color: 0x2DD4BF, emissive: 0x2DD4BF, emissiveIntensity: 2 }));
-  torch.position.set(tx, 2.5, 1.9);
-  fortress.add(torch);
-  const tl = new THREE.PointLight(0x2DD4BF, 0.6, 5);
-  tl.position.set(tx, 2.5, 2);
-  fortress.add(tl);
+    new THREE.MeshStandardMaterial({ color: 0x22D3EE, emissive: 0x22D3EE, emissiveIntensity: 2 }));
+  torch.position.set(tx, 2.5, 1.9); fortress.add(torch);
+  const tl = new THREE.PointLight(0x22D3EE, 0.4, 5);
+  tl.position.set(tx, 2.5, 2); fortress.add(tl);
 });
 
 scene.add(fortress);
 
-// ===== CANDLESTICK FIELD =====
+// Candlestick field
 const candlesticks = [];
 for (let i = 0; i < 28; i++) {
   const angle = (i / 28) * Math.PI * 2 + Math.random() * 0.3;
@@ -827,64 +849,48 @@ for (let i = 0; i < 28; i++) {
   const bh = 0.5 + Math.random() * 3;
   const wh = bh + 1 + Math.random() * 2;
   const bw = 0.35 + Math.random() * 0.25;
-
-  const body = new THREE.Mesh(
-    new THREE.BoxGeometry(bw, bh, bw),
+  const body = new THREE.Mesh(new THREE.BoxGeometry(bw, bh, bw),
     new THREE.MeshStandardMaterial({
-      color: isBull ? 0x10B981 : 0xEF4444,
-      metalness: 0.5, roughness: 0.3,
-      emissive: isBull ? 0x10B981 : 0xEF4444,
-      emissiveIntensity: 0.12, transparent: true, opacity: 0.55
-    })
-  );
+      color: isBull ? 0x10B981 : 0xEF4444, metalness: 0.5, roughness: 0.3,
+      emissive: isBull ? 0x10B981 : 0xEF4444, emissiveIntensity: 0.08,
+      transparent: true, opacity: 0.4
+    }));
   body.position.set(Math.cos(angle) * radius, bh / 2, Math.sin(angle) * radius);
-  addEdges(body, new THREE.LineBasicMaterial({ color: isBull ? 0x10B981 : 0xEF4444, transparent: true, opacity: 0.3 }));
+  addEdges(body, new THREE.LineBasicMaterial({ color: isBull ? 0x10B981 : 0xEF4444, transparent: true, opacity: 0.2 }));
   scene.add(body);
-
-  const wick = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.03, 0.03, wh, 4),
-    new THREE.MeshBasicMaterial({ color: isBull ? 0x10B981 : 0xEF4444, transparent: true, opacity: 0.3 })
-  );
+  const wick = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, wh, 4),
+    new THREE.MeshBasicMaterial({ color: isBull ? 0x10B981 : 0xEF4444, transparent: true, opacity: 0.2 }));
   wick.position.set(Math.cos(angle) * radius, wh / 2, Math.sin(angle) * radius);
   scene.add(wick);
-
-  candlesticks.push({ body, wick, baseY: bh / 2, phase: Math.random() * Math.PI * 2, isBull });
+  candlesticks.push({ body, wick, baseY: bh / 2, phase: Math.random() * Math.PI * 2 });
 }
 
-// ===== PARTICLES =====
-const pCount = 500;
+// Particles
+const pCount = 400;
 const pGeo = new THREE.BufferGeometry();
 const pPos = new Float32Array(pCount * 3);
 const pCol = new Float32Array(pCount * 3);
 const pVel = new Float32Array(pCount);
-
 for (let i = 0; i < pCount; i++) {
   pPos[i*3] = (Math.random() - 0.5) * 40;
   pPos[i*3+1] = Math.random() * 20;
   pPos[i*3+2] = (Math.random() - 0.5) * 40;
   const t = Math.random() > 0.3;
-  pCol[i*3] = t ? 0.18 : 0.51;
-  pCol[i*3+1] = t ? 0.83 : 0.56;
-  pCol[i*3+2] = t ? 0.75 : 0.97;
-  pVel[i] = 0.004 + Math.random() * 0.012;
+  pCol[i*3] = t ? 0.13 : 0.51; pCol[i*3+1] = t ? 0.83 : 0.56; pCol[i*3+2] = t ? 0.94 : 0.97;
+  pVel[i] = 0.004 + Math.random() * 0.01;
 }
 pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
 pGeo.setAttribute('color', new THREE.BufferAttribute(pCol, 3));
-const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({ size: 0.05, vertexColors: true, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending, depthWrite: false }));
+const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({ size: 0.04, vertexColors: true, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending, depthWrite: false }));
 scene.add(particles);
 
 // Floor
-const floor = new THREE.Mesh(
-  new THREE.PlaneGeometry(80, 80),
-  new THREE.MeshStandardMaterial({ color: 0x050507, metalness: 0.95, roughness: 0.25, transparent: true, opacity: 0.5 })
-);
-floor.rotation.x = -Math.PI / 2;
-floor.position.y = -1.5;
-scene.add(floor);
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(80, 80),
+  new THREE.MeshStandardMaterial({ color: 0x050507, metalness: 0.95, roughness: 0.25, transparent: true, opacity: 0.4 }));
+floor.rotation.x = -Math.PI / 2; floor.position.y = -1.5; scene.add(floor);
 
-// ===== CAMERA SCROLL SYSTEM =====
+// Camera system
 let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0, scrollY = 0;
-
 window.addEventListener('mousemove', e => {
   mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
   mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
@@ -897,118 +903,80 @@ window.addEventListener('resize', () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
-// Smooth easing
 function lerp(a, b, t) { return a + (b - a) * t; }
 
-// Camera keyframes per section
 const camKeyframes = [
-  { x: 0, y: 8, z: 22, lookY: 4 },    // hero — wide, slightly above
-  { x: -6, y: 5, z: 18, lookY: 3 },   // arenas — side angle, lower
-  { x: 8, y: 7, z: 16, lookY: 3 },    // how — opposite side
-  { x: -4, y: 3, z: 14, lookY: 4 },   // rex — closer, lower
-  { x: 5, y: 12, z: 18, lookY: 2 },   // leaderboard — high angle
-  { x: -8, y: 4, z: 15, lookY: 3 },   // calculator — side close
-  { x: 0, y: 10, z: 20, lookY: 3 },   // discord — centered, high
-  { x: 3, y: 8, z: 22, lookY: 3 },    // faq — wide pullback
+  { x: 0, y: 8, z: 22, lookY: 4 },
+  { x: -6, y: 5, z: 18, lookY: 3 },
+  { x: 8, y: 7, z: 16, lookY: 3 },
+  { x: -4, y: 3, z: 14, lookY: 4 },
+  { x: 5, y: 12, z: 18, lookY: 2 },
+  { x: -8, y: 4, z: 15, lookY: 3 },
+  { x: 0, y: 10, z: 20, lookY: 3 },
+  { x: 3, y: 8, z: 22, lookY: 3 },
 ];
 
 function getCamTarget() {
-  const sectionHeight = window.innerHeight;
-  const sectionIndex = Math.min(Math.floor(scrollY / sectionHeight), camKeyframes.length - 1);
-  const nextIndex = Math.min(sectionIndex + 1, camKeyframes.length - 1);
-  const sectionProgress = (scrollY / sectionHeight) - sectionIndex;
-  const eased = sectionProgress < 0.5 ? 2 * sectionProgress * sectionProgress : 1 - Math.pow(-2 * sectionProgress + 2, 2) / 2;
-
-  const curr = camKeyframes[sectionIndex];
-  const next = camKeyframes[nextIndex];
-
-  return {
-    x: lerp(curr.x, next.x, eased),
-    y: lerp(curr.y, next.y, eased),
-    z: lerp(curr.z, next.z, eased),
-    lookY: lerp(curr.lookY, next.lookY, eased)
-  };
+  const sh = window.innerHeight;
+  const si = Math.min(Math.floor(scrollY / sh), camKeyframes.length - 1);
+  const ni = Math.min(si + 1, camKeyframes.length - 1);
+  const sp = (scrollY / sh) - si;
+  const eased = sp < 0.5 ? 2 * sp * sp : 1 - Math.pow(-2 * sp + 2, 2) / 2;
+  const c = camKeyframes[si], n = camKeyframes[ni];
+  return { x: lerp(c.x, n.x, eased), y: lerp(c.y, n.y, eased), z: lerp(c.z, n.z, eased), lookY: lerp(c.lookY, n.lookY, eased) };
 }
 
-// Animation
 const clock = new THREE.Clock();
 let camPos = { x: 0, y: 8, z: 22, lookY: 4 };
 
 function animate() {
   requestAnimationFrame(animate);
   const t = clock.getElapsedTime();
-
-  // Smooth mouse
   targetX += (mouseX - targetX) * 0.04;
   targetY += (mouseY - targetY) * 0.04;
-
-  // Get scroll-driven camera target
-  const target = getCamTarget();
-
-  // Smooth camera lerp (creates cinematic ease)
-  camPos.x = lerp(camPos.x, target.x + targetX * 1.5, 0.04);
-  camPos.y = lerp(camPos.y, target.y - targetY * 1, 0.04);
-  camPos.z = lerp(camPos.z, target.z, 0.04);
-  camPos.lookY = lerp(camPos.lookY, target.lookY, 0.04);
-
-  // Subtle breathing
-  const breath = Math.sin(t * 0.5) * 0.15;
-
+  const tgt = getCamTarget();
+  camPos.x = lerp(camPos.x, tgt.x + targetX * 1.5, 0.04);
+  camPos.y = lerp(camPos.y, tgt.y - targetY * 1, 0.04);
+  camPos.z = lerp(camPos.z, tgt.z, 0.04);
+  camPos.lookY = lerp(camPos.lookY, tgt.lookY, 0.04);
+  const breath = Math.sin(t * 0.5) * 0.12;
   camera.position.set(camPos.x, camPos.y + breath, camPos.z);
   camera.lookAt(0, camPos.lookY, 0);
-
-  // Fortress slow rotation
   fortress.rotation.y = t * 0.04;
-
-  // Flag wave
   flag.rotation.z = Math.sin(t * 2) * 0.08;
   flag.rotation.x = Math.cos(t * 1.5) * 0.04;
-
-  // Candlestick pulse
-  candlesticks.forEach((c) => {
-    const p = 1 + Math.sin(t * 1.5 + c.phase) * 0.12;
-    c.body.scale.y = p;
-    c.body.position.y = c.baseY * p;
-    c.wick.scale.y = p;
-    c.wick.position.y = c.baseY * p;
-    c.body.material.emissiveIntensity = 0.08 + Math.sin(t * 2 + c.phase) * 0.08;
+  candlesticks.forEach(c => {
+    const p = 1 + Math.sin(t * 1.5 + c.phase) * 0.1;
+    c.body.scale.y = p; c.body.position.y = c.baseY * p;
+    c.wick.scale.y = p; c.wick.position.y = c.baseY * p;
+    c.body.material.emissiveIntensity = 0.06 + Math.sin(t * 2 + c.phase) * 0.06;
   });
-
-  // Particles
   const pa = particles.geometry.attributes.position;
   for (let i = 0; i < pCount; i++) {
     pa.array[i*3+1] += pVel[i];
     if (pa.array[i*3+1] > 20) pa.array[i*3+1] = -2;
-    pa.array[i*3] += Math.sin(t * 0.5 + i) * 0.004;
+    pa.array[i*3] += Math.sin(t * 0.5 + i) * 0.003;
   }
   pa.needsUpdate = true;
   particles.rotation.y = t * 0.008;
-
-  // Moving light
-  tealKey.position.x = Math.sin(t * 0.15) * 10;
-  tealKey.position.z = Math.cos(t * 0.15) * 10 + 5;
-
+  cyanKey.position.x = Math.sin(t * 0.15) * 10;
+  cyanKey.position.z = Math.cos(t * 0.15) * 10 + 5;
   renderer.render(scene, camera);
 }
 animate();
 
-// ===== COUNTERS =====
-function animateCounter(el, target, dur = 2000) {
-  const start = Date.now();
-  function update() {
-    const p = Math.min((Date.now() - start) / dur, 1);
-    const eased = 1 - Math.pow(1 - p, 3);
-    el.textContent = Math.floor(target * eased).toLocaleString();
-    if (p < 1) requestAnimationFrame(update);
-  }
-  update();
-}
-setTimeout(() => {
-  animateCounter(document.getElementById('stat-registered'), 3247);
-  animateCounter(document.getElementById('stat-verified'), 1406);
-}, 500);
+// FAQ
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const a = q.nextElementSibling;
+    const open = a.style.maxHeight && a.style.maxHeight !== '0px';
+    document.querySelectorAll('.faq-a').forEach(i => i.style.maxHeight = '0px');
+    document.querySelectorAll('.faq-q').forEach(i => i.classList.remove('open'));
+    if (!open) { a.style.maxHeight = a.scrollHeight + 'px'; q.classList.add('open'); }
+  });
+});
 
-// ===== CALCULATOR =====
+// Calculator
 function calcLot() {
   const account = parseFloat(document.getElementById('calc-account').value);
   const riskPct = parseFloat(document.getElementById('calc-risk').value);
@@ -1028,18 +996,7 @@ function calcLot() {
 ['calc-risk', 'calc-sl'].forEach(id => document.getElementById(id).addEventListener('input', calcLot));
 calcLot();
 
-// ===== FAQ =====
-document.querySelectorAll('.faq-q').forEach(q => {
-  q.addEventListener('click', () => {
-    const a = q.nextElementSibling;
-    const open = a.style.maxHeight && a.style.maxHeight !== '0px';
-    document.querySelectorAll('.faq-a').forEach(i => i.style.maxHeight = '0px');
-    document.querySelectorAll('.faq-q').forEach(i => i.classList.remove('open'));
-    if (!open) { a.style.maxHeight = a.scrollHeight + 'px'; q.classList.add('open'); }
-  });
-});
-
-// ===== REVEAL =====
+// Reveal
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
