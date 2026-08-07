@@ -30,7 +30,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-
+#three-canvas {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%; z-index: 0; pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
 .content { position: relative; z-index: 1; }
 
 .mono { font-family: 'JetBrains Mono', monospace; }
@@ -681,6 +686,7 @@ body {
 <body>
 <div id="scroll-progress"></div>
 
+<canvas id="three-canvas"></canvas>
 
 <nav class="nav">
   <div class="nav-brand">
@@ -983,7 +989,7 @@ body {
 
 </div>
 
-<script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">
 // ===== NEW ENHANCED TECHNIQUES JS =====
 
 // 1. Scroll Progress Bar (Technique 13)
@@ -1240,6 +1246,290 @@ if (origWaitlistBtn && origWaitlistEmail) {
   });
 }
 
+</script>
+<script>
+// ===== THREE.JS — background for scroll sections =====
+const canvas = document.getElementById('three-canvas');
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x000000, 0.018);
+
+const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 8, 22);
+
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setClearColor(0x000000, 1);
+
+scene.add(new THREE.AmbientLight(0x0F1525, 0.35));
+
+const cyanKey = new THREE.SpotLight(0x00F2FE, 2, 70, Math.PI / 4, 0.5, 1);
+cyanKey.position.set(8, 20, 12); cyanKey.target.position.set(0, 2, 0);
+scene.add(cyanKey); scene.add(cyanKey.target);
+
+const indigoFill = new THREE.PointLight(0x6366F1, 0.7, 35);
+indigoFill.position.set(-10, 4, 8); scene.add(indigoFill);
+
+const emeraldAccent = new THREE.PointLight(0x10B981, 0.5, 25);
+emeraldAccent.position.set(6, -2, -6); scene.add(emeraldAccent);
+
+const dirLight = new THREE.DirectionalLight(0x4A5568, 0.25);
+dirLight.position.set(-5, 10, -12); scene.add(dirLight);
+
+const fortMat = new THREE.MeshStandardMaterial({ color: 0x0A0D14, metalness: 0.9, roughness: 0.3, flatShading: true });
+const fortMatDark = new THREE.MeshStandardMaterial({ color: 0x070910, metalness: 0.95, roughness: 0.35, flatShading: true });
+const edgeMat = new THREE.LineBasicMaterial({ color: 0x00F2FE, transparent: true, opacity: 0.25 });
+const accentMat = new THREE.MeshStandardMaterial({ color: 0x00F2FE, metalness: 1, roughness: 0.1, emissive: 0x00F2FE, emissiveIntensity: 0.2 });
+
+function addEdges(mesh, mat = edgeMat) {
+  const edges = new THREE.EdgesGeometry(mesh.geometry);
+  mesh.add(new THREE.LineSegments(edges, mat));
+}
+
+const fortress = new THREE.Group();
+const base = new THREE.Mesh(new THREE.CylinderGeometry(9, 10, 1.5, 8), fortMatDark);
+base.position.y = -0.75; addEdges(base); fortress.add(base);
+
+const keep = new THREE.Mesh(new THREE.BoxGeometry(3.5, 7, 3.5), fortMat);
+keep.position.y = 4; addEdges(keep); fortress.add(keep);
+
+for (let i = 0; i < 10; i++) {
+  if (i % 2 !== 0) continue;
+  const angle = (i / 10) * Math.PI * 2;
+  const b = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.7, 0.5), fortMat);
+  b.position.set(Math.cos(angle) * 2.1, 7.85, Math.sin(angle) * 2.1);
+  addEdges(b); fortress.add(b);
+}
+
+const door = new THREE.Mesh(new THREE.BoxGeometry(1.2, 2, 0.3),
+  new THREE.MeshStandardMaterial({ color: 0x0A1A18, metalness: 0.7, roughness: 0.4, emissive: 0x00F2FE, emissiveIntensity: 0.06 }));
+door.position.set(0, 1.5, 1.8); fortress.add(door);
+
+[{x:-5,z:-1},{x:5,z:-1},{x:-4,z:4},{x:4,z:4}].forEach((pos, i) => {
+  const h = 4.5 + (i % 2) * 1.2;
+  const t = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 1.5, h, 6), fortMat);
+  t.position.set(pos.x, h/2, pos.z); addEdges(t); fortress.add(t);
+  const r = new THREE.Mesh(new THREE.ConeGeometry(1.4, 1.5, 6), fortMatDark);
+  r.position.set(pos.x, h + 0.75, pos.z); addEdges(r); fortress.add(r);
+  const tip = new THREE.Mesh(new THREE.SphereGeometry(0.12, 6, 6), accentMat);
+  tip.position.set(pos.x, h + 1.6, pos.z); fortress.add(tip);
+});
+
+[{x:-3.2,z:1.5,w:3,h:3.5,d:0.4,rot:0.3},{x:3.2,z:1.5,w:3,h:3.5,d:0.4,rot:-0.3},
+ {x:-2.5,z:3.5,w:4,h:3,d:0.4,rot:0.6},{x:2.5,z:3.5,w:4,h:3,d:0.4,rot:-0.6}].forEach(wc => {
+  const w = new THREE.Mesh(new THREE.BoxGeometry(wc.w, wc.h, wc.d), fortMat);
+  w.position.set(wc.x, wc.h/2, wc.z); w.rotation.y = wc.rot; addEdges(w); fortress.add(w);
+  for (let j = 0; j < 5; j++) {
+    const wb = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.4, 0.45), fortMat);
+    const lx = -wc.w/2 + 0.5 + j * (wc.w - 1) / 4;
+    wb.position.set(wc.x + Math.cos(wc.rot) * lx, wc.h + 0.2, wc.z + Math.sin(wc.rot) * lx);
+    wb.rotation.y = wc.rot; addEdges(wb); fortress.add(wb);
+  }
+});
+
+const flagPole = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 2.5, 4), accentMat);
+flagPole.position.set(0, 9, 0); fortress.add(flagPole);
+const flag = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 0.9),
+  new THREE.MeshStandardMaterial({ color: 0x00F2FE, metalness: 0.8, roughness: 0.15, side: THREE.DoubleSide, emissive: 0x00F2FE, emissiveIntensity: 0.1 }));
+flag.position.set(0.65, 9.5, 0); fortress.add(flag);
+
+[-0.8, 0.8].forEach(tx => {
+  const torch = new THREE.Mesh(new THREE.SphereGeometry(0.12, 6, 6),
+    new THREE.MeshStandardMaterial({ color: 0x00F2FE, emissive: 0x00F2FE, emissiveIntensity: 2 }));
+  torch.position.set(tx, 2.5, 1.9); fortress.add(torch);
+  const tl = new THREE.PointLight(0x00F2FE, 0.35, 5);
+  tl.position.set(tx, 2.5, 2); fortress.add(tl);
+});
+
+scene.add(fortress);
+
+const candlesticks = [];
+for (let i = 0; i < 28; i++) {
+  const angle = (i / 28) * Math.PI * 2 + Math.random() * 0.3;
+  const radius = 13 + Math.random() * 5;
+  const isBull = Math.random() > 0.45;
+  const bh = 0.5 + Math.random() * 3;
+  const wh = bh + 1 + Math.random() * 2;
+  const bw = 0.35 + Math.random() * 0.25;
+  const body = new THREE.Mesh(new THREE.BoxGeometry(bw, bh, bw),
+    new THREE.MeshStandardMaterial({ color: isBull ? 0x10B981 : 0xEF4444, metalness: 0.5, roughness: 0.3,
+      emissive: isBull ? 0x10B981 : 0xEF4444, emissiveIntensity: 0.06, transparent: true, opacity: 0.35 }));
+  body.position.set(Math.cos(angle) * radius, bh / 2, Math.sin(angle) * radius);
+  addEdges(body, new THREE.LineBasicMaterial({ color: isBull ? 0x10B981 : 0xEF4444, transparent: true, opacity: 0.15 }));
+  scene.add(body);
+  const wick = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, wh, 4),
+    new THREE.MeshBasicMaterial({ color: isBull ? 0x10B981 : 0xEF4444, transparent: true, opacity: 0.15 }));
+  wick.position.set(Math.cos(angle) * radius, wh / 2, Math.sin(angle) * radius);
+  scene.add(wick);
+  candlesticks.push({ body, wick, baseY: bh / 2, phase: Math.random() * Math.PI * 2 });
+}
+
+const pCount = 350;
+const pGeo = new THREE.BufferGeometry();
+const pPos = new Float32Array(pCount * 3);
+const pCol = new Float32Array(pCount * 3);
+const pVel = new Float32Array(pCount);
+for (let i = 0; i < pCount; i++) {
+  pPos[i*3] = (Math.random() - 0.5) * 40; pPos[i*3+1] = Math.random() * 20; pPos[i*3+2] = (Math.random() - 0.5) * 40;
+  const t = Math.random() > 0.3; pCol[i*3] = t ? 0 : 0.51; pCol[i*3+1] = t ? 0.95 : 0.56; pCol[i*3+2] = t ? 1 : 0.97;
+  pVel[i] = 0.004 + Math.random() * 0.01;
+}
+pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+pGeo.setAttribute('color', new THREE.BufferAttribute(pCol, 3));
+const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({ size: 0.04, vertexColors: true, transparent: true, opacity: 0.25, blending: THREE.AdditiveBlending, depthWrite: false }));
+scene.add(particles);
+
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(80, 80),
+  new THREE.MeshStandardMaterial({ color: 0x000000, metalness: 0.95, roughness: 0.25, transparent: true, opacity: 0.35 }));
+floor.rotation.x = -Math.PI / 2; floor.position.y = -1.5; scene.add(floor);
+
+// Camera
+let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0, scrollY = 0;
+window.addEventListener('mousemove', e => { mouseX = (e.clientX / window.innerWidth - 0.5) * 2; mouseY = (e.clientY / window.innerHeight - 0.5) * 2; });
+let lastScrollY = window.scrollY;
+let scrollVel = 0;
+window.addEventListener('scroll', () => {
+  scrollY = window.scrollY;
+  scrollVel = scrollY - lastScrollY;
+  lastScrollY = scrollY;
+});
+window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); });
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+const camKeyframes = [
+  // Hero (hidden) — start far
+  { x: 0, y: 10, z: 26, lookY: 4 },
+  // Arena — sweeping left, medium altitude
+  { x: -8, y: 6, z: 16, lookY: 3 },
+  // How It Works — close right pass, low angle
+  { x: 7, y: 4, z: 12, lookY: 3.5 },
+  // Rebates — high bird's eye, orbiting
+  { x: -3, y: 14, z: 15, lookY: 1 },
+  // Rex — tight close-up from ground level
+  { x: 4, y: 2, z: 10, lookY: 5 },
+  // Leaderboard — dramatic low sweep from left
+  { x: -9, y: 3, z: 13, lookY: 4 },
+  // Calculator — rising shot, ascending altitude
+  { x: 2, y: 8, z: 14, lookY: 3 },
+  // Discord — pull back, wide cinematic
+  { x: -4, y: 7, z: 20, lookY: 3 },
+  // FAQ — gentle drift right
+  { x: 6, y: 5, z: 17, lookY: 3.5 },
+  // Footer — slow pull out to wide
+  { x: 0, y: 9, z: 24, lookY: 3 },
+];
+
+function getCamTarget() {
+  const sh = window.innerHeight;
+  const si = Math.min(Math.floor(scrollY / sh), camKeyframes.length - 1);
+  const ni = Math.min(si + 1, camKeyframes.length - 1);
+  const sp = (scrollY / sh) - si;
+  // Smoother cubic ease-in-out for cinematic camera movement
+  const eased = sp < 0.5 ? 4 * sp * sp * sp : 1 - Math.pow(-2 * sp + 2, 3) / 2;
+  const c = camKeyframes[si], n = camKeyframes[ni];
+  return { x: lerp(c.x, n.x, eased), y: lerp(c.y, n.y, eased), z: lerp(c.z, n.z, eased), lookY: lerp(c.lookY, n.lookY, eased) };
+}
+
+const clock = new THREE.Clock();
+let camPos = { x: 0, y: 8, z: 22, lookY: 4 };
+
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+  targetX += (mouseX - targetX) * 0.04; targetY += (mouseY - targetY) * 0.04;
+  const tgt = getCamTarget();
+  camPos.x = lerp(camPos.x, tgt.x + targetX * 1.5, 0.06);
+  camPos.y = lerp(camPos.y, tgt.y - targetY * 1, 0.06);
+  camPos.z = lerp(camPos.z, tgt.z, 0.06);
+  camPos.lookY = lerp(camPos.lookY, tgt.lookY, 0.06);
+  camera.position.set(camPos.x, camPos.y + Math.sin(t * 0.5) * 0.12, camPos.z);
+  camera.lookAt(0, camPos.lookY, 0);
+
+  // Spatial Navigation camera bank/tilt based on scroll velocity (Technique 9)
+  scrollVel *= 0.90;
+  const targetTilt = Math.max(-0.06, Math.min(0.06, scrollVel * 0.0012));
+  camera.rotation.z = lerp(camera.rotation.z, targetTilt, 0.08);
+  fortress.rotation.y = t * 0.04;
+  flag.rotation.z = Math.sin(t * 2) * 0.08; flag.rotation.x = Math.cos(t * 1.5) * 0.04;
+  candlesticks.forEach(c => {
+    const p = 1 + Math.sin(t * 1.5 + c.phase) * 0.1;
+    c.body.scale.y = p; c.body.position.y = c.baseY * p;
+    c.wick.scale.y = p; c.wick.position.y = c.baseY * p;
+    c.body.material.emissiveIntensity = 0.04 + Math.sin(t * 2 + c.phase) * 0.05;
+  });
+  const pa = particles.geometry.attributes.position;
+  for (let i = 0; i < pCount; i++) { pa.array[i*3+1] += pVel[i]; if (pa.array[i*3+1] > 20) pa.array[i*3+1] = -2; pa.array[i*3] += Math.sin(t * 0.5 + i) * 0.003; }
+  pa.needsUpdate = true; particles.rotation.y = t * 0.008;
+  cyanKey.position.x = Math.sin(t * 0.15) * 10; cyanKey.position.z = Math.cos(t * 0.15) * 10 + 5;
+  
+  // Show 3D canvas only after scrolling past hero
+  const heroHeight = window.innerHeight;
+  // 3D canvas fades in gradually as user scrolls past hero
+  const scrollProgress = Math.min(scrollY / heroHeight, 1);
+  const canvasOpacity = scrollProgress < 0.3 ? 0 : (scrollProgress - 0.3) / 0.4 * 0.55;
+  canvas.style.opacity = Math.min(canvasOpacity, 0.55);
+  
+  renderer.render(scene, camera);
+}
+animate();
+
+// Waitlist
+const waitlistBtn = document.getElementById('waitlist-btn');
+const waitlistEmail = document.getElementById('waitlist-email');
+const waitlistWrap = document.getElementById('waitlist-wrap');
+waitlistBtn.addEventListener('click', () => {
+  if (waitlistEmail.value) {
+    waitlistWrap.innerHTML = '<div class="waitlist-claimed"><span>✓ You\'re on the list. Check your inbox.</span></div>';
+  }
+});
+
+// Scarcity counter
+const slotsTarget = 718, totalSlots = 1000;
+const slotsText = document.getElementById('slots-text');
+const scarcityFill = document.getElementById('scarcity-fill');
+let currentSlots = 0;
+const slotInterval = setInterval(() => {
+  currentSlots += Math.ceil((slotsTarget - currentSlots) / 10);
+  if (currentSlots >= slotsTarget) { currentSlots = slotsTarget; clearInterval(slotInterval); }
+  slotsText.textContent = currentSlots.toLocaleString() + ' / 1,000';
+  scarcityFill.style.width = (currentSlots / totalSlots * 100) + '%';
+}, 60);
+
+// FAQ
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const a = q.nextElementSibling;
+    const open = a.style.maxHeight && a.style.maxHeight !== '0px';
+    document.querySelectorAll('.faq-a').forEach(i => i.style.maxHeight = '0px');
+    document.querySelectorAll('.faq-q').forEach(i => i.classList.remove('open'));
+    if (!open) { a.style.maxHeight = a.scrollHeight + 'px'; q.classList.add('open'); }
+  });
+});
+
+// Calculator
+function calcLot() {
+  const account = parseFloat(document.getElementById('calc-account').value);
+  const riskPct = parseFloat(document.getElementById('calc-risk').value);
+  const pair = parseFloat(document.getElementById('calc-pair').value);
+  const sl = parseFloat(document.getElementById('calc-sl').value) || 20;
+  document.getElementById('calc-risk-val').textContent = riskPct + '%';
+  const riskAmount = account * (riskPct / 100);
+  const pipValue = pair / 100000;
+  const lots = riskAmount / (sl * pipValue);
+  const rebate = lots * 3;
+  document.getElementById('result-risk').textContent = '$' + riskAmount.toFixed(2);
+  document.getElementById('result-pip').textContent = '$' + pipValue.toFixed(2) + '/pip';
+  document.getElementById('result-lots').textContent = lots.toFixed(2) + ' lots';
+  document.getElementById('result-rebate').textContent = '$' + rebate.toFixed(2);
+}
+['calc-account', 'calc-pair'].forEach(id => document.getElementById(id).addEventListener('change', calcLot));
+['calc-risk', 'calc-sl'].forEach(id => document.getElementById(id).addEventListener('input', calcLot));
+calcLot();
+
+// Reveal
+const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
