@@ -9,11 +9,11 @@
 <style>
 :root {
   --bg: #000000;
-  --cyan: #00F2FE;
-  --cyan-dim: #00B4FF;
-  --blue: #3B82F6;
-  --indigo: #6366F1;
-  --emerald: #10B981;
+  --gold: #FFD700;
+  --gold-dim: #D4AF37;
+  --gold-deep: #B8860B;
+  --gold-light: #FFE875;
+  --bronze: #CD7F32;
   --text: #FFFFFF;
   --slate: #94A3B8;
   --slate-dim: #64748B;
@@ -35,13 +35,13 @@ body {
 
 .mono { font-family: 'JetBrains Mono', monospace; }
 .gradient-text {
-  background: linear-gradient(90deg, var(--cyan), var(--cyan-dim), var(--blue));
+  background: linear-gradient(90deg, var(--gold), var(--gold-dim), var(--gold-deep));
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 8px var(--cyan); opacity: 1; }
-  50% { box-shadow: 0 0 16px var(--cyan); opacity: 0.7; }
+  0%, 100% { box-shadow: 0 0 8px var(--gold); opacity: 1; }
+  50% { box-shadow: 0 0 16px var(--gold); opacity: 0.7; }
 }
 
 /* ===== NAV ===== */
@@ -53,7 +53,7 @@ body {
 .nav-brand { display: flex; align-items: center; gap: 12px; cursor: pointer; }
 .nav-logo {
   width: 32px; height: 32px; border-radius: 6px; object-fit: cover;
-  filter: drop-shadow(0 0 10px rgba(0,242,254,0.15));
+  filter: drop-shadow(0 0 10px rgba(255,215,0,0.15));
 }
 .nav-text {
   font-family: 'JetBrains Mono', monospace;
@@ -62,17 +62,17 @@ body {
 }
 .nav-prelaunch {
   padding: 3px 10px; border-radius: 100px;
-  background: rgba(0,242,254,0.08); border: 1px solid rgba(0,242,254,0.2);
+  background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.2);
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px; font-weight: 600; letter-spacing: 1px;
-  color: var(--cyan); text-transform: uppercase;
+  color: var(--gold); text-transform: uppercase;
 }
 .nav-links { display: flex; gap: 32px; align-items: center; }
 .nav-links a {
   color: var(--slate); text-decoration: none;
   font-size: 14px; font-weight: 500; transition: color 0.2s;
 }
-.nav-links a:hover { color: var(--cyan); }
+.nav-links a:hover { color: var(--gold); }
 .nav-actions { display: flex; align-items: center; gap: 24px; }
 .nav-signin { font-size: 14px; font-weight: 600; color: var(--slate); text-decoration: none; transition: color 0.3s; }
 .nav-signin:hover { color: #FFF; }
@@ -82,7 +82,7 @@ body {
   border-radius: 100px; font-size: 14px; font-weight: 700;
   cursor: pointer; transition: all 0.3s; letter-spacing: -0.3px;
 }
-.nav-cta:hover { background: var(--cyan); transform: scale(1.05); }
+.nav-cta:hover { background: var(--gold); transform: scale(1.05); }
 
 /* ===== HERO ===== */
 .hero {
@@ -110,7 +110,7 @@ body {
   position: absolute; top: 33%; left: 50%;
   transform: translate(-50%, -50%);
   width: 600px; height: 400px;
-  background: rgba(0,242,254,0.06);
+  background: rgba(255,215,0,0.06);
   filter: blur(140px); border-radius: 50%;
   pointer-events: none;
 }
@@ -132,12 +132,12 @@ body {
 }
 .hero-pill .dot {
   width: 7px; height: 7px; border-radius: 50%;
-  background: var(--cyan); animation: pulse-glow 2s infinite;
+  background: var(--gold); animation: pulse-glow 2s infinite;
 }
 .hero-pill span:last-child {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--cyan); font-weight: 500;
+  text-transform: uppercase; color: var(--gold); font-weight: 500;
 }
 
 .hero h1 {
@@ -160,11 +160,11 @@ body {
   border: none; border-radius: 100px;
   font-size: 16px; font-weight: 700; letter-spacing: -0.3px;
   cursor: pointer; transition: all 0.3s;
-  box-shadow: 0 4px 30px rgba(0,242,254,0.08);
+  box-shadow: 0 4px 30px rgba(255,215,0,0.08);
 }
 .btn-pill-primary:hover {
-  background: var(--cyan); transform: scale(1.05);
-  box-shadow: 0 8px 35px rgba(0,242,254,0.2);
+  background: var(--gold); transform: scale(1.05);
+  box-shadow: 0 8px 35px rgba(255,215,0,0.2);
 }
 
 /* Waitlist */
@@ -176,7 +176,7 @@ body {
   border: 1px solid rgba(255,255,255,0.08);
   backdrop-filter: blur(12px); transition: border-color 0.3s;
 }
-.waitlist-input-wrap:focus-within { border-color: rgba(0,242,254,0.2); }
+.waitlist-input-wrap:focus-within { border-color: rgba(255,215,0,0.2); }
 .waitlist-input {
   flex: 1; background: transparent; border: none; outline: none;
   color: #FFF; font-size: 14px; font-weight: 500;
@@ -185,21 +185,21 @@ body {
 .waitlist-input::placeholder { color: #64748B; }
 .waitlist-btn {
   padding: 10px 20px; border-radius: 100px;
-  background: var(--cyan); color: #000; border: none;
+  background: var(--gold); color: #000; border: none;
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px; font-weight: 700; letter-spacing: 1px;
   text-transform: uppercase; cursor: pointer;
   transition: background 0.3s; white-space: nowrap;
 }
-.waitlist-btn:hover { background: var(--cyan-dim); }
+.waitlist-btn:hover { background: var(--gold-dim); }
 .waitlist-claimed {
   display: flex; align-items: center; justify-content: center; gap: 8px;
   padding: 12px; border-radius: 100px;
-  background: rgba(0,242,254,0.08); border: 1px solid rgba(0,242,254,0.2);
+  background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.2);
 }
 .waitlist-claimed span {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 13px; color: var(--cyan); letter-spacing: 0.5px;
+  font-size: 13px; color: var(--gold); letter-spacing: 0.5px;
 }
 
 /* Progress bar */
@@ -215,7 +215,7 @@ body {
 .scarcity-value {
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px; letter-spacing: 1px;
-  color: var(--cyan); font-weight: 600;
+  color: var(--gold); font-weight: 600;
 }
 .scarcity-bar {
   height: 6px; width: 100%;
@@ -224,8 +224,8 @@ body {
 }
 .scarcity-fill {
   height: 100%; border-radius: 100px;
-  background: linear-gradient(90deg, var(--cyan), var(--blue));
-  box-shadow: 0 0 12px rgba(0,242,254,0.25);
+  background: linear-gradient(90deg, var(--gold), var(--gold-deep));
+  box-shadow: 0 0 12px rgba(255,215,0,0.25);
   transition: width 1.5s ease;
 }
 
@@ -248,7 +248,7 @@ body {
   letter-spacing: 1px; text-transform: uppercase;
   display: flex; align-items: center; gap: 6px;
 }
-.hero-strip-item .check { color: var(--cyan); }
+.hero-strip-item .check { color: var(--gold); }
 
 /* ===== SECTIONS ===== */
 .section {
@@ -260,9 +260,9 @@ body {
   display: inline-flex; align-items: center; align-self: flex-start;
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--cyan); margin-bottom: 16px; font-weight: 500;
-  padding: 5px 12px; border: 1px solid rgba(0,242,254,0.1);
-  border-radius: 4px; background: rgba(0,242,254,0.02);
+  color: var(--gold); margin-bottom: 16px; font-weight: 500;
+  padding: 5px 12px; border: 1px solid rgba(255,215,0,0.1);
+  border-radius: 4px; background: rgba(255,215,0,0.02);
 }
 .section-title {
   font-family: 'Space Grotesk', sans-serif;
@@ -282,7 +282,7 @@ body {
 }
 .glass-hover { transition: all 0.4s cubic-bezier(0.23,1,0.32,1); }
 .glass-hover:hover {
-  border-color: rgba(0,242,254,0.15);
+  border-color: rgba(255,215,0,0.15);
   background: rgba(255,255,255,0.04);
   transform: translateY(-4px);
   box-shadow: 0 12px 40px rgba(0,0,0,0.3);
@@ -293,7 +293,7 @@ body {
 .arena-card { border-radius: 16px; padding: 28px; position: relative; overflow: hidden; }
 .arena-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
   opacity: 0; transition: opacity 0.5s;
 }
 .arena-card:hover::before { opacity: 1; }
@@ -304,27 +304,27 @@ body {
   letter-spacing: 1px; text-transform: uppercase;
 }
 .arena-status .dot { width: 6px; height: 6px; border-radius: 50%; }
-.arena-status.live { color: var(--emerald); }
-.arena-status.live .dot { background: var(--emerald); box-shadow: 0 0 6px var(--emerald); animation: blink 1.5s infinite; }
-.arena-status.soon { color: var(--cyan); }
-.arena-status.soon .dot { background: var(--cyan); box-shadow: 0 0 6px var(--cyan); }
+.arena-status.live { color: var(--gold-light); }
+.arena-status.live .dot { background: var(--gold-light); box-shadow: 0 0 6px var(--gold-light); animation: blink 1.5s infinite; }
+.arena-status.soon { color: var(--gold); }
+.arena-status.soon .dot { background: var(--gold); box-shadow: 0 0 6px var(--gold); }
 .arena-status.locked { color: var(--slate-faint); }
 .arena-status.locked .dot { background: var(--slate-faint); }
 .arena-name { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 10px; color: #FFF; }
 .arena-desc { font-size: 13px; color: var(--slate); margin-bottom: 20px; line-height: 1.6; font-weight: 300; }
 .arena-prize { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.04); }
 .arena-prize-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--slate-faint); text-transform: uppercase; letter-spacing: 1px; }
-.arena-prize-value { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: var(--cyan); }
+.arena-prize-value { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: var(--gold); }
 .arena-progress { margin-top: 16px; }
 .progress-bar { height: 3px; background: rgba(255,255,255,0.04); border-radius: 2px; overflow: hidden; }
-.progress-fill { height: 100%; background: linear-gradient(90deg, var(--cyan), var(--blue)); border-radius: 2px; box-shadow: 0 0 6px rgba(0,242,254,0.15); }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-deep)); border-radius: 2px; box-shadow: 0 0 6px rgba(255,215,0,0.15); }
 .progress-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--slate-faint); margin-top: 8px; display: flex; justify-content: space-between; }
 
 /* Steps */
 .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
 .step { text-align: center; padding: 40px 28px; border-radius: 16px; position: relative; overflow: hidden; }
-.step::before { content: ''; position: absolute; top: 0; left: 50%; width: 40%; height: 1px; transform: translateX(-50%); background: linear-gradient(90deg, transparent, var(--cyan), transparent); opacity: 0.2; }
-.step-num { font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 700; color: var(--cyan); opacity: 0.12; margin-bottom: 8px; line-height: 1; }
+.step::before { content: ''; position: absolute; top: 0; left: 50%; width: 40%; height: 1px; transform: translateX(-50%); background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.2; }
+.step-num { font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 700; color: var(--gold); opacity: 0.12; margin-bottom: 8px; line-height: 1; }
 .step h3 { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 600; margin-bottom: 12px; color: #FFF; }
 .step p { font-size: 13px; color: var(--slate); line-height: 1.6; font-weight: 300; }
 
@@ -333,13 +333,13 @@ body {
 .rebate-card { border-radius: 16px; padding: 28px; text-align: center; }
 .rebate-card .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--slate-faint); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
 .rebate-card .value { font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; color: #FFF; }
-.rebate-card .value.cyan { color: var(--cyan); }
+.rebate-card .value.gold { color: var(--gold); }
 .rebate-card .note { font-size: 12px; color: var(--slate); margin-top: 8px; font-weight: 300; }
 
 /* Rex */
 .rex-section { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-.rex-holo { border-radius: 20px; padding: 44px 32px; text-align: center; position: relative; overflow: hidden; background: linear-gradient(135deg, rgba(0,242,254,0.04), rgba(99,102,241,0.04)); border: 1px solid rgba(0,242,254,0.1); }
-.rex-holo::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg, transparent, rgba(0,242,254,0.02), transparent, rgba(99,102,241,0.02), transparent); animation: rotate-bg 8s linear infinite; pointer-events: none; }
+.rex-holo { border-radius: 20px; padding: 44px 32px; text-align: center; position: relative; overflow: hidden; background: linear-gradient(135deg, rgba(255,215,0,0.04), rgba(205,127,50,0.04)); border: 1px solid rgba(255,215,0,0.1); }
+.rex-holo::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg, transparent, rgba(255,215,0,0.02), transparent, rgba(205,127,50,0.02), transparent); animation: rotate-bg 8s linear infinite; pointer-events: none; }
 @keyframes rotate-bg { to { transform: rotate(360deg); } }
 .rex-symbol { font-family: 'Space Grotesk', sans-serif; font-size: 52px; font-weight: 700; margin-bottom: 8px; position: relative; }
 .rex-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--slate); margin-bottom: 24px; position: relative; }
@@ -347,56 +347,56 @@ body {
 .rex-balance-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--slate-faint); margin-top: 6px; position: relative; letter-spacing: 1px; }
 .rex-note { font-size: 12px; color: var(--slate-faint); margin-top: 24px; line-height: 1.6; position: relative; font-weight: 300; }
 .rex-earn h4, .rex-spend h4 { font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
-.rex-earn h4 { color: var(--emerald); }
-.rex-spend h4 { color: var(--indigo); }
+.rex-earn h4 { color: var(--gold-light); }
+.rex-spend h4 { color: var(--bronze); }
 .rex-list { list-style: none; }
 .rex-list li { padding: 12px 0; font-size: 13px; color: var(--slate); border-bottom: 1px solid rgba(255,255,255,0.03); display: flex; justify-content: space-between; align-items: center; font-weight: 300; }
-.rex-list li span:last-child { font-family: 'Space Grotesk', sans-serif; color: var(--cyan); font-weight: 600; }
+.rex-list li span:last-child { font-family: 'Space Grotesk', sans-serif; color: var(--gold); font-weight: 600; }
 
 /* Leaderboard */
 .leaderboard { border-radius: 16px; overflow: hidden; }
 .lb-header, .lb-row { display: grid; grid-template-columns: 50px 1fr 100px 90px 80px; padding: 14px 24px; align-items: center; }
 .lb-header { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--slate-faint); text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.04); font-weight: 500; }
 .lb-row { border-bottom: 1px solid rgba(255,255,255,0.02); transition: background 0.3s; }
-.lb-row:hover { background: rgba(0,242,254,0.02); }
+.lb-row:hover { background: rgba(255,215,0,0.02); }
 .lb-row:last-child { border-bottom: none; }
 .lb-rank { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; }
-.lb-rank.gold { color: var(--cyan); }
+.lb-rank.gold { color: var(--gold); }
 .lb-rank.silver { color: #CBD5E1; }
 .lb-rank.bronze { color: #B45309; }
 .lb-name { font-weight: 500; font-size: 14px; color: #FFF; }
 .lb-bracket { font-size: 12px; color: var(--slate); }
-.lb-score { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; color: var(--emerald); }
-.lb-rex { font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--indigo); font-weight: 600; }
+.lb-score { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; color: var(--gold-light); }
+.lb-rex { font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--bronze); font-weight: 600; }
 
 /* Calculator */
 .calc-card { border-radius: 16px; padding: 36px; max-width: 520px; }
 .calc-row { margin-bottom: 24px; }
 .calc-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--slate); margin-bottom: 8px; display: block; letter-spacing: 0.5px; }
 .calc-select, .calc-input { width: 100%; padding: 13px 16px; background: rgba(0,0,0,0.6); color: #FFF; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.3s; }
-.calc-select:focus, .calc-input:focus { border-color: var(--cyan); }
+.calc-select:focus, .calc-input:focus { border-color: var(--gold); }
 .calc-slider { width: 100%; -webkit-appearance: none; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; outline: none; }
-.calc-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--cyan); cursor: pointer; box-shadow: 0 0 8px rgba(0,242,254,0.3); }
-.calc-slider::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--cyan); cursor: pointer; border: none; box-shadow: 0 0 8px rgba(0,242,254,0.3); }
+.calc-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--gold); cursor: pointer; box-shadow: 0 0 8px rgba(255,215,0,0.3); }
+.calc-slider::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--gold); cursor: pointer; border: none; box-shadow: 0 0 8px rgba(255,215,0,0.3); }
 .calc-result { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.04); border-radius: 12px; padding: 22px; }
 .calc-result-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 13px; }
 .calc-result-row span:first-child { color: var(--slate); }
 .calc-result-row span:last-child { font-family: 'Space Grotesk', sans-serif; font-weight: 600; }
 .calc-result-total { border-top: 1px solid rgba(255,255,255,0.06); margin-top: 8px; padding-top: 16px; }
-.calc-result-total span:last-child { color: var(--emerald); font-size: 18px; }
+.calc-result-total span:last-child { color: var(--gold-light); font-size: 18px; }
 
 /* Discord */
 .discord-cta { text-align: center; padding: 64px 40px; border-radius: 20px; position: relative; overflow: hidden; }
-.discord-cta::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
+.discord-cta::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
 .discord-cta h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(28px, 5vw, 52px); font-weight: 700; margin-bottom: 14px; color: #FFF; letter-spacing: -0.5px; }
 .discord-cta p { font-size: 15px; color: var(--slate); margin: 0 auto 28px; max-width: 460px; font-weight: 300; }
 .discord-btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 36px; background: #FFF; color: #000; border: none; border-radius: 100px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.3s; }
-.discord-btn:hover { transform: scale(1.05); background: var(--cyan); }
+.discord-btn:hover { transform: scale(1.05); background: var(--gold); }
 
 /* FAQ */
 .faq-item { border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
 .faq-q { padding: 20px 24px; font-size: 15px; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: color 0.3s; color: #FFF; }
-.faq-q:hover { color: var(--cyan); }
+.faq-q:hover { color: var(--gold); }
 .faq-q .arrow { transition: transform 0.3s; font-size: 12px; color: var(--slate-faint); }
 .faq-q.open .arrow { transform: rotate(180deg); }
 .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
@@ -432,10 +432,10 @@ body {
 /* Technique 13: Scroll Progress Bar */
 #scroll-progress {
   position: fixed; top: 0; left: 0; height: 3px;
-  background: linear-gradient(90deg, var(--cyan), var(--indigo), var(--emerald));
+  background: linear-gradient(90deg, var(--gold), var(--bronze), var(--gold-light));
   z-index: 1001; width: 0%; pointer-events: none;
   transition: width 0.05s ease-out;
-  box-shadow: 0 0 8px rgba(0,242,254,0.6);
+  box-shadow: 0 0 8px rgba(255,215,0,0.6);
 }
 
 /* Technique 13: Section Indicator Dots */
@@ -450,8 +450,8 @@ body {
   position: relative; text-decoration: none;
 }
 .indicator-dot:hover, .indicator-dot.active {
-  background: var(--cyan); box-shadow: 0 0 10px var(--cyan); transform: scale(1.35);
-  border-color: var(--cyan);
+  background: var(--gold); box-shadow: 0 0 10px var(--gold); transform: scale(1.35);
+  border-color: var(--gold);
 }
 .indicator-dot::after {
   content: attr(data-label);
@@ -459,7 +459,7 @@ body {
   background: rgba(0,0,0,0.85); color: #FFF; padding: 4px 10px; border-radius: 6px;
   font-family: 'JetBrains Mono', monospace; font-size: 10px; white-space: nowrap;
   opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s;
-  border: 1px solid rgba(0,242,254,0.2); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,215,0,0.2); backdrop-filter: blur(8px);
 }
 .indicator-dot:hover::after { opacity: 1; transform: translateY(-50%) translateX(-4px); }
 
@@ -521,7 +521,7 @@ body {
 /* Hover glow top border pulse on Arena Card */
 .arena-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
   opacity: 0; transition: opacity 0.3s; z-index: 2;
 }
 .arena-card:hover::before {
@@ -529,14 +529,14 @@ body {
   animation: top-glow-pulse 2s ease-in-out infinite;
 }
 @keyframes top-glow-pulse {
-  0%, 100% { opacity: 0.4; filter: drop-shadow(0 0 2px var(--cyan)); }
-  50% { opacity: 1; filter: drop-shadow(0 0 8px var(--cyan)); }
+  0%, 100% { opacity: 0.4; filter: drop-shadow(0 0 2px var(--gold)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 8px var(--gold)); }
 }
 
 /* Hero Pill animated dot scaling */
 .hero-pill .dot {
   width: 7px; height: 7px; border-radius: 50%;
-  background: var(--cyan);
+  background: var(--gold);
   animation: pulse-glow 2s infinite, dot-scale 2s ease-in-out infinite;
 }
 @keyframes dot-scale {
@@ -557,7 +557,7 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--cyan) 0%, var(--cyan-dim) 25%, #8B5CF6 50%, var(--blue) 75%, var(--cyan) 100%);
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 25%, #D4AF37 50%, var(--gold-deep) 75%, var(--gold) 100%);
   background-size: 300% 300%;
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -581,7 +581,7 @@ body {
 
 /* Technique 6: Dark Neumorphism */
 .waitlist-input-wrap {
-  background: #05080e;
+  background: #1A1408;
   box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.7), -4px -4px 10px rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255,255,255,0.06);
 }
@@ -590,7 +590,7 @@ body {
 }
 .calc-slider::-webkit-slider-thumb {
   -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
-  background: var(--cyan);
+  background: var(--gold);
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8), -2px -2px 6px rgba(255, 255, 255, 0.06), inset 0 0 4px rgba(255,255,255,0.8);
   cursor: pointer; transition: transform 0.2s;
 }
@@ -606,23 +606,23 @@ body {
 }
 .section::before {
   content: ''; position: absolute; inset: 0; pointer-events: none; z-index: -1;
-  background: radial-gradient(circle at 50% 20%, rgba(0, 242, 254, 0.025) 0%, transparent 70%);
+  background: radial-gradient(circle at 50% 20%, rgba(255, 215, 0, 0.025) 0%, transparent 70%);
 }
 .section:nth-child(even)::before {
-  background: radial-gradient(circle at 50% 80%, rgba(99, 102, 241, 0.025) 0%, transparent 70%);
+  background: radial-gradient(circle at 50% 80%, rgba(205, 127, 50, 0.025) 0%, transparent 70%);
 }
 
 /* Technique 8: Holographic Effects */
 .rex-holo-overlay {
   position: absolute; inset: 0; border-radius: 20px;
-  background: conic-gradient(from var(--holo-angle, 0deg) at 50% 50%, #00f2fe, #3b82f6, #8b5cf6, #ec4899, #00f2fe);
+  background: conic-gradient(from var(--holo-angle, 0deg) at 50% 50%, #FFD700, #B8860B, #D4AF37, #CD7F32, #FFD700);
   opacity: 0.12; mix-blend-mode: screen; pointer-events: none;
   transition: opacity 0.3s;
 }
 .rex-holo:hover .rex-holo-overlay { opacity: 0.25; }
 
 .nav-text {
-  background: linear-gradient(110deg, #FFF 0%, #FFF 40%, var(--cyan) 50%, #A855F7 60%, #FFF 70%, #FFF 100%);
+  background: linear-gradient(110deg, #FFF 0%, #FFF 40%, var(--gold) 50%, #FFE875 60%, #FFF 70%, #FFF 100%);
   background-size: 200% 100%;
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -642,7 +642,7 @@ body {
 /* Technique 11: Data Visualization (Leaderboard Bars, Calculator Sparkline) */
 .lb-score-cell { display: flex; flex-direction: column; gap: 4px; }
 .lb-bar-bg { width: 100%; height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; margin-top: 2px; }
-.lb-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--cyan), var(--blue)); border-radius: 2px; transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.lb-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--gold), var(--gold-deep)); border-radius: 2px; transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
 
 .calc-sparkline-wrap { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
 .calc-sparkline-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--slate-dim); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
@@ -654,11 +654,11 @@ body {
 .rex-gen-art {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   margin-top: 20px; padding: 16px; border-radius: 12px;
-  background: rgba(0,0,0,0.3); border: 1px solid rgba(0,242,254,0.1);
+  background: rgba(0,0,0,0.3); border: 1px solid rgba(255,215,0,0.1);
 }
 .rex-art-label {
   font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1.5px;
-  color: var(--cyan); margin-top: 8px; text-transform: uppercase;
+  color: var(--gold); margin-top: 8px; text-transform: uppercase;
 }
 
 /* Technique 13: Enhanced Reveal Scale-up */
@@ -676,9 +676,207 @@ body {
   .arena-card, .rebate-card, .step, .calc-card, .rex-holo { transform: none !important; }
 }
 
+
+/* ===== LIQUID GOLD EMPIRE SPECIFIC STYLES ===== */
+
+/* 1. Liquid Gold Hero Background */
+.hero-liquid-gold {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden;
+  background: #000000; pointer-events: none;
+}
+.hero-liquid-gold .gold-blob {
+  position: absolute; border-radius: 50%;
+  mix-blend-mode: screen; filter: blur(55px); opacity: 0.75;
+  will-change: transform;
+}
+.hero-liquid-gold .blob-1 {
+  width: 65vw; height: 65vw; top: -15vw; left: -10vw;
+  background: radial-gradient(circle, rgba(255,215,0,0.45) 0%, rgba(212,175,55,0.18) 45%, rgba(184,134,11,0.05) 70%, transparent 80%);
+  animation: liquidFlow1 18s ease-in-out infinite alternate;
+}
+.hero-liquid-gold .blob-2 {
+  width: 60vw; height: 60vw; bottom: -12vw; right: -8vw;
+  background: radial-gradient(circle, rgba(255,232,117,0.4) 0%, rgba(205,127,50,0.18) 45%, transparent 75%);
+  animation: liquidFlow2 22s ease-in-out infinite alternate;
+}
+.hero-liquid-gold .blob-3 {
+  width: 48vw; height: 48vw; top: 22%; left: 28%;
+  background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, rgba(184,134,11,0.12) 50%, transparent 75%);
+  animation: liquidFlow3 15s ease-in-out infinite alternate;
+}
+.hero-liquid-gold .blob-4 {
+  width: 42vw; height: 42vw; bottom: 18%; left: 52%;
+  background: radial-gradient(circle, rgba(212,175,55,0.35) 0%, rgba(255,232,117,0.12) 50%, transparent 80%);
+  animation: liquidFlow4 20s ease-in-out infinite alternate;
+}
+.hero-liquid-gold .gold-vignette {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: radial-gradient(circle at 50% 40%, transparent 15%, rgba(0,0,0,0.65) 60%, #000000 100%);
+}
+
+@keyframes liquidFlow1 {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(12%, 15%) scale(1.2) rotate(90deg); }
+  100% { transform: translate(-8%, 22%) scale(0.9) rotate(180deg); }
+}
+@keyframes liquidFlow2 {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(-18%, -12%) scale(1.25) rotate(-120deg); }
+  100% { transform: translate(12%, -20%) scale(0.92) rotate(-240deg); }
+}
+@keyframes liquidFlow3 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-12%, 18%) scale(1.18); }
+  100% { transform: translate(18%, -12%) scale(0.88); }
+}
+@keyframes liquidFlow4 {
+  0% { transform: translate(0, 0) scale(0.92); }
+  50% { transform: translate(20%, -18%) scale(1.3); }
+  100% { transform: translate(-12%, 12%) scale(1); }
+}
+
+/* 2. Gold Dust Floating Particles */
+.gold-dust-field {
+  position: fixed; inset: 0; pointer-events: none; z-index: 2; overflow: hidden;
+}
+.dust-p {
+  position: absolute; bottom: -20px; left: var(--x);
+  width: var(--size); height: var(--size);
+  background: #FFE875; border-radius: 50%;
+  box-shadow: 0 0 8px #FFD700, 0 0 14px rgba(255,215,0,0.6);
+  opacity: 0;
+  animation: floatGoldDust var(--speed) linear infinite;
+  animation-delay: var(--delay);
+}
+@keyframes floatGoldDust {
+  0% { transform: translateY(0) translateX(0) scale(0.8); opacity: 0; }
+  10% { opacity: 0.85; }
+  50% { transform: translateY(-50vh) translateX(25px) scale(1.2); opacity: 0.6; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(-105vh) translateX(-15px) scale(0.5); opacity: 0; }
+}
+
+/* 3. Molten Gold Animated Card Borders */
+.glass {
+  position: relative;
+  background: rgba(18, 14, 8, 0.7) !important;
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.2) !important;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 232, 117, 0.12);
+  overflow: hidden;
+}
+.glass::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%; width: 200%; height: 200%;
+  background: conic-gradient(from 0deg, transparent 0%, #FFD700 25%, #CD7F32 50%, #B8860B 75%, transparent 100%);
+  animation: rotateMoltenBorder 10s linear infinite;
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.4s ease;
+}
+.glass-hover:hover::before {
+  opacity: 0.65;
+}
+@keyframes rotateMoltenBorder {
+  to { transform: rotate(360deg); }
+}
+
+/* 4. Gold Foil Shimmer Text */
+.gradient-text, .nav-text, .rex-symbol {
+  background: linear-gradient(110deg, #B8860B 0%, #D4AF37 20%, #FFD700 40%, #FFF8B5 50%, #FFD700 60%, #CD7F32 80%, #B8860B 100%) !important;
+  background-size: 220% auto !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  animation: goldFoilShimmer 4s linear infinite !important;
+}
+@keyframes goldFoilShimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* 5. Gold Glint Hover Sweep */
+.glass-hover::after {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%; width: 200%; height: 200%;
+  background: linear-gradient(120deg, transparent 40%, rgba(255, 232, 117, 0.35) 50%, transparent 60%);
+  transform: rotate(25deg) translateX(-100%);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+.glass-hover:hover::after {
+  transform: rotate(25deg) translateX(100%);
+}
+
+/* 6. Flowing Gold Progress Bars */
+.progress-fill, .scarcity-fill, .lb-bar-fill {
+  background: linear-gradient(90deg, #B8860B 0%, #D4AF37 25%, #FFD700 50%, #FFE875 75%, #D4AF37 100%) !important;
+  background-size: 200% 100% !important;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.5) !important;
+  animation: goldBarFlow 3s linear infinite !important;
+}
+@keyframes goldBarFlow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+/* 9. Gold Section Dividers */
+.gold-divider {
+  height: 1px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 20px auto;
+  background: linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.3) 20%, #FFD700 50%, rgba(212,175,55,0.3) 80%, transparent 100%);
+  position: relative;
+  overflow: hidden;
+}
+.gold-divider::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -50%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, #FFE875, transparent);
+  animation: dividerShimmer 3s ease-in-out infinite;
+}
+@keyframes dividerShimmer {
+  0% { left: -50%; }
+  100% { left: 150%; }
+}
+
+/* 10. Warm Ambient Lighting on Sections */
+.section {
+  position: relative;
+  background: radial-gradient(circle at 50% 30%, rgba(26, 20, 8, 0.55) 0%, rgba(0, 0, 0, 0.95) 70%, #000000 100%) !important;
+}
+
 </style>
 </head>
 <body>
+<!-- Gold Dust Particles Field -->
+<div class="gold-dust-field" aria-hidden="true">
+  <div class="dust-p" style="--x: 4%; --delay: 0s; --speed: 12s; --size: 3px;"></div>
+  <div class="dust-p" style="--x: 12%; --delay: 3s; --speed: 16s; --size: 2px;"></div>
+  <div class="dust-p" style="--x: 22%; --delay: 1.5s; --speed: 14s; --size: 4px;"></div>
+  <div class="dust-p" style="--x: 31%; --delay: 5s; --speed: 19s; --size: 2.5px;"></div>
+  <div class="dust-p" style="--x: 40%; --delay: 2s; --speed: 11s; --size: 3px;"></div>
+  <div class="dust-p" style="--x: 49%; --delay: 7s; --speed: 15s; --size: 2.5px;"></div>
+  <div class="dust-p" style="--x: 58%; --delay: 0.5s; --speed: 13s; --size: 3.5px;"></div>
+  <div class="dust-p" style="--x: 67%; --delay: 4s; --speed: 17s; --size: 2px;"></div>
+  <div class="dust-p" style="--x: 76%; --delay: 6s; --speed: 10s; --size: 3px;"></div>
+  <div class="dust-p" style="--x: 84%; --delay: 1s; --speed: 18s; --size: 2.5px;"></div>
+  <div class="dust-p" style="--x: 93%; --delay: 3.5s; --speed: 12s; --size: 4px;"></div>
+  <div class="dust-p" style="--x: 15%; --delay: 8s; --speed: 15s; --size: 3px;"></div>
+  <div class="dust-p" style="--x: 36%; --delay: 9.5s; --speed: 13s; --size: 2px;"></div>
+  <div class="dust-p" style="--x: 55%; --delay: 6.5s; --speed: 17s; --size: 3.5px;"></div>
+  <div class="dust-p" style="--x: 72%; --delay: 11s; --speed: 14s; --size: 2.5px;"></div>
+  <div class="dust-p" style="--x: 88%; --delay: 8.5s; --speed: 16s; --size: 3px;"></div>
+</div>
 <div id="scroll-progress"></div>
 
 
@@ -718,11 +916,13 @@ body {
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-video" data-speed="-0.15">
-    <video autoplay loop muted playsinline>
-      <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-technology-lines-in-motion-31780-large.mp4" type="video/mp4">
-    </video>
-    <div class="hero-overlay-v"></div>
+  <div class="hero-liquid-gold" data-speed="-0.15">
+    <div class="gold-blob blob-1"></div>
+    <div class="gold-blob blob-2"></div>
+    <div class="gold-blob blob-3"></div>
+    <div class="gold-blob blob-4"></div>
+    <div class="gold-vignette"></div>
+  </div>
     <div class="hero-overlay-h"></div>
     <div class="hero-glow" data-speed="0.2"></div>
   </div>
@@ -767,6 +967,7 @@ body {
 </section>
 
 <!-- ARENAS -->
+<div class="gold-divider"></div>
 <section class="section" id="arenas">
   <span class="section-tag reveal">Live Competitions</span>
   <h2 class="section-title reveal">Live Arenas</h2>
@@ -806,6 +1007,7 @@ body {
 </section>
 
 <!-- HOW IT WORKS -->
+<div class="gold-divider"></div>
 <section class="section" id="how">
   <span class="section-tag reveal">Getting Started</span>
   <h2 class="section-title reveal">Three Steps to the Arena</h2>
@@ -830,6 +1032,7 @@ body {
 </section>
 
 <!-- REBATES -->
+<div class="gold-divider"></div>
 <section class="section" id="rebates">
   <span class="section-tag reveal">Automated Rebates</span>
   <h2 class="section-title reveal">$3 Per Lot. Every Trade.</h2>
@@ -837,7 +1040,7 @@ body {
   <div class="rebate-grid">
     <div class="rebate-card glass glass-hover reveal">
       <div class="label">Per Lot Rebate</div>
-      <div class="value cyan" data-count="3" data-prefix="$">$3</div>
+      <div class="value gold" data-count="3" data-prefix="$">$3</div>
       <div class="note">On every single order</div>
     </div>
     <div class="rebate-card glass glass-hover reveal">
@@ -859,6 +1062,7 @@ body {
 </section>
 
 <!-- REX -->
+<div class="gold-divider"></div>
 <section class="section" id="rex">
   <span class="section-tag reveal">FORTREX Currency</span>
   <h2 class="section-title reveal">Earn Your Rex</h2>
@@ -871,6 +1075,10 @@ body {
         <div class="rex-balance">12,450</div>
         <div class="rex-balance-label">YOUR BALANCE</div>
         <div class="rex-note">Rex is a closed-loop loyalty reward point. Not a cryptocurrency. Not transferable. Not redeemable for cash.</div>
+        <div class="rex-gen-art">
+          <canvas id="rex-canvas" width="200" height="200"></canvas>
+          <div class="rex-art-label">NEURAL GOLD NETWORK • LIVE</div>
+        </div>
       </div>
     </div>
     <div>
@@ -898,6 +1106,7 @@ body {
 </section>
 
 <!-- LEADERBOARD -->
+<div class="gold-divider"></div>
 <section class="section" id="leaderboard">
   <span class="section-tag reveal">Live Rankings</span>
   <h2 class="section-title reveal">The Leaderboard</h2>
@@ -913,6 +1122,7 @@ body {
 </section>
 
 <!-- CALCULATOR -->
+<div class="gold-divider"></div>
 <section class="section" id="calculator">
   <span class="section-tag reveal">Trader's Arsenal</span>
   <h2 class="section-title reveal">Lot Size Calculator</h2>
@@ -926,7 +1136,7 @@ body {
       </select></div>
     <div class="calc-row"><label class="calc-label">RISK PER TRADE (%)</label>
       <input type="range" class="calc-slider" id="calc-risk" min="0.5" max="10" step="0.5" value="2">
-      <span id="calc-risk-val" style="color: var(--cyan); font-weight: 600; font-size: 13px; font-family: 'JetBrains Mono', monospace;">2%</span></div>
+      <span id="calc-risk-val" style="color: var(--gold); font-weight: 600; font-size: 13px; font-family: 'JetBrains Mono', monospace;">2%</span></div>
     <div class="calc-row"><label class="calc-label">CURRENCY PAIR</label>
       <select class="calc-select" id="calc-pair">
         <option value="100000">EUR/USD</option><option value="100000">GBP/USD</option>
@@ -946,7 +1156,8 @@ body {
 
 <!-- DISCORD -->
 <section class="section">
-  <div class="discord-cta glass reveal">
+  <div class="gold-divider"></div>
+<div class="discord-cta glass reveal">
     <h2>Join FORTREX Citadel</h2>
     <p>The real community lives on Discord. Tournament reveals, prize pool announcements, trader discussions — all in one place. Verified traders only.</p>
     <button class="discord-btn">
@@ -957,6 +1168,7 @@ body {
 </section>
 
 <!-- FAQ -->
+<div class="gold-divider"></div>
 <section class="section" id="faq">
   <span class="section-tag reveal">Questions, Answered</span>
   <h2 class="section-title reveal">FAQ</h2>
@@ -1180,7 +1392,7 @@ document.querySelectorAll('#leaderboard').forEach(sec => lbObs.observe(sec));
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = '#00F2FE';
+      ctx.fillStyle = '#FFD700';
       ctx.fill();
 
       for (let j = i + 1; j < particleCount; j++) {
@@ -1191,7 +1403,7 @@ document.querySelectorAll('#leaderboard').forEach(sec => lbObs.observe(sec));
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(0, 242, 254, ${1 - dist / 40})`;
+          ctx.strokeStyle = `rgba(255, 215, 0, ${1 - dist / 40})`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
@@ -1225,8 +1437,8 @@ if (origWaitlistBtn && origWaitlistEmail) {
           <span>✓ You're on the list. Check your inbox.</span>
           <div style="font-size:11px; color:var(--slate-dim); margin-top:2px;">Your Personal Founder Invite Link:</div>
           <div style="display:flex; gap:6px;">
-            <input type="text" readonly value="https://fortrex.io/invite?ref=${refCode}" id="invite-link-input" style="flex:1; background:rgba(0,0,0,0.5); border:1px solid rgba(0,242,254,0.3); color:#FFF; padding:6px 12px; border-radius:100px; font-size:11px; font-family:'JetBrains Mono', monospace;" />
-            <button id="copy-invite-btn" style="background:var(--cyan); color:#000; border:none; padding:6px 14px; border-radius:100px; font-weight:700; font-size:10px; cursor:pointer; font-family:'JetBrains Mono', monospace;">COPY</button>
+            <input type="text" readonly value="https://fortrex.io/invite?ref=${refCode}" id="invite-link-input" style="flex:1; background:rgba(0,0,0,0.5); border:1px solid rgba(255,215,0,0.3); color:#FFF; padding:6px 12px; border-radius:100px; font-size:11px; font-family:'JetBrains Mono', monospace;" />
+            <button id="copy-invite-btn" style="background:var(--gold); color:#000; border:none; padding:6px 14px; border-radius:100px; font-weight:700; font-size:10px; cursor:pointer; font-family:'JetBrains Mono', monospace;">COPY</button>
           </div>
         </div>`;
       document.getElementById('copy-invite-btn').addEventListener('click', function() {
@@ -1234,7 +1446,7 @@ if (origWaitlistBtn && origWaitlistEmail) {
         input.select();
         navigator.clipboard.writeText(input.value);
         this.textContent = 'COPIED!';
-        this.style.background = 'var(--emerald)';
+        this.style.background = 'var(--gold-light)';
       });
     }
   });
