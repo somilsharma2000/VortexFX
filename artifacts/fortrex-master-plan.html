@@ -1,0 +1,472 @@
+<!doctype html><html dir="auto"><head><meta http-equiv="Content-Security-Policy" content="default-src 'unsafe-inline' 'unsafe-eval' https: data: blob:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<script id="__base44_dark_class__">document.documentElement.classList.remove('dark');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Text:wght@400;500;600;700&display=swap">
+<style id="__base44_editor_theme__">
+:root {
+  --background: 38 27% 94%;
+  --foreground: 0 0% 4%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 4%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 4%;
+  --primary: 21 42% 55%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 39 17% 93%;
+  --muted-foreground: 0 0% 45%;
+  --accent: 0 0% 96%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 98%;
+  --input: 0 0% 98%;
+  --ring: 21 42% 55%;
+  --radius: 0.5rem;
+  color-scheme: light;
+}
+.dark {
+  --background: 220 5% 11%;
+  --foreground: 0 0% 99%;
+  --card: 0 1% 14%;
+  --card-foreground: 0 0% 99%;
+  --popover: 0 1% 14%;
+  --popover-foreground: 0 0% 99%;
+  --primary: 21 42% 55%;
+  --primary-foreground: 0 0% 99%;
+  --secondary: 0 0% 18%;
+  --secondary-foreground: 0 0% 99%;
+  --muted: 0 0% 18%;
+  --muted-foreground: 0 0% 65%;
+  --accent: 0 0% 18%;
+  --accent-foreground: 0 0% 99%;
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 0 0% 99%;
+  --border: 0 0% 16%;
+  --input: 0 0% 16%;
+  --ring: 21 42% 55%;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+/* shadcn's base layer: default every element's border-color to the theme
+   token. Without this, Tailwind's bare `border` utility only sets width and
+   the color falls back to currentColor (near-black text) — so the model's
+   `border` cards render heavy/dark and the `--border` value is ignored.
+   Explicit `border-{color}` utilities and inline styles still override. */
+*, *::before, *::after { border-color: hsl(var(--border)); }
+html, body {
+  margin: 0 !important;
+  padding: 0;
+  overflow: auto !important;
+  /* Inline card: transparent, so the real chat surface (a gradient, not the
+     single flat `--background` stop) shows straight through and the artifact
+     reads as inline chat content in both themes. Standalone saved file: opaque
+     `--background` so it stays readable on its own page. `--card` stays
+     elevated for emphasis blocks (stat tiles, panels) so hierarchy reads. */
+  background: hsl(var(--background)) !important;
+  color: hsl(var(--foreground));
+  font-family: 'WixMadeforText', 'Wix Madefor Text', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+/* 8px (vs 16px) — minimal breathing room from the iframe edge so tightly-composed
+   dashboards don't ship a fat empty halo before their first element. */
+body { padding: 8px; }
+
+code, kbd, pre, samp { font-family: 'WixMadeforMonospace', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+a { color: hsl(var(--primary)); }
+hr { border: 0; border-top: 1px solid hsl(var(--border)); }
+h1, h2, h3, h4, h5, h6 { font-weight: 600; color: hsl(var(--foreground)); }
+</style>
+<script id="__base44_tw_config__">
+window.tailwind = window.tailwind || {};
+window.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: { DEFAULT: 'hsl(var(--primary))', foreground: 'hsl(var(--primary-foreground))' },
+        secondary: { DEFAULT: 'hsl(var(--secondary))', foreground: 'hsl(var(--secondary-foreground))' },
+        destructive: { DEFAULT: 'hsl(var(--destructive))', foreground: 'hsl(var(--destructive-foreground))' },
+        muted: { DEFAULT: 'hsl(var(--muted))', foreground: 'hsl(var(--muted-foreground))' },
+        accent: { DEFAULT: 'hsl(var(--accent))', foreground: 'hsl(var(--accent-foreground))' },
+        popover: { DEFAULT: 'hsl(var(--popover))', foreground: 'hsl(var(--popover-foreground))' },
+        card: { DEFAULT: 'hsl(var(--card))', foreground: 'hsl(var(--card-foreground))' },
+      },
+      // A bare `border` / `divide-*` (no color) falls back to Tailwind
+      // preflight's DEFAULT, which is a FIXED gray-200 (#e5e7eb) — subtle on the
+      // light card but near-white glare on the dark card. The `colors.border`
+      // map above only creates the `border-border` class; it does NOT set the
+      // uncolored default. Point the DEFAULT at the theme token so an uncolored
+      // border adapts to dark mode like the rest of the palette. (Explicit
+      // `border-primary` etc. still override.)
+      borderColor: { DEFAULT: 'hsl(var(--border))' },
+      divideColor: { DEFAULT: 'hsl(var(--border))' },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
+      fontFamily: {
+        // Same two-name stack as `FONT_SANS_STACK` above. The
+        // sandboxed null-origin iframe lands on `Wix Madefor Text`
+        // (Google Fonts' name); `WixMadeforText` is here only for
+        // defense-in-depth in case the iframe ever runs same-origin.
+        sans: ['WixMadeforText', 'Wix Madefor Text', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        mono: ['WixMadeforMonospace', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+      },
+    },
+  },
+};
+</script>
+<script src="https://cdn.tailwindcss.com" id="__base44_tw_cdn__"></script></head><body><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FORTREX Master Plan</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: 'Inter', system-ui, sans-serif; }
+  .phase-card { transition: transform 0.2s; }
+  .phase-card:hover { transform: translateY(-2px); }
+  .glow { box-shadow: 0 0 20px rgba(139,92,246,0.15); }
+</style>
+</head>
+<body class="bg-background text-foreground">
+
+<!-- Header -->
+<div class="mb-8">
+  <h1 class="text-3xl font-bold tracking-tight">FORTREX — Master Platform Plan</h1>
+  <p class="text-muted-foreground mt-1 text-sm">Competitive trading tournament platform · Bi-weekly cycles · Discord-native community</p>
+</div>
+
+<!-- Overview Stats -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+  <div class="rounded-lg border bg-card text-card-foreground p-5 glow">
+    <p class="text-xs font-medium text-muted-foreground uppercase tracking-wider">Platform Type</p>
+    <p class="mt-2 text-lg font-semibold">Trading Tournament</p>
+    <p class="text-xs text-muted-foreground mt-1">Compete · Rank · Earn</p>
+  </div>
+  <div class="rounded-lg border bg-card text-card-foreground p-5">
+    <p class="text-xs font-medium text-muted-foreground uppercase tracking-wider">Tournament Cycle</p>
+    <p class="mt-2 text-lg font-semibold">Bi-Weekly</p>
+    <p class="text-xs text-muted-foreground mt-1">2 rounds per month</p>
+  </div>
+  <div class="rounded-lg border bg-card text-card-foreground p-5">
+    <p class="text-xs font-medium text-muted-foreground uppercase tracking-wider">Community Hub</p>
+    <p class="mt-2 text-lg font-semibold">Discord "Citadel"</p>
+    <p class="text-xs text-muted-foreground mt-1">All users funneled here</p>
+  </div>
+  <div class="rounded-lg border bg-card text-card-foreground p-5">
+    <p class="text-xs font-medium text-muted-foreground uppercase tracking-wider">Admin Control</p>
+    <p class="mt-2 text-lg font-semibold">Full Dashboard</p>
+    <p class="text-xs text-muted-foreground mt-1">Rewards, vars, numbers</p>
+  </div>
+</div>
+
+<!-- User Journey -->
+<div class="rounded-lg border bg-card text-card-foreground p-6 mb-8">
+  <h2 class="text-lg font-semibold mb-4">User Journey</h2>
+  <div class="flex flex-col md:flex-row gap-3 items-stretch">
+    <div class="flex-1 rounded-md border border-input bg-muted/30 p-4">
+      <p class="text-xs text-muted-foreground font-mono mb-1">STEP 01</p>
+      <p class="text-sm font-medium">Landing Page</p>
+      <p class="text-xs text-muted-foreground mt-1">Visit site, sees hype, joins waitlist</p>
+    </div>
+    <div class="flex items-center text-muted-foreground text-xl px-1">→</div>
+    <div class="flex-1 rounded-md border border-input bg-muted/30 p-4">
+      <p class="text-xs text-muted-foreground font-mono mb-1">STEP 02</p>
+      <p class="text-sm font-medium">Discord Citadel</p>
+      <p class="text-xs text-muted-foreground mt-1">Gets invite, joins community, gets role</p>
+    </div>
+    <div class="flex items-center text-muted-foreground text-xl px-1">→</div>
+    <div class="flex-1 rounded-md border border-input bg-muted/30 p-4">
+      <p class="text-xs text-muted-foreground font-mono mb-1">STEP 03</p>
+      <p class="text-sm font-medium">Register Account</p>
+      <p class="text-xs text-muted-foreground mt-1">OTP/OAuth, link broker, verify identity</p>
+    </div>
+    <div class="flex items-center text-muted-foreground text-xl px-1">→</div>
+    <div class="flex-1 rounded-md border border-input bg-muted/30 p-4">
+      <p class="text-xs text-muted-foreground font-mono mb-1">STEP 04</p>
+      <p class="text-sm font-medium">Enter Tournament</p>
+      <p class="text-xs text-muted-foreground mt-1">Join bi-weekly arena, start trading</p>
+    </div>
+    <div class="flex items-center text-muted-foreground text-xl px-1">→</div>
+    <div class="flex-1 rounded-md border border-input bg-muted/30 p-4">
+      <p class="text-xs text-muted-foreground font-mono mb-1">STEP 05</p>
+      <p class="text-sm font-medium">Climb & Earn</p>
+      <p class="text-xs text-muted-foreground mt-1">Leaderboard rank → rebates → rewards</p>
+    </div>
+  </div>
+</div>
+
+<!-- Build Phases -->
+<h2 class="text-lg font-semibold mb-4">Build Roadmap — 4 Phases</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+
+  <!-- Phase 1 -->
+  <div class="rounded-lg border bg-card text-card-foreground p-6 phase-card glow">
+    <div class="flex items-center justify-between mb-3">
+      <span class="text-xs font-mono text-muted-foreground">PHASE 1</span>
+      <span class="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">Foundation</span>
+    </div>
+    <h3 class="text-base font-semibold mb-3">Core Platform</h3>
+    <ul class="text-sm text-muted-foreground space-y-1.5">
+      <li class="flex gap-2"><span class="text-primary">▸</span> User registration (OTP + Google OAuth)</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> Database schema: Users, Tournaments, Entries, Leaderboard, Rebates</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> Admin dashboard — full CRUD on all entities</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> Waitlist system → auto-approve/invite flow</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> Discord bot integration (auto-role on join)</li>
+    </ul>
+    <p class="text-xs text-muted-foreground mt-3 pt-3 border-t border-input">Build time: ~1-2 weeks · Base44 backend + entities</p>
+  </div>
+
+  <!-- Phase 2 -->
+  <div class="rounded-lg border bg-card text-card-foreground p-6 phase-card">
+    <div class="flex items-center justify-between mb-3">
+      <span class="text-xs font-mono text-muted-foreground">PHASE 2</span>
+      <span class="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">Tournament Engine</span>
+    </div>
+    <h3 class="text-base font-semibold mb-3">Competition System</h3>
+    <ul class="text-sm text-muted-foreground space-y-1.5">
+      <li class="flex gap-2"><span class="text-primary">▸</span> Tournament creation & scheduling (bi-weekly auto-cycle)</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> Trade submission/verification system</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> Live leaderboard with real-time ranking</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> Rebate calculator engine (admin-configurable rates)</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> "Rex" AI assistant — stats analysis, tips, match recaps</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> Arena system (multiple trading categories/leagues)</li>
+    </ul>
+    <p class="text-xs text-muted-foreground mt-3 pt-3 border-t border-input">Build time: ~2-3 weeks · Backend functions + automation</p>
+  </div>
+
+  <!-- Phase 3 -->
+  <div class="rounded-lg border bg-card text-card-foreground p-6 phase-card">
+    <div class="flex items-center justify-between mb-3">
+      <span class="text-xs font-mono text-muted-foreground">PHASE 3</span>
+      <span class="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">Growth</span>
+    </div>
+    <h3 class="text-base font-semibold mb-3">Engagement & Monetization</h3>
+    <ul class="text-sm text-muted-foreground space-y-1.5">
+      <li class="flex gap-2"><span class="text-primary">▸</span> Referral system (invite links → bonus rebates)</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> User profiles — stats, rank history, achievements</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> Achievement/badge system (streaks, milestones)</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> Payment integration — entry fees, premium tiers</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> Email/notification system — match alerts, results</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> Sponsorship slots (branded tournaments)</li>
+    </ul>
+    <p class="text-xs text-muted-foreground mt-3 pt-3 border-t border-input">Build time: ~2 weeks · Payments + notifications</p>
+  </div>
+
+  <!-- Phase 4 -->
+  <div class="rounded-lg border bg-card text-card-foreground p-6 phase-card">
+    <div class="flex items-center justify-between mb-3">
+      <span class="text-xs font-mono text-muted-foreground">PHASE 4</span>
+      <span class="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">Scale</span>
+    </div>
+    <h3 class="text-base font-semibold mb-3">Autonomous Operations</h3>
+    <ul class="text-sm text-muted-foreground space-y-1.5">
+      <li class="flex gap-2"><span class="text-primary">▸</span> Automated tournament lifecycle (create → run → rank → reward → archive)</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> Broker API integration (auto-verify trades)</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> AI agent for Discord community management (Rex bot)</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> Weekly analytics dashboard (retention, revenue, engagement)</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> Anti-cheat system (trade verification, pattern detection)</li>
+      <li class="flex gap-2"><span class="text-primary">▸</span> Mobile app / PWA</li>
+    </ul>
+    <p class="text-xs text-muted-foreground mt-3 pt-3 border-t border-input">Build time: ~3-4 weeks · Automation + AI agents</p>
+  </div>
+</div>
+
+<!-- Launch Strategy -->
+<div class="rounded-lg border bg-card text-card-foreground p-6 mb-8">
+  <h2 class="text-lg font-semibold mb-4">Launch Strategy — "First to the Gates"</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div>
+      <div class="flex items-center gap-2 mb-2">
+        <span class="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">1</span>
+        <h4 class="text-sm font-semibold">Pre-Launch Hype (Week -2)</h4>
+      </div>
+      <ul class="text-xs text-muted-foreground space-y-1 ml-8">
+        <li>• Landing page live with waitlist</li>
+        <li>• Social media teasers ("Gates opening soon")</li>
+        <li>• Discord Citadel created — early invites</li>
+        <li>• Countdown timer on site</li>
+        <li>• "First 100 get bonus rebates" incentive</li>
+      </ul>
+    </div>
+    <div>
+      <div class="flex items-center gap-2 mb-2">
+        <span class="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">2</span>
+        <h4 class="text-sm font-semibold">Beta Launch (Week 0)</h4>
+      </div>
+      <ul class="text-xs text-muted-foreground space-y-1 ml-8">
+        <li>• Open registration to waitlist</li>
+        <li>• First tournament announced</li>
+        <li>• Streamed opening ceremony on Discord</li>
+        <li>• Onboarding flow: register → Discord → trade</li>
+        <li>• Collect feedback aggressively</li>
+      </ul>
+    </div>
+    <div>
+      <div class="flex items-center gap-2 mb-2">
+        <span class="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">3</span>
+        <h4 class="text-sm font-semibold">Public Launch (Week 2+)</h4>
+      </div>
+      <ul class="text-xs text-muted-foreground space-y-1 ml-8">
+        <li>• Remove waitlist, open to all</li>
+        <li>• First tournament results published</li>
+        <li>• User testimonials / case studies</li>
+        <li>• Paid acquisition (ads on trading communities)</li>
+        <li>• Sponsorship outreach</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Tech Stack -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+  <div class="rounded-lg border bg-card text-card-foreground p-6">
+    <h2 class="text-base font-semibold mb-3">Tech Stack</h2>
+    <div class="space-y-2 text-sm">
+      <div class="flex justify-between"><span class="text-muted-foreground">Frontend</span><span class="font-medium">React / Next.js</span></div>
+      <div class="flex justify-between"><span class="text-muted-foreground">Backend</span><span class="font-medium">Base44 (entities, functions, auth)</span></div>
+      <div class="flex justify-between"><span class="text-muted-foreground">Database</span><span class="font-medium">Base44 entities (MongoDB)</span></div>
+      <div class="flex justify-between"><span class="text-muted-foreground">Auth</span><span class="font-medium">OTP + Google OAuth</span></div>
+      <div class="flex justify-between"><span class="text-muted-foreground">Payments</span><span class="font-medium">Stripe / Wix Payments</span></div>
+      <div class="flex justify-between"><span class="text-muted-foreground">Community</span><span class="font-medium">Discord bot + API</span></div>
+      <div class="flex justify-between"><span class="text-muted-foreground">AI Assistant</span><span class="font-medium">Rex (Base44 agent)</span></div>
+      <div class="flex justify-between"><span class="text-muted-foreground">Automation</span><span class="font-medium">Base44 workflows (cron)</span></div>
+    </div>
+  </div>
+
+  <div class="rounded-lg border bg-card text-card-foreground p-6">
+    <h2 class="text-base font-semibold mb-3">Revenue Model</h2>
+    <div class="space-y-3 text-sm">
+      <div class="p-3 rounded-md bg-muted/30">
+        <p class="font-medium">Tournament Entry Fees</p>
+        <p class="text-xs text-muted-foreground mt-1">Per-tournament or monthly subscription to compete</p>
+      </div>
+      <div class="p-3 rounded-md bg-muted/30">
+        <p class="font-medium">Rebate Spread</p>
+        <p class="text-xs text-muted-foreground mt-1">Platform takes a % of the rebate pool before distribution</p>
+      </div>
+      <div class="p-3 rounded-md bg-muted/30">
+        <p class="font-medium">Premium Tiers</p>
+        <p class="text-xs text-muted-foreground mt-1">Pro access: advanced Rex AI, priority tournaments, custom arenas</p>
+      </div>
+      <div class="p-3 rounded-md bg-muted/30">
+        <p class="font-medium">Sponsorships</p>
+        <p class="text-xs text-muted-foreground mt-1">Branded tournaments, featured leaderboard slots</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Database Schema -->
+<div class="rounded-lg border bg-card text-card-foreground p-6 mb-8">
+  <h2 class="text-base font-semibold mb-4">Database Schema (Base44 Entities)</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
+    <div class="p-3 rounded-md border border-input">
+      <p class="font-mono text-xs text-primary font-semibold mb-2">User</p>
+      <p class="text-xs text-muted-foreground">id, email, phone, name, discord_id, broker_connected, tier, total_rebates, rank, created_date</p>
+    </div>
+    <div class="p-3 rounded-md border border-input">
+      <p class="font-mono text-xs text-primary font-semibold mb-2">Tournament</p>
+      <p class="text-xs text-muted-foreground">id, name, arena, start_date, end_date, status, entry_fee, prize_pool, rebate_rate, max_participants</p>
+    </div>
+    <div class="p-3 rounded-md border border-input">
+      <p class="font-mono text-xs text-primary font-semibold mb-2">Entry</p>
+      <p class="text-xs text-muted-foreground">id, user_id, tournament_id, trades[], pnl, rank, rebate_amount, status</p>
+    </div>
+    <div class="p-3 rounded-md border border-input">
+      <p class="font-mono text-xs text-primary font-semibold mb-2">Trade</p>
+      <p class="text-xs text-muted-foreground">id, entry_id, asset, direction, entry_price, exit_price, size, pnl, timestamp, verified</p>
+    </div>
+    <div class="p-3 rounded-md border border-input">
+      <p class="font-mono text-xs text-primary font-semibold mb-2">Leaderboard</p>
+      <p class="text-xs text-muted-foreground">id, tournament_id, rankings[{user_id, rank, pnl, rebate}], updated_date</p>
+    </div>
+    <div class="p-3 rounded-md border border-input">
+      <p class="font-mono text-xs text-primary font-semibold mb-2">Waitlist</p>
+      <p class="text-xs text-muted-foreground">id, email, phone, referred_by, invite_code, status, joined_date</p>
+    </div>
+    <div class="p-3 rounded-md border border-input">
+      <p class="font-mono text-xs text-primary font-semibold mb-2">Rebate</p>
+      <p class="text-xs text-muted-foreground">id, user_id, tournament_id, amount, rate, status, paid_date</p>
+    </div>
+    <div class="p-3 rounded-md border border-input">
+      <p class="font-mono text-xs text-primary font-semibold mb-2">Arena</p>
+      <p class="text-xs text-muted-foreground">id, name, category, rules, min_tier, active</p>
+    </div>
+    <div class="p-3 rounded-md border border-input">
+      <p class="font-mono text-xs text-primary font-semibold mb-2">AdminConfig</p>
+      <p class="text-xs text-muted-foreground">id, key, value, updated_by — all platform variables (rates, fees, caps)</p>
+    </div>
+  </div>
+</div>
+
+<!-- Operations -->
+<div class="rounded-lg border bg-card text-card-foreground p-6 mb-8">
+  <h2 class="text-base font-semibold mb-4">Operations — How It Runs</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <h4 class="text-sm font-medium mb-2 text-primary">Automated (Workflows)</h4>
+      <ul class="text-xs text-muted-foreground space-y-1">
+        <li>• Bi-weekly tournament auto-creation (cron)</li>
+        <li>• Leaderboard recalculation every X hours</li>
+        <li>• Rebate distribution on tournament end</li>
+        <li>• Discord role updates on rank change</li>
+        <li>• Email notifications: match start, results, payouts</li>
+        <li>• Waitlist → invite batch sending</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-sm font-medium mb-2 text-primary">Manual (Admin Dashboard)</h4>
+      <ul class="text-xs text-muted-foreground space-y-1">
+        <li>• Adjust rebate rates per tournament</li>
+        <li>• Override prize pools and entry fees</li>
+        <li>• Approve/verify large payouts</li>
+        <li>• Create custom arenas and rules</li>
+        <li>• Ban/dispute resolution</li>
+        <li>• Sponsorship configuration</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Next Actions -->
+<div class="rounded-lg border bg-primary/10 p-6">
+  <h2 class="text-base font-semibold mb-3">Immediate Next Steps</h2>
+  <div class="space-y-2 text-sm">
+    <div class="flex items-start gap-3">
+      <span class="text-primary font-mono text-xs mt-0.5">01</span>
+      <p>Deploy the NEXUS theme (already built) to replace current gold theme</p>
+    </div>
+    <div class="flex items-start gap-3">
+      <span class="text-primary font-mono text-xs mt-0.5">02</span>
+      <p>Create Base44 entities (User, Tournament, Entry, Waitlist, etc.)</p>
+    </div>
+    <div class="flex items-start gap-3">
+      <span class="text-primary font-mono text-xs mt-0.5">03</span>
+      <p>Build auth system — OTP + Google OAuth registration flow</p>
+    </div>
+    <div class="flex items-start gap-3">
+      <span class="text-primary font-mono text-xs mt-0.5">04</span>
+      <p>Set up Discord Citadel + bot integration for auto-role assignment</p>
+    </div>
+    <div class="flex items-start gap-3">
+      <span class="text-primary font-mono text-xs mt-0.5">05</span>
+      <p>Build admin dashboard with full CRUD on all entities</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html><script id="__base44_dark_class_post__">document.documentElement.classList.remove('dark');</script></body></html>
