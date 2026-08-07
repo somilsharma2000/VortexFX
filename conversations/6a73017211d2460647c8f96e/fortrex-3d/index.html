@@ -3,21 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FORTREX — Your Edge. Your Arena. Your Legacy.</title>
+<title>FORTREX — Cybernetic Trading & Arena Command</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #000000;
-  --gold: #FFD700;
-  --gold-dim: #D4AF37;
-  --gold-deep: #B8860B;
-  --gold-light: #FFE875;
-  --bronze: #CD7F32;
+  --bg: #050507;
+  --bg-panel: #0A0A12;
+  --violet: #8B5CF6;
+  --violet-bright: #A78BFA;
+  --violet-deep: #6D28D9;
+  --cyan: #06B6D4;
+  --cyan-bright: #22D3EE;
+  --magenta: #EC4899;
   --text: #FFFFFF;
-  --slate: #94A3B8;
-  --slate-dim: #64748B;
-  --slate-faint: #475569;
+  --text-dim: #94A3B8;
+  --text-faint: #475569;
+  --glow: rgba(139, 92, 246, 0.4);
+  --glow-cyan: rgba(6, 182, 212, 0.4);
+  --glow-magenta: rgba(236, 72, 153, 0.4);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,211 +34,381 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-
-.content { position: relative; z-index: 1; }
-
+.content { position: relative; z-index: 10; }
 .mono { font-family: 'JetBrains Mono', monospace; }
-.gradient-text {
-  background: linear-gradient(90deg, var(--gold), var(--gold-dim), var(--gold-deep));
-  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+.orbitron { font-family: 'Orbitron', sans-serif; }
+
+/* ===== 1. BOOT SEQUENCE OVERLAY ===== */
+.boot-sequence {
+  position: fixed; inset: 0; z-index: 10000;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  font-family: 'JetBrains Mono', monospace;
 }
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 8px var(--gold); opacity: 1; }
-  50% { box-shadow: 0 0 16px var(--gold); opacity: 0.7; }
+.boot-sequence.boot-done {
+  opacity: 0; visibility: hidden; pointer-events: none;
+}
+.boot-terminal {
+  width: 90%; max-width: 520px;
+  background: var(--bg-panel);
+  border: 1px solid var(--violet);
+  box-shadow: 0 0 30px var(--glow), inset 0 0 15px rgba(139,92,246,0.1);
+  border-radius: 8px; overflow: hidden;
+}
+.boot-header {
+  background: rgba(139,92,246,0.15);
+  padding: 10px 16px; display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid rgba(139,92,246,0.3);
+}
+.boot-dot { width: 10px; height: 10px; border-radius: 50%; }
+.boot-dot.red { background: #EF4444; }
+.boot-dot.yellow { background: #F59E0B; }
+.boot-dot.green { background: #10B981; }
+.boot-title { font-size: 11px; color: var(--text-dim); margin-left: auto; letter-spacing: 1px; }
+.boot-body { padding: 24px; color: var(--cyan-bright); font-size: 12px; }
+.boot-log { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; min-height: 80px; }
+.boot-line { color: var(--text-dim); }
+.boot-progress-wrap {
+  width: 100%; height: 6px; background: rgba(255,255,255,0.06);
+  border-radius: 100px; overflow: hidden; border: 1px solid rgba(139,92,246,0.3);
+  margin-bottom: 12px;
+}
+.boot-progress-bar {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--violet), var(--cyan-bright));
+  box-shadow: 0 0 12px var(--cyan);
+  transition: width 0.25s linear;
+}
+.boot-status { font-size: 11px; color: var(--violet-bright); display: flex; align-items: center; gap: 6px; }
+
+/* ===== 2. SCANLINE OVERLAY ===== */
+.scanline-overlay {
+  position: fixed; inset: 0; pointer-events: none; z-index: 999;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.18),
+    rgba(0, 0, 0, 0.18) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  opacity: 0.45;
+}
+
+/* ===== 3. ANIMATED TRON MESH GRID BACKGROUND ===== */
+.perspective-grid-bg {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  background: radial-gradient(circle at 50% 30%, rgba(139,92,246,0.08) 0%, rgba(5,5,7,0.95) 75%, #050507 100%);
+}
+.grid-plane {
+  position: absolute; width: 300%; height: 300%; top: -50%; left: -100%;
+  background-image: 
+    linear-gradient(to right, rgba(109, 40, 217, 0.14) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(109, 40, 217, 0.14) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: perspective(600px) rotateX(72deg) translateY(0);
+  animation: gridScroll 12s linear infinite;
+  transform-origin: 50% 50%;
+}
+@keyframes gridScroll {
+  0% { transform: perspective(600px) rotateX(72deg) translateY(0); }
+  100% { transform: perspective(600px) rotateX(72deg) translateY(60px); }
+}
+
+/* ===== 4. DATA STREAM DECORATIONS ===== */
+.data-stream {
+  position: fixed; top: 0; bottom: 0; width: 28px; pointer-events: none; z-index: 2;
+  overflow: hidden; opacity: 0.16; font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  color: var(--violet-bright); line-height: 14px; user-select: none;
+}
+.data-stream.left { left: 8px; }
+.data-stream.right { right: 8px; text-align: right; }
+.stream-content {
+  display: flex; flex-direction: column;
+  animation: streamScroll 18s linear infinite;
+}
+@keyframes streamScroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+/* ===== 5. CYBER FLOATING PARTICLES ===== */
+.cyber-dust-field {
+  position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden;
+}
+.dust-p {
+  position: absolute; bottom: -20px; left: var(--x);
+  width: var(--size); height: var(--size);
+  background: var(--cyan-bright); border-radius: 50%;
+  box-shadow: 0 0 8px var(--cyan), 0 0 14px var(--violet);
+  opacity: 0;
+  animation: floatCyberDust var(--speed) linear infinite;
+  animation-delay: var(--delay);
+}
+.dust-p:nth-child(even) {
+  background: var(--violet-bright);
+  box-shadow: 0 0 8px var(--violet), 0 0 14px var(--magenta);
+}
+@keyframes floatCyberDust {
+  0% { transform: translateY(0) translateX(0) scale(0.8); opacity: 0; }
+  10% { opacity: 0.8; }
+  50% { transform: translateY(-50vh) translateX(25px) scale(1.2); opacity: 0.6; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(-105vh) translateX(-15px) scale(0.5); opacity: 0; }
+}
+
+/* ===== SCROLL PROGRESS BAR ===== */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: linear-gradient(90deg, var(--violet), var(--cyan-bright), var(--magenta));
+  z-index: 1001; width: 0%; pointer-events: none;
+  transition: width 0.05s ease-out;
+  box-shadow: 0 0 12px var(--cyan);
 }
 
 /* ===== NAV ===== */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
-  padding: 20px 40px; background: transparent;
+  padding: 18px 40px; background: rgba(5,5,7,0.7);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(139,92,246,0.15);
 }
-.nav-brand { display: flex; align-items: center; gap: 12px; cursor: pointer; }
-.nav-logo {
-  width: 32px; height: 32px; border-radius: 6px; object-fit: cover;
-  filter: drop-shadow(0 0 10px rgba(255,215,0,0.15));
+.nav-brand { display: flex; align-items: center; gap: 12px; cursor: pointer; text-decoration: none; }
+.nav-logo-svg {
+  filter: drop-shadow(0 0 8px var(--glow));
+  transition: transform 0.3s ease;
+}
+.nav-brand:hover .nav-logo-svg {
+  transform: rotate(15deg) scale(1.08);
 }
 .nav-text {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 18px; font-weight: 700; color: #FFF;
-  letter-spacing: 4px; text-transform: uppercase;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 19px; font-weight: 800; color: #FFF;
+  letter-spacing: 3px; text-transform: uppercase;
+  background: linear-gradient(90deg, #FFF 0%, var(--cyan-bright) 50%, var(--violet-bright) 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
 .nav-prelaunch {
   padding: 3px 10px; border-radius: 100px;
-  background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.2);
+  background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.3);
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px; font-weight: 600; letter-spacing: 1px;
-  color: var(--gold); text-transform: uppercase;
+  color: var(--cyan-bright); text-transform: uppercase;
+  box-shadow: 0 0 8px rgba(6,182,212,0.2);
 }
 .nav-links { display: flex; gap: 32px; align-items: center; }
 .nav-links a {
-  color: var(--slate); text-decoration: none;
-  font-size: 14px; font-weight: 500; transition: color 0.2s;
+  color: var(--text-dim); text-decoration: none;
+  font-size: 14px; font-weight: 500; transition: all 0.2s;
 }
-.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover { color: var(--cyan-bright); text-shadow: 0 0 8px var(--cyan); }
 .nav-actions { display: flex; align-items: center; gap: 24px; }
-.nav-signin { font-size: 14px; font-weight: 600; color: var(--slate); text-decoration: none; transition: color 0.3s; }
-.nav-signin:hover { color: #FFF; }
+.nav-signin { font-size: 14px; font-weight: 600; color: var(--text-dim); text-decoration: none; transition: color 0.3s; }
+.nav-signin:hover { color: #FFF; text-shadow: 0 0 8px var(--violet); }
 .nav-cta {
   padding: 10px 24px;
-  background: #FFF; color: #000; border: none;
-  border-radius: 100px; font-size: 14px; font-weight: 700;
-  cursor: pointer; transition: all 0.3s; letter-spacing: -0.3px;
+  background: linear-gradient(135deg, var(--violet-deep) 0%, var(--violet) 100%);
+  color: #FFF; border: 1px solid var(--violet-bright);
+  border-radius: 100px; font-family: 'Orbitron', sans-serif;
+  font-size: 12px; font-weight: 700; letter-spacing: 1px;
+  cursor: pointer; transition: all 0.3s;
+  box-shadow: 0 0 12px var(--glow);
 }
-.nav-cta:hover { background: var(--gold); transform: scale(1.05); }
+.nav-cta:hover {
+  background: linear-gradient(135deg, var(--violet) 0%, var(--cyan) 100%);
+  border-color: var(--cyan-bright);
+  box-shadow: 0 0 20px var(--glow-cyan);
+  transform: scale(1.05);
+}
+
+/* ===== GLITCH TEXT EFFECT ===== */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+.glitch-text:hover {
+  animation: glitch-anim 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+@keyframes glitch-anim {
+  0% { transform: translate(0); text-shadow: -2px 0 var(--cyan), 2px 0 var(--magenta); }
+  25% { transform: translate(-2px, 1px); text-shadow: 2px 0 var(--cyan), -2px 0 var(--magenta); }
+  50% { transform: translate(1px, -1px); text-shadow: -1px 0 var(--cyan), 1px 0 var(--magenta); }
+  75% { transform: translate(-1px, 2px); text-shadow: 2px 0 var(--cyan), -2px 0 var(--magenta); }
+  100% { transform: translate(0); text-shadow: none; }
+}
 
 /* ===== HERO ===== */
 .hero {
   position: relative; min-height: 100vh;
   display: flex; flex-direction: column;
   justify-content: space-between; overflow: hidden;
+  padding-top: 80px;
 }
-.hero-video {
-  position: absolute; inset: 0; z-index: 0; overflow: hidden;
-}
-.hero-video video {
-  width: 100%; height: 100%; object-fit: cover;
-  transform: scale(1.5); transform-origin: top left;
-  opacity: 0.25; filter: grayscale(1) contrast(1.25);
-}
-.hero-overlay-v {
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, #000 100%);
-}
-.hero-overlay-h {
-  position: absolute; inset: 0;
-  background: linear-gradient(90deg, rgba(0,0,0,0.6), transparent, rgba(0,0,0,0.6));
+.hero-constellation {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
 }
 .hero-glow {
-  position: absolute; top: 33%; left: 50%;
+  position: absolute; top: 35%; left: 50%;
   transform: translate(-50%, -50%);
   width: 600px; height: 400px;
-  background: rgba(255,215,0,0.06);
-  filter: blur(140px); border-radius: 50%;
+  background: rgba(139,92,246,0.15);
+  filter: blur(150px); border-radius: 50%;
   pointer-events: none;
 }
-
 .hero-content {
   position: relative; z-index: 10; flex: 1;
   display: flex; flex-direction: column;
   justify-content: center; align-items: center;
-  text-align: center; padding: 100px 20px 30px;
-  max-width: 800px; margin: 0 auto;
+  text-align: center; padding: 80px 20px 30px;
+  max-width: 850px; margin: 0 auto;
 }
-
 .hero-pill {
   display: inline-flex; align-items: center; gap: 10px;
-  padding: 6px 16px; border-radius: 100px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(12px); margin-bottom: 36px;
+  padding: 6px 18px; border-radius: 100px;
+  background: rgba(10,10,18,0.8);
+  border: 1px solid rgba(139,92,246,0.3);
+  backdrop-filter: blur(12px); margin-bottom: 32px;
+  box-shadow: 0 0 15px rgba(139,92,246,0.2);
 }
 .hero-pill .dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--gold); animation: pulse-glow 2s infinite;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--cyan-bright);
+  box-shadow: 0 0 10px var(--cyan);
+  animation: pulse-cyan 2s infinite;
+}
+@keyframes pulse-cyan {
+  0%, 100% { box-shadow: 0 0 8px var(--cyan); opacity: 1; transform: scale(1); }
+  50% { box-shadow: 0 0 16px var(--cyan-bright); opacity: 0.7; transform: scale(1.3); }
 }
 .hero-pill span:last-child {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--gold); font-weight: 500;
+  text-transform: uppercase; color: var(--cyan-bright); font-weight: 600;
 }
 
 .hero h1 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(44px, 9vw, 96px);
-  font-weight: 800; letter-spacing: -2px;
-  line-height: 0.95; text-transform: uppercase;
+  font-family: 'Orbitron', 'Space Grotesk', sans-serif;
+  font-size: clamp(40px, 8.5vw, 88px);
+  font-weight: 800; letter-spacing: -1px;
+  line-height: 0.98; text-transform: uppercase;
   margin-bottom: 28px; color: #FFF;
 }
 
+.gradient-text {
+  background: linear-gradient(135deg, var(--violet-bright) 0%, var(--cyan-bright) 50%, var(--magenta) 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  animation: gradient-shimmer 6s ease-in-out infinite;
+}
+@keyframes gradient-shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .hero-sub {
-  font-size: clamp(16px, 2.5vw, 22px);
+  font-size: clamp(15px, 2.2vw, 20px);
   font-weight: 300; color: #CBD5E1;
-  max-width: 560px; line-height: 1.65; margin-bottom: 36px;
+  max-width: 580px; line-height: 1.65; margin-bottom: 36px;
 }
 
 .btn-pill-primary {
   padding: 16px 40px;
-  background: #FFF; color: #000;
-  border: none; border-radius: 100px;
-  font-size: 16px; font-weight: 700; letter-spacing: -0.3px;
+  background: linear-gradient(135deg, var(--violet-deep) 0%, var(--violet) 100%);
+  color: #FFF; border: 1px solid var(--violet-bright);
+  border-radius: 100px; font-family: 'Orbitron', sans-serif;
+  font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
   cursor: pointer; transition: all 0.3s;
-  box-shadow: 0 4px 30px rgba(255,215,0,0.08);
+  box-shadow: 0 0 25px var(--glow), inset 0 0 10px rgba(167,139,250,0.3);
+  text-transform: uppercase;
 }
 .btn-pill-primary:hover {
-  background: var(--gold); transform: scale(1.05);
-  box-shadow: 0 8px 35px rgba(255,215,0,0.2);
+  background: linear-gradient(135deg, var(--violet) 0%, var(--cyan) 100%);
+  border-color: var(--cyan-bright);
+  box-shadow: 0 0 35px var(--glow-cyan), inset 0 0 15px rgba(34,211,238,0.4);
+  transform: scale(1.05);
 }
 
-/* Waitlist */
-.waitlist { width: 100%; max-width: 440px; margin-top: 44px; }
+/* WAITLIST HUD */
+.waitlist { width: 100%; max-width: 460px; margin-top: 40px; }
 .waitlist-input-wrap {
   display: flex; align-items: center; gap: 8px;
   padding: 8px; border-radius: 100px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(12px); transition: border-color 0.3s;
+  background: var(--bg-panel);
+  border: 1px solid rgba(139,92,246,0.3);
+  box-shadow: 0 0 15px rgba(0,0,0,0.8), inset 0 0 10px rgba(139,92,246,0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
-.waitlist-input-wrap:focus-within { border-color: rgba(255,215,0,0.2); }
+.waitlist-input-wrap:focus-within {
+  border-color: var(--cyan-bright);
+  box-shadow: 0 0 20px var(--glow-cyan);
+}
 .waitlist-input {
   flex: 1; background: transparent; border: none; outline: none;
   color: #FFF; font-size: 14px; font-weight: 500;
   padding: 8px 16px; font-family: 'Inter', sans-serif;
 }
-.waitlist-input::placeholder { color: #64748B; }
+.waitlist-input::placeholder { color: var(--text-faint); }
 .waitlist-btn {
-  padding: 10px 20px; border-radius: 100px;
-  background: var(--gold); color: #000; border: none;
-  font-family: 'JetBrains Mono', monospace;
+  padding: 11px 22px; border-radius: 100px;
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
+  color: #FFF; border: none;
+  font-family: 'Orbitron', 'JetBrains Mono', monospace;
   font-size: 11px; font-weight: 700; letter-spacing: 1px;
   text-transform: uppercase; cursor: pointer;
-  transition: background 0.3s; white-space: nowrap;
+  transition: all 0.3s; white-space: nowrap;
+  box-shadow: 0 0 10px var(--glow-cyan);
 }
-.waitlist-btn:hover { background: var(--gold-dim); }
+.waitlist-btn:hover {
+  background: linear-gradient(135deg, var(--cyan-bright) 0%, var(--magenta) 100%);
+  box-shadow: 0 0 20px var(--glow-cyan);
+}
 .waitlist-claimed {
   display: flex; align-items: center; justify-content: center; gap: 8px;
-  padding: 12px; border-radius: 100px;
-  background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.2);
+  padding: 14px; border-radius: 12px;
+  background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.3);
+  box-shadow: 0 0 15px var(--glow);
 }
 .waitlist-claimed span {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 13px; color: var(--gold); letter-spacing: 0.5px;
+  font-size: 13px; color: var(--cyan-bright); letter-spacing: 0.5px;
 }
 
-/* Progress bar */
+/* SCARCITY HUD BAR */
 .scarcity { margin-top: 24px; }
 .scarcity-header {
   display: flex; justify-content: space-between; margin-bottom: 8px;
 }
 .scarcity-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; letter-spacing: 1px;
-  text-transform: uppercase; color: var(--slate-dim);
+  font-size: 10px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--text-dim);
 }
 .scarcity-value {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; letter-spacing: 1px;
-  color: var(--gold); font-weight: 600;
+  font-family: 'Orbitron', 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 1px;
+  color: var(--cyan-bright); font-weight: 700;
+  text-shadow: 0 0 8px var(--cyan);
 }
 .scarcity-bar {
   height: 6px; width: 100%;
-  background: rgba(255,255,255,0.04); border-radius: 100px;
-  overflow: hidden; border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.06); border-radius: 100px;
+  overflow: hidden; border: 1px solid rgba(139,92,246,0.2);
 }
 .scarcity-fill {
   height: 100%; border-radius: 100px;
-  background: linear-gradient(90deg, var(--gold), var(--gold-deep));
-  box-shadow: 0 0 12px rgba(255,215,0,0.25);
+  background: linear-gradient(90deg, var(--violet), var(--cyan-bright));
+  box-shadow: 0 0 12px var(--cyan);
   transition: width 1.5s ease;
 }
 
-/* Hero trust strip */
+/* HERO TRUST STRIP */
 .hero-strip {
   position: relative; z-index: 10; width: 100%;
-  border-top: 1px solid rgba(255,255,255,0.04);
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(139,92,246,0.2);
+  background: rgba(10,10,18,0.7);
+  backdrop-filter: blur(16px);
   padding: 16px 40px;
 }
 .hero-strip-inner {
@@ -244,201 +418,304 @@ body {
 }
 .hero-strip-item {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px; color: var(--slate-dim);
+  font-size: 11px; color: var(--text-dim);
   letter-spacing: 1px; text-transform: uppercase;
-  display: flex; align-items: center; gap: 6px;
+  display: flex; align-items: center; gap: 8px;
 }
-.hero-strip-item .check { color: var(--gold); }
+.hero-strip-item .check { color: var(--cyan-bright); font-weight: 700; text-shadow: 0 0 8px var(--cyan); }
+
+/* ===== SECTION DIVIDERS / CIRCUIT LINES ===== */
+.circuit-divider {
+  position: relative; width: 100%; max-width: 1100px;
+  margin: 20px auto; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(139,92,246,0.2) 20%, var(--violet) 50%, rgba(6,182,212,0.2) 80%, transparent 100%);
+  display: flex; justify-content: center; align-items: center;
+}
+.circuit-node {
+  width: 7px; height: 7px; background: var(--cyan-bright);
+  border-radius: 50%; box-shadow: 0 0 10px var(--cyan);
+  position: relative;
+}
+.circuit-node::before {
+  content: ''; position: absolute; inset: -4px;
+  border: 1px solid var(--violet); border-radius: 50%;
+  animation: pulse-ring 2s infinite;
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
 
 /* ===== SECTIONS ===== */
 .section {
-  min-height: 100vh; padding: 120px 40px;
+  min-height: 100vh; padding: 100px 40px;
   display: flex; flex-direction: column; justify-content: center;
-  max-width: 1100px; margin: 0 auto;
+  max-width: 1100px; margin: 0 auto; position: relative;
 }
 .section-tag {
   display: inline-flex; align-items: center; align-self: flex-start;
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 16px; font-weight: 500;
-  padding: 5px 12px; border: 1px solid rgba(255,215,0,0.1);
-  border-radius: 4px; background: rgba(255,215,0,0.02);
+  color: var(--cyan-bright); margin-bottom: 16px; font-weight: 600;
+  padding: 5px 12px; border: 1px solid rgba(6,182,212,0.3);
+  border-radius: 4px; background: rgba(6,182,212,0.06);
+  box-shadow: 0 0 10px rgba(6,182,212,0.15);
 }
+.section-tag::before { content: '> '; color: var(--violet-bright); }
+
 .section-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(34px, 6.5vw, 68px);
-  font-weight: 700; margin-bottom: 14px; line-height: 1.1;
+  font-family: 'Orbitron', 'Space Grotesk', sans-serif;
+  font-size: clamp(32px, 6vw, 64px);
+  font-weight: 800; margin-bottom: 14px; line-height: 1.1;
   color: #FFF; letter-spacing: -0.5px;
 }
 .section-sub {
-  font-size: clamp(15px, 2vw, 19px); color: var(--slate); margin-bottom: 48px;
-  max-width: 560px; line-height: 1.65; font-weight: 300;
+  font-size: clamp(15px, 2vw, 19px); color: #CBD5E1 !important; margin-bottom: 48px;
+  max-width: 580px; line-height: 1.65; font-weight: 300;
 }
 
+/* ===== HOLOGRAPHIC FLOATING CARDS ===== */
 .glass {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  background: rgba(10, 10, 18, 0.75) !important;
+  border-radius: 12px;
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(139, 92, 246, 0.25) !important;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.85), 0 0 15px rgba(139, 92, 246, 0.1), inset 0 0 15px rgba(6, 182, 212, 0.05);
+  overflow: hidden;
+  animation: holoFloat 8s ease-in-out infinite alternate;
 }
+.glass:nth-child(even) { animation-delay: -4s; }
+@keyframes holoFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-6px); }
+}
+
+/* Sci-Fi Corner Brackets */
+.glass::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: 
+    linear-gradient(to right, var(--cyan-bright) 2px, transparent 2px) 0 0 / 12px 12px no-repeat,
+    linear-gradient(to bottom, var(--cyan-bright) 2px, transparent 2px) 0 0 / 12px 12px no-repeat,
+    linear-gradient(to left, var(--cyan-bright) 2px, transparent 2px) 100% 0 / 12px 12px no-repeat,
+    linear-gradient(to bottom, var(--cyan-bright) 2px, transparent 2px) 100% 0 / 12px 12px no-repeat,
+    linear-gradient(to right, var(--violet-bright) 2px, transparent 2px) 0 100% / 12px 12px no-repeat,
+    linear-gradient(to top, var(--violet-bright) 2px, transparent 2px) 0 100% / 12px 12px no-repeat,
+    linear-gradient(to left, var(--violet-bright) 2px, transparent 2px) 100% 100% / 12px 12px no-repeat,
+    linear-gradient(to top, var(--violet-bright) 2px, transparent 2px) 100% 100% / 12px 12px no-repeat;
+  pointer-events: none; z-index: 2; opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+.glass-hover:hover::before { opacity: 1; }
+
 .glass-hover { transition: all 0.4s cubic-bezier(0.23,1,0.32,1); }
 .glass-hover:hover {
-  border-color: rgba(255,215,0,0.15);
-  background: rgba(255,255,255,0.04);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  border-color: rgba(6,182,212,0.5) !important;
+  background: rgba(15,15,28,0.85) !important;
+  box-shadow: 0 15px 45px rgba(0,0,0,0.9), 0 0 25px var(--glow-cyan);
 }
 
-/* Arena cards */
-.arena-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
-.arena-card { border-radius: 16px; padding: 28px; position: relative; overflow: hidden; }
-.arena-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  opacity: 0; transition: opacity 0.5s;
+/* Glass Card Shimmer Sweep */
+.glass-hover::after {
+  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background: linear-gradient(120deg, transparent 40%, rgba(34, 211, 238, 0.2) 50%, transparent 60%);
+  transform: rotate(25deg) translateX(-100%);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none; z-index: 3;
 }
-.arena-card:hover::before { opacity: 1; }
+.glass-hover:hover::after { transform: rotate(25deg) translateX(100%); }
+
+/* ===== ARENAS ===== */
+.arena-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+.arena-card { border-radius: 12px; padding: 28px; position: relative; overflow: hidden; }
 .arena-status {
   display: inline-flex; align-items: center; gap: 6px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; font-weight: 500; margin-bottom: 16px;
-  letter-spacing: 1px; text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+  text-transform: uppercase; padding: 4px 10px; border-radius: 100px;
+  margin-bottom: 20px; letter-spacing: 1px;
 }
-.arena-status .dot { width: 6px; height: 6px; border-radius: 50%; }
-.arena-status.live { color: var(--gold-light); }
-.arena-status.live .dot { background: var(--gold-light); box-shadow: 0 0 6px var(--gold-light); animation: blink 1.5s infinite; }
-.arena-status.soon { color: var(--gold); }
-.arena-status.soon .dot { background: var(--gold); box-shadow: 0 0 6px var(--gold); }
-.arena-status.locked { color: var(--slate-faint); }
-.arena-status.locked .dot { background: var(--slate-faint); }
-.arena-name { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 10px; color: #FFF; }
-.arena-desc { font-size: 13px; color: var(--slate); margin-bottom: 20px; line-height: 1.6; font-weight: 300; }
-.arena-prize { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.04); }
-.arena-prize-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--slate-faint); text-transform: uppercase; letter-spacing: 1px; }
-.arena-prize-value { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: var(--gold); }
-.arena-progress { margin-top: 16px; }
-.progress-bar { height: 3px; background: rgba(255,255,255,0.04); border-radius: 2px; overflow: hidden; }
-.progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-deep)); border-radius: 2px; box-shadow: 0 0 6px rgba(255,215,0,0.15); }
-.progress-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--slate-faint); margin-top: 8px; display: flex; justify-content: space-between; }
+.arena-status.live { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); color: #10B981; }
+.arena-status.live .dot { width: 6px; height: 6px; border-radius: 50%; background: #10B981; box-shadow: 0 0 8px #10B981; animation: blink 1.5s infinite; }
+.arena-status.soon { background: rgba(6,182,212,0.15); border: 1px solid rgba(6,182,212,0.3); color: var(--cyan-bright); }
+.arena-status.soon .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan-bright); box-shadow: 0 0 8px var(--cyan); }
+.arena-status.locked { background: rgba(148,163,184,0.12); border: 1px solid rgba(148,163,184,0.25); color: var(--text-dim); }
+.arena-status.locked .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-dim); }
 
-/* Steps */
-.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-.step { text-align: center; padding: 40px 28px; border-radius: 16px; position: relative; overflow: hidden; }
-.step::before { content: ''; position: absolute; top: 0; left: 50%; width: 40%; height: 1px; transform: translateX(-50%); background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.2; }
-.step-num { font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 700; color: var(--gold); opacity: 0.12; margin-bottom: 8px; line-height: 1; }
-.step h3 { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 600; margin-bottom: 12px; color: #FFF; }
-.step p { font-size: 13px; color: var(--slate); line-height: 1.6; font-weight: 300; }
+.arena-name { font-family: 'Orbitron', 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: #FFF; margin-bottom: 10px; }
+.arena-desc { font-size: 14px; color: #CBD5E1 !important; line-height: 1.6; margin-bottom: 24px; }
+.arena-prize {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 16px; background: rgba(139,92,246,0.1); border-radius: 8px;
+  border: 1px solid rgba(139,92,246,0.2); margin-bottom: 20px;
+}
+.arena-prize-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); text-transform: uppercase; }
+.arena-prize-value { font-family: 'Orbitron', sans-serif; font-size: 16px; font-weight: 700; color: var(--cyan-bright); text-shadow: 0 0 8px var(--cyan); }
 
-/* Rebate stat cards */
-.rebate-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
-.rebate-card { border-radius: 16px; padding: 28px; text-align: center; }
-.rebate-card .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--slate-faint); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
-.rebate-card .value { font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; color: #FFF; }
-.rebate-card .value.gold { color: var(--gold); }
-.rebate-card .note { font-size: 12px; color: var(--slate); margin-top: 8px; font-weight: 300; }
+.arena-progress { margin-top: 12px; }
+.progress-bar { height: 6px; width: 100%; background: rgba(255,255,255,0.06); border-radius: 100px; overflow: hidden; margin-bottom: 6px; border: 1px solid rgba(139,92,246,0.2); }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--violet), var(--cyan-bright)); box-shadow: 0 0 10px var(--cyan); border-radius: 100px; }
+.progress-label { display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); }
 
-/* Rex */
-.rex-section { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-.rex-holo { border-radius: 20px; padding: 44px 32px; text-align: center; position: relative; overflow: hidden; background: linear-gradient(135deg, rgba(255,215,0,0.04), rgba(205,127,50,0.04)); border: 1px solid rgba(255,215,0,0.1); }
-.rex-holo::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg, transparent, rgba(255,215,0,0.02), transparent, rgba(205,127,50,0.02), transparent); animation: rotate-bg 8s linear infinite; pointer-events: none; }
-@keyframes rotate-bg { to { transform: rotate(360deg); } }
-.rex-symbol { font-family: 'Space Grotesk', sans-serif; font-size: 52px; font-weight: 700; margin-bottom: 8px; position: relative; }
-.rex-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--slate); margin-bottom: 24px; position: relative; }
-.rex-balance { font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 700; color: #FFF; position: relative; }
-.rex-balance-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--slate-faint); margin-top: 6px; position: relative; letter-spacing: 1px; }
-.rex-note { font-size: 12px; color: var(--slate-faint); margin-top: 24px; line-height: 1.6; position: relative; font-weight: 300; }
-.rex-earn h4, .rex-spend h4 { font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
-.rex-earn h4 { color: var(--gold-light); }
-.rex-spend h4 { color: var(--bronze); }
-.rex-list { list-style: none; }
-.rex-list li { padding: 12px 0; font-size: 13px; color: var(--slate); border-bottom: 1px solid rgba(255,255,255,0.03); display: flex; justify-content: space-between; align-items: center; font-weight: 300; }
-.rex-list li span:last-child { font-family: 'Space Grotesk', sans-serif; color: var(--gold); font-weight: 600; }
+/* ===== HOW IT WORKS ===== */
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.step { padding: 32px; border-radius: 12px; position: relative; }
+.step-num {
+  font-family: 'Orbitron', sans-serif; font-size: 36px; font-weight: 800;
+  color: var(--violet-bright); opacity: 0.8; margin-bottom: 16px;
+  text-shadow: 0 0 12px var(--glow);
+}
+.step h3 { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: #FFF; margin-bottom: 12px; }
+.step p { font-size: 14px; color: #CBD5E1 !important; line-height: 1.6; }
 
-/* Leaderboard */
-.leaderboard { border-radius: 16px; overflow: hidden; }
-.lb-header, .lb-row { display: grid; grid-template-columns: 50px 1fr 100px 90px 80px; padding: 14px 24px; align-items: center; }
-.lb-header { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--slate-faint); text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.04); font-weight: 500; }
-.lb-row { border-bottom: 1px solid rgba(255,255,255,0.02); transition: background 0.3s; }
-.lb-row:hover { background: rgba(255,215,0,0.02); }
-.lb-row:last-child { border-bottom: none; }
-.lb-rank { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; }
-.lb-rank.gold { color: var(--gold); }
-.lb-rank.silver { color: #CBD5E1; }
-.lb-rank.bronze { color: #B45309; }
-.lb-name { font-weight: 500; font-size: 14px; color: #FFF; }
-.lb-bracket { font-size: 12px; color: var(--slate); }
-.lb-score { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; color: var(--gold-light); }
-.lb-rex { font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--bronze); font-weight: 600; }
+/* ===== REBATES ===== */
+.rebate-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.rebate-card { padding: 28px; border-radius: 12px; text-align: center; }
+.rebate-card .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px; }
+.rebate-card .value {
+  font-family: 'Orbitron', sans-serif; font-size: 42px; font-weight: 800;
+  color: var(--cyan-bright); text-shadow: 0 0 15px var(--cyan); margin-bottom: 8px;
+}
+.rebate-card .note { font-size: 12px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; }
 
-/* Calculator */
-.calc-card { border-radius: 16px; padding: 36px; max-width: 520px; }
-.calc-row { margin-bottom: 24px; }
-.calc-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--slate); margin-bottom: 8px; display: block; letter-spacing: 0.5px; }
-.calc-select, .calc-input { width: 100%; padding: 13px 16px; background: rgba(0,0,0,0.6); color: #FFF; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.3s; }
-.calc-select:focus, .calc-input:focus { border-color: var(--gold); }
-.calc-slider { width: 100%; -webkit-appearance: none; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; outline: none; }
-.calc-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--gold); cursor: pointer; box-shadow: 0 0 8px rgba(255,215,0,0.3); }
-.calc-slider::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--gold); cursor: pointer; border: none; box-shadow: 0 0 8px rgba(255,215,0,0.3); }
-.calc-result { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.04); border-radius: 12px; padding: 22px; }
-.calc-result-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 13px; }
-.calc-result-row span:first-child { color: var(--slate); }
-.calc-result-row span:last-child { font-family: 'Space Grotesk', sans-serif; font-weight: 600; }
-.calc-result-total { border-top: 1px solid rgba(255,255,255,0.06); margin-top: 8px; padding-top: 16px; }
-.calc-result-total span:last-child { color: var(--gold-light); font-size: 18px; }
+/* ===== REX CURRENCY ===== */
+.rex-section { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+@media (max-width: 900px) { .rex-section { grid-template-columns: 1fr; } }
+.rex-holo {
+  padding: 32px; border-radius: 16px; text-align: center; position: relative;
+  background: var(--bg-panel); border: 1px solid var(--violet);
+  box-shadow: 0 0 30px var(--glow);
+}
+.rex-symbol {
+  font-family: 'Orbitron', sans-serif; font-size: 64px; font-weight: 900;
+  color: var(--violet-bright); text-shadow: 0 0 20px var(--violet); margin-bottom: 8px;
+}
+.rex-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 2px; color: var(--cyan-bright); text-transform: uppercase; margin-bottom: 16px; }
+.rex-balance { font-family: 'Orbitron', sans-serif; font-size: 44px; font-weight: 800; color: #FFF; text-shadow: 0 0 15px var(--cyan); margin-bottom: 4px; }
+.rex-balance-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-faint); letter-spacing: 2px; margin-bottom: 20px; }
+.rex-note { font-size: 11px; color: var(--text-dim); line-height: 1.5; margin-bottom: 20px; }
 
-/* Discord */
-.discord-cta { text-align: center; padding: 64px 40px; border-radius: 20px; position: relative; overflow: hidden; }
-.discord-cta::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
-.discord-cta h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(28px, 5vw, 52px); font-weight: 700; margin-bottom: 14px; color: #FFF; letter-spacing: -0.5px; }
-.discord-cta p { font-size: 15px; color: var(--slate); margin: 0 auto 28px; max-width: 460px; font-weight: 300; }
-.discord-btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 36px; background: #FFF; color: #000; border: none; border-radius: 100px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.3s; }
-.discord-btn:hover { transform: scale(1.05); background: var(--gold); }
+.rex-gen-art {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 16px; border-radius: 12px; background: rgba(5,5,7,0.8);
+  border: 1px solid rgba(139,92,246,0.3);
+}
+.rex-art-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1.5px;
+  color: var(--cyan-bright); margin-top: 10px; text-transform: uppercase;
+}
 
-/* FAQ */
-.faq-item { border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
-.faq-q { padding: 20px 24px; font-size: 15px; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: color 0.3s; color: #FFF; }
-.faq-q:hover { color: var(--gold); }
-.faq-q .arrow { transition: transform 0.3s; font-size: 12px; color: var(--slate-faint); }
-.faq-q.open .arrow { transform: rotate(180deg); }
+.rex-earn, .rex-spend {
+  padding: 24px; border-radius: 12px; margin-bottom: 20px;
+  background: rgba(10,10,18,0.7); border: 1px solid rgba(139,92,246,0.2);
+}
+.rex-earn h4, .rex-spend h4 {
+  font-family: 'Orbitron', sans-serif; font-size: 16px; font-weight: 700;
+  color: var(--cyan-bright); margin-bottom: 16px; letter-spacing: 1px;
+}
+.rex-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.rex-list li {
+  display: flex; justify-content: space-between; font-size: 13px;
+  color: #CBD5E1 !important; border-bottom: 1px solid rgba(255,255,255,0.04); padding-bottom: 8px;
+}
+.rex-list li span:last-child { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--violet-bright); }
+
+/* ===== LEADERBOARD ===== */
+.leaderboard { border-radius: 12px; overflow: hidden; padding: 24px; }
+.lb-header {
+  display: grid; grid-template-columns: 80px 2fr 1.5fr 1fr 1fr;
+  padding: 12px 16px; font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px;
+  border-bottom: 1px solid rgba(139,92,246,0.2);
+}
+.lb-row {
+  display: grid; grid-template-columns: 80px 2fr 1.5fr 1fr 1fr;
+  align-items: center; padding: 16px; border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.2s; font-size: 14px;
+}
+.lb-row:hover { background: rgba(139,92,246,0.08); }
+.lb-rank { font-family: 'Orbitron', monospace; font-weight: 700; font-size: 16px; }
+.lb-rank.gold { color: var(--cyan-bright); text-shadow: 0 0 10px var(--cyan); }
+.lb-rank.silver { color: var(--violet-bright); text-shadow: 0 0 10px var(--violet); }
+.lb-rank.bronze { color: var(--magenta); text-shadow: 0 0 10px var(--magenta); }
+.lb-name { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #FFF; }
+.lb-bracket { font-size: 12px; color: var(--text-dim); }
+.lb-score { font-family: 'Orbitron', monospace; font-weight: 700; color: var(--cyan-bright); }
+.lb-rex { font-family: 'JetBrains Mono', monospace; color: var(--violet-bright); }
+
+.lb-score-cell { display: flex; flex-direction: column; gap: 4px; }
+.lb-bar-bg { width: 100%; height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; margin-top: 4px; }
+.lb-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--violet), var(--cyan-bright)); border-radius: 2px; transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* ===== CALCULATOR ===== */
+.calc-card { padding: 36px; border-radius: 12px; max-width: 680px; margin: 0 auto; width: 100%; }
+.calc-row { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+.calc-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; }
+.calc-select, .calc-input {
+  width: 100%; padding: 12px 16px; border-radius: 8px;
+  background: rgba(5,5,7,0.8); border: 1px solid rgba(139,92,246,0.3);
+  color: #FFF; font-family: 'JetBrains Mono', monospace; font-size: 14px;
+  outline: none; transition: border-color 0.3s;
+}
+.calc-select:focus, .calc-input:focus { border-color: var(--cyan-bright); box-shadow: 0 0 10px var(--glow-cyan); }
+.calc-slider {
+  -webkit-appearance: none; appearance: none; width: 100%; height: 6px;
+  border-radius: 3px; background: rgba(255,255,255,0.1); outline: none;
+}
+.calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--cyan-bright); box-shadow: 0 0 12px var(--cyan); cursor: pointer;
+}
+.calc-result {
+  margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(139,92,246,0.2);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.calc-result-row { display: flex; justify-content: space-between; font-size: 14px; color: var(--text-dim); }
+.calc-result-row span:last-child { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #FFF; }
+.calc-result-total { padding-top: 12px; border-top: 1px dashed rgba(139,92,246,0.3); font-size: 16px; font-weight: 700; color: #FFF; }
+.calc-result-total span:last-child { color: var(--cyan-bright); font-size: 20px; font-family: 'Orbitron', monospace; text-shadow: 0 0 10px var(--cyan); }
+
+/* ===== DISCORD CTA ===== */
+.discord-cta {
+  padding: 48px; border-radius: 16px; text-align: center; max-width: 800px; margin: 0 auto;
+  background: linear-gradient(135deg, rgba(139,92,246,0.12) 0%, rgba(6,182,212,0.08) 100%);
+  border: 1px solid var(--violet); box-shadow: 0 0 35px var(--glow);
+}
+.discord-cta h2 { font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #FFF; margin-bottom: 16px; }
+.discord-cta p { font-size: 15px; color: #CBD5E1; max-width: 560px; margin: 0 auto 32px; line-height: 1.6; }
+.discord-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 36px; border-radius: 100px;
+  background: #5865F2; color: #FFF; border: none;
+  font-family: 'Orbitron', sans-serif; font-size: 14px; font-weight: 700;
+  cursor: pointer; transition: all 0.3s; box-shadow: 0 0 20px rgba(88,101,242,0.4);
+  letter-spacing: 1px;
+}
+.discord-btn:hover { background: #4752C4; box-shadow: 0 0 30px rgba(88,101,242,0.7); transform: scale(1.05); }
+
+/* ===== FAQ ===== */
+.faq-item { margin-bottom: 16px; border-radius: 12px; overflow: hidden; cursor: pointer; }
+.faq-q {
+  padding: 20px 24px; font-family: 'Orbitron', 'Space Grotesk', sans-serif;
+  font-size: 16px; font-weight: 600; color: #FFF;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.faq-q .arrow { font-size: 12px; transition: transform 0.3s; color: var(--cyan-bright); }
+.faq-item.active .arrow { transform: rotate(180deg); }
 .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-.faq-a-inner { padding: 0 24px 20px; font-size: 14px; color: var(--slate); line-height: 1.7; font-weight: 300; }
+.faq-a-inner { padding: 0 24px 20px; font-size: 14px; color: #CBD5E1 !important; line-height: 1.65; }
 
-/* Footer */
-.footer { padding: 48px 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.04); margin-top: 60px; }
-.footer-brand { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; }
-.footer-logo { width: 28px; height: 28px; border-radius: 5px; }
-.footer-text { font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 700; color: #FFF; letter-spacing: 4px; }
-.footer-tag { font-size: 13px; color: var(--slate-faint); margin-bottom: 12px; font-weight: 300; }
-.footer-disclaimer { max-width: 660px; margin: 8px auto 0; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--slate-faint); line-height: 1.6; font-weight: 400; }
-
-/* Reveal */
-.reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.23,1,0.32,1); }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-
-/* Mobile */
-@media (max-width: 768px) {
-  .nav { padding: 16px; } .nav-links { display: none; } .nav-prelaunch { display: none; }
-  .hero-content { padding: 80px 16px 20px; } .hero h1 { font-size: clamp(38px, 11vw, 64px); }
-  .rex-section { grid-template-columns: 1fr; }
-  .lb-header, .lb-row { grid-template-columns: 36px 1fr 70px; font-size: 12px; padding: 12px 14px; }
-  .lb-header span:nth-child(3), .lb-header span:nth-child(4), .lb-row .lb-bracket, .lb-row .lb-rex { display: none; }
-  .section { padding: 80px 20px; }
-  .hero-strip-inner { flex-direction: column; gap: 10px; }
-  .waitlist-input-wrap { flex-direction: column; padding: 12px; border-radius: 16px; }
-  .waitlist-btn { width: 100%; padding: 12px; }
+/* ===== FOOTER ===== */
+.footer {
+  padding: 60px 40px; border-top: 1px solid rgba(139,92,246,0.2);
+  text-align: center; max-width: 1100px; margin: 0 auto;
 }
+.footer-brand { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 16px; }
+.footer-text { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 800; color: #FFF; letter-spacing: 3px; }
+.footer-tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--cyan-bright); margin-bottom: 24px; letter-spacing: 2px; }
+.footer-disclaimer { font-size: 11px; color: var(--text-faint); max-width: 750px; margin: 0 auto; line-height: 1.6; }
 
-/* ===== NEW ENHANCED TECHNIQUES CSS ===== */
-
-/* Technique 13: Scroll Progress Bar */
-#scroll-progress {
-  position: fixed; top: 0; left: 0; height: 3px;
-  background: linear-gradient(90deg, var(--gold), var(--bronze), var(--gold-light));
-  z-index: 1001; width: 0%; pointer-events: none;
-  transition: width 0.05s ease-out;
-  box-shadow: 0 0 8px rgba(255,215,0,0.6);
-}
-
-/* Technique 13: Section Indicator Dots */
+/* ===== SECTION INDICATOR DOTS ===== */
 .section-indicator {
   position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
   z-index: 95; display: flex; flex-direction: column; gap: 14px;
@@ -450,442 +727,168 @@ body {
   position: relative; text-decoration: none;
 }
 .indicator-dot:hover, .indicator-dot.active {
-  background: var(--gold); box-shadow: 0 0 10px var(--gold); transform: scale(1.35);
-  border-color: var(--gold);
+  background: var(--cyan-bright); box-shadow: 0 0 12px var(--cyan); transform: scale(1.4);
+  border-color: var(--cyan-bright);
 }
 .indicator-dot::after {
   content: attr(data-label);
   position: absolute; right: 22px; top: 50%; transform: translateY(-50%);
-  background: rgba(0,0,0,0.85); color: #FFF; padding: 4px 10px; border-radius: 6px;
+  background: var(--bg-panel); color: #FFF; padding: 4px 10px; border-radius: 6px;
   font-family: 'JetBrains Mono', monospace; font-size: 10px; white-space: nowrap;
   opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s;
-  border: 1px solid rgba(255,215,0,0.2); backdrop-filter: blur(8px);
+  border: 1px solid rgba(139,92,246,0.3); backdrop-filter: blur(8px);
 }
 .indicator-dot:hover::after { opacity: 1; transform: translateY(-50%) translateX(-4px); }
 
-/* Technique 1 & 4: 3D Elements & Glass Morphism Double Border + Noise */
-.arena-card, .rebate-card, .step, .calc-card, .rex-holo, .discord-cta {
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  will-change: transform;
+/* ===== REVEAL & KINETIC TYPOGRAPHY ===== */
+.reveal {
+  opacity: 0; transform: translateY(30px) scale(0.97); filter: blur(4px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
 }
+.reveal.visible { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
 
-.glass {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02), 0 12px 40px rgba(0,0,0,0.4);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  position: relative;
-  overflow: hidden;
-}
-
-/* SVG Noise Overlay for Glass */
-.glass::before {
-  content: '';
-  position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none; z-index: 0;
-}
-
-/* Glass Card Shimmer Sweep */
-.glass-hover::after {
-  content: '';
-  position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-  background: linear-gradient(45deg, transparent 45%, rgba(255, 255, 255, 0.07) 50%, transparent 55%);
-  transform: rotate(30deg) translateY(-100%);
-  transition: transform 0.8s ease;
-  pointer-events: none; z-index: 1;
-}
-.glass-hover:hover::after {
-  transform: rotate(30deg) translateY(100%);
-}
-
-/* Technique 2: Ripple & Magnetic Buttons */
-.btn-pill-primary, .nav-cta, .waitlist-btn, .discord-btn {
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.2s ease, background 0.3s, box-shadow 0.3s;
-}
-.ripple-span {
-  position: absolute; border-radius: 50%;
-  background: rgba(255, 255, 255, 0.45);
-  transform: scale(0);
-  animation: ripple-anim 0.6s linear;
-  pointer-events: none;
-}
-@keyframes ripple-anim {
-  to { transform: scale(4); opacity: 0; }
-}
-
-/* Hover glow top border pulse on Arena Card */
-.arena-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  opacity: 0; transition: opacity 0.3s; z-index: 2;
-}
-.arena-card:hover::before {
-  opacity: 1;
-  animation: top-glow-pulse 2s ease-in-out infinite;
-}
-@keyframes top-glow-pulse {
-  0%, 100% { opacity: 0.4; filter: drop-shadow(0 0 2px var(--gold)); }
-  50% { opacity: 1; filter: drop-shadow(0 0 8px var(--gold)); }
-}
-
-/* Hero Pill animated dot scaling */
-.hero-pill .dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--gold);
-  animation: pulse-glow 2s infinite, dot-scale 2s ease-in-out infinite;
-}
-@keyframes dot-scale {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.4); }
-}
-
-/* Technique 5: Kinetic Typography */
 .kinetic-word {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(35px);
+  display: inline-block; opacity: 0; transform: translateY(35px);
   animation: kinetic-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation-delay: calc(var(--i) * 0.12s + 0.1s);
 }
-@keyframes kinetic-in {
-  to { opacity: 1; transform: translateY(0); }
-}
+@keyframes kinetic-in { to { opacity: 1; transform: translateY(0); } }
 
-.gradient-text {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 25%, #D4AF37 50%, var(--gold-deep) 75%, var(--gold) 100%);
-  background-size: 300% 300%;
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-shimmer 6s ease-in-out infinite;
-}
-@keyframes gradient-shimmer {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Letter/Word reveal for section titles */
 .title-char {
   display: inline-block; opacity: 0; transform: translateY(18px);
   transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: calc(var(--char-i) * 0.025s);
 }
-.section-title.visible .title-char {
-  opacity: 1; transform: translateY(0);
-}
+.section-title.visible .title-char { opacity: 1; transform: translateY(0); }
 
-/* Technique 6: Dark Neumorphism */
-.waitlist-input-wrap {
-  background: #1A1408;
-  box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.7), -4px -4px 10px rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255,255,255,0.06);
+/* RIPPLE SPAN */
+.ripple-span {
+  position: absolute; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  transform: scale(0); animation: ripple-anim 0.6s linear; pointer-events: none;
 }
-.nav-cta {
-  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.6), -3px -3px 8px rgba(255, 255, 255, 0.03);
-}
-.calc-slider::-webkit-slider-thumb {
-  -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
-  background: var(--gold);
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8), -2px -2px 6px rgba(255, 255, 255, 0.06), inset 0 0 4px rgba(255,255,255,0.8);
-  cursor: pointer; transition: transform 0.2s;
-}
-.calc-slider::-webkit-slider-thumb:hover { transform: scale(1.18); }
+@keyframes ripple-anim { to { transform: scale(4); opacity: 0; } }
 
-/* Technique 7: Dark UI Palette Refinements & Contrast */
-.section-sub, .arena-desc, .step p, .rex-list li, .faq-a-inner {
-  color: #CBD5E1 !important; /* WCAG AA contrast against #000 */
-}
-.section {
-  position: relative;
-  background: transparent;
-}
-.section::before {
-  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: -1;
-  background: radial-gradient(circle at 50% 20%, rgba(255, 215, 0, 0.025) 0%, transparent 70%);
-}
-.section:nth-child(even)::before {
-  background: radial-gradient(circle at 50% 80%, rgba(205, 127, 50, 0.025) 0%, transparent 70%);
-}
-
-/* Technique 8: Holographic Effects */
-.rex-holo-overlay {
-  position: absolute; inset: 0; border-radius: 20px;
-  background: conic-gradient(from var(--holo-angle, 0deg) at 50% 50%, #FFD700, #B8860B, #D4AF37, #CD7F32, #FFD700);
-  opacity: 0.12; mix-blend-mode: screen; pointer-events: none;
-  transition: opacity 0.3s;
-}
-.rex-holo:hover .rex-holo-overlay { opacity: 0.25; }
-
-.nav-text {
-  background: linear-gradient(110deg, #FFF 0%, #FFF 40%, var(--gold) 50%, #FFE875 60%, #FFF 70%, #FFF 100%);
-  background-size: 200% 100%;
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: holo-nav 5s linear infinite;
-}
-@keyframes holo-nav {
-  0% { background-position: 100% 0; }
-  100% { background-position: -100% 0; }
-}
-
-/* Technique 10: Minimalist Spacing Rhythm */
-.section, .hero-content {
-  max-width: 1100px;
-  margin-left: auto; margin-right: auto;
-}
-
-/* Technique 11: Data Visualization (Leaderboard Bars, Calculator Sparkline) */
-.lb-score-cell { display: flex; flex-direction: column; gap: 4px; }
-.lb-bar-bg { width: 100%; height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; margin-top: 2px; }
-.lb-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--gold), var(--gold-deep)); border-radius: 2px; transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
-
-.calc-sparkline-wrap { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
-.calc-sparkline-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--slate-dim); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
-.calc-sparkline { width: 100%; height: 45px; overflow: visible; }
-.sparkline-line { stroke-dasharray: 400; stroke-dashoffset: 400; transition: stroke-dashoffset 1.5s ease-in-out; }
-.calc-card.visible .sparkline-line { stroke-dashoffset: 0; }
-
-/* Technique 12: Generative Art Canvas in Rex Section */
-.rex-gen-art {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  margin-top: 20px; padding: 16px; border-radius: 12px;
-  background: rgba(0,0,0,0.3); border: 1px solid rgba(255,215,0,0.1);
-}
-.rex-art-label {
-  font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1.5px;
-  color: var(--gold); margin-top: 8px; text-transform: uppercase;
-}
-
-/* Technique 13: Enhanced Reveal Scale-up */
-.reveal {
-  opacity: 0; transform: translateY(30px) scale(0.97);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal.visible {
-  opacity: 1; transform: translateY(0) scale(1);
-}
-
-/* Mobile responsive degradation */
+/* MEDIA QUERIES */
 @media (max-width: 768px) {
+  .nav { padding: 14px 20px; }
+  .nav-links { display: none; }
   .section-indicator { display: none; }
+  .data-stream { display: none; }
+  .section { padding: 80px 20px; }
   .arena-card, .rebate-card, .step, .calc-card, .rex-holo { transform: none !important; }
 }
 
-
-/* ===== LIQUID GOLD EMPIRE SPECIFIC STYLES ===== */
-
-/* 1. Liquid Gold Hero Background */
-.hero-liquid-gold {
-  position: absolute; inset: 0; z-index: 0; overflow: hidden;
-  background: #000000; pointer-events: none;
+@media (prefers-reduced-motion: reduce) {
+  .grid-plane, .stream-content, .dust-p, .glass, .gradient-text { animation: none !important; }
+  .reveal { transition: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
+  .boot-sequence { display: none !important; }
 }
-.hero-liquid-gold .gold-blob {
-  position: absolute; border-radius: 50%;
-  mix-blend-mode: screen; filter: blur(55px); opacity: 0.75;
-  will-change: transform;
-}
-.hero-liquid-gold .blob-1 {
-  width: 65vw; height: 65vw; top: -15vw; left: -10vw;
-  background: radial-gradient(circle, rgba(255,215,0,0.45) 0%, rgba(212,175,55,0.18) 45%, rgba(184,134,11,0.05) 70%, transparent 80%);
-  animation: liquidFlow1 18s ease-in-out infinite alternate;
-}
-.hero-liquid-gold .blob-2 {
-  width: 60vw; height: 60vw; bottom: -12vw; right: -8vw;
-  background: radial-gradient(circle, rgba(255,232,117,0.4) 0%, rgba(205,127,50,0.18) 45%, transparent 75%);
-  animation: liquidFlow2 22s ease-in-out infinite alternate;
-}
-.hero-liquid-gold .blob-3 {
-  width: 48vw; height: 48vw; top: 22%; left: 28%;
-  background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, rgba(184,134,11,0.12) 50%, transparent 75%);
-  animation: liquidFlow3 15s ease-in-out infinite alternate;
-}
-.hero-liquid-gold .blob-4 {
-  width: 42vw; height: 42vw; bottom: 18%; left: 52%;
-  background: radial-gradient(circle, rgba(212,175,55,0.35) 0%, rgba(255,232,117,0.12) 50%, transparent 80%);
-  animation: liquidFlow4 20s ease-in-out infinite alternate;
-}
-.hero-liquid-gold .gold-vignette {
-  position: absolute; inset: 0; pointer-events: none; z-index: 1;
-  background: radial-gradient(circle at 50% 40%, transparent 15%, rgba(0,0,0,0.65) 60%, #000000 100%);
-}
-
-@keyframes liquidFlow1 {
-  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  50% { transform: translate(12%, 15%) scale(1.2) rotate(90deg); }
-  100% { transform: translate(-8%, 22%) scale(0.9) rotate(180deg); }
-}
-@keyframes liquidFlow2 {
-  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  50% { transform: translate(-18%, -12%) scale(1.25) rotate(-120deg); }
-  100% { transform: translate(12%, -20%) scale(0.92) rotate(-240deg); }
-}
-@keyframes liquidFlow3 {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-12%, 18%) scale(1.18); }
-  100% { transform: translate(18%, -12%) scale(0.88); }
-}
-@keyframes liquidFlow4 {
-  0% { transform: translate(0, 0) scale(0.92); }
-  50% { transform: translate(20%, -18%) scale(1.3); }
-  100% { transform: translate(-12%, 12%) scale(1); }
-}
-
-/* 2. Gold Dust Floating Particles */
-.gold-dust-field {
-  position: fixed; inset: 0; pointer-events: none; z-index: 2; overflow: hidden;
-}
-.dust-p {
-  position: absolute; bottom: -20px; left: var(--x);
-  width: var(--size); height: var(--size);
-  background: #FFE875; border-radius: 50%;
-  box-shadow: 0 0 8px #FFD700, 0 0 14px rgba(255,215,0,0.6);
-  opacity: 0;
-  animation: floatGoldDust var(--speed) linear infinite;
-  animation-delay: var(--delay);
-}
-@keyframes floatGoldDust {
-  0% { transform: translateY(0) translateX(0) scale(0.8); opacity: 0; }
-  10% { opacity: 0.85; }
-  50% { transform: translateY(-50vh) translateX(25px) scale(1.2); opacity: 0.6; }
-  90% { opacity: 0.8; }
-  100% { transform: translateY(-105vh) translateX(-15px) scale(0.5); opacity: 0; }
-}
-
-/* 3. Molten Gold Animated Card Borders */
-.glass {
-  position: relative;
-  background: rgba(18, 14, 8, 0.7) !important;
-  border-radius: 16px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(212, 175, 55, 0.2) !important;
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 232, 117, 0.12);
-  overflow: hidden;
-}
-.glass::before {
-  content: '';
-  position: absolute;
-  top: -50%; left: -50%; width: 200%; height: 200%;
-  background: conic-gradient(from 0deg, transparent 0%, #FFD700 25%, #CD7F32 50%, #B8860B 75%, transparent 100%);
-  animation: rotateMoltenBorder 10s linear infinite;
-  opacity: 0.22;
-  pointer-events: none;
-  z-index: 0;
-  transition: opacity 0.4s ease;
-}
-.glass-hover:hover::before {
-  opacity: 0.65;
-}
-@keyframes rotateMoltenBorder {
-  to { transform: rotate(360deg); }
-}
-
-/* 4. Gold Foil Shimmer Text */
-.gradient-text, .nav-text, .rex-symbol {
-  background: linear-gradient(110deg, #B8860B 0%, #D4AF37 20%, #FFD700 40%, #FFF8B5 50%, #FFD700 60%, #CD7F32 80%, #B8860B 100%) !important;
-  background-size: 220% auto !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  animation: goldFoilShimmer 4s linear infinite !important;
-}
-@keyframes goldFoilShimmer {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
-}
-
-/* 5. Gold Glint Hover Sweep */
-.glass-hover::after {
-  content: '';
-  position: absolute;
-  top: -50%; left: -50%; width: 200%; height: 200%;
-  background: linear-gradient(120deg, transparent 40%, rgba(255, 232, 117, 0.35) 50%, transparent 60%);
-  transform: rotate(25deg) translateX(-100%);
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-  z-index: 2;
-}
-.glass-hover:hover::after {
-  transform: rotate(25deg) translateX(100%);
-}
-
-/* 6. Flowing Gold Progress Bars */
-.progress-fill, .scarcity-fill, .lb-bar-fill {
-  background: linear-gradient(90deg, #B8860B 0%, #D4AF37 25%, #FFD700 50%, #FFE875 75%, #D4AF37 100%) !important;
-  background-size: 200% 100% !important;
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.5) !important;
-  animation: goldBarFlow 3s linear infinite !important;
-}
-@keyframes goldBarFlow {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 200% 0%; }
-}
-
-/* 9. Gold Section Dividers */
-.gold-divider {
-  height: 1px;
-  width: 100%;
-  max-width: 1100px;
-  margin: 20px auto;
-  background: linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.3) 20%, #FFD700 50%, rgba(212,175,55,0.3) 80%, transparent 100%);
-  position: relative;
-  overflow: hidden;
-}
-.gold-divider::after {
-  content: '';
-  position: absolute;
-  top: 0; left: -50%;
-  width: 50%; height: 100%;
-  background: linear-gradient(90deg, transparent, #FFE875, transparent);
-  animation: dividerShimmer 3s ease-in-out infinite;
-}
-@keyframes dividerShimmer {
-  0% { left: -50%; }
-  100% { left: 150%; }
-}
-
-/* 10. Warm Ambient Lighting on Sections */
-.section {
-  position: relative;
-  background: radial-gradient(circle at 50% 30%, rgba(26, 20, 8, 0.55) 0%, rgba(0, 0, 0, 0.95) 70%, #000000 100%) !important;
-}
-
 </style>
 </head>
 <body>
-<!-- Gold Dust Particles Field -->
-<div class="gold-dust-field" aria-hidden="true">
-  <div class="dust-p" style="--x: 4%; --delay: 0s; --speed: 12s; --size: 3px;"></div>
-  <div class="dust-p" style="--x: 12%; --delay: 3s; --speed: 16s; --size: 2px;"></div>
-  <div class="dust-p" style="--x: 22%; --delay: 1.5s; --speed: 14s; --size: 4px;"></div>
-  <div class="dust-p" style="--x: 31%; --delay: 5s; --speed: 19s; --size: 2.5px;"></div>
-  <div class="dust-p" style="--x: 40%; --delay: 2s; --speed: 11s; --size: 3px;"></div>
-  <div class="dust-p" style="--x: 49%; --delay: 7s; --speed: 15s; --size: 2.5px;"></div>
-  <div class="dust-p" style="--x: 58%; --delay: 0.5s; --speed: 13s; --size: 3.5px;"></div>
-  <div class="dust-p" style="--x: 67%; --delay: 4s; --speed: 17s; --size: 2px;"></div>
-  <div class="dust-p" style="--x: 76%; --delay: 6s; --speed: 10s; --size: 3px;"></div>
-  <div class="dust-p" style="--x: 84%; --delay: 1s; --speed: 18s; --size: 2.5px;"></div>
-  <div class="dust-p" style="--x: 93%; --delay: 3.5s; --speed: 12s; --size: 4px;"></div>
-  <div class="dust-p" style="--x: 15%; --delay: 8s; --speed: 15s; --size: 3px;"></div>
-  <div class="dust-p" style="--x: 36%; --delay: 9.5s; --speed: 13s; --size: 2px;"></div>
-  <div class="dust-p" style="--x: 55%; --delay: 6.5s; --speed: 17s; --size: 3.5px;"></div>
-  <div class="dust-p" style="--x: 72%; --delay: 11s; --speed: 14s; --size: 2.5px;"></div>
-  <div class="dust-p" style="--x: 88%; --delay: 8.5s; --speed: 16s; --size: 3px;"></div>
+
+<!-- 1. BOOT SEQUENCE -->
+<div id="boot-sequence" class="boot-sequence">
+  <div class="boot-terminal">
+    <div class="boot-header">
+      <span class="boot-dot red"></span>
+      <span class="boot-dot yellow"></span>
+      <span class="boot-dot green"></span>
+      <span class="boot-title">FORTREX_SYS_OS_v4.2</span>
+    </div>
+    <div class="boot-body">
+      <div id="boot-log" class="boot-log"></div>
+      <div class="boot-progress-wrap">
+        <div id="boot-progress-bar" class="boot-progress-bar"></div>
+      </div>
+      <div class="boot-status"><span class="blink">></span> <span id="boot-status-text">INITIALIZING FORTREX COMMAND INTERFACE...</span></div>
+    </div>
+  </div>
 </div>
+
+<!-- 2. FULL VIEWPORT SCANLINES -->
+<div class="scanline-overlay" aria-hidden="true"></div>
+
+<!-- 3. ANIMATED PERSPECTIVE TRON GRID BACKGROUND -->
+<div class="perspective-grid-bg" aria-hidden="true">
+  <div class="grid-plane"></div>
+</div>
+
+<!-- 4. DATA STREAMS LEFT & RIGHT -->
+<div class="data-stream left" aria-hidden="true">
+  <div class="stream-content">
+    01010011 01011001 01010011 00111010 00111010 01000001 01000011 01010100 01001001 01010110 01000101
+    0x46 0x4F 0x52 0x54 0x52 0x45 0x58 0x20 0x43 0x49 0x54 0x41 0x44 0x45 0x4C
+    SYS::ARENA_PING_12MS :: NODES_ONLINE_99.9% :: ENCRYPTION_AES256
+    01100110 01101111 01110010 01110100 01110010 01100101 01111000 00101110 01101001 01101111
+    01010011 01011001 01010011 00111010 00111010 01000001 01000011 01010100 01001001 01010110 01000101
+    0x46 0x4F 0x52 0x54 0x52 0x45 0x58 0x20 0x43 0x49 0x54 0x41 0x44 0x45 0x4C
+  </div>
+</div>
+<div class="data-stream right" aria-hidden="true">
+  <div class="stream-content">
+    0x72 0x65 0x62 0x61 0x74 0x65 0x3D 0x33 0x24 0x2F 0x6C 0x6F 0x74
+    SYS::TOTAL_VOLUME_TRADED :: $14,280,400 :: REBATES_PAID :: $42,840
+    01000110 01001111 01010010 01010100 01010010 01000101 01011000 01011111 01001110 01000101 01011000 01010101 01010011
+    SYS::NEURAL_SCORE_ENGINE_ACTIVE :: ROI_40_CONSISTENCY_30_RISK_30
+    0x72 0x65 0x62 0x61 0x74 0x65 0x3D 0x33 0x24 0x2F 0x6C 0x6F 0x74
+    SYS::TOTAL_VOLUME_TRADED :: $14,280,400 :: REBATES_PAID :: $42,840
+  </div>
+</div>
+
+<!-- 5. CYBER PARTICLES -->
+<div class="cyber-dust-field" aria-hidden="true">
+  <div class="dust-p" style="--x: 5%; --delay: 0s; --speed: 12s; --size: 3px;"></div>
+  <div class="dust-p" style="--x: 14%; --delay: 3s; --speed: 16s; --size: 2px;"></div>
+  <div class="dust-p" style="--x: 25%; --delay: 1.5s; --speed: 14s; --size: 4px;"></div>
+  <div class="dust-p" style="--x: 35%; --delay: 5s; --speed: 19s; --size: 2.5px;"></div>
+  <div class="dust-p" style="--x: 45%; --delay: 2s; --speed: 11s; --size: 3px;"></div>
+  <div class="dust-p" style="--x: 55%; --delay: 7s; --speed: 15s; --size: 2.5px;"></div>
+  <div class="dust-p" style="--x: 65%; --delay: 0.5s; --speed: 13s; --size: 3.5px;"></div>
+  <div class="dust-p" style="--x: 75%; --delay: 4s; --speed: 17s; --size: 2px;"></div>
+  <div class="dust-p" style="--x: 85%; --delay: 6s; --speed: 10s; --size: 3px;"></div>
+  <div class="dust-p" style="--x: 94%; --delay: 1s; --speed: 18s; --size: 2.5px;"></div>
+</div>
+
 <div id="scroll-progress"></div>
 
+<!-- SECTION INDICATOR DOTS -->
+<div class="section-indicator" id="section-indicator">
+  <a href="#hero" class="indicator-dot active" data-label="Hero"></a>
+  <a href="#arenas" class="indicator-dot" data-label="Arenas"></a>
+  <a href="#how" class="indicator-dot" data-label="Steps"></a>
+  <a href="#rebates" class="indicator-dot" data-label="Rebates"></a>
+  <a href="#rex" class="indicator-dot" data-label="Rex Currency"></a>
+  <a href="#leaderboard" class="indicator-dot" data-label="Leaderboard"></a>
+  <a href="#calculator" class="indicator-dot" data-label="Calculator"></a>
+  <a href="#discord" class="indicator-dot" data-label="Community"></a>
+  <a href="#faq" class="indicator-dot" data-label="FAQ"></a>
+</div>
 
+<!-- NAVBAR -->
 <nav class="nav">
-  <div class="nav-brand">
-    <img src="https://media.base44.com/images/public/6a73016f9b626430a0d26f88/033deb0ff_generated_image.png" alt="FORTREX" class="nav-logo">
-    <span class="nav-text">FORTREX</span>
-    <span class="nav-prelaunch">Pre-Launch</span>
-  </div>
+  <a href="#hero" class="nav-brand">
+    <svg class="nav-logo-svg" width="38" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="fortrex-grad-nav" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#8B5CF6" />
+          <stop offset="50%" stop-color="#06B6D4" />
+          <stop offset="100%" stop-color="#EC4899" />
+        </linearGradient>
+        <filter id="logo-glow-nav" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+      <polygon points="50,6 90,28 90,72 50,94 10,72 10,28" stroke="url(#fortrex-grad-nav)" stroke-width="4.5" fill="rgba(10,10,18,0.9)" filter="url(#logo-glow-nav)" />
+      <path d="M50,18 L76,33 L76,67 L50,82 L24,67 L24,33 Z" stroke="url(#fortrex-grad-nav)" stroke-width="2" stroke-dasharray="5,3" fill="none" />
+      <path d="M36,32 L64,32 M36,32 L36,68 M36,48 L58,48" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="50" cy="50" r="3" fill="#06B6D4" />
+    </svg>
+    <span class="nav-text glitch-text">FORTREX</span>
+    <span class="nav-prelaunch">SYS::PRE_LAUNCH</span>
+  </a>
   <div class="nav-links">
     <a href="#arenas">Live Arenas</a>
     <a href="#rebates">Volume Rebates</a>
@@ -899,41 +902,24 @@ body {
   </div>
 </nav>
 
-<div class="section-indicator" id="section-indicator">
-  <a href="#hero" class="indicator-dot active" data-label="Hero"></a>
-  <a href="#arenas" class="indicator-dot" data-label="Arenas"></a>
-  <a href="#how" class="indicator-dot" data-label="Steps"></a>
-  <a href="#rebates" class="indicator-dot" data-label="Rebates"></a>
-  <a href="#rex" class="indicator-dot" data-label="Rex Currency"></a>
-  <a href="#leaderboard" class="indicator-dot" data-label="Leaderboard"></a>
-  <a href="#calculator" class="indicator-dot" data-label="Calculator"></a>
-  <a href="#discord" class="indicator-dot" data-label="Community"></a>
-  <a href="#faq" class="indicator-dot" data-label="FAQ"></a>
-</div>
-
-
 <div class="content">
 
-<!-- HERO -->
+<!-- HERO SECTION -->
 <section class="hero" id="hero">
-  <div class="hero-liquid-gold" data-speed="-0.15">
-    <div class="gold-blob blob-1"></div>
-    <div class="gold-blob blob-2"></div>
-    <div class="gold-blob blob-3"></div>
-    <div class="gold-blob blob-4"></div>
-    <div class="gold-vignette"></div>
-  </div>
-    <div class="hero-overlay-h"></div>
-    <div class="hero-glow" data-speed="0.2"></div>
-  </div>
+  <canvas id="hero-constellation-canvas" class="hero-constellation"></canvas>
+  <div class="hero-glow"></div>
 
-  <div class="hero-content" data-speed="0.05">
+  <div class="hero-content">
     <div class="hero-pill">
       <span class="dot"></span>
       <span id="hero-greeting-text">Founder Passes Active • Limited Access</span>
     </div>
 
-    <h1 id="hero-h1"><span class="kinetic-word" style="--i:0">Your</span> <span class="kinetic-word" style="--i:1">Edge.</span><br><span class="gradient-text kinetic-word" style="--i:2">Your Arena.</span><br><span class="kinetic-word" style="--i:3">Your</span> <span class="kinetic-word" style="--i:4">Legacy.</span></h1>
+    <h1 id="hero-h1">
+      <span class="kinetic-word" style="--i:0">Your</span> <span class="kinetic-word" style="--i:1">Edge.</span><br>
+      <span class="gradient-text kinetic-word glitch-text" style="--i:2">Your Arena.</span><br>
+      <span class="kinetic-word" style="--i:3">Your</span> <span class="kinetic-word" style="--i:4">Legacy.</span>
+    </h1>
 
     <p class="hero-sub">Deposit $100. Trade your strategy. Win cash prizes, earn free funded accounts, and get paid a $3/lot rebate on every order. Welcome to the Citadel.</p>
 
@@ -947,7 +933,7 @@ body {
 
       <div class="scarcity">
         <div class="scarcity-header">
-          <span class="scarcity-label">Founder Slots Filled</span>
+          <span class="scarcity-label">SYS::SLOTS_FILLED</span>
           <span class="scarcity-value" id="slots-text">0 / 1,000</span>
         </div>
         <div class="scarcity-bar">
@@ -967,10 +953,10 @@ body {
 </section>
 
 <!-- ARENAS -->
-<div class="gold-divider"></div>
+<div class="circuit-divider"><div class="circuit-node"></div></div>
 <section class="section" id="arenas">
   <span class="section-tag reveal">Live Competitions</span>
-  <h2 class="section-title reveal">Live Arenas</h2>
+  <h2 class="section-title reveal glitch-text">Live Arenas</h2>
   <p class="section-sub reveal">Verified traders. Real accounts. Skill-based competition. Every two weeks, a new arena opens.</p>
   <div class="arena-grid">
     <div class="arena-card glass glass-hover reveal">
@@ -1007,10 +993,10 @@ body {
 </section>
 
 <!-- HOW IT WORKS -->
-<div class="gold-divider"></div>
+<div class="circuit-divider"><div class="circuit-node"></div></div>
 <section class="section" id="how">
   <span class="section-tag reveal">Getting Started</span>
-  <h2 class="section-title reveal">Three Steps to the Arena</h2>
+  <h2 class="section-title reveal glitch-text">Three Steps to the Arena</h2>
   <p class="section-sub reveal">No complexity. No confusion. Register, verify, compete.</p>
   <div class="steps">
     <div class="step glass glass-hover reveal">
@@ -1032,15 +1018,15 @@ body {
 </section>
 
 <!-- REBATES -->
-<div class="gold-divider"></div>
+<div class="circuit-divider"><div class="circuit-node"></div></div>
 <section class="section" id="rebates">
   <span class="section-tag reveal">Automated Rebates</span>
-  <h2 class="section-title reveal">$3 Per Lot. Every Trade.</h2>
+  <h2 class="section-title reveal glitch-text">$3 Per Lot. Every Trade.</h2>
   <p class="section-sub reveal">Every verified FORTREX trader earns $3 back for every lot they trade. Funded by our broker partnership — we share our affiliate commission with you. No cap. No catch.</p>
   <div class="rebate-grid">
     <div class="rebate-card glass glass-hover reveal">
       <div class="label">Per Lot Rebate</div>
-      <div class="value gold" data-count="3" data-prefix="$">$3</div>
+      <div class="value" data-count="3" data-prefix="$">$3</div>
       <div class="note">On every single order</div>
     </div>
     <div class="rebate-card glass glass-hover reveal">
@@ -1062,27 +1048,27 @@ body {
 </section>
 
 <!-- REX -->
-<div class="gold-divider"></div>
+<div class="circuit-divider"><div class="circuit-node"></div></div>
 <section class="section" id="rex">
   <span class="section-tag reveal">FORTREX Currency</span>
-  <h2 class="section-title reveal">Earn Your Rex</h2>
+  <h2 class="section-title reveal glitch-text">Earn Your Rex</h2>
   <p class="section-sub reveal">Rex is the FORTREX loyalty reward. Earn it through engagement. Redeem it for value. No purchase necessary.</p>
   <div class="rex-section">
     <div class="reveal">
-      <div class="rex-holo">
+      <div class="rex-holo glass">
         <div class="rex-symbol gradient-text">R</div>
         <div class="rex-label">Rex — Loyalty Reward</div>
         <div class="rex-balance">12,450</div>
-        <div class="rex-balance-label">YOUR BALANCE</div>
+        <div class="rex-balance-label">SYS::YOUR_BALANCE</div>
         <div class="rex-note">Rex is a closed-loop loyalty reward point. Not a cryptocurrency. Not transferable. Not redeemable for cash.</div>
         <div class="rex-gen-art">
           <canvas id="rex-canvas" width="200" height="200"></canvas>
-          <div class="rex-art-label">NEURAL GOLD NETWORK • LIVE</div>
+          <div class="rex-art-label">NEURAL VIOLET NETWORK • LIVE</div>
         </div>
       </div>
     </div>
     <div>
-      <div class="rex-earn reveal">
+      <div class="rex-earn reveal glass">
         <h4>Earn Rex</h4>
         <ul class="rex-list">
           <li><span>Daily login streak (Day 1-30)</span><span>10-300 Rex</span></li>
@@ -1092,7 +1078,7 @@ body {
           <li><span>Tournament participation</span><span>100-1000 Rex</span></li>
         </ul>
       </div>
-      <div class="rex-spend reveal">
+      <div class="rex-spend reveal glass">
         <h4>Redeem Rex</h4>
         <ul class="rex-list">
           <li><span>Lucky draw ticket (free entry)</span><span>200 Rex</span></li>
@@ -1106,26 +1092,56 @@ body {
 </section>
 
 <!-- LEADERBOARD -->
-<div class="gold-divider"></div>
+<div class="circuit-divider"><div class="circuit-node"></div></div>
 <section class="section" id="leaderboard">
   <span class="section-tag reveal">Live Rankings</span>
-  <h2 class="section-title reveal">The Leaderboard</h2>
+  <h2 class="section-title reveal glitch-text">The Leaderboard</h2>
   <p class="section-sub reveal">Real-time rankings. Updated as trades are verified. Skill determines position — not account size.</p>
   <div class="leaderboard glass reveal">
     <div class="lb-header"><span>Rank</span><span>Trader</span><span>Bracket</span><span>Score</span><span>Rex</span></div>
-    <div class="lb-row"><div class="lb-rank gold">01</div><div class="lb-name">@alex_goldfx</div><div class="lb-bracket">Heavyweight</div><div class="lb-score">94.7</div><div class="lb-rex">12,450</div></div>
-    <div class="lb-row"><div class="lb-rank silver">02</div><div class="lb-name">@sara_trades</div><div class="lb-bracket">Middleweight</div><div class="lb-score">91.2</div><div class="lb-rex">10,820</div></div>
-    <div class="lb-row"><div class="lb-rank bronze">03</div><div class="lb-name">@nikhil_pips</div><div class="lb-bracket">Lightweight</div><div class="lb-score">88.9</div><div class="lb-rex">9,340</div></div>
-    <div class="lb-row"><div class="lb-rank">04</div><div class="lb-name">@dubai_scalper</div><div class="lb-bracket">Heavyweight</div><div class="lb-score">85.3</div><div class="lb-rex">7,910</div></div>
-    <div class="lb-row"><div class="lb-rank">05</div><div class="lb-name">@maya_fx</div><div class="lb-bracket">Middleweight</div><div class="lb-score">83.1</div><div class="lb-rex">6,450</div></div>
+    <div class="lb-row">
+      <div class="lb-rank gold">01</div>
+      <div class="lb-name">@alex_goldfx</div>
+      <div class="lb-bracket">Heavyweight</div>
+      <div class="lb-score-cell"><span class="lb-score">94.7</span><div class="lb-bar-bg"><div class="lb-bar-fill" data-pct="94.7"></div></div></div>
+      <div class="lb-rex">12,450</div>
+    </div>
+    <div class="lb-row">
+      <div class="lb-rank silver">02</div>
+      <div class="lb-name">@sara_trades</div>
+      <div class="lb-bracket">Middleweight</div>
+      <div class="lb-score-cell"><span class="lb-score">91.2</span><div class="lb-bar-bg"><div class="lb-bar-fill" data-pct="91.2"></div></div></div>
+      <div class="lb-rex">10,820</div>
+    </div>
+    <div class="lb-row">
+      <div class="lb-rank bronze">03</div>
+      <div class="lb-name">@nikhil_pips</div>
+      <div class="lb-bracket">Lightweight</div>
+      <div class="lb-score-cell"><span class="lb-score">88.9</span><div class="lb-bar-bg"><div class="lb-bar-fill" data-pct="88.9"></div></div></div>
+      <div class="lb-rex">9,340</div>
+    </div>
+    <div class="lb-row">
+      <div class="lb-rank">04</div>
+      <div class="lb-name">@dubai_scalper</div>
+      <div class="lb-bracket">Heavyweight</div>
+      <div class="lb-score-cell"><span class="lb-score">85.3</span><div class="lb-bar-bg"><div class="lb-bar-fill" data-pct="85.3"></div></div></div>
+      <div class="lb-rex">7,910</div>
+    </div>
+    <div class="lb-row">
+      <div class="lb-rank">05</div>
+      <div class="lb-name">@maya_fx</div>
+      <div class="lb-bracket">Middleweight</div>
+      <div class="lb-score-cell"><span class="lb-score">83.1</span><div class="lb-bar-bg"><div class="lb-bar-fill" data-pct="83.1"></div></div></div>
+      <div class="lb-rex">6,450</div>
+    </div>
   </div>
 </section>
 
 <!-- CALCULATOR -->
-<div class="gold-divider"></div>
+<div class="circuit-divider"><div class="circuit-node"></div></div>
 <section class="section" id="calculator">
   <span class="section-tag reveal">Trader's Arsenal</span>
-  <h2 class="section-title reveal">Lot Size Calculator</h2>
+  <h2 class="section-title reveal glitch-text">Lot Size Calculator</h2>
   <p class="section-sub reveal">Calculate your position size, risk, and rebate earnings. Real numbers, real fast.</p>
   <div class="calc-card glass reveal">
     <div class="calc-row"><label class="calc-label">ACCOUNT SIZE (USD)</label>
@@ -1136,7 +1152,7 @@ body {
       </select></div>
     <div class="calc-row"><label class="calc-label">RISK PER TRADE (%)</label>
       <input type="range" class="calc-slider" id="calc-risk" min="0.5" max="10" step="0.5" value="2">
-      <span id="calc-risk-val" style="color: var(--gold); font-weight: 600; font-size: 13px; font-family: 'JetBrains Mono', monospace;">2%</span></div>
+      <span id="calc-risk-val" style="color: var(--cyan-bright); font-weight: 600; font-size: 13px; font-family: 'JetBrains Mono', monospace;">2%</span></div>
     <div class="calc-row"><label class="calc-label">CURRENCY PAIR</label>
       <select class="calc-select" id="calc-pair">
         <option value="100000">EUR/USD</option><option value="100000">GBP/USD</option>
@@ -1154,10 +1170,10 @@ body {
   </div>
 </section>
 
-<!-- DISCORD -->
-<section class="section">
-  <div class="gold-divider"></div>
-<div class="discord-cta glass reveal">
+<!-- DISCORD CTA -->
+<section class="section" id="discord">
+  <div class="circuit-divider"><div class="circuit-node"></div></div>
+  <div class="discord-cta glass reveal">
     <h2>Join FORTREX Citadel</h2>
     <p>The real community lives on Discord. Tournament reveals, prize pool announcements, trader discussions — all in one place. Verified traders only.</p>
     <button class="discord-btn">
@@ -1168,10 +1184,10 @@ body {
 </section>
 
 <!-- FAQ -->
-<div class="gold-divider"></div>
+<div class="circuit-divider"><div class="circuit-node"></div></div>
 <section class="section" id="faq">
   <span class="section-tag reveal">Questions, Answered</span>
-  <h2 class="section-title reveal">FAQ</h2>
+  <h2 class="section-title reveal glitch-text">FAQ</h2>
   <div style="max-width: 760px;">
     <div class="faq-item glass reveal"><div class="faq-q">What is FORTREX? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">FORTREX is a professional trading community that organizes skill-based competitions for verified traders. We partner with brokers and prop firms to offer real rewards — cash and funded accounts — to traders who demonstrate superior trading skill.</div></div></div>
     <div class="faq-item glass reveal"><div class="faq-q">How do I enter a competition? <span class="arrow">▼</span></div><div class="faq-a"><div class="faq-a-inner">Open a broker account using our partner link, deposit $100, and complete verification. Once verified, you can join any live arena. For prop firm arenas, purchase a funded account using our partner code.</div></div></div>
@@ -1184,10 +1200,14 @@ body {
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-brand">
-    <img src="https://media.base44.com/images/public/6a73016f9b626430a0d26f88/033deb0ff_generated_image.png" alt="FORTREX" class="footer-logo">
-    <span class="footer-text">FORTREX</span>
+    <svg width="32" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="50,6 90,28 90,72 50,94 10,72 10,28" stroke="url(#fortrex-grad-nav)" stroke-width="4.5" fill="rgba(10,10,18,0.9)" />
+      <path d="M36,32 L64,32 M36,32 L36,68 M36,48 L58,48" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    <span class="footer-text glitch-text">FORTREX</span>
   </div>
   <p class="footer-tag">Your Edge. Your Arena. Your Legacy.</p>
   <p class="footer-disclaimer">FORTREX is a professional trading community and competition platform. We do not provide broker services, investment advice, or financial recommendations. Users are responsible for complying with their local jurisdiction's laws. All competitions are skill-based. Rex is a closed-loop loyalty reward point, not a cryptocurrency or financial instrument.</p>
@@ -1196,9 +1216,49 @@ body {
 </div>
 
 <script>
-// ===== NEW ENHANCED TECHNIQUES JS =====
+// ===== BOOT SEQUENCE LOGIC =====
+(function initBootSequence() {
+  const bootOverlay = document.getElementById('boot-sequence');
+  if (!bootOverlay) return;
 
-// 1. Scroll Progress Bar (Technique 13)
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    bootOverlay.style.display = 'none';
+    return;
+  }
+
+  const bar = document.getElementById('boot-progress-bar');
+  const log = document.getElementById('boot-log');
+
+  const steps = [
+    'CONNECTING_TO_FORTREX_COMMAND_NODE...',
+    'LOAD_MODULES [CRYPTO, FOREX, REBATES]... OK',
+    'VERIFYING_ENCRYPTION_KEYS... OK',
+    'SYSTEM_ONLINE :: READY'
+  ];
+
+  let stepIdx = 0;
+  let progress = 0;
+
+  const interval = setInterval(() => {
+    progress += 25;
+    if (bar) bar.style.width = progress + '%';
+    if (steps[stepIdx] && log) {
+      const line = document.createElement('div');
+      line.className = 'boot-line';
+      line.textContent = '> ' + steps[stepIdx];
+      log.appendChild(line);
+      stepIdx++;
+    }
+    if (progress >= 100) {
+      clearInterval(interval);
+      setTimeout(() => {
+        bootOverlay.classList.add('boot-done');
+      }, 300);
+    }
+  }, 250);
+})();
+
+// ===== SCROLL PROGRESS BAR =====
 const scrollProgress = document.getElementById('scroll-progress');
 window.addEventListener('scroll', () => {
   const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
@@ -1207,17 +1267,19 @@ window.addEventListener('scroll', () => {
   if (scrollProgress) scrollProgress.style.width = scrolled + '%';
 });
 
-// 2. Section Indicator Dots (Technique 13)
+// ===== SECTION INDICATOR DOTS =====
+const sections = document.querySelectorAll('.section, .hero');
 const sectionDots = document.querySelectorAll('.indicator-dot');
-const sectionsList = document.querySelectorAll('section, .hero');
+
 window.addEventListener('scroll', () => {
   let currentSection = '';
-  sectionsList.forEach(sec => {
-    const top = sec.offsetTop - 200;
-    if (window.scrollY >= top) {
-      currentSection = sec.getAttribute('id') || 'hero';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 200;
+    if (window.scrollY >= sectionTop) {
+      currentSection = section.getAttribute('id');
     }
   });
+
   sectionDots.forEach(dot => {
     dot.classList.remove('active');
     if (dot.getAttribute('href') === '#' + currentSection) {
@@ -1226,7 +1288,7 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// 3. Time-based Greeting in Hero Pill (Technique 14)
+// ===== HERO TIME-BASED GREETING =====
 (function initGreeting() {
   const hour = new Date().getHours();
   let greeting = 'Good day, Trader';
@@ -1239,7 +1301,7 @@ window.addEventListener('scroll', () => {
   }
 })();
 
-// 4. 3D Card Tilt on Mousemove (Technique 1)
+// ===== 3D CARD TILT ON MOUSEMOVE =====
 if (window.innerWidth > 768 && matchMedia('(hover: hover)').matches) {
   document.querySelectorAll('.arena-card, .rebate-card, .step, .calc-card, .rex-holo').forEach(card => {
     card.addEventListener('mousemove', e => {
@@ -1248,8 +1310,8 @@ if (window.innerWidth > 768 && matchMedia('(hover: hover)').matches) {
       const y = e.clientY - rect.top;
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -10;
-      const rotateY = ((x - centerX) / centerX) * 10;
+      const rotateX = ((y - centerY) / centerY) * -8;
+      const rotateY = ((x - centerX) / centerX) * 8;
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
     });
     card.addEventListener('mouseleave', () => {
@@ -1258,7 +1320,7 @@ if (window.innerWidth > 768 && matchMedia('(hover: hover)').matches) {
   });
 }
 
-// 5. Button Ripple & Magnetic Hover Effects (Technique 2)
+// ===== BUTTON RIPPLE & MAGNETIC HOVER =====
 document.querySelectorAll('.btn-pill-primary, .nav-cta, .waitlist-btn, .discord-btn').forEach(btn => {
   btn.addEventListener('click', function(e) {
     const rect = this.getBoundingClientRect();
@@ -1279,7 +1341,7 @@ document.querySelectorAll('.btn-pill-primary, .nav-cta, .waitlist-btn, .discord-
       const rect = this.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
-      this.style.transform = `translate(${x * 0.22}px, ${y * 0.22}px)`;
+      this.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
     });
     btn.addEventListener('mouseleave', function() {
       this.style.transform = 'translate(0px, 0px)';
@@ -1287,19 +1349,7 @@ document.querySelectorAll('.btn-pill-primary, .nav-cta, .waitlist-btn, .discord-
   }
 });
 
-// 6. Holographic Card Angle Update on Mousemove (Technique 8)
-const rexHoloCard = document.querySelector('.rex-holo');
-if (rexHoloCard) {
-  rexHoloCard.addEventListener('mousemove', e => {
-    const rect = rexHoloCard.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    const angle = Math.atan2(y, x) * (180 / Math.PI) + 180;
-    rexHoloCard.style.setProperty('--holo-angle', `${angle}deg`);
-  });
-}
-
-// 7. Kinetic Section Titles Letter-by-Letter Split (Technique 5)
+// ===== KINETIC SECTION TITLES LETTER-BY-LETTER SPLIT =====
 document.querySelectorAll('.section-title').forEach(title => {
   const text = title.textContent;
   title.textContent = '';
@@ -1323,7 +1373,18 @@ document.querySelectorAll('.section-title').forEach(title => {
   });
 });
 
-// 8. Rebate Cards Count-Up Animation (Technique 11)
+// ===== INTERSECTION OBSERVER FOR REVEALS =====
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal, .section-title').forEach(el => revealObs.observe(el));
+
+// ===== REBATE CARDS COUNT-UP ANIMATION =====
 const countObs = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -1351,7 +1412,7 @@ const countObs = new IntersectionObserver(entries => {
 
 document.querySelectorAll('#rebates').forEach(sec => countObs.observe(sec));
 
-// 9. Leaderboard Bar Chart Filling Animation (Technique 11)
+// ===== LEADERBOARD BAR FILL ANIMATION =====
 const lbObs = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -1366,24 +1427,93 @@ const lbObs = new IntersectionObserver(entries => {
 
 document.querySelectorAll('#leaderboard').forEach(sec => lbObs.observe(sec));
 
-// 10. Generative Algorithmic Art Canvas in Rex Section (Technique 12)
+// ===== HERO PARTICLE CONSTELLATION CANVAS =====
+(function initConstellation() {
+  const canvas = document.getElementById('hero-constellation-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let width, height;
+
+  function resize() {
+    width = canvas.width = canvas.parentElement.offsetWidth;
+    height = canvas.height = canvas.parentElement.offsetHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  const particles = [];
+  const count = 50;
+
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.6,
+      vy: (Math.random() - 0.5) * 0.6,
+      radius: Math.random() * 2 + 1,
+      color: Math.random() > 0.5 ? '#06B6D4' : '#8B5CF6'
+    });
+  }
+
+  function render() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (let i = 0; i < count; i++) {
+      let p = particles[i];
+      p.x += p.vx; p.y += p.vy;
+
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.fill();
+
+      for (let j = i + 1; j < count; j++) {
+        let p2 = particles[j];
+        let dx = p.x - p2.x;
+        let dy = p.y - p2.y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 110) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          let alpha = (1 - dist / 110) * 0.3;
+          ctx.strokeStyle = `rgba(139, 92, 246, ${alpha})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(render);
+  }
+  render();
+})();
+
+// ===== REX GENERATIVE CANVAS (CYAN / VIOLET NEURAL ART) =====
 (function initRexGenArt() {
   const rexCanvas = document.getElementById('rex-canvas');
   if (!rexCanvas) return;
   const ctx = rexCanvas.getContext('2d');
   const particles = [];
   const particleCount = 45;
+
   for (let i = 0; i < particleCount; i++) {
     particles.push({
       x: Math.random() * 200,
       y: Math.random() * 200,
       vx: (Math.random() - 0.5) * 0.7,
       vy: (Math.random() - 0.5) * 0.7,
-      radius: Math.random() * 1.5 + 1
+      radius: Math.random() * 1.8 + 1,
+      color: Math.random() > 0.5 ? '#06B6D4' : '#8B5CF6'
     });
   }
+
   function drawArt() {
     ctx.clearRect(0, 0, 200, 200);
+
     for (let i = 0; i < particleCount; i++) {
       let p = particles[i];
       p.x += p.vx; p.y += p.vy;
@@ -1392,19 +1522,20 @@ document.querySelectorAll('#leaderboard').forEach(sec => lbObs.observe(sec));
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = '#FFD700';
+      ctx.fillStyle = p.color;
       ctx.fill();
 
       for (let j = i + 1; j < particleCount; j++) {
         let p2 = particles[j];
         let dx = p.x - p2.x, dy = p.y - p2.y;
         let dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 40) {
+
+        if (dist < 45) {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(255, 215, 0, ${1 - dist / 40})`;
-          ctx.lineWidth = 0.5;
+          ctx.strokeStyle = `rgba(6, 182, 212, ${1 - dist / 45})`;
+          ctx.lineWidth = 0.6;
           ctx.stroke();
         }
       }
@@ -1414,9 +1545,17 @@ document.querySelectorAll('#leaderboard').forEach(sec => lbObs.observe(sec));
   drawArt();
 })();
 
-// 11. Dynamic Waitlist Incrementer & Invite Link Generator (Technique 14)
+// ===== DYNAMIC WAITLIST & INVITE LINK GENERATOR =====
+let currentSlots = 742;
+const totalSlots = 1000;
+const slotsText = document.getElementById('slots-text');
+const scarcityFill = document.getElementById('scarcity-fill');
+
+if (slotsText) slotsText.textContent = currentSlots.toLocaleString() + ' / 1,000';
+if (scarcityFill) scarcityFill.style.width = (currentSlots / totalSlots * 100) + '%';
+
 setInterval(() => {
-  if (typeof currentSlots !== 'undefined' && currentSlots < totalSlots - 5) {
+  if (currentSlots < totalSlots - 5) {
     const inc = Math.floor(Math.random() * 2) + 1;
     currentSlots += inc;
     if (slotsText) slotsText.textContent = currentSlots.toLocaleString() + ' / 1,000';
@@ -1424,10 +1563,10 @@ setInterval(() => {
   }
 }, 12000);
 
-// Enhanced Waitlist Submission with Personalized Invite Link
 const origWaitlistBtn = document.getElementById('waitlist-btn');
 const origWaitlistEmail = document.getElementById('waitlist-email');
 const origWaitlistWrap = document.getElementById('waitlist-wrap');
+
 if (origWaitlistBtn && origWaitlistEmail) {
   origWaitlistBtn.addEventListener('click', () => {
     if (origWaitlistEmail.value.includes('@')) {
@@ -1435,10 +1574,10 @@ if (origWaitlistBtn && origWaitlistEmail) {
       origWaitlistWrap.innerHTML = `
         <div class="waitlist-claimed" style="flex-direction:column; gap:8px; align-items:stretch; text-align:center;">
           <span>✓ You're on the list. Check your inbox.</span>
-          <div style="font-size:11px; color:var(--slate-dim); margin-top:2px;">Your Personal Founder Invite Link:</div>
+          <div style="font-size:11px; color:var(--text-dim); margin-top:2px;">Your Personal Founder Invite Link:</div>
           <div style="display:flex; gap:6px;">
-            <input type="text" readonly value="https://fortrex.io/invite?ref=${refCode}" id="invite-link-input" style="flex:1; background:rgba(0,0,0,0.5); border:1px solid rgba(255,215,0,0.3); color:#FFF; padding:6px 12px; border-radius:100px; font-size:11px; font-family:'JetBrains Mono', monospace;" />
-            <button id="copy-invite-btn" style="background:var(--gold); color:#000; border:none; padding:6px 14px; border-radius:100px; font-weight:700; font-size:10px; cursor:pointer; font-family:'JetBrains Mono', monospace;">COPY</button>
+            <input type="text" readonly value="https://fortrex.io/invite?ref=${refCode}" id="invite-link-input" style="flex:1; background:rgba(5,5,7,0.8); border:1px solid rgba(139,92,246,0.4); color:#FFF; padding:6px 12px; border-radius:100px; font-size:11px; font-family:'JetBrains Mono', monospace;" />
+            <button id="copy-invite-btn" style="background:linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%); color:#FFF; border:none; padding:6px 14px; border-radius:100px; font-weight:700; font-size:10px; cursor:pointer; font-family:'JetBrains Mono', monospace;">COPY</button>
           </div>
         </div>`;
       document.getElementById('copy-invite-btn').addEventListener('click', function() {
@@ -1446,11 +1585,71 @@ if (origWaitlistBtn && origWaitlistEmail) {
         input.select();
         navigator.clipboard.writeText(input.value);
         this.textContent = 'COPIED!';
-        this.style.background = 'var(--gold-light)';
+        this.style.background = 'var(--cyan-bright)';
+        this.style.color = '#000';
       });
     }
   });
 }
+
+// ===== FAQ ACCORDION =====
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const isActive = item.classList.contains('active');
+    document.querySelectorAll('.faq-item').forEach(el => {
+      el.classList.remove('active');
+      el.querySelector('.faq-a').style.maxHeight = '0px';
+    });
+    if (!isActive) {
+      item.classList.add('active');
+      const answer = item.querySelector('.faq-a');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+
+// ===== LOT SIZE CALCULATOR LOGIC =====
+const calcAccount = document.getElementById('calc-account');
+const calcRisk = document.getElementById('calc-risk');
+const calcRiskVal = document.getElementById('calc-risk-val');
+const calcPair = document.getElementById('calc-pair');
+const calcSl = document.getElementById('calc-sl');
+
+const resultRisk = document.getElementById('result-risk');
+const resultPip = document.getElementById('result-pip');
+const resultLots = document.getElementById('result-lots');
+const resultRebate = document.getElementById('result-rebate');
+
+function updateCalculator() {
+  if (!calcAccount || !calcRisk || !calcSl) return;
+  const account = parseFloat(calcAccount.value) || 1000;
+  const riskPct = parseFloat(calcRisk.value) || 2;
+  const slPips = parseFloat(calcSl.value) || 20;
+  const contractSize = parseFloat(calcPair.value) || 100000;
+
+  if (calcRiskVal) calcRiskVal.textContent = riskPct + '%';
+
+  const riskAmount = (account * riskPct) / 100;
+  let pipValuePerLot = 10;
+  if (contractSize === 1300) pipValuePerLot = 1; // Gold
+  else if (contractSize === 1) pipValuePerLot = 1; // BTC
+  else if (contractSize === 1000) pipValuePerLot = 1; // ETH
+  else if (contractSize === 150000) pipValuePerLot = 9.1; // USD/JPY approx
+
+  const lots = slPips > 0 ? (riskAmount / (slPips * pipValuePerLot)) : 0;
+  const rebate = lots * 3;
+
+  if (resultRisk) resultRisk.textContent = '$' + riskAmount.toFixed(2);
+  if (resultPip) resultPip.textContent = '$' + pipValuePerLot.toFixed(2) + '/pip';
+  if (resultLots) resultLots.textContent = lots.toFixed(2) + ' lots';
+  if (resultRebate) resultRebate.textContent = '$' + rebate.toFixed(2);
+}
+
+if (calcAccount) calcAccount.addEventListener('change', updateCalculator);
+if (calcRisk) calcRisk.addEventListener('input', updateCalculator);
+if (calcPair) calcPair.addEventListener('change', updateCalculator);
+if (calcSl) calcSl.addEventListener('input', updateCalculator);
+updateCalculator();
 
 </script>
 </body>
