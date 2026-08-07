@@ -147,14 +147,14 @@ body {
 
 .hero h1 {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(44px, 9vw, 96px);
+  font-size: clamp(40px, 7vw, 84px);
   font-weight: 800; letter-spacing: -2px;
   line-height: 0.95; text-transform: uppercase;
   margin-bottom: 28px; color: #FFF;
 }
 
 .hero-sub {
-  font-size: clamp(16px, 2.5vw, 22px);
+  font-size: clamp(15px, 2.2vw, 20px);
   font-weight: 300; color: #CBD5E1;
   max-width: 560px; line-height: 1.65; margin-bottom: 36px;
 }
@@ -271,12 +271,12 @@ body {
 }
 .section-title {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(34px, 6.5vw, 68px);
+  font-size: clamp(30px, 5vw, 56px);
   font-weight: 700; margin-bottom: 14px; line-height: 1.1;
   color: #FFF; letter-spacing: -0.5px;
 }
 .section-sub {
-  font-size: clamp(15px, 2vw, 19px); color: var(--slate); margin-bottom: 48px;
+  font-size: 16px; color: var(--slate); margin-bottom: 48px;
   max-width: 560px; line-height: 1.65; font-weight: 300;
 }
 
@@ -393,7 +393,7 @@ body {
 /* Discord */
 .discord-cta { text-align: center; padding: 64px 40px; border-radius: 20px; position: relative; overflow: hidden; }
 .discord-cta::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
-.discord-cta h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(28px, 5vw, 52px); font-weight: 700; margin-bottom: 14px; color: #FFF; letter-spacing: -0.5px; }
+.discord-cta h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(26px, 4vw, 42px); font-weight: 700; margin-bottom: 14px; color: #FFF; letter-spacing: -0.5px; }
 .discord-cta p { font-size: 15px; color: var(--slate); margin: 0 auto 28px; max-width: 460px; font-weight: 300; }
 .discord-btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 36px; background: #FFF; color: #000; border: none; border-radius: 100px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.3s; }
 .discord-btn:hover { transform: scale(1.05); background: var(--cyan); }
@@ -422,7 +422,7 @@ body {
 /* Mobile */
 @media (max-width: 768px) {
   .nav { padding: 16px; } .nav-links { display: none; } .nav-prelaunch { display: none; }
-  .hero-content { padding: 80px 16px 20px; } .hero h1 { font-size: clamp(38px, 11vw, 64px); }
+  .hero-content { padding: 80px 16px 20px; }
   .rex-section { grid-template-columns: 1fr; }
   .lb-header, .lb-row { grid-template-columns: 36px 1fr 70px; font-size: 12px; padding: 12px 14px; }
   .lb-header span:nth-child(3), .lb-header span:nth-child(4), .lb-row .lb-bracket, .lb-row .lb-rex { display: none; }
@@ -871,26 +871,10 @@ window.addEventListener('resize', () => { camera.aspect = window.innerWidth / wi
 function lerp(a, b, t) { return a + (b - a) * t; }
 
 const camKeyframes = [
-  // Hero (hidden) — start far
-  { x: 0, y: 10, z: 26, lookY: 4 },
-  // Arena — sweeping left, medium altitude
-  { x: -8, y: 6, z: 16, lookY: 3 },
-  // How It Works — close right pass, low angle
-  { x: 7, y: 4, z: 12, lookY: 3.5 },
-  // Rebates — high bird's eye, orbiting
-  { x: -3, y: 14, z: 15, lookY: 1 },
-  // Rex — tight close-up from ground level
-  { x: 4, y: 2, z: 10, lookY: 5 },
-  // Leaderboard — dramatic low sweep from left
-  { x: -9, y: 3, z: 13, lookY: 4 },
-  // Calculator — rising shot, ascending altitude
-  { x: 2, y: 8, z: 14, lookY: 3 },
-  // Discord — pull back, wide cinematic
-  { x: -4, y: 7, z: 20, lookY: 3 },
-  // FAQ — gentle drift right
-  { x: 6, y: 5, z: 17, lookY: 3.5 },
-  // Footer — slow pull out to wide
-  { x: 0, y: 9, z: 24, lookY: 3 },
+  { x: 0, y: 8, z: 22, lookY: 4 }, { x: -6, y: 5, z: 18, lookY: 3 },
+  { x: 8, y: 7, z: 16, lookY: 3 }, { x: -4, y: 3, z: 14, lookY: 4 },
+  { x: 5, y: 12, z: 18, lookY: 2 }, { x: -8, y: 4, z: 15, lookY: 3 },
+  { x: 0, y: 10, z: 20, lookY: 3 }, { x: 3, y: 8, z: 22, lookY: 3 },
 ];
 
 function getCamTarget() {
@@ -898,8 +882,7 @@ function getCamTarget() {
   const si = Math.min(Math.floor(scrollY / sh), camKeyframes.length - 1);
   const ni = Math.min(si + 1, camKeyframes.length - 1);
   const sp = (scrollY / sh) - si;
-  // Smoother cubic ease-in-out for cinematic camera movement
-  const eased = sp < 0.5 ? 4 * sp * sp * sp : 1 - Math.pow(-2 * sp + 2, 3) / 2;
+  const eased = sp < 0.5 ? 2 * sp * sp : 1 - Math.pow(-2 * sp + 2, 2) / 2;
   const c = camKeyframes[si], n = camKeyframes[ni];
   return { x: lerp(c.x, n.x, eased), y: lerp(c.y, n.y, eased), z: lerp(c.z, n.z, eased), lookY: lerp(c.lookY, n.lookY, eased) };
 }
@@ -912,10 +895,10 @@ function animate() {
   const t = clock.getElapsedTime();
   targetX += (mouseX - targetX) * 0.04; targetY += (mouseY - targetY) * 0.04;
   const tgt = getCamTarget();
-  camPos.x = lerp(camPos.x, tgt.x + targetX * 1.5, 0.06);
-  camPos.y = lerp(camPos.y, tgt.y - targetY * 1, 0.06);
-  camPos.z = lerp(camPos.z, tgt.z, 0.06);
-  camPos.lookY = lerp(camPos.lookY, tgt.lookY, 0.06);
+  camPos.x = lerp(camPos.x, tgt.x + targetX * 1.5, 0.04);
+  camPos.y = lerp(camPos.y, tgt.y - targetY * 1, 0.04);
+  camPos.z = lerp(camPos.z, tgt.z, 0.04);
+  camPos.lookY = lerp(camPos.lookY, tgt.lookY, 0.04);
   camera.position.set(camPos.x, camPos.y + Math.sin(t * 0.5) * 0.12, camPos.z);
   camera.lookAt(0, camPos.lookY, 0);
   fortress.rotation.y = t * 0.04;
@@ -933,10 +916,8 @@ function animate() {
   
   // Show 3D canvas only after scrolling past hero
   const heroHeight = window.innerHeight;
-  // 3D canvas fades in gradually as user scrolls past hero
-  const scrollProgress = Math.min(scrollY / heroHeight, 1);
-  const canvasOpacity = scrollProgress < 0.3 ? 0 : (scrollProgress - 0.3) / 0.4 * 0.55;
-  canvas.style.opacity = Math.min(canvasOpacity, 0.55);
+  const showCanvas = scrollY > heroHeight * 0.7;
+  canvas.style.opacity = showCanvas ? '0.5' : '0';
   
   renderer.render(scene, camera);
 }
