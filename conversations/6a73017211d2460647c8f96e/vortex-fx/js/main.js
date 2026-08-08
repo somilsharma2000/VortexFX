@@ -3,10 +3,10 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  VortexFX.initAll();
+  Fortex FX.initAll();
 });
 
-const VortexFX = {
+const Fortex FX = {
   // --- Auto-Initialize All Systems ---
   initAll() {
     this.initBootSequence();
@@ -591,5 +591,5 @@ const VortexFX = {
 };
 
 // Export initParticles to global scope as requested
-window.initParticles = (canvasId, count) => VortexFX.initParticles(canvasId, count);
-window.VortexFX = VortexFX;
+window.initParticles = (canvasId, count) => Fortex FX.initParticles(canvasId, count);
+window.Fortex FX = Fortex FX;
