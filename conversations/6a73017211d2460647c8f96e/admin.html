@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Control Admin | VORTEX FX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/space-theme.css">
+  <link rel="stylesheet" href="css/components.css">
+  
+  <script src="js/main.js"></script>
+  <script src="js/space-theme.js"></script>
+  <script src="js/reg-counter.js"></script>
+
+  <style>
+    :root {
+      --bg-admin: #050508;
+      --admin-panel: rgba(10, 10, 18, 0.7);
+      --admin-border: rgba(139, 92, 246, 0.25);
+    }
+
+    body {
+      background-color: var(--bg-admin);
+      color: var(--text);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Admin Sidebar Enhancements */
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 1rem;
+      text-decoration: none;
+    }
+
+    .admin-brand-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: #fff;
+    }
+
+    .admin-brand-subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--cyan-bright);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .admin-sidebar-footer {
+      padding: 1.5rem;
+      border-top: 1px solid rgba(139, 92, 246, 0.15);
+      margin-top: 2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    .admin-sidebar-footer .status-node {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .status-dot-green {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 8px #22c55e;
+      animation: pulse-dot 2s infinite;
+    }
+
+    .status-dot-cyan {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22d3ee;
+      box-shadow: 0 0 8px #22d3ee;
+    }
+
+    .status-dot-violet {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #a78bfa;
+      box-shadow: 0 0 8px #a78bfa;
+    }
+
+    .status-dot-red {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ef4444;
+      box-shadow: 0 0 8px #ef4444;
+    }
+
+    /* Mission Control Header Bar */
+    .admin-header-bar {
+      position: relative;
+      background: rgba(10, 10, 20, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-radius: 16px;
+      padding: 1.25rem 1.75rem;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.25rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(139, 92, 246, 0.1);
+      overflow: hidden;
+    }
+
+    .admin-header-bar::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--violet), var(--cyan), var(--magenta));
+    }
+
+    .admin-header-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 1;
+    }
+
+    .admin-header-title h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #fff;
+      text-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .admin-header-title .sub-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      letter-spacing: 1.5px;
+    }
+
+    .admin-system-indicators {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      z-index: 1;
+      background: rgba(5, 5, 12, 0.6);
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+      border: 1px solid rgba(139, 92, 246, 0.2);
+    }
+
+    .indicator-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+      color: var(--text-dim);
+    }
+
+    .indicator-item strong {
+      color: #fff;
+    }
+
+    .admin-user-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 1;
+    }
+
+    .admin-avatar-ring {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      padding: 2px;
+      background: linear-gradient(135deg, var(--violet), var(--cyan));
+      position: relative;
+      box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+    }
+
+    .admin-avatar-ring img, .admin-avatar-ring .avatar-placeholder {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #0d0d18;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--cyan-bright);
+    }
+
+    .admin-user-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .admin-user-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .admin-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, rgba(236,72,153,0.25), rgba(139,92,246,0.25));
+      color: var(--magenta);
+      border: 1px solid rgba(236,72,153,0.4);
+      margin-top: 2px;
+    }
+
+    /* Clock Display */
+    .live-clock-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--cyan-bright);
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      padding: 6px 12px;
+      border-radius: 6px;
+      letter-spacing: 1px;
+    }
+
+    /* Mini Trend Bar */
+    .mini-trend-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 2px;
+      margin-top: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .mini-trend-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--violet), var(--cyan));
+      border-radius: 2px;
+    }
+
+    /* Section Headers */
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+    }
+
+    .panel-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .panel-title svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--cyan-bright);
+    }
+
+    /* Badge Styles */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-live {
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+    }
+
+    .status-upcoming {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--cyan-bright);
+      border: 1px solid rgba(6, 182, 212, 0.4);
+    }
+
+    .status-scheduled {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--violet-bright);
+      border: 1px solid rgba(139, 92, 246, 0.4);
+    }
+
+    .status-locked {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    .status-active {
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .status-suspended {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .status-pending {
+      background: rgba(234, 179, 8, 0.15);
+      color: #fde047;
+      border: 1px solid rgba(234, 179, 8, 0.3);
+    }
+
+    /* Action Buttons inside tables */
+    .btn-action {
+      padding: 4px 10px;
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      border-radius: 4px;
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-right: 4px;
+    }
+
+    .btn-action:hover {
+      background: rgba(139, 92, 246, 0.25);
+      border-color: var(--violet);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+    }
+
+    .btn-action.btn-danger {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: rgba(239, 68, 68, 0.3);
+      color: #f87171;
+    }
+
+    .btn-action.btn-danger:hover {
+      background: rgba(239, 68, 68, 0.25);
+      border-color: #ef4444;
+      color: #fff;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+    }
+
+    .btn-action.btn-cyan {
+      background: rgba(6, 182, 212, 0.1);
+      border-color: rgba(6, 182, 212, 0.3);
+      color: var(--cyan-bright);
+    }
+
+    .btn-action.btn-cyan:hover {
+      background: rgba(6, 182, 212, 0.25);
+      border-color: var(--cyan);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+    }
+
+    /* Activity Feed Timeline */
+    .activity-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .activity-timeline::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      bottom: 10px;
+      left: 7px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--violet), var(--cyan), transparent);
+    }
+
+    .activity-item {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 1.25rem;
+      background: rgba(10, 10, 18, 0.5);
+      border: 1px solid rgba(139, 92, 246, 0.12);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .activity-item:hover {
+      background: rgba(139, 92, 246, 0.06);
+      border-color: rgba(139, 92, 246, 0.3);
+      transform: translateX(4px);
+    }
+
+    .activity-item::before {
+      content: '';
+      position: absolute;
+      left: -1.5rem;
+      top: 1.2rem;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--violet);
+      box-shadow: 0 0 8px var(--violet);
+    }
+
+    .activity-item.alert::before {
+      background: #ef4444;
+      box-shadow: 0 0 8px #ef4444;
+    }
+
+    .activity-item.payout::before {
+      background: #22c55e;
+      box-shadow: 0 0 8px #22c55e;
+    }
+
+    .activity-item.join::before {
+      background: #22d3ee;
+      box-shadow: 0 0 8px #22d3ee;
+    }
+
+    .activity-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .activity-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .activity-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--cyan-bright);
+    }
+
+    .activity-text {
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+
+    .activity-text strong {
+      color: var(--violet-bright);
+    }
+
+    .activity-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+
+    /* Controls Grid */
+    .controls-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .control-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1rem;
+      background: rgba(5, 5, 12, 0.5);
+      border: 1px solid rgba(139, 92, 246, 0.15);
+      border-radius: 10px;
+    }
+
+    .control-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .control-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #fff;
+    }
+
+    .control-desc {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    /* Modal Styling */
+    .admin-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .admin-modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .admin-modal {
+      background: #0a0a14;
+      border: 1px solid var(--violet);
+      border-radius: 16px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 0 40px rgba(139, 92, 246, 0.3);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .admin-modal-overlay.active .admin-modal {
+      transform: translateY(0);
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      width: 100%;
+    }
+
+    /* Toast notification */
+    #admin-toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: linear-gradient(135deg, rgba(10,20,35,0.95), rgba(20,15,38,0.95));
+      border: 1px solid var(--cyan-bright);
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #admin-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ADMIN TWO-COLUMN LAYOUT -->
+  <div class="admin-grid">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <a href="admin.html" class="admin-brand">
+          <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5" stroke="#8B5CF6" stroke-width="4" fill="rgba(139, 92, 246, 0.2)"/>
+            <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#22D3EE" stroke-width="2" fill="none"/>
+            <circle cx="50" cy="50" r="5" fill="#EC4899"/>
+          </svg>
+          <div>
+            <div class="admin-brand-title">VORTEX<span style="color:var(--cyan-bright)">FX</span></div>
+            <div class="admin-brand-subtitle">MISSION CONTROL</div>
+          </div>
+        </a>
+      </div>
+
+      <nav>
+        <a href="#overview" class="admin-nav-item active" data-tab="overview">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Dashboard Overview
+        </a>
+        <a href="#tournaments" class="admin-nav-item" data-tab="tournaments">
+          <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0 0 11 15.9V19H7v2h10v-2h-4v-3.1c2.18-.32 3.97-1.92 4.39-4.14C19.7 11.35 21 9.47 21 7V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
+          Tournaments
+        </a>
+        <a href="#users" class="admin-nav-item" data-tab="users">
+          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+          User Management
+        </a>
+        <a href="#reg-counter-section" class="admin-nav-item" data-tab="reg-counter">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          Registration Counter
+        </a>
+        <a href="#rewards" class="admin-nav-item" data-tab="rewards">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          Rewards & Rebates
+        </a>
+        <a href="#rex-ai" class="admin-nav-item" data-tab="rex-ai">
+          <svg viewBox="0 0 24 24"><path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0c1.37-1.35 2.05-3.1 2.04-4.85h2c.01 2.26-.87 4.51-2.63 6.25-3.51 3.48-9.21 3.48-12.72 0-3.51-3.48-3.51-9.12 0-12.6 3.51-3.48 9.21-3.48 12.72 0L21 3v7.12zM12.5 8v4.25l3.5 2.08-.72 1.21L11 13V8h1.5z"/></svg>
+          Rex AI Settings
+        </a>
+        <a href="#analytics" class="admin-nav-item" data-tab="analytics">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+          Analytics
+        </a>
+        <a href="#settings" class="admin-nav-item" data-tab="settings">
+          <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+          Settings
+        </a>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <div class="status-node">
+          <span class="status-dot-green"></span>
+          <span>NODE: ASIA-EAST-01</span>
+        </div>
+        <div class="status-node">
+          <span class="status-dot-cyan"></span>
+          <span>CLEARANCE: LEVEL 5</span>
+        </div>
+        <a href="signout.html" class="btn-action btn-danger" style="margin-top: 12px; width: 100%; justify-content: center; padding: 6px 0;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+          Exit Control Center
+        </a>
+      </div>
+    </aside>
+
+    <!-- RIGHT MAIN CONTENT -->
+    <main class="admin-content">
+
+      <!-- 1. ADMIN HEADER BAR -->
+      <header class="admin-header-bar">
+        <canvas id="particles-admin" style="position: absolute; inset: 0; pointer-events: none; opacity: 0.35; z-index: 0;"></canvas>
+        
+        <div class="admin-header-title">
+          <h1>
+            MISSION CONTROL
+            <span class="badge badge-cyan" style="font-size: 0.65rem; font-weight:700;">OVERWATCH v4.2</span>
+          </h1>
+          <span class="sub-tag">VORTEXFX PLATFORM OPERATOR COMMAND CENTER</span>
+        </div>
+
+        <div class="admin-system-indicators">
+          <div class="indicator-item">
+            <span class="status-dot-green"></span>
+            <span>SYSTEMS: <strong>NOMINAL</strong></span>
+          </div>
+          <div class="indicator-item">
+            <span class="status-dot-cyan"></span>
+            <span>LOAD: <strong>34%</strong></span>
+          </div>
+          <div class="indicator-item">
+            <span class="status-dot-violet"></span>
+            <span>UPTIME: <strong>99.97%</strong></span>
+          </div>
+        </div>
+
+        <div class="admin-user-profile">
+          <div class="live-clock-badge" id="live-clock">
+            2026-08-08 18:04:00 UTC
+          </div>
+          <div class="admin-avatar-ring">
+            <div class="avatar-placeholder">CS</div>
+          </div>
+          <div class="admin-user-info">
+            <span class="admin-user-name">Commander_Somil</span>
+            <span class="admin-badge">SUPER ADMIN</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- 2. OVERVIEW STATS GRID -->
+      <section class="admin-stats-grid" id="overview">
+        <!-- Stat Card 1 -->
+        <div class="admin-stat-card glass">
+          <div class="admin-stat-label">Total Registrations</div>
+          <div class="admin-stat-value" data-count="3742" data-decimals="0">3,742</div>
+          <div class="admin-stat-delta up">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14l5-5 5 5z"/></svg>
+            +12 today
+          </div>
+          <div class="mini-trend-bar">
+            <div class="mini-trend-fill" style="width: 78%;"></div>
+          </div>
+        </div>
+
+        <!-- Stat Card 2 -->
+        <div class="admin-stat-card glass">
+          <div class="admin-stat-label">Active Tournaments</div>
+          <div class="admin-stat-value" style="display:flex; align-items:center; justify-content:space-between;">
+            <span data-count="3">3</span>
+            <span class="status-badge status-live">LIVE</span>
+          </div>
+          <div class="admin-stat-delta up">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14l5-5 5 5z"/></svg>
+            100% Arena Capacity
+          </div>
+          <div class="mini-trend-bar">
+            <div class="mini-trend-fill" style="width: 100%; background: linear-gradient(90deg, #22c55e, #22d3ee);"></div>
+          </div>
+        </div>
+
+        <!-- Stat Card 3 -->
+        <div class="admin-stat-card glass">
+          <div class="admin-stat-label">Total Prize Pool</div>
+          <div class="admin-stat-value" data-count="87500" data-prefix="$" data-decimals="0">$87,500</div>
+          <div class="admin-stat-delta up">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14l5-5 5 5z"/></svg>
+            +$2,500 this week
+          </div>
+          <div class="mini-trend-bar">
+            <div class="mini-trend-fill" style="width: 64%;"></div>
+          </div>
+        </div>
+
+        <!-- Stat Card 4 -->
+        <div class="admin-stat-card glass">
+          <div class="admin-stat-label">Platform Revenue</div>
+          <div class="admin-stat-value" data-count="24890" data-prefix="$" data-decimals="0">$24,890</div>
+          <div class="admin-stat-delta up">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14l5-5 5 5z"/></svg>
+            +$890 this week
+          </div>
+          <div class="mini-trend-bar">
+            <div class="mini-trend-fill" style="width: 82%;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. REGISTRATION COUNTER DISPLAY -->
+      <section class="holo-panel" style="margin-bottom: 2rem;" id="reg-counter-section">
+        <div class="panel-header">
+          <div class="panel-title">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+            REGISTRATION COUNTER CONTROL NODE
+          </div>
+          <div class="badge badge-cyan">AUTOSYNC ACTIVE</div>
+        </div>
+
+        <!-- Target Container for reg-counter.js -->
+        <div id="reg-counter"></div>
+
+        <div style="display: flex; justify-content: space-between; gap: 1rem; margin-top: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-dim); flex-wrap: wrap;">
+          <div>TARGET MILESTONE: <strong style="color: #fff;">10,000 TRADERS</strong></div>
+          <div>UNLOCKS: <strong style="color: var(--cyan-bright);">$100,000 MEGA TOURNAMENT & FREE TRADING TIER</strong></div>
+        </div>
+      </section>
+
+      <!-- 4. TOURNAMENT MANAGEMENT PANEL -->
+      <section class="glass" style="margin-bottom: 2rem;" id="tournaments">
+        <div class="panel-header">
+          <div class="panel-title">
+            <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0 0 11 15.9V19H7v2h10v-2h-4v-3.1c2.18-.32 3.97-1.92 4.39-4.14C19.7 11.35 21 9.47 21 7V7c0-1.1-.9-2-2-2z"/></svg>
+            TOURNAMENT MANAGEMENT
+          </div>
+          <button class="admin-btn" onclick="openCreateTournamentModal()">+ Create New Tournament</button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Tournament Name</th>
+                <th>Status</th>
+                <th>Participants</th>
+                <th>Prize Pool</th>
+                <th>Start Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong style="color:#fff; font-family:'Orbitron',sans-serif;">Summer Showdown</strong>
+                  <div style="font-size:0.75rem; color:var(--text-dim);">Season 4 Main Event</div>
+                </td>
+                <td><span class="status-badge status-live">LIVE</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">247 / 500</td>
+                <td style="font-family:'JetBrains Mono',monospace; color:var(--cyan-bright); font-weight:700;">$50,000</td>
+                <td style="font-family:'JetBrains Mono',monospace;">Jun 15, 2026</td>
+                <td>
+                  <button class="btn-action btn-cyan" onclick="showToast('Opening tournament manager for Summer Showdown...')">Manage</button>
+                  <button class="btn-action btn-danger" onclick="showToast('End confirmation sent for Summer Showdown')">End</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong style="color:#fff; font-family:'Orbitron',sans-serif;">Autumn Arena</strong>
+                  <div style="font-size:0.75rem; color:var(--text-dim);">Mid-Season Championship</div>
+                </td>
+                <td><span class="status-badge status-upcoming">UPCOMING</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">0 / 1000</td>
+                <td style="font-family:'JetBrains Mono',monospace; color:var(--cyan-bright); font-weight:700;">$30,000</td>
+                <td style="font-family:'JetBrains Mono',monospace;">Sep 01, 2026</td>
+                <td>
+                  <button class="btn-action" onclick="showToast('Editing Autumn Arena settings...')">Edit</button>
+                  <button class="btn-action btn-danger" onclick="showToast('Autumn Arena status updated to cancelled')">Cancel</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong style="color:#fff; font-family:'Orbitron',sans-serif;">Winter Wars</strong>
+                  <div style="font-size:0.75rem; color:var(--text-dim);">Global Finals 2026</div>
+                </td>
+                <td><span class="status-badge status-scheduled">SCHEDULED</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">0 / 2000</td>
+                <td style="font-family:'JetBrains Mono',monospace; color:var(--cyan-bright); font-weight:700;">$75,000</td>
+                <td style="font-family:'JetBrains Mono',monospace;">Dec 01, 2026</td>
+                <td>
+                  <button class="btn-action" onclick="showToast('Editing Winter Wars schedule...')">Edit</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong style="color:#fff; font-family:'Orbitron',sans-serif;">Free Friday</strong>
+                  <div style="font-size:0.75rem; color:var(--text-dim);">Community Special</div>
+                </td>
+                <td>
+                  <span class="status-badge status-locked">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                    LOCKED
+                  </span>
+                </td>
+                <td style="font-family:'JetBrains Mono',monospace;">0 / 1000</td>
+                <td style="font-family:'JetBrains Mono',monospace; color:var(--cyan-bright); font-weight:700;">$5,000</td>
+                <td style="font-family:'JetBrains Mono',monospace;">—</td>
+                <td>
+                  <button class="btn-action btn-cyan" onclick="unlockFreeFriday()">Unlock*</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 5. RECENT ACTIVITY FEED & QUICK CONTROLS GRID -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+        
+        <!-- Activity Feed Panel -->
+        <section class="glass">
+          <div class="panel-header">
+            <div class="panel-title">
+              <svg viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+              RECENT ACTIVITY FEED
+            </div>
+            <span class="badge badge-cyan">REAL-TIME</span>
+          </div>
+
+          <div class="activity-timeline">
+            <!-- Event 1 -->
+            <div class="activity-item join">
+              <div class="activity-content">
+                <div class="activity-icon">
+                  <svg viewBox="0 0 24 24"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                </div>
+                <div class="activity-text">
+                  New user registration: <strong>NeonHunter</strong> joined the platform
+                </div>
+              </div>
+              <div class="activity-time">2 min ago</div>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="activity-item">
+              <div class="activity-content">
+                <div class="activity-icon">
+                  <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0 0 11 15.9V19H7v2h10v-2h-4v-3.1c2.18-.32 3.97-1.92 4.39-4.14C19.7 11.35 21 9.47 21 7V7c0-1.1-.9-2-2-2z"/></svg>
+                </div>
+                <div class="activity-text">
+                  Tournament entry: <strong>12 traders</strong> entered 'Summer Showdown'
+                </div>
+              </div>
+              <div class="activity-time">15 min ago</div>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="activity-item payout">
+              <div class="activity-content">
+                <div class="activity-icon">
+                  <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                </div>
+                <div class="activity-text">
+                  Prize payout: <strong style="color:#22c55e;">$2,400</strong> sent to <strong>VoidMaster</strong>
+                </div>
+              </div>
+              <div class="activity-time">1 hour ago</div>
+            </div>
+
+            <!-- Event 4 -->
+            <div class="activity-item alert">
+              <div class="activity-content">
+                <div class="activity-icon" style="background:rgba(239, 68, 68, 0.15); border-color:rgba(239, 68, 68, 0.3);">
+                  <svg viewBox="0 0 24 24" style="fill:#ef4444;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                </div>
+                <div class="activity-text">
+                  System alert: Server load spiked to <strong style="color:#f87171;">67%</strong> during volatility spike
+                </div>
+              </div>
+              <div class="activity-time">2 hours ago</div>
+            </div>
+
+            <!-- Event 5 -->
+            <div class="activity-item">
+              <div class="activity-content">
+                <div class="activity-icon">
+                  <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+                </div>
+                <div class="activity-text">
+                  New referral: <strong>CyberTrader92</strong> invited 3 friends
+                </div>
+              </div>
+              <div class="activity-time">3 hours ago</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Quick Controls Panel -->
+        <section class="holo-panel" id="settings">
+          <div class="panel-header">
+            <div class="panel-title">
+              <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+              QUICK CONTROLS PANEL
+            </div>
+            <span class="badge badge-cyan">OVERRIDE ENABLED</span>
+          </div>
+
+          <form id="quick-controls-form" onsubmit="event.preventDefault(); saveQuickControls();">
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+              
+              <!-- Control 1 -->
+              <div class="control-item">
+                <div class="control-label-row">
+                  <div>
+                    <div class="control-title">Registration Open</div>
+                    <div class="control-desc">Allow new trader registrations globally</div>
+                  </div>
+                  <div class="admin-toggle on" id="toggle-reg" onclick="this.classList.toggle('on')"></div>
+                </div>
+              </div>
+
+              <!-- Control 2 -->
+              <div class="control-item">
+                <div class="control-label-row">
+                  <div>
+                    <div class="control-title">Free Tournaments Locked</div>
+                    <div class="control-desc" style="color:var(--cyan-bright);">Unlocks at 10,000 registrations</div>
+                  </div>
+                  <div class="admin-toggle on" id="toggle-free-lock" onclick="this.classList.toggle('on')"></div>
+                </div>
+              </div>
+
+              <!-- Control 3 -->
+              <div class="control-item">
+                <div class="control-label-row">
+                  <div>
+                    <div class="control-title">Rex AI Enabled</div>
+                    <div class="control-desc">Neural co-pilot assistance & copilot insights</div>
+                  </div>
+                  <div class="admin-toggle on" id="toggle-rex" onclick="this.classList.toggle('on')"></div>
+                </div>
+              </div>
+
+              <!-- Control 4 -->
+              <div class="control-item">
+                <div class="control-label-row">
+                  <div>
+                    <div class="control-title">Auto-Payouts</div>
+                    <div class="control-desc">Instant smart-contract reward distribution</div>
+                  </div>
+                  <div class="admin-toggle on" id="toggle-payouts" onclick="this.classList.toggle('on')"></div>
+                </div>
+              </div>
+
+              <!-- Control 5 -->
+              <div class="control-item">
+                <label class="control-title" for="input-max-participants">Max Tournament Participants</label>
+                <input type="number" id="input-max-participants" class="admin-input" value="2000">
+              </div>
+
+              <!-- Control 6 -->
+              <div class="control-item">
+                <label class="control-title" for="input-rebate-rate">Rebate Rate (%)</label>
+                <input type="number" id="input-rebate-rate" class="admin-input" value="15">
+              </div>
+
+              <button type="submit" class="admin-btn" style="margin-top:0.5rem;">Save Changes</button>
+            </div>
+          </form>
+        </section>
+
+      </div>
+
+      <!-- 7. USER MANAGEMENT TABLE -->
+      <section class="glass" style="margin-bottom: 2rem;" id="users">
+        <div class="panel-header">
+          <div class="panel-title">
+            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+            USER MANAGEMENT DIRECTORY
+          </div>
+          <div class="badge badge-cyan">8 TRADERS ONLINE</div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Email</th>
+                <th>Tier</th>
+                <th>Tournaments</th>
+                <th>Status</th>
+                <th>Joined</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,var(--magenta),var(--violet)); display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:700;">CS</div>
+                    <strong style="color:#fff;">Commander_Somil</strong>
+                  </div>
+                </td>
+                <td style="font-family:'JetBrains Mono',monospace; color:var(--text-dim);">somil@vortexfx.com</td>
+                <td><span class="badge badge-gold">Apex</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">42</td>
+                <td><span class="status-badge status-active">Active</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">May 01, 2026</td>
+                <td>
+                  <button class="btn-action btn-cyan" onclick="showToast('Viewing user record: Commander_Somil')">View</button>
+                  <button class="btn-action" onclick="showToast('Editing user profile: Commander_Somil')">Edit</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,var(--cyan),var(--violet)); display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:700;">CT</div>
+                    <strong style="color:#fff;">CyberTrader92</strong>
+                  </div>
+                </td>
+                <td style="font-family:'JetBrains Mono',monospace; color:var(--text-dim);">cyber92@arena.net</td>
+                <td><span class="badge badge-diamond">Diamond</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">28</td>
+                <td><span class="status-badge status-active">Active</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">May 12, 2026</td>
+                <td>
+                  <button class="btn-action btn-cyan" onclick="showToast('Viewing CyberTrader92')">View</button>
+                  <button class="btn-action" onclick="showToast('Editing CyberTrader92')">Edit</button>
+                  <button class="btn-action btn-danger" onclick="showToast('CyberTrader92 suspended')">Suspend</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,var(--violet-bright),#3b82f6); display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:700;">VM</div>
+                    <strong style="color:#fff;">VoidMaster</strong>
+                  </div>
+                </td>
+                <td style="font-family:'JetBrains Mono',monospace; color:var(--text-dim);">void@shadow.io</td>
+                <td><span class="badge badge-diamond">Diamond</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">35</td>
+                <td><span class="status-badge status-active">Active</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">May 15, 2026</td>
+                <td>
+                  <button class="btn-action btn-cyan" onclick="showToast('Viewing VoidMaster')">View</button>
+                  <button class="btn-action" onclick="showToast('Editing VoidMaster')">Edit</button>
+                  <button class="btn-action btn-danger" onclick="showToast('VoidMaster suspended')">Suspend</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#10b981,#06b6d4); display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:700;">NH</div>
+                    <strong style="color:#fff;">NeonHunter</strong>
+                  </div>
+                </td>
+                <td style="font-family:'JetBrains Mono',monospace; color:var(--text-dim);">neon@cyber.com</td>
+                <td><span class="badge badge-gold">Gold</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">14</td>
+                <td><span class="status-badge status-active">Active</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">Aug 08, 2026</td>
+                <td>
+                  <button class="btn-action btn-cyan" onclick="showToast('Viewing NeonHunter')">View</button>
+                  <button class="btn-action" onclick="showToast('Editing NeonHunter')">Edit</button>
+                  <button class="btn-action btn-danger" onclick="showToast('NeonHunter suspended')">Suspend</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#f59e0b,#eab308); display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:700;">QT</div>
+                    <strong style="color:#fff;">QuantumTrader</strong>
+                  </div>
+                </td>
+                <td style="font-family:'JetBrains Mono',monospace; color:var(--text-dim);">quantum@apex.org</td>
+                <td><span class="badge badge-silver">Silver</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">8</td>
+                <td><span class="status-badge status-pending">Pending</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">Aug 07, 2026</td>
+                <td>
+                  <button class="btn-action btn-cyan" onclick="showToast('Viewing QuantumTrader')">View</button>
+                  <button class="btn-action" onclick="showToast('QuantumTrader approved!')">Approve</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#ec4899,#8b5cf6); display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:700;">AP</div>
+                    <strong style="color:#fff;">ApexPredator</strong>
+                  </div>
+                </td>
+                <td style="font-family:'JetBrains Mono',monospace; color:var(--text-dim);">apex@vortex.io</td>
+                <td><span class="badge badge-gold">Gold</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">19</td>
+                <td><span class="status-badge status-active">Active</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">Jun 02, 2026</td>
+                <td>
+                  <button class="btn-action btn-cyan" onclick="showToast('Viewing ApexPredator')">View</button>
+                  <button class="btn-action" onclick="showToast('Editing ApexPredator')">Edit</button>
+                  <button class="btn-action btn-danger" onclick="showToast('ApexPredator suspended')">Suspend</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#ef4444,#dc2626); display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:700;">VK</div>
+                    <strong style="color:#fff;">VortexKing</strong>
+                  </div>
+                </td>
+                <td style="font-family:'JetBrains Mono',monospace; color:var(--text-dim);">king@vortex.com</td>
+                <td><span class="badge badge-bronze">Bronze</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">2</td>
+                <td><span class="status-badge status-suspended">Suspended</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">Jul 20, 2026</td>
+                <td>
+                  <button class="btn-action btn-cyan" onclick="showToast('Viewing VortexKing')">View</button>
+                  <button class="btn-action" onclick="showToast('VortexKing unsuspended')">Unsuspend</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#6366f1,#8b5cf6); display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:700;">SB</div>
+                    <strong style="color:#fff;">StellarBlade</strong>
+                  </div>
+                </td>
+                <td style="font-family:'JetBrains Mono',monospace; color:var(--text-dim);">blade@orbit.net</td>
+                <td><span class="badge badge-silver">Silver</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">6</td>
+                <td><span class="status-badge status-active">Active</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;">Jul 28, 2026</td>
+                <td>
+                  <button class="btn-action btn-cyan" onclick="showToast('Viewing StellarBlade')">View</button>
+                  <button class="btn-action" onclick="showToast('Editing StellarBlade')">Edit</button>
+                  <button class="btn-action btn-danger" onclick="showToast('StellarBlade suspended')">Suspend</button>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 8. FOOTER -->
+      <footer style="margin-top: 3rem; padding: 1.5rem 0; border-top: 1px solid rgba(139, 92, 246, 0.15); display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-dim); flex-wrap: wrap; gap: 1rem;">
+        <div>VORTEXFX ADMIN // RESTRICTED ACCESS // 2026</div>
+        <div style="display: flex; gap: 1rem;">
+          <span>ENCRYPTION: AES-256</span>
+          <span style="color: var(--cyan-bright);">SERVER TIME: UTC+0</span>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="admin-toast">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color:var(--cyan-bright);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+    <span id="toast-message">Action executed successfully.</span>
+  </div>
+
+  <!-- Create Tournament Modal -->
+  <div class="admin-modal-overlay" id="create-modal">
+    <div class="admin-modal">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <h3 style="font-family:'Orbitron',sans-serif; color:#fff;">CREATE TOURNAMENT</h3>
+        <button onclick="closeModal('create-modal')" style="background:none; border:none; color:var(--text-dim); font-size:1.2rem; cursor:pointer;">✕</button>
+      </div>
+      <form onsubmit="event.preventDefault(); showToast('New Tournament Created!'); closeModal('create-modal');">
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+          <div>
+            <label style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--text-dim);">Tournament Title</label>
+            <input type="text" class="admin-input" placeholder="e.g. HyperDrive Clash" required>
+          </div>
+          <div>
+            <label style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--text-dim);">Prize Pool ($)</label>
+            <input type="number" class="admin-input" placeholder="50000" required>
+          </div>
+          <div>
+            <label style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--text-dim);">Start Date</label>
+            <input type="date" class="admin-input" required>
+          </div>
+          <button type="submit" class="admin-btn" style="margin-top:0.5rem;">Deploy Tournament</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- INLINE SCRIPTS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize Particles in Header
+      if (typeof initParticles === 'function') {
+        initParticles('particles-admin', 40);
+      } else if (window.VortexFX && typeof window.VortexFX.initParticles === 'function') {
+        window.VortexFX.initParticles('particles-admin', 40);
+      }
+
+      // Live Monospace Clock
+      function updateLiveClock() {
+        const clockEl = document.getElementById('live-clock');
+        if (!clockEl) return;
+        const now = new Date();
+        const year = now.getUTCFullYear();
+        const month = String(now.getUTCMonth() + 1).padStart(2, '0');
+        const day = String(now.getUTCDate()).padStart(2, '0');
+        const hours = String(now.getUTCHours()).padStart(2, '0');
+        const minutes = String(now.getUTCMinutes()).padStart(2, '0');
+        const seconds = String(now.getUTCSeconds()).padStart(2, '0');
+        clockEl.textContent = `${year}-${month}-${day} ${hours}:${minutes}:${seconds} UTC`;
+      }
+      setInterval(updateLiveClock, 1000);
+      updateLiveClock();
+
+      // Sidebar Tab Click Highlight
+      const navItems = document.querySelectorAll('.admin-nav-item');
+      navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+          navItems.forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+        });
+      });
+    });
+
+    // Toast Notification System
+    function showToast(msg) {
+      const toast = document.getElementById('admin-toast');
+      const msgEl = document.getElementById('toast-message');
+      if (toast && msgEl) {
+        msgEl.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 3000);
+      }
+    }
+
+    function saveQuickControls() {
+      showToast('System Quick Controls saved successfully!');
+    }
+
+    function unlockFreeFriday() {
+      showToast('Free Friday override: Tournament Unlocked by Commander!');
+    }
+
+    function openCreateTournamentModal() {
+      document.getElementById('create-modal').classList.add('active');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+  </script>
+
+</body>
+</html>
