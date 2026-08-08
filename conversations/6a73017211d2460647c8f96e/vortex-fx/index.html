@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VORTEX FX — Competitive Trading Tournament Platform</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- 1. BOOT SEQUENCE OVERLAY -->
+  <div id="boot-sequence">
+    <div class="boot-terminal">
+      <div class="boot-header">
+        <span class="boot-dot red"></span>
+        <span class="boot-dot yellow"></span>
+        <span class="boot-dot green"></span>
+        <span style="font-size: 0.75rem; color: var(--text-dim); margin-left: auto;">VORTEX-OS v4.2</span>
+      </div>
+      <div class="boot-text glitch-text">VORTEX FX // SYSTEM INITIALIZING...</div>
+      <div class="boot-progress-bar">
+        <div class="boot-progress-fill"></div>
+      </div>
+      <div class="boot-status">CONNECTING TO ARENA NODE...</div>
+    </div>
+  </div>
+
+  <!-- 2. NAVIGATION BAR -->
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">
+      <svg class="nav-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="vortexGradNav" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#8B5CF6" />
+            <stop offset="50%" stop-color="#22D3EE" />
+            <stop offset="100%" stop-color="#EC4899" />
+          </linearGradient>
+          <linearGradient id="innerGlowNav" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.3" />
+            <stop offset="100%" stop-color="#06B6D4" stop-opacity="0.1" />
+          </linearGradient>
+        </defs>
+        <polygon points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5" fill="url(#innerGlowNav)" stroke="url(#vortexGradNav)" stroke-width="3.5"/>
+        <polygon points="50,15 80,32.5 80,67.5 50,85 20,67.5 20,32.5" fill="none" stroke="url(#vortexGradNav)" stroke-width="1.5" stroke-dasharray="6 3"/>
+        <circle cx="50" cy="50" r="10" fill="none" stroke="#22D3EE" stroke-width="2"/>
+        <circle cx="50" cy="50" r="4" fill="#A78BFA"/>
+        <line x1="50" y1="15" x2="50" y2="40" stroke="#06B6D4" stroke-width="2"/>
+        <line x1="50" y1="85" x2="50" y2="60" stroke="#8B5CF6" stroke-width="2"/>
+        <line x1="20" y1="32.5" x2="41" y2="45" stroke="#EC4899" stroke-width="2"/>
+        <line x1="80" y1="67.5" x2="59" y2="55" stroke="#06B6D4" stroke-width="2"/>
+        <circle cx="50" cy="40" r="2.5" fill="#22D3EE"/>
+        <circle cx="50" cy="60" r="2.5" fill="#8B5CF6"/>
+      </svg>
+      <span class="nav-logo-text">VORTEX<span style="color: var(--cyan-bright)">FX</span></span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li><a href="#offers" class="nav-link">Offers</a></li>
+      <li><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+      <li><a href="#profile" class="nav-link">Profile</a></li>
+    </ul>
+
+    <div class="nav-cta">
+      <a href="leaderboard.html" class="btn-primary magnetic">Enter Arena</a>
+      <button class="hamburger" aria-label="Toggle Navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 3. HERO SECTION -->
+  <section class="hero">
+    <canvas id="hero-particles" class="particle-canvas"></canvas>
+    
+    <div class="hero-content reveal">
+      <span class="section-tag">Next-Gen Competitive Trading</span>
+      <h1 class="hero-headline glitch-text">TRADE. COMPETE.<br/>DOMINATE.</h1>
+      <p class="hero-subheadline">
+        Enter high-stakes trading tournaments, prove your alpha on live real-time leaderboards, unlock automated rebate pools, and claim your share of millions in guaranteed prize funds.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#tournaments" class="btn-primary magnetic">Join Tournament</a>
+        <a href="leaderboard.html" class="btn-ghost magnetic">View Leaderboard</a>
+      </div>
+
+      <!-- Floating Stat Cards in Hero -->
+      <div class="hero-stats-row stagger active" data-speed="-0.05">
+        <div class="glass stat-card tilt-3d">
+          <div class="stat-number" data-count="14250" data-suffix="+">0</div>
+          <div class="stat-label">Active Traders</div>
+        </div>
+        <div class="glass stat-card tilt-3d float">
+          <div class="stat-number" data-count="2.5" data-prefix="$" data-suffix="M+" data-decimals="1">0</div>
+          <div class="stat-label">Total Prize Pool</div>
+        </div>
+        <div class="glass stat-card tilt-3d">
+          <div class="stat-number" data-count="12" data-suffix=" Active">0</div>
+          <div class="stat-label">Tournaments Live</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- 4. FEATURES GRID -->
+  <section class="section" id="offers">
+    <div class="section-header reveal">
+      <span class="section-tag">Platform Matrix</span>
+      <h2 class="section-title">Built For Market Competitors</h2>
+      <p class="section-desc">Enterprise-grade trading infrastructure paired with competitive tournament mechanics.</p>
+    </div>
+
+    <div class="feature-grid stagger">
+      <!-- Feature 1 -->
+      <div class="glass feature-card tilt-3d">
+        <div class="feature-icon-wrapper">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Real-Time Leaderboards</h3>
+        <p class="feature-desc">Sub-millisecond execution updates keep rankings dynamically synced across global arenas.</p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="glass feature-card tilt-3d">
+        <div class="feature-icon-wrapper">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 8v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Bi-Weekly Tournaments</h3>
+        <p class="feature-desc">Compete across Crypto, FX, and Indices sprints with tiered buy-ins and guaranteed prize pools.</p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="glass feature-card tilt-3d">
+        <div class="feature-icon-wrapper">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Automated Rebate Pool</h3>
+        <p class="feature-desc">Earn volume-based cash rebates on every trade regardless of tournament rank.</p>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="glass feature-card tilt-3d">
+        <div class="feature-icon-wrapper">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M9.75 17L9 20l-1 1h6l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">AI Trade Analysis (Rex)</h3>
+        <p class="feature-desc">Neural strategy engine inspecting telemetry, drawdown risks, and trade setup efficiency.</p>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="glass feature-card tilt-3d">
+        <div class="feature-icon-wrapper">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Community Citadel</h3>
+        <p class="feature-desc">Private trading arenas, live tape commentary, verified trader badges, and Discord integration.</p>
+      </div>
+
+      <!-- Feature 6 -->
+      <div class="glass feature-card tilt-3d">
+        <div class="feature-icon-wrapper">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Instant Payouts</h3>
+        <p class="feature-desc">Automated smart contract and direct wire payouts instantly upon tournament conclusion.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- 5. TOURNAMENT PREVIEW SECTION -->
+  <section class="section" id="tournaments">
+    <div class="section-header reveal">
+      <span class="section-tag">Active Arenas</span>
+      <h2 class="section-title">Live & Upcoming Battles</h2>
+      <p class="section-desc">Select an arena, deploy your capital, and climb to the apex rank.</p>
+    </div>
+
+    <div class="tournament-grid reveal">
+      <!-- Featured Tournament -->
+      <div class="holo-panel tournament-featured tilt-3d">
+        <div class="corner-bracket top-left"></div>
+        <div class="corner-bracket top-right"></div>
+        <div class="corner-bracket bottom-left"></div>
+        <div class="corner-bracket bottom-right"></div>
+
+        <div class="holo-content">
+          <div class="tournament-header">
+            <div>
+              <span class="badge badge-cyan">Featured Grand Arena</span>
+              <h3 class="tournament-title">Grand Vortex Championship 2026</h3>
+            </div>
+            <span class="badge badge-gold">LIVE NOW</span>
+          </div>
+
+          <div class="tournament-prize">$500,000 GTD</div>
+
+          <div class="tournament-details">
+            <div class="tournament-detail-item">
+              <span class="tournament-detail-label">Participants</span>
+              <span class="tournament-detail-value">1,420 / 2,000</span>
+            </div>
+            <div class="tournament-detail-item">
+              <span class="tournament-detail-label">Min Return Goal</span>
+              <span class="tournament-detail-value">+15.0%</span>
+            </div>
+            <div class="tournament-detail-item">
+              <span class="tournament-detail-label">Entry Fee</span>
+              <span class="tournament-detail-value">$250 or Free Pass</span>
+            </div>
+            <div class="tournament-detail-item">
+              <span class="tournament-detail-label">Max Drawdown</span>
+              <span class="tournament-detail-value">8.0%</span>
+            </div>
+          </div>
+
+          <div class="countdown-box" data-countdown="221528">
+            <div class="countdown-unit">
+              <div class="countdown-val days">02</div>
+              <div class="countdown-lbl">Days</div>
+            </div>
+            <div class="countdown-unit">
+              <div class="countdown-val hours">14</div>
+              <div class="countdown-lbl">Hours</div>
+            </div>
+            <div class="countdown-unit">
+              <div class="countdown-val mins">32</div>
+              <div class="countdown-lbl">Mins</div>
+            </div>
+            <div class="countdown-unit">
+              <div class="countdown-val secs">08</div>
+              <div class="countdown-lbl">Secs</div>
+            </div>
+          </div>
+
+          <a href="leaderboard.html" class="btn-primary magnetic" style="width: 100%;">Enter Championship Arena</a>
+        </div>
+      </div>
+
+      <!-- Upcoming Tournaments Stack -->
+      <div class="upcoming-list stagger">
+        <!-- Upcoming 1 -->
+        <div class="glass upcoming-card tilt-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span class="badge badge-violet">Crypto Sprint</span>
+            <span style="font-size: 0.75rem; color: var(--text-dim); font-family: var(--font-mono);">Starts in 18h</span>
+          </div>
+          <h4 style="font-family: var(--font-heading); font-size: 1.1rem; color: #fff;">Crypto Velocity 24H</h4>
+          <div style="font-family: var(--font-mono); font-size: 1.3rem; color: var(--cyan-bright); font-weight: 700;">$75,000 Pool</div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim);">
+            <span>840 Registered</span>
+            <span>Free Entry</span>
+          </div>
+        </div>
+
+        <!-- Upcoming 2 -->
+        <div class="glass upcoming-card tilt-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span class="badge badge-cyan">Forex Masters</span>
+            <span style="font-size: 0.75rem; color: var(--text-dim); font-family: var(--font-mono);">Starts in 2d</span>
+          </div>
+          <h4 style="font-family: var(--font-heading); font-size: 1.1rem; color: #fff;">FX Titan Showdown</h4>
+          <div style="font-family: var(--font-mono); font-size: 1.3rem; color: var(--cyan-bright); font-weight: 700;">$150,000 Pool</div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim);">
+            <span>1,120 Registered</span>
+            <span>$100 Entry</span>
+          </div>
+        </div>
+
+        <!-- Upcoming 3 -->
+        <div class="glass upcoming-card tilt-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span class="badge badge-magenta">Algo Clash</span>
+            <span style="font-size: 0.75rem; color: var(--text-dim); font-family: var(--font-mono);">Starts in 4d</span>
+          </div>
+          <h4 style="font-family: var(--font-heading); font-size: 1.1rem; color: #fff;">Algorithmic Duel #12</h4>
+          <div style="font-family: var(--font-mono); font-size: 1.3rem; color: var(--cyan-bright); font-weight: 700;">$200,000 Pool</div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim);">
+            <span>410 Bot Nets</span>
+            <span>Pro Access</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- 6. STATS ROW -->
+  <section class="section">
+    <div class="stats-grid stagger">
+      <div class="glass stat-card tilt-3d">
+        <div class="stat-number" data-count="4.8" data-prefix="$" data-suffix="B+" data-decimals="1">0</div>
+        <div class="stat-label">Total Volume Traded</div>
+      </div>
+      <div class="glass stat-card tilt-3d">
+        <div class="stat-number" data-count="45000" data-suffix="+">0</div>
+        <div class="stat-label">Active Users</div>
+      </div>
+      <div class="glass stat-card tilt-3d">
+        <div class="stat-number" data-count="380" data-suffix="+">0</div>
+        <div class="stat-label">Tournaments Completed</div>
+      </div>
+      <div class="glass stat-card tilt-3d">
+        <div class="stat-number" data-count="12.4" data-prefix="$" data-suffix="M+" data-decimals="1">0</div>
+        <div class="stat-label">Total Payouts</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- 7. REX AI SECTION -->
+  <section class="section">
+    <div class="rex-section-wrapper reveal">
+      <div class="glass rex-info tilt-3d">
+        <span class="badge badge-cyan rex-badge">AI CO-PILOT</span>
+        <h2 class="section-title" style="font-size: 2.1rem;">Meet Rex: Neural Trade Telemetry</h2>
+        <p class="section-desc">
+          Rex analyzes your trade execution patterns in real time, alerting you to over-leverage risk, regime shifts, and optimal exit points to maximize tournament profitability.
+        </p>
+
+        <ul class="rex-feature-list">
+          <li class="rex-feature-item">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Real-Time Drawdown Guard & Risk Index
+          </li>
+          <li class="rex-feature-item">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Automated Win-Rate & Expectancy Heatmaps
+          </li>
+          <li class="rex-feature-item">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Live Tactical Suggestions During Tournaments
+          </li>
+        </ul>
+
+        <div style="margin-top: 10px;">
+          <a href="leaderboard.html" class="btn-primary magnetic">Initialize Rex Assist</a>
+        </div>
+      </div>
+
+      <div class="holo-panel rex-canvas-container tilt-3d">
+        <div class="corner-bracket top-left"></div>
+        <div class="corner-bracket top-right"></div>
+        <div class="corner-bracket bottom-left"></div>
+        <div class="corner-bracket bottom-right"></div>
+        <canvas id="rex-canvas"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- 8. CTA SECTION -->
+  <section class="section">
+    <div class="holo-panel cta-box tilt-3d reveal">
+      <div class="corner-bracket top-left"></div>
+      <div class="corner-bracket top-right"></div>
+      <div class="corner-bracket bottom-left"></div>
+      <div class="corner-bracket bottom-right"></div>
+
+      <canvas id="cta-particles" class="cta-canvas"></canvas>
+
+      <div class="cta-content">
+        <span class="badge badge-violet" style="margin-bottom: 16px;">ARENA ENTRY OPEN</span>
+        <h2 class="section-title" style="font-size: 2.6rem;">Ready to Enter the Vortex?</h2>
+        <p class="section-desc" style="margin-bottom: 32px;">
+          Claim your trader handle, receive your virtual tournament allocation, and start climbing the global leaderboard now.
+        </p>
+
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+          <a href="leaderboard.html" class="btn-primary magnetic">Create Account</a>
+          <a href="https://discord.com" target="_blank" rel="noopener" class="btn-ghost magnetic">Join the Citadel</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-brand">
+          <svg class="nav-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5" fill="none" stroke="#22D3EE" stroke-width="3"/>
+            <circle cx="50" cy="50" r="10" fill="#8B5CF6"/>
+          </svg>
+          <span class="nav-logo-text">VORTEX<span style="color: var(--cyan-bright)">FX</span></span>
+        </a>
+        <p class="footer-desc">The premiere competitive trading tournament arena. Real market execution, verified alpha, and instant prize payouts.</p>
+        
+        <div class="social-links">
+          <a href="#" class="social-icon" aria-label="Twitter">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Discord">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.077 0 00.084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Telegram">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer-col-title">Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html" class="footer-link">Home Arena</a></li>
+          <li><a href="#offers" class="footer-link">Platform Offers</a></li>
+          <li><a href="leaderboard.html" class="footer-link">Live Leaderboard</a></li>
+          <li><a href="#profile" class="footer-link">Trader Profile</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-col-title">Tournaments</h4>
+        <ul class="footer-links">
+          <li><a href="#tournaments" class="footer-link">Grand Championship</a></li>
+          <li><a href="#tournaments" class="footer-link">Crypto Velocity</a></li>
+          <li><a href="#tournaments" class="footer-link">FX Titan Sprint</a></li>
+          <li><a href="#tournaments" class="footer-link">Algorithmic Clash</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-col-title">Resources</h4>
+        <ul class="footer-links">
+          <li><a href="#" class="footer-link">Rex AI Docs</a></li>
+          <li><a href="#" class="footer-link">Rulebook & Limits</a></li>
+          <li><a href="#" class="footer-link">Terms of Service</a></li>
+          <li><a href="#" class="footer-link">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 VORTEX FX. ALL RIGHTS RESERVED.</div>
+      <div>SYSTEM TELEMETRY ONLINE // ARENA NODE #01</div>
+    </div>
+  </footer>
+
+  <!-- Core JS -->
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initParticles('hero-particles', 65);
+      initParticles('cta-particles', 35);
+    });
+  </script>
+</body>
+</html>
