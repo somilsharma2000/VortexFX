@@ -1,429 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Signing Out | FORTEX FX</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FORTEX FX — Session Terminated</title>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/space-theme.css">
-  <link rel="stylesheet" href="css/components.css">
-  
-  <script src="js/main.js"></script>
-  <script src="js/space-theme.js"></script>
-  <script src="js/reg-counter.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="css/dala.css">
 
   <style>
-    :root {
-      --bg: #050508;
-      --violet: #8B5CF6;
-      --violet-bright: #A78BFA;
-      --cyan: #06B6D4;
-      --cyan-bright: #22D3EE;
-      --magenta: #EC4899;
-      --text: #FFFFFF;
-      --text-dim: #94A3B8;
-      --border: rgba(139, 92, 246, 0.2);
+    @keyframes pulseDots {
+      0%, 100% { opacity: 0.3; transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1.1); }
     }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Space Grotesk', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    /* Full Background Particle Canvas */
-    #particles-signout {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.5;
-    }
-
-    /* Standard Navigation Bar */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(5, 5, 8, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-      align-items: center;
-    }
-
-    .nav-link {
-      color: var(--text-dim);
-      text-decoration: none;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-      padding: 6px 10px;
-      border-radius: 6px;
-    }
-
-    .nav-link:hover {
-      color: #fff;
-      text-shadow: 0 0 8px rgba(139, 92, 246, 0.5);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    /* Centered Viewport Wrapper */
-    .signout-container {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 100px 24px 60px;
-      position: relative;
-      z-index: 1;
-      width: 100%;
-    }
-
-    /* Holo Card */
-    .signout-card {
-      background: linear-gradient(135deg, rgba(15, 12, 28, 0.85) 0%, rgba(8, 16, 30, 0.85) 100%);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(139, 92, 246, 0.3);
-      border-radius: 20px;
-      padding: 3rem 2.5rem;
-      max-width: 580px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 0 30px rgba(139, 92, 246, 0.1);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .signout-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--violet), var(--cyan), var(--magenta));
-    }
-
-    /* Logo Emblem Animation */
-    .signout-logo-emblem {
-      width: 90px;
-      height: 90px;
-      margin-bottom: 1.5rem;
-      filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.6));
-    }
-
-    /* Pulsing Loader Dots */
-    .signout-spinner-container {
-      margin: 2rem 0;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .pulsing-dots {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .pulse-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--cyan-bright);
-      box-shadow: 0 0 12px var(--cyan-bright);
-      animation: dotPulse 1.2s infinite ease-in-out;
-    }
-
-    .pulse-dot:nth-child(2) {
-      animation-delay: 0.2s;
-      background: var(--violet-bright);
-      box-shadow: 0 0 12px var(--violet-bright);
-    }
-
-    .pulse-dot:nth-child(3) {
-      animation-delay: 0.4s;
-      background: var(--magenta);
-      box-shadow: 0 0 12px var(--magenta);
-    }
-
-    @keyframes dotPulse {
-      0%, 100% { transform: scale(0.6); opacity: 0.4; }
-      50% { transform: scale(1.3); opacity: 1; }
-    }
-
-    /* Checkmark Lock Shield Icon (shown after 2s) */
-    .lock-shield-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: rgba(34, 197, 94, 0.15);
-      border: 1px solid #22c55e;
-      box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #22c55e;
-      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    @keyframes popIn {
-      0% { transform: scale(0); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    /* Headline & Subtext Transitions */
-    .headline-text {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      color: #fff;
-      text-transform: uppercase;
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    .sub-text {
-      font-size: 1.05rem;
-      color: var(--text-dim);
-      margin-top: 0.75rem;
-      line-height: 1.5;
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    /* Buttons Container */
-    .signout-actions {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      margin-top: 2rem;
-      width: 100%;
-      opacity: 0;
-      transform: translateY(20px);
-      pointer-events: none;
-      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .signout-actions.show {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    /* Security Notice */
-    .security-note {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--cyan-bright);
-      margin-top: 2rem;
-      letter-spacing: 0.5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      opacity: 0;
-      transition: opacity 0.6s ease;
-      background: rgba(6, 182, 212, 0.08);
-      border: 1px solid rgba(6, 182, 212, 0.2);
-      padding: 8px 16px;
-      border-radius: 30px;
-    }
-
-    .security-note.show {
-      opacity: 1;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .signout-card { padding: 2rem 1.5rem; }
-      .headline-text { font-size: 1.5rem; }
-      .signout-actions { flex-direction: column; }
+    .amber-pulse {
+      display: inline-block;
+      color: #ffb829;
+      font-size: 14px;
+      letter-spacing: 8px;
+      animation: pulseDots 1.5s infinite ease-in-out;
     }
   </style>
 </head>
 <body>
 
-  <!-- BACKGROUND PARTICLE CANVAS -->
-  <canvas id="particles-signout"></canvas>
+  <!-- PARTICLE CANVAS -->
+  <canvas id="particle-canvas"></canvas>
 
-  <!-- 1. NAVIGATION BAR -->
-  <nav class="nav">
-    <a href="index.html" class="nav-logo">
-      <svg width="36" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5" stroke="#8B5CF6" stroke-width="4" fill="rgba(139, 92, 246, 0.15)"/>
-        <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#06B6D4" stroke-width="2" fill="none"/>
-        <circle cx="50" cy="50" r="4" fill="#22D3EE"/>
-      </svg>
-      <span style="font-family:'Orbitron',sans-serif; font-weight:900; font-size:1.2rem; letter-spacing:2px; color:#fff;">VORTEX<span style="color:#06B6D4;">FX</span></span>
-    </a>
+  <!-- CENTERED SIGN OUT CONTAINER -->
+  <div class="auth-container">
+    <div style="text-align: center; max-width: 500px; width: 100%;">
 
-    <ul class="nav-links">
-      <li><a href="index.html" class="nav-link">Home</a></li>
-      <li><a href="index.html#tournaments" class="nav-link">Tournaments</a></li>
-      <li><a href="offers.html" class="nav-link">Offers</a></li>
-      <li><a href="index.html#resources" class="nav-link">Resources</a></li>
-      <li><a href="index.html#invite" class="nav-link">Invite</a></li>
-      <li><a href="profile.html" class="nav-link">Profile</a></li>
-      <li><a href="signin.html" class="nav-link" style="color: var(--cyan-bright);">Sign In</a></li>
-    </ul>
-
-    <div class="nav-actions">
-      <a href="signin.html" class="btn-primary">Sign In</a>
-    </div>
-  </nav>
-
-  <!-- 2. CENTERED CONTENT -->
-  <main class="signout-container">
-    <div class="signout-card">
-      
-      <!-- Glowing Floating Hexagon Emblem -->
-      <div class="signout-logo-emblem float">
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-          <defs>
-            <linearGradient id="signoutGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#8B5CF6"/>
-              <stop offset="50%" stop-color="#22D3EE"/>
-              <stop offset="100%" stop-color="#EC4899"/>
-            </linearGradient>
-            <filter id="signoutGlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="4" result="blur" />
-              <feComposite in="SourceGraphic" in2="blur" operator="over" />
-            </filter>
-          </defs>
-          <polygon points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5" stroke="url(#signoutGrad)" stroke-width="4" fill="rgba(139, 92, 246, 0.1)" filter="url(#signoutGlow)"/>
-          <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="url(#signoutGrad)" stroke-width="2" fill="none" stroke-dasharray="6 3"/>
-          <circle cx="50" cy="50" r="10" stroke="#22D3EE" stroke-width="2" fill="none"/>
-          <circle cx="50" cy="50" r="4" fill="#A78BFA"/>
+      <!-- CENTERED VIOLET TRIANGLE LOGO -->
+      <div style="margin-bottom: 36px;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin: 0 auto; display: block;">
+          <polygon points="12,2 22,20 2,20" stroke="#8052ff" stroke-width="2" fill="none"/>
         </svg>
       </div>
 
-      <!-- Glitch Headline -->
-      <h1 class="headline-text glitch-text" id="signout-title">SIGNING OUT...</h1>
+      <!-- PHASE 1 -->
+      <div id="phase-1" style="transition: opacity 0.5s ease;">
+        <h1 class="heading" style="margin-bottom: 12px;">Signing out...</h1>
+        <p class="body-text-muted" style="margin-bottom: 24px;">Thank you for trading in the Fortex FX arena, Commander.</p>
+        <div class="amber-pulse">· · ·</div>
+      </div>
 
-      <!-- Subtext -->
-      <p class="sub-text" id="signout-subtext">Thank you for trading in the Fortex FX arena, Commander.</p>
+      <!-- PHASE 2 -->
+      <div id="phase-2" style="display: none; opacity: 0; transition: opacity 0.5s ease;">
+        <h1 class="heading" style="margin-bottom: 12px;">Session Terminated</h1>
+        <p class="body-text-muted" style="margin-bottom: 36px;">You have been safely signed out.</p>
 
-      <!-- Spinner / Lock Animation Container -->
-      <div class="signout-spinner-container" id="spinner-container">
-        <div class="pulsing-dots" id="dots-loader">
-          <div class="pulse-dot"></div>
-          <div class="pulse-dot"></div>
-          <div class="pulse-dot"></div>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 24px; margin-bottom: 48px; flex-wrap: wrap;">
+          <a href="signin.html" class="btn-primary">SIGN BACK IN</a>
+          <a href="index.html" class="btn-ghost" style="color: #9a9a9a;">RETURN HOME</a>
+        </div>
+
+        <div style="font-size: 12px; color: #4a4a4a;">
+          Your session has been encrypted and securely terminated.
         </div>
       </div>
 
-      <!-- Action Buttons -->
-      <div class="signout-actions" id="signout-actions">
-        <a href="signin.html" class="btn-primary" style="flex: 1;">Sign Back In</a>
-        <a href="index.html" class="btn-ghost" style="flex: 1;">Return Home</a>
-      </div>
-
-      <!-- Security Notice -->
-      <div class="security-note" id="security-note">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:#22c55e;"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-5.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-        <span>Your session has been encrypted and securely terminated.</span>
-      </div>
-
     </div>
-  </main>
+  </div>
 
-  <!-- 3. FOOTER -->
-  <footer style="padding: 1.5rem 2rem; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-dim); border-top: 1px solid rgba(139, 92, 246, 0.15); z-index: 1;">
-    FORTEX FX ARENA // SECURE TERMINAL // 2026
-  </footer>
-
-  <!-- TRANSITION SCRIPT -->
+  <!-- SCRIPTS -->
+  <script src="js/dala.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // 1. Initialize subtle particles
-      if (typeof initParticles === 'function') {
-        initParticles('particles-signout', 30);
-      } else if (window.Fortex FX && typeof window.Fortex FX.initParticles === 'function') {
-        window.Fortex FX.initParticles('particles-signout', 30);
-      }
+    new ParticleField('particle-canvas', { shape: 'cloud', particleCount: 40, ambientCount: 20 });
 
-      // 2. 2-Second Transition from SIGNING OUT to SESSION TERMINATED
+    setTimeout(() => {
+      const p1 = document.getElementById('phase-1');
+      const p2 = document.getElementById('phase-2');
+      p1.style.opacity = '0';
       setTimeout(() => {
-        const title = document.getElementById('signout-title');
-        const subtext = document.getElementById('signout-subtext');
-        const spinnerContainer = document.getElementById('spinner-container');
-        const actions = document.getElementById('signout-actions');
-        const securityNote = document.getElementById('security-note');
-
-        // Fade out initial title and subtext briefly
-        title.style.opacity = '0';
-        subtext.style.opacity = '0';
-
+        p1.style.display = 'none';
+        p2.style.display = 'block';
         setTimeout(() => {
-          // Update Content
-          title.textContent = 'SESSION TERMINATED';
-          title.style.color = 'var(--cyan-bright)';
-          subtext.textContent = 'You have been safely signed out.';
-
-          // Replace loading dots with lock shield icon
-          spinnerContainer.innerHTML = `
-            <div class="lock-shield-icon">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-5.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
-              </svg>
-            </div>
-          `;
-
-          // Fade back in
-          title.style.opacity = '1';
-          subtext.style.opacity = '1';
-
-          // Show buttons and security badge
-          actions.classList.add('show');
-          securityNote.classList.add('show');
-        }, 300);
-
-      }, 2000);
-    });
+          p2.style.opacity = '1';
+        }, 50);
+      }, 500);
+    }, 2000);
   </script>
-
 </body>
 </html>

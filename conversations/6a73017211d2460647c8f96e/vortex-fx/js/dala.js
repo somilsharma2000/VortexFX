@@ -263,15 +263,20 @@ function initCounters() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const el = entry.target;
-        const target = parseInt(el.dataset.count);
+        const target = parseFloat(el.dataset.count);
+        if (isNaN(target)) return;
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        const decimals = parseInt(el.dataset.decimals || '0');
         const duration = 2000;
         const start = performance.now();
         function update(now) {
           const elapsed = now - start;
           const progress = Math.min(elapsed / duration, 1);
           const eased = 1 - Math.pow(1 - progress, 3);
-          const value = Math.floor(target * eased);
-          el.textContent = value.toLocaleString();
+          const value = target * eased;
+          const formatted = decimals > 0 ? value.toFixed(decimals) : Math.floor(value).toLocaleString();
+          el.textContent = prefix + formatted + suffix;
           if (progress < 1) requestAnimationFrame(update);
         }
         requestAnimationFrame(update);
@@ -280,6 +285,32 @@ function initCounters() {
     });
   }, { threshold: 0.3 });
   counters.forEach(c => observer.observe(c));
+}
+
+// ===== COUNTDOWN =====
+function initCountdowns() {
+  const countdowns = document.querySelectorAll('[data-countdown]');
+  countdowns.forEach(el => {
+    let targetSeconds = parseInt(el.dataset.countdown, 10) || 172800; // default 2 days
+    function updateCountdown() {
+      if (targetSeconds <= 0) {
+        el.textContent = '00d : 00h : 00m : 00s';
+        return;
+      }
+      const days = Math.floor(targetSeconds / 86400);
+      const hours = Math.floor((targetSeconds % 86400) / 3600);
+      const mins = Math.floor((targetSeconds % 3600) / 60);
+      const secs = targetSeconds % 60;
+      const dStr = String(days).padStart(2, '0');
+      const hStr = String(hours).padStart(2, '0');
+      const mStr = String(mins).padStart(2, '0');
+      const sStr = String(secs).padStart(2, '0');
+      el.textContent = `${dStr}d : ${hStr}h : ${mStr}m : ${sStr}s`;
+      targetSeconds--;
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  });
 }
 
 // ===== REGISTRATION COUNTER =====
@@ -369,24 +400,20 @@ function initAccordion() {
 }
 
 // ===== INIT ALL =====
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    initScrollReveal();
-    initNavScroll();
-    initMobileMenu();
-    initCounters();
-    initLockedTournaments();
-    initAccordion();
-    const counter = document.getElementById('reg-counter');
-    if (counter) initRegCounter('reg-counter');
-  });
-} else {
+function initAll() {
   initScrollReveal();
   initNavScroll();
   initMobileMenu();
   initCounters();
+  initCountdowns();
   initLockedTournaments();
   initAccordion();
   const counter = document.getElementById('reg-counter');
   if (counter) initRegCounter('reg-counter');
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAll);
+} else {
+  initAll();
 }
