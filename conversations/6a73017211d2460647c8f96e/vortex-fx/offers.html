@@ -3,132 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Offers & Membership Tiers — FORTEX FX</title>
+  <title>Rewards — FORTEX FX</title>
   <link rel="stylesheet" href="css/dala.css">
   <script src="js/dala.js"></script>
   <style>
-    /* Custom minimal extensions for Offers page */
-    .tier-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      margin-top: 60px;
+    /* Custom minimal extensions for Rewards page */
+    .calc-box {
+      border: 1px solid #1a1a1a;
+      padding: 40px;
+      border-radius: 24px;
+      background: rgba(10, 10, 10, 0.6);
+      backdrop-filter: blur(10px);
     }
 
-    .tier-col {
-      padding: 0 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      position: relative;
-    }
-
-    .tier-col:not(:last-child) {
-      border-right: 1px solid #111111;
-    }
-
-    .tier-col:first-child {
-      padding-left: 0;
-    }
-
-    .tier-col:last-child {
-      padding-right: 0;
-    }
-
-    .tier-label {
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.025em;
-      color: #8052ff;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .tier-badge {
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.025em;
-      color: #ffb829;
-    }
-
-    .tier-price {
-      font-size: 78px;
-      font-weight: 400;
-      line-height: 1;
-      letter-spacing: -3.12px;
-      color: #ffffff;
-      margin-bottom: 36px;
-    }
-
-    .tier-period {
-      font-size: 18px;
-      font-weight: 200;
-      color: #9a9a9a;
-      letter-spacing: 0;
-    }
-
-    .tier-features {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-bottom: 48px;
-      flex-grow: 1;
-    }
-
-    .tier-feature-item {
-      font-size: 18px;
-      font-weight: 200;
-      color: #bdbdbd;
-      line-height: 1.4;
-    }
-
-    /* Featured Silver Tier styling emphasis */
-    .tier-featured {
-      padding-top: 0;
-    }
-
-    .tier-featured .tier-price {
-      font-size: 88px;
-      color: #ffffff;
-    }
-
-    .tier-featured .tier-feature-item {
-      font-size: 19px;
-      color: #ffffff;
-    }
-
-    @media (max-width: 900px) {
-      .tier-grid {
-        grid-template-columns: 1fr;
-        gap: 60px;
-      }
-      .tier-col {
-        padding: 0 !important;
-        border-right: none !important;
-        border-bottom: 1px solid #111111;
-        padding-bottom: 60px !important;
-      }
-      .tier-col:last-child {
-        border-bottom: none;
-        padding-bottom: 0 !important;
-      }
-    }
-
-    /* Form & Calculator Minimal Styling */
     .calc-form {
       display: flex;
       flex-direction: column;
-      gap: 36px;
+      gap: 32px;
     }
 
     .calc-field {
       display: flex;
       flex-direction: column;
       gap: 12px;
+    }
+
+    .calc-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .calc-label {
@@ -139,70 +42,106 @@
       color: #9a9a9a;
     }
 
-    .calc-input-select {
-      width: 100%;
-      padding: 16px 0;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid #2a2a2a;
-      color: #ffffff;
-      font-family: 'Inter', sans-serif;
+    .calc-value-badge {
       font-size: 18px;
-      font-weight: 200;
-      outline: none;
-      transition: border-color 0.3s;
-      cursor: pointer;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-
-    .calc-input-select:focus {
-      border-bottom-color: #8052ff;
-    }
-
-    .calc-input-select option {
-      background: #000000;
-      color: #ffffff;
+      font-weight: 600;
+      color: #8052ff;
     }
 
     .calc-slider {
       -webkit-appearance: none;
       appearance: none;
       width: 100%;
-      height: 2px;
+      height: 4px;
       background: #2a2a2a;
+      border-radius: 2px;
       outline: none;
-      margin-top: 12px;
     }
 
     .calc-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 18px;
-      height: 18px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       background: #8052ff;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: transform 0.2s, background-color 0.2s;
     }
 
     .calc-slider::-webkit-slider-thumb:hover {
-      transform: scale(1.2);
+      transform: scale(1.15);
+      background: #9d75ff;
     }
 
-    .calc-value-display {
-      font-size: 48px;
-      font-weight: 400;
-      letter-spacing: -1.68px;
-      color: #ffffff;
+    .calc-results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 36px;
+      padding-top: 36px;
+      border-top: 1px solid #1f1f1f;
     }
 
-    .calc-result-label {
-      font-size: 14px;
+    .calc-result-card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .calc-result-title {
+      font-size: 12px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.025em;
-      color: #8052ff;
+      color: #9a9a9a;
+    }
+
+    .calc-result-val {
+      font-size: 36px;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+    }
+
+    .calc-result-val.highlight {
+      color: #ffb829;
+    }
+
+    .calc-result-val.loss {
+      color: #ff5252;
+    }
+
+    .grid-3col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+    }
+
+    .grid-2col {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 36px;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .calc-results-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .grid-3col, .grid-2col {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .calc-box {
+        padding: 24px;
+      }
     }
   </style>
 </head>
@@ -216,7 +155,7 @@
     <a href="index.html" class="nav-brand">
       <div class="nav-logo">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="12,3 22,21 2,21" fill="#8052ff"/>
+          <polygon points="12,3 22,21 2,21" stroke="#8052ff" stroke-width="2" fill="none" stroke-linejoin="round"/>
         </svg>
       </div>
       <span class="nav-wordmark">FORTEX FX</span>
@@ -245,266 +184,329 @@
   <!-- MAIN CONTENT -->
   <main class="container">
 
-    <!-- PAGE HEADER -->
-    <section class="section reveal" style="padding-top: 140px;" data-shape="diamond">
-      <span class="section-label">MEMBERSHIP TIERS</span>
-      <h1 class="display" style="margin-bottom: 24px;">Choose your arena</h1>
-      <p class="body-text-muted" style="max-width: 540px;">
-        Three tiers. One mission. Pick your level of competition.
-      </p>
-    </section>
-
-    <!-- TIER COMPARISON (3 COLUMNS, NO CARDS, PURE TYPE) -->
-    <section class="section reveal" style="padding-top: 0;" data-shape="fortress">
-      <div class="tier-grid">
-
-        <!-- BRONZE TIER -->
-        <div class="tier-col">
-          <div class="tier-label">BRONZE</div>
-          <div class="tier-price">Free</div>
-
-          <div class="tier-features">
-            <div class="tier-feature-item">Access to public tournaments</div>
-            <div class="tier-feature-item">Basic leaderboard</div>
-            <div class="tier-feature-item">Community Discord access</div>
-            <div class="tier-feature-item">Standard rebate rate (10%)</div>
-            <div class="tier-feature-item">2 tournaments per month</div>
-          </div>
-
-          <a href="signin.html" class="btn-primary">Start Free</a>
+    <!-- HERO SECTION -->
+    <section class="hero section reveal" data-shape="brain">
+      <div class="hero-content">
+        <div class="section-label">THE REX REWARDS SYSTEM</div>
+        <h1 class="hero-headline">Every lot you trade pays you back.</h1>
+        <p class="hero-body">
+          Fortex FX is 100% free with zero subscription fees. You're already putting in the chart hours and placing trades on MT4/MT5 — we give back to you. Every trade, referral, and tournament win generates REX directly into your wallet.
+        </p>
+        <div class="hero-actions">
+          <a href="profile.html" class="btn-primary">Claim Your REX Wallet</a>
+          <a href="#calculator" class="btn-ghost-underline">Calculate Your Unclaimed REX</a>
         </div>
 
-        <!-- SILVER TIER (FEATURED) -->
-        <div class="tier-col tier-featured">
-          <div class="tier-label">
-            SILVER
-            <span class="tier-badge">MOST POPULAR</span>
+        <!-- LIVE SOCIAL PROOF STATS -->
+        <div class="stat-row" style="margin-top: var(--spacing-60);">
+          <div class="stat-item">
+            <div class="stat-value" data-count="890" data-prefix="$" data-suffix="K">$890K</div>
+            <div class="stat-label">REX Distributed</div>
           </div>
-          <div class="tier-price">
-            $29<span class="tier-period">/month</span>
+          <div class="stat-item">
+            <div class="stat-value" data-count="3742">3,742</div>
+            <div class="stat-label">Traders Earning</div>
           </div>
-
-          <div class="tier-features">
-            <div class="tier-feature-item">All Bronze features</div>
-            <div class="tier-feature-item">Priority tournament access</div>
-            <div class="tier-feature-item">Enhanced rebate rate (15%)</div>
-            <div class="tier-feature-item">Rex AI basic analysis</div>
-            <div class="tier-feature-item">Advanced leaderboard stats</div>
-            <div class="tier-feature-item">6 tournaments per month</div>
+          <div class="stat-item">
+            <div class="stat-value" data-count="12.4" data-suffix="M">12.4M</div>
+            <div class="stat-label">Lots Rebatable</div>
           </div>
-
-          <a href="signin.html" class="btn-primary">Go Silver</a>
+          <div class="stat-item">
+            <div class="stat-value" style="color: var(--color-saffron-spark);">$0</div>
+            <div class="stat-label">Subscription Fees</div>
+          </div>
         </div>
-
-        <!-- GOLD TIER -->
-        <div class="tier-col">
-          <div class="tier-label">GOLD</div>
-          <div class="tier-price">
-            $79<span class="tier-period">/month</span>
-          </div>
-
-          <div class="tier-features">
-            <div class="tier-feature-item">All Silver features</div>
-            <div class="tier-feature-item">Unlimited tournaments</div>
-            <div class="tier-feature-item">Maximum rebate rate (25%)</div>
-            <div class="tier-feature-item">Full Rex AI analysis suite</div>
-            <div class="tier-feature-item">Private arena access</div>
-            <div class="tier-feature-item">Custom strategies</div>
-            <div class="tier-feature-item">Priority payouts</div>
-          </div>
-
-          <a href="signin.html" class="btn-primary">Go Gold</a>
-        </div>
-
       </div>
     </section>
 
-    <!-- COMPARISON TABLE -->
-    <section class="section reveal" data-shape="wave">
-      <span class="section-label">DETAILED MATRIX</span>
-      <h2 class="section-headline" style="margin-bottom: 48px;">Tier capabilities</h2>
+    <!-- WHAT IS REX SECTION -->
+    <section class="section reveal" data-shape="sphere">
+      <div class="section-label">PLATFORM CURRENCY</div>
+      <h2 class="section-headline">What is REX?</h2>
+      <p class="section-body" style="max-width: 680px; margin-bottom: var(--spacing-60);">
+        REX is Fortex FX's universal rewards currency built exclusively to enrich active traders. Instead of charging you monthly platform fees, we return value directly into your REX wallet for every action you take in the arena.
+      </p>
+
+      <div class="grid-2col">
+        <div class="float-item">
+          <div class="float-item-label">01 / YOUR REX WALLET</div>
+          <h3 class="float-item-title">Permanent ownership of your rewards</h3>
+          <p class="float-item-body">
+            Your REX wallet is tied directly to your profile. Every lot executed on your connected MT4/MT5 terminal deposits REX into your balance automatically. Your earned REX never expires and remains fully yours to redeem whenever you choose.
+          </p>
+        </div>
+
+        <div class="float-item">
+          <div class="float-item-label">02 / TRADING REBATES</div>
+          <h3 class="float-item-title">Reciprocity on every execution</h3>
+          <p class="float-item-body">
+            You bring liquidity and trading volume to the market. We believe you deserve a cut. Convert your accrued REX directly into cash rebates or trading credits with zero hassle.
+          </p>
+        </div>
+
+        <div class="float-item">
+          <div class="float-item-label">03 / TOURNAMENT PRIZES</div>
+          <h3 class="float-item-title">Bi-weekly prize pools paid in REX</h3>
+          <p class="float-item-body">
+            When you compete in our bi-weekly arena battles, your skill earns you direct prize allocations from multi-thousand dollar REX prize pools. Instant distribution directly to top ROI leaders on reveal day.
+          </p>
+        </div>
+
+        <div class="float-item">
+          <div class="float-item-label">04 / ZERO SUBSCRIPTIONS</div>
+          <h3 class="float-item-title">100% free access for all traders</h3>
+          <p class="float-item-body">
+            No paywalls. No Bronze, Silver, or Gold tiers to purchase. Every single trader on Fortex FX gets maximum rebate rates and full tournament access completely free of charge.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW YOU EARN REX -->
+    <section class="section reveal" data-shape="fortress">
+      <div class="section-label">EARNING MECHANICS</div>
+      <h2 class="section-headline">Three ways to grow your REX balance</h2>
+      <p class="section-body" style="max-width: 640px; margin-bottom: var(--spacing-60);">
+        You don't need to change how you trade. Simply connect your account once and earn REX passively across three core channels.
+      </p>
+
+      <div class="grid-3col">
+        <div class="float-item">
+          <div class="float-item-label" style="color: var(--color-electric-iris);">CHANNEL 01</div>
+          <h3 class="float-item-title" style="font-size: 24px;">Trading Volume Rebates</h3>
+          <p class="float-item-body">
+            Earn REX back on every single lot you open and close on your linked MT4 or MT5 account. Whether you win or lose a trade, your volume accrues REX automatically. Stop leaving free rebates on the broker table.
+          </p>
+        </div>
+
+        <div class="float-item">
+          <div class="float-item-label" style="color: var(--color-saffron-spark);">CHANNEL 02</div>
+          <h3 class="float-item-title" style="font-size: 24px;">Referral Fleet Rewards</h3>
+          <p class="float-item-body">
+            Share your unique invite link with trading friends or your Discord community. When traders join your fleet and start trading in the arena, you earn instant REX rewards credited directly to your wallet.
+          </p>
+        </div>
+
+        <div class="float-item">
+          <div class="float-item-label" style="color: var(--color-electric-iris);">CHANNEL 03</div>
+          <h3 class="float-item-title" style="font-size: 24px;">Tournament Payouts</h3>
+          <p class="float-item-body">
+            Out-perform the competition in bi-weekly arena tournaments. When sealed results are revealed, winning ROI positions receive substantial REX prize distributions deposited instantly into their wallets.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE REBATE CALCULATOR -->
+    <section class="section reveal" id="calculator" data-shape="wave">
+      <div class="two-col-asymmetric">
+        <div>
+          <div class="section-label">REBATE CALCULATOR</div>
+          <h2 class="section-headline">See what you're leaving on the table</h2>
+          <p class="section-body" style="margin-bottom: var(--spacing-36);">
+            Traders who trade without linking their MT4/MT5 account miss out on hundreds of dollars in REX rewards every month.
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: var(--spacing-18);">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="color: var(--color-electric-iris); font-weight: 600;">✓</span>
+              <span class="body-text-muted">Automatic tracking on every MT4/MT5 lot</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="color: var(--color-electric-iris); font-weight: 600;">✓</span>
+              <span class="body-text-muted">No change to your broker spreads or leverage</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="color: var(--color-electric-iris); font-weight: 600;">✓</span>
+              <span class="body-text-muted">Instant conversion into trading capital</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-box">
+          <div class="calc-form">
+            <div class="calc-field">
+              <div class="calc-label-row">
+                <span class="calc-label">Monthly Trading Volume</span>
+                <span class="calc-value-badge" id="lots-display">30 Lots / mo</span>
+              </div>
+              <input type="range" id="lots-slider" class="calc-slider" min="5" max="300" step="5" value="30">
+            </div>
+
+            <div class="calc-field">
+              <div class="calc-label-row">
+                <span class="calc-label">Active Referrals</span>
+                <span class="calc-value-badge" id="ref-display">5 Traders</span>
+              </div>
+              <input type="range" id="ref-slider" class="calc-slider" min="0" max="50" step="1" value="5">
+            </div>
+
+            <div class="calc-results-grid">
+              <div class="calc-result-card">
+                <span class="calc-result-title">Monthly REX</span>
+                <span class="calc-result-val highlight" id="calc-rex">1,000</span>
+              </div>
+              <div class="calc-result-card">
+                <span class="calc-result-title">Rebate Value</span>
+                <span class="calc-result-val" id="calc-usd">$100.00</span>
+              </div>
+              <div class="calc-result-card">
+                <span class="calc-result-title">Annual Unclaimed</span>
+                <span class="calc-result-val loss" id="calc-loss">$1,200.00</span>
+              </div>
+            </div>
+
+            <a href="profile.html" class="btn-primary" style="text-align: center; width: 100%; justify-content: center; margin-top: 12px;">
+              Claim Your Monthly Rebates
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REWARD MATRIX / TABLE -->
+    <section class="section reveal" data-shape="diamond">
+      <div class="section-label">DISTRIBUTION MATRIX</div>
+      <h2 class="section-headline">REX Earning Schedule</h2>
+      <p class="section-body" style="margin-bottom: var(--spacing-36);">
+        Transparent, instant, and predictable. Here is how REX accumulates across your trading activity.
+      </p>
 
       <div style="overflow-x: auto;">
         <table class="data-table">
           <thead>
             <tr>
-              <th>Feature</th>
-              <th>Bronze</th>
-              <th>Silver</th>
-              <th>Gold</th>
+              <th>Reward Mechanism</th>
+              <th>How It Works</th>
+              <th>Earning Rate</th>
+              <th>Payout Speed</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Tournament Access</td>
-              <td>Public</td>
-              <td>Priority</td>
-              <td>Unlimited</td>
+              <td style="font-weight: 600; color: #ffffff;">Trading Volume Rebates</td>
+              <td>Calculated per executed lot on connected MT4/MT5 accounts</td>
+              <td style="color: var(--color-electric-iris);">10 REX / Lot</td>
+              <td>Daily Settlement</td>
             </tr>
             <tr>
-              <td>Rebate Rate</td>
-              <td>10%</td>
-              <td>15%</td>
-              <td>25%</td>
+              <td style="font-weight: 600; color: #ffffff;">Bi-Weekly Tournament Prizes</td>
+              <td>Top ROI rankings on reveal day across tournament leaderboards</td>
+              <td style="color: var(--color-saffron-spark);">Up to 50,000 REX Pool</td>
+              <td>Instant on Reveal</td>
             </tr>
             <tr>
-              <td>Rex AI</td>
-              <td style="color: #4a4a4a;">—</td>
-              <td>Basic</td>
-              <td>Full Suite</td>
+              <td style="font-weight: 600; color: #ffffff;">Referral Fleet Rewards</td>
+              <td>Invite active traders using your personal referral link</td>
+              <td style="color: var(--color-electric-iris);">100 REX / Active Trader</td>
+              <td>Instant Credit</td>
             </tr>
             <tr>
-              <td>Leaderboard Stats</td>
-              <td>Basic</td>
-              <td>Advanced</td>
-              <td>Advanced</td>
+              <td style="font-weight: 600; color: #ffffff;">Consistency Streak Bonus</td>
+              <td>Maintain active trading days across 5 consecutive sessions</td>
+              <td>+25% Rebate Boost</td>
+              <td>Weekly Credit</td>
             </tr>
             <tr>
-              <td>Discord</td>
-              <td>Community</td>
-              <td>Community</td>
-              <td>VIP Access</td>
-            </tr>
-            <tr>
-              <td>Payout Speed</td>
-              <td>Standard</td>
-              <td>Fast</td>
-              <td>Priority Instant</td>
-            </tr>
-            <tr>
-              <td>Max Tournaments</td>
-              <td>2 / month</td>
-              <td>6 / month</td>
-              <td>Unlimited</td>
-            </tr>
-            <tr>
-              <td>Custom Strategies</td>
-              <td style="color: #4a4a4a;">—</td>
-              <td style="color: #4a4a4a;">—</td>
-              <td>Included</td>
-            </tr>
-            <tr>
-              <td>Private Arena</td>
-              <td style="color: #4a4a4a;">—</td>
-              <td style="color: #4a4a4a;">—</td>
-              <td>Included</td>
+              <td style="font-weight: 600; color: #ffffff;">Community Discord Drops</td>
+              <td>Participate in weekly strategy drops and tournament reveal parties</td>
+              <td>50 – 500 REX Drops</td>
+              <td>Weekly Drops</td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <!-- REBATE CALCULATOR -->
-    <section class="section reveal" data-shape="sphere">
-      <div class="two-col">
-        <!-- Left Column -->
+    <!-- SOCIAL PROOF & TRADER TESTIMONIAL -->
+    <section class="section reveal" data-shape="spiral">
+      <div class="section-label">TRADER TESTIMONIALS</div>
+      <h2 class="section-headline">Real traders earning real rebates</h2>
+
+      <div class="two-col-asymmetric" style="margin-top: var(--spacing-60);">
         <div>
-          <span class="section-label">REBATE CALCULATOR</span>
-          <h2 class="section-headline">Calculate your earnings</h2>
-          <p class="section-body">
-            Estimate your monthly volume rebate payouts based on your anticipated trading activity and membership tier.
+          <div style="font-size: 24px; font-weight: 200; line-height: 1.4; color: #ffffff; margin-bottom: var(--spacing-36);">
+            "I used to trade 40 lots a month with zero return from my broker. Since connecting to Fortex FX, I've earned over 4,500 REX in pure rebates — plus a 15,000 REX payout when I placed 2nd in the Winter Wars tournament. Leaving this money unclaimed makes no sense."
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: #1f1f1f; border: 1px solid var(--color-electric-iris); display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--color-electric-iris);">
+              AV
+            </div>
+            <div>
+              <div style="font-weight: 600; color: #ffffff; font-size: 16px;">ApexVector</div>
+              <div style="font-size: 14px; color: var(--color-ash-gray);">Full-time Scalper · 19,500 REX Total Earned</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: var(--spacing-24);">
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-saffron-spark);">COMMUNITY STATS</div>
+            <div class="stat-value" style="font-size: 48px;">3,742</div>
+            <p class="float-item-body">Traders earning REX rebates right now across global MT4/MT5 accounts.</p>
+          </div>
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-electric-iris);">TOTAL PAYOUTS</div>
+            <div class="stat-value" style="font-size: 48px;">$890,450</div>
+            <p class="float-item-body">Equivalent value in REX distributed back to traders to date.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FREQUENTLY ASKED QUESTIONS -->
+    <section class="section reveal" data-shape="scattered">
+      <div class="section-label">TRANSPARENCY</div>
+      <h2 class="section-headline">Frequently asked questions</h2>
+
+      <div class="faq-list" style="margin-top: var(--spacing-48);">
+        <div class="float-item">
+          <div class="float-item-label">COST & FEES</div>
+          <h3 class="float-item-title">Is Fortex FX really 100% free?</h3>
+          <p class="float-item-body">
+            Yes, absolutely. There are zero subscription fees, zero premium tiers, and zero hidden charges. You trade with your own money on your own broker account. Fortex FX is built to give back to traders through the REX rewards ecosystem.
           </p>
         </div>
 
-        <!-- Right Column: Pure Form on Black (NO Cards) -->
-        <div class="calc-form">
-          <div class="calc-field">
-            <div style="display: flex; justify-content: space-between; align-items: baseline;">
-              <label for="calc-volume" class="calc-label">MONTHLY VOLUME</label>
-              <span id="calc-volume-display" class="calc-value-display" style="font-size: 27px;">$50,000</span>
-            </div>
-            <input type="range" id="calc-volume" class="calc-slider" min="10000" max="500000" step="5000" value="50000">
-          </div>
+        <div class="float-item">
+          <div class="float-item-label">REBATES</div>
+          <h3 class="float-item-title">How do trading volume rebates work?</h3>
+          <p class="float-item-body">
+            Once you enter your MT4 or MT5 account number in your profile, our system tracks your executed volume automatically. Every lot you trade credits 10 REX directly to your wallet. You don't need to change brokers or alter your trading strategy.
+          </p>
+        </div>
 
-          <div class="calc-field">
-            <label for="calc-tier" class="calc-label">TIER</label>
-            <select id="calc-tier" class="calc-input-select">
-              <option value="bronze">Bronze (10% rebate)</option>
-              <option value="silver" selected>Silver (15% rebate)</option>
-              <option value="gold">Gold (25% rebate)</option>
-            </select>
-          </div>
+        <div class="float-item">
+          <div class="float-item-label">REDEMPTION</div>
+          <h3 class="float-item-title">How do I claim and convert my REX rewards?</h3>
+          <p class="float-item-body">
+            Your earned REX lives safely in your profile wallet. You can convert REX into cash rebates, tournament boosts, or withdraw directly to your verified account whenever you meet the minimum balance threshold.
+          </p>
+        </div>
 
-          <div class="calc-field" style="margin-top: 12px;">
-            <span class="calc-result-label">YOUR MONTHLY REBATE</span>
-            <div id="calc-rebate-display" class="calc-value-display">$7,500</div>
-          </div>
+        <div class="float-item">
+          <div class="float-item-label">EXPIRATION</div>
+          <h3 class="float-item-title">Do my earned REX rewards ever expire?</h3>
+          <p class="float-item-body">
+            No. Once REX is credited to your wallet, it remains yours indefinitely. There are no monthly resets or forced expiration periods.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- FAQ (ACCORDION) -->
-    <section class="section reveal" data-shape="scattered">
-      <span class="section-label">FAQ</span>
-      <h2 class="section-headline" style="margin-bottom: 48px;">Frequently asked questions</h2>
-
-      <div style="max-width: 900px;">
-        <div class="accordion-item">
-          <div class="accordion-header">
-            <div class="accordion-question">How are rebate payouts calculated and distributed?</div>
-            <div class="accordion-toggle">+</div>
-          </div>
-          <div class="accordion-body">
-            <div class="accordion-answer">
-              Rebates are calculated continuously based on your closed trade volume and paid out automatically to your vault at the end of each weekly tournament cycle.
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <div class="accordion-header">
-            <div class="accordion-question">Can I upgrade or downgrade my tier at any time?</div>
-            <div class="accordion-toggle">+</div>
-          </div>
-          <div class="accordion-body">
-            <div class="accordion-answer">
-              Yes, tier changes take effect immediately. Upgrades grant instant access to elevated tournament limits and higher rebate rates.
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <div class="accordion-header">
-            <div class="accordion-question">What is included in the Rex AI analysis suite?</div>
-            <div class="accordion-toggle">+</div>
-          </div>
-          <div class="accordion-body">
-            <div class="accordion-answer">
-              Rex AI monitors your real-time execution telemetry, analyzing drawdown patterns, trade setup efficiency, risk parameters, and optimal exit timing.
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <div class="accordion-header">
-            <div class="accordion-question">How fast are tournament prize payouts processed?</div>
-            <div class="accordion-toggle">+</div>
-          </div>
-          <div class="accordion-body">
-            <div class="accordion-answer">
-              Standard payouts process within 24 hours. Gold tier members receive automated priority instant payouts directly upon tournament finalization.
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <div class="accordion-header">
-            <div class="accordion-question">Are there any hidden platform fees or commission markups?</div>
-            <div class="accordion-toggle">+</div>
-          </div>
-          <div class="accordion-body">
-            <div class="accordion-answer">
-              Zero hidden fees. All membership pricing and rebate structures are completely transparent with no markups on raw execution spreads.
-            </div>
-          </div>
-        </div>
+    <!-- FINAL CTA SECTION -->
+    <section class="section reveal" style="text-align: center; padding: 120px 0;" data-shape="brain">
+      <div class="section-label" style="justify-content: center;">YOUR REX WALLET IS WAITING</div>
+      <h2 class="display" style="margin-bottom: var(--spacing-24); font-size: clamp(36px, 6vw, 78px);">
+        Don't trade another lot<br>without getting paid back.
+      </h2>
+      <p class="body-text-muted" style="max-width: 580px; margin: 0 auto var(--spacing-36);">
+        Join 3,742 traders who are claiming what they earn every day. Zero subscription costs. Immediate rebate accrual.
+      </p>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap;">
+        <a href="profile.html" class="btn-primary">Activate Your REX Wallet</a>
+        <a href="leaderboard.html" class="btn-ghost-underline">Explore Live Tournaments</a>
       </div>
-    </section>
-
-    <!-- CALL TO ACTION -->
-    <section class="section reveal" style="text-align: center; padding: 120px 0;">
-      <h2 class="heading-lg" style="margin-bottom: 36px;">Ready to compete?</h2>
-      <a href="leaderboard.html" class="btn-primary">Join Now</a>
     </section>
 
   </main>
@@ -514,10 +516,14 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <svg viewBox="0 0 24 24" fill="none" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="12,3 22,21 2,21" fill="#8052ff"/>
-          </svg>
-          <span class="nav-wordmark">FORTEX FX</span>
+          <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+            <div class="nav-logo">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="12,3 22,21 2,21" stroke="#8052ff" stroke-width="2" fill="none" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="nav-wordmark">FORTEX FX</span>
+          </a>
         </div>
         <div class="footer-links">
           <a href="index.html" class="footer-link">Home</a>
@@ -526,55 +532,52 @@
           <a href="resources.html" class="footer-link">Resources</a>
           <a href="invite.html" class="footer-link">Invite</a>
           <a href="profile.html" class="footer-link">Profile</a>
+          <a href="signin.html" class="footer-link">Sign In</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-copyright">
-          © 2026 FORTEX FX. ALL RIGHTS RESERVED.
-        </div>
-        <div style="font-size: 12px; color: #4a4a4a; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase;">
-          POWERED BY REX AI
-        </div>
+        <div class="footer-copyright">© 2026 FORTEX FX</div>
       </div>
     </div>
   </footer>
 
-  <!-- REBATE CALCULATOR LOGIC & CONSTELLATION INITIATOR -->
+  <!-- REBATE CALCULATOR INTERACTIVE SCRIPT -->
   <script>
-    function updateCalculator() {
-      const volumeInput = document.getElementById('calc-volume');
-      const tierSelect = document.getElementById('calc-tier');
-      const volumeDisplay = document.getElementById('calc-volume-display');
-      const rebateDisplay = document.getElementById('calc-rebate-display');
+    function initRebateCalculator() {
+      const lotsSlider = document.getElementById('lots-slider');
+      const refSlider = document.getElementById('ref-slider');
+      const lotsDisplay = document.getElementById('lots-display');
+      const refDisplay = document.getElementById('ref-display');
+      const calcRex = document.getElementById('calc-rex');
+      const calcUsd = document.getElementById('calc-usd');
+      const calcLoss = document.getElementById('calc-loss');
 
-      if (!volumeInput || !tierSelect || !volumeDisplay || !rebateDisplay) return;
+      if (!lotsSlider || !refSlider) return;
 
-      const volume = parseFloat(volumeInput.value);
-      const tier = tierSelect.value;
+      function calculate() {
+        const lots = parseInt(lotsSlider.value, 10);
+        const refs = parseInt(refSlider.value, 10);
 
-      volumeDisplay.textContent = '$' + volume.toLocaleString();
+        lotsDisplay.textContent = `${lots} Lots / mo`;
+        refDisplay.textContent = `${refs} Traders`;
 
-      let rate = 0.15;
-      if (tier === 'bronze') rate = 0.10;
-      else if (tier === 'silver') rate = 0.15;
-      else if (tier === 'gold') rate = 0.25;
+        const volumeRex = lots * 10;
+        const referralRex = refs * 100;
+        const totalRex = volumeRex + referralRex;
+        const usdValue = totalRex * 0.10;
+        const annualLoss = usdValue * 12;
 
-      const rebate = volume * rate;
-      rebateDisplay.textContent = '$' + Math.round(rebate).toLocaleString();
+        calcRex.textContent = totalRex.toLocaleString();
+        calcUsd.textContent = `$${usdValue.toFixed(2)}`;
+        calcLoss.textContent = `$${annualLoss.toFixed(2)}`;
+      }
+
+      lotsSlider.addEventListener('input', calculate);
+      refSlider.addEventListener('input', calculate);
+      calculate();
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const volumeInput = document.getElementById('calc-volume');
-      const tierSelect = document.getElementById('calc-tier');
-      if (volumeInput && tierSelect) {
-        volumeInput.addEventListener('input', updateCalculator);
-        tierSelect.addEventListener('change', updateCalculator);
-        updateCalculator();
-      }
-    });
-
-    new ParticleField('particle-canvas', { shape: 'cloud', particleCount: 70, ambientCount: 30 });
+    document.addEventListener('DOMContentLoaded', initRebateCalculator);
   </script>
-
 </body>
 </html>

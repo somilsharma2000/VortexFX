@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+import re
+
+profile_html = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -666,3 +668,9 @@
 
 </body>
 </html>
+"""
+
+with open('vortex-fx/profile.html', 'w') as f:
+    f.write(profile_html)
+
+print("File generate_profile.py executed successfully and profile.html updated!")

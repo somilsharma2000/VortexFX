@@ -1,94 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FORTEX FX — Access Terminal | Sign In</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — FORTEX FX</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Core CSS -->
+  <!-- Core CSS & JS -->
   <link rel="stylesheet" href="css/dala.css">
+  <script src="js/dala.js"></script>
+
+  <style>
+    /* Page-specific minimal extensions */
+    .signin-hero {
+      padding: var(--spacing-36) 0 var(--spacing-60);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .urgency-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 20px;
+      border: 1px solid rgba(128, 82, 255, 0.3);
+      border-radius: 100px;
+      background: rgba(128, 82, 255, 0.05);
+      margin-bottom: var(--spacing-24);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-electric-iris);
+    }
+
+    .urgency-timer {
+      font-family: monospace;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: 0.05em;
+    }
+
+    .auth-card {
+      background: rgba(10, 10, 10, 0.85);
+      border: 1px solid #1a1a1a;
+      border-radius: 8px;
+      padding: var(--spacing-36) var(--spacing-36);
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+      position: relative;
+      backdrop-filter: blur(12px);
+    }
+
+    .discord-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 18px 24px;
+      background-color: #5865F2;
+      color: #ffffff;
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 24px rgba(88, 101, 242, 0.25);
+    }
+
+    .discord-btn:hover {
+      background-color: #4752C4;
+      box-shadow: 0 0 36px rgba(88, 101, 242, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .discord-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    .reassurance-list {
+      margin-top: var(--spacing-24);
+      padding-top: var(--spacing-24);
+      border-top: 1px solid #1a1a1a;
+      text-align: left;
+      font-size: 13px;
+      color: var(--color-ash-gray);
+      line-height: 1.6;
+    }
+
+    .reassurance-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .reassurance-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .reassurance-icon {
+      color: var(--color-electric-iris);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .social-proof-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: var(--spacing-36);
+      width: 100%;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .social-proof-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .auth-card {
+        padding: 24px 18px;
+      }
+    }
+  </style>
 </head>
 <body>
 
   <!-- PARTICLE CANVAS -->
   <canvas id="particle-canvas"></canvas>
 
-  <!-- TOP LEFT LOGO ONLY -->
-  <div style="position: absolute; top: 36px; left: 40px; z-index: 100;">
-    <a href="index.html" class="nav-brand">
-      <div class="nav-logo">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="12,2 22,20 2,20" stroke="#8052ff" stroke-width="2" fill="none"/>
-        </svg>
-      </div>
-      <span class="nav-wordmark">FORTEX FX</span>
-    </a>
-  </div>
-
-  <!-- CENTERED AUTH TERMINAL -->
-  <div class="auth-container" data-shape="fortress">
-    <div class="auth-form">
-
-      <!-- CENTER LOGO -->
-      <div style="text-align: center; margin-bottom: 32px;">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin: 0 auto 12px; display: block;">
-          <polygon points="12,2 22,20 2,20" stroke="#8052ff" stroke-width="2" fill="none"/>
-        </svg>
-        <span style="font-size: 14px; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase; color: #ffffff;">FORTEX FX</span>
-      </div>
-
-      <h1 class="auth-title" style="text-align: center;">Access Terminal</h1>
-      <p class="auth-subtitle" style="text-align: center;">Sign in to enter the arena</p>
-
-      <form onsubmit="event.preventDefault(); window.location.href='index.html';">
-        <div style="margin-bottom: 24px;">
-          <input type="email" class="auth-input" placeholder="Commander Email" required />
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+        <div class="nav-logo">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="12,3 22,21 2,21" stroke="#8052ff" stroke-width="2" fill="none" stroke-linejoin="round"/>
+          </svg>
         </div>
-
-        <div style="margin-bottom: 24px;">
-          <input type="password" class="auth-input" placeholder="Access Code" required />
-        </div>
-
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px; font-size: 14px;">
-          <label style="color: #9a9a9a; display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 200;">
-            <input type="checkbox" style="accent-color: #8052ff;" /> Remember me
-          </label>
-          <a href="#" class="btn-ghost" style="color: #8052ff; text-transform: none; font-size: 14px;">Forgot access code?</a>
-        </div>
-
-        <button type="submit" class="btn-primary" style="width: 100%; text-align: center; justify-content: center;">ENTER ARENA</button>
-      </form>
-
-      <div class="auth-divider">
-        <span>OR CONNECT VIA</span>
-      </div>
-
-      <div style="display: flex; justify-content: center; gap: 32px; margin-bottom: 36px;">
-        <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none; font-size: 14px;">Google</a>
-        <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none; font-size: 14px;">Discord</a>
-        <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none; font-size: 14px;">X</a>
-      </div>
-
-      <div style="text-align: center; font-size: 14px; color: #9a9a9a; margin-bottom: 48px;">
-        New to Fortex FX? <a href="#" style="color: #8052ff; font-weight: 600;">Create your account</a>
-      </div>
-
-      <div style="text-align: center; font-size: 12px; color: #4a4a4a;">
-        256-bit quantum encryption
-      </div>
-
+        <span class="nav-wordmark">FORTEX FX</span>
+      </a>
     </div>
-  </div>
 
-  <!-- SCRIPTS -->
-  <script src="js/dala.js"></script>
-  <script>
-    new ParticleField('particle-canvas', { shape: 'fortress', particleCount: 60, ambientCount: 25 });
-  </script>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="leaderboard.html" class="nav-link">Tournaments</a></li>
+      <li><a href="offers.html" class="nav-link">Rewards</a></li>
+      <li><a href="resources.html" class="nav-link">Resources</a></li>
+      <li><a href="invite.html" class="nav-link">Invite</a></li>
+      <li><a href="profile.html" class="nav-link">Profile</a></li>
+    </ul>
+
+    <div class="nav-cta">
+      <a href="signin.html" class="nav-link active" style="text-transform: uppercase;">Sign In</a>
+      <a href="signin.html" class="btn-primary">Enter Arena</a>
+      <div class="hamburger" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <section class="section auth-container" data-shape="fortress" style="padding-top: var(--spacing-60); min-height: calc(100vh - 160px);">
+      <div class="container reveal">
+
+        <div class="signin-hero">
+
+          <!-- URGENCY TRIGGER -->
+          <div class="urgency-badge">
+            <span class="live-dot" style="background: #ffb829;"></span>
+            <span>Next Tournament Starts Soon · Reveal In:</span>
+            <span id="signin-countdown" class="urgency-timer" data-countdown="2026-08-23T23:59:59">14d : 08h : 32m : 15s</span>
+          </div>
+
+          <!-- IDENTITY TRIGGER -->
+          <div class="section-label">JOIN THE ARENA</div>
+          <h1 class="section-headline" style="max-width: 720px; margin: 0 auto var(--spacing-12);">
+            Join the community of competitive traders
+          </h1>
+          <p class="section-body body-text-muted" style="max-width: 560px; margin: 0 auto var(--spacing-36);">
+            Stop trading in isolation. Connect your account in 30 seconds and let your trading skill speak for itself.
+          </p>
+
+          <!-- CENTERED AUTH CARD WITH DISCORD OAUTH BUTTON -->
+          <div class="auth-card">
+
+            <div style="margin-bottom: var(--spacing-24);">
+              <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px;">
+                <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-electric-iris); background: rgba(128, 82, 255, 0.12); padding: 4px 12px; border-radius: 12px;">
+                  ⚡ 30 Seconds to Join
+                </span>
+              </div>
+              <h2 style="font-size: 20px; font-weight: 600; color: #ffffff; margin-bottom: 6px;">Enter the Arena</h2>
+              <p style="font-size: 14px; color: var(--color-ash-gray); font-weight: 200;">
+                One click with Discord. No password required.
+              </p>
+            </div>
+
+            <!-- PRIMARY CTA BUTTON -->
+            <a href="index.html" class="discord-btn" onclick="event.preventDefault(); alert('Connecting with Discord... Redirecting to Fortex FX Arena.'); window.location.href='index.html';">
+              <svg viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
+                <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.68,1.75,1.36,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.89,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.89,96.12,53,91.08,65.69,84.69,65.69Z"/>
+              </svg>
+              Continue with Discord
+            </a>
+
+            <!-- REASSURANCE TEXT -->
+            <div class="reassurance-list">
+              <div class="reassurance-item">
+                <svg class="reassurance-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><strong>Free forever. No card needed.</strong> Zero subscription or hidden costs.</span>
+              </div>
+              <div class="reassurance-item">
+                <svg class="reassurance-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><strong>Instant Identity:</strong> Your Discord username becomes your Fortex FX identity.</span>
+              </div>
+              <div class="reassurance-item">
+                <svg class="reassurance-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><strong>Effortless Entry:</strong> Zero passwords to remember, 30 seconds and you're in.</span>
+              </div>
+            </div>
+
+            <!-- MOCK T&C AND PRIVACY POLICY LINKS -->
+            <div style="margin-top: var(--spacing-24); font-size: 12px; color: #5a5a5a; text-align: center;">
+              By continuing, you agree to our 
+              <a href="#" style="color: var(--color-silver-mist); text-decoration: underline;">Terms of Service</a> 
+              and 
+              <a href="#" style="color: var(--color-silver-mist); text-decoration: underline;">Privacy Policy</a>.
+            </div>
+
+          </div>
+
+          <!-- SOCIAL PROOF BELOW BUTTON -->
+          <div style="max-width: 680px; width: 100%; margin-top: var(--spacing-48);">
+            <div class="social-proof-grid">
+              <div class="float-item" style="margin-bottom: 0; padding: 20px; text-align: center;">
+                <div class="float-item-label" style="justify-content: center; color: var(--color-electric-iris);">COMMUNITY</div>
+                <div class="stat-value" style="font-size: 32px;" data-count="3742">3,742</div>
+                <div class="float-item-body" style="font-size: 13px;">Traders already here</div>
+              </div>
+
+              <div class="float-item" style="margin-bottom: 0; padding: 20px; text-align: center;">
+                <div class="float-item-label" style="justify-content: center; color: var(--color-electric-iris);">
+                  <span class="live-dot" style="margin-right: 4px;"></span> LIVE ARENA
+                </div>
+                <div class="stat-value" style="font-size: 32px;" data-count="247">247</div>
+                <div class="float-item-body" style="font-size: 13px;">Competing right now</div>
+              </div>
+
+              <div class="float-item" style="margin-bottom: 0; padding: 20px; text-align: center;">
+                <div class="float-item-label" style="justify-content: center; color: #ffb829;">PRIZES PAID</div>
+                <div class="stat-value" style="font-size: 32px;">$2.4M</div>
+                <div class="float-item-body" style="font-size: 13px;">Distributed in rewards</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: LOSS AVERSION & RECIPROCITY TRIGGER HIGHLIGHTS -->
+    <section class="section reveal" data-shape="spiral" style="border-top: 1px solid #111;">
+      <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-36);">
+
+          <!-- LOSS AVERSION -->
+          <div class="float-item">
+            <div class="float-item-label" style="color: #ff5252;">LOSS AVERSION</div>
+            <h3 class="float-item-title">Don't trade in isolation</h3>
+            <p class="float-item-body">
+              Every tournament you miss is prize money you'll never earn. You're already trading every day on your MT4/MT5 account — why execute trades in silence when every setup could be building your ranking and winning prize pools?
+            </p>
+          </div>
+
+          <!-- RECIPROCITY -->
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-electric-iris);">RECIPROCITY</div>
+            <h3 class="float-item-title">Free forever. No card needed.</h3>
+            <p class="float-item-body">
+              No credit card required. No subscription. No catch. Keep 100% of your trading profits while competing for real tournament prize pools paid in REX.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 12px;">
+            <polygon points="12,3 22,21 2,21" stroke="#8052ff" stroke-width="2" fill="none" stroke-linejoin="round"/>
+          </svg>
+          <span class="nav-wordmark">FORTEX FX</span>
+        </div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="leaderboard.html" class="footer-link">Tournaments</a>
+          <a href="offers.html" class="footer-link">Rewards</a>
+          <a href="resources.html" class="footer-link">Resources</a>
+          <a href="invite.html" class="footer-link">Invite</a>
+          <a href="signin.html" class="footer-link">Sign In</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2026 FORTEX FX</div>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
