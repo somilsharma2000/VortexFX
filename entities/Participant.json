@@ -1,0 +1,49 @@
+{
+  "properties": {
+    "final_equity": {
+      "type": "number"
+    },
+    "mt4_account": {
+      "type": "string"
+    },
+    "prize_won_rex": {
+      "type": "number"
+    },
+    "rank": {
+      "type": "number"
+    },
+    "revealed": {
+      "type": "boolean"
+    },
+    "roi": {
+      "type": "number"
+    },
+    "starting_balance": {
+      "type": "number"
+    },
+    "status": {
+      "enum": [
+        "entered",
+        "active",
+        "completed",
+        "disqualified"
+      ],
+      "type": "string"
+    },
+    "trader_id": {
+      "type": "string"
+    },
+    "tournament_id": {
+      "type": "string"
+    },
+    "tournament_name": {
+      "type": "string"
+    },
+    "trader_username": {
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "required": [],
+  "name": "Participant"
+}

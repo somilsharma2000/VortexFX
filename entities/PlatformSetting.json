@@ -1,0 +1,31 @@
+{
+  "properties": {
+    "category": {
+      "enum": [
+        "checkin",
+        "tournament",
+        "referral",
+        "general"
+      ],
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "key": {
+      "type": "string"
+    },
+    "last_updated": {
+      "type": "string"
+    },
+    "updated_by": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "required": [],
+  "name": "PlatformSetting"
+}
