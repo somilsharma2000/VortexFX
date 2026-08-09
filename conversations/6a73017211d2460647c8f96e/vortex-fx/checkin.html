@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Check-In — FORTEX FX</title>
+  <link rel="stylesheet" href="css/dala.css">
+  <script src="js/dala.js"></script>
+  <script src="js/psychology.js"></script>
+</head>
+<body>
+
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+        <div class="nav-logo">
+          <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#8052ff" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+            <polygon points="50,30 65,39 65,61 50,70 35,61 35,39" stroke="#8052ff" stroke-width="1.5" fill="none" stroke-linejoin="round" opacity="0.5"/>
+            <path d="M50,42 Q58,45 55,52 Q48,55 45,48 Q47,43 50,42" stroke="#8052ff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <circle cx="50" cy="50" r="2" fill="#8052ff"/>
+            <circle cx="50" cy="18" r="3" fill="#8052ff"/>
+            <circle cx="78" cy="34" r="3" fill="#8052ff"/>
+            <circle cx="78" cy="66" r="3" fill="#8052ff"/>
+            <circle cx="50" cy="82" r="3" fill="#8052ff"/>
+            <circle cx="22" cy="66" r="3" fill="#8052ff"/>
+            <circle cx="22" cy="34" r="3" fill="#8052ff"/>
+            <line x1="50" y1="18" x2="78" y2="34" stroke="#8052ff" stroke-width="0.8" opacity="0.3"/>
+            <line x1="78" y1="34" x2="78" y2="66" stroke="#8052ff" stroke-width="0.8" opacity="0.3"/>
+            <line x1="78" y1="66" x2="50" y2="82" stroke="#8052ff" stroke-width="0.8" opacity="0.3"/>
+            <line x1="50" y1="82" x2="22" y2="66" stroke="#8052ff" stroke-width="0.8" opacity="0.3"/>
+            <line x1="22" y1="66" x2="22" y2="34" stroke="#8052ff" stroke-width="0.8" opacity="0.3"/>
+            <line x1="22" y1="34" x2="50" y2="18" stroke="#8052ff" stroke-width="0.8" opacity="0.3"/>
+          </svg>
+        </div>
+        <span class="nav-wordmark">FORTEX FX</span>
+      </a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="leaderboard.html" class="nav-link">Tournaments</a></li>
+      <li><a href="offers.html" class="nav-link">Rewards</a></li>
+      <li><a href="resources.html" class="nav-link">Resources</a></li>
+      <li><a href="invite.html" class="nav-link">Invite</a></li>
+      <li><a href="checkin.html" class="nav-link active">Check-In</a></li>
+      <li><a href="profile.html" class="nav-link">Profile</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
+      <a href="signin.html" class="btn-primary">Enter Arena</a>
+      <div class="hamburger" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HEADER -->
+    <section class="section" style="padding-top: 140px; padding-bottom: 40px;" data-shape="sphere">
+      <div class="container reveal">
+        <div class="section-label">DAILY RITUAL</div>
+        <h1 class="display" style="margin-bottom: var(--spacing-24);">Check In</h1>
+        <p class="body-text-muted" data-psychology="checkinLines">Don't break the streak. Your future self will thank you.</p>
+      </div>
+    </section>
+
+    <!-- CHECK-IN CARD -->
+    <section class="section reveal" style="padding-top: 0;" data-shape="fortress">
+      <div class="container" style="max-width: 800px;">
+        <div style="border: 1px solid #1a1a1a; border-radius: 32px; padding: 48px; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--color-electric-iris), transparent);"></div>
+
+          <!-- Current streak display -->
+          <div style="text-align: center; margin-bottom: 48px;">
+            <div class="float-item-label" style="color: var(--color-saffron-spark); margin-bottom: var(--spacing-12);">CURRENT STREAK</div>
+            <div style="font-size: clamp(64px, 10vw, 120px); font-weight: 400; color: var(--color-bone-white); line-height: 1; letter-spacing: -4px;" id="streak-number">7</div>
+            <div style="font-size: 18px; font-weight: 200; color: var(--color-silver-mist); margin-top: var(--spacing-12);">days in a row</div>
+          </div>
+
+          <!-- Check-in button -->
+          <div style="text-align: center; margin-bottom: 48px;">
+            <button id="checkin-btn" class="btn-primary" style="font-size: 18px; padding: 18px 48px;">
+              Check In Today
+            </button>
+            <p id="checkin-status" style="margin-top: var(--spacing-18); font-size: 14px; color: var(--color-ash-gray);">
+              Last check-in: Today, 10:32 AM
+            </p>
+          </div>
+
+          <!-- Streak rewards info -->
+          <div style="border-top: 1px solid #1a1a1a; padding-top: 36px;">
+            <div class="section-label" style="margin-bottom: var(--spacing-24);">REWARDS</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--spacing-24);">
+              <div style="text-align: center; padding: var(--spacing-18);">
+                <div style="font-size: 32px; font-weight: 400; color: var(--color-electric-iris); margin-bottom: var(--spacing-6);">+5</div>
+                <div style="font-size: 14px; color: var(--color-ash-gray); text-transform: uppercase; letter-spacing: 0.025em;">Daily</div>
+                <div style="font-size: 12px; color: var(--color-silver-mist); margin-top: 4px;">REX per check-in</div>
+              </div>
+              <div style="text-align: center; padding: var(--spacing-18);">
+                <div style="font-size: 32px; font-weight: 400; color: var(--color-electric-iris); margin-bottom: var(--spacing-6);">+50</div>
+                <div style="font-size: 14px; color: var(--color-ash-gray); text-transform: uppercase; letter-spacing: 0.025em;">7 Days</div>
+                <div style="font-size: 12px; color: var(--color-silver-mist); margin-top: 4px;">Bonus REX milestone</div>
+              </div>
+              <div style="text-align: center; padding: var(--spacing-18);">
+                <div style="font-size: 32px; font-weight: 400; color: var(--color-electric-iris); margin-bottom: var(--spacing-6);">+150</div>
+                <div style="font-size: 14px; color: var(--color-ash-gray); text-transform: uppercase; letter-spacing: 0.025em;">14 Days</div>
+                <div style="font-size: 12px; color: var(--color-silver-mist); margin-top: 4px;">Bonus REX milestone</div>
+              </div>
+              <div style="text-align: center; padding: var(--spacing-18);">
+                <div style="font-size: 32px; font-weight: 400; color: var(--color-electric-iris); margin-bottom: var(--spacing-6);">+500</div>
+                <div style="font-size: 14px; color: var(--color-ash-gray); text-transform: uppercase; letter-spacing: 0.025em;">30 Days</div>
+                <div style="font-size: 12px; color: var(--color-silver-mist); margin-top: 4px;">Bonus REX milestone</div>
+              </div>
+              <div style="text-align: center; padding: var(--spacing-18);">
+                <div style="font-size: 32px; font-weight: 400; color: var(--color-saffron-spark); margin-bottom: var(--spacing-6);">+2000</div>
+                <div style="font-size: 14px; color: var(--color-ash-gray); text-transform: uppercase; letter-spacing: 0.025em;">90 Days</div>
+                <div style="font-size: 12px; color: var(--color-silver-mist); margin-top: 4px;">Legendary milestone</div>
+              </div>
+            </div>
+            <p style="margin-top: var(--spacing-24); font-size: 14px; color: var(--color-ash-gray); text-align: center;">
+              Reward amounts are set by the Platform administrator and may change. Breaking your streak resets all progress.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALENDAR GRID -->
+    <section class="section reveal" data-shape="wave">
+      <div class="container" style="max-width: 800px;">
+        <div class="section-label" style="margin-bottom: var(--spacing-24);">AUGUST 2026</div>
+        <div id="checkin-grid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px;">
+          <!-- Generated by JS -->
+        </div>
+        <div style="display: flex; gap: var(--spacing-24); margin-top: var(--spacing-24); flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 12px; height: 12px; border-radius: 4px; background: var(--color-electric-iris);"></div>
+            <span style="font-size: 14px; color: var(--color-ash-gray);">Checked in</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 12px; height: 12px; border-radius: 4px; background: var(--color-saffron-spark);"></div>
+            <span style="font-size: 14px; color: var(--color-ash-gray);">Milestone day</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 12px; height: 12px; border-radius: 4px; border: 1px solid #333; background: transparent;"></div>
+            <span style="font-size: 14px; color: var(--color-ash-gray);">Missed</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 12px; height: 12px; border-radius: 4px; border: 1px solid #1a1a1a; background: #0a0a0a;"></div>
+            <span style="font-size: 14px; color: var(--color-ash-gray);">Upcoming</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STREAK STATS -->
+    <section class="section reveal" data-shape="diamond">
+      <div class="container">
+        <div class="section-label" style="margin-bottom: var(--spacing-36);">YOUR STREAK STATS</div>
+        <div class="stat-row">
+          <div class="stat-item">
+            <div class="stat-value">7</div>
+            <div class="stat-label">Current Streak</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">23</div>
+            <div class="stat-label">Best Streak</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">142</div>
+            <div class="stat-label">Total Check-ins</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">890</div>
+            <div class="stat-label">REX Earned</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEADERBOARD — Streak competition -->
+    <section class="section reveal" data-shape="spiral">
+      <div class="container">
+        <div class="section-label" style="margin-bottom: var(--spacing-36);">STREAK LEADERBOARD</div>
+        <h2 style="font-size: 48px; font-weight: 400; letter-spacing: -1.68px; color: var(--color-bone-white); margin-bottom: var(--spacing-36);">
+          Most consistent traders
+        </h2>
+        <div style="overflow-x: auto;">
+          <table class="data-table">
+            <thead>
+              <tr><th>Rank</th><th>Trader</th><th>Current Streak</th><th>Best Streak</th><th>Total Check-ins</th><th>REX Earned</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="rank-medal rank-1">1</span></td><td>TitanMaverick</td><td>89 days</td><td>89 days</td><td>247</td><td>4,120 REX</td></tr>
+              <tr><td><span class="rank-medal rank-2">2</span></td><td>FluxKairos</td><td>67 days</td><td>67 days</td><td>198</td><td>3,340 REX</td></tr>
+              <tr><td><span class="rank-medal rank-3">3</span></td><td>RogueViper</td><td>54 days</td><td>71 days</td><td>187</td><td>3,090 REX</td></tr>
+              <tr><td>4</td><td>CipherPulse</td><td>42 days</td><td>58 days</td><td>156</td><td>2,580 REX</td></tr>
+              <tr><td>5</td><td>AlphaVortex</td><td>31 days</td><td>45 days</td><td>134</td><td>2,210 REX</td></tr>
+              <tr><td>6</td><td>VoidMaster</td><td>7 days</td><td>23 days</td><td>142</td><td>890 REX</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- REX AI NOTE -->
+    <section class="section reveal" data-shape="brain">
+      <div class="container" style="max-width: 800px;">
+        <div style="border: 1px solid #1a1a1a; border-radius: 24px; padding: 36px;">
+          <div class="section-label" style="margin-bottom: var(--spacing-18);">REX AI INSIGHT</div>
+          <p class="body-text-muted" style="margin-bottom: var(--spacing-18);" data-psychology="rexAILines">
+            Rex AI learns your trading patterns. The more you trade, the smarter it gets.
+          </p>
+          <p style="font-size: 14px; color: var(--color-silver-mist);">
+            Your 7-day streak correlates with a 23% improvement in tournament ROI. Traders who check in daily are 3.2x more likely to finish in the top 10. Keep the streak alive.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RISK DISCLAIMER -->
+    <section class="section reveal" style="padding-bottom: 80px;" data-shape="scattered">
+      <div class="container" style="max-width: 800px;">
+        <div style="border: 1px solid #1a1a1a; border-radius: 24px; padding: 36px;">
+          <div class="section-label" style="margin-bottom: var(--spacing-18);">RISK WARNING</div>
+          <p style="font-size: 14px; font-weight: 200; color: var(--color-silver-mist); line-height: 1.6;">
+            Trading forex and cryptocurrency on margin carries a high level of risk and may not be suitable for all investors. You could lose some or all of your invested capital. Fortex FX is a skill-based trading competition platform and does not execute trades, hold funds, or provide investment advice. All trading occurs on your personal broker account at your own risk. Tournament prizes are distributed as REX reward points, which have no cash value. Never trade with money you cannot afford to lose.
+          </p>
+          <div style="margin-top: var(--spacing-18); display: flex; gap: var(--spacing-24); flex-wrap: wrap;">
+            <a href="terms.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Terms & Conditions</a>
+            <a href="privacy.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 12px;">
+            <polygon points="12,3 22,21 2,21" stroke="#8052ff" stroke-width="2" fill="none" stroke-linejoin="round"/>
+          </svg>
+          <span class="nav-wordmark">FORTEX FX</span>
+        </div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="leaderboard.html" class="footer-link">Tournaments</a>
+          <a href="offers.html" class="footer-link">Rewards</a>
+          <a href="resources.html" class="footer-link">Resources</a>
+          <a href="checkin.html" class="footer-link">Check-In</a>
+          <a href="terms.html" class="footer-link">Terms</a>
+          <a href="privacy.html" class="footer-link">Privacy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2026 FORTEX FX — Skill-based trading competitions. Not a financial service.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  // Check-in grid generator
+  function initCheckinGrid() {
+    const grid = document.getElementById('checkin-grid');
+    if (!grid) return;
+    const days = ['M','T','W','T','F','S','S'];
+    const today = 9; // Aug 9
+    const checkedInDays = [1,2,3,4,5,6,7,8]; // Days checked in
+    const milestoneDays = [7]; // Milestone days
+
+    // Day headers
+    days.forEach(d => {
+      const cell = document.createElement('div');
+      cell.style.cssText = 'text-align:center;font-size:12px;color:var(--color-ash-gray);text-transform:uppercase;padding:8px 0;';
+      cell.textContent = d;
+      grid.appendChild(cell);
+    });
+
+    // Calendar cells (Aug 1-31, starting on a Saturday)
+    for (let i = 0; i < 5; i++) {
+      grid.appendChild(document.createElement('div')); // Empty cells for offset
+    }
+
+    for (let day = 1; day <= 31; day++) {
+      const cell = document.createElement('div');
+      const isChecked = checkedInDays.includes(day);
+      const isMilestone = milestoneDays.includes(day);
+      const isPast = day < today;
+      const isToday = day === today;
+
+      let bg = 'transparent';
+      let border = '1px solid #1a1a1a';
+      let color = 'var(--color-ash-gray)';
+      let radius = '12px';
+
+      if (isChecked && isMilestone) {
+        bg = 'var(--color-saffron-spark)';
+        color = '#000';
+        border = 'none';
+      } else if (isChecked) {
+        bg = 'var(--color-electric-iris)';
+        color = '#fff';
+        border = 'none';
+      } else if (isPast) {
+        // Missed day
+        border = '1px solid #333';
+        color = '#444';
+      }
+
+      cell.style.cssText = `aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:${border};background:${bg};color:${color};border-radius:${radius};font-size:16px;font-weight:${isChecked?'600':'200'};`;
+      cell.textContent = day;
+      grid.appendChild(cell);
+    }
+  }
+  initCheckinGrid();
+
+  // Check-in button handler
+  document.getElementById('checkin-btn')?.addEventListener('click', function() {
+    this.textContent = 'Checked In ✓';
+    this.style.opacity = '0.6';
+    this.style.pointerEvents = 'none';
+    document.getElementById('checkin-status').textContent = 'Checked in just now. +5 REX earned.';
+    const streak = document.getElementById('streak-number');
+    streak.textContent = parseInt(streak.textContent) + 1;
+    streak.style.color = 'var(--color-saffron-spark)';
+  });
+  </script>
+</body>
+</html>
