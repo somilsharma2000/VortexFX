@@ -15,6 +15,8 @@ import TraderProfile from "@/pages/TraderProfile";
 import CheckIn from "@/pages/CheckIn";
 import Leaderboard from "@/pages/Leaderboard";
 import Admin from "@/pages/Admin";
+import Referrals from "@/pages/Referrals";
+import Transactions from "@/pages/Transactions";
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -51,6 +53,8 @@ const AuthenticatedApp = () => {
         <Route path="/check-in" element={<CheckIn />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/referrals" element={<Referrals />} />
+        <Route path="/transactions" element={<Transactions />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>

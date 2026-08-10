@@ -8,6 +8,8 @@ const navItems = [
   { to: "/tournaments", label: "Tournaments" },
   { to: "/traders", label: "Traders" },
   { to: "/leaderboard", label: "Leaderboard" },
+  { to: "/referrals", label: "Referrals" },
+  { to: "/transactions", label: "Transactions" },
   { to: "/check-in", label: "Check-in", badge: "HUB" },
 ];
 
