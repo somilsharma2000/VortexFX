@@ -38,17 +38,31 @@ export default function Transactions() {
     );
   }
 
-  const totalIn = txns
+  const earned = txns
     .filter((t) => (typeStyles[t.type]?.positive ?? true) && (t.amount || 0) > 0)
     .reduce((s, t) => s + (t.amount || 0), 0);
+  const spent = txns
+    .filter((t) => typeStyles[t.type]?.positive === false)
+    .reduce((s, t) => s + Math.abs(t.amount || 0), 0);
+  const balance = trader.rex_balance || 0;
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <SectionHeader label="Wallet" title="Transactions" subtitle="Your REX reward and deduction history." />
 
-      <div className="card mb-10 text-center fade-in">
-        <div className="section-label mb-3">Total Earned</div>
-        <div className="text-5xl font-bold text-white">{totalIn.toLocaleString()} <span className="text-[#7c3aed] text-xl">REX</span></div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+        <div className="card text-center fade-in">
+          <div className="section-label mb-3">Total Earned</div>
+          <div className="text-3xl font-bold text-white">{earned.toLocaleString()} <span className="text-[#22c55e] text-base">REX</span></div>
+        </div>
+        <div className="card text-center fade-in">
+          <div className="section-label mb-3">Total Spent</div>
+          <div className="text-3xl font-bold text-white">{spent.toLocaleString()} <span className="text-[#ef4444] text-base">REX</span></div>
+        </div>
+        <div className="card text-center fade-in">
+          <div className="section-label mb-3">Current Balance</div>
+          <div className="text-3xl font-bold text-white">{balance.toLocaleString()} <span className="text-[#7c3aed] text-base">REX</span></div>
+        </div>
       </div>
 
       <div className="space-y-3">

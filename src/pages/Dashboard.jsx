@@ -10,17 +10,25 @@ import StatusDot from "@/components/StatusDot";
 export default function Dashboard() {
   const [traders, setTraders] = useState([]);
   const [tournaments, setTournaments] = useState([]);
+  const [activity, setActivity] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
       try {
-        const [t, tn] = await Promise.all([
+        const [t, tn, ck, tx] = await Promise.all([
           base44.entities.Trader.list("-rex_balance", 100),
           base44.entities.Tournament.list("-created_date", 100),
+          base44.entities.CheckIn.list("-checkin_date", 10),
+          base44.entities.Transaction.list("-transaction_date", 10),
         ]);
         setTraders(t);
         setTournaments(tn);
+        const merged = [
+          ...ck.map((c) => ({ kind: "checkin", date: c.checkin_date, title: `${c.trader_username || "Trader"} checked in`, value: c.rex_earned })),
+          ...tx.map((x) => ({ kind: "transaction", date: x.transaction_date, title: x.description || (x.type || "transaction").replace(/_/g, " "), value: x.amount })),
+        ].sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0)).slice(0, 8);
+        setActivity(merged);
       } finally {
         setLoading(false);
       }
@@ -123,6 +131,31 @@ export default function Dashboard() {
             ))
           )}
         </div>
+      </section>
+
+      {/* Recent activity */}
+      <section className="pb-16">
+        <SectionHeader label="Live" title="Recent Activity" subtitle="The latest check-ins, rewards, and tournament activity across Koda." />
+        {activity.length === 0 ? (
+          <div className="card text-center text-[#9ca3af] py-12">No recent activity.</div>
+        ) : (
+          <div className="card" style={{ padding: 0 }}>
+            {activity.map((a, i) => (
+              <div key={i} className="flex items-center gap-4 px-6 py-4 border-b border-[#202028] last:border-0">
+                <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: a.kind === "checkin" ? "#7c3aed" : "#3b82f6", boxShadow: "0 0 8px rgba(124,58,237,0.5)" }} />
+                <div className="flex-1 min-w-0">
+                  <div className="text-white font-semibold text-sm capitalize truncate">{a.title}</div>
+                  <div className="text-xs text-[#9ca3af]">{a.date ? new Date(a.date).toLocaleDateString(undefined, { month: "short", day: "numeric" }) : "—"}</div>
+                </div>
+                {a.value != null && (
+                  <div className="font-bold text-sm shrink-0" style={{ color: (a.value || 0) >= 0 ? "#22c55e" : "#ef4444" }}>
+                    {(a.value || 0) >= 0 ? "+" : "-"}{Math.abs(a.value || 0)} REX
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </section>
     </div>
   );

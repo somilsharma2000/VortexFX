@@ -101,16 +101,41 @@ export default function CheckIn() {
           {alreadyCheckedIn ? "Checked in today ✓" : submitting ? "Processing…" : "Check in now"}
           {!alreadyCheckedIn && !submitting && <Zap className="w-4 h-4 btn-arrow" />}
         </button>
-        <div className="grid grid-cols-4 gap-3 mt-8 max-w-md mx-auto">
-          {["7", "14", "30", "90"].map((m) => {
-            const reached = ["7", "14", "30", "90"].includes(String(trader.best_streak)) && Number(trader.best_streak) >= Number(m);
+        {/* 7-day strip */}
+        <div className="flex items-center justify-center gap-2 mt-8 max-w-md mx-auto">
+          {Array.from({ length: 7 }).map((_, i) => {
+            const d = new Date();
+            d.setDate(d.getDate() - (6 - i));
+            const ds = d.toISOString().slice(0, 10);
+            const checked = history.some((c) => (c.checkin_date || "").slice(0, 10) === ds);
             return (
-              <div key={m} className="card-container px-3 py-3 text-center" style={{ opacity: reached ? 1 : 0.5 }}>
-                <div className="text-lg font-bold text-white">{m}d</div>
-                <div className="text-[0.65rem] uppercase text-[#9ca3af] tracking-wider">Bonus</div>
+              <div key={i} className="flex flex-col items-center gap-1">
+                <div
+                  className="w-9 h-9 rounded-lg flex items-center justify-center text-xs font-bold transition-all"
+                  style={checked ? { backgroundImage: "linear-gradient(135deg, #8b5cf6, #3b82f6)", color: "#ffffff" } : { backgroundColor: "#14141c", border: "1px solid #202028", color: "#6b7280" }}
+                >
+                  {d.getDate()}
+                </div>
+                <span className="text-[0.6rem] uppercase text-[#6b7280]">{d.toLocaleDateString(undefined, { weekday: "narrow" })}</span>
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-3 gap-4 mb-8">
+        <div className="card text-center">
+          <div className="section-label mb-3">Total Check-ins</div>
+          <div className="text-3xl font-bold text-white">{trader.total_checkins || 0}</div>
+        </div>
+        <div className="card text-center">
+          <div className="section-label mb-3">Best Streak</div>
+          <div className="text-3xl font-bold text-white">{trader.best_streak || 0}<span className="text-base text-[#9ca3af] ml-1">d</span></div>
+        </div>
+        <div className="card text-center">
+          <div className="section-label mb-3">REX from Check-ins</div>
+          <div className="text-3xl font-bold text-white">{history.reduce((s, c) => s + (c.rex_earned || 0), 0)}</div>
         </div>
       </div>
 

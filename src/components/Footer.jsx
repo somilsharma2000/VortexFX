@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Twitter, MessageCircle, Github } from "lucide-react";
 
 const columns = [
   {
@@ -69,10 +70,17 @@ export default function Footer() {
 
         <div className="mt-12 pt-6 border-t border-[#202028] flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-[#9ca3af]">© {new Date().getFullYear()} Koda Trading. All rights reserved.</p>
-          <div className="flex items-center gap-6 text-xs text-[#9ca3af]">
-            <a href="#" className="hover:text-white transition-colors">Terms</a>
-            <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Risk Disclosure</a>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3">
+              <a href="#" aria-label="Twitter" className="w-8 h-8 rounded-lg flex items-center justify-center text-[#9ca3af] hover:text-white transition-colors" style={{ backgroundColor: "#14141c", border: "1px solid #202028" }}><Twitter className="w-4 h-4" /></a>
+              <a href="#" aria-label="Discord" className="w-8 h-8 rounded-lg flex items-center justify-center text-[#9ca3af] hover:text-white transition-colors" style={{ backgroundColor: "#14141c", border: "1px solid #202028" }}><MessageCircle className="w-4 h-4" /></a>
+              <a href="#" aria-label="GitHub" className="w-8 h-8 rounded-lg flex items-center justify-center text-[#9ca3af] hover:text-white transition-colors" style={{ backgroundColor: "#14141c", border: "1px solid #202028" }}><Github className="w-4 h-4" /></a>
+            </div>
+            <div className="flex items-center gap-6 text-xs text-[#9ca3af]">
+              <a href="#" className="hover:text-white transition-colors">Terms</a>
+              <a href="#" className="hover:text-white transition-colors">Privacy</a>
+              <a href="#" className="hover:text-white transition-colors">Risk Disclosure</a>
+            </div>
           </div>
         </div>
       </div>

@@ -1,19 +1,23 @@
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
-import SectionHeader from "@/components/SectionHeader";
 import TournamentCard from "@/components/TournamentCard";
+import { useCurrentTrader } from "@/hooks/useCurrentTrader";
+import { Plus } from "lucide-react";
 
 const filters = [
   { key: "all", label: "All" },
-  { key: "live", label: "Live" },
+  { key: "live", label: "Active" },
   { key: "upcoming", label: "Upcoming" },
   { key: "completed", label: "Completed" },
 ];
 
 export default function Tournaments() {
+  const { user } = useCurrentTrader();
   const [tournaments, setTournaments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("all");
+  const isAdmin = user?.role === "admin";
 
   useEffect(() => {
     (async () => {
@@ -36,7 +40,18 @@ export default function Tournaments() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <SectionHeader label="Compete" title="All Tournaments" subtitle="Browse every active and upcoming competition. Filter by status to find your next arena." />
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+        <div>
+          <div className="section-label mb-3">Compete</div>
+          <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">All Tournaments</h2>
+          <p className="text-[#9ca3af] mt-2 max-w-2xl">Browse every active and upcoming competition. Filter by status to find your next arena.</p>
+        </div>
+        {isAdmin && (
+          <Link to="/admin" className="btn-primary shrink-0">
+            <Plus className="w-4 h-4" /> Create Tournament
+          </Link>
+        )}
+      </div>
 
       <div className="flex flex-wrap gap-2 mb-10">
         {filters.map((f) => (

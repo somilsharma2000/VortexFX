@@ -52,6 +52,20 @@ export default function TraderCard({ trader, rank }) {
               <Flame className="w-4 h-4 text-[#7c3aed]" /> {tr.checkin_streak || 0}
             </div>
           </div>
+          <div>
+            <div className="section-label mb-1">Check-ins</div>
+            <div className="text-lg font-bold text-white">{tr.total_checkins || 0}</div>
+          </div>
+          <div>
+            <div className="section-label mb-1">Role</div>
+            <div className="text-lg font-bold text-white capitalize">{tr.role || "trader"}</div>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 mb-4">
+          <span className={`badge ${tr.mt4_linked ? "badge-green" : "badge-muted"}`}>
+            {tr.mt4_linked ? "MT4 Linked" : "MT4 Not Linked"}
+          </span>
         </div>
 
         <div className="mt-auto inline-flex items-center gap-1.5 text-[#7c3aed] font-semibold text-sm group">

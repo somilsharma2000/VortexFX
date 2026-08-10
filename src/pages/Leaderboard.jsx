@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
-import { Crown, Flame, BadgeCheck } from "lucide-react";
+import { Crown, Flame, BadgeCheck, Search } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 
 export default function Leaderboard() {
   const [traders, setTraders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -19,9 +20,18 @@ export default function Leaderboard() {
     })();
   }, []);
 
+  const filtered = query.trim()
+    ? traders.filter((tr) => (tr.discord_username || "").toLowerCase().includes(query.toLowerCase()))
+    : traders;
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <SectionHeader label="Rankings" title="Platform Leaderboard" subtitle="The top Koda traders ranked by total REX earned across all tournaments and rewards." />
+
+      <div className="relative max-w-md mb-8">
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b7280]" />
+        <input className="input-field pl-11" placeholder="Search traders…" value={query} onChange={(e) => setQuery(e.target.value)} />
+      </div>
 
       <div className="card overflow-hidden" style={{ padding: 0 }}>
         <div className="grid grid-cols-12 px-6 py-4 border-b border-[#202028] table-header">
@@ -33,10 +43,10 @@ export default function Leaderboard() {
         </div>
         {loading ? (
           <div className="px-6 py-8 text-[#9ca3af]">Loading leaderboard…</div>
-        ) : traders.length === 0 ? (
-          <div className="px-6 py-8 text-[#9ca3af]">No traders yet.</div>
+        ) : filtered.length === 0 ? (
+          <div className="px-6 py-8 text-[#9ca3af]">No traders found.</div>
         ) : (
-          traders.map((tr, i) => (
+          filtered.map((tr, i) => (
             <Link key={tr.id} to={`/traders/${tr.id}`} className="data-row grid grid-cols-12 items-center px-6 py-4 border-b border-[#202028] last:border-0">
               <div className="col-span-1 flex items-center">
                 {i < 3 ? (

@@ -46,7 +46,7 @@ export default function TournamentCard({ tournament }) {
           </div>
         </div>
 
-        <div className="flex items-center justify-between text-sm text-[#9ca3af] mb-5">
+        <div className="flex items-center justify-between text-sm text-[#9ca3af] mb-4">
           <span className="inline-flex items-center gap-1.5">
             <Users className="w-4 h-4" /> {t.participant_count || 0} traders
           </span>
@@ -56,6 +56,27 @@ export default function TournamentCard({ tournament }) {
             </span>
           )}
         </div>
+
+        {(() => {
+          const now = Date.now();
+          const start = t.start_date ? new Date(t.start_date).getTime() : null;
+          const end = t.end_date ? new Date(t.end_date).getTime() : null;
+          if (!start || !end) return null;
+          let pct = 0;
+          if (t.status === "upcoming") pct = 0;
+          else if (t.status === "completed" || t.status === "cancelled") pct = 100;
+          else pct = Math.min(100, Math.max(0, ((now - start) / (end - start)) * 100));
+          return (
+            <div className="mb-5">
+              <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: "#202028" }}>
+                <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, backgroundImage: "linear-gradient(90deg, #8b5cf6, #3b82f6)" }} />
+              </div>
+              <div className="text-[0.65rem] uppercase tracking-wider text-[#6b7280] mt-1.5">
+                {t.status === "upcoming" ? "Starts soon" : t.status === "completed" ? "Finished" : `${Math.round(pct)}% elapsed`}
+              </div>
+            </div>
+          );
+        })()}
 
         <div className="inline-flex items-center gap-1.5 text-[#7c3aed] font-semibold text-sm group">
           View Details

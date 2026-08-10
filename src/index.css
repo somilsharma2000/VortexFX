@@ -288,6 +288,28 @@
     background-clip: text;
     color: transparent;
   }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar-item {
+    @apply flex items-center gap-3 text-sm font-medium transition-all duration-300;
+    color: #6b7280;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border-left: 3px solid transparent;
+  }
+  .sidebar-item:hover {
+    color: #c4b5fd;
+    background-color: rgba(139, 92, 246, 0.08);
+  }
+  .sidebar-item-active {
+    color: #ffffff;
+    background-color: rgba(139, 92, 246, 0.15);
+    border-left: 3px solid #7c3aed;
+  }
+  .sidebar-item-active:hover {
+    color: #ffffff;
+    background-color: rgba(139, 92, 246, 0.15);
+  }
 }
 
 @layer utilities {
