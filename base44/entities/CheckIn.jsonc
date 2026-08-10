@@ -1,0 +1,35 @@
+{
+  "properties": {
+    "checkin_date": {
+      "type": "string"
+    },
+    "milestone_reached": {
+      "enum": [
+        "none",
+        "7",
+        "14",
+        "30",
+        "90"
+      ],
+      "type": "string"
+    },
+    "milestone_bonus_rex": {
+      "type": "number"
+    },
+    "new_streak": {
+      "type": "number"
+    },
+    "rex_earned": {
+      "type": "number"
+    },
+    "trader_id": {
+      "type": "string"
+    },
+    "trader_username": {
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "required": [],
+  "name": "CheckIn"
+}

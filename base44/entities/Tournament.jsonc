@@ -1,0 +1,58 @@
+{
+  "properties": {
+    "admin_notes": {
+      "type": "string"
+    },
+    "created_by": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "end_date": {
+      "type": "string"
+    },
+    "entry_criteria_min_deposit": {
+      "type": "number"
+    },
+    "is_active": {
+      "type": "boolean"
+    },
+    "markets": {
+      "enum": [
+        "forex",
+        "crypto",
+        "both"
+      ],
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "participant_count": {
+      "type": "number"
+    },
+    "prize_pool_rex": {
+      "type": "number"
+    },
+    "reveal_date": {
+      "type": "string"
+    },
+    "start_date": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "upcoming",
+        "live",
+        "revealing",
+        "completed",
+        "cancelled"
+      ],
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "required": [],
+  "name": "Tournament"
+}

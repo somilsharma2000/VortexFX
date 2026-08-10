@@ -1,0 +1,62 @@
+{
+  "properties": {
+    "avatar": {
+      "type": "string"
+    },
+    "best_streak": {
+      "type": "number"
+    },
+    "banned": {
+      "type": "boolean"
+    },
+    "banned_reason": {
+      "type": "string"
+    },
+    "checkin_streak": {
+      "type": "number"
+    },
+    "discord_id": {
+      "type": "string"
+    },
+    "discord_username": {
+      "type": "string"
+    },
+    "joined_date": {
+      "type": "string"
+    },
+    "last_checkin_date": {
+      "type": "string"
+    },
+    "mt4_account": {
+      "type": "string"
+    },
+    "mt4_linked": {
+      "type": "boolean"
+    },
+    "referred_by": {
+      "type": "string"
+    },
+    "referral_code": {
+      "type": "string"
+    },
+    "rex_balance": {
+      "type": "number"
+    },
+    "role": {
+      "enum": [
+        "trader",
+        "admin"
+      ],
+      "type": "string"
+    },
+    "total_checkins": {
+      "type": "number"
+    },
+    "verified": {
+      "type": "boolean"
+    }
+  },
+  "type": "object",
+  "required": [],
+  "name": "Trader"
+}

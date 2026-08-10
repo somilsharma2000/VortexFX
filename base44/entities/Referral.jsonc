@@ -1,0 +1,39 @@
+{
+  "properties": {
+    "qualified": {
+      "type": "boolean"
+    },
+    "qualified_date": {
+      "type": "string"
+    },
+    "referred_id": {
+      "type": "string"
+    },
+    "referred_username": {
+      "type": "string"
+    },
+    "referral_date": {
+      "type": "string"
+    },
+    "referrer_id": {
+      "type": "string"
+    },
+    "referrer_username": {
+      "type": "string"
+    },
+    "reward_amount_rex": {
+      "type": "number"
+    },
+    "status": {
+      "enum": [
+        "pending",
+        "qualified",
+        "rewarded"
+      ],
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "required": [],
+  "name": "Referral"
+}
