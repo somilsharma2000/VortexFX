@@ -1,4 +1,4 @@
-export default function StatusDot({ color = "#22c55e", label }) {
+export default function StatusDot({ color = "#00C853", label }) {
   return (
     <span className="inline-flex items-center gap-2">
       <span className="relative flex h-2.5 w-2.5">
@@ -8,7 +8,7 @@ export default function StatusDot({ color = "#22c55e", label }) {
         />
         <span className="relative inline-flex rounded-full h-2.5 w-2.5" style={{ backgroundColor: color }} />
       </span>
-      {label && <span className="text-xs text-[#9ca3af]">{label}</span>}
+      {label && <span className="text-xs text-[#A0A8C0]">{label}</span>}
     </span>
   );
 }

@@ -43,8 +43,8 @@ export default function Tournaments() {
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
         <div>
           <div className="section-label mb-3">Compete</div>
-          <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">All Tournaments</h2>
-          <p className="text-[#9ca3af] mt-2 max-w-2xl">Browse every active and upcoming competition. Filter by status to find your next arena.</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">All Championships</h2>
+          <p className="text-[#A0A8C0] mt-2 max-w-2xl">Browse every active and upcoming competition. Filter by status to find your next arena.</p>
         </div>
         {isAdmin && (
           <Link to="/admin" className="btn-primary shrink-0">
@@ -66,9 +66,9 @@ export default function Tournaments() {
       </div>
 
       {loading ? (
-        <div className="text-[#9ca3af]">Loading tournaments…</div>
+        <div className="text-[#A0A8C0]">Loading tournaments…</div>
       ) : filtered.length === 0 ? (
-        <div className="card text-center text-[#9ca3af] py-16">No tournaments match this filter.</div>
+        <div className="card text-center text-[#A0A8C0] py-16">No tournaments match this filter.</div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((t, i) => (

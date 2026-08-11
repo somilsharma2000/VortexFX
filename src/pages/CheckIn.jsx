@@ -68,14 +68,14 @@ export default function CheckIn() {
     }
   };
 
-  if (loading) return <div className="max-w-7xl mx-auto px-4 py-20 text-[#9ca3af]">Loading…</div>;
+  if (loading) return <div className="max-w-7xl mx-auto px-4 py-20 text-[#A0A8C0]">Loading…</div>;
 
   if (!trader) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-24 text-center">
         <div className="card">
           <h1 className="text-2xl font-bold text-white mb-3">No trader profile yet</h1>
-          <p className="text-[#9ca3af] mb-6">Connect your Discord to create your Koda trader profile and start earning REX.</p>
+          <p className="text-[#A0A8C0] mb-6">Connect your Discord to create your FORTREX trader profile and start earning REX.</p>
           <button onClick={handleDiscord} className="btn-primary">
             <MessageCircle className="w-4 h-4" /> Connect Discord
           </button>
@@ -93,10 +93,10 @@ export default function CheckIn() {
       <h1 className="text-3xl font-bold text-white mb-10">Check-in & Rewards</h1>
 
       {/* Streak hero */}
-      <div className="card mb-8 text-center fade-in" style={{ backgroundImage: "linear-gradient(135deg, rgba(139,92,246,0.1), rgba(59,130,246,0.04))" }}>
-        <div className="inline-flex items-center gap-2 section-label mb-4 justify-center"><Flame className="w-4 h-4 text-[#7c3aed]" /> Current Streak</div>
-        <div className="text-7xl font-bold text-white mb-2">{trader.checkin_streak || 0}<span className="text-2xl text-[#9ca3af] ml-2">days</span></div>
-        <p className="text-[#9ca3af] mb-6">Best streak: {trader.best_streak || 0} days · Total check-ins: {trader.total_checkins || 0}</p>
+      <div className="card mb-8 text-center fade-in" style={{ backgroundImage: "linear-gradient(135deg, rgba(212,175,55,0.1), rgba(0,200,83,0.04))" }}>
+        <div className="inline-flex items-center gap-2 section-label mb-4 justify-center"><Flame className="w-4 h-4 text-[#D4AF37]" /> Current Streak</div>
+        <div className="text-7xl font-bold text-white mb-2">{trader.checkin_streak || 0}<span className="text-2xl text-[#A0A8C0] ml-2">days</span></div>
+        <p className="text-[#A0A8C0] mb-6">Best streak: {trader.best_streak || 0} days · Total check-ins: {trader.total_checkins || 0}</p>
         <button onClick={handleCheckIn} disabled={submitting || alreadyCheckedIn} className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed">
           {alreadyCheckedIn ? "Checked in today ✓" : submitting ? "Processing…" : "Check in now"}
           {!alreadyCheckedIn && !submitting && <Zap className="w-4 h-4 btn-arrow" />}
@@ -112,11 +112,11 @@ export default function CheckIn() {
               <div key={i} className="flex flex-col items-center gap-1">
                 <div
                   className="w-9 h-9 rounded-lg flex items-center justify-center text-xs font-bold transition-all"
-                  style={checked ? { backgroundImage: "linear-gradient(135deg, #8b5cf6, #3b82f6)", color: "#ffffff" } : { backgroundColor: "#14141c", border: "1px solid #202028", color: "#6b7280" }}
+                  style={checked ? { backgroundImage: "linear-gradient(135deg, #D4AF37, #00C853)", color: "#ffffff" } : { backgroundColor: "#0A0E27", border: "1px solid rgba(212,175,55,0.15)", color: "#6B7494" }}
                 >
                   {d.getDate()}
                 </div>
-                <span className="text-[0.6rem] uppercase text-[#6b7280]">{d.toLocaleDateString(undefined, { weekday: "narrow" })}</span>
+                <span className="text-[0.6rem] uppercase text-[#6B7494]">{d.toLocaleDateString(undefined, { weekday: "narrow" })}</span>
               </div>
             );
           })}
@@ -131,7 +131,7 @@ export default function CheckIn() {
         </div>
         <div className="card text-center">
           <div className="section-label mb-3">Best Streak</div>
-          <div className="text-3xl font-bold text-white">{trader.best_streak || 0}<span className="text-base text-[#9ca3af] ml-1">d</span></div>
+          <div className="text-3xl font-bold text-white">{trader.best_streak || 0}<span className="text-base text-[#A0A8C0] ml-1">d</span></div>
         </div>
         <div className="card text-center">
           <div className="section-label mb-3">REX from Check-ins</div>
@@ -143,7 +143,7 @@ export default function CheckIn() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <div className="card">
           <div className="flex items-center gap-2 section-title-accent mb-4"><Link2 className="w-4 h-4" /> MT4 Account</div>
-          <p className="text-sm text-[#9ca3af] mb-4">Link your MT4 trading account to verify trades.</p>
+          <p className="text-sm text-[#A0A8C0] mb-4">Link your MT4 trading account to verify trades.</p>
           <input className="input-field mb-4" placeholder="MT4 account number" value={mt4Account} onChange={(e) => setMt4Account(e.target.value)} />
           <button onClick={handleLinkMt4} disabled={linkingMt4 || !mt4Account.trim()} className="btn-blue w-full disabled:opacity-50">
             {linkingMt4 ? "Linking…" : trader.mt4_linked ? "Update MT4" : "Link MT4"}
@@ -151,12 +151,12 @@ export default function CheckIn() {
         </div>
         <div className="card">
           <div className="flex items-center gap-2 section-title-accent mb-4"><MessageCircle className="w-4 h-4" /> Discord</div>
-          <p className="text-sm text-[#9ca3af] mb-4">Connect Discord to join the community hub and verify identity.</p>
+          <p className="text-sm text-[#A0A8C0] mb-4">Connect Discord to join the community hub and verify identity.</p>
           <div className="mb-4 text-sm">
             {trader.discord_username ? (
-              <span className="inline-flex items-center gap-2 text-white"><span className="w-2 h-2 rounded-full" style={{ backgroundColor: "#22c55e" }} /> Connected as {trader.discord_username}</span>
+              <span className="inline-flex items-center gap-2 text-white"><span className="w-2 h-2 rounded-full" style={{ backgroundColor: "#00C853" }} /> Connected as {trader.discord_username}</span>
             ) : (
-              <span className="text-[#9ca3af]">Not connected</span>
+              <span className="text-[#A0A8C0]">Not connected</span>
             )}
           </div>
           <button onClick={handleDiscord} className="btn-secondary w-full">
@@ -172,23 +172,23 @@ export default function CheckIn() {
       </div>
       <div className="space-y-3">
         {history.length === 0 ? (
-          <div className="card text-center text-[#9ca3af] py-12">No check-ins yet. Start your streak today!</div>
+          <div className="card text-center text-[#A0A8C0] py-12">No check-ins yet. Start your streak today!</div>
         ) : (
           history.map((c) => (
             <div key={c.id} className="card flex items-center gap-4" style={{ padding: "16px 20px" }}>
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: "rgba(124,58,237,0.15)" }}>
-                <Flame className="w-5 h-5 text-[#7c3aed]" />
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: "rgba(212,175,55,0.15)" }}>
+                <Flame className="w-5 h-5 text-[#D4AF37]" />
               </div>
               <div className="flex-1">
                 <div className="text-white font-semibold text-sm">Day {c.new_streak} streak</div>
-                <div className="text-xs text-[#9ca3af] inline-flex items-center gap-1.5">
+                <div className="text-xs text-[#A0A8C0] inline-flex items-center gap-1.5">
                   <Calendar className="w-3 h-3" /> {c.checkin_date ? new Date(c.checkin_date).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }) : "—"}
                   {c.milestone_reached && c.milestone_reached !== "none" && (
                     <span className="badge badge-purple ml-1"><Award className="w-3 h-3" /> {c.milestone_reached}d milestone</span>
                   )}
                 </div>
               </div>
-              <div className="font-bold text-sm text-[#22c55e]">+{c.rex_earned || 0} REX</div>
+              <div className="font-bold text-sm text-[#00C853]">+{c.rex_earned || 0} REX</div>
             </div>
           ))
         )}

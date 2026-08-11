@@ -4,12 +4,12 @@ export default function SectionHeader({ label, title, viewAllTo, viewAllText = "
       <div>
         {label && <div className="section-label mb-3">{label}</div>}
         <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">{title}</h2>
-        {subtitle && <p className="text-[#9ca3af] mt-2 max-w-2xl">{subtitle}</p>}
+        {subtitle && <p className="text-[#A0A8C0] mt-2 max-w-2xl">{subtitle}</p>}
       </div>
       {viewAllTo && (
         <a
           href={viewAllTo}
-          className="inline-flex items-center gap-1.5 text-[#7c3aed] hover:text-[#8b5cf6] font-semibold text-sm transition-all duration-300 group"
+          className="inline-flex items-center gap-1.5 text-[#D4AF37] hover:text-[#E5C04D] font-semibold text-sm transition-all duration-300 group"
         >
           {viewAllText}
           <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>

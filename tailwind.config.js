@@ -89,8 +89,8 @@ module.exports = {
 				to: { opacity: '1', transform: 'translateY(0)' }
 			},
 			'float-pulse': {
-				'0%, 100%': { boxShadow: '0 0 0 0 rgba(124, 58, 237, 0.4)' },
-				'50%': { boxShadow: '0 0 0 12px rgba(124, 58, 237, 0)' }
+				'0%, 100%': { boxShadow: '0 0 0 0 rgba(212, 175, 55, 0.4)' },
+				'50%': { boxShadow: '0 0 0 12px rgba(212, 175, 55, 0)' }
 			}
 		},
 		animation: {

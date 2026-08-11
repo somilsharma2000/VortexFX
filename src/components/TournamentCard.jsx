@@ -29,15 +29,15 @@ export default function TournamentCard({ tournament }) {
         </div>
 
         <h3 className="text-xl font-bold text-white mb-2">{t.name || "Untitled Tournament"}</h3>
-        <p className="text-sm text-[#9ca3af] line-clamp-2 mb-6 flex-1">
+        <p className="text-sm text-[#A0A8C0] line-clamp-2 mb-6 flex-1">
           {t.description || "No description provided."}
         </p>
 
-        <div className="flex items-end justify-between mb-5 pb-5 border-b border-[#202028]">
+        <div className="flex items-end justify-between mb-5 pb-5 border-b border-[#D4AF37]/15">
           <div>
             <div className="section-label mb-1.5">Prize Pool</div>
             <div className="text-2xl font-bold text-white">
-              {prize} <span className="text-[#7c3aed] text-base font-semibold">REX</span>
+              {prize} <span className="text-[#D4AF37] text-base font-semibold">REX</span>
             </div>
           </div>
           <div className="text-right">
@@ -46,7 +46,7 @@ export default function TournamentCard({ tournament }) {
           </div>
         </div>
 
-        <div className="flex items-center justify-between text-sm text-[#9ca3af] mb-4">
+        <div className="flex items-center justify-between text-sm text-[#A0A8C0] mb-4">
           <span className="inline-flex items-center gap-1.5">
             <Users className="w-4 h-4" /> {t.participant_count || 0} traders
           </span>
@@ -68,17 +68,17 @@ export default function TournamentCard({ tournament }) {
           else pct = Math.min(100, Math.max(0, ((now - start) / (end - start)) * 100));
           return (
             <div className="mb-5">
-              <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: "#202028" }}>
-                <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, backgroundImage: "linear-gradient(90deg, #8b5cf6, #3b82f6)" }} />
+              <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: "rgba(212,175,55,0.15)" }}>
+                <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, backgroundImage: "linear-gradient(90deg, #D4AF37, #00C853)" }} />
               </div>
-              <div className="text-[0.65rem] uppercase tracking-wider text-[#6b7280] mt-1.5">
+              <div className="text-[0.65rem] uppercase tracking-wider text-[#6B7494] mt-1.5">
                 {t.status === "upcoming" ? "Starts soon" : t.status === "completed" ? "Finished" : `${Math.round(pct)}% elapsed`}
               </div>
             </div>
           );
         })()}
 
-        <div className="inline-flex items-center gap-1.5 text-[#7c3aed] font-semibold text-sm group">
+        <div className="inline-flex items-center gap-1.5 text-[#D4AF37] font-semibold text-sm group">
           View Details
           <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
         </div>

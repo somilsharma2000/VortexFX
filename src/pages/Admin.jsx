@@ -33,12 +33,12 @@ export default function Admin() {
     if (user?.role === "admin") loadTournaments();
   }, [user]);
 
-  if (loading) return <div className="max-w-7xl mx-auto px-4 py-20 text-[#9ca3af]">Loading…</div>;
+  if (loading) return <div className="max-w-7xl mx-auto px-4 py-20 text-[#A0A8C0]">Loading…</div>;
   if (user?.role !== "admin") {
     return <div className="max-w-3xl mx-auto px-4 py-24 text-center">
       <div className="card">
         <h1 className="text-2xl font-bold text-white mb-2">Admin access required</h1>
-        <p className="text-[#9ca3af]">You need an admin role to view this page.</p>
+        <p className="text-[#A0A8C0]">You need an admin role to view this page.</p>
       </div>
     </div>;
   }
@@ -154,14 +154,14 @@ export default function Admin() {
             <div className="flex items-center gap-2 section-title-accent mb-6"><Settings className="w-4 h-4" /> Tournament Control</div>
             <div className="space-y-3 max-h-[360px] overflow-y-auto pr-1">
               {tournaments.length === 0 ? (
-                <div className="text-[#9ca3af] text-sm py-6 text-center">No tournaments yet.</div>
+                <div className="text-[#A0A8C0] text-sm py-6 text-center">No tournaments yet.</div>
               ) : (
                 tournaments.map((t) => (
                   <div key={t.id} className="card-container p-4">
                     <div className="flex items-center justify-between mb-3">
                       <div className="min-w-0">
                         <div className="text-white font-semibold truncate">{t.name}</div>
-                        <div className="text-xs text-[#9ca3af]">{(t.prize_pool_rex || 0).toLocaleString()} REX · {t.participant_count || 0} traders</div>
+                        <div className="text-xs text-[#A0A8C0]">{(t.prize_pool_rex || 0).toLocaleString()} REX · {t.participant_count || 0} traders</div>
                       </div>
                       <span className={`badge ${t.status === "live" ? "badge-green" : "badge-muted"}`}>{t.status}</span>
                     </div>

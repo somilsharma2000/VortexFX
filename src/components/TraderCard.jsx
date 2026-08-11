@@ -18,7 +18,7 @@ export default function TraderCard({ trader, rank }) {
           <div className="flex items-center justify-between mb-4">
             <span className="badge badge-purple">RANK #{rank}</span>
             {tr.verified && (
-              <span className="inline-flex items-center gap-1 text-xs text-[#3b82f6] font-semibold">
+              <span className="inline-flex items-center gap-1 text-xs text-[#00C853] font-semibold">
                 <BadgeCheck className="w-4 h-4" /> Verified
               </span>
             )}
@@ -28,20 +28,20 @@ export default function TraderCard({ trader, rank }) {
         <div className="flex items-center gap-4 mb-5">
           <div
             className="w-14 h-14 rounded-2xl flex items-center justify-center text-lg font-bold text-white shrink-0"
-            style={{ backgroundImage: "linear-gradient(135deg, #8b5cf6, #3b82f6)" }}
+            style={{ backgroundImage: "linear-gradient(135deg, #D4AF37, #00C853)" }}
           >
             {initials(username)}
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-1.5">
               <h3 className="text-lg font-bold text-white truncate">{username}</h3>
-              {tr.verified && <BadgeCheck className="w-4 h-4 text-[#3b82f6] shrink-0" />}
+              {tr.verified && <BadgeCheck className="w-4 h-4 text-[#00C853] shrink-0" />}
             </div>
-            <p className="text-xs text-[#9ca3af] truncate">{tr.referral_code ? `Ref: ${tr.referral_code}` : "Koda Trader"}</p>
+            <p className="text-xs text-[#A0A8C0] truncate">{tr.referral_code ? `Ref: ${tr.referral_code}` : "FORTREX Trader"}</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 mb-5 pb-5 border-b border-[#202028]">
+        <div className="grid grid-cols-2 gap-4 mb-5 pb-5 border-b border-[#D4AF37]/15">
           <div>
             <div className="section-label mb-1">REX Balance</div>
             <div className="text-lg font-bold text-white">{(tr.rex_balance || 0).toLocaleString()}</div>
@@ -49,7 +49,7 @@ export default function TraderCard({ trader, rank }) {
           <div>
             <div className="section-label mb-1">Streak</div>
             <div className="text-lg font-bold text-white inline-flex items-center gap-1">
-              <Flame className="w-4 h-4 text-[#7c3aed]" /> {tr.checkin_streak || 0}
+              <Flame className="w-4 h-4 text-[#D4AF37]" /> {tr.checkin_streak || 0}
             </div>
           </div>
           <div>
@@ -68,7 +68,7 @@ export default function TraderCard({ trader, rank }) {
           </span>
         </div>
 
-        <div className="mt-auto inline-flex items-center gap-1.5 text-[#7c3aed] font-semibold text-sm group">
+        <div className="mt-auto inline-flex items-center gap-1.5 text-[#D4AF37] font-semibold text-sm group">
           View Profile
           <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
         </div>

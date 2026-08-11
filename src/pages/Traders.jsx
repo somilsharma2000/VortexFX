@@ -31,10 +31,10 @@ export default function Traders() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <SectionHeader label="Community" title="Trader Profiles" subtitle="Meet the Koda traders. Search by username or referral code." />
+      <SectionHeader label="Community" title="Trader Profiles" subtitle="Meet the FORTREX traders. Search by username or referral code." />
 
       <div className="relative max-w-md mb-10">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b7280]" />
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7494]" />
         <input
           className="input-field pl-11"
           placeholder="Search traders…"
@@ -44,9 +44,9 @@ export default function Traders() {
       </div>
 
       {loading ? (
-        <div className="text-[#9ca3af]">Loading traders…</div>
+        <div className="text-[#A0A8C0]">Loading traders…</div>
       ) : filtered.length === 0 ? (
-        <div className="card text-center text-[#9ca3af] py-16">No traders found.</div>
+        <div className="card text-center text-[#A0A8C0] py-16">No traders found.</div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((tr, i) => (

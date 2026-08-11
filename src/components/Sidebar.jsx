@@ -5,7 +5,7 @@ import { useCurrentTrader } from "@/hooks/useCurrentTrader";
 
 const navItems = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard, end: true },
-  { to: "/tournaments", label: "Tournaments", icon: Trophy },
+  { to: "/tournaments", label: "Championships", icon: Trophy },
   { to: "/traders", label: "Traders", icon: Users },
   { to: "/leaderboard", label: "Leaderboard", icon: BarChart3 },
   { to: "/check-in", label: "Check-in", icon: CalendarCheck, badge: "HUB" },
@@ -21,8 +21,8 @@ export default function Sidebar() {
   const sidebarContent = (
     <>
       <Link to="/" className="flex items-center gap-2.5 px-6 h-16 shrink-0" onClick={() => setOpen(false)}>
-        <div className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-bold" style={{ backgroundImage: "linear-gradient(135deg, #8b5cf6, #3b82f6)" }}>K</div>
-        <span className="text-lg font-bold text-white tracking-tight">KODA</span>
+        <div className="w-9 h-9 rounded-xl flex items-center justify-center text-[#0A0E27] font-bold" style={{ backgroundImage: "linear-gradient(135deg, #D4AF37, #00C853)" }}>F</div>
+        <span className="text-lg font-bold text-white tracking-tight">FORTREX</span>
       </Link>
 
       <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
@@ -49,12 +49,12 @@ export default function Sidebar() {
         )}
       </nav>
 
-      <div className="p-4 border-t border-[#202028]">
+      <div className="p-4" style={{ borderTop: "1px solid rgba(212,175,55,0.15)" }}>
         {!loading && trader && (
           <div className="card-container px-4 py-3 mb-3 flex items-center gap-2">
-            <Zap className="w-4 h-4 text-[#7c3aed]" />
+            <Zap className="w-4 h-4 text-[#D4AF37]" />
             <span className="text-sm font-semibold text-white">{(trader.rex_balance || 0).toLocaleString()}</span>
-            <span className="text-xs text-[#9ca3af]">REX</span>
+            <span className="text-xs text-[#A0A8C0]">REX</span>
           </div>
         )}
         <Link to="/check-in" onClick={() => setOpen(false)} className="btn-primary w-full text-sm" style={{ padding: "10px 16px" }}>
@@ -66,28 +66,25 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Desktop sidebar */}
-      <aside className="hidden lg:flex fixed inset-y-0 left-0 w-[260px] flex-col z-40" style={{ backgroundColor: "#0d0d12", borderRight: "1px solid #202028" }}>
+      <aside className="hidden lg:flex fixed inset-y-0 left-0 w-[260px] flex-col z-40" style={{ backgroundColor: "#080C1F", borderRight: "1px solid rgba(212,175,55,0.15)" }}>
         {sidebarContent}
       </aside>
 
-      {/* Mobile top bar */}
-      <header className="lg:hidden fixed top-0 inset-x-0 z-50 h-16 flex items-center justify-between px-4" style={{ backgroundColor: "rgba(10,10,12,0.85)", backdropFilter: "blur(12px)", borderBottom: "1px solid #202028" }}>
+      <header className="lg:hidden fixed top-0 inset-x-0 z-50 h-16 flex items-center justify-between px-4" style={{ backgroundColor: "rgba(10,14,39,0.85)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(212,175,55,0.15)" }}>
         <Link to="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style={{ backgroundImage: "linear-gradient(135deg, #8b5cf6, #3b82f6)" }}>K</div>
-          <span className="text-base font-bold text-white">KODA</span>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center text-[#0A0E27] font-bold text-sm" style={{ backgroundImage: "linear-gradient(135deg, #D4AF37, #00C853)" }}>F</div>
+          <span className="text-base font-bold text-white">FORTREX</span>
         </Link>
         <button onClick={() => setOpen(!open)} className="text-white p-2" aria-label="Menu">
           {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </header>
 
-      {/* Mobile drawer */}
       {open && (
         <>
           <div className="lg:hidden fixed inset-0 z-40" style={{ backgroundColor: "rgba(0,0,0,0.6)" }} onClick={() => setOpen(false)} />
-          <aside className="lg:hidden fixed inset-y-0 left-0 w-[260px] z-50 flex flex-col" style={{ backgroundColor: "#0d0d12", borderRight: "1px solid #202028" }}>
-            <button onClick={() => setOpen(false)} className="absolute top-4 right-4 text-[#9ca3af] hover:text-white z-10">
+          <aside className="lg:hidden fixed inset-y-0 left-0 w-[260px] z-50 flex flex-col" style={{ backgroundColor: "#080C1F", borderRight: "1px solid rgba(212,175,55,0.15)" }}>
+            <button onClick={() => setOpen(false)} className="absolute top-4 right-4 text-[#A0A8C0] hover:text-white z-10">
               <X className="w-5 h-5" />
             </button>
             {sidebarContent}
