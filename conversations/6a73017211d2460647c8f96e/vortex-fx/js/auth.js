@@ -2,7 +2,7 @@
    FORTREX — SHARED AUTH MODULE
    Handles Discord OAuth, guild membership check,
    session management, API calls, and
-   PRE-LAUNCH STEALTH MODE.
+   FULL STEALTH MODE — nothing visible until login.
    ============================================ */
 
 const FORTREX_AUTH = {
@@ -10,7 +10,6 @@ const FORTREX_AUTH = {
   
   DISCORD_CLIENT_ID: '1536976658836230254',
   DISCORD_REDIRECT_URI: 'https://somilsharma2000.github.io/VortexFX/signin.html',
-  // 'identify' + 'guilds' = we check if user is in our Discord server
   DISCORD_SCOPES: 'identify guilds',
   DISCORD_GUILD_ID: '1526348728108322946',
   DISCORD_INVITE: 'https://discord.gg/9pTSqeTbn',
@@ -18,12 +17,17 @@ const FORTREX_AUTH = {
   TRADER_KEY: 'fortrex_trader',
   TOKEN_KEY: 'fortrex_discord_token',
   
-  // Pre-launch: pages that require login
-  LOCKED_PAGES: ['profile.html', 'checkin.html'],
+  // PUBLIC pages — accessible without login
+  PUBLIC_PAGES: ['index.html', 'terms.html', 'privacy.html', 'signin.html', '404.html', ''],
   
+  // ALL other pages require authentication
   isLoggedIn() {
-    const trader = localStorage.getItem(this.TRADER_KEY);
-    return trader ? JSON.parse(trader) : null;
+    try {
+      const trader = localStorage.getItem(this.TRADER_KEY);
+      return trader ? JSON.parse(trader) : null;
+    } catch (e) {
+      return null;
+    }
   },
   
   loginWithDiscord(referralCode) {
@@ -68,7 +72,6 @@ const FORTREX_AUTH = {
         localStorage.setItem(this.TOKEN_KEY, accessToken);
         return data;
       } else {
-        // If the error is about guild membership, show the join link
         if (data.error && data.error.includes('Discord server')) {
           return { 
             success: false, 
@@ -101,49 +104,33 @@ const FORTREX_AUTH = {
     } catch (err) {
       return { success: false, error: 'Network error' };
     }
-  },
-  
-  updateNav() {
-    const trader = this.isLoggedIn();
-    const navCta = document.querySelector('.nav-cta');
-    if (!navCta) return;
-    
-    if (trader) {
-      const signinLink = navCta.querySelector('a[href="signin.html"]');
-      if (signinLink) {
-        signinLink.textContent = trader.username || 'Profile';
-        signinLink.href = 'profile.html';
-      }
-      
-      const enterBtn = navCta.querySelector('.btn-primary');
-      if (enterBtn) {
-        enterBtn.textContent = 'Logout';
-        enterBtn.href = '#';
-        enterBtn.onclick = (e) => {
-          e.preventDefault();
-          this.logout();
-        };
-      }
-    }
   }
 };
 
-// ===== PRE-LAUNCH STEALTH MODE LOCK =====
+// ===== FULL STEALTH MODE LOCK =====
+// Only index.html, terms.html, privacy.html, signin.html are public.
+// EVERYTHING else requires authentication — redirect to index.html if not logged in.
 (function() {
   const currentPage = window.location.pathname.split('/').pop();
   const trader = FORTREX_AUTH.isLoggedIn();
   
+  // If on a public page, allow access
+  if (FORTREX_AUTH.PUBLIC_PAGES.includes(currentPage)) return;
+  
   // admin.html has its own passcode gate — don't redirect it
   if (currentPage === 'admin.html') return;
-  if (FORTREX_AUTH.LOCKED_PAGES.includes(currentPage) && !trader) {
+  
+  // All other pages — require login
+  if (!trader) {
+    window.location.href = 'index.html';
+    return;
+  }
+  
+  // If banned, redirect to index
+  if (trader.banned) {
+    localStorage.removeItem(FORTREX_AUTH.TRADER_KEY);
+    localStorage.removeItem(FORTREX_AUTH.TOKEN_KEY);
     window.location.href = 'index.html';
     return;
   }
 })();
-
-// Auto-update nav on every page
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => FORTREX_AUTH.updateNav());
-} else {
-  FORTREX_AUTH.updateNav();
-}
