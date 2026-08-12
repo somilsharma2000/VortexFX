@@ -12,6 +12,14 @@
     "banned_reason": {
       "type": "string"
     },
+    "battlepass_level": {
+      "type": "number",
+      "default": 0
+    },
+    "battlepass_xp": {
+      "type": "number",
+      "default": 0
+    },
     "checkin_streak": {
       "type": "number"
     },
@@ -52,6 +60,16 @@
     },
     "total_checkins": {
       "type": "number"
+    },
+    "trader_class": {
+      "type": "string",
+      "enum": [
+        "Sniper",
+        "Scalper",
+        "Swing King",
+        "Rookie"
+      ],
+      "default": "Rookie"
     },
     "verified": {
       "type": "boolean"

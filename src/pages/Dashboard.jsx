@@ -4,6 +4,10 @@ import { base44 } from "@/api/base44Client";
 import { Flame, ArrowRight, Crown, BadgeCheck, Users, Trophy, Zap, Gift, TrendingUp, ShieldCheck, MessageCircle } from "lucide-react";
 import { useCurrentTrader } from "@/hooks/useCurrentTrader";
 import StatusDot from "@/components/StatusDot";
+import GenesisBanner from "@/components/landing/GenesisBanner";
+import SocialProofBar from "@/components/landing/SocialProofBar";
+import HowItWorks from "@/components/landing/HowItWorks";
+import TrustSection from "@/components/landing/TrustSection";
 
 export default function Dashboard() {
   const { trader } = useCurrentTrader();
@@ -50,6 +54,7 @@ export default function Dashboard() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <GenesisBanner />
       {/* Hero */}
       <section className="relative overflow-hidden rounded-2xl mb-10 fade-in" style={{ backgroundImage: "linear-gradient(135deg, #0A0E27 0%, #111634 50%, #1A2050 100%)", border: "1px solid rgba(212,175,55,0.15)" }}>
         <div className="absolute inset-0 bg-grid-faint opacity-60" />
@@ -76,6 +81,10 @@ export default function Dashboard() {
           </div>
         </div>
       </section>
+
+      <SocialProofBar />
+      <HowItWorks />
+      <TrustSection />
 
       {/* Welcome */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">

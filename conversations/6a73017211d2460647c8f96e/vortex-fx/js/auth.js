@@ -1,7 +1,8 @@
 /* ============================================
    FORTEX FX — SHARED AUTH MODULE
-   Handles Discord OAuth, session management,
-   API calls, and PRE-LAUNCH STEALTH MODE.
+   Handles Discord OAuth, guild membership check,
+   session management, API calls, and
+   PRE-LAUNCH STEALTH MODE.
    ============================================ */
 
 const FORTEX_AUTH = {
@@ -9,7 +10,10 @@ const FORTEX_AUTH = {
   
   DISCORD_CLIENT_ID: '1536976658836230254',
   DISCORD_REDIRECT_URI: 'https://somilsharma2000.github.io/VortexFX/signin.html',
-  DISCORD_SCOPES: 'identify',
+  // 'identify' + 'guilds' = we check if user is in our Discord server
+  DISCORD_SCOPES: 'identify guilds',
+  DISCORD_GUILD_ID: '1526348728108322946',
+  DISCORD_INVITE: 'https://discord.gg/9pTSqeTbn',
   
   TRADER_KEY: 'fortex_trader',
   TOKEN_KEY: 'fortex_discord_token',
@@ -64,6 +68,15 @@ const FORTEX_AUTH = {
         localStorage.setItem(this.TOKEN_KEY, accessToken);
         return data;
       } else {
+        // If the error is about guild membership, show the join link
+        if (data.error && data.error.includes('Discord server')) {
+          return { 
+            success: false, 
+            error: data.error,
+            needs_guild: true,
+            invite_url: this.DISCORD_INVITE
+          };
+        }
         return { success: false, error: data.error };
       }
     } catch (err) {
@@ -116,7 +129,6 @@ const FORTEX_AUTH = {
 };
 
 // ===== PRE-LAUNCH STEALTH MODE LOCK =====
-// All inner pages redirect to homepage unless logged in
 (function() {
   const currentPage = window.location.pathname.split('/').pop();
   const trader = FORTEX_AUTH.isLoggedIn();

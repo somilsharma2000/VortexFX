@@ -45,6 +45,15 @@
         "completed",
         "cancelled"
       ]
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "monthly",
+        "sprint",
+        "flash"
+      ],
+      "default": "monthly"
     }
   },
   "type": "object",

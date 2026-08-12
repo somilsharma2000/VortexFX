@@ -19,6 +19,7 @@ import Leaderboard from "@/pages/Leaderboard";
 import Admin from "@/pages/Admin";
 import Referrals from "@/pages/Referrals";
 import Transactions from "@/pages/Transactions";
+import Waitlist from "@/pages/Waitlist";
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -57,6 +58,7 @@ const AuthenticatedApp = () => {
         <Route path="/admin" element={<Admin />} />
         <Route path="/referrals" element={<Referrals />} />
         <Route path="/transactions" element={<Transactions />} />
+        <Route path="/waitlist" element={<Waitlist />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>

@@ -1,0 +1,31 @@
+{
+  "properties": {
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "position": {
+      "type": "number"
+    },
+    "referred_by": {
+      "type": "string"
+    },
+    "discord_joined": {
+      "type": "boolean"
+    },
+    "telegram_joined": {
+      "type": "boolean"
+    },
+    "signup_date": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "type": "object",
+  "required": [
+    "email"
+  ],
+  "name": "WaitlistEntry"
+}
