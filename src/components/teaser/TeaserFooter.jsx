@@ -1,13 +1,14 @@
 export default function TeaserFooter() {
   return (
-    <footer className="w-full text-center py-8" style={{ borderTop: "1px solid rgba(212,175,55,0.12)" }}>
-      <div className="text-sm font-bold tracking-[0.25em] mb-2" style={{ color: "#D4AF37" }}>
+    <footer className="w-full text-center py-10 px-4">
+      <div className="text-sm font-extrabold tracking-[0.3em]" style={{ color: "#D4AF37" }}>
         FORTREX
       </div>
-      <p className="text-xs mb-1" style={{ color: "#666666" }}>© 2026 FORTREX. All rights reserved.</p>
-      <p className="text-xs" style={{ color: "#666666" }}>
+      <p className="mt-3 text-xs" style={{ color: "#666666" }}>© 2026 FORTREX. All rights reserved.</p>
+      <p className="mt-1 text-xs" style={{ color: "#666666" }}>
         Trading involves risk. Past performance does not guarantee future results.
       </p>
+      <p className="mt-1 text-xs" style={{ color: "#666666" }}>Built by traders, for traders.</p>
     </footer>
   );
 }
