@@ -19,7 +19,7 @@ const FORTREX_AUTH = {
   TOKEN_KEY: 'fortrex_discord_token',
   
   // Pre-launch: pages that require login
-  LOCKED_PAGES: ['dashboard.html', 'profile.html', 'checkin.html', 'admin.html'],
+  LOCKED_PAGES: ['dashboard.html', 'profile.html', 'checkin.html'],
   
   isLoggedIn() {
     const trader = localStorage.getItem(this.TRADER_KEY);
@@ -133,6 +133,8 @@ const FORTREX_AUTH = {
   const currentPage = window.location.pathname.split('/').pop();
   const trader = FORTREX_AUTH.isLoggedIn();
   
+  // admin.html has its own passcode gate — don't redirect it
+  if (currentPage === 'admin.html') return;
   if (FORTREX_AUTH.LOCKED_PAGES.includes(currentPage) && !trader) {
     window.location.href = 'index.html';
     return;
