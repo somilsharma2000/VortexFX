@@ -19,7 +19,7 @@ const FORTEX_AUTH = {
   TOKEN_KEY: 'fortex_discord_token',
   
   // Pre-launch: pages that require login
-  LOCKED_PAGES: ['profile.html', 'checkin.html', 'leaderboard.html', 'offers.html', 'invite.html', 'admin.html', 'resources.html'],
+  LOCKED_PAGES: ['dashboard.html', 'profile.html', 'checkin.html', 'admin.html'],
   
   isLoggedIn() {
     const trader = localStorage.getItem(this.TRADER_KEY);

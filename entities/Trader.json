@@ -3,23 +3,65 @@
     "avatar": {
       "type": "string"
     },
-    "best_streak": {
-      "type": "number"
-    },
     "banned": {
       "type": "boolean"
     },
     "banned_reason": {
       "type": "string"
     },
+    "battlepass_level": {
+      "type": "number"
+    },
+    "battlepass_xp": {
+      "type": "number"
+    },
+    "best_streak": {
+      "type": "number"
+    },
     "checkin_streak": {
       "type": "number"
+    },
+    "created_by": {
+      "type": "string"
     },
     "discord_id": {
       "type": "string"
     },
     "discord_username": {
       "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "experience_level": {
+      "type": "string",
+      "enum": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "prop"
+      ]
+    },
+    "invite_count": {
+      "type": "number"
+    },
+    "invite_passes": {
+      "type": "number"
+    },
+    "invite_tier": {
+      "type": "string",
+      "enum": [
+        "member",
+        "recruiter",
+        "squad-leader",
+        "ambassador",
+        "diamond",
+        "founding-trader",
+        "legend"
+      ]
+    },
+    "is_active_trader": {
+      "type": "boolean"
     },
     "joined_date": {
       "type": "string"
@@ -33,6 +75,15 @@
     "mt4_linked": {
       "type": "boolean"
     },
+    "preferred_market": {
+      "type": "string",
+      "enum": [
+        "forex",
+        "gold-indices",
+        "crypto",
+        "mixed"
+      ]
+    },
     "referred_by": {
       "type": "string"
     },
@@ -42,18 +93,41 @@
     "rex_balance": {
       "type": "number"
     },
+    "rex_earned_total": {
+      "type": "number"
+    },
+    "rex_spent_total": {
+      "type": "number"
+    },
     "role": {
-      "enum": [
-        "trader",
-        "admin"
-      ],
       "type": "string"
+    },
+    "telegram_code": {
+      "type": "string"
+    },
+    "telegram_linked": {
+      "type": "boolean"
     },
     "total_checkins": {
       "type": "number"
     },
+    "trader_class": {
+      "type": "string"
+    },
+    "trades_logged_30d": {
+      "type": "number"
+    },
     "verified": {
       "type": "boolean"
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "unsubmitted",
+        "pending",
+        "approved",
+        "rejected"
+      ]
     }
   },
   "type": "object",

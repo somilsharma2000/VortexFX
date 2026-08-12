@@ -1,0 +1,38 @@
+{
+  "properties": {
+    "rex_awarded": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "claimed",
+        "pending",
+        "approved",
+        "rejected"
+      ]
+    },
+    "task_type": {
+      "type": "string",
+      "enum": [
+        "whatsapp",
+        "discord-help",
+        "invite",
+        "x-post",
+        "join-discord"
+      ]
+    },
+    "trader_id": {
+      "type": "string"
+    },
+    "claimed_date": {
+      "type": "string"
+    },
+    "proof_url": {
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "required": [],
+  "name": "TaskClaim"
+}

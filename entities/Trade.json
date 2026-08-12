@@ -1,0 +1,41 @@
+{
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "username": {
+      "type": "string"
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "long",
+        "short"
+      ]
+    },
+    "pair": {
+      "type": "string"
+    },
+    "entry_price": {
+      "type": "number"
+    },
+    "exit_price": {
+      "type": "number"
+    },
+    "points": {
+      "type": "number"
+    },
+    "shared_on_wall": {
+      "type": "boolean"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "trade_date": {
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "required": [],
+  "name": "Trade"
+}

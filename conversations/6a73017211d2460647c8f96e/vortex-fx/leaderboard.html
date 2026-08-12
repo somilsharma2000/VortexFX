@@ -566,14 +566,19 @@
         <span class="nav-wordmark">FORTREX FX</span>
       </a>
     </div>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links-main">
       <li><a href="index.html" class="nav-link">Home</a></li>
-      <li><a href="leaderboard.html" class="nav-link active">Tournaments</a></li>
-      <li><a href="offers.html" class="nav-link">Rewards</a></li>
-      <li><a href="resources.html" class="nav-link">Resources</a></li>
-      <li><a href="invite.html" class="nav-link">Invite</a></li>
-      <li><a href="profile.html" class="nav-link">Profile</a></li>
-      <li><a href="checkin.html" class="nav-link">Check-In</a></li>
+      <li><a href="tools.html" class="nav-link">Tools</a></li>
+      <li><a href="contests.html" class="nav-link">Tournaments</a></li>
+      <li><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+      <li><a href="rex.html" class="nav-link">REX</a></li>
+      <li><a href="journal.html" class="nav-link">Journal</a></li>
+      <li><a href="community.html" class="nav-link">Community</a></li>
+      <li><a href="faq.html" class="nav-link">FAQ</a></li>
+      <li><a href="dashboard.html" class="nav-link nav-internal" style="display:none">Dashboard</a></li>
+      <li><a href="invite.html" class="nav-link nav-internal" style="display:none">Invite</a></li>
+      <li><a href="profile.html" class="nav-link nav-internal" style="display:none">Profile</a></li>
+      <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
     </ul>
     <div class="nav-cta">
       <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
@@ -1693,5 +1698,13 @@
       init();
     });
   </script>
+
+    <script>
+      (function() {
+        const trader = localStorage.getItem('fortex_trader');
+        if (trader) document.querySelectorAll('.nav-internal').forEach(el => el.style.display = '');
+      })();
+    </script>
+
 </body>
 </html>
