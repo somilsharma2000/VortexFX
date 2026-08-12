@@ -553,7 +553,7 @@
   <nav class="nav">
     <div class="nav-brand">
       <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-        <div class="nav-logo"><img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 32px; height: 32px; border-radius: 8px; object-fit: cover; filter: drop-shadow(0 0 8px rgba(234, 202, 122, 0.35));"></div>
+        <div class="nav-logo"><img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 32px; height: 32px; object-fit: contain; filter: drop-shadow(0 0 6px rgba(234, 202, 122, 0.3));"></div>
         <span class="nav-wordmark">FORTREX</span>
       </a>
     </div>
@@ -722,7 +722,7 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 28px; height: 28px; border-radius: 6px; margin-right: 12px;">
+          <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(234, 202, 122, 0.2));">
           <span class="nav-wordmark" style="color: #EACA7A; font-weight: 700;">FORTREX</span>
         </div>
         <div class="footer-links">
@@ -943,9 +943,9 @@
         let sprintTournaments = SPRINTS_FALLBACK;
 
         // Call backend function getTournaments
-        if (window.FORTEX_AUTH && typeof FORTEX_AUTH.callFunction === 'function') {
+        if (window.FORTREX_AUTH && typeof FORTREX_AUTH.callFunction === 'function') {
           try {
-            const tourneyRes = await FORTEX_AUTH.callFunction('getTournaments', {});
+            const tourneyRes = await FORTREX_AUTH.callFunction('getTournaments', {});
             if (tourneyRes && tourneyRes.success && Array.isArray(tourneyRes.tournaments) && tourneyRes.tournaments.length > 0) {
               const allT = tourneyRes.tournaments;
               const mainFiltered = allT.filter(t => t.type !== 'sprint');
@@ -1045,9 +1045,9 @@
         renderLoading('leaderboard-container');
 
         let data = null;
-        if (window.FORTEX_AUTH && typeof FORTEX_AUTH.callFunction === 'function') {
+        if (window.FORTREX_AUTH && typeof FORTREX_AUTH.callFunction === 'function') {
           try {
-            const res = await FORTEX_AUTH.callFunction('getLeaderboard', { tournament_id: tournamentId });
+            const res = await FORTREX_AUTH.callFunction('getLeaderboard', { tournament_id: tournamentId });
             if (res && res.success) data = res;
           } catch (e) {
             console.warn('Backend call error, using fallback:', e);
@@ -1079,9 +1079,9 @@
         renderLoading('sprint-leaderboard-container');
 
         let data = null;
-        if (window.FORTEX_AUTH && typeof FORTEX_AUTH.callFunction === 'function') {
+        if (window.FORTREX_AUTH && typeof FORTREX_AUTH.callFunction === 'function') {
           try {
-            const res = await FORTEX_AUTH.callFunction('getLeaderboard', { tournament_id: sprintId });
+            const res = await FORTREX_AUTH.callFunction('getLeaderboard', { tournament_id: sprintId });
             if (res && res.success) data = res;
           } catch (e) {
             console.warn('Backend call error, using fallback:', e);
@@ -1197,7 +1197,7 @@
         const container = document.getElementById(containerId);
         if (!container) return;
 
-        const loggedInUser = window.FORTEX_AUTH ? FORTEX_AUTH.isLoggedIn() : null;
+        const loggedInUser = window.FORTREX_AUTH ? FORTREX_AUTH.isLoggedIn() : null;
         const userTierBadgeHtml = loggedInUser 
           ? `<span class="your-tier-badge">⚡ Your Tier: Pro</span>` 
           : `<span style="font-size: 12px; color: #94A3B8; font-style: italic;">Sign in to see your active tier badge</span>`;
@@ -1704,7 +1704,7 @@
 
     <script>
       (function() {
-        const trader = localStorage.getItem('fortex_trader');
+        const trader = localStorage.getItem('fortrex_trader');
         if (trader) document.querySelectorAll('.nav-internal').forEach(el => el.style.display = '');
       })();
     </script>

@@ -1907,7 +1907,7 @@
     // ===================================================================
     document.addEventListener('DOMContentLoaded', async () => {
       // 1. Verify Authentication & Admin Role
-      currentAdmin = FORTEX_AUTH.isLoggedIn();
+      currentAdmin = FORTREX_AUTH.isLoggedIn();
 
       if (!currentAdmin || currentAdmin.role !== 'admin') {
         alert('Access Denied: Admin privileges required to access Mission Control.');
@@ -2074,7 +2074,7 @@
     // ===================================================================
     async function loadOverviewData() {
       try {
-        const res = await FORTEX_AUTH.callFunction('getPlatformStats', {});
+        const res = await FORTREX_AUTH.callFunction('getPlatformStats', {});
         if (res && res.success && res.stats) {
           const s = res.stats;
 
@@ -2125,7 +2125,7 @@
       tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 30px;">Fetching tournaments...</td></tr>`;
 
       try {
-        const res = await FORTEX_AUTH.callFunction('getTournaments', {});
+        const res = await FORTREX_AUTH.callFunction('getTournaments', {});
         if (res && res.success && Array.isArray(res.tournaments) && res.tournaments.length > 0) {
           allTournaments = res.tournaments;
         } else {
@@ -2218,7 +2218,7 @@
     // ===================================================================
     async function loadWaitlistData() {
       try {
-        const statsRes = await FORTEX_AUTH.callFunction('getPlatformStats', {});
+        const statsRes = await FORTREX_AUTH.callFunction('getPlatformStats', {});
         if (statsRes && statsRes.success && statsRes.stats && Array.isArray(statsRes.stats.waitlist_entries)) {
           allWaitlist = statsRes.stats.waitlist_entries;
         } else {
@@ -2427,7 +2427,7 @@
       };
 
       try {
-        const res = await FORTEX_AUTH.callFunction('adminCreateTournament', payload);
+        const res = await FORTREX_AUTH.callFunction('adminCreateTournament', payload);
         if (res && res.success) {
           showToast(`Tournament '${payload.name}' created successfully!`, 'success');
           closeModal('modal-create-tournament');
@@ -2476,7 +2476,7 @@
       submitBtn.textContent = 'Processing Payouts...';
 
       try {
-        const res = await FORTEX_AUTH.callFunction('adminTournamentControl', {
+        const res = await FORTREX_AUTH.callFunction('adminTournamentControl', {
           admin_id: currentAdmin ? currentAdmin.id : 'admin',
           tournament_id: tournamentId,
           action: 'distribute',
@@ -2521,7 +2521,7 @@
     // ===================================================================
     async function quickControl(tournamentId, action) {
       try {
-        const res = await FORTEX_AUTH.callFunction('adminTournamentControl', {
+        const res = await FORTREX_AUTH.callFunction('adminTournamentControl', {
           admin_id: currentAdmin ? currentAdmin.id : 'admin',
           tournament_id: tournamentId,
           action: action
@@ -2554,7 +2554,7 @@
 
       let participants = [];
       try {
-        const res = await FORTEX_AUTH.callFunction('getLeaderboard', { tournament_id: tournamentId, type: 'tournament_results' });
+        const res = await FORTREX_AUTH.callFunction('getLeaderboard', { tournament_id: tournamentId, type: 'tournament_results' });
         if (res && res.success && Array.isArray(res.results) && res.results.length > 0) {
           participants = res.results.map(r => ({
             trader_id: r.trader_id || r.id,
@@ -2655,7 +2655,7 @@
       }).filter(p => p.trader_id.length > 0);
 
       try {
-        const res = await FORTEX_AUTH.callFunction('adminTournamentControl', {
+        const res = await FORTREX_AUTH.callFunction('adminTournamentControl', {
           admin_id: currentAdmin ? currentAdmin.id : 'admin',
           tournament_id: tournamentId,
           action: action,
@@ -2695,7 +2695,7 @@
       ];
 
       try {
-        const res = await FORTEX_AUTH.callFunction('adminUpdateSettings', {
+        const res = await FORTREX_AUTH.callFunction('adminUpdateSettings', {
           admin_id: currentAdmin ? currentAdmin.id : 'admin',
           settings: settingsPayload
         });

@@ -672,7 +672,7 @@
     <!-- Navbar -->
     <header class="navbar">
       <a href="index.html" class="nav-brand">
-        <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 32px; height: 32px; border-radius: 8px; object-fit: cover; filter: drop-shadow(0 0 8px rgba(234, 202, 122, 0.35));">
+        <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 32px; height: 32px; object-fit: contain; filter: drop-shadow(0 0 6px rgba(234, 202, 122, 0.3));">
         <span class="nav-wordmark">FORTREX</span>
       </a>
 
@@ -757,7 +757,7 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 28px; height: 28px; border-radius: 6px; margin-right: 12px;">
+          <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(234, 202, 122, 0.2));">
           <span class="nav-wordmark" style="color: #EACA7A; font-weight: 700;">FORTREX</span>
         </div>
         <div class="footer-links">
@@ -926,7 +926,7 @@
 
     // Auth & Navigation State
     function updateNavState() {
-      const trader = localStorage.getItem('fortex_trader');
+      const trader = localStorage.getItem('fortrex_trader');
       const navLinksContainer = document.getElementById('nav-links-list');
       const navCtaContainer = document.getElementById('nav-cta-container');
       const logTradeBtn = document.getElementById('log-trade-btn');
@@ -956,7 +956,7 @@
               </div>
               <span>${traderObj.username || 'Trader'}</span>
             </a>
-            <button onclick="FORTEX_AUTH.logout()" class="btn-ghost-pill" style="padding: 6px 16px; font-size: 12px;">Logout</button>
+            <button onclick="FORTREX_AUTH.logout()" class="btn-ghost-pill" style="padding: 6px 16px; font-size: 12px;">Logout</button>
           `;
         }
 
@@ -1091,8 +1091,8 @@
     // Attempt backend fetch if available
     async function loadCommunityTrades() {
       try {
-        if (typeof FORTEX_AUTH !== 'undefined' && FORTEX_AUTH.callFunction) {
-          const res = await FORTEX_AUTH.callFunction('getTraderProfile', {});
+        if (typeof FORTREX_AUTH !== 'undefined' && FORTREX_AUTH.callFunction) {
+          const res = await FORTREX_AUTH.callFunction('getTraderProfile', {});
           if (res && res.success && res.trades && res.trades.length > 0) {
             currentTrades = res.trades;
           }
@@ -1183,7 +1183,7 @@
 
     <script>
       (function() {
-        const trader = localStorage.getItem('fortex_trader');
+        const trader = localStorage.getItem('fortrex_trader');
         if (trader) document.querySelectorAll('.nav-internal').forEach(el => el.style.display = '');
       })();
     </script>

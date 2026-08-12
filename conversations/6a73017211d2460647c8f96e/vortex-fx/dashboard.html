@@ -497,7 +497,7 @@
   <nav class="nav">
     <div class="nav-brand">
       <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-        <div class="nav-logo"><img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 32px; height: 32px; border-radius: 8px; object-fit: cover; filter: drop-shadow(0 0 8px rgba(234, 202, 122, 0.35));"></div>
+        <div class="nav-logo"><img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 32px; height: 32px; object-fit: contain; filter: drop-shadow(0 0 6px rgba(234, 202, 122, 0.3));"></div>
         <span class="nav-wordmark">FORTREX</span>
       </a>
     </div>
@@ -536,7 +536,7 @@
         <div class="welcome-subtitle">FORTREX Member Dashboard · Command Center</div>
       </div>
       <div>
-        <button onclick="FORTEX_AUTH.logout()" class="btn-pill btn-ghost btn-sm">Log Out</button>
+        <button onclick="FORTREX_AUTH.logout()" class="btn-pill btn-ghost btn-sm">Log Out</button>
       </div>
     </div>
 
@@ -1024,7 +1024,7 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 28px; height: 28px; border-radius: 6px; margin-right: 12px;">
+          <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(234, 202, 122, 0.2));">
           <span class="nav-wordmark" style="color: #EACA7A; font-weight: 700;">FORTREX</span>
         </div>
         <div class="footer-links">
@@ -1062,11 +1062,11 @@
 
     // Auth & Init Check
     (function checkAuth() {
-      if (!window.FORTEX_AUTH || typeof window.FORTEX_AUTH.isLoggedIn !== 'function') {
+      if (!window.FORTREX_AUTH || typeof window.FORTREX_AUTH.isLoggedIn !== 'function') {
         window.location.href = 'signin.html';
         return;
       }
-      localTrader = FORTEX_AUTH.isLoggedIn();
+      localTrader = FORTREX_AUTH.isLoggedIn();
       if (!localTrader) {
         window.location.href = 'signin.html';
         return;
@@ -1086,10 +1086,10 @@
 
       // Fetch Full Profile from Backend
       try {
-        const res = await FORTEX_AUTH.callFunction('getTraderProfile', { trader_id: localTrader.id });
+        const res = await FORTREX_AUTH.callFunction('getTraderProfile', { trader_id: localTrader.id });
         if (res && res.success && res.trader) {
           localTrader = { ...localTrader, ...res.trader };
-          localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+          localStorage.setItem(FORTREX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
           renderDashboardUI(localTrader);
         }
       } catch (err) {
@@ -1213,12 +1213,12 @@
       if (!localTrader) return;
 
       try {
-        const res = await FORTEX_AUTH.callFunction('dailyCheckin', { trader_id: localTrader.id });
+        const res = await FORTREX_AUTH.callFunction('dailyCheckin', { trader_id: localTrader.id });
         if (res && res.success) {
           localTrader.rex_balance = res.new_rex_balance || (localTrader.rex_balance + 20);
           localTrader.checkin_streak = res.new_streak || (localTrader.checkin_streak + 1);
           localTrader.last_checkin_date = new Date().toISOString().split('T')[0];
-          localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+          localStorage.setItem(FORTREX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
           renderDashboardUI(localTrader);
           showToast(`+20 REX Earned! Streak: ${localTrader.checkin_streak} Days 🔥`);
         } else {
@@ -1229,7 +1229,7 @@
         localTrader.rex_balance = (localTrader.rex_balance || 0) + 20;
         localTrader.checkin_streak = (localTrader.checkin_streak || 0) + 1;
         localTrader.last_checkin_date = new Date().toISOString().split('T')[0];
-        localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+        localStorage.setItem(FORTREX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
         renderDashboardUI(localTrader);
         showToast('+20 REX Earned! Daily check-in logged.');
       }
@@ -1245,7 +1245,7 @@
       }
 
       try {
-        const res = await FORTEX_AUTH.callFunction('updateProfile', {
+        const res = await FORTREX_AUTH.callFunction('updateProfile', {
           trader_id: localTrader.id,
           mt4_account: mt4Account,
           deposit_amount: depositAmount,
@@ -1255,13 +1255,13 @@
         localTrader.mt4_account = mt4Account;
         localTrader.deposit_amount = depositAmount;
         localTrader.verification_status = 'pending';
-        localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+        localStorage.setItem(FORTREX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
         renderDashboardUI(localTrader);
         showToast('Verification submitted! Status set to pending review.');
       } catch (e) {
         localTrader.mt4_account = mt4Account;
         localTrader.verification_status = 'pending';
-        localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+        localStorage.setItem(FORTREX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
         renderDashboardUI(localTrader);
         showToast('Verification details saved!');
       }
@@ -1273,7 +1273,7 @@
       const prefMarket = document.getElementById('market-pref-select').value;
 
       try {
-        const res = await FORTEX_AUTH.callFunction('updateProfile', {
+        const res = await FORTREX_AUTH.callFunction('updateProfile', {
           trader_id: localTrader.id,
           experience_level: expLevel,
           preferred_market: prefMarket
@@ -1289,12 +1289,12 @@
 
         localTrader.experience_level = expLevel;
         localTrader.preferred_market = prefMarket;
-        localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+        localStorage.setItem(FORTREX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
         renderDashboardUI(localTrader);
       } catch (e) {
         localTrader.experience_level = expLevel;
         localTrader.preferred_market = prefMarket;
-        localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+        localStorage.setItem(FORTREX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
         renderDashboardUI(localTrader);
         showToast('Profile preferences updated.');
       }
@@ -1317,7 +1317,7 @@
       const netTransferred = amountVal - burned;
 
       try {
-        await FORTEX_AUTH.callFunction('sendRex', {
+        await FORTREX_AUTH.callFunction('sendRex', {
           trader_id: localTrader.id,
           recipient,
           amount: amountVal
@@ -1327,7 +1327,7 @@
       }
 
       localTrader.rex_balance = (localTrader.rex_balance || 0) - amountVal;
-      localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+      localStorage.setItem(FORTREX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
       renderDashboardUI(localTrader);
 
       document.getElementById('send-recipient').value = '';
@@ -1362,7 +1362,7 @@
       }
 
       localTrader.rex_balance = (localTrader.rex_balance || 0) + reward;
-      localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+      localStorage.setItem(FORTREX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
       renderDashboardUI(localTrader);
 
       showToast(`+${reward} REX claimed!`);
@@ -1374,7 +1374,7 @@
       if (!container) return;
 
       try {
-        const res = await FORTEX_AUTH.callFunction('getTournaments', {});
+        const res = await FORTREX_AUTH.callFunction('getTournaments', {});
         if (res && res.success && res.tournaments && res.tournaments.length > 0) {
           container.innerHTML = res.tournaments.slice(0, 3).map(t => `
             <div style="display: flex; justify-content: space-between; align-items: center; background: #080808; border: 1px solid #1f1f1f; border-radius: 12px; padding: 12px 16px;">
@@ -1641,7 +1641,7 @@
 
     <script>
       (function() {
-        const trader = localStorage.getItem('fortex_trader');
+        const trader = localStorage.getItem('fortrex_trader');
         if (trader) document.querySelectorAll('.nav-internal').forEach(el => el.style.display = '');
       })();
     </script>

@@ -5,7 +5,7 @@
    PRE-LAUNCH STEALTH MODE.
    ============================================ */
 
-const FORTEX_AUTH = {
+const FORTREX_AUTH = {
   API_BASE: 'https://api.base44.com/v1/apps/6a73016f9b626430a0d26f88/functions',
   
   DISCORD_CLIENT_ID: '1536976658836230254',
@@ -15,8 +15,8 @@ const FORTEX_AUTH = {
   DISCORD_GUILD_ID: '1526348728108322946',
   DISCORD_INVITE: 'https://discord.gg/9pTSqeTbn',
   
-  TRADER_KEY: 'fortex_trader',
-  TOKEN_KEY: 'fortex_discord_token',
+  TRADER_KEY: 'fortrex_trader',
+  TOKEN_KEY: 'fortrex_discord_token',
   
   // Pre-launch: pages that require login
   LOCKED_PAGES: ['dashboard.html', 'profile.html', 'checkin.html', 'admin.html'],
@@ -131,9 +131,9 @@ const FORTEX_AUTH = {
 // ===== PRE-LAUNCH STEALTH MODE LOCK =====
 (function() {
   const currentPage = window.location.pathname.split('/').pop();
-  const trader = FORTEX_AUTH.isLoggedIn();
+  const trader = FORTREX_AUTH.isLoggedIn();
   
-  if (FORTEX_AUTH.LOCKED_PAGES.includes(currentPage) && !trader) {
+  if (FORTREX_AUTH.LOCKED_PAGES.includes(currentPage) && !trader) {
     window.location.href = 'index.html';
     return;
   }
@@ -141,7 +141,7 @@ const FORTEX_AUTH = {
 
 // Auto-update nav on every page
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => FORTEX_AUTH.updateNav());
+  document.addEventListener('DOMContentLoaded', () => FORTREX_AUTH.updateNav());
 } else {
-  FORTEX_AUTH.updateNav();
+  FORTREX_AUTH.updateNav();
 }
