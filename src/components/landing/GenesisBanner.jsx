@@ -17,7 +17,7 @@ export default function GenesisBanner() {
   }, []);
 
   useEffect(() => {
-    const target = new Date("2026-08-31T23:59:59").getTime();
+    const target = new Date("2026-08-23T23:59:59").getTime();
     const tick = () => {
       const diff = target - Date.now();
       if (diff <= 0) return setTimeLeft("Ended");

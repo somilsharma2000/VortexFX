@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X, Zap, LayoutDashboard, Trophy, Users, BarChart3, Gift, Wallet, CalendarCheck, Shield, Flame } from "lucide-react";
 import { useCurrentTrader } from "@/hooks/useCurrentTrader";
+import Logo from "@/components/Logo";
 
 const navItems = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard, end: true },
@@ -21,8 +22,8 @@ export default function Sidebar() {
   const sidebarContent = (
     <>
       <Link to="/" className="flex items-center gap-2.5 px-6 h-16 shrink-0" onClick={() => setOpen(false)}>
-        <div className="w-9 h-9 rounded-xl flex items-center justify-center text-[#0A0E27] font-bold" style={{ backgroundImage: "linear-gradient(135deg, #D4AF37, #00C853)" }}>F</div>
-        <span className="text-lg font-bold text-white tracking-tight">FORTREX</span>
+        <Logo size={36} />
+        <span className="text-lg font-bold tracking-tight" style={{ color: "#D4AF37" }}>FORTREX</span>
       </Link>
 
       <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
@@ -72,8 +73,8 @@ export default function Sidebar() {
 
       <header className="lg:hidden fixed top-0 inset-x-0 z-50 h-16 flex items-center justify-between px-4" style={{ backgroundColor: "rgba(10,14,39,0.85)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(212,175,55,0.15)" }}>
         <Link to="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center text-[#0A0E27] font-bold text-sm" style={{ backgroundImage: "linear-gradient(135deg, #D4AF37, #00C853)" }}>F</div>
-          <span className="text-base font-bold text-white">FORTREX</span>
+          <Logo size={30} />
+          <span className="text-base font-bold" style={{ color: "#D4AF37" }}>FORTREX</span>
         </Link>
         <button onClick={() => setOpen(!open)} className="text-white p-2" aria-label="Menu">
           {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

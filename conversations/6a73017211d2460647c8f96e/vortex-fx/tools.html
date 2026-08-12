@@ -296,7 +296,35 @@
       background: radial-gradient(circle, rgba(234, 202, 122, 0.08) 0%, transparent 60%);
       pointer-events: none;
     }
-  </style>
+  
+    /* MOBILE RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: #0A0B0F; flex-direction: column; padding: 100px 24px 24px; gap: 8px; z-index: 999; border-left: 1px solid rgba(234,202,122,0.15); transform: translateX(100%); transition: transform 0.3s ease; }
+      .nav-links.active { display: flex; transform: translateX(0); }
+      .nav-cta > a:not(.hamburger) { display: none; }
+      .hamburger { display: flex !important; cursor: pointer; }
+      .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      .hamburger.active span:nth-child(2) { opacity: 0; }
+      .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+      .footer-content { flex-direction: column; gap: 24px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 12px !important; }
+      .container { padding-left: 16px; padding-right: 16px; }
+      main { padding-top: 100px !important; padding-bottom: 40px !important; }
+      h1, .section-headline { font-size: 28px !important; }
+      h2 { font-size: 22px !important; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr !important; }
+      .auth-card, .card, .panel { width: 100% !important; max-width: 100% !important; }
+      table { font-size: 12px; }
+      .hide-mobile { display: none !important; }
+    }
+    @media (max-width: 480px) {
+      .nav-wordmark { font-size: 16px; }
+      .footer-links { gap: 8px !important; }
+      h1, .section-headline { font-size: 24px !important; }
+      .container { padding-left: 12px; padding-right: 12px; }
+    }
+
+    </style>
     <link rel="icon" type="image/png" sizes="32x32" href="assets/fortrex-icon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/fortrex-icon-32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/fortrex-icon-180.png">
@@ -312,16 +340,14 @@
 
   <canvas id="particle-canvas"></canvas>
 
-  <!-- NAVIGATION -->
+    <!-- NAVIGATION -->
   <nav class="nav">
     <div class="nav-brand">
       <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-        <div class="nav-logo"><img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 32px; height: 32px; border-radius: 8px; object-fit: cover; filter: drop-shadow(0 0 8px rgba(234, 202, 122, 0.35));">
-        </div>
-        <span class="nav-wordmark"><span style="color:#EACA7A; font-weight:700;">FORTREX</span></span>
+        <div class="nav-logo"><img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 32px; height: 32px; border-radius: 8px; object-fit: cover; filter: drop-shadow(0 0 8px rgba(234, 202, 122, 0.35));"></div>
+        <span class="nav-wordmark">FORTREX</span>
       </a>
     </div>
-
     <ul class="nav-links" id="nav-links-main">
       <li><a href="index.html" class="nav-link">Home</a></li>
       <li><a href="tools.html" class="nav-link">Tools</a></li>
@@ -336,7 +362,6 @@
       <li><a href="profile.html" class="nav-link nav-internal" style="display:none">Profile</a></li>
       <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
     </ul>
-
     <div class="nav-cta">
       <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
       <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
@@ -652,19 +677,20 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+    <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 12px;">
-            <polygon points="12,3 22,21 2,21" stroke="#EACA7A" stroke-width="2" fill="none" stroke-linejoin="round"/>
-          </svg>
-          <span class="nav-wordmark"><span style="color:#fff;">FORTREX</span> <span style="color:#EACA7A;">FX</span></span>
+          <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 28px; height: 28px; border-radius: 6px; margin-right: 12px;">
+          <span class="nav-wordmark" style="color: #EACA7A; font-weight: 700;">FORTREX</span>
         </div>
         <div class="footer-links">
           <a href="index.html" class="footer-link">Home</a>
           <a href="tools.html" class="footer-link">Tools</a>
+          <a href="contests.html" class="footer-link">Tournaments</a>
+          <a href="leaderboard.html" class="footer-link">Leaderboard</a>
+          <a href="community.html" class="footer-link">Community</a>
           <a href="faq.html" class="footer-link">FAQ</a>
           <a href="terms.html" class="footer-link">Terms</a>
           <a href="privacy.html" class="footer-link">Privacy</a>
@@ -672,7 +698,10 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-copyright">© 2026 FORTREX — Skill-based trading competitions & tools. Not a financial service.</div>
+        <div class="footer-copyright">© 2026 FORTREX — Skill-based trading competitions. Not a financial service.</div>
+        <div class="footer-disclaimer" style="font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 8px; line-height: 1.5;">
+          Trading forex and cryptocurrency on margin carries a high level of risk. FORTREX is a skill-based competition platform and does not execute trades, hold funds, or provide financial advice. Tournament prizes are distributed as REX reward points with no cash value.
+        </div>
       </div>
     </div>
   </footer>
@@ -866,6 +895,28 @@
         if (trader) document.querySelectorAll('.nav-internal').forEach(el => el.style.display = '');
       })();
     </script>
+
+
+<script>
+// Mobile hamburger toggle
+document.addEventListener('DOMContentLoaded', function() {
+  var hamburger = document.querySelector('.hamburger');
+  var navLinks = document.querySelector('#nav-links-main');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+    // Close on link click
+    navLinks.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+  }
+});
+</script>
 
 </body>
 </html>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { MessageCircle, Youtube, Send, Instagram } from "lucide-react";
+import Logo from "@/components/Logo";
 
 const columns = [
   {
@@ -36,8 +37,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center text-[#0A0E27] font-bold" style={{ backgroundImage: "linear-gradient(135deg, #D4AF37, #00C853)" }}>F</div>
-              <span className="text-lg font-bold text-white">FORTREX</span>
+              <Logo size={36} />
+              <span className="text-lg font-bold" style={{ color: "#D4AF37" }}>FORTREX</span>
             </div>
             <p className="text-sm text-[#A0A8C0] max-w-sm mb-6 leading-relaxed">
               Trade. Compete. Win. The FORTREX Trading Community — free education, monthly trading championships, and real cash prizes.

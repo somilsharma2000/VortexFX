@@ -41,6 +41,7 @@ export default function Dashboard() {
   const currentContest = tournaments.find((t) => t.status === "active") || tournaments.find((t) => t.status === "upcoming");
   const topTraders = traders.slice(0, 5);
   const totalPrize = tournaments.filter((t) => t.status === "active" || t.status === "upcoming").reduce((s, t) => s + (t.prize_pool_rex || 0), 0);
+  const verifiedCount = traders.filter((t) => t.verified).length;
   const username = trader?.discord_username || "Trader";
 
   const countdown = (() => {
@@ -73,11 +74,11 @@ export default function Dashboard() {
             <Link to="/tournaments" className="btn-secondary">View Championships <ArrowRight className="w-4 h-4" /></Link>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 mt-10 text-sm text-[#A0A8C0]">
-            <span className="inline-flex items-center gap-1.5"><Users className="w-4 h-4 text-[#D4AF37]" /> 500+ Traders</span>
+            <span className="inline-flex items-center gap-1.5"><Users className="w-4 h-4 text-[#D4AF37]" /> {traders.length.toLocaleString()} Traders</span>
             <span className="hidden md:inline text-[#6B7494]">|</span>
-            <span className="inline-flex items-center gap-1.5"><Trophy className="w-4 h-4 text-[#D4AF37]" /> ${totalPrize.toLocaleString()}+ in Prizes</span>
+            <span className="inline-flex items-center gap-1.5"><Trophy className="w-4 h-4 text-[#D4AF37]" /> {totalPrize.toLocaleString()} REX Variable Pool</span>
             <span className="hidden md:inline text-[#6B7494]">|</span>
-            <span className="inline-flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-[#00C853]" /> XM Partner</span>
+            <span className="inline-flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-[#00C853]" /> {verifiedCount} Verified</span>
           </div>
         </div>
       </section>

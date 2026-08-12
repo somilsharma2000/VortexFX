@@ -582,12 +582,12 @@
 
   <!-- NAVIGATION BAR -->
   <nav class="nav">
-    <a href="index.html" class="nav-brand">
-      <div class="nav-logo"><img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 32px; height: 32px; border-radius: 8px; object-fit: cover; filter: drop-shadow(0 0 8px rgba(234, 202, 122, 0.35));">
-        </div>
-      <span class="nav-wordmark">FORTREX</span>
-    </a>
-
+    <div class="nav-brand">
+      <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+        <div class="nav-logo"><img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 32px; height: 32px; border-radius: 8px; object-fit: cover; filter: drop-shadow(0 0 8px rgba(234, 202, 122, 0.35));"></div>
+        <span class="nav-wordmark">FORTREX</span>
+      </a>
+    </div>
     <ul class="nav-links" id="nav-links-main">
       <li><a href="index.html" class="nav-link">Home</a></li>
       <li><a href="tools.html" class="nav-link">Tools</a></li>
@@ -602,15 +602,12 @@
       <li><a href="profile.html" class="nav-link nav-internal" style="display:none">Profile</a></li>
       <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
     </ul>
-
     <div class="nav-cta">
       <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
-      <a href="leaderboard.html" class="btn-primary">Enter Arena</a>
-      <button class="hamburger" aria-label="Toggle Navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
+      <div class="hamburger" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </div>
     </div>
   </nav>
 
@@ -803,10 +800,10 @@
           </div>
         </section>
 
-        <!-- 5. REDEMPTION CATALOG (STATIC PLACEHOLDER) -->
+        <!-- 5. REDEMPTION CATALOG -->
         <section style="margin-bottom: 60px;" class="reveal" data-shape="gold">
           <div class="section-label">REX MARKETPLACE</div>
-          <h2 class="subheading">Coming Soon - REX Marketplace</h2>
+          <h2 class="subheading">REX Marketplace — Launching After Tournaments</h2>
           <p class="body-text-muted" style="max-width: 640px; margin-bottom: 28px;">
             Redeem your accumulated REX for prop trading challenges, institutional MT4/MT5 tools, cash rebates, and exclusive Fortex merch.
           </p>
@@ -814,7 +811,7 @@
           <div class="marketplace-grid">
             <!-- Catalog Item 1 -->
             <div class="catalog-card">
-              <span class="catalog-badge">Coming Soon</span>
+              <span class="catalog-badge">Early Access</span>
               <div class="catalog-icon">🏆</div>
               <h3 class="catalog-item-title">$10,000 Prop Challenge Account</h3>
               <div class="catalog-item-price">1,500 REX</div>
@@ -824,7 +821,7 @@
 
             <!-- Catalog Item 2 -->
             <div class="catalog-card">
-              <span class="catalog-badge">Coming Soon</span>
+              <span class="catalog-badge">Early Access</span>
               <div class="catalog-icon">📊</div>
               <h3 class="catalog-item-title">MT4/MT5 Indicator Suite</h3>
               <div class="catalog-item-price">800 REX</div>
@@ -834,7 +831,7 @@
 
             <!-- Catalog Item 3 -->
             <div class="catalog-card">
-              <span class="catalog-badge">Coming Soon</span>
+              <span class="catalog-badge">Early Access</span>
               <div class="catalog-icon">💵</div>
               <h3 class="catalog-item-title">$50 USD Cash Rebate</h3>
               <div class="catalog-item-price">500 REX</div>
@@ -844,7 +841,7 @@
 
             <!-- Catalog Item 4 -->
             <div class="catalog-card">
-              <span class="catalog-badge">Coming Soon</span>
+              <span class="catalog-badge">Early Access</span>
               <div class="catalog-icon">📦</div>
               <h3 class="catalog-item-title">Fortex Founder Merch Box</h3>
               <div class="catalog-item-price">1,200 REX</div>
@@ -854,7 +851,7 @@
 
             <!-- Catalog Item 5 -->
             <div class="catalog-card">
-              <span class="catalog-badge">Coming Soon</span>
+              <span class="catalog-badge">Early Access</span>
               <div class="catalog-icon">🎯</div>
               <h3 class="catalog-item-title">1-on-1 Strategy Review</h3>
               <div class="catalog-item-price">2,500 REX</div>
@@ -864,7 +861,7 @@
 
             <!-- Catalog Item 6 -->
             <div class="catalog-card">
-              <span class="catalog-badge">Coming Soon</span>
+              <span class="catalog-badge">Early Access</span>
               <div class="catalog-icon">🚀</div>
               <h3 class="catalog-item-title">2x Leaderboard Multiplier</h3>
               <div class="catalog-item-price">600 REX</div>
@@ -879,21 +876,31 @@
 
   </main>
 
-  <!-- FOOTER -->
-  <footer style="border-top: 1px solid #1a1a24; padding: 60px 0 40px; background: rgba(4, 5, 8, 0.9);" class="reveal">
-    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;">
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <div class="nav-logo"><img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 32px; height: 32px; border-radius: 8px; object-fit: cover; filter: drop-shadow(0 0 8px rgba(234, 202, 122, 0.35));">
+    <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 28px; height: 28px; border-radius: 6px; margin-right: 12px;">
+          <span class="nav-wordmark" style="color: #EACA7A; font-weight: 700;">FORTREX</span>
         </div>
-        <span style="font-weight: 600; font-size: 14px; letter-spacing: 0.05em; text-transform: uppercase;">FORTREX</span>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="tools.html" class="footer-link">Tools</a>
+          <a href="contests.html" class="footer-link">Tournaments</a>
+          <a href="leaderboard.html" class="footer-link">Leaderboard</a>
+          <a href="community.html" class="footer-link">Community</a>
+          <a href="faq.html" class="footer-link">FAQ</a>
+          <a href="terms.html" class="footer-link">Terms</a>
+          <a href="privacy.html" class="footer-link">Privacy</a>
+          <a href="signin.html" class="footer-link">Sign In</a>
+        </div>
       </div>
-      <div style="font-size: 13px; color: #9a9a9a;">
-        &copy; 2026 FORTREX. All trading involves risk. REX rewards subject to terms.
-      </div>
-      <div style="display: flex; gap: 20px; font-size: 13px; color: #9a9a9a;">
-        <a href="terms.html" style="color: inherit;">Terms</a>
-        <a href="privacy.html" style="color: inherit;">Privacy</a>
-        <a href="resources.html" style="color: inherit;">Resources</a>
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2026 FORTREX — Skill-based trading competitions. Not a financial service.</div>
+        <div class="footer-disclaimer" style="font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 8px; line-height: 1.5;">
+          Trading forex and cryptocurrency on margin carries a high level of risk. FORTREX is a skill-based competition platform and does not execute trades, hold funds, or provide financial advice. Tournament prizes are distributed as REX reward points with no cash value.
+        </div>
       </div>
     </div>
   </footer>
@@ -1155,6 +1162,28 @@
         if (trader) document.querySelectorAll('.nav-internal').forEach(el => el.style.display = '');
       })();
     </script>
+
+
+<script>
+// Mobile hamburger toggle
+document.addEventListener('DOMContentLoaded', function() {
+  var hamburger = document.querySelector('.hamburger');
+  var navLinks = document.querySelector('#nav-links-main');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+    // Close on link click
+    navLinks.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+  }
+});
+</script>
 
 </body>
 </html>
