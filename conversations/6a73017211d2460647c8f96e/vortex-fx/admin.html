@@ -1447,66 +1447,143 @@
            =================================================================== -->
       <div id="tab-traders" class="tab-pane">
 
+        <!-- Trader Stats Row -->
+        <div class="stats-grid-6" style="grid-template-columns: repeat(4, 1fr);">
+          <div class="stat-card" style="padding: 16px;">
+            <span class="stat-label">TOTAL TRADERS</span>
+            <div class="stat-value-gold" id="trader-stat-total">0</div>
+          </div>
+          <div class="stat-card" style="padding: 16px;">
+            <span class="stat-label">VERIFIED</span>
+            <div class="stat-value-gold" id="trader-stat-verified" style="color: var(--status-live);">0</div>
+          </div>
+          <div class="stat-card" style="padding: 16px;">
+            <span class="stat-label">BANNED</span>
+            <div class="stat-value-gold" id="trader-stat-banned" style="color: #EF4444;">0</div>
+          </div>
+          <div class="stat-card" style="padding: 16px;">
+            <span class="stat-label">GENESIS TRADERS</span>
+            <div class="stat-value-gold" id="trader-stat-genesis" style="color: var(--accent-gold);">0</div>
+          </div>
+        </div>
+
+        <!-- Trader Directory -->
         <div class="content-card">
           <div class="card-header">
             <div>
-              <h2 class="card-title">Trader Directory</h2>
-              <p class="card-subtitle">Inspect registered traders, Discord linkage, total REX balances, and MT5 connections.</p>
+              <h2 class="card-title">Trader Command</h2>
+              <p class="card-subtitle">Full trader management — verify, ban, adjust REX, override Battle Pass, link MT4.</p>
             </div>
-            <div style="display: flex; gap: 12px;">
-              <input type="text" id="trader-search-input" class="form-control" placeholder="Search handle or ID..." style="width: 220px; padding: 8px 12px;" />
-              <button class="btn-primary-accent" onclick="handleTraderSearch()">Search</button>
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <select id="trader-filter-status" class="form-control" style="width: 140px; padding: 8px 12px;" onchange="loadTraders()">
+                <option value="all">All Traders</option>
+                <option value="verified">Verified Only</option>
+                <option value="unverified">Unverified</option>
+                <option value="banned">Banned Only</option>
+                <option value="genesis">Genesis</option>
+              </select>
+              <input type="text" id="trader-search-input" class="form-control" placeholder="Search handle or Discord ID..." style="width: 240px; padding: 8px 12px;" oninput="filterTraderTable()" />
+              <button class="btn-primary-accent" onclick="loadTraders()">Refresh</button>
             </div>
           </div>
 
           <div class="table-responsive">
-            <table class="data-table">
+            <table class="data-table" id="traders-table">
               <thead>
                 <tr>
-                  <th>Trader Handle</th>
-                  <th>Discord ID</th>
+                  <th>Trader</th>
+                  <th>Discord</th>
                   <th>REX Balance</th>
-                  <th>Current Rank</th>
-                  <th>MT5 Account</th>
+                  <th>Class</th>
+                  <th>BP Level</th>
+                  <th>MT4 Account</th>
+                  <th>Streak</th>
                   <th>Status</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <div style="font-weight: 600; color: #FFFFFF;">VortexMaster99</div>
-                    <div style="font-size: 11px; color: var(--text-dim);">Joined Aug 1, 2026</div>
-                  </td>
-                  <td style="font-family: monospace; color: var(--text-muted);">782910394819</td>
-                  <td style="font-weight: 700; color: var(--accent-gold);">12,450 REX</td>
-                  <td><span class="status-badge live">RANK #1</span></td>
-                  <td style="font-family: monospace; color: var(--accent-iris);">MT5-884912</td>
-                  <td><span class="status-badge live">VERIFIED</span></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div style="font-weight: 600; color: #FFFFFF;">—</div>
-                    <div style="font-size: 11px; color: var(--text-dim);">Joined Jul 28, 2026</div>
-                  </td>
-                  <td style="font-family: monospace; color: var(--text-muted);">—</td>
-                  <td style="font-weight: 700; color: var(--accent-gold);">9,800 REX</td>
-                  <td><span class="status-badge live">RANK #2</span></td>
-                  <td style="font-family: monospace; color: var(--accent-iris);">MT5-991023</td>
-                  <td><span class="status-badge live">VERIFIED</span></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div style="font-weight: 600; color: #FFFFFF;">NeonHunter</div>
-                    <div style="font-size: 11px; color: var(--text-dim);">Joined Aug 5, 2026</div>
-                  </td>
-                  <td style="font-family: monospace; color: var(--text-muted);">901283948123</td>
-                  <td style="font-weight: 700; color: var(--accent-gold);">4,120 REX</td>
-                  <td><span class="status-badge live">RANK #3</span></td>
-                  <td style="font-family: monospace; color: var(--accent-iris);">MT5-102934</td>
-                  <td><span class="status-badge live">VERIFIED</span></td>
-                </tr>
+              <tbody id="traders-tbody">
+                <tr><td colspan="9" style="text-align: center; padding: 40px; color: var(--text-dim);">Loading traders...</td></tr>
               </tbody>
             </table>
+          </div>
+        </div>
+
+        <!-- Trader Detail Modal -->
+        <div class="modal-overlay" id="trader-detail-modal" style="display: none;">
+          <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+              <h2 class="modal-title">Trader Details</h2>
+              <button class="modal-close" onclick="closeModal('trader-detail-modal')">&times;</button>
+            </div>
+            <div style="padding: 24px;">
+              <div id="trader-detail-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <!-- Populated by JS -->
+              </div>
+              <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+                <button class="btn-primary-accent" id="trader-action-verify" onclick="traderAction('verify')">Verify Trader</button>
+                <button class="btn-primary-accent" id="trader-action-rex" onclick="traderAction('rex')">Adjust REX</button>
+                <button class="btn-primary-accent" id="trader-action-bp" onclick="traderAction('battlepass')">Set BP Level</button>
+                <button class="btn-primary-accent" id="trader-action-ban" onclick="traderAction('ban')" style="background: linear-gradient(135deg, #EF4444, #DC2626); border-color: #EF4444;">Ban Trader</button>
+                <button class="btn-primary-accent" id="trader-action-unban" onclick="traderAction('unban')" style="background: linear-gradient(135deg, #22C55E, #16A34A); border-color: #22C55E; display: none;">Unban Trader</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Adjust REX Modal -->
+        <div class="modal-overlay" id="rex-adjust-modal" style="display: none;">
+          <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+              <h2 class="modal-title">Adjust REX Balance</h2>
+              <button class="modal-close" onclick="closeModal('rex-adjust-modal')">&times;</button>
+            </div>
+            <div style="padding: 24px;">
+              <div style="margin-bottom: 16px;">
+                <label style="font-size: 13px; color: var(--text-muted); display: block; margin-bottom: 6px;">Action</label>
+                <select id="rex-adjust-type" class="form-control" style="width: 100%;">
+                  <option value="add">Add REX</option>
+                  <option value="deduct">Deduct REX</option>
+                </select>
+              </div>
+              <div style="margin-bottom: 16px;">
+                <label style="font-size: 13px; color: var(--text-muted); display: block; margin-bottom: 6px;">Amount</label>
+                <input type="number" id="rex-adjust-amount" class="form-control" placeholder="Enter amount..." style="width: 100%;" min="1" />
+              </div>
+              <div style="margin-bottom: 16px;">
+                <label style="font-size: 13px; color: var(--text-muted); display: block; margin-bottom: 6px;">Reason</label>
+                <input type="text" id="rex-adjust-reason" class="form-control" placeholder="Reason for adjustment..." style="width: 100%;" />
+              </div>
+              <button class="btn-primary-accent" style="width: 100%;" onclick="executeRexAdjust()">Confirm Adjustment</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ban Trader Modal -->
+        <div class="modal-overlay" id="ban-modal" style="display: none;">
+          <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+              <h2 class="modal-title" style="color: #EF4444;">Ban Trader</h2>
+              <button class="modal-close" onclick="closeModal('ban-modal')">&times;</button>
+            </div>
+            <div style="padding: 24px;">
+              <p style="color: var(--text-muted); margin-bottom: 16px; font-size: 14px;">This will revoke platform access for this trader. They will be unable to participate in tournaments or earn REX.</p>
+              <div style="margin-bottom: 16px;">
+                <label style="font-size: 13px; color: var(--text-muted); display: block; margin-bottom: 6px;">Ban Reason</label>
+                <select id="ban-reason" class="form-control" style="width: 100%;">
+                  <option value="Cheating detected">Cheating detected</option>
+                  <option value="Multiple accounts">Multiple accounts</option>
+                  <option value="Tournament manipulation">Tournament manipulation</option>
+                  <option value="Violation of terms">Violation of terms</option>
+                  <option value="Suspicious activity">Suspicious activity</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div style="margin-bottom: 16px;" id="ban-reason-custom" style="display: none;">
+                <input type="text" id="ban-reason-text" class="form-control" placeholder="Specify reason..." style="width: 100%;" />
+              </div>
+              <button class="btn-primary-accent" style="width: 100%; background: linear-gradient(135deg, #EF4444, #DC2626); border-color: #EF4444;" onclick="executeBan()">Confirm Ban</button>
+            </div>
           </div>
         </div>
 
@@ -1687,6 +1764,33 @@
 
       </div>
 
+
+      <!-- ===================================================================
+           TAB 6: REX TREASURY
+           =================================================================== -->
+      <div id="tab-rex" class="tab-pane">
+        <div id="rex-treasury-content">
+          <p style="color: var(--text-dim); text-align: center; padding: 60px;">Loading REX Treasury...</p>
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           TAB 7: INTELLIGENCE
+           =================================================================== -->
+      <div id="tab-intel" class="tab-pane">
+        <div id="intelligence-content">
+          <p style="color: var(--text-dim); text-align: center; padding: 60px;">Loading Intelligence...</p>
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           TAB 8: GATE CONTROL
+           =================================================================== -->
+      <div id="tab-gate" class="tab-pane">
+        <div id="gate-control-content">
+          <p style="color: var(--text-dim); text-align: center; padding: 60px;">Loading Gate Control...</p>
+        </div>
+      </div>
     </main>
   </div>
 
@@ -2831,6 +2935,261 @@
     // ===================================================================
     // UTILITIES
     // ===================================================================
+
+    // ========== TRADER MANAGEMENT ==========
+    let allTraders = [];
+    let selectedTraderId = null;
+
+    async function loadTraders() {
+      const tbody = document.getElementById('traders-tbody');
+      tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 40px; color: var(--text-dim);">Loading traders...</td></tr>';
+
+      try {
+        const res = await FORTREX_AUTH.callFunction('getTraders', { limit: 200 });
+        allTraders = res.traders || res.data || res || [];
+
+        // Update stats
+        document.getElementById('trader-stat-total').textContent = allTraders.length;
+        document.getElementById('trader-stat-verified').textContent = allTraders.filter(t => t.verified).length;
+        document.getElementById('trader-stat-banned').textContent = allTraders.filter(t => t.banned).length;
+        document.getElementById('trader-stat-genesis').textContent = allTraders.filter(t => t.trader_class === 'Genesis').length;
+
+        renderTradersTable(allTraders);
+      } catch (err) {
+        console.error('Load traders error:', err);
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 40px; color: #EF4444;">Error loading traders. Check backend connection.</td></tr>';
+      }
+    }
+
+    function renderTradersTable(traders) {
+      const tbody = document.getElementById('traders-tbody');
+      const filter = document.getElementById('trader-filter-status').value;
+
+      let filtered = traders;
+      if (filter === 'verified') filtered = traders.filter(t => t.verified && !t.banned);
+      else if (filter === 'unverified') filtered = traders.filter(t => !t.verified && !t.banned);
+      else if (filter === 'banned') filtered = traders.filter(t => t.banned);
+      else if (filter === 'genesis') filtered = traders.filter(t => t.trader_class === 'Genesis');
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 40px; color: var(--text-dim);">No traders found.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(t => {
+        const statusBadge = t.banned
+          ? '<span class="status-badge" style="background: rgba(239,68,68,0.15); color: #EF4444; border: 1px solid rgba(239,68,68,0.3);">BANNED</span>'
+          : t.verified
+          ? '<span class="status-badge live">VERIFIED</span>'
+          : '<span class="status-badge" style="background: rgba(245,158,11,0.15); color: #F59E0B; border: 1px solid rgba(245,158,11,0.3);">UNVERIFIED</span>';
+
+        return `
+          <tr onclick="openTraderDetail('${t.id}')" style="cursor: pointer;">
+            <td>
+              <div style="font-weight: 600; color: #FFFFFF;">${escapeHtml(t.discord_username || 'Unknown')}</div>
+              <div style="font-size: 11px; color: var(--text-dim);">ID: ${t.id}</div>
+            </td>
+            <td style="font-family: monospace; color: var(--text-muted); font-size: 12px;">${t.discord_id || '—'}</td>
+            <td style="font-weight: 700; color: var(--accent-gold);">${(t.rex_balance || 0).toLocaleString()} REX</td>
+            <td><span style="color: var(--accent-iris); font-size: 12px; font-weight: 600;">${t.trader_class || 'Recruit'}</span></td>
+            <td style="color: var(--text-muted);">Lv. ${t.battlepass_level || 1}</td>
+            <td style="font-family: monospace; color: ${t.mt4_linked ? 'var(--accent-iris)' : 'var(--text-dim)'}; font-size: 12px;">${t.mt4_account || 'Not linked'}</td>
+            <td style="color: var(--text-muted);">${t.checkin_streak || 0} days</td>
+            <td>${statusBadge}</td>
+            <td>
+              <div style="display: flex; gap: 6px;">
+                ${!t.verified && !t.banned ? `<button onclick="event.stopPropagation(); quickVerify('${t.id}')" style="padding: 4px 10px; font-size: 11px; background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #22C55E; border-radius: 6px; cursor: pointer;">Verify</button>` : ''}
+                ${!t.banned ? `<button onclick="event.stopPropagation(); openBanModal('${t.id}')" style="padding: 4px 10px; font-size: 11px; background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #EF4444; border-radius: 6px; cursor: pointer;">Ban</button>` : ''}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function filterTraderTable() {
+      const query = document.getElementById('trader-search-input').value.toLowerCase();
+      const filtered = allTraders.filter(t =>
+        (t.discord_username || '').toLowerCase().includes(query) ||
+        (t.discord_id || '').toLowerCase().includes(query) ||
+        (t.id || '').toLowerCase().includes(query)
+      );
+      renderTradersTable(filtered);
+    }
+
+    function openTraderDetail(traderId) {
+      const trader = allTraders.find(t => t.id === traderId);
+      if (!trader) return;
+      selectedTraderId = traderId;
+
+      const body = document.getElementById('trader-detail-body');
+      body.innerHTML = `
+        <div><span style="color: var(--text-dim); font-size: 12px;">Username</span><div style="font-weight: 600;">${escapeHtml(trader.discord_username || '—')}</div></div>
+        <div><span style="color: var(--text-dim); font-size: 12px;">Discord ID</span><div style="font-family: monospace;">${trader.discord_id || '—'}</div></div>
+        <div><span style="color: var(--text-dim); font-size: 12px;">REX Balance</span><div style="color: var(--accent-gold); font-weight: 700;">${(trader.rex_balance || 0).toLocaleString()} REX</div></div>
+        <div><span style="color: var(--text-dim); font-size: 12px;">Trader Class</span><div style="color: var(--accent-iris); font-weight: 600;">${trader.trader_class || 'Recruit'}</div></div>
+        <div><span style="color: var(--text-dim); font-size: 12px;">Battle Pass Level</span><div>Lv. ${trader.battlepass_level || 1} (${(trader.battlepass_xp || 0)} XP)</div></div>
+        <div><span style="color: var(--text-dim); font-size: 12px;">Check-in Streak</span><div>${trader.checkin_streak || 0} days (Best: ${trader.best_streak || 0})</div></div>
+        <div><span style="color: var(--text-dim); font-size: 12px;">MT4 Account</span><div style="font-family: monospace;">${trader.mt4_account || 'Not linked'}</div></div>
+        <div><span style="color: var(--text-dim); font-size: 12px;">Referral Code</span><div style="font-family: monospace;">${trader.referral_code || '—'}</div></div>
+        <div><span style="color: var(--text-dim); font-size: 12px;">Joined Date</span><div>${trader.joined_date ? new Date(trader.joined_date).toLocaleDateString() : '—'}</div></div>
+        <div><span style="color: var(--text-dim); font-size: 12px;">Status</span><div>${trader.banned ? '<span style="color: #EF4444;">BANNED</span>' : trader.verified ? '<span style="color: #22C55E;">VERIFIED</span>' : '<span style="color: #F59E0B;">UNVERIFIED</span>'}</div></div>
+        ${trader.banned ? `<div style="grid-column: 1 / -1;"><span style="color: var(--text-dim); font-size: 12px;">Ban Reason</span><div style="color: #EF4444;">${escapeHtml(trader.banned_reason || 'Not specified')}</div></div>` : ''}
+      `;
+
+      // Show/hide action buttons based on status
+      document.getElementById('trader-action-verify').style.display = trader.verified || trader.banned ? 'none' : 'inline-flex';
+      document.getElementById('trader-action-ban').style.display = trader.banned ? 'none' : 'inline-flex';
+      document.getElementById('trader-action-unban').style.display = trader.banned ? 'inline-flex' : 'none';
+
+      document.getElementById('trader-detail-modal').style.display = 'flex';
+    }
+
+    async function quickVerify(traderId) {
+      try {
+        const res = await FORTREX_AUTH.callFunction('adminVerifyTrader', { trader_id: traderId, verified: true });
+        showToast('Trader verified successfully!', 'success');
+        loadTraders();
+      } catch (err) {
+        showToast('Error verifying trader: ' + err.message, 'error');
+      }
+    }
+
+    function openBanModal(traderId) {
+      selectedTraderId = traderId;
+      document.getElementById('ban-modal').style.display = 'flex';
+    }
+
+    async function executeBan() {
+      const reasonSelect = document.getElementById('ban-reason');
+      let reason = reasonSelect.value;
+      if (reason === 'Other') {
+        reason = document.getElementById('ban-reason-text').value || 'Other';
+      }
+
+      try {
+        await FORTREX_AUTH.callFunction('adminBanTrader', { trader_id: selectedTraderId, banned: true, banned_reason: reason });
+        showToast('Trader banned: ' + reason, 'error');
+        closeModal('ban-modal');
+        loadTraders();
+      } catch (err) {
+        showToast('Error banning trader: ' + err.message, 'error');
+      }
+    }
+
+    async function traderAction(action) {
+      if (action === 'verify') {
+        await quickVerify(selectedTraderId);
+        closeModal('trader-detail-modal');
+      } else if (action === 'rex') {
+        closeModal('trader-detail-modal');
+        document.getElementById('rex-adjust-modal').style.display = 'flex';
+      } else if (action === 'ban') {
+        closeModal('trader-detail-modal');
+        document.getElementById('ban-modal').style.display = 'flex';
+      } else if (action === 'unban') {
+        try {
+          await FORTREX_AUTH.callFunction('adminBanTrader', { trader_id: selectedTraderId, banned: false, banned_reason: '' });
+          showToast('Trader unbanned!', 'success');
+          closeModal('trader-detail-modal');
+          loadTraders();
+        } catch (err) {
+          showToast('Error unbanning trader: ' + err.message, 'error');
+        }
+      } else if (action === 'battlepass') {
+        const level = prompt('Set Battle Pass level (1-30):', '1');
+        if (level && !isNaN(level) && level >= 1 && level <= 30) {
+          try {
+            await FORTREX_AUTH.callFunction('adminUpdateTrader', { trader_id: selectedTraderId, battlepass_level: parseInt(level) });
+            showToast('Battle Pass level set to ' + level, 'success');
+            loadTraders();
+          } catch (err) {
+            showToast('Error updating BP level: ' + err.message, 'error');
+          }
+        }
+      }
+    }
+
+    async function executeRexAdjust() {
+      const type = document.getElementById('rex-adjust-type').value;
+      const amount = parseInt(document.getElementById('rex-adjust-amount').value);
+      const reason = document.getElementById('rex-adjust-reason').value;
+
+      if (!amount || amount < 1) { showToast('Enter a valid amount', 'error'); return; }
+
+      const adjAmount = type === 'deduct' ? -amount : amount;
+
+      try {
+        await FORTREX_AUTH.callFunction('distributeRex', { trader_id: selectedTraderId, amount: adjAmount, reason: reason || 'Manual adjustment' });
+        showToast(`REX ${type === 'add' ? 'added' : 'deducted'}: ${amount}`, 'success');
+        closeModal('rex-adjust-modal');
+        loadTraders();
+      } catch (err) {
+        showToast('Error adjusting REX: ' + err.message, 'error');
+      }
+    }
+
+    // ========== LOAD MODULES ON TAB SWITCH ==========
+    let modulesLoaded = { rex: false, intel: false, gate: false };
+
+    const originalSwitchTab = switchTab;
+    switchTab = function(tabName) {
+      originalSwitchTab(tabName);
+
+      // Update page title
+      const titles = {
+        overview: ['Platform Overview', 'Real-time status, trader metrics, and global tournament telemetry.'],
+        tournaments: ['Tournament Operations', 'Create, manage, and reveal tournament competitions.'],
+        traders: ['Trader Command', 'Full trader management — verify, ban, adjust REX, Battle Pass.'],
+        waitlist: ['Waitlist Management', 'Monitor and export the FORTREX FX waitlist.'],
+        settings: ['Mission Settings', 'Global platform configuration and reward rates.'],
+        rex: ['REX Treasury', 'Currency distribution, transaction logs, and economy health.'],
+        intel: ['Intelligence Center', 'Analytics, growth metrics, and engagement data.'],
+        gate: ['Gate Control', 'Security, access management, and launch controls.']
+      };
+
+      if (titles[tabName]) {
+        document.getElementById('page-title').textContent = titles[tabName][0];
+        document.getElementById('page-subtitle').textContent = titles[tabName][1];
+      }
+
+      // Load modules on first visit
+      if (tabName === 'rex' && !modulesLoaded.rex) { modulesLoaded.rex = true; loadRexModule(); }
+      if (tabName === 'intel' && !modulesLoaded.intel) { modulesLoaded.intel = true; loadIntelModule(); }
+      if (tabName === 'gate' && !modulesLoaded.gate) { modulesLoaded.gate = true; loadGateModule(); }
+      if (tabName === 'traders') { loadTraders(); }
+    };
+
+    async function loadRexModule() {
+      try {
+        const res = await fetch('modules/rex-treasury.html?v=2');
+        const html = await res.text();
+        document.getElementById('rex-treasury-content').innerHTML = html;
+      } catch (err) {
+        document.getElementById('rex-treasury-content').innerHTML = '<p style="color: #EF4444; text-align: center; padding: 40px;">Failed to load REX Treasury module.</p>';
+      }
+    }
+
+    async function loadIntelModule() {
+      try {
+        const res = await fetch('modules/intelligence.html?v=2');
+        const html = await res.text();
+        document.getElementById('intelligence-content').innerHTML = html;
+      } catch (err) {
+        document.getElementById('intelligence-content').innerHTML = '<p style="color: #EF4444; text-align: center; padding: 40px;">Failed to load Intelligence module.</p>';
+      }
+    }
+
+    async function loadGateModule() {
+      try {
+        const res = await fetch('modules/gate-control.html?v=2');
+        const html = await res.text();
+        document.getElementById('gate-control-content').innerHTML = html;
+      } catch (err) {
+        document.getElementById('gate-control-content').innerHTML = '<p style="color: #EF4444; text-align: center; padding: 40px;">Failed to load Gate Control module.</p>';
+      }
+    }
+
     function showToast(message, type = 'info') {
       const container = document.getElementById('toast-container');
       const toast = document.createElement('div');
