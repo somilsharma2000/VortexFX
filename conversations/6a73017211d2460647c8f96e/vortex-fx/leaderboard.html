@@ -97,6 +97,7 @@
     .trader-avatar.gold { background: linear-gradient(135deg, #D0AC73, #EACA7A); }
 
     .roi-pos { color: #10B981; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+    .roi-neg { color: #EF4444; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
     .equity { font-family: 'JetBrains Mono', monospace; color: #ffffff; }
 
     .status-pill {
@@ -367,7 +368,8 @@ async function loadLeaderboard() {
     body.innerHTML = entries.map(p => {
       const rank = p.rank || '-';
       const name = p.trader_username || 'Unknown';
-      const roi = p.roi !== undefined && p.roi !== null ? `+${Number(p.roi).toFixed(1)}%` : '—';
+      const roiNum = p.roi !== undefined && p.roi !== null ? Number(p.roi) : null;
+      const roi = roiNum !== null ? `${roiNum >= 0 ? '+' : ''}${roiNum.toFixed(1)}%` : '—';
       const equity = p.final_equity !== undefined && p.final_equity !== null ? '$' + Number(p.final_equity).toLocaleString() : '—';
       const status = p.revealed
         ? '<span class="status-pill status-revealed">Revealed</span>'
@@ -379,7 +381,7 @@ async function loadLeaderboard() {
         <tr>
           <td class="rank-cell${rankClass}">#${rank}</td>
           <td><div class="trader-cell"><div class="trader-avatar${rankClass}">${initial}</div> ${name}</div></td>
-          <td class="right roi-pos">${roi}</td>
+          <td class="right ${roiNum !== null && roiNum < 0 ? 'roi-neg' : 'roi-pos'}">${roi}</td>
           <td class="right equity">${equity}</td>
           <td class="right equity">—</td>
           <td class="right">${status}</td>

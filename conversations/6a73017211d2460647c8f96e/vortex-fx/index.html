@@ -1069,20 +1069,20 @@
         <div class="stat-label">Launch Countdown</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number gold-stat" style="font-size: clamp(18px, 2.2vw, 24px); line-height:1.25;">Variable Prize Pool</div>
-        <div class="stat-label">Funded by platform revenue</div>
+        <div class="stat-number gold-stat" style="font-size: clamp(28px, 3.2vw, 38px); line-height:1.25;" id="stat-prize-pool">—</div>
+        <div class="stat-label">REX Prize Pool</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number white-stat" style="font-size: clamp(20px, 2.4vw, 28px);">Join the Waitlist</div>
-        <div class="stat-label">Be first through the gates</div>
+        <div class="stat-number white-stat" style="font-size: clamp(28px, 3.2vw, 38px);" id="stat-waitlist">—</div>
+        <div class="stat-label">On the Waitlist</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number white-stat" style="font-size: clamp(20px, 2.4vw, 28px);">Be an Early Trader</div>
-        <div class="stat-label">Limited Genesis spots — register early</div>
+        <div class="stat-number white-stat" style="font-size: clamp(28px, 3.2vw, 38px);" id="stat-traders">—</div>
+        <div class="stat-label">Verified Traders</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number white-stat" style="font-size: clamp(20px, 2.4vw, 28px);">MT4 / MT5 Verified</div>
-        <div class="stat-label">Verified accounts only</div>
+        <div class="stat-number white-stat" style="font-size: clamp(28px, 3.2vw, 38px);" id="stat-championships">—</div>
+        <div class="stat-label">Championships Run</div>
       </div>
     </div>
   </section>
@@ -1113,7 +1113,7 @@
       </div>
       <div class="genesis-progress-footer">
         <span>50% Spots Claimed</span>
-        <span class="gold-text">1,253 Remaining</span>
+        <span class="gold-text" id="genesis-remaining">2,500 Remaining</span>
       </div>
     </div>
 
@@ -1411,7 +1411,6 @@
     // ===== FETCH REAL STATS FROM DATABASE =====
     async function fetchRealStats() {
       try {
-        // Fetch real stats from getPlatformStats backend function
         const res = await fetch('https://koda-a0d26f88.base44.app/functions/getPublicStats', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1421,11 +1420,19 @@
 
         if (data && data.success && data.stats) {
           const s = data.stats;
-          const wlCount = s.waitlist_count || 0;
 
-          // Update waitlist count
-          const wlEl = document.getElementById('waitlist-count');
-          if (wlEl) wlEl.textContent = wlCount.toLocaleString();
+          // Update stat cards
+          const wlEl = document.getElementById('stat-waitlist');
+          if (wlEl) wlEl.textContent = (s.waitlist_count || 0).toLocaleString();
+
+          const ppEl = document.getElementById('stat-prize-pool');
+          if (ppEl) ppEl.textContent = (s.total_prize_pool_rex || 0).toLocaleString();
+
+          const trEl = document.getElementById('stat-traders');
+          if (trEl) trEl.textContent = (s.verified_accounts || 0).toLocaleString();
+
+          const chEl = document.getElementById('stat-championships');
+          if (chEl) chEl.textContent = (s.completed_championships || 0).toLocaleString();
 
           // Update genesis progress
           const genesisMax = 2500;
@@ -1434,12 +1441,11 @@
           const genesisClaimedEl = document.getElementById('genesis-claimed');
           if (genesisClaimedEl) genesisClaimedEl.textContent = genesisClaimed.toLocaleString();
 
-          const genesisRemainingEl = document.querySelector('.gold-text');
-          if (genesisRemainingEl && genesisRemainingEl.textContent.includes('Remaining')) {
+          const genesisRemainingEl = document.getElementById('genesis-remaining');
+          if (genesisRemainingEl) {
             genesisRemainingEl.textContent = (genesisMax - genesisClaimed).toLocaleString() + ' Remaining';
           }
 
-          // Update progress bar
           const fillEl = document.querySelector('.genesis-progress-fill');
           if (fillEl) {
             const pct = genesisMax > 0 ? (genesisClaimed / genesisMax) * 100 : 0;
