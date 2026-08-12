@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+import re
+
+content = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -885,3 +887,9 @@
   </script>
 </body>
 </html>
+"""
+
+with open('vortex-fx/profile.html', 'w') as f:
+    f.write(content)
+
+print("Updated vortex-fx/profile.html successfully!")
