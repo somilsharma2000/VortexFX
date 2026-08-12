@@ -19,13 +19,24 @@ Deno.serve(async (req) => {
     const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
     let newStreak = (trader.last_checkin_date === yesterday) ? (trader.checkin_streak || 0) + 1 : 1;
     
-    let rexReward = 5, milestoneReached = '', milestoneBonus = 0;
-    const milestones = { 3:{rex:10,name:'3-Day Streak'}, 7:{rex:25,name:'7-Day Streak Master'}, 14:{rex:50,name:'14-Day Warrior'}, 30:{rex:100,name:'30-Day Legend'}, 60:{rex:250,name:'60-Day Dynasty'}, 100:{rex:500,name:'100-Day Immortal'} };
-    if (milestones[newStreak]) { milestoneReached = milestones[newStreak].name; milestoneBonus = milestones[newStreak].rex; rexReward += milestoneBonus; }
+    // Get Genesis multiplier (default 1.0 if not set)
+    const multiplier = trader.genesis_multiplier || 1.0;
     
-    const newBalance = (trader.rex_balance || 0) + rexReward;
+    // Base check-in reward: 5 REX, multiplied by Genesis tier
+    const baseReward = 5;
+    let milestoneReached = '';
+    let baseMilestoneBonus = 0;
+    const milestones = { 3:{rex:10,name:'3-Day Streak'}, 7:{rex:25,name:'7-Day Streak Master'}, 14:{rex:50,name:'14-Day Warrior'}, 30:{rex:100,name:'30-Day Legend'}, 60:{rex:250,name:'60-Day Dynasty'}, 100:{rex:500,name:'100-Day Immortal'} };
+    if (milestones[newStreak]) { milestoneReached = milestones[newStreak].name; baseMilestoneBonus = milestones[newStreak].rex; }
+    
+    // Apply Genesis multiplier to BOTH base reward and milestone bonus
+    const multipliedBase = Math.round(baseReward * multiplier);
+    const multipliedMilestone = Math.round(baseMilestoneBonus * multiplier);
+    const totalRexEarned = multipliedBase + multipliedMilestone;
+    
+    const newBalance = (trader.rex_balance || 0) + totalRexEarned;
     const newTotalCheckins = (trader.total_checkins || 0) + 1;
-    const newBPXP = (trader.battlepass_xp || 0) + (rexReward * 2);
+    const newBPXP = (trader.battlepass_xp || 0) + (totalRexEarned * 2);
     const newBPLevel = Math.floor(newBPXP / 100) + 1;
     
     await base44.asServiceRole.entities.Trader.update(trader_id, {
@@ -34,10 +45,21 @@ Deno.serve(async (req) => {
       best_streak: Math.max(trader.best_streak || 0, newStreak)
     });
     
-    try { await base44.asServiceRole.entities.CheckIn.create({ trader_id, trader_username: trader.discord_username || '', checkin_date: today, new_streak: newStreak, rex_earned: rexReward, milestone_reached: milestoneReached, milestone_bonus_rex: milestoneBonus }); } catch (e) {}
-    try { await base44.asServiceRole.entities.Transaction.create({ trader_id, amount: rexReward, type: 'checkin_reward', description: 'Daily Check-In' + (milestoneReached ? ' + ' + milestoneReached : ''), reason: 'daily_checkin', transaction_date: new Date().toISOString() }); } catch (e) {}
+    try { await base44.asServiceRole.entities.CheckIn.create({ trader_id, trader_username: trader.discord_username || '', checkin_date: today, new_streak: newStreak, rex_earned: totalRexEarned, milestone_reached: milestoneReached, milestone_bonus_rex: multipliedMilestone }); } catch (e) {}
+    try { await base44.asServiceRole.entities.Transaction.create({ trader_id, amount: totalRexEarned, type: 'checkin_reward', description: 'Daily Check-In (' + multiplier + 'x)' + (milestoneReached ? ' + ' + milestoneReached : ''), reason: 'daily_checkin', transaction_date: new Date().toISOString() }); } catch (e) {}
     
-    return Response.json({ success: true, streak: newStreak, rex_earned: rexReward, new_balance: newBalance, milestone: milestoneReached, milestone_bonus: milestoneBonus, battlepass_xp: newBPXP, battlepass_level: newBPLevel });
+    return Response.json({ 
+      success: true, 
+      streak: newStreak, 
+      rex_earned: totalRexEarned, 
+      base_rex: multipliedBase, 
+      milestone_bonus: multipliedMilestone,
+      multiplier: multiplier,
+      new_balance: newBalance, 
+      milestone: milestoneReached, 
+      battlepass_xp: newBPXP, 
+      battlepass_level: newBPLevel 
+    });
   } catch (err) {
     return Response.json({ success: false, error: 'Check-in failed.' });
   }

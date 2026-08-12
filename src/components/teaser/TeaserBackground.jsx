@@ -1,10 +1,10 @@
 const PARTICLES = [
-  { left: "10%", top: "22%", size: 3, delay: "0s" },
-  { left: "85%", top: "30%", size: 2, delay: "1.2s" },
-  { left: "25%", top: "76%", size: 4, delay: "2.1s" },
-  { left: "70%", top: "82%", size: 2, delay: "0.6s" },
-  { left: "50%", top: "15%", size: 3, delay: "1.8s" },
-  { left: "92%", top: "62%", size: 2, delay: "2.6s" },
+  { left: "12%", top: "24%", size: 3, delay: "0s" },
+  { left: "84%", top: "32%", size: 2, delay: "1.2s" },
+  { left: "28%", top: "74%", size: 4, delay: "2.1s" },
+  { left: "68%", top: "80%", size: 2, delay: "0.6s" },
+  { left: "52%", top: "16%", size: 3, delay: "1.8s" },
+  { left: "90%", top: "60%", size: 2, delay: "2.6s" },
 ];
 
 export default function TeaserBackground() {
@@ -13,15 +13,14 @@ export default function TeaserBackground() {
       <div
         className="absolute inset-0"
         style={{
-          opacity: 0.035,
           backgroundImage:
-            "linear-gradient(#D4AF37 1px, transparent 1px), linear-gradient(90deg, #D4AF37 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
+            "linear-gradient(rgba(212,175,55,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.015) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
         }}
       />
       <div
         className="absolute inset-0"
-        style={{ background: "radial-gradient(circle at 50% 38%, rgba(212,175,55,0.10), transparent 62%)" }}
+        style={{ background: "radial-gradient(circle at 100% 100%, rgba(212,175,55,0.04), transparent 45%)" }}
       />
       {PARTICLES.map((p, i) => (
         <span
@@ -33,9 +32,9 @@ export default function TeaserBackground() {
             width: p.size,
             height: p.size,
             backgroundColor: "#D4AF37",
-            opacity: 0.25,
+            opacity: 0.22,
             animationDelay: p.delay,
-            boxShadow: "0 0 8px rgba(212,175,55,0.5)",
+            boxShadow: "0 0 8px rgba(212,175,55,0.45)",
           }}
         />
       ))}

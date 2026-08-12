@@ -32,7 +32,7 @@ export default function RotatingQuote() {
     <section style={{ marginBottom: 60, textAlign: "center" }}>
       <div style={{ minHeight: 120, display: "flex", alignItems: "center", justifyContent: "center" }}>
         <p
-          className="text-[22px] md:text-[28px] font-bold text-white mx-auto"
+          className="text-[22px] md:text-[32px] font-bold text-white mx-auto"
           style={{ maxWidth: 600, letterSpacing: "0.5px", lineHeight: 1.4, transition: "opacity 0.5s ease", opacity: show ? 1 : 0 }}
         >
           {QUOTES[i]}

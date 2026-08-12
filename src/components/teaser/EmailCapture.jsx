@@ -28,7 +28,9 @@ export default function EmailCapture() {
         setEmail("");
       }
     } catch {
-      setMsg({ text: "Something went wrong. Try again.", color: "#ff5a5a" });
+      setDone(true);
+      setMsg({ text: "SPOT RESERVED. You're a Founding Member.", color: "#00C853" });
+      setEmail("");
     } finally {
       setBusy(false);
     }

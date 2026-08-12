@@ -36,7 +36,7 @@ export default function RegistrationGate() {
           Traders Registered
         </div>
         <div style={{ width: "100%", height: 8, background: "#1A1A1A", borderRadius: 4, overflow: "hidden" }}>
-          <div style={{ width: `${pct}%`, height: "100%", background: "#D4AF37", borderRadius: 4, transition: "width 0.7s ease" }} />
+          <div style={{ width: `${pct}%`, height: "100%", borderRadius: 4, transition: "width 0.7s ease", backgroundImage: "linear-gradient(90deg, #BF9256, #D4AF37, #E5C158)", boxShadow: "0 0 12px rgba(212,175,55,0.4)" }} />
         </div>
         <div className="text-sm text-center mt-3 text-white">{count.toLocaleString()} / 10,000</div>
         <div className="text-xs text-center mt-2" style={{ color: "#666666" }}>

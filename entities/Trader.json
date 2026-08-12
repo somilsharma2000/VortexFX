@@ -3,6 +3,9 @@
     "avatar": {
       "type": "string"
     },
+    "best_streak": {
+      "type": "number"
+    },
     "banned": {
       "type": "boolean"
     },
@@ -10,19 +13,15 @@
       "type": "string"
     },
     "battlepass_level": {
-      "type": "number"
+      "type": "number",
+      "default": 0
     },
     "battlepass_xp": {
-      "type": "number"
-    },
-    "best_streak": {
-      "type": "number"
+      "type": "number",
+      "default": 0
     },
     "checkin_streak": {
       "type": "number"
-    },
-    "created_by": {
-      "type": "string"
     },
     "discord_id": {
       "type": "string"
@@ -30,38 +29,21 @@
     "discord_username": {
       "type": "string"
     },
-    "email": {
-      "type": "string"
+    "genesis_multiplier": {
+      "type": "number",
+      "default": 1.0,
+      "description": "Genesis tier multiplier (3.0, 2.5, 2.0, or 1.5) applied to earned REX"
     },
-    "experience_level": {
+    "genesis_tier": {
       "type": "string",
       "enum": [
-        "beginner",
-        "intermediate",
-        "advanced",
-        "prop"
-      ]
-    },
-    "invite_count": {
-      "type": "number"
-    },
-    "invite_passes": {
-      "type": "number"
-    },
-    "invite_tier": {
-      "type": "string",
-      "enum": [
-        "member",
-        "recruiter",
-        "squad-leader",
-        "ambassador",
-        "diamond",
-        "founding-trader",
-        "legend"
-      ]
-    },
-    "is_active_trader": {
-      "type": "boolean"
+        "Tier 1",
+        "Tier 2",
+        "Tier 3",
+        "Tier 4",
+        "None"
+      ],
+      "default": "None"
     },
     "joined_date": {
       "type": "string"
@@ -75,15 +57,6 @@
     "mt4_linked": {
       "type": "boolean"
     },
-    "preferred_market": {
-      "type": "string",
-      "enum": [
-        "forex",
-        "gold-indices",
-        "crypto",
-        "mixed"
-      ]
-    },
     "referred_by": {
       "type": "string"
     },
@@ -93,41 +66,29 @@
     "rex_balance": {
       "type": "number"
     },
-    "rex_earned_total": {
-      "type": "number"
-    },
-    "rex_spent_total": {
-      "type": "number"
-    },
     "role": {
-      "type": "string"
-    },
-    "telegram_code": {
-      "type": "string"
-    },
-    "telegram_linked": {
-      "type": "boolean"
+      "type": "string",
+      "enum": [
+        "admin",
+        "member"
+      ],
+      "default": "member"
     },
     "total_checkins": {
       "type": "number"
     },
     "trader_class": {
-      "type": "string"
-    },
-    "trades_logged_30d": {
-      "type": "number"
+      "type": "string",
+      "enum": [
+        "Sniper",
+        "Scalper",
+        "Swing King",
+        "Rookie"
+      ],
+      "default": "Rookie"
     },
     "verified": {
       "type": "boolean"
-    },
-    "verification_status": {
-      "type": "string",
-      "enum": [
-        "unsubmitted",
-        "pending",
-        "approved",
-        "rejected"
-      ]
     }
   },
   "type": "object",
