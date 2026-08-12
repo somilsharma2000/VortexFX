@@ -83,6 +83,9 @@ export default function Waitlist() {
             <div className="text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>You are</div>
             <div className="text-3xl font-bold" style={{ color: "#00C853" }}>#{position.toLocaleString()}</div>
             <div className="text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>in line</div>
+            <a href="https://discord.gg/9pTSqeTbn" target="_blank" rel="noopener noreferrer" className="btn-secondary w-full mt-4 text-sm">
+              <MessageCircle className="w-4 h-4" /> Join the community on Discord <ArrowRight className="w-4 h-4" />
+            </a>
           </div>
         )}
       </div>

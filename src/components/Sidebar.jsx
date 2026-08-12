@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Menu, X, Zap, LayoutDashboard, Trophy, Users, BarChart3, Gift, Wallet, CalendarCheck, Shield, Flame } from "lucide-react";
+import { Menu, X, Zap, LayoutDashboard, Trophy, Users, BarChart3, Gift, Wallet, CalendarCheck, Shield, Flame, Sword } from "lucide-react";
 import { useCurrentTrader } from "@/hooks/useCurrentTrader";
+
+const DISCORD_URL = "https://discord.gg/9pTSqeTbn";
 import Logo from "@/components/Logo";
 
 const navItems = [
@@ -58,7 +60,10 @@ export default function Sidebar() {
             <span className="text-xs text-[#A0A8C0]">REX</span>
           </div>
         )}
-        <Link to="/check-in" onClick={() => setOpen(false)} className="btn-primary w-full text-sm" style={{ padding: "10px 16px" }}>
+        <a href={DISCORD_URL} target="_blank" rel="noopener noreferrer" className="btn-primary w-full text-sm mb-2" style={{ padding: "10px 16px" }}>
+          <Sword className="w-4 h-4" /> Enter Arena
+        </a>
+        <Link to="/check-in" onClick={() => setOpen(false)} className="btn-secondary w-full text-sm" style={{ padding: "10px 16px" }}>
           <Flame className="w-4 h-4" /> Daily Check-in
         </Link>
       </div>
@@ -76,6 +81,9 @@ export default function Sidebar() {
           <Logo size={30} />
           <span className="text-base font-bold" style={{ color: "#D4AF37" }}>FORTREX</span>
         </Link>
+        <a href={DISCORD_URL} target="_blank" rel="noopener noreferrer" className="btn-primary text-xs" style={{ padding: "6px 12px" }}>
+          <Sword className="w-3.5 h-3.5" /> Enter Arena
+        </a>
         <button onClick={() => setOpen(!open)} className="text-white p-2" aria-label="Menu">
           {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
