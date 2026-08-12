@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+import sys
+
+html_content = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -1177,3 +1179,9 @@
   </script>
 </body>
 </html>
+"""
+
+with open('./vortex-fx/leaderboard.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print("Updated ./vortex-fx/leaderboard.html successfully!")
