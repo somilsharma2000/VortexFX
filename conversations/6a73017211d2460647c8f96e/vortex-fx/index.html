@@ -144,11 +144,6 @@
     }
 
     /* COUNTDOWN */
-    .stealth-countdown {
-      display: flex;
-      gap: clamp(12px, 4vw, 32px);
-      margin: 48px 0 40px;
-    }
 
     .count-unit {
       display: flex;
@@ -254,6 +249,11 @@
       backdrop-filter: blur(10px);
       position: relative;
       z-index: 2;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      transition: border-color 0.3s ease;
+    }
+    .reg-counter:hover {
+      border-color: rgba(229, 193, 88, 0.35);
     }
     .reg-counter-header {
       display: flex;
@@ -367,10 +367,16 @@
       background: rgba(229, 193, 88, 0.04);
       border: 1px solid rgba(229, 193, 88, 0.12);
       border-radius: 8px;
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    }
+    .tier-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(229, 193, 88, 0.3);
     }
     .tier-item.active {
       background: rgba(229, 193, 88, 0.1);
       border-color: rgba(229, 193, 88, 0.4);
+      box-shadow: 0 0 16px rgba(229, 193, 88, 0.12);
     }
     .tier-mult {
       display: block;
@@ -544,16 +550,40 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 10px 12px;
+      padding: 16px 12px;
+      border-radius: 14px;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.35s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      background: rgba(229, 193, 88, 0.04);
+    }
+
+    .stat-icon {
+      width: 22px;
+      height: 22px;
+      margin-bottom: 10px;
+      opacity: 0.85;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .stat-icon svg { width: 100%; height: 100%; }
+
+    .stat-card:hover .stat-icon {
+      opacity: 1;
+      transform: scale(1.08);
     }
 
     .stat-number {
-      font-size: clamp(28px, 3.8vw, 44px);
+      font-size: clamp(24px, 3.4vw, 40px);
       font-weight: 700;
       letter-spacing: -0.02em;
       font-variant-numeric: tabular-nums;
       line-height: 1.1;
       margin-bottom: 8px;
+      white-space: nowrap;
+      cursor: default;
     }
 
     .stat-number.gold-stat {
@@ -569,7 +599,7 @@
     }
 
     .stat-label {
-      font-size: 12px;
+      font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: #888888;
@@ -1060,7 +1090,6 @@
     }
 
     @media (max-width: 640px) {
-      .stealth-countdown { gap: 16px; }
       .stealth-cta { padding: 16px 28px; font-size: 13px; }
    left: 12px; right: 12px; bottom: 12px; }
       .brand-logo { width: 44px; height: 44px; }
@@ -1334,7 +1363,7 @@
     <div class="genesis-hero-bar">
       <div class="genesis-hero-header">
         <span class="genesis-hero-label">GENESIS PROGRAM</span>
-        <span class="genesis-hero-pool">LIFETIME REX CAP: <span class="gold-text" style="font-weight: 700;">1,000,000,000</span></span>
+        <span class="genesis-hero-pool">LIFETIME REX CAP: <span class="gold-text" style="font-weight: 700;" title="1,000,000,000 REX">1B</span></span>
       </div>
       <div class="genesis-hero-progress">
         <div class="genesis-hero-fill" id="genesis-hero-fill"></div>
@@ -1374,19 +1403,31 @@
   <section class="social-proof-section" id="social-proof">
     <div class="social-proof-container" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
       <div class="stat-card">
-        <div class="stat-number gold-stat" style="font-size: clamp(20px, 2.4vw, 28px); line-height:1.25;">GATES OPEN<br>AUGUST 23</div>
-        <div class="stat-label">Launch Countdown</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number gold-stat" style="font-size: clamp(28px, 3.2vw, 38px); line-height:1.25;">1,000,000,000</div>
-        <div class="stat-label">Lifetime REX Cap</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number white-stat" style="font-size: clamp(28px, 3.2vw, 38px);" id="stat-waitlist">—</div>
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#E5C158" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="stat-number white-stat" id="stat-waitlist">—</div>
         <div class="stat-label">Traders Registered</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number gold-stat" style="font-size: clamp(28px, 3.2vw, 38px); line-height:1.25;" id="stat-rex-total">—</div>
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#E5C158" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="stat-number gold-stat" id="stat-spots-left">—</div>
+        <div class="stat-label">Genesis Spots Left</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#E5C158" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+        </div>
+        <div class="stat-number gold-stat" id="stat-rex-cap" title="1,000,000,000 REX">1B</div>
+        <div class="stat-label">Lifetime REX Cap</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#E5C158" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="stat-number gold-stat" id="stat-rex-total">—</div>
         <div class="stat-label">Total REX Distributed</div>
       </div>
 
@@ -1628,6 +1669,15 @@
     }, { threshold: 0.12 });
     revealSections.forEach(section => revealObserver.observe(section));
 
+    // ===== COMPACT NUMBER FORMATTER (1,000,000,000 -> 1B) =====
+    function formatCompact(num) {
+      num = Number(num) || 0;
+      if (num >= 1e9) return (num / 1e9).toFixed(num % 1e9 === 0 ? 0 : 1).replace(/\.0$/, '') + 'B';
+      if (num >= 1e6) return (num / 1e6).toFixed(num % 1e6 === 0 ? 0 : 1).replace(/\.0$/, '') + 'M';
+      if (num >= 1e3) return (num / 1e3).toFixed(num % 1e3 === 0 ? 0 : 1).replace(/\.0$/, '') + 'K';
+      return num.toLocaleString();
+    }
+
     // ===== FETCH REAL STATS FROM DATABASE =====
     async function fetchRealStats() {
       try {
@@ -1640,22 +1690,24 @@
 
         if (data && data.success && data.stats) {
           const s = data.stats;
+          const registered = s.registration_count || s.waitlist_count || 0;
 
           // Update stat cards
           const wlEl = document.getElementById('stat-waitlist');
-          if (wlEl) wlEl.textContent = (s.registration_count || s.waitlist_count || 0).toLocaleString();
+          if (wlEl) wlEl.textContent = registered.toLocaleString();
 
           const rexTotalEl = document.getElementById('stat-rex-total');
-          if (rexTotalEl) rexTotalEl.textContent = (s.total_rex_distributed || 0).toLocaleString();
+          if (rexTotalEl) {
+            const totalRex = s.total_rex_distributed || 0;
+            rexTotalEl.textContent = formatCompact(totalRex);
+            rexTotalEl.title = totalRex.toLocaleString() + ' REX';
+          }
 
-          const ppEl = document.getElementById('stat-prize-pool');
-          if (ppEl) ppEl.textContent = '1B';
-
-          const trEl = document.getElementById('stat-traders');
-          if (trEl) trEl.textContent = (s.verified_accounts || 0).toLocaleString();
-
-          const chEl = document.getElementById('stat-championships');
-          if (chEl) chEl.textContent = (s.completed_championships || 0).toLocaleString();
+          const spotsLeftEl = document.getElementById('stat-spots-left');
+          if (spotsLeftEl) {
+            const spotsLeft = Math.max(0, 10000 - registered);
+            spotsLeftEl.textContent = spotsLeft.toLocaleString();
+          }
 
           // Update genesis progress
           const genesisMax = 10000;
