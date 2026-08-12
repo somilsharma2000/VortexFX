@@ -322,6 +322,39 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* === NAVBAR OVERLAP FIX === */
+    .nav-links {
+      gap: 1.25rem !important;
+      max-width: 60%;
+      overflow: hidden;
+    }
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+    body.user-logged-in .nav-links {
+      max-width: 55%;
+    }
+    /* Reduce link font slightly to prevent crowding */
+    body.user-logged-in .nav-link {
+      font-size: 12px;
+    }
+
+    /* === CONTAINER FIT & SECTION SPACING === */
+    .container {
+      max-width: 1200px;
+      padding: 0 1.5rem;
+    }
+    .rex-section {
+      padding: 2rem 0 !important;
+    }
+    .section {
+      padding: 2rem 0 !important;
+    }
   </style>
     <link rel="icon" type="image/png" sizes="32x32" href="assets/fortrex-icon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/fortrex-icon-32.png">
@@ -373,11 +406,11 @@
   <main>
 
     <!-- HEADER SECTION -->
-    <section class="section" style="padding-top: 140px; padding-bottom: 40px;">
-      <div class="container reveal">
+    <section class="section" style="padding-top: 140px; padding-bottom: 40px; text-align: center;">
+      <div class="container reveal" style="max-width: 800px; margin: 0 auto 3rem auto;">
         <div class="section-label">THE REX ECONOMY</div>
         <h1 class="display space-grotesk" style="margin-bottom: 16px; font-weight: 700;">Your rewards, your status.</h1>
-        <p class="body-text-muted" style="max-width: 680px; font-size: 18px; color: #9A9A9A; line-height: 1.6;">
+        <p class="body-text-muted" style="max-width: 680px; margin: 0 auto; font-size: 18px; color: #9A9A9A; line-height: 1.6;">
           REX are closed-loop loyalty points. Not crypto. Not currency. Not withdrawable as cash.
         </p>
       </div>
