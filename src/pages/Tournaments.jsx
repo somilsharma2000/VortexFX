@@ -7,7 +7,7 @@ import { Plus } from "lucide-react";
 
 const filters = [
   { key: "all", label: "All" },
-  { key: "live", label: "Active" },
+  { key: "active", label: "Active" },
   { key: "upcoming", label: "Upcoming" },
   { key: "completed", label: "Completed" },
 ];
@@ -33,7 +33,7 @@ export default function Tournaments() {
   const filtered = useMemo(() => {
     const list = filter === "all" ? tournaments : tournaments.filter((t) => t.status === filter);
     return [...list].sort((a, b) => {
-      const order = { live: 0, upcoming: 1, revealing: 2, completed: 3, cancelled: 4 };
+      const order = { active: 0, upcoming: 1, revealing: 2, completed: 3, cancelled: 4 };
       return (order[a.status] ?? 9) - (order[b.status] ?? 9);
     });
   }, [tournaments, filter]);

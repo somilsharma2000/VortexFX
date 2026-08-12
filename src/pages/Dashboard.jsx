@@ -34,9 +34,9 @@ export default function Dashboard() {
     })();
   }, []);
 
-  const currentContest = tournaments.find((t) => t.status === "live") || tournaments.find((t) => t.status === "upcoming");
+  const currentContest = tournaments.find((t) => t.status === "active") || tournaments.find((t) => t.status === "upcoming");
   const topTraders = traders.slice(0, 5);
-  const totalPrize = tournaments.filter((t) => t.status === "live" || t.status === "upcoming").reduce((s, t) => s + (t.prize_pool_rex || 0), 0);
+  const totalPrize = tournaments.filter((t) => t.status === "active" || t.status === "upcoming").reduce((s, t) => s + (t.prize_pool_rex || 0), 0);
   const username = trader?.discord_username || "Trader";
 
   const countdown = (() => {
@@ -111,7 +111,7 @@ export default function Dashboard() {
         <div className="lg:col-span-2 card card-hover">
           <div className="flex items-center justify-between mb-5">
             <div className="section-title-accent">Current Contest</div>
-            {currentContest && <span className={`badge ${currentContest.status === "live" ? "badge-green" : "badge-muted"}`}>{currentContest.status}</span>}
+            {currentContest && <span className={`badge ${currentContest.status === "active" ? "badge-green" : "badge-muted"}`}>{currentContest.status}</span>}
           </div>
           {loading ? (
             <div className="text-[#A0A8C0]">Loading…</div>

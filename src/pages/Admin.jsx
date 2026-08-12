@@ -4,7 +4,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useCurrentTrader } from "@/hooks/useCurrentTrader";
 import { Plus, Settings, Trophy, Save } from "lucide-react";
 
-const statusOptions = ["upcoming", "live", "revealing", "completed", "cancelled"];
+const statusOptions = ["upcoming", "active", "revealing", "completed", "cancelled"];
 
 export default function Admin() {
   const { user, loading } = useCurrentTrader();
@@ -163,7 +163,7 @@ export default function Admin() {
                         <div className="text-white font-semibold truncate">{t.name}</div>
                         <div className="text-xs text-[#A0A8C0]">{(t.prize_pool_rex || 0).toLocaleString()} REX · {t.participant_count || 0} traders</div>
                       </div>
-                      <span className={`badge ${t.status === "live" ? "badge-green" : "badge-muted"}`}>{t.status}</span>
+                      <span className={`badge ${t.status === "active" ? "badge-green" : "badge-muted"}`}>{t.status}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <select

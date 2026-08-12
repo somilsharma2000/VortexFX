@@ -58,7 +58,7 @@ export default function TraderCard({ trader, rank }) {
           </div>
           <div>
             <div className="section-label mb-1">Role</div>
-            <div className="text-lg font-bold text-white capitalize">{tr.role || "trader"}</div>
+            <div className="text-lg font-bold text-white capitalize">{tr.role || "member"}</div>
           </div>
         </div>
 

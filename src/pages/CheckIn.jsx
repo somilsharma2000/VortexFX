@@ -1,22 +1,37 @@
 import { useEffect, useState } from "react";
 import { base44 } from "@/api/base44Client";
 import { useToast } from "@/components/ui/use-toast";
-import { Flame, Zap, Link2, MessageCircle, Calendar, Award } from "lucide-react";
+import { Flame, Zap, Link2, Calendar, Award } from "lucide-react";
 import { useCurrentTrader } from "@/hooks/useCurrentTrader";
 
 export default function CheckIn() {
   const { trader, loading, refresh } = useCurrentTrader();
   const { toast } = useToast();
   const [history, setHistory] = useState([]);
+  const [leaders, setLeaders] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [mt4Account, setMt4Account] = useState("");
   const [linkingMt4, setLinkingMt4] = useState(false);
+
+  const today = new Date().toISOString().slice(0, 10);
+  const alreadyCheckedIn = (trader?.last_checkin_date || "").slice(0, 10) === today;
 
   const loadHistory = async (traderId) => {
     if (!traderId) return;
     const h = await base44.entities.CheckIn.filter({ trader_id: traderId }, "-checkin_date", 30);
     setHistory(h);
   };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const top = await base44.entities.Trader.list("-checkin_streak", 10);
+        setLeaders(top);
+      } catch {
+        setLeaders([]);
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     if (trader) {
@@ -26,66 +41,104 @@ export default function CheckIn() {
   }, [trader]);
 
   const handleCheckIn = async () => {
+    if (!trader || submitting || alreadyCheckedIn) return;
     setSubmitting(true);
     try {
-      const res = await base44.functions.invoke("dailyCheckin", {});
-      const data = res.data || {};
+      const last = (trader.last_checkin_date || "").slice(0, 10);
+      const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+      let newStreak = 1;
+      if (last === yesterday) newStreak = (trader.checkin_streak || 0) + 1;
+      else if (last === today) newStreak = trader.checkin_streak || 1;
+
+      const baseRex = 10 + Math.min(newStreak, 30) * 2;
+      let bonusRex = 0;
+      let milestone = null;
+      const milestones = {
+        7: ["7-Day Streak!", 50],
+        14: ["14-Day Streak!", 100],
+        30: ["30-Day Streak!", 250],
+        50: ["50-Day Streak! LEGENDARY", 500],
+        100: ["100-Day Streak! GODLIKE", 1000],
+      };
+      if (milestones[newStreak]) {
+        milestone = milestones[newStreak][0];
+        bonusRex = milestones[newStreak][1];
+      }
+      const totalRex = baseRex + bonusRex;
+
+      await base44.entities.Trader.update(trader.id, {
+        checkin_streak: newStreak,
+        last_checkin_date: today,
+        total_checkins: (trader.total_checkins || 0) + 1,
+        best_streak: Math.max(trader.best_streak || 0, newStreak),
+        rex_balance: (trader.rex_balance || 0) + totalRex,
+      });
+      await base44.entities.CheckIn.create({
+        trader_id: trader.id,
+        trader_username: trader.discord_username,
+        checkin_date: today,
+        rex_earned: totalRex,
+        new_streak: newStreak,
+        milestone_reached: milestone,
+        milestone_bonus_rex: bonusRex,
+      });
+      await base44.entities.Transaction.create({
+        trader_id: trader.id,
+        type: "earn",
+        amount: totalRex,
+        description: `Daily check-in (Day ${newStreak})`,
+        transaction_date: today,
+        reason: "daily_checkin",
+      });
+
       toast({
         title: "Check-in complete!",
-        description: `+${data.rex_earned ?? 1} REX · Streak ${data.new_streak ?? (trader?.checkin_streak || 0) + 1}`,
+        description: `+${totalRex} REX · Streak ${newStreak}${milestone ? ` · ${milestone}` : ""}`,
       });
       await refresh();
       await loadHistory(trader.id);
     } catch (e) {
-      toast({ title: "Check-in failed", description: e?.response?.data?.error || e.message || "Try again later.", variant: "destructive" });
+      toast({ title: "Check-in failed", description: e?.message || "Try again later.", variant: "destructive" });
     } finally {
       setSubmitting(false);
     }
   };
 
   const handleLinkMt4 = async () => {
-    if (!mt4Account.trim()) return;
+    if (!mt4Account.trim() || !trader) return;
     setLinkingMt4(true);
     try {
-      await base44.functions.invoke("linkMT4", { mt4_account: mt4Account.trim() });
-      toast({ title: "MT4 linked", description: "Your MT4 account is now connected." });
+      await base44.entities.Trader.update(trader.id, { mt4_account: mt4Account.trim(), mt4_linked: false });
+      toast({ title: "MT4/MT5 submitted", description: "Your account will be verified within 24-48 hours." });
       await refresh();
     } catch (e) {
-      toast({ title: "Linking failed", description: e?.response?.data?.error || e.message || "Try again later.", variant: "destructive" });
+      toast({ title: "Linking failed", description: e?.message || "Try again later.", variant: "destructive" });
     } finally {
       setLinkingMt4(false);
     }
   };
 
-  const handleDiscord = async () => {
-    try {
-      const res = await base44.functions.invoke("discordAuth", {});
-      const data = res.data || {};
-      if (data.url) window.location.href = data.url;
-      else toast({ title: "Discord", description: data.message || "Discord connection requested." });
-    } catch (e) {
-      toast({ title: "Discord connect failed", description: e?.response?.data?.error || e.message, variant: "destructive" });
-    }
-  };
-
   if (loading) return <div className="max-w-7xl mx-auto px-4 py-20 text-[#A0A8C0]">Loading…</div>;
-
   if (!trader) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-24 text-center">
         <div className="card">
           <h1 className="text-2xl font-bold text-white mb-3">No trader profile yet</h1>
-          <p className="text-[#A0A8C0] mb-6">Connect your Discord to create your FORTREX trader profile and start earning REX.</p>
-          <button onClick={handleDiscord} className="btn-primary">
-            <MessageCircle className="w-4 h-4" /> Connect Discord
-          </button>
+          <p className="text-[#A0A8C0]">Log in to create your FORTREX trader profile and start earning REX.</p>
         </div>
       </div>
     );
   }
 
-  const today = new Date().toISOString().slice(0, 10);
-  const alreadyCheckedIn = trader.last_checkin_date === today;
+  // 30-day calendar
+  const days = Array.from({ length: 30 }, (_, i) => {
+    const d = new Date();
+    d.setDate(d.getDate() - (29 - i));
+    return d.toISOString().slice(0, 10);
+  });
+  const checkedDates = new Set(history.map((c) => (c.checkin_date || "").slice(0, 10)));
+  const nextMilestone = [7, 14, 30, 50, 100].find((m) => m > (trader.checkin_streak || 0)) || 100;
+  const daysToMilestone = nextMilestone - (trader.checkin_streak || 0);
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -95,31 +148,30 @@ export default function CheckIn() {
       {/* Streak hero */}
       <div className="card mb-8 text-center fade-in" style={{ backgroundImage: "linear-gradient(135deg, rgba(212,175,55,0.1), rgba(0,200,83,0.04))" }}>
         <div className="inline-flex items-center gap-2 section-label mb-4 justify-center"><Flame className="w-4 h-4 text-[#D4AF37]" /> Current Streak</div>
-        <div className="text-7xl font-bold text-white mb-2">{trader.checkin_streak || 0}<span className="text-2xl text-[#A0A8C0] ml-2">days</span></div>
-        <p className="text-[#A0A8C0] mb-6">Best streak: {trader.best_streak || 0} days · Total check-ins: {trader.total_checkins || 0}</p>
+        <div className="text-7xl font-bold text-white mb-2">🔥 {trader.checkin_streak || 0}<span className="text-2xl text-[#A0A8C0] ml-2">days</span></div>
+        <p className="text-[#A0A8C0] mb-2">Best streak: {trader.best_streak || 0} days · Total check-ins: {trader.total_checkins || 0}</p>
+        <p className="text-sm text-[#D4AF37] mb-6">Next milestone: {nextMilestone}-Day ({daysToMilestone} days to go)</p>
         <button onClick={handleCheckIn} disabled={submitting || alreadyCheckedIn} className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed">
           {alreadyCheckedIn ? "Checked in today ✓" : submitting ? "Processing…" : "Check in now"}
           {!alreadyCheckedIn && !submitting && <Zap className="w-4 h-4 btn-arrow" />}
         </button>
-        {/* 7-day strip */}
-        <div className="flex items-center justify-center gap-2 mt-8 max-w-md mx-auto">
-          {Array.from({ length: 7 }).map((_, i) => {
-            const d = new Date();
-            d.setDate(d.getDate() - (6 - i));
-            const ds = d.toISOString().slice(0, 10);
-            const checked = history.some((c) => (c.checkin_date || "").slice(0, 10) === ds);
-            return (
-              <div key={i} className="flex flex-col items-center gap-1">
+
+        {/* 30-day calendar */}
+        <div className="mt-8">
+          <div className="section-label mb-3">Last 30 Days</div>
+          <div className="grid grid-cols-10 gap-1.5 max-w-2xl mx-auto">
+            {days.map((ds) => {
+              const checked = checkedDates.has(ds);
+              return (
                 <div
-                  className="w-9 h-9 rounded-lg flex items-center justify-center text-xs font-bold transition-all"
-                  style={checked ? { backgroundImage: "linear-gradient(135deg, #D4AF37, #00C853)", color: "#ffffff" } : { backgroundColor: "#0A0E27", border: "1px solid rgba(212,175,55,0.15)", color: "#6B7494" }}
-                >
-                  {d.getDate()}
-                </div>
-                <span className="text-[0.6rem] uppercase text-[#6B7494]">{d.toLocaleDateString(undefined, { weekday: "narrow" })}</span>
-              </div>
-            );
-          })}
+                  key={ds}
+                  title={ds}
+                  className="aspect-square rounded-md transition-all"
+                  style={checked ? { backgroundColor: "#00C853", boxShadow: "0 0 8px rgba(0,200,83,0.4)" } : { backgroundColor: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.12)" }}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -139,30 +191,44 @@ export default function CheckIn() {
         </div>
       </div>
 
-      {/* Connected accounts */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div className="card">
-          <div className="flex items-center gap-2 section-title-accent mb-4"><Link2 className="w-4 h-4" /> MT4 Account</div>
-          <p className="text-sm text-[#A0A8C0] mb-4">Link your MT4 trading account to verify trades.</p>
-          <input className="input-field mb-4" placeholder="MT4 account number" value={mt4Account} onChange={(e) => setMt4Account(e.target.value)} />
-          <button onClick={handleLinkMt4} disabled={linkingMt4 || !mt4Account.trim()} className="btn-blue w-full disabled:opacity-50">
-            {linkingMt4 ? "Linking…" : trader.mt4_linked ? "Update MT4" : "Link MT4"}
-          </button>
-        </div>
-        <div className="card">
-          <div className="flex items-center gap-2 section-title-accent mb-4"><MessageCircle className="w-4 h-4" /> Discord</div>
-          <p className="text-sm text-[#A0A8C0] mb-4">Connect Discord to join the community hub and verify identity.</p>
-          <div className="mb-4 text-sm">
-            {trader.discord_username ? (
-              <span className="inline-flex items-center gap-2 text-white"><span className="w-2 h-2 rounded-full" style={{ backgroundColor: "#00C853" }} /> Connected as {trader.discord_username}</span>
-            ) : (
-              <span className="text-[#A0A8C0]">Not connected</span>
-            )}
+      {/* MT4 / MT5 linking */}
+      <div className="card mb-8">
+        <div className="flex items-center gap-2 section-title-accent mb-4"><Link2 className="w-4 h-4" /> MT4 / MT5 Account</div>
+        {trader.mt4_linked ? (
+          <div className="text-sm text-white">
+            <span className="inline-flex items-center gap-2"><span className="w-2 h-2 rounded-full" style={{ backgroundColor: "#00C853" }} /> Verified · {trader.mt4_account}</span>
           </div>
-          <button onClick={handleDiscord} className="btn-secondary w-full">
-            {trader.discord_username ? "Reconnect Discord" : "Connect Discord"}
-          </button>
-        </div>
+        ) : (
+          <>
+            <p className="text-sm text-[#A0A8C0] mb-4">Link your MT4/MT5 account to join competitions. Verified within 24-48 hours.</p>
+            <input className="input-field mb-4" placeholder="MT4/MT5 account number" value={mt4Account} onChange={(e) => setMt4Account(e.target.value)} />
+            <button onClick={handleLinkMt4} disabled={linkingMt4 || !mt4Account.trim()} className="btn-blue w-full disabled:opacity-50">
+              {linkingMt4 ? "Submitting…" : trader.mt4_account ? "Update MT4/MT5" : "Link MT4/MT5"}
+            </button>
+          </>
+        )}
+      </div>
+
+      {/* Streak leaderboard */}
+      <div className="mb-4">
+        <div className="section-label mb-3">Community</div>
+        <h2 className="text-2xl font-bold text-white">Streak Leaderboard</h2>
+      </div>
+      <div className="card mb-8 overflow-hidden" style={{ padding: 0 }}>
+        {leaders.length === 0 ? (
+          <div className="px-6 py-8 text-[#A0A8C0]">No data.</div>
+        ) : (
+          leaders.map((tr, i) => (
+            <div key={tr.id} className="data-row flex items-center gap-4 px-6 py-4 border-b last:border-0" style={{ borderColor: "rgba(212,175,55,0.12)" }}>
+              <span className="w-6 font-bold text-[#D4AF37]">{i < 3 ? ["🥇", "🥈", "🥉"][i] : i + 1}</span>
+              <div className="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold text-white" style={{ backgroundImage: "linear-gradient(135deg, #D4AF37, #00C853)" }}>
+                {(tr.discord_username || "T")[0].toUpperCase()}
+              </div>
+              <span className="flex-1 text-white font-semibold">{tr.discord_username || "Trader"}</span>
+              <span className="inline-flex items-center gap-1.5 text-[#D4AF37] font-bold"><Flame className="w-4 h-4" />{tr.checkin_streak || 0}</span>
+            </div>
+          ))
+        )}
       </div>
 
       {/* Streak history */}
@@ -181,10 +247,10 @@ export default function CheckIn() {
               </div>
               <div className="flex-1">
                 <div className="text-white font-semibold text-sm">Day {c.new_streak} streak</div>
-                <div className="text-xs text-[#A0A8C0] inline-flex items-center gap-1.5">
+                <div className="text-xs text-[#A0A8C0] inline-flex items-center gap-1.5 flex-wrap">
                   <Calendar className="w-3 h-3" /> {c.checkin_date ? new Date(c.checkin_date).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }) : "—"}
-                  {c.milestone_reached && c.milestone_reached !== "none" && (
-                    <span className="badge badge-purple ml-1"><Award className="w-3 h-3" /> {c.milestone_reached}d milestone</span>
+                  {c.milestone_reached && (
+                    <span className="badge badge-purple ml-1"><Award className="w-3 h-3" /> {c.milestone_reached}</span>
                   )}
                 </div>
               </div>

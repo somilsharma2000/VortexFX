@@ -41,8 +41,8 @@ export default function TournamentDetail() {
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <span className="badge">{t.markets === "both" ? "Forex + Crypto" : t.markets ? t.markets[0].toUpperCase() + t.markets.slice(1) : "Tournament"}</span>
-              <span className={`badge ${t.status === "live" ? "badge-green" : t.status === "upcoming" ? "badge-muted" : "badge-purple"}`}>{t.status}</span>
+              <span className="badge">{t.markets || "Tournament"}</span>
+              <span className={`badge ${t.status === "active" ? "badge-green" : t.status === "upcoming" ? "badge-muted" : "badge-purple"}`}>{t.status}</span>
             </div>
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">{t.name}</h1>
             <p className="text-[#A0A8C0] max-w-2xl">{t.description || "No description provided."}</p>

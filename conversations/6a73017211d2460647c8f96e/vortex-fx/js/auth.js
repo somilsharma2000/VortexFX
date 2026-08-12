@@ -9,8 +9,8 @@ const FORTEX_AUTH = {
   // Base44 backend function endpoint
   API_BASE: 'https://api.base44.com/v1/apps/6a73016f9b626430a0d26f88/functions',
   
-  // Discord OAuth config (client_id will be set by Somil)
-  DISCORD_CLIENT_ID: 'PLACEHOLDER_REPLACE_WITH_DISCORD_CLIENT_ID',
+  // Discord OAuth config
+  DISCORD_CLIENT_ID: '1536976658836230254',
   DISCORD_REDIRECT_URI: 'https://somilsharma2000.github.io/VortexFX/signin.html',
   DISCORD_SCOPES: 'identify',
   

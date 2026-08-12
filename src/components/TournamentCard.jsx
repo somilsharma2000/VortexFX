@@ -3,7 +3,7 @@ import { Users, Calendar, ArrowRight } from "lucide-react";
 
 const statusStyles = {
   upcoming: { className: "badge badge-muted", text: "Upcoming" },
-  live: { className: "badge badge-green", text: "Live" },
+  active: { className: "badge badge-green", text: "Active" },
   revealing: { className: "badge badge-purple", text: "Revealing" },
   completed: { className: "badge badge-muted", text: "Completed" },
   cancelled: { className: "badge badge-muted", text: "Cancelled" },
@@ -24,7 +24,7 @@ export default function TournamentCard({ tournament }) {
     <Link to={`/tournaments/${t.id}`} className="block">
       <div className="card card-hover h-full flex flex-col">
         <div className="flex items-center justify-between mb-5">
-          <span className="badge">{marketBadge[t.markets] || "Tournament"}</span>
+          <span className="badge">{marketBadge[t.markets] || t.markets || "Tournament"}</span>
           <span className={status.className}>{status.text}</span>
         </div>
 
