@@ -1,5 +1,5 @@
 /* ============================================
-   Fortex FX — Registration Counter & Locked Tournaments
+   FORTREX FX — Registration Counter & Locked Tournaments
    ============================================ */
 
 // Registration counter state

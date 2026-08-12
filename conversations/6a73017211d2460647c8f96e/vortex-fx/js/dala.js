@@ -964,7 +964,7 @@ function initAdminClock(elementId) {
 
 let constellation = null;
 
-function initFortexFX() {
+function initFORTREXFX() {
   initScrollReveal();
   initNavScroll();
   initMobileMenu();
@@ -996,7 +996,7 @@ function initFortexFX() {
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initFortexFX);
+  document.addEventListener('DOMContentLoaded', initFORTREXFX);
 } else {
-  initFortexFX();
+  initFORTREXFX();
 }

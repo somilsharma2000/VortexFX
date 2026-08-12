@@ -439,7 +439,7 @@
       let rexEarnedToday = 0;
 
       const todayStr = new Date().toISOString().split('T')[0];
-      const lastCheckinDate = localStorage.getItem(`fortex_checkin_date_${trader.id}`);
+      const lastCheckinDate = localStorage.getItem(`fortrex_checkin_date_${trader.id}`);
       let checkedInToday = (lastCheckinDate === todayStr);
 
       // REQUIREMENT 2: Show current streak on load
@@ -486,7 +486,7 @@
             checkedInToday = true;
 
             // Persist locally
-            localStorage.setItem(`fortex_checkin_date_${trader.id}`, todayStr);
+            localStorage.setItem(`fortrex_checkin_date_${trader.id}`, todayStr);
             trader.current_streak = currentStreak;
             trader.streak = currentStreak;
             trader.best_streak = bestStreak;
@@ -517,7 +517,7 @@
             if (res.current_streak) currentStreak = res.current_streak;
             if (res.rex_balance) rexBalance = res.rex_balance;
 
-            localStorage.setItem(`fortex_checkin_date_${trader.id}`, todayStr);
+            localStorage.setItem(`fortrex_checkin_date_${trader.id}`, todayStr);
             trader.current_streak = currentStreak;
             trader.streak = currentStreak;
             if (res.rex_balance) trader.rex_balance = rexBalance;
