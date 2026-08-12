@@ -449,10 +449,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* All content above particle canvas */
-.nav, main, section, footer, .page-content {
+main, section, footer, .page-content {
   position: relative;
   z-index: 10;
 }
+
+/* Nav stays fixed, above particle canvas */
+.nav { z-index: 1000; }
 
 /* --- HERO SECTION --- */
 .hero {
