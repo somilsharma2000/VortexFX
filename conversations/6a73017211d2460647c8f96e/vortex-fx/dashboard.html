@@ -1374,7 +1374,7 @@
       if (!container) return;
 
       try {
-        const res = await FORTREX_AUTH.callFunction('getTournaments', {});
+        const res = await FORTREX_AUTH.callFunction('getPublicTournaments', {});
         if (res && res.success && res.tournaments && res.tournaments.length > 0) {
           container.innerHTML = res.tournaments.slice(0, 3).map(t => `
             <div style="display: flex; justify-content: space-between; align-items: center; background: #080808; border: 1px solid #1f1f1f; border-radius: 12px; padding: 12px 16px;">

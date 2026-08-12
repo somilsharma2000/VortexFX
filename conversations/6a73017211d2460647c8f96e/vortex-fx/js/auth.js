@@ -6,7 +6,7 @@
    ============================================ */
 
 const FORTREX_AUTH = {
-  API_BASE: 'https://api.base44.com/v1/apps/6a73016f9b626430a0d26f88/functions',
+  API_BASE: 'https://koda-a0d26f88.base44.app/functions',
   
   DISCORD_CLIENT_ID: '1536976658836230254',
   DISCORD_REDIRECT_URI: 'https://somilsharma2000.github.io/VortexFX/signin.html',

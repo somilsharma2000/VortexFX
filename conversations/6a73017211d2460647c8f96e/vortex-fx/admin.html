@@ -2074,16 +2074,16 @@
     // ===================================================================
     async function loadOverviewData() {
       try {
-        const res = await FORTREX_AUTH.callFunction('getPlatformStats', {});
+        const res = await FORTREX_AUTH.callFunction('getAdminData', { admin_id: currentAdmin?.id || FORTREX_AUTH.isLoggedIn()?.id });
         if (res && res.success && res.stats) {
           const s = res.stats;
 
-          const totalTraders = s.active_traders || s.registration_count || 3742;
-          const verifiedAccounts = s.verified_accounts || 2150;
-          const activeTournaments = s.active_tournaments !== undefined ? s.active_tournaments : 2;
-          const rexDistributed = s.total_rex_distributed || 2450000;
-          const prizePoolRex = s.total_prize_pool_rex || 500000;
-          const waitlistCount = s.waitlist_count || 849;
+          const totalTraders = s.total_traders || 0;
+          const verifiedAccounts = s.verified_traders || 0;
+          const activeTournaments = s.total_tournaments || 0;
+          const rexDistributed = s.total_rex_distributed || 0;
+          const prizePoolRex = s.total_prize_pool_rex || 0;
+          const waitlistCount = s.waitlist_count || 0;
 
           animateCountUp('stat-total-traders', totalTraders);
           animateCountUp('stat-verified-accounts', verifiedAccounts);
@@ -2092,13 +2092,20 @@
           animateCountUp('stat-prize-pool-rex', prizePoolRex);
           animateCountUp('stat-waitlist-count', waitlistCount);
 
-          if (s.genesis_claimed !== undefined) {
-            document.getElementById('genesis-claimed-text').textContent = s.genesis_claimed.toLocaleString();
-            document.getElementById('genesis-tx-count').textContent = s.genesis_claimed.toLocaleString();
-            const pct = Math.min((s.genesis_claimed / 2500) * 100, 100).toFixed(1);
-            document.getElementById('genesis-progress-bar').style.width = `${pct}%`;
-            document.getElementById('genesis-claimed-pct').textContent = `${pct}% Claimed`;
-            document.getElementById('genesis-remaining-spots').textContent = `${(2500 - s.genesis_claimed).toLocaleString()} Spots Remaining`;
+          if (s.registration_count !== undefined) {
+            const genesisMax = s.genesis_max || 2500;
+            const genesisClaimed = s.registration_count;
+            const genesisEl = document.getElementById('genesis-claimed-text');
+            if (genesisEl) genesisEl.textContent = genesisClaimed.toLocaleString();
+            const genesisTxEl = document.getElementById('genesis-tx-count');
+            if (genesisTxEl) genesisTxEl.textContent = genesisClaimed.toLocaleString();
+            const pct = Math.min((genesisClaimed / genesisMax) * 100, 100).toFixed(1);
+            const barEl = document.getElementById('genesis-progress-bar');
+            if (barEl) barEl.style.width = `${pct}%`;
+            const pctEl = document.getElementById('genesis-claimed-pct');
+            if (pctEl) pctEl.textContent = `${pct}% Claimed`;
+            const remEl = document.getElementById('genesis-remaining-spots');
+            if (remEl) remEl.textContent = `${(genesisMax - genesisClaimed).toLocaleString()} Spots Remaining`;
           }
         } else {
           // Fallback stats count up
@@ -2125,7 +2132,7 @@
       tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 30px;">Fetching tournaments...</td></tr>`;
 
       try {
-        const res = await FORTREX_AUTH.callFunction('getTournaments', {});
+        const res = await FORTREX_AUTH.callFunction('getPublicTournaments', {});
         if (res && res.success && Array.isArray(res.tournaments) && res.tournaments.length > 0) {
           allTournaments = res.tournaments;
         } else {
@@ -2218,35 +2225,21 @@
     // ===================================================================
     async function loadWaitlistData() {
       try {
-        const statsRes = await FORTREX_AUTH.callFunction('getPlatformStats', {});
-        if (statsRes && statsRes.success && statsRes.stats && Array.isArray(statsRes.stats.waitlist_entries)) {
-          allWaitlist = statsRes.stats.waitlist_entries;
+        const adminId = currentAdmin?.id || (FORTREX_AUTH.isLoggedIn()?.id);
+        if (!adminId) { allWaitlist = FALLBACK_WAITLIST; updateWaitlistStats(); renderWaitlistTable(allWaitlist); return; }
+        
+        const res = await FORTREX_AUTH.callFunction('getAdminData', { admin_id: adminId });
+        if (res && res.success && Array.isArray(res.waitlist)) {
+          allWaitlist = res.waitlist;
+          // Also populate stats and tournaments if available
+          if (res.stats) updateOverviewStats(res.stats);
+          if (res.tournaments) { allTournaments = res.tournaments; renderTournamentsTable(allTournaments); }
+          if (res.traders) { allTraders = res.traders; renderTradersTable(allTraders); }
         } else {
-          try {
-            const entRes = await fetch('https://koda-a0d26f88.base44.app/entities/WaitlistEntry');
-            if (entRes.ok) {
-              const entData = await entRes.json();
-              if (Array.isArray(entData) && entData.length > 0) {
-                allWaitlist = entData.map((w, idx) => ({
-                  position: w.position || idx + 1,
-                  email: w.email || 'n/a',
-                  phone: w.phone || 'n/a',
-                  referred_by: w.referred_by || 'Direct',
-                  discord_joined: !!w.discord_joined,
-                  telegram_joined: !!w.telegram_joined,
-                  signup_date: w.created_date ? w.created_date.substring(0, 10) : '2026-08-01'
-                }));
-              } else {
-                allWaitlist = FALLBACK_WAITLIST;
-              }
-            } else {
-              allWaitlist = FALLBACK_WAITLIST;
-            }
-          } catch (e) {
-            allWaitlist = FALLBACK_WAITLIST;
-          }
+          allWaitlist = FALLBACK_WAITLIST;
         }
       } catch (err) {
+        console.warn('Failed to load admin data:', err);
         allWaitlist = FALLBACK_WAITLIST;
       }
 
@@ -2554,7 +2547,7 @@
 
       let participants = [];
       try {
-        const res = await FORTREX_AUTH.callFunction('getLeaderboard', { tournament_id: tournamentId, type: 'tournament_results' });
+        const res = await FORTREX_AUTH.callFunction('getPublicLeaderboard', { tournament_id: tournamentId });
         if (res && res.success && Array.isArray(res.results) && res.results.length > 0) {
           participants = res.results.map(r => ({
             trader_id: r.trader_id || r.id,
