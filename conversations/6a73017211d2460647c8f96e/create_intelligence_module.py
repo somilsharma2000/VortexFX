@@ -1,0 +1,1561 @@
+import os
+
+filepath = "/app/conversations/6a73017211d2460647c8f96e/vortex-fx/modules/intelligence.html"
+os.makedirs(os.path.dirname(filepath), exist_ok=True)
+
+content = """<!-- FORTREX FX — INTELLIGENCE ANALYTICS MODULE -->
+<!-- Mission Control Cockpit Telemetry & Dashboard Intelligence -->
+<style>
+  :root {
+    --intel-bg: #06070A;
+    --intel-card: #0D0F18;
+    --intel-card-hover: #131625;
+    --intel-gold: #EACA7A;
+    --intel-iris: #D4AF37;
+    --intel-white: #FFFFFF;
+    --intel-muted: #9A9A9A;
+    --intel-dim: #64687A;
+    --intel-status-live: #22C55E;
+    --intel-status-paused: #F59E0B;
+    --intel-status-completed: #3B82F6;
+    --intel-border: rgba(255, 255, 255, 0.08);
+    --intel-border-gold: rgba(234, 202, 122, 0.3);
+    --intel-gold-glow: rgba(234, 202, 122, 0.15);
+    --intel-iris-glow: rgba(212, 175, 55, 0.2);
+    --intel-radius-card: 16px;
+    --intel-radius-btn: 12px;
+    --intel-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  /* Base Reset for Self-Contained Module */
+  .intel-wrapper {
+    font-family: var(--intel-font);
+    background-color: var(--intel-bg);
+    color: var(--intel-white);
+    padding: 24px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .intel-wrapper * {
+    box-sizing: border-box;
+  }
+
+  /* Cockpit HUD Header Controls */
+  .intel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--intel-card);
+    border: 1px solid var(--intel-border);
+    border-radius: var(--intel-radius-card);
+    padding: 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .intel-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--intel-gold) 0%, var(--intel-iris) 100%);
+    box-shadow: 0 0 12px var(--intel-gold);
+  }
+
+  .intel-header-title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .intel-header-title h2 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin: 0;
+    color: var(--intel-white);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+
+  .intel-header-title h2 span.badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 20px;
+    background: rgba(34, 197, 94, 0.15);
+    color: var(--intel-status-live);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .intel-header-title h2 span.badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--intel-status-live);
+    box-shadow: 0 0 6px var(--intel-status-live);
+    animation: pulseDot 1.8s infinite;
+  }
+
+  @keyframes pulseDot {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .intel-header-title p {
+    font-size: 13px;
+    color: var(--intel-muted);
+    margin: 0;
+  }
+
+  .intel-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .intel-time-indicator {
+    font-size: 12px;
+    color: var(--intel-dim);
+    font-variant-numeric: tabular-nums;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--intel-border);
+  }
+
+  .intel-btn {
+    background: linear-gradient(135deg, rgba(234, 202, 122, 0.12) 0%, rgba(212, 175, 55, 0.05) 100%);
+    border: 1px solid var(--intel-border-gold);
+    color: var(--intel-gold);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: var(--intel-radius-btn);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .intel-btn:hover {
+    background: linear-gradient(135deg, rgba(234, 202, 122, 0.25) 0%, rgba(212, 175, 55, 0.15) 100%);
+    box-shadow: 0 0 15px var(--intel-gold-glow);
+    border-color: var(--intel-gold);
+    transform: translateY(-1px);
+  }
+
+  /* Grid Layouts */
+  .intel-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .intel-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .intel-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 1200px) {
+    .intel-grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .intel-grid-3 { grid-template-columns: 1fr; }
+    .intel-grid-2 { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 680px) {
+    .intel-grid-4 { grid-template-columns: 1fr; }
+    .intel-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  }
+
+  /* Standard Card Container */
+  .intel-card-panel {
+    background-color: var(--intel-card);
+    border: 1px solid var(--intel-border);
+    border-radius: var(--intel-radius-card);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .intel-card-panel:hover {
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+
+  .intel-card-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .intel-card-panel-title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .intel-card-panel-title h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--intel-white);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .intel-card-panel-title p {
+    font-size: 12px;
+    color: var(--intel-muted);
+    margin: 0;
+  }
+
+  /* Section 1: Trader Growth Chart (Pure CSS) */
+  .growth-chart-controls {
+    display: flex;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid var(--intel-border);
+  }
+
+  .growth-filter-btn {
+    background: transparent;
+    border: none;
+    color: var(--intel-muted);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .growth-filter-btn.active, .growth-filter-btn:hover {
+    background: var(--intel-gold);
+    color: #06070A;
+  }
+
+  .chart-summary-pills {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1px solid var(--intel-border);
+  }
+
+  .chart-summary-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .chart-summary-item span.label {
+    font-size: 11px;
+    color: var(--intel-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .chart-summary-item span.val {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--intel-gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .chart-summary-item span.sub {
+    font-size: 11px;
+    color: var(--intel-status-live);
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  /* CSS Bar Chart Layout */
+  .css-chart-container {
+    position: relative;
+    height: 280px;
+    margin-top: 15px;
+    padding-left: 45px;
+    padding-bottom: 30px;
+  }
+
+  /* Grid Lines */
+  .css-chart-grid {
+    position: absolute;
+    top: 0;
+    left: 45px;
+    right: 0;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    pointer-events: none;
+  }
+
+  .css-chart-gridline {
+    width: 100%;
+    border-top: 1px dashed rgba(255, 255, 255, 0.06);
+    position: relative;
+  }
+
+  .css-chart-gridline span.y-label {
+    position: absolute;
+    left: -42px;
+    top: -8px;
+    font-size: 11px;
+    color: var(--intel-dim);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Bars Alignment Container */
+  .css-chart-bars {
+    position: absolute;
+    top: 0;
+    left: 45px;
+    right: 0;
+    bottom: 30px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    gap: 8px;
+    padding: 0 10px;
+  }
+
+  .css-bar-wrapper {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    group: bar;
+  }
+
+  .css-bar-fill {
+    width: 100%;
+    max-width: 36px;
+    background: linear-gradient(180deg, var(--intel-gold) 0%, var(--intel-iris) 100%);
+    border-radius: 6px 6px 2px 2px;
+    transition: height 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s ease, filter 0.2s ease;
+    position: relative;
+    box-shadow: 0 0 10px rgba(234, 202, 122, 0.1);
+  }
+
+  .css-bar-wrapper:hover .css-bar-fill {
+    filter: brightness(1.25);
+    box-shadow: 0 0 20px rgba(234, 202, 122, 0.4);
+    transform: scaleX(1.08);
+  }
+
+  .css-bar-x-label {
+    position: absolute;
+    bottom: -25px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--intel-muted);
+    text-transform: uppercase;
+  }
+
+  .css-bar-wrapper:hover .css-bar-x-label {
+    color: var(--intel-gold);
+  }
+
+  /* Bar Hover Tooltip */
+  .css-bar-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+    background: #181B2A;
+    border: 1px solid var(--intel-border-gold);
+    border-radius: 8px;
+    padding: 10px 14px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    z-index: 50;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .css-bar-wrapper:hover .css-bar-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-6px);
+  }
+
+  .css-bar-tooltip .title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--intel-gold);
+  }
+
+  .css-bar-tooltip .stat {
+    font-size: 11px;
+    color: var(--intel-white);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .css-bar-tooltip .stat span.val {
+    font-weight: 700;
+    color: var(--intel-gold);
+  }
+
+  /* Section 2: Tournament Participation Metrics (Mini Cards) */
+  .metric-mini-card {
+    background: var(--intel-card);
+    border: 1px solid var(--intel-border);
+    border-radius: var(--intel-radius-card);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .metric-mini-card:hover {
+    border-color: var(--intel-border-gold);
+    box-shadow: 0 0 20px var(--intel-gold-glow);
+    background: var(--intel-card-hover);
+    transform: translateY(-2px);
+  }
+
+  .metric-mini-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .metric-mini-header span.title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--intel-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .metric-mini-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(234, 202, 122, 0.08);
+    border: 1px solid rgba(234, 202, 122, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--intel-gold);
+    font-size: 14px;
+  }
+
+  .metric-mini-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .metric-mini-val {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--intel-white);
+    letter-spacing: -0.5px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .metric-mini-sub {
+    font-size: 12px;
+    color: var(--intel-dim);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .metric-status-badges {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+  }
+
+  .intel-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .intel-badge.live { background: rgba(34, 197, 94, 0.15); color: var(--intel-status-live); border: 1px solid rgba(34, 197, 94, 0.3); }
+  .intel-badge.paused { background: rgba(245, 158, 11, 0.15); color: var(--intel-status-paused); border: 1px solid rgba(245, 158, 11, 0.3); }
+  .intel-badge.completed { background: rgba(59, 130, 246, 0.15); color: var(--intel-status-completed); border: 1px solid rgba(59, 130, 246, 0.3); }
+  .intel-badge.gold { background: rgba(234, 202, 122, 0.15); color: var(--intel-gold); border: 1px solid rgba(234, 202, 122, 0.3); }
+
+  /* Section 3: REX Economy Flow (Horizontal Stacked Bar) */
+  .rex-flow-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .rex-stacked-bar-wrapper {
+    height: 38px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    border: 1px solid var(--intel-border);
+    display: flex;
+    overflow: hidden;
+    padding: 3px;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+  }
+
+  .rex-segment {
+    height: 100%;
+    position: relative;
+    transition: all 0.5s ease;
+    cursor: pointer;
+  }
+
+  .rex-segment:first-child { border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
+  .rex-segment:last-child { border-top-right-radius: 8px; border-bottom-right-radius: 8px; }
+
+  .rex-segment:hover {
+    filter: brightness(1.25);
+    z-index: 10;
+  }
+
+  /* Segment colors */
+  .seg-prize { background: linear-gradient(90deg, #EACA7A 0%, #D4AF37 100%); }
+  .seg-referral { background: linear-gradient(90deg, #3B82F6 0%, #2563EB 100%); }
+  .seg-checkin { background: linear-gradient(90deg, #22C55E 0%, #16A34A 100%); }
+  .seg-genesis { background: linear-gradient(90deg, #A855F7 0%, #9333EA 100%); }
+  .seg-battlepass { background: linear-gradient(90deg, #EC4899 0%, #DB2777 100%); }
+  .seg-manual { background: linear-gradient(90deg, #F59E0B 0%, #D97706 100%); }
+
+  .rex-legend-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  @media (max-width: 900px) {
+    .rex-legend-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 550px) {
+    .rex-legend-grid { grid-template-columns: 1fr; }
+  }
+
+  .rex-legend-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--intel-border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.2s ease;
+  }
+
+  .rex-legend-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .rex-legend-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .rex-legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+  }
+
+  .rex-legend-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .rex-legend-info span.name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--intel-white);
+  }
+
+  .rex-legend-info span.pct {
+    font-size: 11px;
+    color: var(--intel-muted);
+  }
+
+  .rex-legend-right {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--intel-gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Section 4: Referral Conversion Funnel */
+  .funnel-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 10px 0;
+  }
+
+  .funnel-stage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .funnel-bar {
+    height: 52px;
+    background: linear-gradient(90deg, rgba(234, 202, 122, 0.15) 0%, rgba(212, 175, 55, 0.25) 50%, rgba(234, 202, 122, 0.15) 100%);
+    border: 1px solid var(--intel-border-gold);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .funnel-bar:hover {
+    background: linear-gradient(90deg, rgba(234, 202, 122, 0.3) 0%, rgba(212, 175, 55, 0.45) 50%, rgba(234, 202, 122, 0.3) 100%);
+    box-shadow: 0 0 20px var(--intel-gold-glow);
+    transform: scale(1.01);
+  }
+
+  .funnel-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--intel-white);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .funnel-step-num {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--intel-gold);
+    color: #06070A;
+    font-size: 11px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .funnel-values {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .funnel-count {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--intel-gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .funnel-pct {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--intel-muted);
+    background: rgba(0, 0, 0, 0.4);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--intel-border);
+  }
+
+  .funnel-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 4px 0;
+    font-size: 11px;
+    color: var(--intel-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .funnel-drop-badge {
+    background: rgba(245, 158, 11, 0.12);
+    color: var(--intel-status-paused);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 10px;
+  }
+
+  /* Section 5: Waitlist Analytics & Sources Bar Chart */
+  .waitlist-sources-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .source-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .source-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+  }
+
+  .source-name {
+    font-weight: 600;
+    color: var(--intel-white);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .source-val {
+    font-weight: 700;
+    color: var(--intel-gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .source-bar-bg {
+    height: 12px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
+    border: 1px solid var(--intel-border);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .source-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--intel-gold) 0%, var(--intel-iris) 100%);
+    border-radius: 6px;
+    transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Section 6: Engagement Metrics */
+  .engagement-block {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .dau-hourly-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid var(--intel-border);
+  }
+
+  .dau-hour-bar {
+    flex: 1;
+    background: rgba(234, 202, 122, 0.3);
+    border-radius: 2px 2px 0 0;
+    transition: height 0.3s ease, background 0.3s ease;
+  }
+
+  .dau-hour-bar:hover {
+    background: var(--intel-gold);
+  }
+
+  /* Check-in Streak Top 5 Table */
+  .streak-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  .streak-table th {
+    text-align: left;
+    padding: 8px 12px;
+    color: var(--intel-dim);
+    font-weight: 600;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--intel-border);
+    letter-spacing: 0.5px;
+  }
+
+  .streak-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--intel-white);
+  }
+
+  .streak-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .streak-table tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .streak-rank {
+    font-weight: 800;
+    color: var(--intel-gold);
+    width: 30px;
+  }
+
+  .streak-user {
+    font-weight: 600;
+    color: var(--intel-white);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .streak-badge {
+    background: rgba(234, 202, 122, 0.12);
+    color: var(--intel-gold);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 11px;
+    border: 1px solid rgba(234, 202, 122, 0.25);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* Battlepass Distribution Bars */
+  .bp-dist-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .bp-tier-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .bp-tier-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+  }
+
+  .bp-tier-name {
+    font-weight: 600;
+    color: var(--intel-white);
+  }
+
+  .bp-tier-val {
+    color: var(--intel-gold);
+    font-weight: 700;
+  }
+
+  .bp-bar-bg {
+    height: 10px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    border: 1px solid var(--intel-border);
+    overflow: hidden;
+  }
+
+  .bp-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3B82F6 0%, #D4AF37 100%);
+    border-radius: 5px;
+    transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+</style>
+
+<!-- MODULE MARKUP -->
+<div class="intel-wrapper" id="intel-module-root">
+  
+  <!-- HUD HEADER & TELEMETRY CONTROL -->
+  <div class="intel-header">
+    <div class="intel-header-title">
+      <h2>
+        <span>INTELLIGENCE & TELEMETRY CENTER</span>
+        <span class="badge">LIVE DATA</span>
+      </h2>
+      <p>FORTREX FX Ecosystem Analytics, Growth Vectors & Participant Engagement</p>
+    </div>
+    <div class="intel-header-actions">
+      <div class="intel-time-indicator" id="intel-sync-time">
+        LAST SYNC: JUST NOW
+      </div>
+      <button class="intel-btn" onclick="initIntelligenceModule(true)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+        REFRESH DATA
+      </button>
+    </div>
+  </div>
+
+  <!-- SECTION 1: TRADER GROWTH CHART (Monthly Registrations - Pure CSS) -->
+  <div class="intel-card-panel">
+    <div class="intel-card-panel-header">
+      <div class="intel-card-panel-title">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--intel-gold)" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+          1. TRADER GROWTH TELEMETRY
+        </h3>
+        <p>Monthly trader registration volume and cumulative ecosystem expansion trajectory</p>
+      </div>
+      <div class="growth-chart-controls">
+        <button class="growth-filter-btn active" onclick="setGrowthFilter('12M', this)">12 MONTHS</button>
+        <button class="growth-filter-btn" onclick="setGrowthFilter('6M', this)">6 MONTHS</button>
+        <button class="growth-filter-btn" onclick="setGrowthFilter('YTD', this)">YTD</button>
+      </div>
+    </div>
+
+    <!-- Summary KPI Bar -->
+    <div class="chart-summary-pills">
+      <div class="chart-summary-item">
+        <span class="label">Total Registered</span>
+        <span class="val" id="growth-total-reg">4,892</span>
+        <span class="sub">↑ +18.4% MoM</span>
+      </div>
+      <div class="chart-summary-item">
+        <span class="label">Verified Trader Ratio</span>
+        <span class="val" id="growth-verified-ratio">71.5%</span>
+        <span class="sub">3,498 Verified</span>
+      </div>
+      <div class="chart-summary-item">
+        <span class="label">Peak Month Volume</span>
+        <span class="val" id="growth-peak-month">890</span>
+        <span class="sub">July 2026</span>
+      </div>
+      <div class="chart-summary-item">
+        <span class="label">Monthly Average</span>
+        <span class="val" id="growth-avg-month">408 / mo</span>
+        <span class="sub">Steady Acquisition</span>
+      </div>
+    </div>
+
+    <!-- Pure CSS Bar Chart -->
+    <div class="css-chart-container">
+      <!-- Gridlines -->
+      <div class="css-chart-grid">
+        <div class="css-chart-gridline"><span class="y-label">1,000</span></div>
+        <div class="css-chart-gridline"><span class="y-label">750</span></div>
+        <div class="css-chart-gridline"><span class="y-label">500</span></div>
+        <div class="css-chart-gridline"><span class="y-label">250</span></div>
+        <div class="css-chart-gridline" style="border-top-style: solid; border-color: rgba(255,255,255,0.15);"><span class="y-label">0</span></div>
+      </div>
+
+      <!-- CSS Bars Container -->
+      <div class="css-chart-bars" id="growth-bars-target">
+        <!-- Injected via JavaScript for animated loading -->
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: TOURNAMENT PARTICIPATION METRICS (4 Mini Cards) -->
+  <div>
+    <div style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+      <h3 style="font-size: 14px; font-weight: 700; color: var(--intel-muted); text-transform: uppercase; letter-spacing: 0.8px; margin: 0; display: flex; align-items: center; gap: 8px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--intel-gold)" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path></svg>
+        2. TOURNAMENT PARTICIPATION METRICS
+      </h3>
+    </div>
+    
+    <div class="intel-grid-4">
+      <!-- Mini Card 1: Total Tournaments -->
+      <div class="metric-mini-card">
+        <div class="metric-mini-header">
+          <span class="title">Total Tournaments</span>
+          <div class="metric-mini-icon">🏆</div>
+        </div>
+        <div class="metric-mini-body">
+          <div class="metric-mini-val" id="tourn-total-cnt">24</div>
+          <div class="metric-mini-sub">Created to Date</div>
+          <div class="metric-status-badges" id="tourn-status-badges">
+            <span class="intel-badge live">3 LIVE</span>
+            <span class="intel-badge paused">2 PAUSED</span>
+            <span class="intel-badge completed">19 DONE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mini Card 2: Avg Participants -->
+      <div class="metric-mini-card">
+        <div class="metric-mini-header">
+          <span class="title">Avg Participants</span>
+          <div class="metric-mini-icon">👥</div>
+        </div>
+        <div class="metric-mini-body">
+          <div class="metric-mini-val" id="tourn-avg-part">186.4</div>
+          <div class="metric-mini-sub" style="color: var(--intel-status-live);">↑ +14.2% vs prev qtr</div>
+          <div class="metric-status-badges">
+            <span class="intel-badge gold">88.5% FILL RATE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mini Card 3: Completion Rate % -->
+      <div class="metric-mini-card">
+        <div class="metric-mini-header">
+          <span class="title">Completion Rate</span>
+          <div class="metric-mini-icon">⚡</div>
+        </div>
+        <div class="metric-mini-body">
+          <div class="metric-mini-val" id="tourn-comp-rate">94.2%</div>
+          <div class="metric-mini-sub">High Arena Stability</div>
+          <div class="metric-status-badges">
+            <span class="intel-badge completed">22 OF 24 COMPLETED</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mini Card 4: Most Popular Tournament Type -->
+      <div class="metric-mini-card">
+        <div class="metric-mini-header">
+          <span class="title">Most Popular Type</span>
+          <div class="metric-mini-icon">🔥</div>
+        </div>
+        <div class="metric-mini-body">
+          <div class="metric-mini-val" style="font-size: 20px; line-height: 1.2;" id="tourn-pop-type">Bi-Weekly Blitz</div>
+          <div class="metric-mini-sub">41.6% of Total Entries</div>
+          <div class="metric-status-badges">
+            <span class="intel-badge gold">HIGH FREQUENCY</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: REX ECONOMY FLOW (Horizontal Stacked Bar) -->
+  <div class="intel-card-panel">
+    <div class="intel-card-panel-header">
+      <div class="intel-card-panel-title">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--intel-gold)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v12M15 9.5C15 8.12 13.66 7 12 7s-3 1.12-3 2.5 1.34 2.5 3 2.5 3 1.12 3 2.5-1.34 2.5-3 2.5-3-1.12-3-2.5"></path></svg>
+          3. REX ECONOMY FLOW & DISTRIBUTION
+        </h3>
+        <p>Proportional token emission breakdown by distribution reason and velocity</p>
+      </div>
+      <div style="font-size: 13px; font-weight: 700; color: var(--intel-gold); background: rgba(234, 202, 122, 0.1); border: 1px solid var(--intel-border-gold); padding: 6px 14px; border-radius: 8px;">
+        TOTAL DISTRIBUTED: <span id="rex-flow-total-top">2,976,000 REX</span>
+      </div>
+    </div>
+
+    <div class="rex-flow-container">
+      <!-- Main CSS Multi-Segment Stacked Bar -->
+      <div class="rex-stacked-bar-wrapper" id="rex-stacked-bar">
+        <div class="rex-segment seg-prize" style="width: 42%;" title="Tournament Prize: 42.0% (1,250,000 REX)"></div>
+        <div class="rex-segment seg-referral" style="width: 22%;" title="Referral Bonus: 22.0% (655,000 REX)"></div>
+        <div class="rex-segment seg-checkin" style="width: 15%;" title="Check-in: 15.0% (446,000 REX)"></div>
+        <div class="rex-segment seg-genesis" style="width: 10%;" title="Genesis Bonus: 10.0% (298,000 REX)"></div>
+        <div class="rex-segment seg-battlepass" style="width: 7%;" title="Battle Pass: 7.0% (208,000 REX)"></div>
+        <div class="rex-segment seg-manual" style="width: 4%;" title="Manual: 4.0% (119,000 REX)"></div>
+      </div>
+
+      <!-- Category Legend & Breakdown Cards -->
+      <div class="rex-legend-grid" id="rex-legend-grid">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: REFERRAL CONVERSION FUNNEL -->
+  <div class="intel-card-panel">
+    <div class="intel-card-panel-header">
+      <div class="intel-card-panel-title">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--intel-gold)" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+          4. REFERRAL CONVERSION FUNNEL
+        </h3>
+        <p>Acquisition lifecycle tracking from initial invite link to active arena trader</p>
+      </div>
+      <div style="display: flex; gap: 12px;">
+        <div style="font-size: 12px; color: var(--intel-muted); background: rgba(0,0,0,0.3); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--intel-border);">
+          VIRAL K-FACTOR: <strong style="color: var(--intel-gold);">1.42</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="funnel-container" id="funnel-target">
+      <!-- Injected via JS -->
+    </div>
+  </div>
+
+  <!-- SECTION 5 & 6 IN 2-COLUMN GRID -->
+  <div class="intel-grid-2">
+    
+    <!-- SECTION 5: WAITLIST ANALYTICS & SOURCES -->
+    <div class="intel-card-panel">
+      <div class="intel-card-panel-header">
+        <div class="intel-card-panel-title">
+          <h3>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--intel-gold)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            5. WAITLIST ANALYTICS
+          </h3>
+          <p>Queue position velocity & top referral origin channels</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 16px; background: rgba(0, 0, 0, 0.3); padding: 14px; border-radius: 10px; border: 1px solid var(--intel-border);">
+        <div style="flex: 1;">
+          <div style="font-size: 11px; color: var(--intel-dim); text-transform: uppercase;">Waitlist Queue Size</div>
+          <div style="font-size: 22px; font-weight: 800; color: var(--intel-gold);" id="waitlist-cnt-val">4,892</div>
+        </div>
+        <div style="flex: 1; border-left: 1px solid var(--intel-border); padding-left: 16px;">
+          <div style="font-size: 11px; color: var(--intel-dim); text-transform: uppercase;">Registered Conversion</div>
+          <div style="font-size: 22px; font-weight: 800; color: var(--intel-status-live);" id="waitlist-conv-val">38.4%</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 6px;">
+        <div style="font-size: 12px; font-weight: 700; color: var(--intel-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">
+          TOP REFERRAL SOURCES
+        </div>
+        <div class="waitlist-sources-list" id="waitlist-sources-target">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 6: ENGAGEMENT METRICS -->
+    <div class="intel-card-panel">
+      <div class="intel-card-panel-header">
+        <div class="intel-card-panel-title">
+          <h3>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--intel-gold)" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+            6. ENGAGEMENT & RETENTION TELEMETRY
+          </h3>
+          <p>Daily active traders, check-in streak leaders & battle pass progression</p>
+        </div>
+      </div>
+
+      <!-- DAU / Activity Hourly Chart -->
+      <div class="engagement-block">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+          <div>
+            <div style="font-size: 11px; color: var(--intel-dim); text-transform: uppercase;">Estimated Daily Active Traders (DAU)</div>
+            <div style="font-size: 20px; font-weight: 800; color: var(--intel-white);" id="dau-est-val">1,420 Traders <span style="font-size: 12px; color: var(--intel-gold); font-weight: 600;">(34.2% DAU/MAU)</span></div>
+          </div>
+          <span style="font-size: 11px; color: var(--intel-muted);">24H Activity Spark</span>
+        </div>
+        <div class="dau-hourly-chart" id="dau-hourly-target">
+          <!-- 24 hourly bars injected via JS -->
+        </div>
+      </div>
+
+      <!-- Check-in Streak Leaders Top 5 -->
+      <div style="margin-top: 10px;">
+        <div style="font-size: 12px; font-weight: 700; color: var(--intel-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; justify-content: space-between;">
+          <span>Check-in Streak Leaders (Top 5)</span>
+          <span style="color: var(--intel-gold);">🔥 Daily Retention</span>
+        </div>
+        <table class="streak-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Trader</th>
+              <th>Streak</th>
+              <th>Best</th>
+              <th>Class</th>
+            </tr>
+          </thead>
+          <tbody id="streak-leaders-target">
+            <!-- Injected via JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Battle Pass Level Distribution -->
+      <div style="margin-top: 10px;">
+        <div style="font-size: 12px; font-weight: 700; color: var(--intel-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">
+          Battle Pass Level Brackets
+        </div>
+        <div class="bp-dist-list" id="bp-dist-target">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- INLINE SCRIPT LOGIC FOR INTELLIGENCE MODULE -->
+<script>
+  // FORTREX AUTH & API CLIENT DEFINITION (Mandatory Pattern)
+  if (typeof FORTREX_AUTH === 'undefined') {
+    window.FORTREX_AUTH = {
+      APP_ID: '6a7c208f76be9b02b86b0380',
+      callFunction: async function(name, payload) {
+        const token = localStorage.getItem('fortrex_auth_token');
+        const res = await fetch('https://api.base44.com/v1/apps/' + this.APP_ID + '/functions/' + name, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify(payload || {})
+        });
+        return res.json();
+      }
+    };
+  }
+
+  // Mock / Default Datasets (ensures instant rendering if offline or API delay)
+  const DEFAULT_GROWTH_DATA = [
+    { month: 'Sep', count: 180, verified: 120, mom: '+12.4%' },
+    { month: 'Oct', count: 240, verified: 175, mom: '+33.3%' },
+    { month: 'Nov', count: 310, verified: 220, mom: '+29.1%' },
+    { month: 'Dec', count: 290, verified: 205, mom: '-6.4%' },
+    { month: 'Jan', count: 380, verified: 270, mom: '+31.0%' },
+    { month: 'Feb', count: 420, verified: 300, mom: '+10.5%' },
+    { month: 'Mar', count: 490, verified: 350, mom: '+16.6%' },
+    { month: 'Apr', count: 530, verified: 380, mom: '+8.1%' },
+    { month: 'May', count: 610, verified: 440, mom: '+15.0%' },
+    { month: 'Jun', count: 720, verified: 520, mom: '+18.0%' },
+    { month: 'Jul', count: 890, verified: 650, mom: '+23.6%' },
+    { month: 'Aug', count: 652, verified: 480, mom: 'Current' }
+  ];
+
+  const REX_CATEGORIES = [
+    { key: 'Tournament Prize', pct: 42.0, amount: '1,250,000 REX', avg: '520 REX/trader', class: 'seg-prize', dot: '#EACA7A' },
+    { key: 'Referral Bonus', pct: 22.0, amount: '655,000 REX', avg: '270 REX/trader', class: 'seg-referral', dot: '#3B82F6' },
+    { key: 'Check-in Streak', pct: 15.0, amount: '446,000 REX', avg: '185 REX/trader', class: 'seg-checkin', dot: '#22C55E' },
+    { key: 'Genesis Bonus', pct: 10.0, amount: '298,000 REX', avg: '124 REX/trader', class: 'seg-genesis', dot: '#A855F7' },
+    { key: 'Battle Pass', pct: 7.0, amount: '208,000 REX', avg: '86 REX/trader', class: 'seg-battlepass', dot: '#EC4899' },
+    { key: 'Manual / Promo', pct: 4.0, amount: '119,000 REX', avg: '49 REX/trader', class: 'seg-manual', dot: '#F59E0B' }
+  ];
+
+  const FUNNEL_STAGES = [
+    { num: 1, label: 'Total Referrals Invited', count: '12,480', pct: '100%', drop: null, width: '100%' },
+    { num: 2, label: 'Verified Accounts', count: '8,920', pct: '71.5%', drop: '28.5% dropoff', width: '82%' },
+    { num: 3, label: 'Qualified (MT4 Linked)', count: '5,340', pct: '42.8%', drop: '40.1% dropoff', width: '64%' },
+    { num: 4, label: 'Active Arena Traders', count: '3,820', pct: '30.6%', drop: '28.5% dropoff', width: '48%' }
+  ];
+
+  const WAITLIST_SOURCES = [
+    { name: 'Twitter / X', count: 1859, pct: '38.0%' },
+    { name: 'Discord Community', count: 1321, pct: '27.0%' },
+    { name: 'Partner Prop Firms', count: 880, pct: '18.0%' },
+    { name: 'Telegram Channels', count: 538, pct: '11.0%' },
+    { name: 'Direct / Organic Search', count: 294, pct: '6.0%' }
+  ];
+
+  const STREAK_LEADERS = [
+    { rank: 1, user: '@Maverick_FX', streak: 48, best: 48, cls: 'Apex' },
+    { rank: 2, user: '@VortexTrader', streak: 42, best: 45, cls: 'Titan' },
+    { rank: 3, user: '@QuantumPip', streak: 39, best: 39, cls: 'Vanguard' },
+    { rank: 4, user: '@AlphaScalper', streak: 35, best: 36, cls: 'Veteran' },
+    { rank: 5, user: '@CryptoFalcon', streak: 31, best: 31, cls: 'Veteran' }
+  ];
+
+  const BATTLEPASS_DIST = [
+    { name: 'Tier 1 - 10 (Novice)', pct: 45, val: '2,201 traders' },
+    { name: 'Tier 11 - 25 (Adept)', pct: 28, val: '1,370 traders' },
+    { name: 'Tier 26 - 50 (Veteran)', pct: 16, val: '783 traders' },
+    { name: 'Tier 51 - 75 (Master)', pct: 8, val: '391 traders' },
+    { name: 'Tier 76 - 100 (Grandmaster)', pct: 3, val: '147 traders' }
+  ];
+
+  // Core Module Initialization Function
+  window.initIntelligenceModule = async function(isRefresh = false) {
+    console.log("⚡ FORTREX Intelligence Module Initializing...");
+    
+    // Update Sync Timestamp
+    const now = new Date();
+    const timeStr = now.toTimeString().split(' ')[0] + ' UTC';
+    const timeElem = document.getElementById('intel-sync-time');
+    if (timeElem) timeElem.textContent = 'LAST SYNC: ' + timeStr;
+
+    try {
+      // Try fetching live admin stats
+      const adminId = localStorage.getItem('fortrex_admin_id');
+      if (adminId) {
+        const res = await FORTREX_AUTH.callFunction('getAdminData', { admin_id: adminId });
+        if (res && res.success && res.stats) {
+          updateLiveStats(res.stats, res.tournaments, res.traders);
+        }
+      }
+    } catch (err) {
+      console.warn("Using fallback telemetry data (API offline or local preview)");
+    }
+
+    // Render components
+    renderGrowthChart(DEFAULT_GROWTH_DATA);
+    renderRexFlow();
+    renderFunnel();
+    renderWaitlistSources();
+    renderDauChart();
+    renderStreakLeaders();
+    renderBattlepassDist();
+  };
+
+  // Render Trader Growth Chart (Pure CSS bars)
+  function renderGrowthChart(data) {
+    const target = document.getElementById('growth-bars-target');
+    if (!target) return;
+
+    target.innerHTML = '';
+    const maxVal = 1000; // max scale height
+
+    data.forEach(item => {
+      const heightPct = Math.min(100, (item.count / maxVal) * 100);
+      
+      const barWrapper = document.createElement('div');
+      barWrapper.className = 'css-bar-wrapper';
+      
+      barWrapper.innerHTML = `
+        <div class="css-bar-tooltip">
+          <span class="title">${item.month} Telemetry</span>
+          <div class="stat"><span>Total Registrations:</span> <span class="val">${item.count}</span></div>
+          <div class="stat"><span>Verified Accounts:</span> <span class="val">${item.verified}</span></div>
+          <div class="stat"><span>MoM Growth:</span> <span class="val">${item.mom}</span></div>
+        </div>
+        <div class="css-bar-fill" style="height: 0%;" data-target-height="${heightPct}%"></div>
+        <span class="css-bar-x-label">${item.month}</span>
+      `;
+
+      target.appendChild(barWrapper);
+    });
+
+    // Trigger bar growth animation after append
+    setTimeout(() => {
+      const fills = target.querySelectorAll('.css-bar-fill');
+      fills.forEach(fill => {
+        fill.style.height = fill.getAttribute('data-target-height');
+      });
+    }, 100);
+  }
+
+  // Filter growth chart timeframe
+  window.setGrowthFilter = function(mode, btn) {
+    const btns = document.querySelectorAll('.growth-filter-btn');
+    btns.forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+
+    let filtered = DEFAULT_GROWTH_DATA;
+    if (mode === '6M') {
+      filtered = DEFAULT_GROWTH_DATA.slice(-6);
+    } else if (mode === 'YTD') {
+      filtered = DEFAULT_GROWTH_DATA.slice(-8);
+    }
+    renderGrowthChart(filtered);
+  };
+
+  // Render REX Economy Flow Cards
+  function renderRexFlow() {
+    const grid = document.getElementById('rex-legend-grid');
+    if (!grid) return;
+
+    grid.innerHTML = REX_CATEGORIES.map(cat => `
+      <div class="rex-legend-item">
+        <div class="rex-legend-left">
+          <div class="rex-legend-dot" style="background: ${cat.dot};"></div>
+          <div class="rex-legend-info">
+            <span class="name">${cat.key}</span>
+            <span class="pct">${cat.pct}% (${cat.avg})</span>
+          </div>
+        </div>
+        <div class="rex-legend-right">${cat.amount}</div>
+      </div>
+    `).join('');
+  }
+
+  // Render Referral Conversion Funnel
+  function renderFunnel() {
+    const target = document.getElementById('funnel-target');
+    if (!target) return;
+
+    let html = '';
+    FUNNEL_STAGES.forEach((stage, idx) => {
+      html += `
+        <div class="funnel-stage">
+          <div class="funnel-bar" style="width: ${stage.width};">
+            <div class="funnel-label">
+              <span class="funnel-step-num">${stage.num}</span>
+              <span>${stage.label}</span>
+            </div>
+            <div class="funnel-values">
+              <span class="funnel-count">${stage.count}</span>
+              <span class="funnel-pct">${stage.pct}</span>
+            </div>
+          </div>
+          ${stage.drop ? `
+            <div class="funnel-connector">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+              <span class="funnel-drop-badge">${stage.drop}</span>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    });
+
+    target.innerHTML = html;
+  }
+
+  // Render Waitlist Referral Sources
+  function renderWaitlistSources() {
+    const target = document.getElementById('waitlist-sources-target');
+    if (!target) return;
+
+    target.innerHTML = WAITLIST_SOURCES.map(s => `
+      <div class="source-row">
+        <div class="source-info">
+          <span class="source-name">${s.name}</span>
+          <span class="source-val">${s.count} <span style="font-weight: 400; color: var(--intel-muted);">(${s.pct})</span></span>
+        </div>
+        <div class="source-bar-bg">
+          <div class="source-bar-fill" style="width: ${s.pct};"></div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Render DAU Hourly Spark Chart
+  function renderDauChart() {
+    const target = document.getElementById('dau-hourly-target');
+    if (!target) return;
+
+    const hourlyHeights = [20, 15, 12, 10, 8, 14, 28, 45, 65, 80, 92, 100, 95, 88, 92, 85, 78, 70, 62, 55, 48, 38, 30, 24];
+    
+    target.innerHTML = hourlyHeights.map((h, i) => `
+      <div class="dau-hour-bar" style="height: ${h}%;" title="Hour ${i}:00 UTC (${h}% peak load)"></div>
+    `).join('');
+  }
+
+  // Render Check-in Streak Leaders
+  function renderStreakLeaders() {
+    const target = document.getElementById('streak-leaders-target');
+    if (!target) return;
+
+    target.innerHTML = STREAK_LEADERS.map(l => `
+      <tr>
+        <td class="streak-rank">#${l.rank}</td>
+        <td><div class="streak-user">${l.user}</div></td>
+        <td><span class="streak-badge">🔥 ${l.streak}d</span></td>
+        <td style="color: var(--intel-muted);">${l.best}d</td>
+        <td><span class="intel-badge gold">${l.cls}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  // Render Battle Pass Level Distribution
+  function renderBattlepassDist() {
+    const target = document.getElementById('bp-dist-target');
+    if (!target) return;
+
+    target.innerHTML = BATTLEPASS_DIST.map(b => `
+      <div class="bp-tier-item">
+        <div class="bp-tier-header">
+          <span class="bp-tier-name">${b.name}</span>
+          <span class="bp-tier-val">${b.val} (${b.pct}%)</span>
+        </div>
+        <div class="bp-bar-bg">
+          <div class="bp-bar-fill" style="width: ${b.pct}%;"></div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Helper to update UI if live API stats arrive
+  function updateLiveStats(stats, tournaments, traders) {
+    if (stats.total_traders) {
+      const totalElem = document.getElementById('growth-total-reg');
+      if (totalElem) totalElem.textContent = stats.total_traders.toLocaleString();
+    }
+    if (stats.verified_traders && stats.total_traders) {
+      const verRatio = Math.round((stats.verified_traders / stats.total_traders) * 1000) / 10;
+      const verElem = document.getElementById('growth-verified-ratio');
+      if (verElem) verElem.textContent = verRatio + '%';
+    }
+    if (stats.total_tournaments) {
+      const tournTotal = document.getElementById('tourn-total-cnt');
+      if (tournTotal) tournTotal.textContent = stats.total_tournaments;
+    }
+    if (stats.waitlist_count) {
+      const waitCnt = document.getElementById('waitlist-cnt-val');
+      if (waitCnt) waitCnt.textContent = stats.waitlist_count.toLocaleString();
+    }
+    if (stats.total_rex_distributed) {
+      const rexTotal = document.getElementById('rex-flow-total-top');
+      if (rexTotal) rexTotal.textContent = stats.total_rex_distributed.toLocaleString() + ' REX';
+    }
+  }
+
+  // Auto-run on direct load
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(initIntelligenceModule, 50);
+  } else {
+    document.addEventListener('DOMContentLoaded', initIntelligenceModule);
+  }
+</script>
+
+<!-- Event Trigger image for innerHTML injection execution -->
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+     style="display:none;"
+     onload="if(typeof initIntelligenceModule==='function') initIntelligenceModule();"
+     onerror="if(typeof initIntelligenceModule==='function') initIntelligenceModule();" />
+"""
+
+with open(filepath, "w", encoding="utf-8") as f:
+    f.write(content)
+
+print(f"Successfully generated {filepath} ({len(content)} bytes)")
