@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Something is coming.</title>
-  <meta name="description" content="The gates are opening soon. Be first through.">
-  <meta property="og:title" content="Something is coming.">
+  <title>FORTEX FX — The Gates Are Opening Soon</title>
+  <meta name="description" content="FORTEX FX. A new era for traders. The gates are opening soon. Be first through.">
+  <meta property="og:title" content="FORTEX FX — Something is coming.">
   <meta property="og:description" content="The gates are opening soon. Be first through.">
   <meta property="og:type" content="website">
 
@@ -18,9 +18,52 @@
   <script src="js/auth.js"></script>
 
   <style>
-    /* STEALTH MODE — PRE-LAUNCH */
     body { overflow-x: hidden; }
 
+    /* BRAND LOGO + NAME */
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand-logo {
+      width: 56px;
+      height: 56px;
+      filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.3));
+      animation: logo-glow 4s ease-in-out infinite;
+    }
+
+    @keyframes logo-glow {
+      0%, 100% { filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.2)); }
+      50% { filter: drop-shadow(0 0 24px rgba(212, 175, 55, 0.5)); }
+    }
+
+    .brand-name {
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: #ffffff;
+    }
+
+    .brand-name .gold-text {
+      color: #D4AF37;
+    }
+
+    .brand-tagline {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.35em;
+      color: #444;
+      margin-top: 2px;
+      text-align: center;
+    }
+
+    /* STEALTH HERO */
     .stealth-hero {
       min-height: 100vh;
       display: flex;
@@ -45,7 +88,7 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: #D4AF37;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
       animation: pulse-gold 3s ease-in-out infinite;
     }
 
@@ -90,7 +133,7 @@
       font-size: clamp(15px, 2vw, 19px);
       font-weight: 200;
       color: #555;
-      max-width: 520px;
+      max-width: 560px;
       margin: 24px auto 0;
       line-height: 1.6;
     }
@@ -143,8 +186,6 @@
       text-decoration: none;
       transition: all 0.3s;
       box-shadow: 0 0 30px rgba(88, 101, 242, 0.2);
-      position: relative;
-      overflow: hidden;
     }
 
     .stealth-cta:hover {
@@ -246,7 +287,7 @@
       50% { transform: translateX(-50%) translateY(8px); opacity: 0.8; }
     }
 
-    /* FINAL CTA SECTION */
+    /* FINAL CTA */
     .final-section {
       min-height: 60vh;
       display: flex;
@@ -277,13 +318,30 @@
       margin-bottom: 36px;
     }
 
-    /* FOOTER MINIMAL */
+    /* FOOTER */
     .stealth-footer {
       padding: 40px 24px;
       text-align: center;
       border-top: 1px solid #0a0a0a;
       position: relative;
       z-index: 2;
+    }
+
+    .stealth-footer-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .stealth-footer-brand svg { width: 24px; height: 24px; }
+
+    .stealth-footer-brand span {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: #555;
     }
 
     .stealth-footer p {
@@ -307,7 +365,7 @@
       100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
     }
 
-    /* NOTIFICATION TOAST */
+    /* JOIN TOAST */
     .join-toast {
       position: fixed;
       bottom: 24px;
@@ -346,11 +404,11 @@
       font-weight: 600;
     }
 
-    /* RESPONSIVE */
     @media (max-width: 640px) {
       .stealth-countdown { gap: 16px; }
       .stealth-cta { padding: 16px 28px; font-size: 13px; }
       .join-toast { left: 12px; right: 12px; bottom: 12px; }
+      .brand-logo { width: 44px; height: 44px; }
     }
   </style>
 </head>
@@ -360,16 +418,43 @@
 
   <!-- STEALTH HERO -->
   <section class="stealth-hero" data-shape="galaxy">
+
+    <!-- BRAND LOGO + NAME -->
+    <div class="brand-lockup">
+      <svg class="brand-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,15 80,32 80,68 50,85 20,68 20,32" stroke="#D4AF37" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+        <polygon points="50,28 67,38 67,62 50,72 33,62 33,38" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linejoin="round" opacity="0.5"/>
+        <path d="M50,40 Q58,43 55,50 Q48,53 45,46 Q47,41 50,40" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <circle cx="50" cy="50" r="2.5" fill="#D4AF37"/>
+        <circle cx="50" cy="15" r="3" fill="#D4AF37"/>
+        <circle cx="80" cy="32" r="3" fill="#D4AF37"/>
+        <circle cx="80" cy="68" r="3" fill="#D4AF37"/>
+        <circle cx="50" cy="85" r="3" fill="#D4AF37"/>
+        <circle cx="20" cy="68" r="3" fill="#D4AF37"/>
+        <circle cx="20" cy="32" r="3" fill="#D4AF37"/>
+        <line x1="50" y1="15" x2="80" y2="32" stroke="#D4AF37" stroke-width="0.8" opacity="0.3"/>
+        <line x1="80" y1="32" x2="80" y2="68" stroke="#D4AF37" stroke-width="0.8" opacity="0.3"/>
+        <line x1="80" y1="68" x2="50" y2="85" stroke="#D4AF37" stroke-width="0.8" opacity="0.3"/>
+        <line x1="50" y1="85" x2="20" y2="68" stroke="#D4AF37" stroke-width="0.8" opacity="0.3"/>
+        <line x1="20" y1="68" x2="20" y2="32" stroke="#D4AF37" stroke-width="0.8" opacity="0.3"/>
+        <line x1="20" y1="32" x2="50" y2="15" stroke="#D4AF37" stroke-width="0.8" opacity="0.3"/>
+      </svg>
+    </div>
+    <div style="text-align: center; margin-bottom: 40px;">
+      <div class="brand-name">FORTEX <span class="gold-text">FX</span></div>
+      <div class="brand-tagline">Where Traders Rise</div>
+    </div>
+
     <div class="seal-badge">
       <span>Sealed · Launching Soon</span>
     </div>
 
     <h1 class="stealth-headline">
-      Something is <span class="accent">coming.</span>
+      A new arena for <span class="accent">traders.</span>
     </h1>
 
     <p class="stealth-sub">
-      The gates haven't opened yet. But they will. And those who arrive first — they'll remember it.
+      You already have the skill. You watch the charts every day. What if that skill could finally be seen — and rewarded?
     </p>
 
     <!-- COUNTDOWN -->
@@ -410,18 +495,18 @@
     <div class="scroll-hint">Scroll</div>
   </section>
 
-  <!-- CRYPTIC HINTS — reveals nothing, builds everything -->
+  <!-- CRYPTIC HINTS — subtle trading references, reveals nothing specific -->
   <section class="cryptic-section" data-shape="spiral">
     <div class="cryptic-line">
-      You already have the skill. You trade every day. You watch the charts.
+      You watch the charts. You take the trades. You manage the risk.
     </div>
     <div class="cryptic-divider"></div>
     <div class="cryptic-line">
-      But nobody sees it. Nobody knows. <span class="gold">Until now.</span>
+      But nobody sees your skill. Nobody knows your results. <span class="gold">Until now.</span>
     </div>
     <div class="cryptic-divider"></div>
     <div class="cryptic-line">
-      Something is being built. Something for traders who are <span class="gold">tired of trading alone.</span>
+      Something is being built for traders who are <span class="gold">tired of trading alone.</span>
     </div>
     <div class="cryptic-divider"></div>
     <div class="cryptic-line">
@@ -453,12 +538,19 @@
     </a>
   </section>
 
-  <!-- MINIMAL FOOTER -->
+  <!-- FOOTER WITH LOGO -->
   <footer class="stealth-footer">
-    <p>© 2026 · The gates will open soon.</p>
+    <div class="stealth-footer-brand">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,15 80,32 80,68 50,85 20,68 20,32" stroke="#D4AF37" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+        <circle cx="50" cy="50" r="2.5" fill="#D4AF37"/>
+      </svg>
+      <span>FORTEX FX</span>
+    </div>
+    <p>© 2026 FORTEX FX · The gates will open soon.</p>
   </footer>
 
-  <!-- JOIN TOAST NOTIFICATIONS -->
+  <!-- JOIN TOAST -->
   <div class="join-toast" id="join-toast">
     <div class="avatar" id="toast-avatar">?</div>
     <div>
@@ -469,13 +561,11 @@
 
   <script>
     // ===== COUNTDOWN TIMER =====
-    // Set to August 23, 2026 23:59 IST
     const LAUNCH_DATE = new Date('2026-08-23T23:59:59+05:30').getTime();
 
     function updateCountdown() {
       const now = Date.now();
       const diff = LAUNCH_DATE - now;
-
       if (diff <= 0) {
         document.getElementById('cd-days').textContent = '00';
         document.getElementById('cd-hours').textContent = '00';
@@ -483,37 +573,31 @@
         document.getElementById('cd-secs').textContent = '00';
         return;
       }
-
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
       document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
       document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
       document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
       document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
     }
-
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // ===== JOIN WAITLIST (Discord OAuth) =====
+    // ===== JOIN WAITLIST =====
     function joinWaitlist(e) {
       e.preventDefault();
       FORTEX_AUTH.loginWithDiscord();
     }
 
-    // ===== CRYPTIC LINE REVEALS ON SCROLL =====
+    // ===== CRYPTIC LINE REVEALS =====
     const crypticLines = document.querySelectorAll('.cryptic-line');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.5 });
-
     crypticLines.forEach(line => observer.observe(line));
 
     // ===== ANIMATED WAITLIST COUNTER =====
@@ -521,14 +605,13 @@
     function animateWaitlist() {
       const el = document.getElementById('waitlist-count');
       if (!el) return;
-      // Random increment every 15-45 seconds
       const increment = Math.floor(Math.random() * 3) + 1;
       currentCount += increment;
       el.textContent = currentCount.toLocaleString();
     }
     setInterval(animateWaitlist, 30000);
 
-    // ===== FAKE JOIN NOTIFICATIONS (social proof) =====
+    // ===== FAKE JOIN NOTIFICATIONS =====
     const traderNames = [
       'Alex', 'Sarah', 'Mohammed', 'Kai', 'Priya', 'Daniel', 'Yuki', 'Marcus',
       'Elena', 'Raj', 'Chen', 'Fatima', 'Thomas', 'Nina', 'Hassan', 'Sofia'
@@ -546,12 +629,9 @@
       document.getElementById('toast-avatar').textContent = name[0];
       document.getElementById('toast-name').textContent = `${name} ${country}`;
       document.getElementById('toast-time').textContent = 'moments ago';
-
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 4000);
     }
-
-    // Show first toast after 5 seconds, then every 12-25 seconds
     setTimeout(showJoinToast, 5000);
     setInterval(() => {
       const delay = Math.random() * 13000 + 12000;
@@ -559,7 +639,6 @@
     }, 18000);
 
     // ===== LIVE WAITLIST COUNT SYNC =====
-    // Try to fetch real count from backend
     fetch('https://api.base44.com/v1/apps/6a73016f9b626430a0d26f88/functions/getPlatformStats', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -574,17 +653,17 @@
     // ===== CHECK IF ALREADY LOGGED IN =====
     const trader = FORTEX_AUTH.isLoggedIn();
     if (trader) {
-      // Change CTA text
       document.querySelectorAll('.stealth-cta').forEach(btn => {
-        btn.innerHTML = btn.innerHTML.replace('Claim Your Spot', 'You\\'re In');
-        btn.innerHTML = btn.innerHTML.replace('Join the Waitlist', 'Enter the Gates');
-        btn.onclick = (e) => { e.preventDefault(); window.location.href = 'profile.html'; };
+        if (btn.textContent.includes('Claim')) {
+          btn.innerHTML = btn.innerHTML.replace(/Claim Your Spot/g, "You're In");
+          btn.onclick = (e) => { e.preventDefault(); window.location.href = 'profile.html'; };
+        }
+        if (btn.textContent.includes('Join')) {
+          btn.innerHTML = btn.innerHTML.replace(/Join the Waitlist/g, 'Enter the Gates');
+          btn.onclick = (e) => { e.preventDefault(); window.location.href = 'profile.html'; };
+        }
       });
     }
-
-    // ===== PRE-LAUNCH LOCK =====
-    // All inner pages redirect to here unless logged in
-    // (enforced by auth.js pre-launch lock below)
   </script>
 
 </body>
