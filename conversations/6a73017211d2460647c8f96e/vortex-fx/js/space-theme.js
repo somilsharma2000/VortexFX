@@ -29,7 +29,7 @@ function generateGlowOrbs(count = 8) {
     orb.style.left = Math.random() * 100 + '%';
     orb.style.animationDelay = Math.random() * 8 + 's';
     orb.style.animationDuration = (6 + Math.random() * 6) + 's';
-    const colors = ['#22D3EE', '#A78BFA', '#EC4899'];
+    const colors = ['#22D3EE', '#EACA7A', '#EC4899'];
     const color = colors[Math.floor(Math.random() * colors.length)];
     orb.style.background = color;
     orb.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
@@ -130,7 +130,7 @@ function initScrollParticleBursts() {
 
 function triggerParticleBurst(container) {
   const rect = container.getBoundingClientRect();
-  const colors = ['#8B5CF6', '#06B6D4', '#EC4899', '#A78BFA', '#22D3EE'];
+  const colors = ['#D4AF37', '#06B6D4', '#EC4899', '#EACA7A', '#22D3EE'];
   const burstCount = 12;
 
   for (let i = 0; i < burstCount; i++) {

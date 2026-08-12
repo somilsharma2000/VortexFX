@@ -16,7 +16,7 @@ class MorphingConstellation {
       particleCount: options.particleCount || 450,
       ambientCount: options.ambientCount || 180,
       colors: options.colors || [
-        '#8052ff', '#ffb829', '#15846e', '#ffffff',
+        '#D4AF37', '#ffb829', '#15846e', '#ffffff',
         '#a78bfa', '#22d3ee', '#ec4899', '#6366f1',
         '#fbbf24', '#34d399', '#f472b6', '#60a5fa',
         '#c084fc', '#fb923c', '#2dd4bf', '#e879f9'
@@ -530,7 +530,7 @@ class MorphingConstellation {
     let lines = 0;
     const cdSq = connectionDist * connectionDist;
     
-    this.ctx.strokeStyle = 'rgba(128, 82, 255, 0.05)';
+    this.ctx.strokeStyle = 'rgba(212, 175, 55, 0.05)';
     this.ctx.lineWidth = 0.35;
     
     for (let i = 0; i < this.particles.length && lines < maxLines; i++) {

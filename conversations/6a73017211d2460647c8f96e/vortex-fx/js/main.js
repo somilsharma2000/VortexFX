@@ -36,7 +36,7 @@ const Fortex FX = {
     let height = (canvas.height = canvas.parentElement.offsetHeight || window.innerHeight);
 
     const particles = [];
-    const colors = ['#8B5CF6', '#A78BFA', '#06B6D4', '#22D3EE', '#EC4899'];
+    const colors = ['#D4AF37', '#EACA7A', '#06B6D4', '#22D3EE', '#EC4899'];
 
     let mouse = { x: null, y: null, radius: 130 };
 
@@ -534,7 +534,7 @@ const Fortex FX = {
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.strokeStyle = '#8B5CF6';
+            ctx.strokeStyle = '#D4AF37';
             ctx.lineWidth = 1;
             ctx.stroke();
             ctx.restore();

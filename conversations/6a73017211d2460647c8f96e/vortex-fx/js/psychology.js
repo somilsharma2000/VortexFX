@@ -89,7 +89,7 @@ const PsychologyEngine = {
   communityLines: [
     "You're not trading alone anymore.",
     "The Citadel isn't just a Discord. It's your trading family.",
-    "Every Fortex FX trader belongs to the Citadel. You're either in or you're out.",
+    "Every FORTREX FX trader belongs to the Citadel. You're either in or you're out.",
     "Trading is lonely. It doesn't have to be.",
   ],
 
