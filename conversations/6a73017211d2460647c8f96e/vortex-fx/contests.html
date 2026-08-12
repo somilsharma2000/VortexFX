@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tournaments & Arena — FORTREX FX</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- System Styles and Scripts -->
+  <link rel="stylesheet" href="css/dala.css">
+  <script src="js/dala.js"></script>
+  <script src="js/auth.js"></script>
+
+  <style>
+    :root {
+      --bg-black: #000000;
+      --bg-dark: #0a0a0a;
+      --card-bg: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
+      --card-border: #222222;
+      --gold-accent: #D4AF37;
+      --gold-glow: rgba(212, 175, 55, 0.25);
+      --purple-accent: #8B5CF6;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --green-bull: #10B981;
+      --red-bear: #EF4444;
+      --gray-status: #6B7280;
+      --font-body: 'Inter', sans-serif;
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-black);
+      background-image: radial-gradient(circle at 50% 0%, #0a0a0a 0%, #000000 100%);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* Particle Canvas Background */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .app-container {
+      position: relative;
+      z-index: 1;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      z-index: 100;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo-svg {
+      width: 32px;
+      height: 32px;
+      filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.4));
+    }
+
+    .nav-wordmark {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 0.05em;
+      color: #FFFFFF;
+      background: linear-gradient(135deg, #FFFFFF 0%, #D4AF37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--gold-accent);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-primary-pill {
+      background: linear-gradient(135deg, #D4AF37 0%, #AA7C11 100%);
+      color: #000000;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 24px;
+      border-radius: 9999px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-primary-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+      background: linear-gradient(135deg, #E5C158 0%, #C4921B 100%);
+    }
+
+    .btn-ghost-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 22px;
+      border-radius: 9999px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-ghost-pill:hover {
+      border-color: var(--gold-accent);
+      color: var(--gold-accent);
+      background: rgba(212, 175, 55, 0.08);
+    }
+
+    /* Page Header */
+    .header-section {
+      padding: 60px 0 40px;
+      text-align: center;
+    }
+
+    .label-gold {
+      color: var(--gold-accent);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 4px 14px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 9999px;
+    }
+
+    .headline {
+      font-family: var(--font-heading);
+      font-size: 52px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #A1A1AA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtext {
+      color: var(--text-muted);
+      font-size: 17px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), transparent);
+    }
+
+    /* ACTIVE TOURNAMENT CARDS */
+    .active-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      margin-bottom: 60px;
+    }
+
+    .tournament-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .tournament-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.9), 0 0 24px rgba(212, 175, 55, 0.12);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .status-badge.open {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--green-bull);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .status-badge.live {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--red-bear);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .status-badge.completed {
+      background: rgba(107, 114, 128, 0.15);
+      color: var(--gray-status);
+      border: 1px solid rgba(107, 114, 128, 0.3);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--red-bear);
+      box-shadow: 0 0 8px var(--red-bear);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .tourney-name {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      font-weight: 700;
+      margin: 16px 0 12px;
+      color: var(--text-main);
+    }
+
+    .tourney-description {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .tourney-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+
+    .meta-item-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .meta-item-value {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .meta-item-value.gold {
+      color: var(--gold-accent);
+      font-size: 20px;
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+    }
+
+    .rules-summary {
+      font-size: 12px;
+      color: #94A3B8;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      font-family: var(--font-mono);
+    }
+
+    /* Sealed Overlay Badge */
+    .sealed-overlay-badge {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid var(--purple-accent);
+      color: var(--purple-accent);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+    }
+
+    /* TOURNAMENT TYPES SECTION */
+    .types-section {
+      margin-bottom: 70px;
+    }
+
+    .types-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .type-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .type-card:hover {
+      border-color: var(--gold-accent);
+      transform: translateY(-3px);
+    }
+
+    .type-icon {
+      font-size: 32px;
+      margin-bottom: 14px;
+      display: inline-block;
+    }
+
+    .type-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .type-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      line-height: 1.4;
+    }
+
+    .type-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+
+    .type-tag {
+      color: var(--gold-accent);
+      font-weight: 600;
+    }
+
+    /* PAST TOURNAMENTS SECTION */
+    .past-section {
+      margin-bottom: 70px;
+    }
+
+    .past-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .past-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+    }
+
+    .winner-spotlight {
+      background: rgba(212, 175, 55, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .winner-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-accent), #8B5CF6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      color: #000;
+    }
+
+    .winner-info {
+      flex: 1;
+    }
+
+    .winner-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .winner-roi {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--green-bull);
+      font-weight: 700;
+    }
+
+    .proof-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--green-bull);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* PRIZE POOL EXPLAINER SECTION */
+    .explainer-section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 48px;
+      margin-bottom: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .explainer-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+
+    .explainer-title {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .explainer-subtitle {
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    /* Podiums Visual */
+    .podium-container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 24px;
+      margin: 40px 0 30px;
+      height: 220px;
+    }
+
+    .podium-bar {
+      width: 140px;
+      border-radius: 16px 16px 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 16px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .podium-bar.p1 {
+      height: 180px;
+      background: linear-gradient(180deg, rgba(212, 175, 55, 0.3) 0%, rgba(212, 175, 55, 0.05) 100%);
+      border: 1px solid var(--gold-accent);
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+    }
+
+    .podium-bar.p2 {
+      height: 130px;
+      background: linear-gradient(180deg, rgba(139, 92, 246, 0.3) 0%, rgba(139, 92, 246, 0.05) 100%);
+      border: 1px solid var(--purple-accent);
+    }
+
+    .podium-bar.p3 {
+      height: 90px;
+      background: linear-gradient(180deg, rgba(148, 163, 184, 0.2) 0%, rgba(148, 163, 184, 0.05) 100%);
+      border: 1px solid #94A3B8;
+    }
+
+    .podium-place {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .podium-percent {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 40px 0;
+      color: var(--text-muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .disclaimer {
+      max-width: 800px;
+      margin: 0 auto 16px;
+      line-height: 1.6;
+      color: #64748B;
+    }
+
+    .copyright {
+      color: #475569;
+      font-family: var(--font-mono);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .active-grid {
+        grid-template-columns: 1fr;
+      }
+      .types-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .past-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .types-grid {
+        grid-template-columns: 1fr;
+      }
+      .past-grid {
+        grid-template-columns: 1fr;
+      }
+      .headline {
+        font-size: 38px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .explainer-section {
+        padding: 24px;
+      }
+      .podium-container {
+        gap: 12px;
+      }
+      .podium-bar {
+        width: 90px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="app-container">
+    <!-- Navbar -->
+    <header class="navbar">
+      <a href="index.html" class="nav-brand">
+        <svg class="nav-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#D4AF37" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+          <polygon points="50,30 65,39 65,61 50,70 35,61 35,39" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linejoin="round" opacity="0.6"/>
+          <path d="M50,42 Q58,45 55,52 Q48,55 45,48 Q47,43 50,42" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <circle cx="50" cy="50" r="2.5" fill="#D4AF37"/>
+          <circle cx="50" cy="18" r="3" fill="#D4AF37"/>
+          <circle cx="78" cy="34" r="3" fill="#D4AF37"/>
+          <circle cx="78" cy="66" r="3" fill="#D4AF37"/>
+          <circle cx="50" cy="82" r="3" fill="#D4AF37"/>
+          <circle cx="22" cy="66" r="3" fill="#D4AF37"/>
+          <circle cx="22" cy="34" r="3" fill="#D4AF37"/>
+        </svg>
+        <span class="nav-wordmark">FORTREX FX</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links-list">
+        <!-- Dynamic Nav Links -->
+      </ul>
+
+      <div class="nav-cta" id="nav-cta-container">
+        <!-- Dynamic Nav CTA -->
+      </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="header-section">
+      <span class="label-gold">THE ARENA</span>
+      <h1 class="headline">Tournaments</h1>
+      <p class="subtext">Free to enter. Trade your own capital. Highest ROI wins. Results sealed until reveal day.</p>
+    </section>
+
+    <!-- ACTIVE TOURNAMENTS SECTION -->
+    <section style="margin-bottom: 60px;">
+      <h2 class="section-title">Active & Upcoming Arenas</h2>
+      <div class="active-grid" id="active-tournaments-container">
+        <!-- Populated via getTournaments or Fallback -->
+      </div>
+    </section>
+
+    <!-- TOURNAMENT TYPES SECTION -->
+    <section class="types-section">
+      <h2 class="section-title">Tournament Formats</h2>
+      <div class="types-grid">
+        <div class="type-card">
+          <div>
+            <div class="type-icon">⚡</div>
+            <div class="type-title">Weekly Rookie</div>
+            <p class="type-desc">Free, small pool, beginner-friendly 7-day sprint to sharpen your execution without high pressure.</p>
+          </div>
+          <div class="type-footer">
+            <div><span class="type-tag">ENTRY:</span> FREE</div>
+            <div><span class="type-tag">POOL:</span> 10,000 REX</div>
+          </div>
+        </div>
+
+        <div class="type-card">
+          <div>
+            <div class="type-icon">🏆</div>
+            <div class="type-title">Monthly Championship</div>
+            <p class="type-desc">Free entry flagship tournament. Top 20 performers claim high community prize distributions.</p>
+          </div>
+          <div class="type-footer">
+            <div><span class="type-tag">ENTRY:</span> FREE</div>
+            <div><span class="type-tag">POOL:</span> 50,000 REX</div>
+          </div>
+        </div>
+
+        <div class="type-card">
+          <div>
+            <div class="type-icon">⚔️</div>
+            <div class="type-title">Season Championship</div>
+            <p class="type-desc">Qualified top performers quarterly arena. Highest prestige, maximum prize pool, global hall of fame.</p>
+          </div>
+          <div class="type-footer">
+            <div><span class="type-tag">ENTRY:</span> QUALIFIED</div>
+            <div><span class="type-tag">POOL:</span> 250,000 REX</div>
+          </div>
+        </div>
+
+        <div class="type-card">
+          <div>
+            <div class="type-icon">💎</div>
+            <div class="type-title">High-Roller</div>
+            <p class="type-desc">Min deposit required for capital managers. Strict verified execution with high-tier profit allocations.</p>
+          </div>
+          <div class="type-footer">
+            <div><span class="type-tag">ENTRY:</span> MIN CAPITAL</div>
+            <div><span class="type-tag">POOL:</span> 100,000+ REX</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAST TOURNAMENTS SECTION -->
+    <section class="past-section">
+      <h2 class="section-title">Hall of Fame & Past Champions</h2>
+      <div class="past-grid" id="past-tournaments-container">
+        <!-- Populated via getTournaments status === 'revealed' -->
+      </div>
+    </section>
+
+    <!-- PRIZE POOL EXPLAINER SECTION -->
+    <section class="explainer-section">
+      <div class="explainer-header">
+        <span class="label-gold">TRANSPARENT REWARDS</span>
+        <h2 class="explainer-title">How Prize Pools Work</h2>
+        <p class="explainer-subtitle">40% of partnership revenue, split among top performers. The more members, the bigger the pools.</p>
+      </div>
+
+      <div class="podium-container">
+        <!-- 2nd Place -->
+        <div class="podium-bar p2">
+          <div class="podium-place" style="color: var(--purple-accent);">2nd</div>
+          <div class="podium-percent">30%</div>
+        </div>
+
+        <!-- 1st Place -->
+        <div class="podium-bar p1">
+          <div class="podium-place" style="color: var(--gold-accent);">1st</div>
+          <div class="podium-percent">50%</div>
+        </div>
+
+        <!-- 3rd Place -->
+        <div class="podium-bar p3">
+          <div class="podium-place" style="color: #94A3B8;">3rd</div>
+          <div class="podium-percent">20%</div>
+        </div>
+      </div>
+
+      <p style="text-align: center; color: var(--text-muted); font-size: 14px; max-width: 540px; margin: 0 auto;">
+        Prize distributions are executed automatically in REX tokens upon reveal day verification.
+      </p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p class="disclaimer">
+        Risk Warning: Trading foreign exchange and CFD contracts carries a high level of risk and may not be suitable for all investors. Tournament ROI figures are calculated based on verified broker metrics.
+      </p>
+      <p class="copyright">© 2026 FORTREX FX. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Fallback Tournaments Data conforming to backend structure
+    const fallbackTournaments = [
+      {
+        id: 't-active-1',
+        name: 'Vortex Genesis Championship #42',
+        status: 'OPEN',
+        start_date: 'Aug 15, 2026',
+        end_date: 'Aug 29, 2026',
+        reveal_date: 'Aug 30, 2026',
+        prize_pool_rex: '50,000 REX',
+        participant_count: 1240,
+        is_active: true,
+        type: 'Monthly Championship',
+        description: 'Our flagship monthly tournament. Connect your MetaTrader or cTrader account, trade your own strategy, highest net ROI wins.'
+      },
+      {
+        id: 't-active-2',
+        name: 'Weekly Alpha Sprint #88',
+        status: 'LIVE',
+        start_date: 'Aug 10, 2026',
+        end_date: 'Aug 17, 2026',
+        reveal_date: 'Aug 18, 2026',
+        prize_pool_rex: '15,000 REX',
+        participant_count: 618,
+        is_active: true,
+        type: 'Weekly Rookie',
+        description: 'High-speed 7-day Forex and Gold trading arena. Leaderboard metrics are sealed until reveal day to eliminate copy trading.'
+      },
+      {
+        id: 't-past-1',
+        name: 'July Apex Championship #41',
+        status: 'revealed',
+        start_date: 'Jul 01, 2026',
+        end_date: 'Jul 28, 2026',
+        reveal_date: 'Jul 29, 2026',
+        prize_pool_rex: '50,000 REX',
+        participant_count: 1105,
+        is_active: false,
+        winner: {
+          username: 'Kratos_FX',
+          roi: '+384.2%',
+          prize: '25,000 REX'
+        },
+        description: 'Completed arena with full verified withdrawal proof.'
+      },
+      {
+        id: 't-past-2',
+        name: 'Weekly Sprint #87',
+        status: 'revealed',
+        start_date: 'Aug 01, 2026',
+        end_date: 'Aug 08, 2026',
+        reveal_date: 'Aug 09, 2026',
+        prize_pool_rex: '15,000 REX',
+        participant_count: 540,
+        is_active: false,
+        winner: {
+          username: 'Bullseye_Gold',
+          roi: '+210.5%',
+          prize: '7,500 REX'
+        },
+        description: 'Gold scaling focus tournament.'
+      },
+      {
+        id: 't-past-3',
+        name: 'Summer High-Roller Arena',
+        status: 'revealed',
+        start_date: 'Jun 15, 2026',
+        end_date: 'Jul 15, 2026',
+        reveal_date: 'Jul 16, 2026',
+        prize_pool_rex: '120,000 REX',
+        participant_count: 320,
+        is_active: false,
+        winner: {
+          username: 'QuantApex',
+          roi: '+175.8%',
+          prize: '60,000 REX'
+        },
+        description: 'Pro tier capital tournament.'
+      }
+    ];
+
+    // Auth & Navigation Setup
+    function updateNavState() {
+      const trader = localStorage.getItem('fortex_trader');
+      const navLinksContainer = document.getElementById('nav-links-list');
+      const navCtaContainer = document.getElementById('nav-cta-container');
+
+      if (trader) {
+        let traderObj = {};
+        try { traderObj = JSON.parse(trader); } catch(e){}
+
+        if (navLinksContainer) {
+          navLinksContainer.innerHTML = `
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="contests.html" class="nav-link active">Tournaments</a></li>
+            <li><a href="journal.html" class="nav-link">Journal Wall</a></li>
+            <li><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+            <li><a href="offers.html" class="nav-link">Rewards</a></li>
+            <li><a href="resources.html" class="nav-link">Resources</a></li>
+            <li><a href="profile.html" class="nav-link">Profile</a></li>
+            <li><a href="checkin.html" class="nav-link">Check-In</a></li>
+          `;
+        }
+
+        if (navCtaContainer) {
+          navCtaContainer.innerHTML = `
+            <a href="profile.html" style="display: flex; align-items: center; gap: 8px; color: var(--gold-accent); text-decoration: none; font-weight: 600; font-size: 13px; text-transform: uppercase;">
+              <div style="width: 30px; height: 30px; border-radius: 50%; background: rgba(212, 175, 55, 0.2); border: 1px solid var(--gold-accent); display: flex; align-items: center; justify-content: center; font-size: 12px; color: #FFF;">
+                ${(traderObj.username || 'T')[0].toUpperCase()}
+              </div>
+              <span>${traderObj.username || 'Trader'}</span>
+            </a>
+            <button onclick="FORTEX_AUTH.logout()" class="btn-ghost-pill" style="padding: 6px 16px; font-size: 12px;">Logout</button>
+          `;
+        }
+      } else {
+        if (navLinksContainer) {
+          navLinksContainer.innerHTML = `
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="contests.html" class="nav-link active">Tournaments</a></li>
+            <li><a href="journal.html" class="nav-link">Journal Wall</a></li>
+            <li><a href="offers.html" class="nav-link">Rewards</a></li>
+            <li><a href="resources.html" class="nav-link">Resources</a></li>
+          `;
+        }
+
+        if (navCtaContainer) {
+          navCtaContainer.innerHTML = `
+            <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
+            <a href="signin.html" class="btn-primary-pill">Enter Arena</a>
+          `;
+        }
+      }
+    }
+
+    // Render Active Tournaments
+    function renderActiveTournaments(tournaments) {
+      const container = document.getElementById('active-tournaments-container');
+      if (!container) return;
+
+      const active = tournaments.filter(t => t.status === 'OPEN' || t.status === 'LIVE' || t.is_active);
+
+      container.innerHTML = active.map(t => {
+        const isLive = t.status === 'LIVE';
+        const isOpen = t.status === 'OPEN';
+
+        return `
+          <div class="tournament-card">
+            ${isLive ? `
+              <div class="sealed-overlay-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                </svg>
+                SEALED
+              </div>
+            ` : ''}
+
+            <div>
+              <div style="margin-bottom: 8px;">
+                <span class="status-badge ${t.status.toLowerCase()}">
+                  ${isLive ? '<span class="live-dot"></span> LIVE IN PROGRESS' : 'OPEN FOR REGISTRATION'}
+                </span>
+              </div>
+
+              <h3 class="tourney-name">${t.name}</h3>
+              <p class="tourney-description">${t.description}</p>
+
+              <div class="tourney-meta-grid">
+                <div>
+                  <div class="meta-item-label">Prize Pool</div>
+                  <div class="meta-item-value gold">${t.prize_pool_rex}</div>
+                </div>
+                <div>
+                  <div class="meta-item-label">Entry</div>
+                  <div class="meta-item-value">FREE</div>
+                </div>
+                <div>
+                  <div class="meta-item-label">Duration</div>
+                  <div class="meta-item-value" style="font-size: 13px;">${t.start_date} → ${t.end_date}</div>
+                </div>
+                <div>
+                  <div class="meta-item-label">Participants</div>
+                  <div class="meta-item-value">${t.participant_count || 0} Registered</div>
+                </div>
+              </div>
+
+              <div class="rules-summary">
+                <span>Highest ROI wins</span> · 
+                <span>Sealed results</span> · 
+                <span>Verified sync</span>
+              </div>
+            </div>
+
+            <div>
+              <a href="${localStorage.getItem('fortex_trader') ? 'leaderboard.html' : 'signin.html'}" class="btn-primary-pill" style="width: 100%; justify-content: center;">
+                ENTER TOURNAMENT
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Render Past Tournaments
+    function renderPastTournaments(tournaments) {
+      const container = document.getElementById('past-tournaments-container');
+      if (!container) return;
+
+      const past = tournaments.filter(t => t.status === 'revealed' || t.status === 'COMPLETED');
+
+      container.innerHTML = past.map(t => {
+        const w = t.winner || { username: 'TopTrader', roi: '+240%', prize: '25,000 REX' };
+        return `
+          <div class="past-card">
+            <div style="font-size: 12px; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 4px;">
+              ${t.start_date} - ${t.end_date}
+            </div>
+            <h4 style="font-family: var(--font-heading); font-size: 18px; font-weight: 700;">${t.name}</h4>
+
+            <div class="winner-spotlight">
+              <div class="winner-avatar">${w.username[0]}</div>
+              <div class="winner-info">
+                <div class="winner-name">
+                  👑 @${w.username}
+                </div>
+                <div class="winner-roi">${w.roi} ROI · ${w.prize}</div>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 12px;">
+              <span class="proof-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                </svg>
+                WITHDRAWAL PROOF
+              </span>
+              <span style="font-size: 12px; color: var(--text-muted); font-family: var(--font-mono);">${t.participant_count} Traders</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Fetch Tournaments API Call
+    async function loadTournamentsData() {
+      let tournaments = [...fallbackTournaments];
+
+      try {
+        if (typeof FORTEX_AUTH !== 'undefined' && FORTEX_AUTH.callFunction) {
+          const res = await FORTEX_AUTH.callFunction('getTournaments', {});
+          if (res && res.success && res.tournaments && res.tournaments.length > 0) {
+            tournaments = res.tournaments;
+          }
+        }
+      } catch (err) {
+        console.log('Using default tournament set');
+      }
+
+      renderActiveTournaments(tournaments);
+      renderPastTournaments(tournaments);
+    }
+
+    // Canvas Particle System
+    function initParticleCanvas() {
+      const canvas = document.getElementById('particle-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const particles = [];
+      const numParticles = 40;
+
+      for (let i = 0; i < numParticles; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          radius: Math.random() * 2 + 0.8,
+          color: Math.random() > 0.4 ? 'rgba(212, 175, 55, ' : 'rgba(139, 92, 246, ',
+          alpha: Math.random() * 0.5 + 0.15
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color + p.alpha + ')';
+          ctx.fill();
+
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dx = p.x - p2.x;
+            const dy = p.y - p2.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 120) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `rgba(212, 175, 55, ${0.15 * (1 - dist / 120)})`;
+              ctx.lineWidth = 0.6;
+              ctx.stroke();
+            }
+          }
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateNavState();
+      loadTournamentsData();
+      initParticleCanvas();
+    });
+  </script>
+</body>
+</html>

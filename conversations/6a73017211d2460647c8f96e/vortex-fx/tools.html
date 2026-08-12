@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Trading Tools & Calculators — FORTREX FX</title>
+  <meta name="description" content="Free forex and crypto trading calculators. Pip value calculator, lot size calculator, risk/reward calculator, and capital compounding simulator. Zero fees, no registration needed.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/dala.css">
+  <script src="js/dala.js"></script>
+  <script src="js/auth.js"></script>
+
+  <style>
+    /* DESIGN SYSTEM OVERRIDES & EXTENSIONS */
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .font-display {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* NAV LOGO & LINKS CONTROL */
+    .nav-internal {
+      display: none; /* hidden by default for logged-out users */
+    }
+    body.is-logged-in .nav-internal {
+      display: inline-block;
+    }
+
+    /* GOLD & PURPLE ACCENTS */
+    .text-gold { color: #D4AF37; }
+    .text-purple { color: #8B8CF6; }
+
+    .uppercase-label {
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* CARD DESIGN SYSTEM */
+    .tool-card {
+      background: linear-gradient(145deg, #111111 0%, #1A1A1A 100%);
+      border: 1px solid #222222;
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tool-card:hover {
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .tool-header {
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #222222;
+    }
+
+    .tool-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tool-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #D4AF37;
+    }
+
+    /* INPUTS & CONTROLS */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #9A9A9A;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .form-control, .form-select {
+      width: 100%;
+      background: #0D0D0D;
+      border: 1px solid #282828;
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      transition: all 0.2s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+      outline: none;
+      border-color: #D4AF37;
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
+      background: #121212;
+    }
+
+    .form-select option {
+      background: #111111;
+      color: #ffffff;
+    }
+
+    /* RANGE SLIDERS */
+    .range-slider {
+      width: 100%;
+      accent-color: #D4AF37;
+      height: 6px;
+      background: #222;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    /* OUTPUT PANELS */
+    .output-box {
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid #2A2A2A;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 24px;
+    }
+
+    .output-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #1A1A1A;
+    }
+
+    .output-row:last-child {
+      border-bottom: none;
+    }
+
+    .output-label {
+      font-size: 13px;
+      color: #9A9A9A;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .output-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .output-val.gold {
+      color: #D4AF37;
+    }
+
+    .output-val.purple {
+      color: #8B8CF6;
+    }
+
+    .verdict-badge {
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .verdict-good {
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ADE80;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+
+    .verdict-bad {
+      background: rgba(239, 68, 68, 0.15);
+      color: #F87171;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    /* BUTTONS */
+    .btn-pill-gold {
+      background: #D4AF37;
+      color: #000000;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 9999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 14px;
+      transition: all 0.25s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-pill-gold:hover {
+      background: #F3E5AB;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.35);
+    }
+
+    /* TABLE STYLES FOR COMPOUNDING */
+    .sim-table-container {
+      max-height: 220px;
+      overflow-y: auto;
+      margin-top: 16px;
+      border: 1px solid #222;
+      border-radius: 8px;
+    }
+
+    .sim-table-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    .sim-table-container::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 3px;
+    }
+
+    .sim-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    .sim-table th {
+      background: #0D0D0D;
+      color: #9A9A9A;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 8px 12px;
+      position: sticky;
+      top: 0;
+      border-bottom: 1px solid #222;
+    }
+
+    .sim-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #181818;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* CTA SECTION */
+    .cta-banner {
+      background: linear-gradient(135deg, #0A0A0A 0%, #151320 50%, #0A0A0A 100%);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 24px;
+      padding: 48px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 60px;
+    }
+
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+        <div class="nav-logo">
+          <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,10 88,30 88,70 50,90 12,70 12,30" stroke="#D4AF37" stroke-width="4" fill="rgba(212, 175, 55, 0.1)" stroke-linejoin="round"/>
+            <polygon points="50,24 74,38 74,62 50,76 26,62 26,38" stroke="#D4AF37" stroke-width="2" fill="none" opacity="0.6"/>
+            <path d="M42,38 L60,38 L42,50 L56,50 L42,64" stroke="#D4AF37" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="50" cy="10" r="3" fill="#D4AF37"/>
+            <circle cx="88" cy="30" r="3" fill="#D4AF37"/>
+            <circle cx="88" cy="70" r="3" fill="#D4AF37"/>
+            <circle cx="50" cy="90" r="3" fill="#D4AF37"/>
+            <circle cx="12" cy="70" r="3" fill="#D4AF37"/>
+            <circle cx="12" cy="30" r="3" fill="#D4AF37"/>
+          </svg>
+        </div>
+        <span class="nav-wordmark"><span style="color: #ffffff; font-weight: 700;">FORTREX</span> <span style="color: #D4AF37; font-weight: 700;">FX</span></span>
+      </a>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="tools.html" class="nav-link active">Tools</a></li>
+      <li><a href="faq.html" class="nav-link">FAQ</a></li>
+      <!-- INTERNAL LINKS SHOWN ONLY IF LOGGED IN -->
+      <li class="nav-internal"><a href="leaderboard.html" class="nav-link">Tournaments</a></li>
+      <li class="nav-internal"><a href="offers.html" class="nav-link">Rewards</a></li>
+      <li class="nav-internal"><a href="resources.html" class="nav-link">Resources</a></li>
+      <li class="nav-internal"><a href="invite.html" class="nav-link">Invite</a></li>
+      <li class="nav-internal"><a href="profile.html" class="nav-link">Profile</a></li>
+      <li class="nav-internal"><a href="checkin.html" class="nav-link">Check-In</a></li>
+    </ul>
+
+    <div class="nav-cta">
+      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
+      <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
+      <div class="hamburger" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <main style="padding-top: 130px; padding-bottom: 80px;">
+    <div class="container" style="max-width: 1200px;">
+
+      <!-- HEADER -->
+      <div style="text-align: center; margin-bottom: 50px;">
+        <div class="uppercase-label text-gold" style="margin-bottom: 12px; display: inline-flex; align-items: center; gap: 8px;">
+          <span style="width: 8px; height: 8px; background: #D4AF37; border-radius: 50%; display: inline-block;"></span>
+          FREE TOOLS
+        </div>
+        <h1 class="font-display" style="font-size: clamp(36px, 5vw, 60px); font-weight: 700; margin-bottom: 16px; color: #ffffff;">
+          The trader's toolkit.
+        </h1>
+        <p style="font-size: 18px; color: #9A9A9A; max-width: 580px; margin: 0 auto; line-height: 1.6;">
+          Four calculators, zero fees, no registration needed.
+        </p>
+      </div>
+
+      <!-- 2X2 GRID OF CALCULATORS -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
+
+        <!-- 1. PIP VALUE CALCULATOR -->
+        <div class="tool-card">
+          <div>
+            <div class="tool-header">
+              <div class="tool-title">
+                <div class="tool-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                  </svg>
+                </div>
+                Pip Value Calculator
+              </div>
+              <p style="font-size: 13px; color: #888; margin-top: 6px;">Calculate the exact value of each pip for any lot size and currency.</p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="pip-pair">Currency Pair</label>
+              <select id="pip-pair" class="form-select" onchange="calculatePipValue()">
+                <option value="EUR/USD" selected>EUR/USD</option>
+                <option value="GBP/USD">GBP/USD</option>
+                <option value="USD/JPY">USD/JPY</option>
+                <option value="EUR/GBP">EUR/GBP</option>
+                <option value="AUD/USD">AUD/USD</option>
+                <option value="USD/CHF">USD/CHF</option>
+                <option value="XAU/USD">XAU/USD (Gold)</option>
+                <option value="BTC/USD">BTC/USD (Bitcoin)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="pip-lots">Lot Size (Standard Lots)</label>
+              <input type="number" id="pip-lots" class="form-control font-mono" value="1.0" step="0.01" min="0.01" oninput="calculatePipValue()">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="pip-account-ccy">Account Currency</label>
+              <select id="pip-account-ccy" class="form-select" onchange="calculatePipValue()">
+                <option value="USD" selected>USD ($)</option>
+                <option value="EUR">EUR (€)</option>
+                <option value="GBP">GBP (£)</option>
+                <option value="INR">INR (₹)</option>
+                <option value="NGN">NGN (₦)</option>
+                <option value="IDR">IDR (Rp)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="output-box">
+            <div class="output-row">
+              <span class="output-label">Pip Value</span>
+              <span id="pip-out-val" class="output-val gold">$10.00</span>
+            </div>
+            <div class="output-row">
+              <span class="output-label">Value Per 1.0 Lot</span>
+              <span id="pip-out-per-lot" class="output-val">$10.00 / pip</span>
+            </div>
+            <div class="output-row">
+              <span class="output-label">50-Pip Scenario</span>
+              <span id="pip-out-50pip" class="output-val purple">+$500.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. LOT SIZE CALCULATOR -->
+        <div class="tool-card">
+          <div>
+            <div class="tool-header">
+              <div class="tool-title">
+                <div class="tool-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                  </svg>
+                </div>
+                Lot Size Calculator
+              </div>
+              <p style="font-size: 13px; color: #888; margin-top: 6px;">Determine optimal position sizing based on risk percentage.</p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="lot-balance">Account Balance ($)</label>
+              <input type="number" id="lot-balance" class="form-control font-mono" value="10000" step="100" min="10" oninput="calculateLotSize()">
+            </div>
+
+            <div class="form-group">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <label class="form-label" for="lot-risk-pct" style="margin-bottom:0;">Risk Percentage (%)</label>
+                <span id="lot-risk-disp" class="font-mono text-gold" style="font-size: 13px; font-weight: 700;">1.0%</span>
+              </div>
+              <input type="range" id="lot-risk-pct" class="range-slider" min="0.1" max="10" step="0.1" value="1.0" oninput="calculateLotSize()">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="lot-sl-pips">Stop Loss (Pips)</label>
+              <input type="number" id="lot-sl-pips" class="form-control font-mono" value="20" step="1" min="1" oninput="calculateLotSize()">
+            </div>
+          </div>
+
+          <div class="output-box">
+            <div class="output-row">
+              <span class="output-label">Recommended Lot Size</span>
+              <span id="lot-out-size" class="output-val gold">0.50 Lots</span>
+            </div>
+            <div class="output-row">
+              <span class="output-label">Max Risk Amount</span>
+              <span id="lot-out-risk" class="output-val">$100.00</span>
+            </div>
+            <div class="output-row">
+              <span class="output-label">Position Breakdown</span>
+              <span id="lot-out-micro" class="output-val purple" style="font-size: 14px;">5 Mini / 50 Micro</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. RISK/REWARD CALCULATOR -->
+        <div class="tool-card">
+          <div>
+            <div class="tool-header">
+              <div class="tool-title">
+                <div class="tool-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                  </svg>
+                </div>
+                Risk/Reward Calculator
+              </div>
+              <p style="font-size: 13px; color: #888; margin-top: 6px;">Evaluate trade quality and required win rate for break-even.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <div class="form-group">
+                <label class="form-label" for="rr-entry">Entry Price</label>
+                <input type="number" id="rr-entry" class="form-control font-mono" value="1.0850" step="0.0001" oninput="calculateRR()">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="rr-sl">Stop Loss Price</label>
+                <input type="number" id="rr-sl" class="form-control font-mono" value="1.0820" step="0.0001" oninput="calculateRR()">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <div class="form-group">
+                <label class="form-label" for="rr-target">Target Price (TP)</label>
+                <input type="number" id="rr-target" class="form-control font-mono" value="1.0925" step="0.0001" oninput="calculateRR()">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="rr-balance">Account Balance ($)</label>
+                <input type="number" id="rr-balance" class="form-control font-mono" value="10000" step="100" oninput="calculateRR()">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <label class="form-label" for="rr-risk-pct" style="margin-bottom:0;">Risk %</label>
+                <span id="rr-risk-disp" class="font-mono text-gold" style="font-size: 13px; font-weight: 700;">2.0%</span>
+              </div>
+              <input type="range" id="rr-risk-pct" class="range-slider" min="0.5" max="10" step="0.5" value="2.0" oninput="calculateRR()">
+            </div>
+          </div>
+
+          <div class="output-box">
+            <div class="output-row">
+              <span class="output-label">R:R Ratio</span>
+              <span id="rr-out-ratio" class="output-val gold">1 : 2.50</span>
+            </div>
+            <div class="output-row">
+              <span class="output-label">Risk $ / Reward $</span>
+              <span id="rr-out-amounts" class="output-val">$200 / $500</span>
+            </div>
+            <div class="output-row">
+              <span class="output-label">Break-Even Win Rate</span>
+              <span id="rr-out-be" class="output-val purple">28.57%</span>
+            </div>
+            <div class="output-row">
+              <span class="output-label">Verdict</span>
+              <span id="rr-out-verdict"><span class="verdict-badge verdict-good">GOOD TRADE</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. CAPITAL COMPOUNDING SIMULATOR -->
+        <div class="tool-card">
+          <div>
+            <div class="tool-header">
+              <div class="tool-title">
+                <div class="tool-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                  </svg>
+                </div>
+                Compounding Simulator
+              </div>
+              <p style="font-size: 13px; color: #888; margin-top: 6px;">Simulate account growth trajectory over time with steady compounding.</p>
+            </div>
+
+            <div class="form-group">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <label class="form-label" for="sim-start" style="margin-bottom:0;">Starting Capital ($)</label>
+                <span id="sim-start-disp" class="font-mono text-gold" style="font-size: 13px; font-weight:700;">$1,000</span>
+              </div>
+              <input type="range" id="sim-start" class="range-slider" min="100" max="100000" step="100" value="1000" oninput="calculateCompounding()">
+            </div>
+
+            <div class="form-group">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <label class="form-label" for="sim-return" style="margin-bottom:0;">Monthly Return (%)</label>
+                <span id="sim-return-disp" class="font-mono text-gold" style="font-size: 13px; font-weight:700;">10%</span>
+              </div>
+              <input type="range" id="sim-return" class="range-slider" min="1" max="50" step="1" value="10" oninput="calculateCompounding()">
+            </div>
+
+            <div class="form-group">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <label class="form-label" for="sim-duration" style="margin-bottom:0;">Duration (Months)</label>
+                <span id="sim-duration-disp" class="font-mono text-gold" style="font-size: 13px; font-weight:700;">12 Months</span>
+              </div>
+              <input type="range" id="sim-duration" class="range-slider" min="1" max="36" step="1" value="12" oninput="calculateCompounding()">
+            </div>
+          </div>
+
+          <div>
+            <div class="output-box">
+              <div class="output-row">
+                <span class="output-label">Final Balance</span>
+                <span id="sim-out-final" class="output-val gold">$3,138.43</span>
+              </div>
+              <div class="output-row">
+                <span class="output-label">Total Growth</span>
+                <span id="sim-out-growth" class="output-val purple">+213.84% (3.14x)</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 12px; font-size: 11px; color: #777; text-align: center; font-style: italic;">
+              ⚠️ Disclaimer: A model, not a promise. Most traders lose.
+            </div>
+
+            <div class="sim-table-container">
+              <table class="sim-table">
+                <thead>
+                  <tr>
+                    <th>Month</th>
+                    <th>Start ($)</th>
+                    <th>Profit ($)</th>
+                    <th>End ($)</th>
+                  </tr>
+                </thead>
+                <tbody id="sim-table-body">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- BOTTOM CTA -->
+      <div class="cta-banner">
+        <h2 class="font-display" style="font-size: clamp(28px, 4vw, 42px); font-weight: 700; color: #ffffff; margin-bottom: 12px;">
+          Ready to put these tools to work?
+        </h2>
+        <p style="font-size: 16px; color: #9A9A9A; max-width: 500px; margin: 0 auto 28px; line-height: 1.6;">
+          Join thousands of traders competing in free ROI tournaments. Trade your own capital on your own terminal.
+        </p>
+        <a href="signin.html" class="btn-pill-gold">
+          Join FORTREX FX →
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- RISK DISCLAIMER -->
+  <section style="padding: 40px 0; border-top: 1px solid #1A1A1A;">
+    <div class="container" style="max-width: 900px; text-align: center;">
+      <div class="uppercase-label" style="color: #666; margin-bottom: 12px;">RISK WARNING</div>
+      <p style="font-size: 12px; color: #777; line-height: 1.7; font-weight: 300;">
+        Trading foreign exchange, cryptocurrencies, and commodities carries a high level of risk and may not be suitable for all investors. Leveraged trading can work against you as well as for you. FORTREX FX provides analytical tools and trading competitions for educational and entertainment purposes. We do not execute trades, manage funds, or provide financial advice. All calculation tools are theoretical models based on user inputs. Past results do not guarantee future performance. Never trade with capital you cannot afford to lose.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 12px;">
+            <polygon points="12,3 22,21 2,21" stroke="#D4AF37" stroke-width="2" fill="none" stroke-linejoin="round"/>
+          </svg>
+          <span class="nav-wordmark"><span style="color:#fff;">FORTREX</span> <span style="color:#D4AF37;">FX</span></span>
+        </div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="tools.html" class="footer-link">Tools</a>
+          <a href="faq.html" class="footer-link">FAQ</a>
+          <a href="terms.html" class="footer-link">Terms</a>
+          <a href="privacy.html" class="footer-link">Privacy</a>
+          <a href="signin.html" class="footer-link">Sign In</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2026 FORTREX FX — Skill-based trading competitions & tools. Not a financial service.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CALCULATOR JAVASCRIPT LOGIC -->
+  <script>
+    // --- AUTH & NAV LINK CHECK ---
+    (function() {
+      const trader = localStorage.getItem('fortex_trader');
+      if (trader) {
+        document.body.classList.add('is-logged-in');
+      }
+    })();
+
+    // --- MARKET DATA DICTIONARIES ---
+    const MARKET_SPECS = {
+      'EUR/USD': { pip_size: 0.0001, contract_size: 100000, default_rate: 1.0850, is_jpy: false },
+      'GBP/USD': { pip_size: 0.0001, contract_size: 100000, default_rate: 1.2700, is_jpy: false },
+      'USD/JPY': { pip_size: 0.01,   contract_size: 100000, default_rate: 155.00, is_jpy: true },
+      'EUR/GBP': { pip_size: 0.0001, contract_size: 100000, default_rate: 0.8550, is_jpy: false },
+      'AUD/USD': { pip_size: 0.0001, contract_size: 100000, default_rate: 0.6550, is_jpy: false },
+      'USD/CHF': { pip_size: 0.0001, contract_size: 100000, default_rate: 0.8850, is_jpy: false },
+      'XAU/USD': { pip_size: 0.01,   contract_size: 100,    default_rate: 2400.00, is_jpy: false },
+      'BTC/USD': { pip_size: 1.0,    contract_size: 1,      default_rate: 65000.00, is_jpy: false }
+    };
+
+    const CCY_RATES = {
+      'USD': { rate: 1.0,     symbol: '$' },
+      'EUR': { rate: 0.92,    symbol: '€' },
+      'GBP': { rate: 0.79,    symbol: '£' },
+      'INR': { rate: 83.90,   symbol: '₹' },
+      'NGN': { rate: 1600.00, symbol: '₦' },
+      'IDR': { rate: 15800.0, symbol: 'Rp ' }
+    };
+
+    function formatCcy(amount, ccyCode) {
+      const symbol = CCY_RATES[ccyCode] ? CCY_RATES[ccyCode].symbol : '$';
+      if (ccyCode === 'IDR' || ccyCode === 'NGN' || ccyCode === 'INR') {
+        return symbol + Math.round(amount).toLocaleString('en-US');
+      }
+      return symbol + amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // --- 1. PIP VALUE CALCULATOR ---
+    function calculatePipValue() {
+      const pair = document.getElementById('pip-pair').value;
+      const lots = parseFloat(document.getElementById('pip-lots').value) || 0.01;
+      const ccy = document.getElementById('pip-account-ccy').value;
+
+      const spec = MARKET_SPECS[pair] || MARKET_SPECS['EUR/USD'];
+      const ccyData = CCY_RATES[ccy] || CCY_RATES['USD'];
+
+      // Calculate pip value per lot in USD
+      let pipValUSDPerLot = 10.0; // default for USD quote pairs
+      if (pair === 'USD/JPY') {
+        pipValUSDPerLot = (spec.pip_size * spec.contract_size) / spec.default_rate;
+      } else if (pair === 'EUR/GBP') {
+        pipValUSDPerLot = (spec.pip_size * spec.contract_size) / 0.7874;
+      } else if (pair === 'USD/CHF') {
+        pipValUSDPerLot = (spec.pip_size * spec.contract_size) / spec.default_rate;
+      } else if (pair === 'XAU/USD') {
+        pipValUSDPerLot = spec.pip_size * spec.contract_size;
+      } else if (pair === 'BTC/USD') {
+        pipValUSDPerLot = spec.pip_size * spec.contract_size;
+      } else {
+        pipValUSDPerLot = (spec.pip_size * spec.contract_size);
+      }
+
+      const pipValUSDCurrent = pipValUSDPerLot * lots;
+
+      // Convert to account currency
+      const pipValInAcc = pipValUSDCurrent * ccyData.rate;
+      const valPerLotInAcc = pipValUSDPerLot * ccyData.rate;
+      const fiftyPipInAcc = pipValInAcc * 50;
+
+      document.getElementById('pip-out-val').textContent = formatCcy(pipValInAcc, ccy);
+      document.getElementById('pip-out-per-lot').textContent = formatCcy(valPerLotInAcc, ccy) + ' / pip';
+      document.getElementById('pip-out-50pip').textContent = '±' + formatCcy(fiftyPipInAcc, ccy);
+    }
+
+    // --- 2. LOT SIZE CALCULATOR ---
+    function calculateLotSize() {
+      const balance = parseFloat(document.getElementById('lot-balance').value) || 0;
+      const riskPct = parseFloat(document.getElementById('lot-risk-pct').value) || 1.0;
+      const slPips = parseFloat(document.getElementById('lot-sl-pips').value) || 20;
+
+      document.getElementById('lot-risk-disp').textContent = riskPct.toFixed(1) + '%';
+
+      const maxRiskUSD = balance * (riskPct / 100);
+      const pipValPerLotUSD = 10.0; // Standard $10/pip standard lot assumption for forex
+
+      let recLots = 0;
+      if (slPips > 0 && pipValPerLotUSD > 0) {
+        recLots = maxRiskUSD / (slPips * pipValPerLotUSD);
+      }
+
+      const miniLots = (recLots * 10).toFixed(1);
+      const microLots = Math.round(recLots * 100);
+
+      document.getElementById('lot-out-size').textContent = recLots.toFixed(2) + ' Lots';
+      document.getElementById('lot-out-risk').textContent = '$' + maxRiskUSD.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById('lot-out-micro').textContent = `${miniLots} Mini / ${microLots} Micro`;
+    }
+
+    // --- 3. RISK/REWARD CALCULATOR ---
+    function calculateRR() {
+      const entry = parseFloat(document.getElementById('rr-entry').value) || 0;
+      const sl = parseFloat(document.getElementById('rr-sl').value) || 0;
+      const target = parseFloat(document.getElementById('rr-target').value) || 0;
+      const balance = parseFloat(document.getElementById('rr-balance').value) || 0;
+      const riskPct = parseFloat(document.getElementById('rr-risk-pct').value) || 2.0;
+
+      document.getElementById('rr-risk-disp').textContent = riskPct.toFixed(1) + '%';
+
+      let riskDiff = Math.abs(entry - sl);
+      let rewardDiff = Math.abs(target - entry);
+
+      let rRatio = 0;
+      if (riskDiff > 0) {
+        rRatio = rewardDiff / riskDiff;
+      }
+
+      const beWinRate = rRatio > 0 ? (1 / (1 + rRatio)) * 100 : 0;
+      const riskUSD = balance * (riskPct / 100);
+      const rewardUSD = riskUSD * rRatio;
+
+      document.getElementById('rr-out-ratio').textContent = '1 : ' + rRatio.toFixed(2);
+      document.getElementById('rr-out-amounts').textContent = '$' + Math.round(riskUSD).toLocaleString() + ' / $' + Math.round(rewardUSD).toLocaleString();
+      document.getElementById('rr-out-be').textContent = beWinRate.toFixed(2) + '%';
+
+      const verdictEl = document.getElementById('rr-out-verdict');
+      if (rRatio >= 2.0) {
+        verdictEl.innerHTML = '<span class="verdict-badge verdict-good">EXCELLENT (1:' + rRatio.toFixed(1) + ')</span>';
+      } else if (rRatio >= 1.5) {
+        verdictEl.innerHTML = '<span class="verdict-badge verdict-good">GOOD (1:' + rRatio.toFixed(1) + ')</span>';
+      } else {
+        verdictEl.innerHTML = '<span class="verdict-badge verdict-bad">POOR / HIGH RISK</span>';
+      }
+    }
+
+    // --- 4. COMPOUNDING SIMULATOR ---
+    function calculateCompounding() {
+      const start = parseFloat(document.getElementById('sim-start').value) || 1000;
+      const returnPct = parseFloat(document.getElementById('sim-return').value) || 10;
+      const duration = parseInt(document.getElementById('sim-duration').value) || 12;
+
+      document.getElementById('sim-start-disp').textContent = '$' + start.toLocaleString();
+      document.getElementById('sim-return-disp').textContent = returnPct + '%';
+      document.getElementById('sim-duration-disp').textContent = duration + ' Months';
+
+      const finalBal = start * Math.pow(1 + (returnPct / 100), duration);
+      const totalGrowthPct = ((finalBal - start) / start) * 100;
+      const multiple = finalBal / start;
+
+      document.getElementById('sim-out-final').textContent = '$' + finalBal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById('sim-out-growth').textContent = '+' + totalGrowthPct.toFixed(1) + '% (' + multiple.toFixed(2) + 'x)';
+
+      // Generate table rows
+      const tbody = document.getElementById('sim-table-body');
+      tbody.innerHTML = '';
+
+      let currentBal = start;
+      for (let m = 1; m <= duration; m++) {
+        const monthStart = currentBal;
+        const profit = monthStart * (returnPct / 100);
+        currentBal = monthStart + profit;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="color: #9A9A9A;">Month ${m}</td>
+          <td>$${Math.round(monthStart).toLocaleString()}</td>
+          <td style="color: #4ADE80;">+$${Math.round(profit).toLocaleString()}</td>
+          <td style="color: #D4AF37; font-weight:700;">$${Math.round(currentBal).toLocaleString()}</td>
+        `;
+        tbody.appendChild(tr);
+      }
+    }
+
+    // Initialize all calculations on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      calculatePipValue();
+      calculateLotSize();
+      calculateRR();
+      calculateCompounding();
+    });
+  </script>
+</body>
+</html>

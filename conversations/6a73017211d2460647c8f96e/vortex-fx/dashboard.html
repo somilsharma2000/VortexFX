@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — FORTREX FX</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Dala CSS -->
+  <link rel="stylesheet" href="css/dala.css">
+  <!-- Core Scripts -->
+  <script src="js/dala.js"></script>
+  <script src="js/auth.js"></script>
+  <style>
+    /* ==========================================================================
+       FORTREX FX — MEMBER DASHBOARD STYLES
+       Pure Black Void · Gold & Purple Accents · Monolithic Design
+       ========================================================================== */
+    :root {
+      --bg-dark: #000000;
+      --card-bg: #111111;
+      --card-bg-gradient: linear-gradient(180deg, #121212 0%, #0A0A0A 100%);
+      --card-border: #222222;
+      --gold-primary: #D4AF37;
+      --gold-glow: rgba(212, 175, 55, 0.25);
+      --purple-accent: #8B5CF6;
+      --purple-glow: rgba(139, 92, 246, 0.25);
+      --text-muted: #888888;
+      --text-bright: #FFFFFF;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-heading: 'Space Grotesk', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-bright);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6, .font-heading {
+      font-family: var(--font-heading);
+    }
+
+    .font-mono {
+      font-family: var(--font-mono);
+    }
+
+    .text-gold { color: var(--gold-primary); }
+    .text-purple { color: var(--purple-accent); }
+    .text-muted { color: var(--text-muted); }
+
+    /* Dashboard Grid Layout */
+    .dash-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 100px 24px 80px;
+    }
+
+    .dash-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+      background: var(--card-bg-gradient);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px 32px;
+      backdrop-filter: blur(12px);
+    }
+
+    .welcome-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #ffffff;
+    }
+
+    .welcome-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Cards */
+    .dash-card {
+      background: var(--card-bg-gradient);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .dash-card:hover {
+      border-color: #333333;
+    }
+
+    .card-title-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .card-label {
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-label .icon {
+      color: var(--gold-primary);
+    }
+
+    /* Pill Buttons */
+    .btn-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 9999px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none;
+      outline: none;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #D4AF37 0%, #B8941F 100%);
+      color: #000000;
+      box-shadow: 0 4px 15px var(--gold-glow);
+    }
+
+    .btn-gold:hover {
+      background: linear-gradient(135deg, #F3C649 0%, #D4AF37 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .btn-purple {
+      background: var(--purple-accent);
+      color: #FFFFFF;
+      box-shadow: 0 4px 15px var(--purple-glow);
+    }
+
+    .btn-purple:hover {
+      background: #7C3AED;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid #333333;
+      color: var(--text-muted);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--gold-primary);
+      color: var(--gold-primary);
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 11px;
+    }
+
+    /* Form Inputs */
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      background: #080808;
+      border: 1px solid #222222;
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #FFFFFF;
+      font-family: var(--font-body);
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s ease;
+      box-sizing: border-box;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--gold-primary);
+    }
+
+    .form-select option {
+      background: #111111;
+      color: #FFFFFF;
+    }
+
+    /* Status Indicators */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .status-unsubmitted { background: rgba(136, 138, 143, 0.15); color: #888888; border: 1px solid #333; }
+    .status-pending { background: rgba(234, 179, 8, 0.15); color: #EAB308; border: 1px solid rgba(234, 179, 8, 0.3); }
+    .status-approved { background: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .status-rejected { background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    /* Class Badges */
+    .class-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .class-badge.unrated { background: rgba(136, 138, 143, 0.15); color: #888888; border: 1px solid #333; }
+    .class-badge.bronze { background: rgba(180, 83, 9, 0.15); color: #CD7F32; border: 1px solid rgba(180, 83, 9, 0.4); }
+    .class-badge.silver { background: rgba(156, 163, 175, 0.15); color: #C0C0C0; border: 1px solid rgba(156, 163, 175, 0.4); }
+    .class-badge.gold { background: rgba(212, 175, 55, 0.15); color: #D4AF37; border: 1px solid rgba(212, 175, 55, 0.4); }
+    .class-badge.platinum { background: rgba(128, 82, 255, 0.15); color: #8052FF; border: 1px solid rgba(128, 82, 255, 0.4); }
+    .class-badge.diamond { background: rgba(56, 189, 248, 0.15); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.4); }
+
+    /* Grid Formats */
+    .grid-row-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .grid-row-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .grid-row-main {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 1024px) {
+      .grid-row-3, .grid-row-2, .grid-row-main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* REX Shop Grid */
+    .shop-items-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .shop-card-item {
+      background: #080808;
+      border: 1px solid #222222;
+      border-radius: 12px;
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shop-card-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(3px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--gold-primary);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 12px;
+      text-transform: uppercase;
+    }
+
+    /* Battle Pass Bar */
+    .bp-progress-track {
+      width: 100%;
+      height: 16px;
+      background: #080808;
+      border: 1px solid #222222;
+      border-radius: 9999px;
+      overflow: hidden;
+      margin: 12px 0;
+      position: relative;
+    }
+
+    .bp-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #D4AF37, #FFD700);
+      border-radius: 9999px;
+      transition: width 1s ease;
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+    }
+
+    /* Task Board */
+    .task-board-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .task-card-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #080808;
+      border: 1px solid #222222;
+      border-radius: 12px;
+      padding: 12px 16px;
+      transition: border-color 0.2s;
+    }
+
+    .task-card-row:hover {
+      border-color: #333333;
+    }
+
+    .task-icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      color: var(--gold-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    /* Trade Journal Toggle */
+    .journal-toggle-container {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .journal-toggle-btn {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      border-radius: 8px;
+      border: 1px solid #222;
+      background: #080808;
+      color: #888;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+    }
+
+    .journal-toggle-btn.active-long {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: #10B981;
+      color: #10B981;
+    }
+
+    .journal-toggle-btn.active-short {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: #EF4444;
+      color: #EF4444;
+    }
+
+    /* Recent Trades Table */
+    .trades-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 13px;
+    }
+
+    .trades-table th {
+      text-align: left;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      padding: 8px 12px;
+      border-bottom: 1px solid #1a1a1a;
+    }
+
+    .trades-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #0f0f0f;
+    }
+
+    /* Canvas Card */
+    #flex-card-canvas {
+      display: none;
+      width: 100%;
+      max-width: 100%;
+      border-radius: 12px;
+      margin-top: 16px;
+      border: 1px solid var(--gold-primary);
+    }
+
+    /* Toast Notification */
+    .toast-popup {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      background: #111111;
+      border: 1px solid var(--gold-primary);
+      color: #ffffff;
+      padding: 14px 24px;
+      border-radius: 12px;
+      z-index: 9999;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: toastIn 0.3s ease forwards;
+    }
+
+    @keyframes toastIn {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PARTICLE CANVAS -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+        <div class="nav-logo">
+          <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#D4AF37" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+            <circle cx="50" cy="50" r="2" fill="#D4AF37"/>
+            <circle cx="50" cy="18" r="3" fill="#D4AF37"/>
+            <circle cx="78" cy="34" r="3" fill="#D4AF37"/>
+            <circle cx="78" cy="66" r="3" fill="#D4AF37"/>
+            <circle cx="50" cy="82" r="3" fill="#D4AF37"/>
+            <circle cx="22" cy="66" r="3" fill="#D4AF37"/>
+            <circle cx="22" cy="34" r="3" fill="#D4AF37"/>
+          </svg>
+        </div>
+        <span class="nav-wordmark">FORTREX FX</span>
+      </a>
+    </div>
+
+    <ul class="nav-links" id="nav-links-main">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="leaderboard.html" class="nav-link">Tournaments</a></li>
+      <li><a href="offers.html" class="nav-link">Rewards</a></li>
+      <li><a href="resources.html" class="nav-link">Resources</a></li>
+      <li><a href="invite.html" class="nav-link">Invite</a></li>
+      <li><a href="checkin.html" class="nav-link">Check-In</a></li>
+      <li><a href="profile.html" class="nav-link">Profile</a></li>
+      <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
+    </ul>
+
+    <div class="nav-cta">
+      <a href="signin.html" class="nav-link" id="nav-user-link" style="text-transform: uppercase;">Sign In</a>
+      <a href="#" class="btn-pill btn-gold btn-sm" id="nav-logout-btn" onclick="FORTEX_AUTH.logout()">Logout</a>
+      <div class="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+
+  <!-- DASHBOARD MAIN CONTENT -->
+  <main class="dash-container">
+
+    <!-- SECTION 1: WELCOME HEADER -->
+    <div class="dash-header-row">
+      <div>
+        <div class="welcome-title">
+          Welcome <span style="color: #D4AF37;">back.</span> <span id="dash-user-name">Trader</span>
+        </div>
+        <div class="welcome-subtitle">FORTREX FX Member Dashboard · Command Center</div>
+      </div>
+      <div>
+        <button onclick="FORTEX_AUTH.logout()" class="btn-pill btn-ghost btn-sm">Log Out</button>
+      </div>
+    </div>
+
+    <!-- ROW 1: REX BALANCE + DAILY CHECK-IN + BATTLE PASS -->
+    <div class="grid-row-3">
+
+      <!-- SECTION 2: REX BALANCE CARD -->
+      <div class="dash-card">
+        <div>
+          <div class="card-title-bar">
+            <span class="card-label"><span class="icon">⚡</span> REX BALANCE</span>
+            <span class="status-badge" style="background: rgba(212,175,55,0.1); color: #D4AF37; border: 1px solid rgba(212,175,55,0.3);">ACTIVE</span>
+          </div>
+          <div style="margin: 12px 0;">
+            <span class="font-mono text-gold" id="dash-balance-num" style="font-size: 42px; font-weight: 700; line-height: 1;">0</span>
+            <span class="text-gold" style="font-size: 20px; font-weight: 700; margin-left: 6px;">REX</span>
+          </div>
+        </div>
+        <div style="border-top: 1px solid #1a1a1a; padding-top: 14px; font-size: 12px; color: var(--text-muted);">
+          Earned <span class="font-mono text-bright" id="dash-rex-earned">0</span> / 
+          Spent <span class="font-mono text-bright" id="dash-rex-spent">0</span> / 
+          Streak <span class="font-mono text-gold" id="dash-rex-streak">0</span> days
+        </div>
+      </div>
+
+      <!-- SECTION 3: DAILY CHECK-IN -->
+      <div class="dash-card">
+        <div>
+          <div class="card-title-bar">
+            <span class="card-label"><span class="icon">🔥</span> DAILY CHECK-IN</span>
+            <span id="dash-checkin-streak-badge" class="font-mono" style="font-size: 12px; color: #D4AF37;">🔥 <span id="dash-checkin-streak-count">0</span> Days</span>
+          </div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+            Claim your daily +20 REX ritual reward. Keep your streak alive!
+          </p>
+        </div>
+        <div>
+          <div id="dash-checkin-action-area">
+            <button id="dash-checkin-btn" onclick="triggerDailyCheckin()" class="btn-pill btn-gold" style="width: 100%;">
+              +20 REX
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 9: BATTLE PASS -->
+      <div class="dash-card">
+        <div>
+          <div class="card-title-bar">
+            <span class="card-label"><span class="icon">⚔️</span> BATTLE PASS</span>
+            <span class="font-mono" style="font-size: 11px; color: var(--gold-primary);">SEASON 4</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <div style="font-size: 16px; font-weight: 700; color: #ffffff;">
+              Level <span id="bp-level-num">1</span> <span style="font-size: 12px; font-weight: 400; color: #888;" id="bp-unlock-title">(Rookie Trader)</span>
+            </div>
+            <div class="font-mono" style="font-size: 12px; color: #888;" id="bp-xp-text">
+              150 / 300 XP
+            </div>
+          </div>
+          <div class="bp-progress-track">
+            <div class="bp-progress-fill" id="bp-bar-fill" style="width: 50%;"></div>
+          </div>
+        </div>
+        <div style="font-size: 11px; color: var(--text-muted); text-align: right;">
+          Next Level: <span style="color: #ffffff;" id="bp-next-reward">+100 REX & Class XP</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ROW 2: ACCOUNT VERIFICATION + PROFILE COMPLETION -->
+    <div class="grid-row-2">
+
+      <!-- SECTION 4: ACCOUNT VERIFICATION (XM BROKER NAMED HERE ONLY) -->
+      <div class="dash-card">
+        <div>
+          <div class="card-title-bar">
+            <span class="card-label"><span class="icon">🏛️</span> ACCOUNT VERIFICATION</span>
+            <span id="verif-status-badge" class="status-badge status-unsubmitted">Unsubmitted</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+            Link your live broker account to verify active status and qualify for cash prize tournaments.
+          </p>
+
+          <div class="form-group">
+            <label class="form-label" for="mt4-account-input">XM Broker Account Number (MT4/MT5 ID)</label>
+            <input type="text" id="mt4-account-input" class="form-input" placeholder="e.g. 84920145">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="deposit-amount-input">Deposit Amount ($) (Optional)</label>
+            <input type="number" id="deposit-amount-input" class="form-input" placeholder="e.g. 500">
+          </div>
+        </div>
+
+        <div style="margin-top: 10px;">
+          <button onclick="submitAccountVerification()" class="btn-pill btn-gold" style="width: 100%;">
+            SUBMIT FOR VERIFICATION
+          </button>
+        </div>
+      </div>
+
+      <!-- SECTION 5: PROFILE COMPLETION -->
+      <div class="dash-card">
+        <div>
+          <div class="card-title-bar">
+            <span class="card-label"><span class="icon">🎯</span> PROFILE COMPLETION</span>
+            <span id="profile-complete-badge" class="status-badge" style="background: rgba(212,175,55,0.1); color: #D4AF37;">+250 REX BONUS</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+            Complete your trader personality parameters to earn a one-time +250 REX bonus.
+          </p>
+
+          <div class="form-group">
+            <label class="form-label" for="exp-level-select">Trading Experience</label>
+            <select id="exp-level-select" class="form-select">
+              <option value="Beginner">Beginner (< 1 Year)</option>
+              <option value="Intermediate">Intermediate (1-3 Years)</option>
+              <option value="Advanced">Advanced (3+ Years)</option>
+              <option value="Prop">Prop Funded Trader</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="market-pref-select">Preferred Market</label>
+            <select id="market-pref-select" class="form-select">
+              <option value="Forex">Forex Pairs</option>
+              <option value="Gold-Indices">Gold & Indices (XAU, US30, NAS100)</option>
+              <option value="Crypto">Crypto Assets</option>
+              <option value="Mixed">Mixed Multi-Asset</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-top: 10px;">
+          <button onclick="submitProfileCompletion()" class="btn-pill btn-gold" style="width: 100%;">
+            COMPLETE PROFILE → +250 REX
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ROW 3: TRADER CLASS & FLEX CARD + SEND REX -->
+    <div class="grid-row-main">
+
+      <!-- SECTION 8: TRADER CLASS & FLEX CARD -->
+      <div class="dash-card">
+        <div>
+          <div class="card-title-bar">
+            <span class="card-label"><span class="icon">👑</span> TRADER CLASS</span>
+            <span id="dash-class-badge" class="class-badge gold">UNRATED</span>
+          </div>
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; background: #080808; padding: 14px 18px; border-radius: 12px; border: 1px solid #1f1f1f;">
+            <div>
+              <div style="font-size: 14px; font-weight: 600; color: #fff;">Class Unlock Progression</div>
+              <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Log 5 trades in 30 days to unlock</div>
+            </div>
+            <button onclick="generateFlexCard()" class="btn-pill btn-gold btn-sm">
+              Generate Flex Card
+            </button>
+          </div>
+
+          <!-- Canvas Render Container -->
+          <canvas id="flex-card-canvas" width="600" height="340"></canvas>
+
+          <div id="flex-card-actions" style="display: none; gap: 12px; margin-top: 12px; justify-content: flex-end;">
+            <button onclick="downloadFlexCard()" class="btn-pill btn-ghost btn-sm">⬇ Download Image</button>
+            <button onclick="shareFlexCard()" class="btn-pill btn-purple btn-sm">📲 Share Card</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 7: SEND REX -->
+      <div class="dash-card">
+        <div>
+          <div class="card-title-bar">
+            <span class="card-label"><span class="icon">💸</span> SEND REX</span>
+            <span class="status-badge" style="background: rgba(139,92,246,0.15); color: #8B5CF6;">DEFLATIONARY</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+            Transfer REX to peer traders. Note: 10% of every send is permanently burned (deflationary).
+          </p>
+
+          <div class="form-group">
+            <label class="form-label" for="send-recipient">Recipient Username</label>
+            <input type="text" id="send-recipient" class="form-input" placeholder="e.g. AlexTrader">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="send-amount">Amount (REX)</label>
+            <input type="number" id="send-amount" class="form-input" placeholder="e.g. 100">
+          </div>
+        </div>
+
+        <div>
+          <button onclick="handleSendRex()" class="btn-pill btn-purple" style="width: 100%;">
+            Send (10% burned)
+          </button>
+          <div style="font-size: 10px; color: #666; text-align: center; margin-top: 8px;">
+            10% of every send is permanently burned (deflationary)
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ROW 4: TASK BOARD + CONTESTS WIDGET -->
+    <div class="grid-row-2">
+
+      <!-- SECTION 10: TASK BOARD -->
+      <div class="dash-card">
+        <div class="card-title-bar">
+          <span class="card-label"><span class="icon">📋</span> TASK BOARD</span>
+          <span class="font-mono" style="font-size: 11px; color: var(--gold-primary);">5 TASKS AVAILABLE</span>
+        </div>
+
+        <div class="task-board-list" id="task-board-container">
+          <!-- Task 1 -->
+          <div class="task-card-row">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div class="task-icon-box">💬</div>
+              <div>
+                <div style="font-size: 13px; font-weight: 600; color: #fff;">WhatsApp share</div>
+                <div style="font-size: 11px; color: var(--text-muted);">Share FORTREX FX in your trading group</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="font-mono text-gold" style="font-size: 12px; font-weight: 700;">+15 REX</span>
+              <button onclick="claimTask('whatsapp')" id="task-btn-whatsapp" class="btn-pill btn-gold btn-sm">CLAIM</button>
+            </div>
+          </div>
+
+          <!-- Task 2 -->
+          <div class="task-card-row">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div class="task-icon-box">👾</div>
+              <div>
+                <div style="font-size: 13px; font-weight: 600; color: #fff;">Discord help</div>
+                <div style="font-size: 11px; color: var(--text-muted);">Answer a trader's question in #chat</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="font-mono text-gold" style="font-size: 12px; font-weight: 700;">+20 REX</span>
+              <button onclick="claimTask('discord_help')" id="task-btn-discord_help" class="btn-pill btn-gold btn-sm">CLAIM</button>
+            </div>
+          </div>
+
+          <!-- Task 3 -->
+          <div class="task-card-row">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div class="task-icon-box">🤝</div>
+              <div>
+                <div style="font-size: 13px; font-weight: 600; color: #fff;">Invite friend</div>
+                <div style="font-size: 11px; color: var(--text-muted);">Have 1 friend register with your link</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="font-mono text-gold" style="font-size: 12px; font-weight: 700;">+100 REX</span>
+              <button onclick="claimTask('invite')" id="task-btn-invite" class="btn-pill btn-gold btn-sm">CLAIM</button>
+            </div>
+          </div>
+
+          <!-- Task 4 -->
+          <div class="task-card-row">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div class="task-icon-box">𝕏</div>
+              <div>
+                <div style="font-size: 13px; font-weight: 600; color: #fff;">X post</div>
+                <div style="font-size: 11px; color: var(--text-muted);">Tag @FORTREX_FX on X</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="font-mono text-gold" style="font-size: 12px; font-weight: 700;">+30 REX</span>
+              <button onclick="claimTask('x_post')" id="task-btn-x_post" class="btn-pill btn-gold btn-sm">CLAIM</button>
+            </div>
+          </div>
+
+          <!-- Task 5 -->
+          <div class="task-card-row">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div class="task-icon-box">🎧</div>
+              <div>
+                <div style="font-size: 13px; font-weight: 600; color: #fff;">Join Discord</div>
+                <div style="font-size: 11px; color: var(--text-muted);">Join the official FORTREX FX Discord</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="font-mono text-gold" style="font-size: 12px; font-weight: 700;">+50 REX</span>
+              <button onclick="claimTask('join_discord')" id="task-btn-join_discord" class="btn-pill btn-gold btn-sm">CLAIM</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SECTION 11: CONTESTS WIDGET -->
+      <div class="dash-card">
+        <div>
+          <div class="card-title-bar">
+            <span class="card-label"><span class="icon">🏆</span> ACTIVE TOURNAMENTS</span>
+            <span class="status-badge" style="background: rgba(16,185,129,0.15); color: #10B981;">LIVE</span>
+          </div>
+
+          <div style="background: rgba(212,175,55,0.08); border: 1px dashed rgba(212,175,55,0.3); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; text-align: center;">
+            <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Community Prize Pool</div>
+            <div style="font-size: 16px; font-weight: 700; color: var(--gold-primary); margin-top: 2px;">
+              40% of partnership revenue, split top 10
+            </div>
+          </div>
+
+          <div id="tournaments-list-container" style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="font-size: 12px; color: #666; text-align: center; padding: 20px;">Loading tournaments...</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ROW 5: INVITE WIDGET + REX SHOP PREVIEW -->
+    <div class="grid-row-2">
+
+      <!-- SECTION 12: INVITE WIDGET -->
+      <div class="dash-card">
+        <div>
+          <div class="card-title-bar">
+            <span class="card-label"><span class="icon">🚀</span> SQUAD INVITE</span>
+            <span class="status-badge" style="background: rgba(212,175,55,0.1); color: #D4AF37;">3 PASSES LEFT THIS MONTH</span>
+          </div>
+
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+            Share your unique referral link to earn +100 REX per qualified signup.
+          </p>
+
+          <div class="form-group" style="display: flex; gap: 8px;">
+            <input type="text" id="ref-link-input" class="form-input" readonly value="https://fortrexfx.com/signin.html?ref=TRADER123">
+            <button onclick="copyRefLink()" class="btn-pill btn-gold btn-sm">Copy</button>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 14px;">
+            <button onclick="shareSocial('whatsapp')" class="btn-pill btn-ghost btn-sm" style="flex: 1;">WhatsApp</button>
+            <button onclick="shareSocial('telegram')" class="btn-pill btn-ghost btn-sm" style="flex: 1;">Telegram</button>
+            <button onclick="shareSocial('x')" class="btn-pill btn-ghost btn-sm" style="flex: 1;">X Post</button>
+          </div>
+
+          <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #1a1a1a;">
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">
+              <span>Referral Tier Ladder</span>
+              <span id="ref-progress-text" style="color: #fff;">2 / 5 Referrals</span>
+            </div>
+            <div style="height: 6px; background: #080808; border-radius: 999px; overflow: hidden;">
+              <div id="ref-progress-fill" style="width: 40%; height: 100%; background: var(--gold-primary);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 6: REX SHOP (COMPACT PREVIEW) -->
+      <div class="dash-card">
+        <div>
+          <div class="card-title-bar">
+            <span class="card-label"><span class="icon">🛍️</span> REX SHOP</span>
+            <span class="status-badge" style="background: rgba(139,92,246,0.15); color: #8B5CF6;">PREVIEW</span>
+          </div>
+
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+            Redeem your earned REX for challenges, boosts, and VIP roles.
+          </p>
+
+          <div class="shop-items-grid">
+            <!-- Item 1 -->
+            <div class="shop-card-item">
+              <div style="font-size: 13px; font-weight: 600; color: #fff;">Funded Account Challenge</div>
+              <div class="font-mono text-gold" style="font-size: 12px; margin-top: 4px;">10,000 REX</div>
+              <div class="shop-card-overlay">COMING SOON</div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="shop-card-item">
+              <div style="font-size: 13px; font-weight: 600; color: #fff;">Contest Boost</div>
+              <div class="font-mono text-gold" style="font-size: 12px; margin-top: 4px;">500 REX</div>
+              <div class="shop-card-overlay">COMING SOON</div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="shop-card-item">
+              <div style="font-size: 13px; font-weight: 600; color: #fff;">VIP Discord Role</div>
+              <div class="font-mono text-gold" style="font-size: 12px; margin-top: 4px;">2,000 REX/mo</div>
+              <div class="shop-card-overlay">COMING SOON</div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="shop-card-item">
+              <div style="font-size: 13px; font-weight: 600; color: #fff;">Trading Course</div>
+              <div class="font-mono text-gold" style="font-size: 12px; margin-top: 4px;">1,500 REX</div>
+              <div class="shop-card-overlay">COMING SOON</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ROW 6: TRADE JOURNAL -->
+    <div class="dash-card" style="margin-bottom: 24px;">
+      <div>
+        <div class="card-title-bar">
+          <span class="card-label"><span class="icon">📓</span> TRADE JOURNAL</span>
+          <span class="status-badge" style="background: rgba(16,185,129,0.15); color: #10B981;">PERFORMANCE TRACKER</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+
+          <!-- Trade Entry Form -->
+          <div>
+            <div class="journal-toggle-container">
+              <button id="toggle-long-btn" onclick="setJournalSide('LONG')" class="journal-toggle-btn active-long">
+                📈 LONG
+              </button>
+              <button id="toggle-short-btn" onclick="setJournalSide('SHORT')" class="journal-toggle-btn">
+                📉 SHORT
+              </button>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+              <div class="form-group">
+                <label class="form-label" for="trade-pair">Pair</label>
+                <input type="text" id="trade-pair" class="form-input" placeholder="e.g. EUR/USD">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="trade-entry">Entry Price</label>
+                <input type="number" step="any" id="trade-entry" class="form-input" placeholder="1.0850">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="trade-exit">Exit Price</label>
+                <input type="number" step="any" id="trade-exit" class="form-input" placeholder="1.0920">
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); cursor: pointer;">
+                <input type="checkbox" id="trade-wall-share" checked style="accent-color: var(--gold-primary);">
+                Share on community wall
+              </label>
+
+              <button onclick="logTrade()" class="btn-pill btn-gold btn-sm">
+                Log Trade
+              </button>
+            </div>
+          </div>
+
+          <!-- Recent Trades List -->
+          <div>
+            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 8px;">
+              Recent Trades (Last 5)
+            </div>
+
+            <table class="trades-table">
+              <thead>
+                <tr>
+                  <th>Pair</th>
+                  <th>Side</th>
+                  <th>Entry</th>
+                  <th>Exit</th>
+                  <th>PnL %</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="recent-trades-tbody">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- SECTION 14: FOOTER -->
+  <footer style="background: #000000; border-top: 1px solid #1a1a1a; padding: 40px 24px; text-align: center;">
+    <div style="max-width: 900px; margin: 0 auto;">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px;">
+        <svg width="20" height="20" viewBox="0 0 100 100" fill="none">
+          <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#D4AF37" stroke-width="3" fill="none"/>
+        </svg>
+        <span style="font-family: var(--font-heading); font-size: 14px; font-weight: 600; letter-spacing: 0.05em; color: #fff;">FORTREX FX</span>
+      </div>
+      <p style="font-size: 11px; color: #555555; line-height: 1.6; margin-bottom: 12px;">
+        Risk Disclaimer: Trading foreign exchange and CFDs on margin carries a high level of risk and may not be suitable for all investors. The high degree of leverage can work against you as well as for you. Before deciding to trade foreign exchange you should carefully consider your investment objectives, level of experience, and risk appetite. FORTREX FX does not provide financial advice or brokerage services.
+      </p>
+      <p style="font-size: 11px; color: #444444;">
+        © 2026 FORTREX FX. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    // Global State
+    let currentSide = 'LONG';
+    let localTrader = null;
+    let localTrades = [
+      { pair: 'EUR/USD', side: 'LONG', entry: 1.0820, exit: 1.0890, pnl: '+0.65%', date: 'Aug 10' },
+      { pair: 'XAU/USD', side: 'SHORT', entry: 2420.50, exit: 2405.00, pnl: '+0.64%', date: 'Aug 09' },
+      { pair: 'GBP/USD', side: 'LONG', entry: 1.2710, exit: 1.2780, pnl: '+0.55%', date: 'Aug 08' }
+    ];
+    let claimedTasks = {};
+
+    // Auth & Init Check
+    (function checkAuth() {
+      if (!window.FORTEX_AUTH || typeof window.FORTEX_AUTH.isLoggedIn !== 'function') {
+        window.location.href = 'signin.html';
+        return;
+      }
+      localTrader = FORTEX_AUTH.isLoggedIn();
+      if (!localTrader) {
+        window.location.href = 'signin.html';
+        return;
+      }
+    })();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initDashboard();
+    });
+
+    async function initDashboard() {
+      if (!localTrader) return;
+
+      // Initial Render from Local Storage
+      renderDashboardUI(localTrader);
+      renderRecentTrades();
+
+      // Fetch Full Profile from Backend
+      try {
+        const res = await FORTEX_AUTH.callFunction('getTraderProfile', { trader_id: localTrader.id });
+        if (res && res.success && res.trader) {
+          localTrader = { ...localTrader, ...res.trader };
+          localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+          renderDashboardUI(localTrader);
+        }
+      } catch (err) {
+        console.warn('Backend sync note:', err);
+      }
+
+      // Fetch Tournaments
+      loadTournaments();
+    }
+
+    // Render Dashboard UI with Trader Data
+    function renderDashboardUI(t) {
+      if (!t) return;
+
+      // Welcome Header
+      const nameEl = document.getElementById('dash-user-name');
+      if (nameEl) nameEl.textContent = t.username || t.discord_username || 'Trader';
+
+      const navUserLink = document.getElementById('nav-user-link');
+      if (navUserLink) {
+        navUserLink.textContent = t.username || 'Profile';
+        navUserLink.href = 'profile.html';
+      }
+
+      // REX Balance Card
+      const balNum = document.getElementById('dash-balance-num');
+      if (balNum) balNum.textContent = (t.rex_balance || 0).toLocaleString();
+
+      const earnedEl = document.getElementById('dash-rex-earned');
+      if (earnedEl) earnedEl.textContent = (t.earned_rex || t.rex_earned || t.rex_balance || 0).toLocaleString();
+
+      const spentEl = document.getElementById('dash-rex-spent');
+      if (spentEl) spentEl.textContent = (t.spent_rex || 0).toLocaleString();
+
+      const streakEl = document.getElementById('dash-rex-streak');
+      if (streakEl) streakEl.textContent = t.checkin_streak || t.streak || 0;
+
+      // Daily Check-in Area
+      const checkinStreakCount = document.getElementById('dash-checkin-streak-count');
+      if (checkinStreakCount) checkinStreakCount.textContent = t.checkin_streak || 0;
+
+      const todayStr = new Date().toISOString().split('T')[0];
+      const checkinAction = document.getElementById('dash-checkin-action-area');
+      if (checkinAction) {
+        if (t.last_checkin_date === todayStr || t.checked_in_today) {
+          checkinAction.innerHTML = `
+            <div style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); color: #10B981; border-radius: 9999px; padding: 12px; text-align: center; font-size: 13px; font-weight: 700;">
+              ✓ Checked in today
+            </div>
+          `;
+        }
+      }
+
+      // Verification Status
+      const verifBadge = document.getElementById('verif-status-badge');
+      if (verifBadge) {
+        const st = (t.verification_status || 'unsubmitted').toLowerCase();
+        if (st === 'approved' || st === 'verified') {
+          verifBadge.className = 'status-badge status-approved';
+          verifBadge.textContent = '✓ Verified Active Trader';
+        } else if (st === 'pending') {
+          verifBadge.className = 'status-badge status-pending';
+          verifBadge.textContent = 'Pending Review';
+        } else if (st === 'rejected') {
+          verifBadge.className = 'status-badge status-rejected';
+          verifBadge.textContent = 'Rejected';
+        } else {
+          verifBadge.className = 'status-badge status-unsubmitted';
+          verifBadge.textContent = 'Unsubmitted';
+        }
+      }
+
+      if (t.mt4_account) {
+        const mt4In = document.getElementById('mt4-account-input');
+        if (mt4In && !mt4In.value) mt4In.value = t.mt4_account;
+      }
+      if (t.deposit_amount) {
+        const depIn = document.getElementById('deposit-amount-input');
+        if (depIn && !depIn.value) depIn.value = t.deposit_amount;
+      }
+
+      // Profile Completion
+      if (t.experience_level) {
+        const expSelect = document.getElementById('exp-level-select');
+        if (expSelect) expSelect.value = t.experience_level;
+      }
+      if (t.preferred_market) {
+        const mktSelect = document.getElementById('market-pref-select');
+        if (mktSelect) mktSelect.value = t.preferred_market;
+      }
+
+      // Trader Class
+      const classBadge = document.getElementById('dash-class-badge');
+      if (classBadge) {
+        const cls = t.trader_class || 'Unrated';
+        classBadge.textContent = cls.toUpperCase();
+        classBadge.className = `class-badge ${cls.toLowerCase()}`;
+      }
+
+      // Battle Pass Progress
+      const bpLvl = document.getElementById('bp-level-num');
+      if (bpLvl) bpLvl.textContent = t.bp_level || Math.floor((t.rex_balance || 0) / 300) + 1;
+
+      const bpXp = (t.rex_balance || 0) % 300;
+      const bpXpText = document.getElementById('bp-xp-text');
+      if (bpXpText) bpXpText.textContent = `${bpXp} / 300 XP`;
+
+      const bpFill = document.getElementById('bp-bar-fill');
+      if (bpFill) bpFill.style.width = `${Math.min(100, Math.max(10, (bpXp / 300) * 100))}%`;
+
+      // Invite Link
+      const refIn = document.getElementById('ref-link-input');
+      if (refIn) {
+        const code = t.referral_code || t.username || 'TRADER';
+        refIn.value = `https://fortrexfx.com/signin.html?ref=${code}`;
+      }
+    }
+
+    // Daily Check-in Trigger
+    async function triggerDailyCheckin() {
+      if (!localTrader) return;
+
+      try {
+        const res = await FORTEX_AUTH.callFunction('dailyCheckin', { trader_id: localTrader.id });
+        if (res && res.success) {
+          localTrader.rex_balance = res.new_rex_balance || (localTrader.rex_balance + 20);
+          localTrader.checkin_streak = res.new_streak || (localTrader.checkin_streak + 1);
+          localTrader.last_checkin_date = new Date().toISOString().split('T')[0];
+          localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+          renderDashboardUI(localTrader);
+          showToast(`+20 REX Earned! Streak: ${localTrader.checkin_streak} Days 🔥`);
+        } else {
+          showToast(res.error || 'Already checked in today!');
+        }
+      } catch (e) {
+        // Fallback UI update if function pending
+        localTrader.rex_balance = (localTrader.rex_balance || 0) + 20;
+        localTrader.checkin_streak = (localTrader.checkin_streak || 0) + 1;
+        localTrader.last_checkin_date = new Date().toISOString().split('T')[0];
+        localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+        renderDashboardUI(localTrader);
+        showToast('+20 REX Earned! Daily check-in logged.');
+      }
+    }
+
+    // Account Verification Submit
+    async function submitAccountVerification() {
+      const mt4Account = document.getElementById('mt4-account-input').value.trim();
+      const depositAmount = document.getElementById('deposit-amount-input').value.trim();
+
+      if (!mt4Account) {
+        return showToast('Please enter your XM broker account number');
+      }
+
+      try {
+        const res = await FORTEX_AUTH.callFunction('updateProfile', {
+          trader_id: localTrader.id,
+          mt4_account: mt4Account,
+          deposit_amount: depositAmount,
+          verification_status: 'pending'
+        });
+
+        localTrader.mt4_account = mt4Account;
+        localTrader.deposit_amount = depositAmount;
+        localTrader.verification_status = 'pending';
+        localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+        renderDashboardUI(localTrader);
+        showToast('Verification submitted! Status set to pending review.');
+      } catch (e) {
+        localTrader.mt4_account = mt4Account;
+        localTrader.verification_status = 'pending';
+        localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+        renderDashboardUI(localTrader);
+        showToast('Verification details saved!');
+      }
+    }
+
+    // Profile Completion Submit
+    async function submitProfileCompletion() {
+      const expLevel = document.getElementById('exp-level-select').value;
+      const prefMarket = document.getElementById('market-pref-select').value;
+
+      try {
+        const res = await FORTEX_AUTH.callFunction('updateProfile', {
+          trader_id: localTrader.id,
+          experience_level: expLevel,
+          preferred_market: prefMarket
+        });
+
+        if (!localTrader.profile_completed) {
+          localTrader.rex_balance = (localTrader.rex_balance || 0) + 250;
+          localTrader.profile_completed = true;
+          showToast('Profile completed! +250 REX bonus added 🎉');
+        } else {
+          showToast('Profile updated successfully!');
+        }
+
+        localTrader.experience_level = expLevel;
+        localTrader.preferred_market = prefMarket;
+        localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+        renderDashboardUI(localTrader);
+      } catch (e) {
+        localTrader.experience_level = expLevel;
+        localTrader.preferred_market = prefMarket;
+        localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+        renderDashboardUI(localTrader);
+        showToast('Profile preferences updated.');
+      }
+    }
+
+    // Send REX
+    async function handleSendRex() {
+      const recipient = document.getElementById('send-recipient').value.trim();
+      const amountVal = parseFloat(document.getElementById('send-amount').value);
+
+      if (!recipient || !amountVal || amountVal <= 0) {
+        return showToast('Please enter a valid recipient and amount');
+      }
+
+      if (amountVal > (localTrader.rex_balance || 0)) {
+        return showToast('Insufficient REX balance');
+      }
+
+      const burned = amountVal * 0.1;
+      const netTransferred = amountVal - burned;
+
+      try {
+        await FORTEX_AUTH.callFunction('sendRex', {
+          trader_id: localTrader.id,
+          recipient,
+          amount: amountVal
+        });
+      } catch (e) {
+        console.log('Send call logged.');
+      }
+
+      localTrader.rex_balance = (localTrader.rex_balance || 0) - amountVal;
+      localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+      renderDashboardUI(localTrader);
+
+      document.getElementById('send-recipient').value = '';
+      document.getElementById('send-amount').value = '';
+
+      showToast(`Sent ${netTransferred} REX to ${recipient} (${burned} REX permanently burned 🔥)`);
+    }
+
+    // Task Board Claim
+    function claimTask(taskId) {
+      if (claimedTasks[taskId]) return;
+
+      const rewardMap = {
+        whatsapp: 15,
+        discord_help: 20,
+        invite: 100,
+        x_post: 30,
+        join_discord: 50
+      };
+
+      const reward = rewardMap[taskId] || 10;
+      claimedTasks[taskId] = true;
+
+      const btn = document.getElementById(`task-btn-${taskId}`);
+      if (btn) {
+        btn.innerHTML = '✓ Claimed';
+        btn.className = 'btn-pill btn-sm';
+        btn.style.background = 'rgba(16,185,129,0.15)';
+        btn.style.color = '#10B981';
+        btn.style.border = '1px solid rgba(16,185,129,0.3)';
+        btn.disabled = true;
+      }
+
+      localTrader.rex_balance = (localTrader.rex_balance || 0) + reward;
+      localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(localTrader));
+      renderDashboardUI(localTrader);
+
+      showToast(`+${reward} REX claimed!`);
+    }
+
+    // Tournaments Fetch
+    async function loadTournaments() {
+      const container = document.getElementById('tournaments-list-container');
+      if (!container) return;
+
+      try {
+        const res = await FORTEX_AUTH.callFunction('getTournaments', {});
+        if (res && res.success && res.tournaments && res.tournaments.length > 0) {
+          container.innerHTML = res.tournaments.slice(0, 3).map(t => `
+            <div style="display: flex; justify-content: space-between; align-items: center; background: #080808; border: 1px solid #1f1f1f; border-radius: 12px; padding: 12px 16px;">
+              <div>
+                <div style="font-size: 13px; font-weight: 600; color: #fff;">${t.title || 'Weekly Sprint'}</div>
+                <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Prize: ${t.prize_pool || '$500 Pool'}</div>
+              </div>
+              <button onclick="enterTournament('${t.id}')" class="btn-pill btn-gold btn-sm">ENTER · FREE</button>
+            </div>
+          `).join('');
+          return;
+        }
+      } catch (e) {
+        console.warn('Tournaments fetch fallback');
+      }
+
+      // Default Tournaments
+      container.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; background: #080808; border: 1px solid #1f1f1f; border-radius: 12px; padding: 12px 16px;">
+          <div>
+            <div style="font-size: 13px; font-weight: 600; color: #fff;">XAUUSD Gold Sprint</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Top 10 split 40% revenue share</div>
+          </div>
+          <button onclick="enterTournament('gold-sprint')" class="btn-pill btn-gold btn-sm">ENTER · FREE</button>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; background: #080808; border: 1px solid #1f1f1f; border-radius: 12px; padding: 12px 16px;">
+          <div>
+            <div style="font-size: 13px; font-weight: 600; color: #fff;">Forex Majors Showdown</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Monthly Leaderboard Battle</div>
+          </div>
+          <button onclick="enterTournament('forex-showdown')" class="btn-pill btn-gold btn-sm">ENTER · FREE</button>
+        </div>
+      `;
+    }
+
+    function enterTournament(id) {
+      showToast('Successfully registered for tournament!');
+    }
+
+    // Trade Journal Logic
+    function setJournalSide(side) {
+      currentSide = side;
+      const longBtn = document.getElementById('toggle-long-btn');
+      const shortBtn = document.getElementById('toggle-short-btn');
+
+      if (side === 'LONG') {
+        longBtn.className = 'journal-toggle-btn active-long';
+        shortBtn.className = 'journal-toggle-btn';
+      } else {
+        longBtn.className = 'journal-toggle-btn';
+        shortBtn.className = 'journal-toggle-btn active-short';
+      }
+    }
+
+    function logTrade() {
+      const pair = document.getElementById('trade-pair').value.trim().toUpperCase();
+      const entry = parseFloat(document.getElementById('trade-entry').value);
+      const exit = parseFloat(document.getElementById('trade-exit').value);
+
+      if (!pair || !entry || !exit) {
+        return showToast('Please enter pair, entry price, and exit price');
+      }
+
+      let pnlPct = 0;
+      if (currentSide === 'LONG') {
+        pnlPct = ((exit - entry) / entry) * 100;
+      } else {
+        pnlPct = ((entry - exit) / entry) * 100;
+      }
+
+      const formattedPnl = (pnlPct >= 0 ? '+' : '') + pnlPct.toFixed(2) + '%';
+      const todayDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+      localTrades.unshift({
+        pair,
+        side: currentSide,
+        entry,
+        exit,
+        pnl: formattedPnl,
+        date: todayDate
+      });
+
+      if (localTrades.length > 5) localTrades = localTrades.slice(0, 5);
+
+      renderRecentTrades();
+
+      document.getElementById('trade-pair').value = '';
+      document.getElementById('trade-entry').value = '';
+      document.getElementById('trade-exit').value = '';
+
+      showToast(`Trade logged: ${pair} ${currentSide} (${formattedPnl})`);
+    }
+
+    function renderRecentTrades() {
+      const tbody = document.getElementById('recent-trades-tbody');
+      if (!tbody) return;
+
+      tbody.innerHTML = localTrades.map(tr => {
+        const isWin = !tr.pnl.startsWith('-');
+        const colorClass = isWin ? '#10B981' : '#EF4444';
+        return `
+          <tr>
+            <td style="font-weight: 600; color: #fff;">${tr.pair}</td>
+            <td><span style="font-size: 10px; font-weight: 700; color: ${tr.side==='LONG'?'#10B981':'#EF4444'};">${tr.side}</span></td>
+            <td class="font-mono" style="color: #aaa;">${tr.entry}</td>
+            <td class="font-mono" style="color: #aaa;">${tr.exit}</td>
+            <td class="font-mono" style="font-weight: 700; color: ${colorClass};">${tr.pnl}</td>
+            <td style="color: #666; font-size: 11px;">${tr.date}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Flex Card Generator (Canvas)
+    function generateFlexCard() {
+      const canvas = document.getElementById('flex-card-canvas');
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      const W = 600, H = 340;
+
+      // Dark Gradient Background
+      const grad = ctx.createLinearGradient(0, 0, W, H);
+      grad.addColorStop(0, '#06070A');
+      grad.addColorStop(1, '#11111a');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Gold Border
+      ctx.strokeStyle = '#D4AF37';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(12, 12, W - 24, H - 24);
+
+      // Hexagon Logo Graphic
+      ctx.strokeStyle = '#D4AF37';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      const cx = 50, cy = 50, r = 18;
+      for (let i = 0; i < 6; i++) {
+        const a = (Math.PI / 3) * i - Math.PI / 2;
+        const x = cx + r * Math.cos(a);
+        const y = cy + r * Math.sin(a);
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.stroke();
+
+      // Header Text
+      ctx.fillStyle = '#D4AF37';
+      ctx.font = 'bold 18px Space Grotesk, sans-serif';
+      ctx.fillText('FORTREX FX', 80, 52);
+
+      ctx.fillStyle = '#666666';
+      ctx.font = '10px Inter, sans-serif';
+      ctx.fillText('WHERE TRADERS RISE · MEMBER FLEX CARD', 80, 68);
+
+      // Trader Details
+      const t = localTrader || {};
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = 'bold 24px Space Grotesk, sans-serif';
+      ctx.fillText(t.username || t.discord_username || 'Active Trader', 32, 130);
+
+      ctx.fillStyle = '#D4AF37';
+      ctx.font = '700 13px Inter, sans-serif';
+      ctx.fillText((t.trader_class || 'UNRATED').toUpperCase() + ' CLASS', 32, 150);
+
+      // Stat Columns
+      const stats = [
+        { label: 'REX BALANCE', value: (t.rex_balance || 0).toLocaleString() },
+        { label: 'CHECK-IN STREAK', value: `${t.checkin_streak || 0} Days` },
+        { label: 'ACCOUNT STATUS', value: (t.verification_status || 'Active').toUpperCase() }
+      ];
+
+      stats.forEach((s, i) => {
+        const x = 32 + i * 180;
+        ctx.fillStyle = '#D4AF37';
+        ctx.font = 'bold 24px JetBrains Mono, monospace';
+        ctx.fillText(s.value, x, 220);
+
+        ctx.fillStyle = '#666666';
+        ctx.font = '10px Inter, sans-serif';
+        ctx.fillText(s.label, x, 238);
+      });
+
+      // Card Footer
+      ctx.fillStyle = '#444444';
+      ctx.font = '10px Inter, sans-serif';
+      ctx.fillText('Official FORTREX FX Trader Card · fortrexfx.com', 32, H - 28);
+
+      canvas.style.display = 'block';
+      const actions = document.getElementById('flex-card-actions');
+      if (actions) actions.style.display = 'flex';
+      showToast('Flex Card generated!');
+    }
+
+    function downloadFlexCard() {
+      const c = document.getElementById('flex-card-canvas');
+      if (!c) return;
+      const a = document.createElement('a');
+      a.download = `fortrex-flex-card-${localTrader.username || 'trader'}.png`;
+      a.href = c.toDataURL('image/png');
+      a.click();
+    }
+
+    async function shareFlexCard() {
+      const c = document.getElementById('flex-card-canvas');
+      if (!c) return;
+      c.toBlob(async (b) => {
+        const file = new File([b], 'fortrex-flex-card.png', { type: 'image/png' });
+        if (navigator.share && navigator.canShare({ files: [file] })) {
+          try {
+            await navigator.share({
+              files: [file],
+              title: 'FORTREX FX Flex Card',
+              text: 'Check out my trading stats on FORTREX FX!'
+            });
+          } catch (e) {
+            downloadFlexCard();
+          }
+        } else {
+          downloadFlexCard();
+        }
+      });
+    }
+
+    // Invite Helpers
+    function copyRefLink() {
+      const input = document.getElementById('ref-link-input');
+      if (input) {
+        input.select();
+        document.execCommand('copy');
+        showToast('Referral link copied to clipboard!');
+      }
+    }
+
+    function shareSocial(platform) {
+      const url = encodeURIComponent(document.getElementById('ref-link-input').value);
+      const text = encodeURIComponent('Join me on FORTREX FX — where traders rise!');
+
+      if (platform === 'whatsapp') {
+        window.open(`https://api.whatsapp.com/send?text=${text}%20${url}`, '_blank');
+      } else if (platform === 'telegram') {
+        window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
+      } else if (platform === 'x') {
+        window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+      }
+    }
+
+    // Notification Helper
+    function showToast(msg) {
+      const existing = document.querySelector('.toast-popup');
+      if (existing) existing.remove();
+
+      const toast = document.createElement('div');
+      toast.className = 'toast-popup';
+      toast.innerHTML = `<span>⚡</span> <span>${msg}</span>`;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.remove();
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
