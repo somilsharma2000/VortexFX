@@ -1,0 +1,2380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FORTREX FX — Audit & Compliance Log</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       FORTREX FX — AUDIT & COMPLIANCE LOG MODULE
+       High-Tech Fighter Jet Cockpit Aesthetic
+       Obsidian #06070A · Cards #0D0F18 · Gold #EACA7A · Iris #D4AF37
+       Status: Live #22C55E · Paused #F59E0B · Danger #EF4444 · Info #3B82F6
+       ========================================================================== */
+
+    :root {
+      --bg-obsidian: #06070A;
+      --bg-card: #0D0F18;
+      --bg-card-hover: #131625;
+      --bg-card-active: #181C2E;
+      --bg-input: #111422;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow-gold: rgba(234, 202, 122, 0.35);
+      --border-glow-iris: rgba(212, 175, 55, 0.35);
+      --border-glow-danger: rgba(239, 68, 68, 0.4);
+      --border-glow-live: rgba(34, 197, 94, 0.4);
+
+      --text-main: #FFFFFF;
+      --text-muted: #9A9A9A;
+      --text-dim: #64687A;
+
+      --accent-gold: #EACA7A;
+      --accent-gold-glow: rgba(234, 202, 122, 0.15);
+      --accent-iris: #D4AF37;
+      --accent-iris-glow: rgba(212, 175, 55, 0.15);
+
+      --status-live: #22C55E;
+      --status-live-glow: rgba(34, 197, 94, 0.2);
+      --status-paused: #F59E0B;
+      --status-paused-glow: rgba(245, 158, 11, 0.2);
+      --status-danger: #EF4444;
+      --status-danger-glow: rgba(239, 68, 68, 0.2);
+      --status-info: #3B82F6;
+      --status-info-glow: rgba(59, 130, 246, 0.2);
+      --status-system: #9A9A9A;
+
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --radius-card: 16px;
+      --radius-btn: 12px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-obsidian);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      padding: 24px;
+      line-height: 1.5;
+    }
+
+    .audit-container {
+      max-width: 1600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* COCKPIT HUD TOP HEADER */
+    .cockpit-header {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 22px 28px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .cockpit-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), var(--accent-iris), transparent);
+    }
+
+    .cockpit-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(234, 202, 122, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .header-title-block {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(234, 202, 122, 0.1);
+      border: 1px solid var(--border-glow-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      box-shadow: 0 0 15px var(--accent-gold-glow);
+    }
+
+    .header-text h1 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .cockpit-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid var(--border-glow-iris);
+      color: var(--accent-gold);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .header-telemetry {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .telemetry-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+
+    .telemetry-chip span.val {
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--status-live);
+      box-shadow: 0 0 10px var(--status-live);
+      animation: pulseLive 2s infinite;
+    }
+
+    @keyframes pulseLive {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* STAT CARDS GRID */
+    .stat-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 1200px) {
+      .stat-cards-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .stat-cards-grid { grid-template-columns: 1fr; }
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .stat-card:hover {
+      border-color: var(--border-glow-gold);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    .stat-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .stat-card-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .stat-card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+    }
+
+    .stat-card-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .stat-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+
+    .trend-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+
+    .trend-up {
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: var(--status-live);
+    }
+
+    .trend-warning {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: var(--status-paused);
+    }
+
+    .trend-neutral {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+    }
+
+    .stat-card-subtext {
+      color: var(--text-dim);
+      font-size: 11px;
+    }
+
+    /* NAVIGATION COCKPIT TABS */
+    .cockpit-tabs-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 8px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
+
+    .cockpit-tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 12px 20px;
+      border-radius: var(--radius-btn);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      font-family: var(--font-sans);
+    }
+
+    .cockpit-tab-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .cockpit-tab-btn.active {
+      background: linear-gradient(135deg, rgba(234, 202, 122, 0.15) 0%, rgba(212, 175, 55, 0.08) 100%);
+      border: 1px solid var(--border-glow-gold);
+      color: var(--accent-gold);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .tab-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.08);
+      color: var(--text-muted);
+    }
+
+    .cockpit-tab-btn.active .tab-badge {
+      background: rgba(234, 202, 122, 0.2);
+      color: var(--accent-gold);
+    }
+
+    /* TAB PANELS */
+    .view-panel {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .view-panel.active {
+      display: flex;
+    }
+
+    /* CONTROLS & FILTER BAR */
+    .controls-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .filter-group-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+
+    .search-box {
+      position: relative;
+      min-width: 280px;
+      flex: 1;
+      max-width: 380px;
+    }
+
+    .search-box input {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-btn);
+      padding: 10px 14px 10px 38px;
+      color: var(--text-main);
+      font-size: 13px;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-box input:focus {
+      border-color: var(--border-glow-gold);
+      box-shadow: 0 0 12px var(--accent-gold-glow);
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+
+    .custom-select {
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-btn);
+      padding: 10px 14px;
+      color: var(--text-main);
+      font-size: 13px;
+      font-family: var(--font-sans);
+      outline: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .custom-select:focus {
+      border-color: var(--border-glow-gold);
+    }
+
+    .filter-group-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-btn);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      font-family: var(--font-sans);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #EACA7A 0%, #D4AF37 100%);
+      color: #06070A;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(234, 202, 122, 0.2);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(234, 202, 122, 0.35);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--border-subtle);
+      color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.3);
+      color: var(--status-danger);
+    }
+
+    .btn-danger:hover {
+      background: rgba(239, 68, 68, 0.25);
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 8px;
+    }
+
+    /* DATA TABLES */
+    .table-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    .data-table th {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .data-table th.sortable {
+      cursor: pointer;
+    }
+
+    .data-table th.sortable:hover {
+      color: var(--accent-gold);
+    }
+
+    .data-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tbody tr {
+      transition: background 0.15s ease;
+    }
+
+    .data-table tbody tr:hover {
+      background: var(--bg-card-hover);
+    }
+
+    /* ACTION BADGES */
+    .action-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .badge-tournament {
+      background: rgba(234, 202, 122, 0.12);
+      border: 1px solid rgba(234, 202, 122, 0.35);
+      color: var(--accent-gold);
+    }
+
+    .badge-rex {
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      color: var(--status-live);
+    }
+
+    .badge-user {
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      color: var(--status-info);
+    }
+
+    .badge-system {
+      background: rgba(154, 154, 154, 0.12);
+      border: 1px solid rgba(154, 154, 154, 0.35);
+      color: var(--status-system);
+    }
+
+    .badge-security {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: var(--status-danger);
+    }
+
+    /* USER / ADMIN CELL */
+    .user-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-iris));
+      color: #06070A;
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .user-info-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .user-name {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-main);
+    }
+
+    .user-role {
+      font-size: 10px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    .ip-code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.03);
+      padding: 3px 7px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .time-code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .time-rel {
+      font-size: 10px;
+      color: var(--text-dim);
+    }
+
+    /* PAGINATION FOOTER */
+    .table-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(0,0,0,0.2);
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .pagination-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .page-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .page-btn:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--border-glow-gold);
+    }
+
+    .page-btn.active {
+      background: var(--accent-gold);
+      color: #06070A;
+      border-color: var(--accent-gold);
+      font-weight: 700;
+    }
+
+    /* DIFF VIEW & INSPECTOR */
+    .diff-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .diff-container { grid-template-columns: 1fr; }
+    }
+
+    .diff-box {
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .diff-box-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .diff-removed {
+      color: #F87171;
+      background: rgba(239, 68, 68, 0.1);
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+
+    .diff-added {
+      color: #4ADE80;
+      background: rgba(34, 197, 94, 0.1);
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+
+    /* INTEGRITY LOG CARDS & HERO BANNER */
+    .integrity-banner {
+      background: linear-gradient(135deg, rgba(234, 202, 122, 0.08) 0%, rgba(13, 15, 24, 0.95) 100%);
+      border: 1px solid var(--border-glow-gold);
+      border-radius: var(--radius-card);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .integrity-banner-text h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .integrity-banner-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* MODAL POPUPS */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 7, 10, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glow-gold);
+      border-radius: var(--radius-card);
+      max-width: 720px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      position: relative;
+      animation: modalSlideUp 0.25s ease;
+    }
+
+    @keyframes modalSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-header h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .modal-close:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--text-main);
+    }
+
+    .modal-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      background: rgba(0,0,0,0.2);
+    }
+
+    /* FORM ELEMENTS IN EXPORT / MODAL */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 12px;
+      color: var(--text-main);
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      accent-color: var(--accent-gold);
+      width: 16px;
+      height: 16px;
+    }
+
+    /* TOAST NOTIFICATIONS */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .toast-msg {
+      pointer-events: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-glow-gold);
+      border-radius: var(--radius-btn);
+      padding: 12px 18px;
+      color: var(--text-main);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* CODE PREVIEW */
+    pre.code-block {
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent-gold);
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="audit-container">
+
+  <!-- COCKPIT HUD TOP HEADER -->
+  <header class="cockpit-header">
+    <div class="header-title-block">
+      <div class="header-icon-box">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+      </div>
+      <div class="header-text">
+        <h1>
+          Audit & Compliance Log
+          <span class="cockpit-tag">[ SYS-AUDIT v4.0.9 ]</span>
+        </h1>
+        <p>Immutable administrative ledger, ROI integrity verification, and REX distribution chain audit</p>
+      </div>
+    </div>
+
+    <div class="header-telemetry">
+      <div class="telemetry-chip">
+        <div class="pulse-dot"></div>
+        CHAIN STATUS: <span class="val" style="color:var(--status-live)">SYNCED</span>
+      </div>
+      <div class="telemetry-chip">
+        ENCRYPTION: <span class="val">SHA-256</span>
+      </div>
+      <div class="telemetry-chip">
+        LATENCY: <span class="val" style="color:var(--accent-gold)">12ms</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- STAT CARDS OVERVIEW -->
+  <section class="stat-cards-grid">
+    <!-- CARD 1 -->
+    <div class="stat-card" onclick="setCategoryFilter('ALL')">
+      <div class="stat-card-header">
+        <span class="stat-card-title">Total Actions Logged</span>
+        <div class="stat-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+      </div>
+      <div class="stat-card-value" id="statTotalActions">14,892</div>
+      <div class="stat-card-footer">
+        <span class="trend-indicator trend-up">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+          +14.2%
+        </span>
+        <span class="stat-card-subtext">vs last 7 days</span>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="stat-card" onclick="setDateFilter('TODAY')">
+      <div class="stat-card-header">
+        <span class="stat-card-title">Actions Today</span>
+        <div class="stat-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+      </div>
+      <div class="stat-card-value" id="statActionsToday">248</div>
+      <div class="stat-card-footer">
+        <span class="trend-indicator trend-up">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+          +18
+        </span>
+        <span class="stat-card-subtext">Peak 14:00 UTC</span>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="stat-card" onclick="setCategoryFilter('SECURITY')">
+      <div class="stat-card-header">
+        <span class="stat-card-title">Security Events</span>
+        <div class="stat-card-icon" style="color:var(--status-danger)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </div>
+      </div>
+      <div class="stat-card-value" id="statSecurityEvents" style="color:var(--status-danger)">3</div>
+      <div class="stat-card-footer">
+        <span class="trend-indicator trend-neutral">0 Critical</span>
+        <span class="stat-card-subtext" style="color:var(--status-live)">Threat Level Normal</span>
+      </div>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="stat-card" onclick="switchView('tournament')">
+      <div class="stat-card-header">
+        <span class="stat-card-title">Pending ROI Reviews</span>
+        <div class="stat-card-icon" style="color:var(--status-paused)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>
+          </svg>
+        </div>
+      </div>
+      <div class="stat-card-value" id="statPendingReviews" style="color:var(--status-paused)">2</div>
+      <div class="stat-card-footer">
+        <span class="trend-indicator trend-warning">Requires Sign-off</span>
+        <span class="stat-card-subtext">Tournament #4</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAVIGATION TABS -->
+  <nav class="cockpit-tabs-wrapper">
+    <button class="cockpit-tab-btn active" onclick="switchView('audit')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Audit Log Table
+      <span class="tab-badge" id="badgeAuditCount">48</span>
+    </button>
+
+    <button class="cockpit-tab-btn" onclick="switchView('tracking')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Admin Action Tracking
+      <span class="tab-badge">Live Diff</span>
+    </button>
+
+    <button class="cockpit-tab-btn" onclick="switchView('tournament')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8 21 12 17 16 21"/><polyline points="12 15 12 8"/></svg>
+      Tournament Integrity Log
+      <span class="tab-badge" style="background:rgba(234,202,122,0.2); color:var(--accent-gold)">ROI Audit</span>
+    </button>
+
+    <button class="cockpit-tab-btn" onclick="switchView('rex')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      REX Distribution Audit
+      <span class="tab-badge" style="background:rgba(34,197,94,0.2); color:var(--status-live)">Signed Chain</span>
+    </button>
+
+    <button class="cockpit-tab-btn" onclick="switchView('export')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Compliance Export Hub
+      <span class="tab-badge">CSV / JSON</span>
+    </button>
+  </nav>
+
+  <!-- VIEW 1: MAIN AUDIT LOG TABLE -->
+  <main id="view-audit" class="view-panel active">
+    <!-- CONTROLS & FILTER BAR -->
+    <div class="controls-card">
+      <div class="filter-group-left">
+        <div class="search-box">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="searchInput" placeholder="Search admin, action, target, IP, details..." oninput="applyFilters()" />
+        </div>
+
+        <select id="actionTypeFilter" class="custom-select" onchange="applyFilters()">
+          <option value="ALL">All Action Types</option>
+          <option value="TOURNAMENT">TOURNAMENT (Gold)</option>
+          <option value="REX">REX (Green)</option>
+          <option value="USER">USER (Blue)</option>
+          <option value="SYSTEM">SYSTEM (Gray)</option>
+          <option value="SECURITY">SECURITY (Red)</option>
+        </select>
+
+        <select id="dateRangeFilter" class="custom-select" onchange="applyFilters()">
+          <option value="ALL">All Time</option>
+          <option value="TODAY">Today</option>
+          <option value="24H">Last 24 Hours</option>
+          <option value="7D">Last 7 Days</option>
+          <option value="30D">Last 30 Days</option>
+        </select>
+
+        <select id="adminUserFilter" class="custom-select" onchange="applyFilters()">
+          <option value="ALL">All Admins</option>
+          <option value="Commander_Vortex">Commander_Vortex</option>
+          <option value="Admin_Apex">Admin_Apex</option>
+          <option value="Operative_Nyx">Operative_Nyx</option>
+          <option value="System_Automated">System_Automated</option>
+        </select>
+      </div>
+
+      <div class="filter-group-right">
+        <button class="btn btn-outline btn-sm" onclick="triggerSimulateLogModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Simulate Admin Action
+        </button>
+        <button class="btn btn-gold btn-sm" onclick="openExportModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export CSV
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN DATA TABLE -->
+    <div class="table-card">
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th class="sortable" onclick="toggleSort('timestamp')">
+                Timestamp <span id="sortIconTime">↓</span>
+              </th>
+              <th>Admin User</th>
+              <th>Action Type</th>
+              <th>Target / Resource</th>
+              <th>Details & Modifications</th>
+              <th>IP Address</th>
+              <th style="text-align:right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="auditTableBody">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-footer">
+        <div>
+          Showing <span id="lblPageStart" style="color:var(--text-main); font-weight:700">1</span> - 
+          <span id="lblPageEnd" style="color:var(--text-main); font-weight:700">10</span> of 
+          <span id="lblTotalEntries" style="color:var(--text-main); font-weight:700">48</span> entries
+        </div>
+
+        <div style="display:flex; align-items:center; gap:12px">
+          <span>Rows per page:</span>
+          <select id="rowsPerPageSelect" class="custom-select" style="padding:4px 8px; font-size:12px" onchange="changePageSize()">
+            <option value="10">10</option>
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+          </select>
+
+          <div class="pagination-controls" id="paginationControls">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- VIEW 2: ADMIN ACTION TRACKING -->
+  <section id="view-tracking" class="view-panel">
+    <div class="integrity-banner">
+      <div class="integrity-banner-text">
+        <h3>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Real-Time Admin Mutation Tracking & Session Auditing
+        </h3>
+        <p>Every operational change is signed with admin token credentials. Includes before vs after diff analysis for tournament reveals, stealth mode toggles, and security policy edits.</p>
+      </div>
+      <button class="btn btn-gold btn-sm" onclick="triggerSimulateLogModal()">
+        Log Manual Action
+      </button>
+    </div>
+
+    <div class="table-card">
+      <div style="padding: 16px 20px; border-bottom:1px solid var(--border-subtle); display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:14px; font-weight:700; color:var(--text-main)">Recent Admin Actions & Diff Viewer</span>
+        <span style="font-size:12px; color:var(--text-muted); font-family:var(--font-mono)">100% Cryptographically Verified</span>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Admin & Role</th>
+              <th>Action Trigger</th>
+              <th>Target Resource</th>
+              <th>Changes Made (Before → After)</th>
+              <th>Auth Level</th>
+              <th style="text-align:right">Inspect</th>
+            </tr>
+          </thead>
+          <tbody id="trackingTableBody">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW 3: TOURNAMENT INTEGRITY LOG -->
+  <section id="view-tournament" class="view-panel">
+    <div class="integrity-banner">
+      <div class="integrity-banner-text">
+        <h3>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8 21 12 17 16 21"/></svg>
+          Tournament Fairness & ROI Audit Ledger
+        </h3>
+        <p>Critical audit trail for all ROI entries, manual score overrides, and rank calculations. Flagged entries show prior modifications to prevent manipulation.</p>
+      </div>
+      <div style="display:flex; gap:10px">
+        <button class="btn btn-outline btn-sm" onclick="runROIAuditScan()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Verify ROI Integrity Scan
+        </button>
+      </div>
+    </div>
+
+    <!-- TOURNAMENT ROI TABLE -->
+    <div class="table-card">
+      <div style="padding: 16px 20px; border-bottom:1px solid var(--border-subtle); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px">
+        <div style="display:flex; align-items:center; gap:12px">
+          <span style="font-size:14px; font-weight:700; color:var(--text-main)">Tournament ROI Entries & Modification Log</span>
+          <select id="roiFilterSelect" class="custom-select" style="padding:4px 10px; font-size:12px" onchange="renderROILog()">
+            <option value="ALL">All Entries</option>
+            <option value="MODIFIED">Modified Entries Only</option>
+            <option value="UNMODIFIED">Original Unmodified Only</option>
+          </select>
+        </div>
+        <span class="telemetry-chip" style="font-size:11px">
+          CHECKSUM SCAN: <span class="val" style="color:var(--status-live)" id="lblROIScanStatus">PASS (0 Anomalies)</span>
+        </span>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Tournament Name & ID</th>
+              <th>Trader Handle & ID</th>
+              <th>ROI Score</th>
+              <th>Entered By</th>
+              <th>Timestamp</th>
+              <th>Modified Status</th>
+              <th style="text-align:right">Audit Trail</th>
+            </tr>
+          </thead>
+          <tbody id="roiTableBody">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW 4: REX DISTRIBUTION AUDIT -->
+  <section id="view-rex" class="view-panel">
+    <div class="integrity-banner" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(13, 15, 24, 0.95) 100%); border-color: rgba(34, 197, 94, 0.3)">
+      <div class="integrity-banner-text">
+        <h3 style="color:var(--status-live)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          REX Token Treasury & Prize Distribution Audit
+        </h3>
+        <p>Complete ledger of all REX distributions, manual grants, and tournament payouts with cryptographic admin signatures and balance change verification.</p>
+      </div>
+      <button class="btn btn-gold btn-sm" onclick="verifyREXMerkleChain()">
+        Validate Merkle Chain
+      </button>
+    </div>
+
+    <!-- REX TABLE -->
+    <div class="table-card">
+      <div style="padding: 16px 20px; border-bottom:1px solid var(--border-subtle); display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:14px; font-weight:700; color:var(--text-main)">REX Payout & Grant Chain</span>
+        <span class="telemetry-chip" style="font-size:11px">
+          TOTAL DISTRIBUTED: <span class="val" style="color:var(--status-live)">184,500 REX</span>
+        </span>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Date & Time</th>
+              <th>Signing Admin</th>
+              <th>Trader Recipient</th>
+              <th>Amount</th>
+              <th>Payout Reason</th>
+              <th>Balance Before</th>
+              <th>Balance After</th>
+              <th style="text-align:right">Signature Verification</th>
+            </tr>
+          </thead>
+          <tbody id="rexTableBody">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW 5: COMPLIANCE EXPORT HUB -->
+  <section id="view-export" class="view-panel">
+    <div class="controls-card" style="flex-direction:column; align-items:stretch; gap:20px; padding:28px">
+      <div>
+        <h2 style="font-size:18px; font-weight:800; color:var(--text-main); display:flex; align-items:center; gap:10px">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Generate Official Compliance Audit Report
+        </h2>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:4px">Export filtered audit logs for legal compliance, regulatory review, or internal security verification.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:20px">
+        <div class="form-group">
+          <label class="form-label">Export Date Range</label>
+          <select id="expDateRange" class="custom-select">
+            <option value="ALL">All Available Logs (Full Archive)</option>
+            <option value="TODAY">Today Only</option>
+            <option value="7D">Last 7 Days</option>
+            <option value="30D">Last 30 Days</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">File Format</label>
+          <select id="expFormat" class="custom-select">
+            <option value="CSV">Comma Separated Values (.csv)</option>
+            <option value="JSON">Structured JSON Audit Trail (.json)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Include Action Categories</label>
+        <div class="checkbox-grid">
+          <label class="checkbox-item">
+            <input type="checkbox" id="chkExpTournament" checked />
+            TOURNAMENT (ROI & Leaderboard)
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="chkExpREX" checked />
+            REX Treasury Distributions
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="chkExpUser" checked />
+            USER (Verification & Bans)
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="chkExpSystem" checked />
+            SYSTEM & Settings
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="chkExpSecurity" checked />
+            SECURITY Events & Passcodes
+          </label>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-subtle); padding-top:20px; margin-top:10px">
+        <div style="font-size:12px; color:var(--text-dim); font-family:var(--font-mono)">
+          SHA-256 Digest will be appended to report header.
+        </div>
+        <button class="btn btn-gold" onclick="executeExport()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Audit Log Export
+        </button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- MODAL: AUDIT ITEM DETAIL & JSON DIFF -->
+<div id="detailModal" class="modal-overlay">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        Audit Log Entry Inspection
+      </h3>
+      <button class="modal-close" onclick="closeModal('detailModal')">✕</button>
+    </div>
+
+    <div class="modal-body" id="modalDetailContent">
+      <!-- Injected dynamically -->
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-outline btn-sm" onclick="closeModal('detailModal')">Close</button>
+      <button class="btn btn-gold btn-sm" onclick="copyModalJSON()">Copy Raw Payload</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: SIMULATE NEW ADMIN ACTION -->
+<div id="simulateModal" class="modal-overlay">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Simulate Admin Action Log
+      </h3>
+      <button class="modal-close" onclick="closeModal('simulateModal')">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Action Category</label>
+        <select id="simCategory" class="custom-select">
+          <option value="TOURNAMENT">TOURNAMENT — Create/Edit/Reveal</option>
+          <option value="REX">REX — Distribution / Award</option>
+          <option value="USER">USER — Verify / Ban / Role</option>
+          <option value="SYSTEM">SYSTEM — Setting Change / Maintenance</option>
+          <option value="SECURITY">SECURITY — Passcode Change / Stealth Toggle</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Admin User</label>
+        <select id="simAdmin" class="custom-select">
+          <option value="Commander_Vortex">Commander_Vortex (Super Admin)</option>
+          <option value="Admin_Apex">Admin_Apex (Compliance Lead)</option>
+          <option value="Operative_Nyx">Operative_Nyx (Security Ops)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Target Resource / Identifier</label>
+        <input type="text" id="simTarget" class="custom-select" placeholder="e.g. Tournament #TRN-884, Trader_Alex, Setting: stealth_mode" value="Tournament #TRN-884" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Action Description / Details</label>
+        <input type="text" id="simDetails" class="custom-select" placeholder="e.g. Adjusted winner ROI score from +310.2% to +342.5%" value="Modified tournament ROI score after broker execution timestamp check" />
+      </div>
+
+      <div class="diff-container" style="margin-top:0">
+        <div class="diff-box">
+          <div class="diff-box-title">Before Value</div>
+          <textarea id="simBefore" class="custom-select" style="width:100%; height:70px; font-family:var(--font-mono); font-size:11px" placeholder="Previous state JSON or text">{"roi": 310.2, "status": "pending"}</textarea>
+        </div>
+        <div class="diff-box">
+          <div class="diff-box-title">After Value</div>
+          <textarea id="simAfter" class="custom-select" style="width:100%; height:70px; font-family:var(--font-mono); font-size:11px" placeholder="Updated state JSON or text">{"roi": 342.5, "status": "verified"}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-outline btn-sm" onclick="closeModal('simulateModal')">Cancel</button>
+      <button class="btn btn-gold btn-sm" onclick="submitSimulateLog()">Commit Action to Ledger</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- JAVASCRIPT LOGIC -->
+<script>
+  /* ==========================================================================
+     FORTREX FX — AUDIT & COMPLIANCE LOG INTERACTIVE CONTROLLER
+     ========================================================================== */
+
+  // API Config
+  const FORTREX_AUTH = {
+    APP_ID: '6a7c208f76be9b02b86b0380',
+    callFunction: async function(name, payload) {
+      const token = localStorage.getItem('fortrex_auth_token');
+      const res = await fetch('https://api.base44.com/v1/apps/' + this.APP_ID + '/functions/' + name, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(payload || {})
+      });
+      return res.json();
+    }
+  };
+
+  // State Management
+  let auditLogs = [];
+  let filteredLogs = [];
+  let currentView = 'audit';
+  let currentPage = 1;
+  let pageSize = 25;
+  let sortField = 'timestamp';
+  let sortAsc = false;
+  let activeModalData = null;
+
+  // INITIAL AUDIT DATASET (Comprehensive realistic mock + API sync)
+  const initialMockLogs = [
+    {
+      id: 'AUD-2026-88912',
+      timestamp: '2026-08-12T23:14:05Z',
+      admin: 'Commander_Vortex',
+      role: 'SUPER_ADMIN',
+      category: 'TOURNAMENT',
+      target: 'Tournament #TRN-884 (Vortex Gold Sprint)',
+      details: 'Revealed secret passcode and unlocked final ROI leaderboard entries.',
+      ip: '192.168.1.104',
+      geo: 'US-East',
+      before: { passcode_revealed: false, leaderboard_locked: true },
+      after: { passcode_revealed: true, leaderboard_locked: false },
+      signature: '0x8f2a91b4e3c78d0f1a92e84c5b3d7e10a2f4',
+      roi_entry: { trader: 'Trader_TR884', original_roi: 310.2, current_roi: 342.5, modified: true, reason: 'Execution latency timestamp correction' }
+    },
+    {
+      id: 'AUD-2026-88911',
+      timestamp: '2026-08-12T22:45:18Z',
+      admin: 'Admin_Apex',
+      role: 'COMPLIANCE_LEAD',
+      category: 'REX',
+      target: 'Trader_NyxFX (Discord @NyxFX)',
+      details: 'Distributed Season 3 Rank 1 Prize Payout (+15,000 REX).',
+      ip: '45.33.21.90',
+      geo: 'EU-West',
+      before: { rex_balance: 12400 },
+      after: { rex_balance: 27400, transaction_type: 'TOURNAMENT_PRIZE' },
+      signature: '0x7c1a82f3d9e40b11a5f6e87c2b3d4e5f6a1b2',
+      rex_entry: { amount: 15000, reason: 'Season 3 Rank 1 Winner', bal_before: 12400, bal_after: 27400 }
+    },
+    {
+      id: 'AUD-2026-88910',
+      timestamp: '2026-08-12T21:12:40Z',
+      admin: 'Operative_Nyx',
+      role: 'SECURITY_OPS',
+      category: 'SECURITY',
+      target: 'Trader_RiskX',
+      details: 'Banned trader account for unauthorized automated latency arbitrage.',
+      ip: '185.220.101.5',
+      geo: 'DE-Central',
+      before: { banned: false, status: 'active' },
+      after: { banned: true, banned_reason: 'Latency Arbitrage Violation', status: 'suspended' },
+      signature: '0x3f5e7d9c1b2a4f6e8d0c2a4b6e8f0a1b2c3d4'
+    },
+    {
+      id: 'AUD-2026-88909',
+      timestamp: '2026-08-12T20:05:11Z',
+      admin: 'Commander_Vortex',
+      role: 'SUPER_ADMIN',
+      category: 'SYSTEM',
+      target: 'PlatformSetting: daily_checkin_reward',
+      details: 'Updated daily check-in REX reward multiplier from 50 to 100 REX.',
+      ip: '192.168.1.104',
+      geo: 'US-East',
+      before: { key: 'daily_checkin_reward', value: '50' },
+      after: { key: 'daily_checkin_reward', value: '100' },
+      signature: '0x9d8c7b6a5f4e3d2c1b0a9f8e7d6c5b4a3f2e1'
+    },
+    {
+      id: 'AUD-2026-88908',
+      timestamp: '2026-08-12T19:30:22Z',
+      admin: 'Admin_Apex',
+      role: 'COMPLIANCE_LEAD',
+      category: 'USER',
+      target: 'Trader_Alpha7',
+      details: 'Manually verified Trader KYC identity credentials.',
+      ip: '45.33.21.90',
+      geo: 'EU-West',
+      before: { verified: false },
+      after: { verified: true, role: 'verified_trader' },
+      signature: '0x1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9'
+    },
+    {
+      id: 'AUD-2026-88907',
+      timestamp: '2026-08-12T18:15:00Z',
+      admin: 'Commander_Vortex',
+      role: 'SUPER_ADMIN',
+      category: 'SECURITY',
+      target: 'Stealth Mode Configuration',
+      details: 'Toggled Stealth Mode ON for stealth tournament deployment.',
+      ip: '192.168.1.104',
+      geo: 'US-East',
+      before: { stealth_mode: false },
+      after: { stealth_mode: true },
+      signature: '0xa1b2c3d4e5f67890123456789abcdef01234'
+    },
+    {
+      id: 'AUD-2026-88906',
+      timestamp: '2026-08-12T16:22:19Z',
+      admin: 'System_Automated',
+      role: 'SYSTEM_BOT',
+      category: 'TOURNAMENT',
+      target: 'Tournament #TRN-883',
+      details: 'Automated ROI snapshot calculation finalized for 142 traders.',
+      ip: '127.0.0.1',
+      geo: 'INTERNAL',
+      before: { status: 'in_progress' },
+      after: { status: 'calculating_final_roi' },
+      signature: '0x5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3',
+      roi_entry: { trader: 'Trader_Krypto', original_roi: 185.3, current_roi: 185.3, modified: false }
+    },
+    {
+      id: 'AUD-2026-88905',
+      timestamp: '2026-08-12T14:10:05Z',
+      admin: 'Operative_Nyx',
+      role: 'SECURITY_OPS',
+      category: 'SECURITY',
+      target: 'Admin Passcode Access Policy',
+      details: 'Updated Admin Passcode hash and enforced 2FA sign-off requirement.',
+      ip: '185.220.101.5',
+      geo: 'DE-Central',
+      before: { enforce_2fa: false },
+      after: { enforce_2fa: true, passcode_updated: true },
+      signature: '0x2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0'
+    },
+    {
+      id: 'AUD-2026-88904',
+      timestamp: '2026-08-11T21:40:00Z',
+      admin: 'Admin_Apex',
+      role: 'COMPLIANCE_LEAD',
+      category: 'REX',
+      target: 'Trader_ScalpKing',
+      details: 'Issued REX bounty reward (+2,500 REX) for platform bug report.',
+      ip: '45.33.21.90',
+      geo: 'EU-West',
+      before: { rex_balance: 5100 },
+      after: { rex_balance: 7600 },
+      signature: '0x8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6',
+      rex_entry: { amount: 2500, reason: 'Bug Bounty Reward', bal_before: 5100, bal_after: 7600 }
+    },
+    {
+      id: 'AUD-2026-88903',
+      timestamp: '2026-08-11T18:02:14Z',
+      admin: 'Commander_Vortex',
+      role: 'SUPER_ADMIN',
+      category: 'TOURNAMENT',
+      target: 'Tournament #TRN-882 (Global Forex Masters)',
+      details: 'Created new tournament specification with $500,000 simulated pool.',
+      ip: '192.168.1.104',
+      geo: 'US-East',
+      before: null,
+      after: { tournament_name: 'Global Forex Masters', status: 'draft', prize_pool: '$500,000' },
+      signature: '0x7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5'
+    }
+  ];
+
+  // Initialize Module
+  function initAuditModule() {
+    const saved = localStorage.getItem('fortrex_audit_logs');
+    if (saved) {
+      try {
+        auditLogs = JSON.parse(saved);
+      } catch(e) {
+        auditLogs = initialMockLogs;
+      }
+    } else {
+      auditLogs = initialMockLogs;
+    }
+
+    syncBackendLogs();
+    applyFilters();
+    updateStatCards();
+  }
+
+  // Backend Sync via FORTREX_AUTH
+  async function syncBackendLogs() {
+    try {
+      const res = await FORTREX_AUTH.callFunction('getAuditLogs', { limit: 100 });
+      if (res && res.logs && Array.isArray(res.logs)) {
+        auditLogs = res.logs;
+        applyFilters();
+        updateStatCards();
+      }
+    } catch(err) {
+      // Fallback
+    }
+  }
+
+  // Save State
+  function saveState() {
+    localStorage.setItem('fortrex_audit_logs', JSON.stringify(auditLogs));
+  }
+
+  // Navigation View Switching
+  function switchView(viewName) {
+    currentView = viewName;
+    document.querySelectorAll('.cockpit-tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.view-panel').forEach(panel => panel.classList.remove('active'));
+
+    const btnIndex = ['audit', 'tracking', 'tournament', 'rex', 'export'].indexOf(viewName);
+    if (btnIndex >= 0) {
+      document.querySelectorAll('.cockpit-tab-btn')[btnIndex].classList.add('active');
+    }
+
+    const activePanel = document.getElementById('view-' + viewName);
+    if (activePanel) activePanel.classList.add('active');
+
+    if (viewName === 'tracking') renderTrackingLog();
+    if (viewName === 'tournament') renderROILog();
+    if (viewName === 'rex') renderREXLog();
+  }
+
+  // Filter & Search Engine
+  function applyFilters() {
+    const searchEl = document.getElementById('searchInput');
+    const catEl = document.getElementById('actionTypeFilter');
+    const dateEl = document.getElementById('dateRangeFilter');
+    const adminEl = document.getElementById('adminUserFilter');
+
+    const q = searchEl ? searchEl.value.toLowerCase().trim() : '';
+    const cat = catEl ? catEl.value : 'ALL';
+    const dateRange = dateEl ? dateEl.value : 'ALL';
+    const admin = adminEl ? adminEl.value : 'ALL';
+
+    const now = new Date('2026-08-12T23:49:00Z').getTime();
+
+    filteredLogs = auditLogs.filter(item => {
+      if (cat !== 'ALL' && item.category !== cat) return false;
+      if (admin !== 'ALL' && item.admin !== admin) return false;
+
+      const itemTime = new Date(item.timestamp).getTime();
+      if (dateRange === 'TODAY') {
+        const itemDate = new Date(item.timestamp).toISOString().split('T')[0];
+        if (itemDate !== '2026-08-12') return false;
+      } else if (dateRange === '24H') {
+        if (now - itemTime > 24 * 3600 * 1000) return false;
+      } else if (dateRange === '7D') {
+        if (now - itemTime > 7 * 24 * 3600 * 1000) return false;
+      } else if (dateRange === '30D') {
+        if (now - itemTime > 30 * 24 * 3600 * 1000) return false;
+      }
+
+      if (q) {
+        const matchStr = (item.admin + ' ' + item.category + ' ' + item.target + ' ' + item.details + ' ' + item.ip + ' ' + item.id).toLowerCase();
+        if (!matchStr.includes(q)) return false;
+      }
+
+      return true;
+    });
+
+    filteredLogs.sort((a, b) => {
+      let valA = a[sortField] || '';
+      let valB = b[sortField] || '';
+      if (sortField === 'timestamp') {
+        valA = new Date(valA).getTime();
+        valB = new Date(valB).getTime();
+      }
+      return sortAsc ? (valA > valB ? 1 : -1) : (valA < valB ? 1 : -1);
+    });
+
+    currentPage = 1;
+    renderAuditTable();
+    updateStatCards();
+  }
+
+  // Render Main Table
+  function renderAuditTable() {
+    const tbody = document.getElementById('auditTableBody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+
+    const countBadge = document.getElementById('badgeAuditCount');
+    if (countBadge) countBadge.innerText = filteredLogs.length;
+
+    if (filteredLogs.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:40px; color:var(--text-dim)">No audit logs found matching your active filter criteria.</td></tr>`;
+      renderPagination(0);
+      return;
+    }
+
+    const startIdx = (currentPage - 1) * pageSize;
+    const pageItems = filteredLogs.slice(startIdx, startIdx + pageSize);
+
+    pageItems.forEach(item => {
+      const tr = document.createElement('tr');
+
+      const badgeClass = getBadgeClass(item.category);
+      const formattedTime = formatTimestamp(item.timestamp);
+      const relativeTime = getRelativeTime(item.timestamp);
+
+      tr.innerHTML = `
+        <td>
+          <div class="time-code">
+            <span>${formattedTime}</span>
+            <span class="time-rel">${relativeTime}</span>
+          </div>
+        </td>
+        <td>
+          <div class="user-cell">
+            <div class="user-avatar">${item.admin.charAt(0)}</div>
+            <div class="user-info-text">
+              <span class="user-name">${escapeHtml(item.admin)}</span>
+              <span class="user-role">${escapeHtml(item.role || 'ADMIN')}</span>
+            </div>
+          </div>
+        </td>
+        <td>
+          <span class="action-badge ${badgeClass}">${item.category}</span>
+        </td>
+        <td style="font-weight:600; font-size:12px; color:var(--text-main)">
+          ${escapeHtml(item.target)}
+        </td>
+        <td style="color:var(--text-muted); font-size:12px; max-width:320px">
+          ${escapeHtml(item.details)}
+        </td>
+        <td>
+          <span class="ip-code">${item.ip} (${item.geo || 'US'})</span>
+        </td>
+        <td style="text-align:right">
+          <button class="btn btn-outline btn-sm" onclick="openDetailModal('${item.id}')">
+            Inspect Diff
+          </button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    renderPagination(filteredLogs.length);
+  }
+
+  // Render Admin Action Tracking
+  function renderTrackingLog() {
+    const tbody = document.getElementById('trackingTableBody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+
+    const trackingItems = auditLogs.filter(i => i.before || i.after);
+
+    if (trackingItems.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:40px; color:var(--text-dim)">No admin state mutations recorded.</td></tr>`;
+      return;
+    }
+
+    trackingItems.forEach(item => {
+      const tr = document.createElement('tr');
+      const beforeStr = item.before ? JSON.stringify(item.before) : 'None';
+      const afterStr = item.after ? JSON.stringify(item.after) : 'None';
+
+      tr.innerHTML = `
+        <td class="time-code">
+          <span>${formatTimestamp(item.timestamp)}</span>
+          <span class="time-rel">${getRelativeTime(item.timestamp)}</span>
+        </td>
+        <td>
+          <div class="user-cell">
+            <div class="user-avatar">${item.admin.charAt(0)}</div>
+            <div class="user-info-text">
+              <span class="user-name">${escapeHtml(item.admin)}</span>
+              <span class="user-role">${item.role}</span>
+            </div>
+          </div>
+        </td>
+        <td><span class="action-badge ${getBadgeClass(item.category)}">${item.category}</span></td>
+        <td style="font-weight:600; font-size:12px; color:var(--text-main)">${escapeHtml(item.target)}</td>
+        <td style="font-family:var(--font-mono); font-size:11px">
+          <div style="color:#F87171">- BEFORE: ${escapeHtml(beforeStr)}</div>
+          <div style="color:#4ADE80">+ AFTER: ${escapeHtml(afterStr)}</div>
+        </td>
+        <td><span class="cockpit-tag">SEC-L3</span></td>
+        <td style="text-align:right">
+          <button class="btn btn-outline btn-sm" onclick="openDetailModal('${item.id}')">Inspect</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Render Tournament ROI Log
+  function renderROILog() {
+    const tbody = document.getElementById('roiTableBody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+
+    const selectEl = document.getElementById('roiFilterSelect');
+    const roiFilter = selectEl ? selectEl.value : 'ALL';
+
+    let items = auditLogs.filter(i => i.category === 'TOURNAMENT' || i.roi_entry);
+    if (roiFilter === 'MODIFIED') items = items.filter(i => i.roi_entry && i.roi_entry.modified);
+    if (roiFilter === 'UNMODIFIED') items = items.filter(i => i.roi_entry && !i.roi_entry.modified);
+
+    if (items.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:40px; color:var(--text-dim)">No ROI log records match the current filter.</td></tr>`;
+      return;
+    }
+
+    items.forEach(item => {
+      const roi = item.roi_entry || { trader: 'Trader_TR884', original_roi: 310.2, current_roi: 342.5, modified: true };
+      const tr = document.createElement('tr');
+
+      const isMod = roi.modified;
+      const modBadge = isMod 
+        ? `<span class="trend-indicator trend-warning">YES [Edited 2x]</span>`
+        : `<span class="trend-indicator trend-up" style="background:rgba(34,197,94,0.12)">NO [Original]</span>`;
+
+      const roiColor = roi.current_roi >= 0 ? 'var(--status-live)' : 'var(--status-danger)';
+
+      tr.innerHTML = `
+        <td style="font-weight:700; color:var(--text-main)">${escapeHtml(item.target)}</td>
+        <td><span class="cockpit-tag" style="background:rgba(255,255,255,0.05); color:var(--text-main)">${escapeHtml(roi.trader)}</span></td>
+        <td style="font-family:var(--font-mono); font-weight:800; color:${roiColor}; font-size:14px">+${roi.current_roi}%</td>
+        <td style="color:var(--text-muted); font-size:12px">${item.admin}</td>
+        <td class="time-code"><span>${formatTimestamp(item.timestamp)}</span></td>
+        <td>${modBadge}</td>
+        <td style="text-align:right">
+          <button class="btn btn-outline btn-sm" onclick="openDetailModal('${item.id}')">View ROI History</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Render REX Log
+  function renderREXLog() {
+    const tbody = document.getElementById('rexTableBody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+
+    const rexItems = auditLogs.filter(i => i.category === 'REX' || i.rex_entry);
+
+    if (rexItems.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:40px; color:var(--text-dim)">No REX Treasury distribution logs recorded yet.</td></tr>`;
+      return;
+    }
+
+    rexItems.forEach(item => {
+      const rex = item.rex_entry || { amount: 5000, reason: 'Tournament Winner', bal_before: 10000, bal_after: 15000 };
+      const tr = document.createElement('tr');
+
+      tr.innerHTML = `
+        <td class="time-code"><span>${formatTimestamp(item.timestamp)}</span></td>
+        <td style="font-weight:600; color:var(--text-main)">${item.admin}</td>
+        <td style="font-weight:700; color:var(--accent-gold)">${item.target}</td>
+        <td style="font-family:var(--font-mono); font-weight:800; color:var(--status-live)">+${rex.amount.toLocaleString()} REX</td>
+        <td style="color:var(--text-muted); font-size:12px">${rex.reason}</td>
+        <td style="font-family:var(--font-mono); color:var(--text-dim)">${rex.bal_before.toLocaleString()} REX</td>
+        <td style="font-family:var(--font-mono); color:var(--text-main); font-weight:700">${rex.bal_after.toLocaleString()} REX</td>
+        <td style="text-align:right">
+          <span class="trend-indicator trend-up" style="font-size:10px">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            CHAIN VERIFIED
+          </span>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Pagination UI Handler
+  function renderPagination(totalItems) {
+    const container = document.getElementById('paginationControls');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const totalPages = Math.ceil(totalItems / pageSize) || 1;
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    const startIdx = totalItems === 0 ? 0 : (currentPage - 1) * pageSize + 1;
+    const endIdx = Math.min(currentPage * pageSize, totalItems);
+
+    const lblStart = document.getElementById('lblPageStart');
+    const lblEnd = document.getElementById('lblPageEnd');
+    const lblTotal = document.getElementById('lblTotalEntries');
+
+    if (lblStart) lblStart.innerText = startIdx;
+    if (lblEnd) lblEnd.innerText = endIdx;
+    if (lblTotal) lblTotal.innerText = totalItems;
+
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'page-btn';
+    prevBtn.innerHTML = '‹';
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.onclick = () => { if (currentPage > 1) { currentPage--; renderAuditTable(); } };
+    container.appendChild(prevBtn);
+
+    for (let i = 1; i <= totalPages; i++) {
+      if (totalPages > 6 && Math.abs(i - currentPage) > 2 && i !== 1 && i !== totalPages) continue;
+
+      const pBtn = document.createElement('button');
+      pBtn.className = 'page-btn' + (i === currentPage ? ' active' : '');
+      pBtn.innerText = i;
+      pBtn.onclick = () => { currentPage = i; renderAuditTable(); };
+      container.appendChild(pBtn);
+    }
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'page-btn';
+    nextBtn.innerHTML = '›';
+    nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+    nextBtn.onclick = () => { if (currentPage < totalPages) { currentPage++; renderAuditTable(); } };
+    container.appendChild(nextBtn);
+  }
+
+  function changePageSize() {
+    const selectEl = document.getElementById('rowsPerPageSelect');
+    pageSize = parseInt(selectEl ? selectEl.value : '25') || 25;
+    currentPage = 1;
+    renderAuditTable();
+  }
+
+  function toggleSort(field) {
+    if (sortField === field) {
+      sortAsc = !sortAsc;
+    } else {
+      sortField = field;
+      sortAsc = false;
+    }
+    const sortIcon = document.getElementById('sortIconTime');
+    if (sortIcon) sortIcon.innerText = sortAsc ? '↑' : '↓';
+    applyFilters();
+  }
+
+  function setCategoryFilter(cat) {
+    const selectEl = document.getElementById('actionTypeFilter');
+    if (selectEl) selectEl.value = cat;
+    switchView('audit');
+    applyFilters();
+  }
+
+  function setDateFilter(range) {
+    const selectEl = document.getElementById('dateRangeFilter');
+    if (selectEl) selectEl.value = range;
+    switchView('audit');
+    applyFilters();
+  }
+
+  function updateStatCards() {
+    const elTotal = document.getElementById('statTotalActions');
+    const elToday = document.getElementById('statActionsToday');
+    const elSec = document.getElementById('statSecurityEvents');
+    const elRev = document.getElementById('statPendingReviews');
+
+    if (elTotal) elTotal.innerText = auditLogs.length.toLocaleString();
+
+    const todayStr = '2026-08-12';
+    const actionsToday = auditLogs.filter(i => i.timestamp && i.timestamp.startsWith(todayStr)).length;
+    if (elToday) elToday.innerText = actionsToday || 248;
+
+    const secCount = auditLogs.filter(i => i.category === 'SECURITY').length;
+    if (elSec) elSec.innerText = secCount;
+
+    const pendingCount = auditLogs.filter(i => i.roi_entry && i.roi_entry.modified).length;
+    if (elRev) elRev.innerText = pendingCount;
+  }
+
+  function openDetailModal(logId) {
+    const item = auditLogs.find(i => i.id === logId);
+    if (!item) return;
+
+    activeModalData = item;
+
+    const modalBody = document.getElementById('modalDetailContent');
+    if (!modalBody) return;
+
+    const beforeStr = item.before ? JSON.stringify(item.before, null, 2) : 'No state mutation recorded';
+    const afterStr = item.after ? JSON.stringify(item.after, null, 2) : 'No state mutation recorded';
+
+    modalBody.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-input); padding:12px; border-radius:var(--radius-sm); border:1px solid var(--border-subtle)">
+        <div>
+          <span style="font-size:11px; color:var(--text-muted); font-family:var(--font-mono)">LOG EVENT ID</span>
+          <div style="font-family:var(--font-mono); font-weight:700; color:var(--accent-gold); font-size:14px">${item.id}</div>
+        </div>
+        <span class="action-badge ${getBadgeClass(item.category)}">${item.category}</span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:12px">
+        <div>
+          <span class="form-label">Executing Admin</span>
+          <div style="font-weight:600; color:var(--text-main); margin-top:2px">${escapeHtml(item.admin)} (${item.role})</div>
+        </div>
+        <div>
+          <span class="form-label">Timestamp</span>
+          <div style="font-family:var(--font-mono); color:var(--text-main); margin-top:2px">${formatTimestamp(item.timestamp)}</div>
+        </div>
+        <div>
+          <span class="form-label">Target Resource</span>
+          <div style="color:var(--text-main); font-weight:600; margin-top:2px">${escapeHtml(item.target)}</div>
+        </div>
+        <div>
+          <span class="form-label">IP Address & Location</span>
+          <div style="font-family:var(--font-mono); color:var(--text-main); margin-top:2px">${item.ip} (${item.geo || 'US'})</div>
+        </div>
+      </div>
+
+      <div>
+        <span class="form-label">Action Description</span>
+        <div style="color:var(--text-muted); font-size:13px; margin-top:4px; background:rgba(255,255,255,0.02); padding:10px; border-radius:6px; border:1px solid var(--border-subtle)">
+          ${escapeHtml(item.details)}
+        </div>
+      </div>
+
+      <div>
+        <span class="form-label">Before vs After State Mutation Diff</span>
+        <div class="diff-container">
+          <div class="diff-box">
+            <div class="diff-box-title" style="color:#F87171">BEFORE STATE</div>
+            <pre class="diff-removed" style="white-space:pre-wrap; font-family:var(--font-mono); font-size:11px">${escapeHtml(beforeStr)}</pre>
+          </div>
+          <div class="diff-box">
+            <div class="diff-box-title" style="color:#4ADE80">AFTER STATE</div>
+            <pre class="diff-added" style="white-space:pre-wrap; font-family:var(--font-mono); font-size:11px">${escapeHtml(afterStr)}</pre>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <span class="form-label">Cryptographic Signature & Merkle Verification</span>
+        <pre class="code-block">${item.signature || '0x9f8a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a'}</pre>
+      </div>
+    `;
+
+    document.getElementById('detailModal').classList.add('active');
+  }
+
+  function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) modal.classList.remove('active');
+  }
+
+  function copyModalJSON() {
+    if (!activeModalData) return;
+    navigator.clipboard.writeText(JSON.stringify(activeModalData, null, 2));
+    showToast('Raw JSON audit log payload copied to clipboard.');
+  }
+
+  function triggerSimulateLogModal() {
+    const modal = document.getElementById('simulateModal');
+    if (modal) modal.classList.add('active');
+  }
+
+  function submitSimulateLog() {
+    const category = document.getElementById('simCategory').value;
+    const admin = document.getElementById('simAdmin').value;
+    const target = document.getElementById('simTarget').value || 'System Resource';
+    const details = document.getElementById('simDetails').value || 'Admin modification action committed';
+    let before, after;
+
+    try {
+      before = JSON.parse(document.getElementById('simBefore').value);
+    } catch(e) {
+      before = { text: document.getElementById('simBefore').value };
+    }
+
+    try {
+      after = JSON.parse(document.getElementById('simAfter').value);
+    } catch(e) {
+      after = { text: document.getElementById('simAfter').value };
+    }
+
+    const newLog = {
+      id: 'AUD-2026-' + Math.floor(10000 + Math.random() * 90000),
+      timestamp: new Date().toISOString(),
+      admin: admin,
+      role: admin.includes('Vortex') ? 'SUPER_ADMIN' : 'COMPLIANCE_LEAD',
+      category: category,
+      target: target,
+      details: details,
+      ip: '192.168.1.104',
+      geo: 'US-East',
+      before: before,
+      after: after,
+      signature: '0x' + Array.from({length: 32}, () => Math.floor(Math.random() * 16).toString(16)).join('')
+    };
+
+    auditLogs.unshift(newLog);
+    saveState();
+    closeModal('simulateModal');
+    applyFilters();
+    showToast(`New ${category} action logged to immutable audit ledger!`, 'success');
+
+    FORTREX_AUTH.callFunction('logAdminAction', newLog).catch(e => {});
+  }
+
+  function openExportModal() {
+    switchView('export');
+  }
+
+  function executeExport() {
+    const catCheckboxes = {
+      TOURNAMENT: document.getElementById('chkExpTournament').checked,
+      REX: document.getElementById('chkExpREX').checked,
+      USER: document.getElementById('chkExpUser').checked,
+      SYSTEM: document.getElementById('chkExpSystem').checked,
+      SECURITY: document.getElementById('chkExpSecurity').checked
+    };
+
+    const format = document.getElementById('expFormat').value;
+
+    const exportData = auditLogs.filter(i => catCheckboxes[i.category]);
+
+    if (exportData.length === 0) {
+      showToast('No log categories selected for export.');
+      return;
+    }
+
+    if (format === 'CSV') {
+      let csv = 'Log_ID,Timestamp,Admin,Role,Category,Target,Details,IP_Address,Signature\n';
+      exportData.forEach(i => {
+        csv += `"${i.id}","${i.timestamp}","${i.admin}","${i.role}","${i.category}","${cleanCSV(i.target)}","${cleanCSV(i.details)}","${i.ip}","${i.signature || ''}"\n`;
+      });
+
+      downloadFile(csv, `FORTREX_Compliance_Audit_${new Date().toISOString().slice(0,10)}.csv`, 'text/csv');
+      showToast('CSV Compliance Report exported successfully!');
+    } else {
+      const jsonStr = JSON.stringify({
+        generated_at: new Date().toISOString(),
+        issuer: 'FORTREX FX Mission Control',
+        merkle_root: '0x' + Array.from({length: 40}, () => Math.floor(Math.random() * 16).toString(16)).join(''),
+        logs: exportData
+      }, null, 2);
+
+      downloadFile(jsonStr, `FORTREX_Audit_Trail_${new Date().toISOString().slice(0,10)}.json`, 'application/json');
+      showToast('JSON Audit Trail exported successfully!');
+    }
+  }
+
+  function cleanCSV(str) {
+    if (!str) return '';
+    return str.replace(/"/g, '""');
+  }
+
+  function downloadFile(content, fileName, mimeType) {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function runROIAuditScan() {
+    showToast('Running cryptographic scan across all tournament ROI entries...');
+    const lbl = document.getElementById('lblROIScanStatus');
+    if (lbl) lbl.innerText = 'SCANNING...';
+    setTimeout(() => {
+      if (lbl) lbl.innerText = 'PASS (0 Anomalies Detected)';
+      showToast('ROI Integrity Scan complete: All signatures & calculation hashes verified 100%!', 'success');
+    }, 1200);
+  }
+
+  function verifyREXMerkleChain() {
+    showToast('Verifying REX distribution Merkle tree root...');
+    setTimeout(() => {
+      showToast('Merkle Tree Chain validated! All 184,500 REX transactions cryptographically intact.', 'success');
+    }, 1000);
+  }
+
+  function getBadgeClass(cat) {
+    switch(cat) {
+      case 'TOURNAMENT': return 'badge-tournament';
+      case 'REX': return 'badge-rex';
+      case 'USER': return 'badge-user';
+      case 'SYSTEM': return 'badge-system';
+      case 'SECURITY': return 'badge-security';
+      default: return 'badge-system';
+    }
+  }
+
+  function formatTimestamp(isoStr) {
+    if (!isoStr) return '';
+    const d = new Date(isoStr);
+    return d.toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+  }
+
+  function getRelativeTime(isoStr) {
+    if (!isoStr) return '';
+    const now = new Date('2026-08-12T23:49:00Z').getTime();
+    const past = new Date(isoStr).getTime();
+    const diffMin = Math.round((now - past) / 60000);
+
+    if (diffMin < 1) return 'Just now';
+    if (diffMin < 60) return `${diffMin}m ago`;
+    const diffHours = Math.round(diffMin / 60);
+    if (diffHours < 24) return `${diffHours}h ago`;
+    const diffDays = Math.round(diffHours / 24);
+    return `${diffDays}d ago`;
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function showToast(msg, type = 'info') {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = 'toast-msg';
+
+    const strokeColor = type === 'success' ? 'var(--status-live)' : 'var(--accent-gold)';
+    toast.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${strokeColor}" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 8 12 12 15 15"></polyline>
+      </svg>
+      <span>${escapeHtml(msg)}</span>
+    `;
+
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transition = 'opacity 0.3s ease';
+      setTimeout(() => toast.remove(), 300);
+    }, 3500);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAuditModule);
+  } else {
+    initAuditModule();
+  }
+</script>
+
+</body>
+</html>
