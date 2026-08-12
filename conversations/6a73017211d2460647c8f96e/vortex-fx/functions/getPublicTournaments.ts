@@ -6,9 +6,9 @@ Deno.serve(async (req) => {
   try { body = await req.json(); } catch (e) {}
 
   try {
-    const tournaments = await base44.asServiceRole.entities.Tournament.list({ 
-      limit: 50, sort: '-created_date'
-    });
+    let tournaments = await base44.asServiceRole.entities.Tournament.list();
+    if (tournaments) tournaments.sort((a, b) => new Date(b.created_date) - new Date(a.created_date));
+    if (tournaments && tournaments.length > 50) tournaments = tournaments.slice(0, 50);
     return Response.json({ success: true, tournaments: tournaments || [] });
   } catch (err) {
     return Response.json({ success: true, tournaments: [] });

@@ -7,15 +7,14 @@ Deno.serve(async (req) => {
 
   const { tournament_id } = body;
   try {
+    let participants;
     if (tournament_id) {
-      const participants = await base44.asServiceRole.entities.Participant.list({
-        filter: { tournament_id }, limit: 500, sort: '-roi'
-      });
-      return Response.json({ success: true, participants: participants || [] });
+      participants = await base44.asServiceRole.entities.Participant.filter({ tournament_id });
+    } else {
+      participants = await base44.asServiceRole.entities.Participant.list();
     }
-    const participants = await base44.asServiceRole.entities.Participant.list({
-      limit: 100, sort: '-roi'
-    });
+    if (participants) participants.sort((a, b) => (Number(b.roi) || 0) - (Number(a.roi) || 0));
+    if (participants && participants.length > 100) participants = participants.slice(0, 100);
     return Response.json({ success: true, participants: participants || [] });
   } catch (err) {
     return Response.json({ success: true, participants: [] });

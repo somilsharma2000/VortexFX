@@ -7,9 +7,10 @@ Deno.serve(async (req) => {
 
   const { limit } = body;
   try {
-    const traders = await base44.asServiceRole.entities.Trader.list({ limit: limit || 200, sort: '-created_date' });
+    let traders = await base44.asServiceRole.entities.Trader.list();
+    if (traders) traders.sort((a, b) => new Date(b.created_date) - new Date(a.created_date));
+    const n = limit || 200;
+    if (traders && traders.length > n) traders = traders.slice(0, n);
     return Response.json({ success: true, traders: traders || [] });
-  } catch (err) {
-    return Response.json({ success: true, traders: [] });
-  }
+  } catch (err) { return Response.json({ success: true, traders: [] }); }
 });

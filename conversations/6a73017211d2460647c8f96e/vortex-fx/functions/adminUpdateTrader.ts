@@ -7,14 +7,6 @@ Deno.serve(async (req) => {
 
   const { admin_id, trader_id, ...updateData } = body;
   if (!admin_id || !trader_id) return Response.json({ success: false, error: 'Missing parameters.' });
-  
-  delete updateData.admin_id;
-  delete updateData.trader_id;
-  
-  try {
-    const updated = await base44.asServiceRole.entities.Trader.update(trader_id, updateData);
-    return Response.json({ success: true, trader: updated });
-  } catch (err) {
-    return Response.json({ success: false, error: 'Update failed.' });
-  }
+  delete updateData.admin_id; delete updateData.trader_id;
+  try { const updated = await base44.asServiceRole.entities.Trader.update(trader_id, updateData); return Response.json({ success: true, trader: updated }); } catch (err) { return Response.json({ success: false, error: 'Update failed.' }); }
 });

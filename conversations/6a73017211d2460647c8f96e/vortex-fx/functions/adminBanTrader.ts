@@ -7,11 +7,5 @@ Deno.serve(async (req) => {
 
   const { admin_id, trader_id, banned, banned_reason } = body;
   if (!admin_id || !trader_id) return Response.json({ success: false, error: 'Missing parameters.' });
-  
-  try {
-    const updated = await base44.asServiceRole.entities.Trader.update(trader_id, { banned: banned !== false, banned_reason: banned_reason || '' });
-    return Response.json({ success: true, trader: updated });
-  } catch (err) {
-    return Response.json({ success: false, error: 'Ban action failed.' });
-  }
+  try { const updated = await base44.asServiceRole.entities.Trader.update(trader_id, { banned: banned !== false, banned_reason: banned_reason || '' }); return Response.json({ success: true, trader: updated }); } catch (err) { return Response.json({ success: false, error: 'Ban action failed.' }); }
 });

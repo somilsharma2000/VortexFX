@@ -14,15 +14,13 @@ Deno.serve(async (req) => {
     if (trader.banned) return Response.json({ success: false, error: 'Account banned.' });
     
     const today = new Date().toISOString().split('T')[0];
-    if (trader.last_checkin_date === today) {
-      return Response.json({ success: false, error: 'Already checked in today!', alreadyCheckedIn: true, streak: trader.checkin_streak || 0 });
-    }
+    if (trader.last_checkin_date === today) return Response.json({ success: false, error: 'Already checked in today!', alreadyCheckedIn: true, streak: trader.checkin_streak || 0 });
     
     const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
     let newStreak = (trader.last_checkin_date === yesterday) ? (trader.checkin_streak || 0) + 1 : 1;
     
     let rexReward = 5, milestoneReached = '', milestoneBonus = 0;
-    const milestones = { 3: {rex:10,name:'3-Day Streak'}, 7: {rex:25,name:'7-Day Streak Master'}, 14: {rex:50,name:'14-Day Warrior'}, 30: {rex:100,name:'30-Day Legend'}, 60: {rex:250,name:'60-Day Dynasty'}, 100: {rex:500,name:'100-Day Immortal'} };
+    const milestones = { 3:{rex:10,name:'3-Day Streak'}, 7:{rex:25,name:'7-Day Streak Master'}, 14:{rex:50,name:'14-Day Warrior'}, 30:{rex:100,name:'30-Day Legend'}, 60:{rex:250,name:'60-Day Dynasty'}, 100:{rex:500,name:'100-Day Immortal'} };
     if (milestones[newStreak]) { milestoneReached = milestones[newStreak].name; milestoneBonus = milestones[newStreak].rex; rexReward += milestoneBonus; }
     
     const newBalance = (trader.rex_balance || 0) + rexReward;
@@ -37,7 +35,7 @@ Deno.serve(async (req) => {
     });
     
     try { await base44.asServiceRole.entities.CheckIn.create({ trader_id, trader_username: trader.discord_username || '', checkin_date: today, new_streak: newStreak, rex_earned: rexReward, milestone_reached: milestoneReached, milestone_bonus_rex: milestoneBonus }); } catch (e) {}
-    try { await base44.asServiceRole.entities.Transaction.create({ trader_id, amount: rexReward, type: 'checkin_reward', description: 'Daily Check-In Reward' + (milestoneReached ? ' + ' + milestoneReached : ''), reason: 'daily_checkin', transaction_date: new Date().toISOString() }); } catch (e) {}
+    try { await base44.asServiceRole.entities.Transaction.create({ trader_id, amount: rexReward, type: 'checkin_reward', description: 'Daily Check-In' + (milestoneReached ? ' + ' + milestoneReached : ''), reason: 'daily_checkin', transaction_date: new Date().toISOString() }); } catch (e) {}
     
     return Response.json({ success: true, streak: newStreak, rex_earned: rexReward, new_balance: newBalance, milestone: milestoneReached, milestone_bonus: milestoneBonus, battlepass_xp: newBPXP, battlepass_level: newBPLevel });
   } catch (err) {

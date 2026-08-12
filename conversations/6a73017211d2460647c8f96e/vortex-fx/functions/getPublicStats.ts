@@ -9,27 +9,24 @@ Deno.serve(async (req) => {
   let genesisCap = 2500, waitlistTarget = 10000;
   
   try {
-    const entries = await base44.asServiceRole.entities.WaitlistEntry.list({ limit: 10000 });
+    const entries = await base44.asServiceRole.entities.WaitlistEntry.list();
     regCount = entries ? entries.length : 0;
   } catch (e) {}
   
   try {
-    const tournaments = await base44.asServiceRole.entities.Tournament.list({ limit: 100 });
+    const tournaments = await base44.asServiceRole.entities.Tournament.list();
     if (tournaments) for (const t of tournaments) {
-      if (t.status === 'active') {
-        activeTournaments++;
-        totalPrizePool += (t.prize_pool_rex || 0);
-      }
+      if (t.status === 'active') { activeTournaments++; totalPrizePool += (t.prize_pool_rex || 0); }
     }
   } catch (e) {}
   
   try {
-    const traders = await base44.asServiceRole.entities.Trader.list({ limit: 10000 });
+    const traders = await base44.asServiceRole.entities.Trader.list();
     totalTraders = traders ? traders.length : 0;
   } catch (e) {}
   
   try {
-    const settings = await base44.asServiceRole.entities.PlatformSetting.list({ limit: 100 });
+    const settings = await base44.asServiceRole.entities.PlatformSetting.list();
     if (settings) for (const s of settings) {
       if (s.key === 'genesis_cap') genesisCap = parseInt(s.value) || 2500;
       if (s.key === 'waitlist_target') waitlistTarget = parseInt(s.value) || 10000;
@@ -38,15 +35,6 @@ Deno.serve(async (req) => {
   
   return Response.json({
     success: true,
-    stats: {
-      registration_count: regCount,
-      waitlist_count: regCount,
-      active_tournaments: activeTournaments,
-      total_prize_pool: totalPrizePool,
-      total_traders: totalTraders,
-      genesis_cap: genesisCap,
-      waitlist_target: waitlistTarget,
-      genesis_remaining: Math.max(0, genesisCap - regCount)
-    }
+    stats: { registration_count: regCount, waitlist_count: regCount, active_tournaments: activeTournaments, total_prize_pool: totalPrizePool, total_traders: totalTraders, genesis_cap: genesisCap, waitlist_target: waitlistTarget, genesis_remaining: Math.max(0, genesisCap - regCount) }
   });
 });

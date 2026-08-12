@@ -14,11 +14,11 @@ Deno.serve(async (req) => {
     if (trader.banned) return Response.json({ success: false, error: 'Account banned: ' + (trader.banned_reason || 'Violation of terms.') });
     
     let checkins = [], transactions = [], tournaments = [];
-    try { checkins = await base44.asServiceRole.entities.CheckIn.list({ filter: { trader_id }, limit: 30, sort: '-created_date' }); } catch (e) {}
-    try { transactions = await base44.asServiceRole.entities.Transaction.list({ filter: { trader_id }, limit: 20, sort: '-created_date' }); } catch (e) {}
-    try { tournaments = await base44.asServiceRole.entities.Participant.list({ filter: { trader_id }, limit: 10, sort: '-created_date' }); } catch (e) {}
+    try { checkins = await base44.asServiceRole.entities.CheckIn.filter({ trader_id }); checkins.sort((a,b) => new Date(b.created_date) - new Date(a.created_date)); if (checkins.length > 30) checkins = checkins.slice(0, 30); } catch (e) {}
+    try { transactions = await base44.asServiceRole.entities.Transaction.filter({ trader_id }); transactions.sort((a,b) => new Date(b.created_date) - new Date(a.created_date)); if (transactions.length > 20) transactions = transactions.slice(0, 20); } catch (e) {}
+    try { tournaments = await base44.asServiceRole.entities.Participant.filter({ trader_id }); tournaments.sort((a,b) => new Date(b.created_date) - new Date(a.created_date)); if (tournaments.length > 10) tournaments = tournaments.slice(0, 10); } catch (e) {}
     
-    return Response.json({ success: true, trader, checkins: checkins || [], transactions: transactions || [], tournaments: tournaments || [] });
+    return Response.json({ success: true, trader, checkins, transactions, tournaments });
   } catch (err) {
     return Response.json({ success: false, error: 'Failed to load profile.' });
   }
