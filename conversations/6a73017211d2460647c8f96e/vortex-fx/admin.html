@@ -983,7 +983,9 @@
 
       <!-- Passcode Input -->
       <div style="margin-bottom: 20px;">
-        <input type="password" id="admin-passcode" placeholder="Enter access code"
+        <!-- Dummy input to catch browser auto-fill -->
+      <input type="password" style="display:none" autocomplete="new-password" tabindex="-1" aria-hidden="true">
+      <input type="password" id="admin-passcode" autocomplete="new-password" onfocus="this.select()" placeholder="Enter access code"
           style="width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(229,193,88,0.2); border-radius: 10px; color: #fff; font-size: 16px; font-family: 'JetBrains Mono', monospace; text-align: center; letter-spacing: 0.1em; transition: border 0.2s;"
           onfocus="this.style.borderColor='rgba(229,193,88,0.5)'"
           onblur="this.style.borderColor='rgba(229,193,88,0.2)'"
@@ -1006,6 +1008,19 @@
     // Passcode: FORTREX-{somil-admin-2026}
     const ADMIN_HASH = "f7e9c1a2b3d4e5f6"; // FORTREX-S0m1l@2026!Admin
     
+    // Prevent form submission on Enter key
+    document.addEventListener("DOMContentLoaded", function() {
+      const input = document.getElementById("admin-passcode");
+      if (input) {
+        input.addEventListener("keydown", function(e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            verifyAdminPasscode();
+          }
+        });
+      }
+    });
+
     function verifyAdminPasscode() {
       const input = document.getElementById('admin-passcode').value.trim();
       const errorEl = document.getElementById('gate-error');
@@ -2006,6 +2021,12 @@
       } else {
         // Show access gate
         document.getElementById('admin-gate').style.display = 'flex';
+        // Clear passcode field and prevent browser auto-fill
+        const passInput = document.getElementById('admin-passcode');
+        passInput.value = '';
+        setTimeout(() => { passInput.value = ''; }, 50);
+        setTimeout(() => { passInput.value = ''; }, 200);
+        setTimeout(() => { passInput.value = ''; }, 500);
         document.getElementById('admin-container').style.display = 'none';
         // Focus passcode input
         setTimeout(() => {
