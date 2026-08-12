@@ -241,7 +241,7 @@
       <li><a href="rex.html" class="nav-link">REX</a></li>
       <li><a href="journal.html" class="nav-link">Journal</a></li>
       <li><a href="community.html" class="nav-link">Community</a></li>
-      <li><a href="faq.html" class="nav-link">FAQ</a></li>
+      
       <li><a href="dashboard.html" class="nav-link nav-internal" style="display:none">Dashboard</a></li>
       <li><a href="invite.html" class="nav-link nav-internal" style="display:none">Invite</a></li>
       <li><a href="profile.html" class="nav-link nav-internal" style="display:none">Profile</a></li>
@@ -260,7 +260,7 @@
   <main>
 
     <!-- HEADER SECTION -->
-    <section class="section" style="padding-top: 140px; padding-bottom: 40px;">
+    <section class="section" style="padding-top: 140px; padding-bottom: 40px; text-align: center;">
       <div class="container reveal">
         <div class="section-label">THE COMMUNITY</div>
         <h1 class="display space-grotesk" style="margin-bottom: 16px; font-weight: 700;">Where the real talk happens.</h1>
@@ -274,7 +274,7 @@
     <section class="community-section">
       <div class="container reveal">
         <div class="community-card" style="background: linear-gradient(135deg, #0d0f1a 0%, #15182e 100%); border: 1px solid rgba(88, 101, 242, 0.35); box-shadow: 0 0 40px rgba(88, 101, 242, 0.15); padding: 48px 36px;">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 32px;">
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 28px;">
             <div style="max-width: 580px;">
               <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
                 <svg width="36" height="36" viewBox="0 0 127.14 96.36" fill="#5865F2">
@@ -293,11 +293,11 @@
 
               <div style="display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #10B981;">
                 <span class="pulse-green"></span>
-                <span>1,200+ members and growing</span>
+                <span id="discord-live-count">Growing daily</span>
               </div>
             </div>
 
-            <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 12px;">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
               <a href="https://discord.gg/9pTSqeTbn" target="_blank" rel="noopener noreferrer" class="btn-pill btn-discord">
                 <svg width="20" height="20" viewBox="0 0 127.14 96.36" fill="currentColor">
                   <path d="M107.7,8.07A105.15,107.15,0,0,0,81.47,0a72.06,72.06,0,0,0,3.36,6.83A97.68,97.68,0,0,0,42.3,6.83,72.37,72.37,0,0,0,45.66,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a74.57,74.57,0,0,0,64.3,0c.87.68,1.76,1.36,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.8,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.88-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53S36,40.3,42.45,40.3C48.83,40.3,54,46,53.87,53,53.87,60,48.83,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5.07-12.7,11.44-12.7C91.07,40.3,96.22,46,96.1,53,96.1,60,91.07,65.69,84.69,65.69Z"/>
@@ -326,21 +326,21 @@
               <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">MEMBERS ONLINE</div>
               <span class="pulse-green" title="Active Now"></span>
             </div>
-            <div class="stat-number jetbrains-mono" style="color: #10B981;">47</div>
+            <div class="stat-number jetbrains-mono" style="color: #10B981;">—</div>
             <div style="font-size: 13px; color: #666; font-family: 'JetBrains Mono', monospace;">1,248 Total Server Members</div>
           </div>
 
           <!-- Stat Card 2 -->
           <div class="community-card">
             <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">MESSAGES TODAY</div>
-            <div class="stat-number jetbrains-mono" style="color: var(--color-gold);">2.3K</div>
+            <div class="stat-number jetbrains-mono" style="color: var(--color-gold);">—</div>
             <div style="font-size: 13px; color: #666; font-family: 'JetBrains Mono', monospace;">Active Trading Discussion</div>
           </div>
 
           <!-- Stat Card 3 -->
           <div class="community-card">
             <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">TOURNAMENTS DISCUSSED</div>
-            <div class="stat-number jetbrains-mono" style="color: var(--color-purple);">8</div>
+            <div class="stat-number jetbrains-mono" style="color: var(--color-purple);">—</div>
             <div style="font-size: 13px; color: #666; font-family: 'JetBrains Mono', monospace;">Sprint & Weekly Battles</div>
           </div>
         </div>
@@ -525,7 +525,7 @@
               Ready to join the discussion?
             </h2>
             <p style="color: #A0A0A0; font-size: 16px; line-height: 1.6; margin-bottom: 32px;">
-              Connect with 1,200+ traders, get live alpha, and participate in exclusive Discord giveaways.
+              Connect with fellow traders, get live alpha, and participate in exclusive Discord giveaways.
             </p>
             <a href="https://discord.gg/9pTSqeTbn" target="_blank" rel="noopener noreferrer" class="btn-pill btn-discord" style="font-size: 16px;">
               <svg width="22" height="22" viewBox="0 0 127.14 96.36" fill="currentColor">
@@ -554,7 +554,7 @@
           <a href="contests.html" class="footer-link">Tournaments</a>
           <a href="leaderboard.html" class="footer-link">Leaderboard</a>
           <a href="community.html" class="footer-link">Community</a>
-          <a href="faq.html" class="footer-link">FAQ</a>
+          
           <a href="terms.html" class="footer-link">Terms</a>
           <a href="privacy.html" class="footer-link">Privacy</a>
           <a href="signin.html" class="footer-link">Sign In</a>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tournaments & Leaderboard — FORTREX</title>
-  <meta name="description" content="FORTREX tournament leaderboard. Standings sealed until reveal day. ROI-based, MT4/MT5 verified.">
+  <meta name="description" content="FORTREX tournament leaderboard. Standings sealed until reveal day. ROI-based, MT5 verified.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -146,7 +146,7 @@
       <li><a href="rex.html" class="nav-link">REX</a></li>
       <li><a href="journal.html" class="nav-link">Journal</a></li>
       <li><a href="community.html" class="nav-link">Community</a></li>
-      <li><a href="faq.html" class="nav-link">FAQ</a></li>
+      
       <li><a href="dashboard.html" class="nav-link nav-internal" style="display:none">Dashboard</a></li>
       <li><a href="invite.html" class="nav-link nav-internal" style="display:none">Invite</a></li>
       <li><a href="profile.html" class="nav-link nav-internal" style="display:none">Profile</a></li>
@@ -170,6 +170,28 @@
           Compete for real prizes. Standings remain 100% sealed until reveal day — no live rank distortion, pure trading skill.
         </p>
       </section>
+
+      <!-- LEADERBOARD LOCK STATE (hidden until 10,000 registrations) -->
+      <div id="leaderboard-locked" style="display: none; text-align: center; padding: 80px 24px; background: rgba(20, 22, 26, 0.4); border: 1px solid rgba(229, 193, 88, 0.15); border-radius: 16px; margin-bottom: 32px;">
+        <div style="width: 64px; height: 64px; margin: 0 auto 24px; border: 2px solid rgba(229, 193, 88, 0.3); border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+          <svg width="32" height="32" fill="none" stroke="#E5C158" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h2 style="font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 12px;">Leaderboard Locked</h2>
+        <p style="font-size: 16px; color: #999; max-width: 480px; margin: 0 auto 24px; line-height: 1.6;">The leaderboard unlocks when we reach <span style="color: #E5C158; font-weight: 700;">10,000 trader registrations</span>. No early rankings. No live scores. Pure suspense until reveal day.</p>
+        <div style="max-width: 360px; margin: 0 auto 24px;">
+          <div style="background: rgba(255,255,255,0.08); border-radius: 999px; height: 8px; overflow: hidden; margin-bottom: 8px;">
+            <div id="lb-lock-bar" style="background: linear-gradient(90deg, #E5C158, #F5D172); height: 100%; border-radius: 999px; width: 0%; transition: width 1.5s ease;"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666;">
+            <span id="lb-lock-current">0 registered</span>
+            <span id="lb-lock-remaining">10,000 to unlock</span>
+          </div>
+        </div>
+        <a href="signin.html" style="display: inline-block; background: linear-gradient(135deg, #E5C158, #E5C158); color: #0B0C0E; padding: 12px 32px; border-radius: 999px; font-weight: 700; font-size: 14px; text-decoration: none; margin-top: 8px;">Register Now</a>
+      </div>
+
+      <!-- LEADERBOARD CONTENT (hidden until 10k registrations) -->
+      <div id="leaderboard-content" style="display: none;">
 
       <!-- TOURNAMENT SELECTOR -->
       <section style="margin-bottom: 28px;">
@@ -219,6 +241,7 @@
         </div>
       </div>
 
+      </div>
     </div>
   </main>
 
@@ -236,7 +259,7 @@
           <a href="tournaments.html" class="footer-link">Tournaments</a>
           <a href="leaderboard.html" class="footer-link">Leaderboard</a>
           <a href="community.html" class="footer-link">Community</a>
-          <a href="faq.html" class="footer-link">FAQ</a>
+          
           <a href="terms.html" class="footer-link">Terms</a>
           <a href="privacy.html" class="footer-link">Privacy</a>
           <a href="signin.html" class="footer-link">Sign In</a>
@@ -408,10 +431,12 @@ document.getElementById('tournament-select').addEventListener('change', function
   loadLeaderboard();
 });
 
-loadTournamentDropdown();
+// Check registration lock first, then load leaderboard if unlocked
+checkRegistrationLock();
 setInterval(() => {
-  loadLeaderboard();
-}, 30000); // Auto-refresh every 30s
+  checkRegistrationLock();
+  if (leaderboardUnlocked) loadLeaderboard();
+}, 30000);
 </script>
 
 </body>

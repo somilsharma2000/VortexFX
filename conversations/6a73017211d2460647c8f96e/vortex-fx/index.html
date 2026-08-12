@@ -116,7 +116,6 @@
       50% { opacity: 0.3; transform: scale(0.7); }
     }
 
-    .stealth-headline {
       font-size: clamp(36px, 7vw, 88px);
       font-weight: 200;
       letter-spacing: -0.03em;
@@ -126,7 +125,6 @@
       max-width: 900px;
     }
 
-    .stealth-headline .accent {
       font-weight: 700;
       background: linear-gradient(135deg, #E5C158 0%, #E5C158 50%, #E5C158 100%);
       -webkit-background-clip: text;
@@ -134,7 +132,6 @@
       background-clip: text;
     }
 
-    .stealth-sub {
       font-size: clamp(15px, 2vw, 19px);
       font-weight: 200;
       color: #555;
@@ -241,6 +238,80 @@
     }
 
     /* SCROLL HINT */
+
+    /* REGISTRATION COUNTER */
+    .reg-counter {
+      background: rgba(20, 22, 26, 0.6);
+      border: 1px solid rgba(229, 193, 88, 0.2);
+      border-radius: 16px;
+      padding: 28px 36px;
+      max-width: 460px;
+      width: 100%;
+      margin: 0 auto;
+      backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 2;
+    }
+    .reg-counter-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .reg-counter-title {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(229, 193, 88, 0.8);
+      font-weight: 600;
+    }
+    .reg-counter-body {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .reg-counter-current {
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 800;
+      color: #E5C158;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .reg-counter-divider {
+      font-size: clamp(20px, 3vw, 28px);
+      color: rgba(255, 255, 255, 0.3);
+      font-weight: 300;
+    }
+    .reg-counter-target {
+      font-size: clamp(20px, 3vw, 28px);
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 600;
+    }
+    .reg-counter-bar-wrap {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      height: 8px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .reg-counter-bar {
+      background: linear-gradient(90deg, #E5C158, #F5D172);
+      height: 100%;
+      border-radius: 999px;
+      transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 12px rgba(229, 193, 88, 0.4);
+    }
+    .reg-counter-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
     .scroll-hint {
       position: absolute;
       bottom: 40px;
@@ -986,7 +1057,7 @@
       <li><a href="rex.html" class="nav-link">REX</a></li>
       <li><a href="journal.html" class="nav-link">Journal</a></li>
       <li><a href="community.html" class="nav-link">Community</a></li>
-      <li><a href="faq.html" class="nav-link">FAQ</a></li>
+      
       <li><a href="dashboard.html" class="nav-link nav-internal" style="display:none">Dashboard</a></li>
       <li><a href="invite.html" class="nav-link nav-internal" style="display:none">Invite</a></li>
       <li><a href="profile.html" class="nav-link nav-internal" style="display:none">Profile</a></li>
@@ -1002,10 +1073,10 @@
   </nav>
 
   <!-- STEALTH HERO -->
-  <section class="stealth-hero" data-shape="galaxy">
+  <section class="stealth-hero">
 
     <!-- BRAND LOGO + NAME -->
-    <div class="brand-lockup" style="margin-top: 80px;">
+    <div class="brand-lockup" style="margin-top: 120px;">
       <img src="assets/fortrex-icon-512.png" alt="FORTREX" class="brand-logo">
     </div>
     <div style="text-align: center; margin-bottom: 40px;">
@@ -1013,35 +1084,27 @@
       <div class="brand-tagline">Where Traders Rise</div>
     </div>
 
-    <div class="seal-badge">
-      <span>Gates Open August 23</span>
-    </div>
 
-    <h1 class="stealth-headline">
-      A new arena for <span class="accent">traders.</span>
-    </h1>
 
-    <p class="stealth-sub">
-      You already have the skill. You watch the charts every day. What if that skill could finally be seen — and rewarded?
-    </p>
 
-    <!-- COUNTDOWN -->
-    <div class="stealth-countdown" id="countdown">
-      <div class="count-unit">
-        <div class="count-num" id="cd-days">--</div>
-        <div class="count-label">Days</div>
+
+    <!-- REGISTRATION COUNTER -->
+    <div class="reg-counter" id="reg-counter">
+      <div class="reg-counter-header">
+        <span class="live-dot" style="background: #E5C158;"></span>
+        <span class="reg-counter-title">TRADER REGISTRATIONS</span>
       </div>
-      <div class="count-unit">
-        <div class="count-num" id="cd-hours">--</div>
-        <div class="count-label">Hours</div>
+      <div class="reg-counter-body">
+        <span class="reg-counter-current" id="reg-current">0</span>
+        <span class="reg-counter-divider">/</span>
+        <span class="reg-counter-target">10,000</span>
       </div>
-      <div class="count-unit">
-        <div class="count-num" id="cd-mins">--</div>
-        <div class="count-label">Minutes</div>
+      <div class="reg-counter-bar-wrap">
+        <div class="reg-counter-bar" id="reg-bar" style="width: 0%;"></div>
       </div>
-      <div class="count-unit">
-        <div class="count-num" id="cd-secs">--</div>
-        <div class="count-label">Seconds</div>
+      <div class="reg-counter-footer">
+        <span id="reg-pct">0% to launch</span>
+        <span class="gold-text" id="reg-remaining">10,000 spots remaining</span>
       </div>
     </div>
 
@@ -1052,13 +1115,8 @@
     </div>
     <div id="waitlist-msg" class="waitlist-msg"></div>
 
-    <!-- WAITLIST CTA (pre-launch — no fake counts) -->
-    <div class="waitlist-bar">
-      <span class="live-dot" style="background: #E5C158;"></span>
-      <span>Join the waitlist — be first through the gates.</span>
-    </div>
 
-    <div class="scroll-hint">Scroll</div>
+
   </section>
 
   <!-- 1. SOCIAL PROOF BAR (right after hero section, before cryptic hints) -->
@@ -1076,14 +1134,8 @@
         <div class="stat-number white-stat" style="font-size: clamp(28px, 3.2vw, 38px);" id="stat-waitlist">—</div>
         <div class="stat-label">On the Waitlist</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-number white-stat" style="font-size: clamp(28px, 3.2vw, 38px);" id="stat-traders">—</div>
-        <div class="stat-label">Verified Traders</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number white-stat" style="font-size: clamp(28px, 3.2vw, 38px);" id="stat-championships">—</div>
-        <div class="stat-label">Championships Run</div>
-      </div>
+
+
     </div>
   </section>
 
@@ -1092,28 +1144,28 @@
   <!-- 2. GENESIS TRADER PROGRAM (after cryptic hints, before final CTA) -->
   <section class="genesis-section reveal-section" id="genesis">
     <div class="genesis-badge-tag">
-      <span class="gold">LIMITED ACCESS</span> · FIRST 2,500 ONLY
+      <span class="gold">LIMITED ACCESS</span> · FIRST 10,000 ONLY
     </div>
 
     <h2 class="section-headline">
-      The First <span class="gold-text">2,500</span> Get More.
+      The First <span class="gold-text">10,000</span> Get More.
     </h2>
     <p class="section-subtext">
-      Genesis Traders receive a permanent <span class="gold-text">1.25x</span> REX multiplier and <span class="gold-text">1,000</span> bonus REX on signup. Once the spots are gone, they're gone forever.
+      Genesis Traders receive a permanent <span class="gold-text">10x</span> REX multiplier and <span class="gold-text">10,000</span> bonus REX on signup. Once the spots are gone, they're gone forever.
     </p>
 
     <!-- PROGRESS BAR -->
     <div class="genesis-progress-wrapper">
       <div class="genesis-progress-header">
         <span>Genesis Spots Claimed</span>
-        <span><span class="gold-text" id="genesis-claimed">0</span> / 2,500</span>
+        <span><span class="gold-text" id="genesis-claimed">0</span> / 10,000</span>
       </div>
       <div class="genesis-progress-bar">
         <div class="genesis-progress-fill"></div>
       </div>
       <div class="genesis-progress-footer">
         <span>0% Spots Claimed</span>
-        <span class="gold-text" id="genesis-remaining">2,500 Remaining</span>
+        <span class="gold-text" id="genesis-remaining">10,000 Remaining</span>
       </div>
     </div>
 
@@ -1125,8 +1177,8 @@
             <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
           </svg>
         </div>
-        <h3 class="genesis-card-title"><span class="gold-text">1.25x</span> REX Multiplier</h3>
-        <p class="genesis-card-desc">Every REX you earn is multiplied by 1.25x. Forever.</p>
+        <h3 class="genesis-card-title"><span class="gold-text">10x</span> REX Multiplier</h3>
+        <p class="genesis-card-desc">Every REX you earn is multiplied by 10x. Forever.</p>
       </div>
 
       <div class="genesis-card featured">
@@ -1136,7 +1188,7 @@
             <path d="M12 8v8M8 12h8"></path>
           </svg>
         </div>
-        <h3 class="genesis-card-title"><span class="gold-text">1,000</span> Bonus REX</h3>
+        <h3 class="genesis-card-title"><span class="gold-text">10,000</span> Bonus REX</h3>
         <p class="genesis-card-desc">Instant bonus on signup. Start with a head start.</p>
       </div>
 
@@ -1147,7 +1199,7 @@
           </svg>
         </div>
         <h3 class="genesis-card-title">Genesis Badge</h3>
-        <p class="genesis-card-desc">Permanent profile badge. Visible flex. Only for the first <span class="gold-text">2,500</span>.</p>
+        <p class="genesis-card-desc">Permanent profile badge. Visible flex. Only for the first <span class="gold-text">10,000</span>.</p>
       </div>
     </div>
 
@@ -1180,8 +1232,8 @@
               </svg>
             </div>
           </div>
-          <h3 class="step-title">Join the Citadel</h3>
-          <p class="step-desc">Connect with Discord. Takes 30 seconds. No passwords, no fees.</p>
+          <h3 class="step-title">Join the Community</h3>
+          <p class="step-desc">Join our Discord community. Takes 30 seconds. No passwords, no fees.</p>
         </div>
 
         <!-- Step 2 -->
@@ -1196,8 +1248,8 @@
               </svg>
             </div>
           </div>
-          <h3 class="step-title">Link Your MT4</h3>
-          <p class="step-desc">Connect your MT4/MT5 account. We verify. You're in.</p>
+          <h3 class="step-title">Link Your MT5</h3>
+          <p class="step-desc">Connect your MT5 account. We verify. You're in. No results shown until tournament end.</p>
         </div>
 
         <!-- Step 3 -->
@@ -1216,7 +1268,7 @@
             </div>
           </div>
           <h3 class="step-title">Compete & Win</h3>
-          <p class="step-desc">Trade on your own terminal. Highest ROI wins. Results revealed on tournament day.</p>
+          <p class="step-desc">Trade on your own MT5 terminal. Highest ROI wins. Results revealed only at tournament end.</p>
         </div>
       </div>
     </div>
@@ -1239,23 +1291,11 @@
           </div>
           <div>
             <h3 class="trust-title">TWRR Verification</h3>
-            <p class="trust-desc">Time-Weighted Rate of Return. Industry-standard performance metric. No tricks.</p>
+            <p class="trust-desc">Time-Weighted Rate of Return — the gold standard used by institutional funds. Every trade is measured fairly, regardless of deposit timing or size.</p>
           </div>
         </div>
 
-        <!-- Pillar 2 -->
-        <div class="trust-card">
-          <div class="trust-icon-circle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#E5C158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-            </svg>
-          </div>
-          <div>
-            <h3 class="trust-title">MT4 Investor Password</h3>
-            <p class="trust-desc">Your trades are verified through MT4 investor passwords. Full transparency.</p>
-          </div>
-        </div>
+
 
         <!-- Pillar 3 -->
         <div class="trust-card">
@@ -1287,17 +1327,23 @@
     </div>
   </section>
 
-  <!-- FINAL CTA -->
-  <section class="final-section" data-shape="fortress">
-    <h2 class="final-headline">
-      When the gates open, will you be <span class="gold">ready?</span>
-    </h2>
-    <p class="final-sub">
-      Join the waitlist. Get early access. Be part of something from day one.
-    </p>
-    <a href="#waitlist-form-wrap" class="btn-primary" style="padding: 14px 36px; font-size: 15px;" onclick="document.getElementById('waitlist-email').focus(); return false;">
-      Join the Waitlist
-    </a>
+  <!-- COMMUNITY SECTION (Centered, Discord-linked) -->
+  <section class="reveal-section" id="community-cta" style="padding: 100px 24px; text-align: center; position: relative; z-index: 2;">
+    <div style="max-width: 600px; margin: 0 auto;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px; padding: 8px 16px; border: 1px solid rgba(88, 101, 242, 0.4); border-radius: 999px;">
+        <span style="width: 8px; height: 8px; background: #5865F2; border-radius: 50%; display: inline-block;"></span>
+        <span style="font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: #5865F2; font-weight: 600;">Discord Community</span>
+      </div>
+      <h2 class="section-headline" style="margin-bottom: 16px;">Where traders actually <span class="gold-text">talk.</span></h2>
+      <p class="section-subtext" style="margin-bottom: 40px;">No forums. No Reddit threads. Just real-time voice, live trade setups, and direct access to the FORTREX team. Everything happens in our Discord.</p>
+      <a href="https://discord.gg/9pTSqeTbn" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 12px; background: #5865F2; color: #fff; padding: 16px 36px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: background 0.3s;">
+        <svg viewBox="0 0 127.14 96.36" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.68,1.75,1.36,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.89,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.89,96.12,53,91.08,65.69,84.69,65.69Z"/>
+        </svg>
+        Join the Discord
+      </a>
+      <p style="margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.4);">Free forever. No gatekeeping. Just traders helping traders.</p>
+    </div>
   </section>
 
   <!-- FOOTER WITH LOGO -->
@@ -1314,7 +1360,7 @@
           <a href="contests.html" class="footer-link">Tournaments</a>
           <a href="leaderboard.html" class="footer-link">Leaderboard</a>
           <a href="community.html" class="footer-link">Community</a>
-          <a href="faq.html" class="footer-link">FAQ</a>
+          
           <a href="terms.html" class="footer-link">Terms</a>
           <a href="privacy.html" class="footer-link">Privacy</a>
           <a href="signin.html" class="footer-link">Sign In</a>
@@ -1332,30 +1378,7 @@
 
 
   <script>
-    // ===== COUNTDOWN TIMER =====
-    const LAUNCH_DATE = new Date('2026-08-23T23:59:59+05:30').getTime();
-
-    function updateCountdown() {
-      const now = Date.now();
-      const diff = LAUNCH_DATE - now;
-      if (diff <= 0) {
-        document.getElementById('cd-days').textContent = '00';
-        document.getElementById('cd-hours').textContent = '00';
-        document.getElementById('cd-mins').textContent = '00';
-        document.getElementById('cd-secs').textContent = '00';
-        return;
-      }
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const secs = Math.floor((diff % (1000 * 60)) / 1000);
-      document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
-      document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-      document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
-      document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
-    }
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    // ===== REGISTRATION COUNTER (replaces countdown) =====
 
     // ===== JOIN WAITLIST =====
     async function submitWaitlist(e) {
@@ -1435,7 +1458,7 @@
           if (chEl) chEl.textContent = (s.completed_championships || 0).toLocaleString();
 
           // Update genesis progress
-          const genesisMax = 2500;
+          const genesisMax = 10000;
           const genesisClaimed = s.registration_count || 0;
 
           const genesisClaimedEl = document.getElementById('genesis-claimed');
@@ -1453,6 +1476,20 @@
           }
           const pctEl = document.querySelector('.genesis-progress-footer span:first-child');
           if (pctEl) pctEl.textContent = pct.toFixed(0) + '% Spots Claimed';
+
+          // Update registration counter in hero
+          const regCurrentEl = document.getElementById('reg-current');
+          if (regCurrentEl) regCurrentEl.textContent = genesisClaimed.toLocaleString();
+
+          const regBarEl = document.getElementById('reg-bar');
+          const regPct = genesisMax > 0 ? (genesisClaimed / genesisMax) * 100 : 0;
+          if (regBarEl) regBarEl.style.width = regPct + '%';
+
+          const regPctEl = document.getElementById('reg-pct');
+          if (regPctEl) regPctEl.textContent = regPct.toFixed(1) + '% to launch';
+
+          const regRemainingEl = document.getElementById('reg-remaining');
+          if (regRemainingEl) regRemainingEl.textContent = (genesisMax - genesisClaimed).toLocaleString() + ' spots remaining';
         }
       } catch (err) {
         console.warn('Stats fetch failed:', err);
