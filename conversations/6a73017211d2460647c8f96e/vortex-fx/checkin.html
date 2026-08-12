@@ -109,10 +109,18 @@
     @media (max-width: 600px) {
       .calendar-grid-container {
         grid-template-columns: repeat(5, 1fr);
-        gap: 8px;
+        gap: 6px;
       }
       .checkin-card-box {
-        padding: 28px 20px;
+        padding: 24px 16px;
+      }
+    }
+    @media (max-width: 480px) {
+      .metric-box-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .streak-display-number {
+        font-size: 56px !important;
       }
     }
 

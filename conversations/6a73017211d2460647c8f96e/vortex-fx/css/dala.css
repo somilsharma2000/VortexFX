@@ -1338,3 +1338,289 @@ main, section, footer, .page-content {
   0%, 100% { opacity: 0.4; transform: scale(1); }
   50% { opacity: 1; transform: scale(1.3); }
 }
+
+/* ==========================================================================
+   GLASSMORPHISM CARD MOBILE SCALING SYSTEM
+   Ensures all glass cards scale perfectly on iOS/Android without overflow
+   ========================================================================== */
+
+/* Tablet — reduce padding, tighten gaps */
+@media (max-width: 768px) {
+  /* All glass cards: reduce padding uniformly */
+  .checkin-card-box,
+  .profile-card,
+  .content-card,
+  .bp-section,
+  .auth-card,
+  .dash-card,
+  .rex-card,
+  .shop-card,
+  .genesis-card,
+  .step-card,
+  .metric-card-item,
+  .info-card,
+  .referral-section {
+    padding: 20px 16px !important;
+    border-radius: 12px !important;
+  }
+
+  /* Profile card gets slightly more padding */
+  .profile-card {
+    padding: 24px 20px !important;
+  }
+
+  /* Auth card stays readable */
+  .auth-card {
+    padding: 28px 20px !important;
+    max-width: 100% !important;
+  }
+
+  /* Checkin card hero padding */
+  .checkin-card-box {
+    padding: 28px 20px !important;
+  }
+
+  /* All grids collapse to single column */
+  .social-proof-container,
+  .genesis-cards-grid,
+  .steps-grid,
+  .trust-grid,
+  .shop-grid,
+  .shop-items-grid,
+  .grid-3,
+  .grid-row-3,
+  .grid-row-2,
+  .grid-row-main {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* Social proof can stay 2-col on tablet, 1-col on phone */
+  .social-proof-container {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  /* Metric grids stay 2-col on tablet */
+  .metric-box-grid,
+  .stat-tiles {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  /* Profile grid collapses */
+  .profile-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* Container max-widths tighten */
+  .container {
+    max-width: 100% !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Card text scales down */
+  .genesis-card-title,
+  .step-title {
+    font-size: 18px !important;
+  }
+  .genesis-card-desc,
+  .step-desc {
+    font-size: 13px !important;
+  }
+
+  /* Card icons shrink slightly */
+  .genesis-card-icon,
+  .step-icon-circle {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .genesis-card-icon svg,
+  .step-icon-circle svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  /* Streak display in checkin scales */
+  .streak-display-number {
+    font-size: clamp(48px, 14vw, 80px) !important;
+  }
+
+  /* Stat numbers in social proof */
+  .stat-number {
+    font-size: clamp(24px, 6vw, 36px) !important;
+  }
+
+  /* Metric card values */
+  .metric-val {
+    font-size: 24px !important;
+  }
+}
+
+/* Phone — tighten further, prevent any overflow */
+@media (max-width: 480px) {
+  /* All glass cards: minimum viable padding */
+  .checkin-card-box,
+  .profile-card,
+  .content-card,
+  .bp-section,
+  .auth-card,
+  .dash-card,
+  .rex-card,
+  .shop-card,
+  .genesis-card,
+  .step-card,
+  .metric-card-item,
+  .info-card,
+  .referral-section {
+    padding: 16px 12px !important;
+    border-radius: 10px !important;
+  }
+
+  /* Profile card */
+  .profile-card {
+    padding: 20px 16px !important;
+  }
+
+  /* Auth card */
+  .auth-card {
+    padding: 24px 16px !important;
+    border-radius: 10px !important;
+  }
+
+  /* Checkin card */
+  .checkin-card-box {
+    padding: 20px 14px !important;
+  }
+
+  /* ALL grids become single column */
+  .social-proof-container,
+  .metric-box-grid,
+  .stat-tiles,
+  .achievements-grid,
+  .shop-grid,
+  .shop-items-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Calendar grid stays 5-col but tighter */
+  .calendar-grid-container {
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  /* Card titles smaller */
+  .genesis-card-title,
+  .step-title,
+  .section-h2 {
+    font-size: 16px !important;
+  }
+
+  /* Card descriptions */
+  .genesis-card-desc,
+  .step-desc,
+  .section-sub {
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Stat numbers */
+  .stat-number {
+    font-size: 22px !important;
+  }
+  .metric-val {
+    font-size: 20px !important;
+  }
+
+  /* BP level number */
+  .bp-level {
+    font-size: 36px !important;
+  }
+
+  /* Streak number */
+  .streak-display-number {
+    font-size: 56px !important;
+    letter-spacing: -2px !important;
+  }
+
+  /* Profile wrapper padding */
+  .profile-wrapper {
+    padding: 90px 12px 40px !important;
+  }
+
+  /* Stat tile padding */
+  .stat-tile {
+    padding: 10px 8px !important;
+  }
+  .stat-tile .val {
+    font-size: 20px !important;
+  }
+
+  /* Prevent box-shadow overflow causing scroll */
+  .genesis-card:hover,
+  .step-card:hover {
+    transform: none !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* Achievement grid becomes 2-col */
+  .achievements-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  .achievement {
+    padding: 14px 8px !important;
+  }
+  .achievement-icon {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 18px !important;
+  }
+
+  /* Info card tighter */
+  .info-row {
+    padding: 6px 0 !important;
+    font-size: 12px !important;
+  }
+
+  /* Referral section */
+  .referral-code {
+    font-size: 16px !important;
+  }
+  .referral-link-box {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  /* Flex card canvas */
+  #flex-card-canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+/* Very small phones — final safety net */
+@media (max-width: 360px) {
+  .checkin-card-box,
+  .profile-card,
+  .content-card,
+  .auth-card,
+  .dash-card {
+    padding: 12px 10px !important;
+  }
+  .stat-tile .val {
+    font-size: 18px !important;
+  }
+  .metric-val {
+    font-size: 18px !important;
+  }
+  .streak-display-number {
+    font-size: 48px !important;
+  }
+  .calendar-grid-container {
+    gap: 4px !important;
+  }
+}
