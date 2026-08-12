@@ -461,26 +461,272 @@
     </div>
   </footer>
 
-  <script>
-  // Home page countdown to next tournament reveal
-  function initHomeCountdown() {
-    const el = document.getElementById('home-countdown');
-    if (!el) return;
-    const target = new Date('2026-08-23T23:59:59').getTime();
-    function update() {
-      const now = Date.now();
-      const diff = target - now;
-      if (diff <= 0) { el.textContent = 'REVEALING SOON'; return; }
-      const d = Math.floor(diff / 86400000);
-      const h = Math.floor((diff % 86400000) / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      const s = Math.floor((diff % 60000) / 1000);
-      el.textContent = `${String(d).padStart(2,'0')}d : ${String(h).padStart(2,'0')}h : ${String(m).padStart(2,'0')}m : ${String(s).padStart(2,'0')}s`;
+    <script>
+  // ============================================
+  // FORTEX FX — Live Stats & Auth Integration
+  // ============================================
+  (function() {
+    // 1. Inject pulse animation style for stats loading state
+    const loadingStyle = document.createElement('style');
+    loadingStyle.textContent = `
+      @keyframes statsPulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.35; }
+      }
+      .stats-loading {
+        animation: statsPulse 1.2s ease-in-out infinite !important;
+      }
+    `;
+    document.head.appendChild(loadingStyle);
+
+    let homeCountdownInterval = null;
+
+    // Helper: format ISO or date string to 'MMM DD'
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      try {
+        const d = new Date(dateStr);
+        if (isNaN(d.getTime())) return dateStr;
+        return d.toLocaleDateString('en-US', { month: 'short', day: '2-digit' });
+      } catch (e) {
+        return dateStr;
+      }
     }
-    update();
-    setInterval(update, 1000);
-  }
-  initHomeCountdown();
+
+    // Helper: dynamic countdown timer
+    function updateCountdown(targetDateStr) {
+      const el = document.getElementById('home-countdown');
+      if (!el) return;
+
+      if (homeCountdownInterval) {
+        clearInterval(homeCountdownInterval);
+        homeCountdownInterval = null;
+      }
+
+      if (!targetDateStr) {
+        el.textContent = 'Next tournament coming soon';
+        return;
+      }
+
+      const target = new Date(targetDateStr).getTime();
+      if (isNaN(target)) {
+        el.textContent = 'Next tournament coming soon';
+        return;
+      }
+
+      function tick() {
+        const now = Date.now();
+        const diff = target - now;
+        if (diff <= 0) {
+          el.textContent = 'REVEALING SOON';
+          if (homeCountdownInterval) {
+            clearInterval(homeCountdownInterval);
+            homeCountdownInterval = null;
+          }
+          return;
+        }
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        el.textContent = `${String(d).padStart(2,'0')}d : ${String(h).padStart(2,'0')}h : ${String(m).padStart(2,'0')}m : ${String(s).padStart(2,'0')}s`;
+      }
+
+      tick();
+      homeCountdownInterval = setInterval(tick, 1000);
+    }
+
+    // Helper: animated count-up for registration number
+    function animateRegistrationCount(targetCount) {
+      const digits = document.querySelectorAll('#reg-counter .reg-digit');
+      const barFill = document.querySelector('#reg-counter .reg-counter-bar-fill');
+      const remainingEl = document.querySelector('#reg-counter .reg-counter-remaining');
+      const socialHeadline = document.querySelector('h2[data-psychology="socialProof"]');
+      
+      const activeTraderValues = [];
+      document.querySelectorAll('.stat-item').forEach(item => {
+        const label = item.querySelector('.stat-label');
+        if (label && label.textContent.trim().toLowerCase().includes('trader')) {
+          const val = item.querySelector('.stat-value');
+          if (val) activeTraderValues.push(val);
+        }
+      });
+
+      function updateDOM(currentVal) {
+        const rounded = Math.round(currentVal);
+        const str = String(rounded).padStart(5, '0');
+
+        // Digits display in counter
+        digits.forEach((digitEl, idx) => {
+          if (str[idx] !== undefined) {
+            digitEl.textContent = str[idx];
+          }
+        });
+
+        // Progress bar towards target 10,000
+        if (barFill) {
+          const pct = Math.min((currentVal / 10000) * 100, 100).toFixed(2);
+          barFill.style.width = `${pct}%`;
+        }
+
+        // Remaining registrations count
+        if (remainingEl) {
+          const rem = Math.max(10000 - rounded, 0);
+          remainingEl.textContent = `${rem.toLocaleString()} traders needed to unlock free tournaments`;
+        }
+
+        // Section headline
+        if (socialHeadline) {
+          socialHeadline.textContent = `${rounded.toLocaleString()} traders have already joined`;
+        }
+
+        // Active traders stat row numbers
+        activeTraderValues.forEach(valEl => {
+          valEl.textContent = rounded.toLocaleString();
+        });
+      }
+
+      // Smooth count-up animation
+      const duration = 1500;
+      const startTime = performance.now();
+
+      function step(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeProgress = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+        const currentVal = targetCount * easeProgress;
+
+        updateDOM(currentVal);
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          updateDOM(targetCount);
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    // Helper: update hero greeting if user is logged in
+    function updateHeroGreeting() {
+      if (typeof FORTEX_AUTH !== 'undefined' && FORTEX_AUTH.isLoggedIn) {
+        const trader = FORTEX_AUTH.isLoggedIn();
+        if (trader) {
+          const username = trader.username || trader.display_name || trader.name || 'Trader';
+          const headline = document.querySelector('.hero-headline');
+          if (headline) {
+            headline.textContent = `Welcome back, ${username}`;
+          }
+        }
+      }
+    }
+
+    // Main initialization function
+    async function initLiveStats() {
+      // 1. Apply loading pulse effect to stats containers
+      const regCounter = document.getElementById('reg-counter');
+      const upcomingContainer = document.querySelector('section[data-shape="metatrader"]');
+      const heroContent = document.querySelector('.hero-content');
+
+      const loadingTargets = [regCounter, upcomingContainer, heroContent].filter(Boolean);
+      loadingTargets.forEach(el => el.classList.add('stats-loading'));
+
+      // 2. Default static mock numbers
+      const fallbackStats = {
+        registration_count: 3742,
+        active_tournaments: 0,
+        next_tournament: {
+          name: 'Autumn Arena',
+          start_date: '2026-08-23T23:59:59',
+          prize_pool_rex: 50000,
+          status: 'upcoming'
+        }
+      };
+
+      let stats = fallbackStats;
+
+      // 3. Fetch platform stats from backend
+      try {
+        if (typeof FORTEX_AUTH !== 'undefined' && FORTEX_AUTH.callFunction) {
+          const res = await FORTEX_AUTH.callFunction('getPlatformStats', {});
+          if (res && res.success && res.stats) {
+            stats = res.stats;
+          }
+        }
+      } catch (err) {
+        console.warn('getPlatformStats failed, falling back to static mock stats:', err);
+      } finally {
+        loadingTargets.forEach(el => el.classList.remove('stats-loading'));
+      }
+
+      // 4. Update Registration Counter with animated count-up
+      const regCount = (stats && typeof stats.registration_count === 'number') ? stats.registration_count : 3742;
+      animateRegistrationCount(regCount);
+
+      // 5. Update Active Tournament Count
+      const activeTournaments = (stats && typeof stats.active_tournaments === 'number') ? stats.active_tournaments : 0;
+      
+      const liveBadges = document.querySelectorAll('.badge-live');
+      liveBadges.forEach(badge => {
+        if (activeTournaments > 0) {
+          badge.textContent = `${activeTournaments} ACTIVE TOURNAMENT${activeTournaments > 1 ? 'S' : ''} LIVE NOW`;
+        } else {
+          badge.textContent = 'NO ACTIVE TOURNAMENTS';
+        }
+      });
+
+      const liveIndicators = document.querySelectorAll('.live-indicator span');
+      liveIndicators.forEach(span => {
+        if (activeTournaments > 0) {
+          span.textContent = `${activeTournaments} active tournament${activeTournaments > 1 ? 's' : ''} live now`;
+        } else {
+          span.textContent = '0 active tournaments live now';
+        }
+      });
+
+      // 6. Update Next Tournament Preview Card & Countdown Timer
+      const upcomingCards = Array.from(document.querySelectorAll('.float-item')).filter(item => {
+        const label = item.querySelector('.float-item-label');
+        return label && label.textContent.trim().toUpperCase() === 'UPCOMING';
+      });
+
+      if (stats && stats.next_tournament) {
+        const nt = stats.next_tournament;
+        upcomingCards.forEach(card => {
+          const title = card.querySelector('.float-item-title');
+          const body = card.querySelector('.float-item-body');
+          if (title) title.textContent = nt.name || 'Next Tournament';
+          if (body) {
+            const dateStr = formatDate(nt.start_date);
+            const prizeStr = nt.prize_pool_rex ? ` · ${nt.prize_pool_rex.toLocaleString()} REX prize pool` : '';
+            body.textContent = `Starts ${dateStr}${prizeStr}`;
+          }
+        });
+
+        updateCountdown(nt.start_date);
+      } else {
+        // next_tournament is null
+        upcomingCards.forEach(card => {
+          const title = card.querySelector('.float-item-title');
+          const body = card.querySelector('.float-item-body');
+          if (title) title.textContent = 'Next tournament coming soon';
+          if (body) body.textContent = 'Stay tuned for our upcoming tournament announcements.';
+        });
+
+        updateCountdown(null);
+      }
+
+      // 7. Personalize Hero Copy if user is logged in
+      updateHeroGreeting();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initLiveStats);
+    } else {
+      initLiveStats();
+    }
+  })();
   </script>
 </body>
 </html>
