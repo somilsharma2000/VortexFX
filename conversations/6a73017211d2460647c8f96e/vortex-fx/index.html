@@ -244,8 +244,8 @@
       background: rgba(20, 22, 26, 0.6);
       border: 1px solid rgba(229, 193, 88, 0.2);
       border-radius: 16px;
-      padding: 28px 36px;
-      max-width: 460px;
+      padding: 36px 48px;
+      max-width: 720px;
       width: 100%;
       margin: 0 auto;
       backdrop-filter: blur(10px);
@@ -310,6 +310,192 @@
       align-items: center;
       font-size: 12px;
       color: rgba(255, 255, 255, 0.5);
+    }
+
+
+    /* MILESTONE MARKERS */
+    .milestone-marker {
+      position: absolute;
+      top: -2px;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+    }
+    .milestone-dot {
+      width: 3px;
+      height: 12px;
+      background: rgba(229, 193, 88, 0.5);
+      border-radius: 2px;
+    }
+    .milestone-dot-sm {
+      width: 2px;
+      height: 8px;
+      background: rgba(229, 193, 88, 0.4);
+      border-radius: 1px;
+    }
+    .milestone-label {
+      font-size: 9px;
+      color: rgba(229, 193, 88, 0.5);
+      margin-top: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.03em;
+    }
+    .milestone-label-sm {
+      font-size: 8px;
+      color: rgba(229, 193, 88, 0.35);
+      margin-top: 2px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* TIER ROW */
+    .tier-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 20px 0 12px;
+      padding: 0 2px;
+    }
+    .tier-item {
+      flex: 1;
+      text-align: center;
+      padding: 10px 6px;
+      background: rgba(229, 193, 88, 0.04);
+      border: 1px solid rgba(229, 193, 88, 0.12);
+      border-radius: 8px;
+    }
+    .tier-item.active {
+      background: rgba(229, 193, 88, 0.1);
+      border-color: rgba(229, 193, 88, 0.4);
+    }
+    .tier-mult {
+      display: block;
+      font-size: 18px;
+      font-weight: 800;
+      color: #E5C158;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1;
+    }
+    .tier-bonus {
+      display: block;
+      font-size: 10px;
+      color: #888;
+      margin-top: 4px;
+      letter-spacing: 0.02em;
+    }
+    .tier-range {
+      display: block;
+      font-size: 9px;
+      color: #555;
+      margin-top: 2px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* GENESIS HERO BAR (slim, wide) */
+    .genesis-hero-bar {
+      max-width: 720px;
+      width: 100%;
+      margin: 20px auto 0;
+      background: rgba(10, 11, 16, 0.6);
+      border: 1px solid rgba(229, 193, 88, 0.2);
+      border-radius: 12px;
+      padding: 16px 24px;
+      backdrop-filter: blur(10px);
+    }
+    .genesis-hero-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .genesis-hero-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(229, 193, 88, 0.8);
+    }
+    .genesis-hero-pool {
+      font-size: 12px;
+      color: #aaa;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .genesis-hero-progress {
+      position: relative;
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 2px;
+      overflow: visible;
+      margin-bottom: 10px;
+    }
+    .genesis-hero-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #E5C158, #F5D172);
+      border-radius: 2px;
+      transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 8px rgba(229, 193, 88, 0.4);
+    }
+    .genesis-hero-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .genesis-hero-footer span {
+      font-size: 11px;
+      color: #666;
+      letter-spacing: 0.02em;
+    }
+    .genesis-claim-btn {
+      font-size: 12px;
+      font-weight: 700;
+      color: #E5C158;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: opacity 0.2s;
+    }
+    .genesis-claim-btn:hover { opacity: 0.8; }
+
+    /* HERO SIGN-IN CTA */
+    .hero-signin-cta {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .hero-signin-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      border: none;
+      cursor: pointer;
+    }
+    .hero-signin-btn svg { width: 20px; height: 20px; }
+    .hero-signin-btn.discord-cta {
+      background: #5865F2;
+      color: #fff;
+    }
+    .hero-signin-btn.discord-cta:hover {
+      background: #4752C4;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(88, 101, 242, 0.35);
+    }
+    .hero-signin-btn.google-cta {
+      background: #fff;
+      color: #1a1a1a;
+    }
+    .hero-signin-btn.google-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
     }
 
     .scroll-hint {
@@ -1088,7 +1274,7 @@
 
 
 
-    <!-- REGISTRATION COUNTER -->
+    <!-- EXPANDED REGISTRATION COUNTER WITH MILESTONES -->
     <div class="reg-counter" id="reg-counter">
       <div class="reg-counter-header">
         <span class="live-dot" style="background: #E5C158;"></span>
@@ -1099,8 +1285,41 @@
         <span class="reg-counter-divider">/</span>
         <span class="reg-counter-target">10,000</span>
       </div>
-      <div class="reg-counter-bar-wrap">
+      <div class="reg-counter-bar-wrap" style="position: relative; height: 12px; margin-bottom: 4px;">
         <div class="reg-counter-bar" id="reg-bar" style="width: 0%;"></div>
+        <div class="milestone-marker" style="left: 25%;"><div class="milestone-dot"></div></div>
+        <div class="milestone-marker" style="left: 50%;"><div class="milestone-dot"></div></div>
+        <div class="milestone-marker" style="left: 75%;"><div class="milestone-dot"></div></div>
+        <div class="milestone-marker" style="left: 100%;"><div class="milestone-dot"></div></div>
+      </div>
+      <div style="display:flex; justify-content:space-between; padding: 0; margin-bottom: 16px; position: relative;">
+        <span style="font-size: 9px; color: #555; font-family: 'JetBrains Mono', monospace;">0</span>
+        <span style="font-size: 9px; color: rgba(229,193,88,0.5); font-family: 'JetBrains Mono', monospace; position: absolute; left: 25%; transform: translateX(-50%);">2,500</span>
+        <span style="font-size: 9px; color: rgba(229,193,88,0.5); font-family: 'JetBrains Mono', monospace; position: absolute; left: 50%; transform: translateX(-50%);">5,000</span>
+        <span style="font-size: 9px; color: rgba(229,193,88,0.5); font-family: 'JetBrains Mono', monospace; position: absolute; left: 75%; transform: translateX(-50%);">7,500</span>
+        <span style="font-size: 9px; color: #555; font-family: 'JetBrains Mono', monospace; margin-right: -4px;">10,000</span>
+      </div>
+      <div class="tier-row" id="tier-row">
+        <div class="tier-item" id="tier-1">
+          <span class="tier-mult">3.0x</span>
+          <span class="tier-bonus">4,000 REX</span>
+          <span class="tier-range">0-2,500</span>
+        </div>
+        <div class="tier-item" id="tier-2">
+          <span class="tier-mult">2.5x</span>
+          <span class="tier-bonus">3,000 REX</span>
+          <span class="tier-range">2,500-5,000</span>
+        </div>
+        <div class="tier-item" id="tier-3">
+          <span class="tier-mult">2.0x</span>
+          <span class="tier-bonus">2,000 REX</span>
+          <span class="tier-range">5,000-7,500</span>
+        </div>
+        <div class="tier-item" id="tier-4">
+          <span class="tier-mult">1.5x</span>
+          <span class="tier-bonus">1,000 REX</span>
+          <span class="tier-range">7,500-10,000</span>
+        </div>
       </div>
       <div class="reg-counter-footer">
         <span id="reg-pct">0% to launch</span>
@@ -1108,14 +1327,43 @@
       </div>
     </div>
 
-    <!-- WAITLIST FORM -->
-    <div class="waitlist-form" id="waitlist-form-wrap">
-      <input type="email" id="waitlist-email" placeholder="Enter your email" class="waitlist-input" />
-      <button onclick="submitWaitlist(event)" class="btn-primary" style="padding: 12px 28px;">Join Waitlist</button>
+    <!-- GENESIS HERO BAR (slim, wide, with milestones + REX pool + gates text) -->
+    <div class="genesis-hero-bar">
+      <div class="genesis-hero-header">
+        <span class="genesis-hero-label">GENESIS PROGRAM</span>
+        <span class="genesis-hero-pool">REX PRIZE POOL: <span class="gold-text" style="font-weight: 700;">1,000,000</span></span>
+      </div>
+      <div class="genesis-hero-progress">
+        <div class="genesis-hero-fill" id="genesis-hero-fill"></div>
+        <div class="milestone-marker" style="left: 25%;"><div class="milestone-dot-sm"></div></div>
+        <div class="milestone-marker" style="left: 50%;"><div class="milestone-dot-sm"></div></div>
+        <div class="milestone-marker" style="left: 75%;"><div class="milestone-dot-sm"></div></div>
+        <div class="milestone-marker" style="left: 100%;"><div class="milestone-dot-sm"></div></div>
+      </div>
+      <div class="genesis-hero-footer">
+        <span>Gates open after 10,000 registrations</span>
+        <a href="signin.html" class="genesis-claim-btn">Claim Your Genesis Spot &rarr;</a>
+      </div>
     </div>
-    <div id="waitlist-msg" class="waitlist-msg"></div>
 
-
+    <!-- SIGN-IN CTA (replaces waitlist form) -->
+    <div class="hero-signin-cta">
+      <a href="signin.html" class="hero-signin-btn discord-cta" onclick="FORTREX_AUTH.loginWithDiscord(); return false;">
+        <svg viewBox="0 0 127.14 96.36" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M107.7,8.07A105.15,107.15,0,0,0,81.47,0a72.06,72.06,0,0,0,3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.68,1.75,1.36,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.8,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.89,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.89,96.12,53,91.08,65.69,84.69,65.69Z"/>
+        </svg>
+        Continue with Discord
+      </a>
+      <a href="signin.html" class="hero-signin-btn google-cta">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        Continue with Google
+      </a>
+    </div>
 
   </section>
 
@@ -1127,7 +1375,7 @@
         <div class="stat-label">Launch Countdown</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number gold-stat" style="font-size: clamp(28px, 3.2vw, 38px); line-height:1.25;" id="stat-prize-pool">—</div>
+        <div class="stat-number gold-stat" style="font-size: clamp(28px, 3.2vw, 38px); line-height:1.25;">1,000,000</div>
         <div class="stat-label">REX Prize Pool</div>
       </div>
       <div class="stat-card">
@@ -1141,35 +1389,20 @@
 
 
 
-  <!-- 2. GENESIS TRADER PROGRAM (after cryptic hints, before final CTA) -->
+  <!-- 2. GENESIS TRADER PROGRAM (updated: tiered rewards, no 10x) -->
   <section class="genesis-section reveal-section" id="genesis">
     <div class="genesis-badge-tag">
-      <span class="gold">LIMITED ACCESS</span> · FIRST 10,000 ONLY
+      <span class="gold">LIMITED ACCESS</span> &middot; FIRST 10,000 ONLY
     </div>
 
     <h2 class="section-headline">
       The First <span class="gold-text">10,000</span> Get More.
     </h2>
     <p class="section-subtext">
-      Genesis Traders receive a permanent <span class="gold-text">10x</span> REX multiplier and <span class="gold-text">10,000</span> bonus REX on signup. Once the spots are gone, they're gone forever.
+      Genesis Traders receive tiered REX multipliers and bonus REX on signup. The earlier you join, the higher your tier. Once the spots are gone, they're gone forever.
     </p>
 
-    <!-- PROGRESS BAR -->
-    <div class="genesis-progress-wrapper">
-      <div class="genesis-progress-header">
-        <span>Genesis Spots Claimed</span>
-        <span><span class="gold-text" id="genesis-claimed">0</span> / 10,000</span>
-      </div>
-      <div class="genesis-progress-bar">
-        <div class="genesis-progress-fill"></div>
-      </div>
-      <div class="genesis-progress-footer">
-        <span>0% Spots Claimed</span>
-        <span class="gold-text" id="genesis-remaining">10,000 Remaining</span>
-      </div>
-    </div>
-
-    <!-- 3 BENEFIT CARDS -->
+    <!-- 3 BENEFIT CARDS (updated, no 10x) -->
     <div class="genesis-cards-grid">
       <div class="genesis-card">
         <div class="genesis-card-icon">
@@ -1177,8 +1410,8 @@
             <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
           </svg>
         </div>
-        <h3 class="genesis-card-title"><span class="gold-text">10x</span> REX Multiplier</h3>
-        <p class="genesis-card-desc">Every REX you earn is multiplied by 10x. Forever.</p>
+        <h3 class="genesis-card-title">Tiered REX Multipliers</h3>
+        <p class="genesis-card-desc">From <span class="gold-text">3.0x</span> down to <span class="gold-text">1.5x</span> based on your registration tier. Permanent for life.</p>
       </div>
 
       <div class="genesis-card featured">
@@ -1188,8 +1421,8 @@
             <path d="M12 8v8M8 12h8"></path>
           </svg>
         </div>
-        <h3 class="genesis-card-title"><span class="gold-text">10,000</span> Bonus REX</h3>
-        <p class="genesis-card-desc">Instant bonus on signup. Start with a head start.</p>
+        <h3 class="genesis-card-title">Up to <span class="gold-text">4,000</span> Bonus REX</h3>
+        <p class="genesis-card-desc">Instant bonus on signup. Scaled by tier. Earliest traders get the most.</p>
       </div>
 
       <div class="genesis-card">
@@ -1204,17 +1437,17 @@
     </div>
 
     <div style="margin-top: 48px;">
-      <a href="signin.html" class="stealth-cta" onclick="joinWaitlist(event)">
+      <a href="signin.html" class="stealth-cta">
         <svg viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
-          <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.68,1.75,1.36,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.89,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.89,96.12,53,91.08,65.69,84.69,65.69Z"/>
+          <path d="M107.7,8.07A105.15,107.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.68,1.75,1.36,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.8,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.89,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.89,96.12,53,91.08,65.69,84.69,65.69Z"/>
         </svg>
         Claim Your Genesis Spot
       </a>
     </div>
   </section>
 
-  <!-- 3. HOW IT WORKS (3 steps, after Genesis section) -->
-  <section class="how-section reveal-section" id="how-it-works">
+  <!-- 3. HOW IT WORKS (hidden for pre-launch) -->
+  <section class="how-section reveal-section" id="how-it-works" style="display: none;">
     <div class="how-container">
       <div style="text-align: center; margin-bottom: 60px;">
         <h2 class="section-headline">How It Works</h2>
@@ -1380,48 +1613,6 @@
   <script>
     // ===== REGISTRATION COUNTER (replaces countdown) =====
 
-    // ===== JOIN WAITLIST =====
-    async function submitWaitlist(e) {
-      e.preventDefault();
-      const emailInput = document.getElementById('waitlist-email');
-      const msgEl = document.getElementById('waitlist-msg');
-      const email = emailInput.value.trim();
-
-      if (!email || !email.includes('@')) {
-        msgEl.textContent = 'Please enter a valid email.';
-        msgEl.className = 'waitlist-msg waitlist-error';
-        return;
-      }
-
-      msgEl.textContent = 'Adding you to the list...';
-      msgEl.className = 'waitlist-msg waitlist-loading';
-
-      try {
-        const res = await fetch('https://koda-a0d26f88.base44.app/functions/joinWaitlist', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email })
-        });
-        const data = await res.json();
-
-        if (data.success) {
-          msgEl.textContent = data.message || "You're on the list. Gates open August 23.";
-          msgEl.className = 'waitlist-msg waitlist-success';
-          emailInput.value = '';
-          fetchRealStats(); // Refresh stats
-        } else if (data.error === 'already_registered') {
-          msgEl.textContent = "You're already on the waitlist!";
-          msgEl.className = 'waitlist-msg waitlist-info';
-        } else {
-          msgEl.textContent = data.message || 'Something went wrong. Try again.';
-          msgEl.className = 'waitlist-msg waitlist-error';
-        }
-      } catch (err) {
-        msgEl.textContent = 'Network error. Try again.';
-        msgEl.className = 'waitlist-msg waitlist-error';
-      }
-    }
-
     // ===== SCROLL REVEAL =====
     const revealSections = document.querySelectorAll('.reveal-section');
     const revealObserver = new IntersectionObserver((entries) => {
@@ -1490,6 +1681,17 @@
 
           const regRemainingEl = document.getElementById('reg-remaining');
           if (regRemainingEl) regRemainingEl.textContent = (genesisMax - genesisClaimed).toLocaleString() + ' spots remaining';
+
+          // Highlight active tier based on registration count
+          const tierId = genesisClaimed < 2500 ? 'tier-1' : genesisClaimed < 5000 ? 'tier-2' : genesisClaimed < 7500 ? 'tier-3' : 'tier-4';
+          ['tier-1', 'tier-2', 'tier-3', 'tier-4'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.classList.toggle('active', id === tierId);
+          });
+
+          // Update genesis hero bar fill
+          const genesisHeroFill = document.getElementById('genesis-hero-fill');
+          if (genesisHeroFill) genesisHeroFill.style.width = regPct + '%';
         }
       } catch (err) {
         console.warn('Stats fetch failed:', err);
@@ -1502,11 +1704,13 @@
     // ===== CHECK IF ALREADY LOGGED IN =====
     const trader = FORTREX_AUTH.isLoggedIn();
     if (trader) {
-      document.querySelectorAll('.btn-primary').forEach(btn => {
-        if (btn.textContent.includes('Join Waitlist')) {
-          btn.textContent = "You're In";
-          btn.onclick = (e) => { e.preventDefault(); window.location.href = 'profile.html'; };
-        }
+      // Update hero sign-in buttons to show dashboard link
+      document.querySelectorAll('.hero-signin-btn').forEach(btn => {
+        btn.textContent = 'Go to Dashboard →';
+        btn.href = 'dashboard.html';
+        btn.classList.remove('discord-cta', 'google-cta');
+        btn.style.background = 'linear-gradient(135deg, #E5C158, #F5D172)';
+        btn.style.color = '#0B0C0E';
       });
     }
   </script>
