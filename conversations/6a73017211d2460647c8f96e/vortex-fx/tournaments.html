@@ -140,99 +140,11 @@
         </p>
       </section>
 
-      <!-- CARD GRID -->
-      <div class="t-arena-grid">
-
-        <!-- Featured: Genesis Championship -->
-        <div class="t-card featured">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span class="t-status t-status-gates">⚡ Gates Open August 23</span>
-            <span class="t-status t-status-open">Registration Open</span>
-          </div>
-          <div class="t-name">Genesis Championship</div>
-          <div class="t-prize">Variable Pool — funded by platform revenue</div>
-          <div class="t-meta">
-            <div>
-              <div class="t-meta-label">Start Date</div>
-              <div class="t-meta-val">August 23, 2026</div>
-            </div>
-            <div>
-              <div class="t-meta-label">End Date</div>
-              <div class="t-meta-val">September 23, 2026</div>
-            </div>
-            <div>
-              <div class="t-meta-label">Entry Requirements</div>
-              <div class="t-meta-val">MT4/MT5 verified · Any balance</div>
-            </div>
-            <div>
-              <div class="t-meta-label">Format</div>
-              <div class="t-meta-val">ROI-based (TWRR)</div>
-            </div>
-          </div>
-          <div class="t-format">The inaugural championship. Open to all verified MT4/MT5 traders. Highest time-weighted ROI wins. Prize pool grows with platform revenue — the bigger the community, the bigger the payout.</div>
-          <a href="signin.html" class="t-register">Register</a>
+      <!-- DYNAMIC CARD GRID (populated from Tournament entity) -->
+      <div class="t-arena-grid" id="tournament-grid">
+        <div style="text-align: center; padding: 60px 24px; grid-column: 1 / -1;">
+          <div style="font-size: 14px; color: #A0A5B1;">Loading tournaments...</div>
         </div>
-
-        <!-- September -->
-        <div class="t-card">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span class="t-status t-status-upcoming">Upcoming</span>
-            <span class="t-status t-status-upcoming">Registration Soon</span>
-          </div>
-          <div class="t-name">September Showdown</div>
-          <div class="t-prize">Variable Pool — funded by platform revenue</div>
-          <div class="t-meta">
-            <div>
-              <div class="t-meta-label">Start Date</div>
-              <div class="t-meta-val">September 24, 2026</div>
-            </div>
-            <div>
-              <div class="t-meta-label">End Date</div>
-              <div class="t-meta-val">October 23, 2026</div>
-            </div>
-            <div>
-              <div class="t-meta-label">Entry Requirements</div>
-              <div class="t-meta-val">MT4/MT5 verified · $200 min</div>
-            </div>
-            <div>
-              <div class="t-meta-label">Format</div>
-              <div class="t-meta-val">ROI-based (TWRR)</div>
-            </div>
-          </div>
-          <div class="t-format">Monthly championship for verified traders. Sealed standings, reveal-day payout. Prize pool scales with platform revenue.</div>
-          <a href="signin.html" class="t-register disabled" aria-disabled="true">Notify Me</a>
-        </div>
-
-        <!-- October -->
-        <div class="t-card">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span class="t-status t-status-upcoming">Upcoming</span>
-            <span class="t-status t-status-upcoming">Registration Soon</span>
-          </div>
-          <div class="t-name">October Outlier Cup</div>
-          <div class="t-prize">Variable Pool — funded by platform revenue</div>
-          <div class="t-meta">
-            <div>
-              <div class="t-meta-label">Start Date</div>
-              <div class="t-meta-val">October 24, 2026</div>
-            </div>
-            <div>
-              <div class="t-meta-label">End Date</div>
-              <div class="t-meta-val">November 23, 2026</div>
-            </div>
-            <div>
-              <div class="t-meta-label">Entry Requirements</div>
-              <div class="t-meta-val">MT4/MT5 verified · $200 min</div>
-            </div>
-            <div>
-              <div class="t-meta-label">Format</div>
-              <div class="t-meta-val">ROI-based (TWRR)</div>
-            </div>
-          </div>
-          <div class="t-format">Monthly championship for verified traders. Sealed standings, reveal-day payout. Prize pool scales with platform revenue.</div>
-          <a href="signin.html" class="t-register disabled" aria-disabled="true">Notify Me</a>
-        </div>
-
       </div>
 
       <!-- Info strip -->
@@ -307,5 +219,100 @@
       }
     });
   </script>
+
+<script>
+const API_BASE = 'https://api.base44.com/v1/apps/6a73016f9b626430a0d26f88';
+
+async function loadTournaments() {
+  try {
+    const res = await fetch(API_BASE + '/entities/Tournament');
+    const tournaments = await res.json();
+
+    const grid = document.getElementById('tournament-grid');
+
+    if (!Array.isArray(tournaments) || tournaments.length === 0) {
+      grid.innerHTML = `
+        <div style="text-align: center; padding: 80px 24px; grid-column: 1 / -1;">
+          <div style="width: 48px; height: 48px; margin: 0 auto 20px; border: 2px solid #262930; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+            <svg width="24" height="24" fill="none" stroke="#6B7080" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+          </div>
+          <div style="font-size: 16px; color: #FFFFFF; font-weight: 600; margin-bottom: 8px;">No tournaments yet.</div>
+          <div style="font-size: 14px; color: #A0A5B1;">The first championship begins August 23. Be ready.</div>
+        </div>`;
+      return;
+    }
+
+    // Sort by start_date ascending
+    tournaments.sort((a, b) => new Date(a.start_date || 0) - new Date(b.start_date || 0));
+
+    grid.innerHTML = tournaments.map((t, i) => {
+      const status = t.status || 'upcoming';
+      const startDate = t.start_date ? new Date(t.start_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'TBD';
+      const endDate = t.end_date ? new Date(t.end_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'TBD';
+      const entryReq = t.entry_criteria_min_deposit ? '$' + t.entry_criteria_min_deposit + ' min' : 'Any balance';
+      const registered = t.participant_count || 0;
+      const maxP = 2500; // Genesis max or tournament-specific
+      const isFeatured = i === 0;
+
+      // Status badge logic
+      let statusBadge = '';
+      let actionButton = '';
+      if (status === 'upcoming') {
+        statusBadge = '<span class="t-status t-status-upcoming">Upcoming</span>';
+        actionButton = '<span class="t-register disabled" aria-disabled="true">Notify Me</span>';
+      } else if (status === 'active') {
+        statusBadge = '<span class="t-status" style="background: rgba(229,193,88,0.15); color: #E5C158; border: 1px solid rgba(229,193,88,0.3);">Live</span>';
+        actionButton = '<a href="signin.html" class="t-register">View Results</a>';
+      } else if (status === 'completed' || status === 'revealing') {
+        statusBadge = '<span class="t-status t-status-upcoming">Completed</span>';
+        actionButton = '<a href="leaderboard.html" class="t-register">View Results</a>';
+      } else {
+        statusBadge = '<span class="t-status t-status-open">Registration Open</span>';
+        actionButton = '<a href="signin.html" class="t-register">Register</a>';
+      }
+
+      return `
+        <div class="t-card${isFeatured ? ' featured' : ''}">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="t-status t-status-gates">⚡ ${t.type || 'Monthly'}</span>
+            ${statusBadge}
+          </div>
+          <div class="t-name">${t.name || 'Tournament'}</div>
+          <div class="t-prize">Variable Pool — funded by platform revenue</div>
+          <div class="t-meta">
+            <div>
+              <div class="t-meta-label">Start Date</div>
+              <div class="t-meta-val">${startDate}</div>
+            </div>
+            <div>
+              <div class="t-meta-label">End Date</div>
+              <div class="t-meta-val">${endDate}</div>
+            </div>
+            <div>
+              <div class="t-meta-label">Entry Requirements</div>
+              <div class="t-meta-val">MT4/MT5 verified · ${entryReq}</div>
+            </div>
+            <div>
+              <div class="t-meta-label">Registered</div>
+              <div class="t-meta-val">${registered} / ${maxP}</div>
+            </div>
+          </div>
+          <div class="t-format">${t.description || 'Compete for real prizes. Sealed standings, reveal-day payout.'}</div>
+          ${actionButton}
+        </div>`;
+    }).join('');
+  } catch (err) {
+    console.warn('Failed to load tournaments:', err);
+    document.getElementById('tournament-grid').innerHTML = `
+      <div style="text-align: center; padding: 60px 24px; grid-column: 1 / -1;">
+        <div style="font-size: 14px; color: #EF4444;">Failed to load tournaments. Refresh the page.</div>
+      </div>`;
+  }
+}
+
+loadTournaments();
+setInterval(loadTournaments, 30000); // Refresh every 30s
+</script>
+
 </body>
 </html>
