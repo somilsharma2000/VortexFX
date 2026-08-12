@@ -175,7 +175,7 @@
       padding: 18px 36px;
       background: #5865F2;
       color: #fff;
-      font-family: var(--font);
+      font-family: var(--font, 'Inter', sans-serif);
       font-size: 15px;
       font-weight: 600;
       text-transform: uppercase;
@@ -235,6 +235,82 @@
       100% { opacity: 0.6; }
     }
 
+    /* SCROLL HINT */
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #333;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.3; }
+      50% { transform: translateX(-50%) translateY(8px); opacity: 0.8; }
+    }
+
+    /* 1. SOCIAL PROOF BAR */
+    .social-proof-section {
+      position: relative;
+      z-index: 2;
+      padding: 36px 24px;
+      background: rgba(6, 7, 10, 0.9);
+      border-top: 1px solid rgba(212, 175, 55, 0.25);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.6), inset 0 0 25px rgba(212, 175, 55, 0.03);
+      backdrop-filter: blur(12px);
+    }
+
+    .social-proof-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+
+    .stat-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 12px;
+    }
+
+    .stat-number {
+      font-size: clamp(28px, 3.8vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .stat-number.gold-stat {
+      background: linear-gradient(135deg, #D4AF37 0%, #F4D77A 50%, #D4AF37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.2));
+    }
+
+    .stat-number.white-stat {
+      color: #ffffff;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #888888;
+      font-weight: 400;
+    }
+
     /* CRYPTIC HINTS */
     .cryptic-section {
       padding: 120px 24px;
@@ -269,22 +345,324 @@
       margin: 60px auto;
     }
 
-    /* SCROLL HINT */
-    .scroll-hint {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: #333;
-      animation: bounce 2s infinite;
+    /* GENERAL SECTION HEADINGS */
+    .section-headline {
+      font-size: clamp(28px, 4.5vw, 52px);
+      font-weight: 300;
+      color: #ffffff;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.3; }
-      50% { transform: translateX(-50%) translateY(8px); opacity: 0.8; }
+    .section-headline .gold-text,
+    .gold-text {
+      color: #D4AF37;
+      font-weight: 600;
+    }
+
+    .iris-text {
+      color: #8052FF;
+      font-weight: 600;
+    }
+
+    .section-subtext {
+      font-size: clamp(14px, 1.8vw, 17px);
+      font-weight: 300;
+      color: #888888;
+      max-width: 680px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    /* 2. GENESIS TRADER PROGRAM */
+    .genesis-section {
+      padding: 100px 24px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .genesis-badge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 100px;
+      background: rgba(212, 175, 55, 0.05);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 24px;
+    }
+
+    .genesis-badge-tag .gold { color: #D4AF37; font-weight: 600; }
+
+    .genesis-progress-wrapper {
+      max-width: 580px;
+      margin: 0 auto 60px;
+      background: rgba(10, 11, 16, 0.8);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 12px;
+      padding: 24px 28px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    .genesis-progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 12px;
+      color: #aaaaaa;
+    }
+
+    .genesis-progress-bar {
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .genesis-progress-fill {
+      height: 100%;
+      width: 50%;
+      background: linear-gradient(90deg, #D4AF37 0%, #F4D77A 100%);
+      border-radius: 5px;
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+    }
+
+    .genesis-progress-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #666666;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .genesis-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      text-align: left;
+    }
+
+    .genesis-card {
+      background: rgba(10, 11, 16, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 32px 24px;
+      position: relative;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .genesis-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.08);
+    }
+
+    .genesis-card.featured {
+      border-color: rgba(212, 175, 55, 0.35);
+      background: linear-gradient(180deg, rgba(212, 175, 55, 0.06) 0%, rgba(10, 11, 16, 0.8) 100%);
+    }
+
+    .genesis-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+    }
+
+    .genesis-card-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .genesis-card-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .genesis-card-desc {
+      font-size: 14px;
+      color: #888888;
+      line-height: 1.6;
+    }
+
+    /* 3. HOW IT WORKS */
+    .how-section {
+      padding: 100px 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .how-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .step-card {
+      background: rgba(10, 11, 16, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 32px 24px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .step-card:hover {
+      border-color: rgba(212, 175, 55, 0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.08);
+    }
+
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .step-number {
+      font-size: 36px;
+      font-weight: 700;
+      color: #D4AF37;
+      letter-spacing: -0.02em;
+    }
+
+    .step-icon-circle {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.1);
+    }
+
+    .step-icon-circle svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .step-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .step-desc {
+      font-size: 14px;
+      color: #888888;
+      line-height: 1.6;
+    }
+
+    /* 4. TRUST SECTION */
+    .trust-section {
+      padding: 100px 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .trust-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+
+    .trust-card {
+      background: rgba(10, 11, 16, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 28px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .trust-card:hover {
+      border-color: rgba(212, 175, 55, 0.35);
+      background: rgba(13, 15, 22, 0.85);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+    }
+
+    .trust-icon-circle {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      border-radius: 50%;
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 14px rgba(212, 175, 55, 0.15);
+    }
+
+    .trust-icon-circle svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .trust-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .trust-desc {
+      font-size: 13.5px;
+      color: #888888;
+      line-height: 1.5;
+    }
+
+    /* SCROLL REVEALS */
+    .reveal-section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .reveal-section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* FINAL CTA */
@@ -404,6 +782,18 @@
       font-weight: 600;
     }
 
+    @media (max-width: 868px) {
+      .social-proof-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px 16px;
+      }
+      .genesis-cards-grid,
+      .steps-grid,
+      .trust-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 640px) {
       .stealth-countdown { gap: 16px; }
       .stealth-cta { padding: 16px 28px; font-size: 13px; }
@@ -495,6 +885,28 @@
     <div class="scroll-hint">Scroll</div>
   </section>
 
+  <!-- 1. SOCIAL PROOF BAR (right after hero section, before cryptic hints) -->
+  <section class="social-proof-section" id="social-proof">
+    <div class="social-proof-container">
+      <div class="stat-card">
+        <div class="stat-number gold-stat" id="stat-genesis-spots">0</div>
+        <div class="stat-label">Genesis Spots Available</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number gold-stat" id="stat-prize-pool">$0</div>
+        <div class="stat-label">Prize Pool</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number white-stat" id="stat-active-traders">0</div>
+        <div class="stat-label">Active Traders</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number white-stat" id="stat-verified-accounts">0</div>
+        <div class="stat-label">Verified Accounts</div>
+      </div>
+    </div>
+  </section>
+
   <!-- CRYPTIC HINTS — subtle trading references, reveals nothing specific -->
   <section class="cryptic-section" data-shape="spiral">
     <div class="cryptic-line">
@@ -519,6 +931,204 @@
     <div class="cryptic-divider"></div>
     <div class="cryptic-line">
       The gates open soon. Be <span class="gold">first through.</span>
+    </div>
+  </section>
+
+  <!-- 2. GENESIS TRADER PROGRAM (after cryptic hints, before final CTA) -->
+  <section class="genesis-section reveal-section" id="genesis">
+    <div class="genesis-badge-tag">
+      <span class="gold">LIMITED ACCESS</span> · FIRST 2,500 ONLY
+    </div>
+
+    <h2 class="section-headline">
+      The First <span class="gold-text">2,500</span> Get More.
+    </h2>
+    <p class="section-subtext">
+      Genesis Traders receive a permanent <span class="gold-text">1.25x</span> REX multiplier and <span class="gold-text">1,000</span> bonus REX on signup. Once the spots are gone, they're gone forever.
+    </p>
+
+    <!-- PROGRESS BAR -->
+    <div class="genesis-progress-wrapper">
+      <div class="genesis-progress-header">
+        <span>Genesis Spots Claimed</span>
+        <span><span class="gold-text">1,247</span> / 2,500</span>
+      </div>
+      <div class="genesis-progress-bar">
+        <div class="genesis-progress-fill"></div>
+      </div>
+      <div class="genesis-progress-footer">
+        <span>50% Spots Claimed</span>
+        <span class="gold-text">1,253 Remaining</span>
+      </div>
+    </div>
+
+    <!-- 3 BENEFIT CARDS -->
+    <div class="genesis-cards-grid">
+      <div class="genesis-card">
+        <div class="genesis-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+          </svg>
+        </div>
+        <h3 class="genesis-card-title"><span class="gold-text">1.25x</span> REX Multiplier</h3>
+        <p class="genesis-card-desc">Every REX you earn is multiplied by 1.25x. Forever.</p>
+      </div>
+
+      <div class="genesis-card featured">
+        <div class="genesis-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 8v8M8 12h8"></path>
+          </svg>
+        </div>
+        <h3 class="genesis-card-title"><span class="gold-text">1,000</span> Bonus REX</h3>
+        <p class="genesis-card-desc">Instant bonus on signup. Start with a head start.</p>
+      </div>
+
+      <div class="genesis-card">
+        <div class="genesis-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        <h3 class="genesis-card-title">Genesis Badge</h3>
+        <p class="genesis-card-desc">Permanent profile badge. Visible flex. Only for the first <span class="gold-text">2,500</span>.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 48px;">
+      <a href="#" class="stealth-cta" onclick="joinWaitlist(event)">
+        <svg viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
+          <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.68,1.75,1.36,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.89,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.89,96.12,53,91.08,65.69,84.69,65.69Z"/>
+        </svg>
+        Claim Your Genesis Spot
+      </a>
+    </div>
+  </section>
+
+  <!-- 3. HOW IT WORKS (3 steps, after Genesis section) -->
+  <section class="how-section reveal-section" id="how-it-works">
+    <div class="how-container">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <h2 class="section-headline">How It Works</h2>
+        <p class="section-subtext">Three steps. Zero friction. Maximum upside.</p>
+      </div>
+
+      <div class="steps-grid">
+        <!-- Step 1 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-number">01</span>
+            <div class="step-icon-circle">
+              <svg viewBox="0 0 127.14 96.36" fill="#D4AF37" xmlns="http://www.w3.org/2000/svg">
+                <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.68,1.75,1.36,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.89,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.89,96.12,53,91.08,65.69,84.69,65.69Z"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="step-title">Join the Citadel</h3>
+          <p class="step-desc">Connect with Discord. Takes 30 seconds. No passwords, no fees.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-number">02</span>
+            <div class="step-icon-circle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+            </div>
+          </div>
+          <h3 class="step-title">Link Your MT4</h3>
+          <p class="step-desc">Connect your MT4/MT5 account. We verify. You're in.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-number">03</span>
+            <div class="step-icon-circle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                <path d="M4 22h16"></path>
+                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path>
+              </svg>
+            </div>
+          </div>
+          <h3 class="step-title">Compete & Win</h3>
+          <p class="step-desc">Trade on your own terminal. Highest ROI wins. Results revealed on tournament day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. TRUST SECTION (after How It Works, before final CTA) -->
+  <section class="trust-section reveal-section" id="trust">
+    <div class="trust-container">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <h2 class="section-headline">Verified. Transparent. Fair.</h2>
+      </div>
+
+      <div class="trust-grid">
+        <!-- Pillar 1 -->
+        <div class="trust-card">
+          <div class="trust-icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+          </div>
+          <div>
+            <h3 class="trust-title">TWRR Verification</h3>
+            <p class="trust-desc">Time-Weighted Rate of Return. Industry-standard performance metric. No tricks.</p>
+          </div>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="trust-card">
+          <div class="trust-icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="trust-title">MT4 Investor Password</h3>
+            <p class="trust-desc">Your trades are verified through MT4 investor passwords. Full transparency.</p>
+          </div>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="trust-card">
+          <div class="trust-icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <div>
+            <h3 class="trust-title">Payout Proofs</h3>
+            <p class="trust-desc">Every prize distribution is public. See who won, see how much.</p>
+          </div>
+        </div>
+
+        <!-- Pillar 4 -->
+        <div class="trust-card">
+          <div class="trust-icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="trust-title">Anti-Cheat System</h3>
+            <p class="trust-desc">Multiple account detection, deposit verification, manual review. Fair play guaranteed.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -593,12 +1203,104 @@
 
     // ===== CRYPTIC LINE REVEALS =====
     const crypticLines = document.querySelectorAll('.cryptic-line');
-    const observer = new IntersectionObserver((entries) => {
+    const crypticObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.5 });
-    crypticLines.forEach(line => observer.observe(line));
+    crypticLines.forEach(line => crypticObserver.observe(line));
+
+    // ===== SCROLL REVEAL OBSERVER =====
+    const revealSections = document.querySelectorAll('.reveal-section');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+    revealSections.forEach(section => revealObserver.observe(section));
+
+    // ===== PLATFORM STATS & SOCIAL PROOF COUNT-UP =====
+    let platformStats = {
+      genesis_spots: 2500,
+      total_prize_pool_rex: 10000,
+      active_traders: 500,
+      verified_accounts: 8,
+      completed_championships: 0
+    };
+
+    function animateCountUp(element, targetVal, prefix = '', suffix = '', duration = 1800) {
+      if (!element) return;
+      const startTime = performance.now();
+      const startVal = 0;
+      const numTarget = typeof targetVal === 'number' ? targetVal : parseInt(targetVal) || 0;
+
+      function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeProgress = 1 - Math.pow(1 - progress, 3);
+        const currentVal = Math.floor(startVal + (numTarget - startVal) * easeProgress);
+        element.textContent = prefix + currentVal.toLocaleString() + suffix;
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          element.textContent = prefix + numTarget.toLocaleString() + suffix;
+        }
+      }
+      requestAnimationFrame(update);
+    }
+
+    let hasAnimatedStats = false;
+    function runStatsCountUp() {
+      if (hasAnimatedStats) return;
+      hasAnimatedStats = true;
+      animateCountUp(document.getElementById('stat-genesis-spots'), platformStats.genesis_spots, '', '');
+      animateCountUp(document.getElementById('stat-prize-pool'), platformStats.total_prize_pool_rex, '$', '+');
+      animateCountUp(document.getElementById('stat-active-traders'), platformStats.active_traders, '', '+');
+      animateCountUp(document.getElementById('stat-verified-accounts'), platformStats.verified_accounts, '', '');
+    }
+
+    const socialProofEl = document.getElementById('social-proof');
+    if (socialProofEl) {
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            runStatsCountUp();
+          }
+        });
+      }, { threshold: 0.2 });
+      statsObserver.observe(socialProofEl);
+    }
+
+    // ===== FETCH REAL DATA FROM API =====
+    fetch('https://api.base44.com/v1/apps/6a73016f9b626430a0d26f88/functions/getPlatformStats', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({})
+    }).then(r => r.json()).then(data => {
+      if (data && data.success && data.stats) {
+        const s = data.stats;
+        if (s.total_prize_pool_rex !== undefined) platformStats.total_prize_pool_rex = s.total_prize_pool_rex;
+        if (s.active_traders !== undefined) platformStats.active_traders = s.active_traders;
+        if (s.verified_accounts !== undefined) platformStats.verified_accounts = s.verified_accounts;
+        if (s.completed_championships !== undefined) platformStats.completed_championships = s.completed_championships;
+        if (s.genesis_spots !== undefined) platformStats.genesis_spots = s.genesis_spots;
+        if (s.registration_count) {
+          currentCount = s.registration_count;
+          const waitlistEl = document.getElementById('waitlist-count');
+          if (waitlistEl) waitlistEl.textContent = currentCount.toLocaleString();
+        }
+        if (hasAnimatedStats) {
+          document.getElementById('stat-genesis-spots').textContent = platformStats.genesis_spots.toLocaleString();
+          document.getElementById('stat-prize-pool').textContent = '$' + platformStats.total_prize_pool_rex.toLocaleString() + '+';
+          document.getElementById('stat-active-traders').textContent = platformStats.active_traders.toLocaleString() + '+';
+          document.getElementById('stat-verified-accounts').textContent = platformStats.verified_accounts.toLocaleString();
+        }
+      }
+    }).catch(err => {
+      console.warn('Failed to fetch platform stats:', err);
+    });
 
     // ===== ANIMATED WAITLIST COUNTER =====
     let currentCount = 3742;
@@ -626,6 +1328,7 @@
       const name = traderNames[Math.floor(Math.random() * traderNames.length)];
       const country = countries[Math.floor(Math.random() * countries.length)];
       const toast = document.getElementById('join-toast');
+      if (!toast) return;
       document.getElementById('toast-avatar').textContent = name[0];
       document.getElementById('toast-name').textContent = `${name} ${country}`;
       document.getElementById('toast-time').textContent = 'moments ago';
@@ -638,24 +1341,12 @@
       setTimeout(showJoinToast, delay);
     }, 18000);
 
-    // ===== LIVE WAITLIST COUNT SYNC =====
-    fetch('https://api.base44.com/v1/apps/6a73016f9b626430a0d26f88/functions/getPlatformStats', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({})
-    }).then(r => r.json()).then(data => {
-      if (data.success && data.stats?.registration_count) {
-        currentCount = data.stats.registration_count;
-        document.getElementById('waitlist-count').textContent = currentCount.toLocaleString();
-      }
-    }).catch(() => {});
-
     // ===== CHECK IF ALREADY LOGGED IN =====
     const trader = FORTEX_AUTH.isLoggedIn();
     if (trader) {
       document.querySelectorAll('.stealth-cta').forEach(btn => {
         if (btn.textContent.includes('Claim')) {
-          btn.innerHTML = btn.innerHTML.replace(/Claim Your Spot/g, "You're In");
+          btn.innerHTML = btn.innerHTML.replace(/Claim Your Genesis Spot|Claim Your Spot/g, "You're In");
           btn.onclick = (e) => { e.preventDefault(); window.location.href = 'profile.html'; };
         }
         if (btn.textContent.includes('Join')) {
