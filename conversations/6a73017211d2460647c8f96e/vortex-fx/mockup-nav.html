@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Navbar Mockup</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #06070A; font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif; min-height: 100vh; }
+  .nav-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; height: 68px;
+    background: rgba(6, 7, 10, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo {
+    width: 36px; height: 36px; border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+    transition: box-shadow 0.3s ease;
+  }
+  .nav-brand:hover .nav-logo { box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
+  .nav-wordmark { font-size: 18px; font-weight: 700; letter-spacing: 2px; color: #D4AF37; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { color: #8B8B8B; text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: #D4AF37; }
+  .nav-cta { padding: 8px 20px; border-radius: 8px; background: linear-gradient(135deg, #D4AF37, #B8941F); color: #06070A; font-weight: 700; font-size: 13px; text-decoration: none; letter-spacing: 0.5px; }
+  .hero-preview { display: flex; flex-direction: column; align-items: center; padding: 60px 32px; gap: 32px; }
+  .hero-preview h2 { color: #D4AF37; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; }
+  .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 900px; width: 100%; }
+  .comparison-card { background: rgba(17, 17, 17, 0.8); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 16px; padding: 32px; text-align: center; }
+  .comparison-card .label { color: #555; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+  .comparison-card .old-logo { width: 36px; height: 36px; margin: 0 auto; }
+  .comparison-card .new-logo { width: 36px; height: 36px; margin: 0 auto; border-radius: 8px; object-fit: cover; box-shadow: 0 0 12px rgba(212, 175, 55, 0.3); }
+  .comparison-card .wordmark { margin-top: 10px; font-size: 18px; font-weight: 700; color: #D4AF37; letter-spacing: 2px; }
+  .hero-full {
+    margin-top: 40px; max-width: 900px; width: 100%;
+    background: linear-gradient(180deg, #06070A 0%, #0A0A0A 100%);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 24px; overflow: hidden;
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 400px;
+  }
+  .hero-text-side { padding: 48px; display: flex; flex-direction: column; justify-content: center; gap: 20px; }
+  .hero-text-side .badge { color: #D4AF37; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; }
+  .hero-text-side h1 { font-size: 48px; font-weight: 800; color: #fff; letter-spacing: 4px; line-height: 1.1; }
+  .hero-text-side h1 span { color: #D4AF37; }
+  .hero-text-side p { color: #888; font-size: 15px; line-height: 1.6; max-width: 320px; }
+  .hero-text-side .cta { display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #D4AF37, #B8941F); color: #06070A; font-weight: 700; font-size: 14px; border-radius: 10px; text-decoration: none; letter-spacing: 1px; text-transform: uppercase; width: fit-content; }
+  .hero-image-side { display: flex; align-items: center; justify-content: center; background: #06070A; padding: 24px; }
+  .hero-image-side img { max-width: 100%; max-height: 350px; border-radius: 16px; box-shadow: 0 0 40px rgba(212, 175, 55, 0.15); }
+  .caption { color: #555; font-size: 12px; text-align: center; margin-top: 16px; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+  <nav class="nav-bar">
+    <a href="#" class="nav-brand">
+      <img src="assets/fortrex-icon-nav.png" class="nav-logo" alt="FORTREX">
+      <span class="nav-wordmark">FORTREX</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Tools</a></li>
+      <li><a href="#">Tournaments</a></li>
+      <li><a href="#">Leaderboard</a></li>
+      <li><a href="#">REX</a></li>
+      <li><a href="#">Journal</a></li>
+      <li><a href="#">FAQ</a></li>
+    </ul>
+    <a href="#" class="nav-cta">ENTER THE GATES</a>
+  </nav>
+  <div class="hero-preview">
+    <h2>OLD vs NEW — Navbar Logo Comparison</h2>
+    <div class="comparison-grid">
+      <div class="comparison-card">
+        <div class="label">Current (SVG Hexagon)</div>
+        <svg class="old-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="50,15 80,32 80,68 50,85 20,68 20,32" stroke="#D4AF37" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+          <polygon points="50,28 67,38 67,62 50,72 33,62 33,38" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linejoin="round" opacity="0.5"/>
+          <path d="M50,40 Q58,43 55,50 Q48,53 45,46 Q47,41 50,40" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <circle cx="50" cy="50" r="2.5" fill="#D4AF37"/>
+        </svg>
+        <div class="wordmark">FORTREX <span style="color:#D4AF37">FX</span></div>
+      </div>
+      <div class="comparison-card">
+        <div class="label">New (Your Logo)</div>
+        <img src="assets/fortrex-icon-nav.png" class="new-logo" alt="New icon">
+        <div class="wordmark">FORTREX</div>
+      </div>
+    </div>
+    <h2>Homepage Hero — With Cinematic Logo</h2>
+    <div class="hero-full">
+      <div class="hero-text-side">
+        <div class="badge">The Gates Are Opening</div>
+        <h1>FORTREX<br><span>FX</span></h1>
+        <p>Where traders rise. Join the elite fortress of traders competing for glory, REX rewards, and seasonal supremacy.</p>
+        <a href="#" class="cta">ENTER THE GATES</a>
+      </div>
+      <div class="hero-image-side">
+        <img src="assets/fortrex-hero-raw.png" alt="FORTREX Hero">
+      </div>
+    </div>
+    <p class="caption">Mockup — not live. Approve to roll out across all 18 pages.</p>
+  </div>
+</body>
+</html>
