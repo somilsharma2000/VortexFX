@@ -41,8 +41,13 @@
 
     .metric-box-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+    @media (max-width: 700px) {
+      .metric-box-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     .metric-card-item {
@@ -193,11 +198,11 @@
 
   <main>
     <!-- SECTION 1: HEADER (data-shape="brain") -->
-    <section class="section" style="padding-top: 140px; padding-bottom: 40px;" data-shape="brain">
-      <div class="container reveal">
-        <div class="section-label">DAILY RITUAL</div>
+    <section class="section" style="padding-top: 140px; padding-bottom: 40px; text-align: center;" data-shape="brain">
+      <div class="container reveal" style="max-width: 800px; margin: 0 auto;">
+        <div class="section-label" style="justify-content: center;">DAILY RITUAL</div>
         <h1 class="display" style="margin-bottom: var(--spacing-24);">Check In</h1>
-        <p class="body-text-muted" data-psychology="checkinLines">Don't break the streak. Your future self will thank you.</p>
+        <p class="body-text-muted" data-psychology="checkinLines" style="max-width: 500px; margin: 0 auto;">Don't break the streak. Your future self will thank you.</p>
       </div>
     </section>
 
@@ -539,7 +544,6 @@
             showErrorState(errorMsg);
           }
         } catch (err) {
-          setButtonLoading(false);
           showErrorState('Network connection error. Please try again.');
         }
       }
@@ -551,10 +555,17 @@
           checkinBtn.innerHTML = `<span class="checkin-spinner"></span> Checking in...`;
           checkinBtn.style.opacity = '0.7';
           checkinBtn.style.cursor = 'wait';
+          checkinBtn.style.background = '#333';
+          checkinBtn.style.border = 'none';
+          checkinBtn.style.color = '#999';
         } else {
           checkinBtn.disabled = false;
           checkinBtn.style.cursor = 'pointer';
           checkinBtn.style.opacity = '1';
+          checkinBtn.style.background = 'var(--color-electric-iris)';
+          checkinBtn.style.border = 'none';
+          checkinBtn.style.color = 'var(--color-bone-white)';
+          checkinBtn.innerHTML = `Retry Check-In (+5 REX)`;
         }
       }
 
@@ -646,9 +657,12 @@
       }
 
       function showErrorState(errorMsg) {
+        // FIRST: reset primary button from loading state
+        setButtonLoading(false);
+
         if (!checkinFeedback) return;
         checkinFeedback.innerHTML = `
-          <div style="border: 1px solid #ff4d4d; background: rgba(255, 77, 77, 0.1); border-radius: 20px; padding: 24px; margin-top: 24px; text-align: center; animation: fadeIn 0.4s ease;">
+          <div id="check-in-error" style="border: 1px solid #ff4d4d; background: rgba(255, 77, 77, 0.1); border-radius: 20px; padding: 24px; margin-top: 24px; text-align: center; animation: fadeIn 0.4s ease;">
             <div style="font-size: 24px; margin-bottom: 8px; color: #ff4d4d;">⚠️ Check-In Warning</div>
             <div style="font-size: 14px; color: var(--color-bone-white); margin-bottom: 16px;">
               ${escapeHtml(errorMsg)}

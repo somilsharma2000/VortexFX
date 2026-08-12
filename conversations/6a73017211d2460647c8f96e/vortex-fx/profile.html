@@ -6,58 +6,192 @@
   <title>Profile — FORTREX</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/dala.css?v=2">
-  <script src="js/dala.js?v=2"></script>
-  <script src="js/auth.js?v=2"></script>
-  <script src="js/psychology.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/dala.css?v=3">
+  <script src="js/dala.js?v=3"></script>
+  <script src="js/auth.js?v=3"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/fortrex-icon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/fortrex-icon-180.png">
+  <meta property="og:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
   <style>
-    .profile-grid { display: grid; grid-template-columns: 320px 1fr; gap: 24px; max-width: 1200px; margin: 0 auto; padding: 100px 24px 60px; }
-    @media (max-width: 768px) { .profile-grid { grid-template-columns: 1fr; } }
-    .profile-card { background: rgba(10,10,10,0.85); border: 1px solid #1a1a1a; border-radius: 12px; padding: 32px 24px; text-align: center; backdrop-filter: blur(12px); }
-    .profile-avatar { width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 16px; border: 3px solid #EACA7A; object-fit: cover; }
+    * { box-sizing: border-box; }
+    body { background: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; }
+    h2, h3 { font-family: 'Space Grotesk', 'Inter', sans-serif; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    .profile-wrapper {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 100px 1.5rem 60px;
+    }
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 820px) { .profile-grid { grid-template-columns: 1fr; } }
+
+    .profile-card {
+      background: rgba(10,10,10,0.85);
+      border: 1px solid #1a1a1a;
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+    }
+    .profile-avatar {
+      width: 96px; height: 96px; border-radius: 50%;
+      margin: 0 auto 16px; border: 3px solid #E5C158;
+      object-fit: cover;
+      box-shadow: 0 0 16px rgba(229,193,88,0.2);
+    }
     .profile-name { font-size: 22px; font-weight: 600; color: #fff; margin-bottom: 4px; }
-    .profile-role { font-size: 13px; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
-    .class-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
+    .profile-role { font-size: 13px; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 100px;
+      font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+    .status-badge.verified { background: rgba(34,197,94,0.12); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+    .status-badge.pending { background: rgba(234,202,122,0.12); color: #EACA7A; border: 1px solid rgba(234,202,122,0.3); }
+    .status-badge.unverified { background: rgba(102,102,102,0.12); color: #999; border: 1px solid rgba(102,102,102,0.3); }
+    .status-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    .class-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 20px;
+      font-size: 13px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
     .class-badge.sniper { background: rgba(212,175,55,0.15); color: #D4AF37; border: 1px solid rgba(212,175,55,0.3); }
     .class-badge.scalper { background: rgba(234,202,122,0.15); color: #EACA7A; border: 1px solid rgba(234,202,122,0.3); }
     .class-badge.swing { background: rgba(16,185,129,0.15); color: #10B981; border: 1px solid rgba(16,185,129,0.3); }
     .class-badge.rookie { background: rgba(102,102,102,0.15); color: #999; border: 1px solid rgba(102,102,102,0.3); }
-    .stat-tiles { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-top: 20px; }
-    .stat-tile { background: rgba(255,255,255,0.02); border: 1px solid #1a1a1a; border-radius: 8px; padding: 14px 12px; text-align: center; }
-    .stat-tile .val { font-size: 24px; font-weight: 700; color: #EACA7A; }
+
+    .genesis-tier-badge {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px; border-radius: 10px;
+      background: linear-gradient(135deg, rgba(229,193,88,0.08), rgba(212,175,55,0.04));
+      border: 1px solid rgba(229,193,88,0.2);
+      margin-top: 12px;
+    }
+    .genesis-tier-badge .tier-label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
+    .genesis-tier-badge .tier-value { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 700; color: #E5C158; }
+
+    .stat-tiles {
+      display: grid; grid-template-columns: repeat(2,1fr);
+      gap: 12px; margin-top: 20px;
+    }
+    .stat-tile {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid #1a1a1a;
+      border-radius: 10px;
+      padding: 14px 12px; text-align: center;
+    }
+    .stat-tile .val { font-size: 24px; font-weight: 700; color: #E5C158; }
     .stat-tile .lbl { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
-    .bp-section { background: rgba(10,10,10,0.85); border: 1px solid #1a1a1a; border-radius: 12px; padding: 28px; margin-bottom: 24px; }
+
+    .info-card {
+      background: rgba(10,10,10,0.85);
+      border: 1px solid #1a1a1a;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 16px;
+    }
+    .info-card-title {
+      font-size: 11px; color: #888;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      margin-bottom: 12px; display: flex; align-items: center; gap: 6px;
+    }
+    .info-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid #111;
+      font-size: 13px;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-row .label { color: #666; }
+    .info-row .value { color: #ddd; font-weight: 500; }
+
+    .referral-section {
+      margin-top: 16px;
+      background: rgba(10,10,10,0.85);
+      border: 1px solid #1a1a1a;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .referral-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 20px; font-weight: 700;
+      color: #E5C158; letter-spacing: 0.05em;
+      margin: 8px 0;
+    }
+    .referral-link-box {
+      display: flex; gap: 8px; margin-top: 8px;
+    }
+    .referral-link-input {
+      flex: 1; padding: 10px 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid #222; border-radius: 8px;
+      color: #aaa; font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      outline: none;
+    }
+    .copy-link-btn {
+      padding: 10px 18px;
+      background: linear-gradient(135deg, #E5C158, #D4AF37);
+      color: #0B0C0E; font-weight: 700; font-size: 12px;
+      border: none; border-radius: 8px;
+      cursor: pointer; white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .copy-link-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+    .right-col > div { margin-bottom: 24px; }
+    .content-card {
+      background: rgba(10,10,10,0.85);
+      border: 1px solid #1a1a1a;
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .section-h2 { font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+    .section-sub { font-size: 13px; color: #666; margin-bottom: 16px; }
+
     .bp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .bp-level { font-size: 48px; font-weight: 700; color: #EACA7A; line-height: 1; }
+    .bp-level { font-size: 48px; font-weight: 700; color: #E5C158; line-height: 1; }
     .bp-level-label { font-size: 13px; color: #666; text-transform: uppercase; letter-spacing: 0.05em; }
     .bp-xp-text { font-size: 14px; color: #999; text-align: right; }
-    .bp-bar-container { position: relative; height: 40px; background: #0a0a0a; border-radius: 6px; overflow: hidden; margin: 16px 0; }
-    .bp-bar-fill { height: 100%; background: linear-gradient(90deg, #EACA7A, #FFD700); border-radius: 6px; transition: width 1.5s ease; }
+    .bp-bar-container { position: relative; height: 40px; background: #0a0a0a; border-radius: 8px; overflow: hidden; margin: 16px 0; }
+    .bp-bar-fill { height: 100%; background: linear-gradient(90deg, #E5C158, #F5D172); border-radius: 8px; transition: width 1.5s ease; box-shadow: 0 0 8px rgba(229,193,88,0.3); }
     .bp-milestones { display: flex; justify-content: space-between; position: relative; margin-top: 12px; }
     .bp-milestone { display: flex; flex-direction: column; align-items: center; gap: 4px; }
     .bp-milestone-dot { width: 12px; height: 12px; border-radius: 50%; background: #222; border: 2px solid #333; }
-    .bp-milestone-dot.reached { background: #EACA7A; border-color: #EACA7A; box-shadow: 0 0 8px rgba(234,202,122,0.5); }
+    .bp-milestone-dot.reached { background: #E5C158; border-color: #E5C158; box-shadow: 0 0 8px rgba(229,193,88,0.5); }
     .bp-milestone-label { font-size: 10px; color: #555; }
-    .bp-milestone-label.reached { color: #EACA7A; }
+    .bp-milestone-label.reached { color: #E5C158; }
     .bp-milestone-reward { font-size: 9px; color: #444; }
-    .bp-milestone-reward.reached { color: #EACA7A; }
+    .bp-milestone-reward.reached { color: #E5C158; }
+    .bp-next-req { font-size: 12px; color: #555; margin-top: 12px; text-align: center; }
+
     .achievements-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 16px; }
     @media (max-width: 600px) { .achievements-grid { grid-template-columns: repeat(2,1fr); } }
-    .achievement { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 20px 12px; background: rgba(255,255,255,0.02); border: 1px solid #1a1a1a; border-radius: 10px; text-align: center; transition: all 0.3s; }
-    .achievement.unlocked { border-color: rgba(234,202,122,0.3); }
-    .achievement.unlocked:hover { border-color: #EACA7A; transform: translateY(-2px); }
+    .achievement { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 20px 12px; background: rgba(255,255,255,0.02); border: 1px solid #1a1a1a; border-radius: 12px; text-align: center; transition: all 0.3s; }
+    .achievement.unlocked { border-color: rgba(229,193,88,0.3); }
+    .achievement.unlocked:hover { border-color: #E5C158; transform: translateY(-2px); }
     .achievement.locked { opacity: 0.4; }
     .achievement-icon { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; }
-    .achievement.unlocked .achievement-icon { background: rgba(234,202,122,0.15); border: 2px solid #EACA7A; }
+    .achievement.unlocked .achievement-icon { background: rgba(229,193,88,0.15); border: 2px solid #E5C158; }
     .achievement.locked .achievement-icon { background: rgba(255,255,255,0.03); border: 2px solid #222; }
     .achievement-title { font-size: 12px; font-weight: 600; color: #ddd; }
     .achievement.locked .achievement-title { color: #555; }
     .achievement-desc { font-size: 10px; color: #555; }
+
     .activity-feed { margin-top: 8px; }
-    .activity-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid #0f0f0f; opacity: 0; animation: fadeInRow 0.4s forwards; }
+    .activity-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid #0f0f0f; }
     .activity-row:last-child { border-bottom: none; }
-    @keyframes fadeInRow { to { opacity: 1; } }
     .activity-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; }
     .activity-icon.gain { background: rgba(34,197,94,0.15); color: #22c55e; }
     .activity-icon.loss { background: rgba(239,68,68,0.15); color: #ef4444; }
@@ -67,27 +201,36 @@
     .activity-amount { font-size: 14px; font-weight: 700; }
     .activity-amount.gain { color: #22c55e; }
     .activity-amount.loss { color: #ef4444; }
-    .flex-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: linear-gradient(135deg, #EACA7A, #C8AA78); color: #06070A; font-weight: 600; font-size: 14px; border: none; border-radius: 6px; cursor: pointer; transition: all 0.3s; }
-    .flex-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(234,202,122,0.3); }
+
+    .flex-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #E5C158, #D4AF37);
+      color: #0B0C0E; font-weight: 600; font-size: 14px;
+      border: none; border-radius: 8px; cursor: pointer;
+      transition: all 0.3s;
+    }
+    .flex-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(229,193,88,0.3); }
     #flex-card-canvas { display: none; max-width: 100%; border-radius: 12px; margin-top: 16px; }
-    #flex-card-download { display: none; }
-    .section-h2 { font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 4px; }
-    .section-sub { font-size: 13px; color: #666; margin-bottom: 16px; }
-    .right-col > div { margin-bottom: 24px; }
+    #flex-card-download, #flex-card-share { display: none; }
+
+    .toast {
+      position: fixed; bottom: 30px; left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(10,11,16,0.95);
+      border: 1px solid rgba(229,193,88,0.2);
+      color: #fff; padding: 14px 24px;
+      border-radius: 100px; font-size: 14px;
+      font-weight: 500; z-index: 9999;
+      transition: transform 0.3s ease;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
   </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/fortrex-icon-32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/fortrex-icon-32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/fortrex-icon-180.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="assets/fortrex-icon-512.png">
-    <meta property="og:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
 </head>
 <body>
   <canvas id="particle-canvas"></canvas>
+
+  <!-- NAVIGATION -->
   <nav class="nav">
     <div class="nav-brand">
       <a href="index.html" class="navbar-brand">
@@ -102,93 +245,144 @@
       <li><a href="rex.html" class="nav-link">REX</a></li>
       <li><a href="journal.html" class="nav-link">Journal</a></li>
       <li><a href="community.html" class="nav-link">Community</a></li>
-      
       <li><a href="dashboard.html" class="nav-link nav-internal" style="display:none">Dashboard</a></li>
       <li><a href="invite.html" class="nav-link nav-internal" style="display:none">Invite</a></li>
-      <li><a href="profile.html" class="nav-link nav-internal" style="display:none">Profile</a></li>
+      <li><a href="profile.html" class="nav-link nav-internal active" style="display:none">Profile</a></li>
       <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
     </ul>
     <div class="nav-cta">
       <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
       <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
-      <div class="hamburger" aria-label="Toggle Menu">
-        <span></span><span></span><span></span>
-      </div>
+      <div class="hamburger" aria-label="Toggle Menu"><span></span><span></span><span></span></div>
     </div>
   </nav>
+
   <main>
-    <div class="profile-grid">
-      <div class="left-col">
-        <div class="profile-card" id="profile-card">
-          <img class="profile-avatar" id="p-avatar" src="" alt="">
-          <div class="profile-name" id="p-name">Loading...</div>
-          <div class="profile-role" id="p-role">Trader</div>
-          <div id="p-class-badge"></div>
-          <div class="stat-tiles">
-            <div class="stat-tile"><div class="val" id="p-rex">0</div><div class="lbl">REX Balance</div></div>
-            <div class="stat-tile"><div class="val" id="p-streak">0</div><div class="lbl">Day Streak</div></div>
-            <div class="stat-tile"><div class="val" id="p-best">0</div><div class="lbl">Best Streak</div></div>
-            <div class="stat-tile"><div class="val" id="p-checkins">0</div><div class="lbl">Check-ins</div></div>
-          </div>
-          <div style="margin-top:20px;padding-top:16px;border-top:1px solid #1a1a1a;">
-            <div style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">Referral Code</div>
-            <div id="p-refcode" style="font-size:18px;font-weight:700;color:#EACA7A;letter-spacing:0.05em;">---</div>
-            <div id="p-refs" style="font-size:11px;color:#666;margin-top:4px;">0 qualified referrals</div>
-          </div>
-          <div style="margin-top:16px;padding-top:16px;border-top:1px solid #1a1a1a;">
-            <div style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">MT5 Account</div>
-            <div id="p-mt4" style="font-size:14px;color:#ddd;">Not linked</div>
-            <button id="p-link-mt4" onclick="window.location.href='checkin.html'" style="margin-top:8px;padding:6px 16px;background:rgba(234,202,122,0.1);border:1px solid rgba(234,202,122,0.3);color:#EACA7A;border-radius:4px;cursor:pointer;font-size:12px;">Link MT5</button>
-          </div>
-        </div>
-      </div>
-      <div class="right-col">
-        <div class="bp-section">
-          <div class="bp-header">
-            <div>
-              <div class="bp-level" id="bp-level">0</div>
-              <div class="bp-level-label">Battle Pass Level</div>
+    <div class="profile-wrapper">
+      <div class="profile-grid">
+        <!-- LEFT SIDEBAR -->
+        <div class="left-col">
+          <!-- Profile Card -->
+          <div class="profile-card" id="profile-card">
+            <img class="profile-avatar" id="p-avatar" src="" alt="">
+            <div class="profile-name" id="p-name">Loading...</div>
+            <div class="profile-role" id="p-role">Trader</div>
+
+            <!-- Trader Status Badge -->
+            <div id="p-status-badge" class="status-badge unverified">Unverified</div>
+
+            <!-- Class Badge -->
+            <div id="p-class-badge"></div>
+
+            <!-- Genesis Tier Badge -->
+            <div class="genesis-tier-badge" id="p-genesis-tier">
+              <div>
+                <div class="tier-label">Genesis Tier</div>
+                <div class="tier-value" id="p-genesis-multiplier">3.0x Multiplier</div>
+              </div>
+              <div style="font-size: 11px; color: #666; text-align: right;" id="p-genesis-tier-name">Tier 1</div>
             </div>
-            <div class="bp-xp-text">
-              <div id="bp-xp" style="font-weight:600;color:#EACA7A;">0 XP</div>
-              <div style="font-size:11px;color:#555;">Season 1</div>
+
+            <!-- Stat Tiles -->
+            <div class="stat-tiles">
+              <div class="stat-tile"><div class="val" id="p-rex">0</div><div class="lbl">REX Balance</div></div>
+              <div class="stat-tile"><div class="val" id="p-streak">0</div><div class="lbl">Day Streak</div></div>
+              <div class="stat-tile"><div class="val" id="p-best">0</div><div class="lbl">Best Streak</div></div>
+              <div class="stat-tile"><div class="val" id="p-checkins">0</div><div class="lbl">Check-ins</div></div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="info-card">
+              <div class="info-card-title">Contact Information</div>
+              <div class="info-row"><span class="label">Full Name</span><span class="value" id="p-fullname">—</span></div>
+              <div class="info-row"><span class="label">Email</span><span class="value" id="p-email">—</span></div>
+              <div class="info-row"><span class="label">Phone</span><span class="value" id="p-phone">—</span></div>
+              <div class="info-row"><span class="label">Discord</span><span class="value" id="p-discord">—</span></div>
+            </div>
+
+            <!-- Referral Code & Link -->
+            <div class="referral-section">
+              <div class="info-card-title">Unique Referral Code</div>
+              <div class="referral-code" id="p-refcode">---</div>
+              <div id="p-refs" style="font-size: 11px; color: #666; margin-bottom: 10px;">0 qualified referrals</div>
+              <div class="referral-link-box">
+                <input type="text" id="p-reflink" class="referral-link-input" readonly value="Loading...">
+                <button class="copy-link-btn" onclick="copyReferralLink()">Copy Link</button>
+              </div>
+            </div>
+
+            <!-- MT5 Account -->
+            <div class="info-card">
+              <div class="info-card-title">MT5 Account</div>
+              <div class="info-row"><span class="label">Status</span><span class="value" id="p-mt4-status">Not linked</span></div>
+              <div class="info-row"><span class="label">Account #</span><span class="value" id="p-mt4">—</span></div>
             </div>
           </div>
-          <div class="bp-bar-container">
-            <div class="bp-bar-fill" id="bp-fill" style="width:0%"></div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="right-col">
+          <!-- Battle Pass & XP -->
+          <div class="content-card">
+            <div class="section-h2">Battle Pass & XP</div>
+            <div class="section-sub">Season 1 — Level up to unlock REX rewards</div>
+            <div class="bp-header">
+              <div>
+                <div class="bp-level" id="bp-level">1</div>
+                <div class="bp-level-label">Battle Pass Level</div>
+              </div>
+              <div class="bp-xp-text">
+                <div id="bp-xp" style="font-weight:600;color:#E5C158;">0 XP</div>
+                <div style="font-size:11px;color:#555;" id="bp-next">500 XP to Level 2</div>
+              </div>
+            </div>
+            <div class="bp-bar-container">
+              <div class="bp-bar-fill" id="bp-fill" style="width:0%"></div>
+            </div>
+            <div class="bp-milestones" id="bp-milestones"></div>
           </div>
-          <div class="bp-milestones" id="bp-milestones"></div>
-          <div style="font-size:12px;color:#555;margin-top:12px;text-align:center;">Earn XP from check-ins, tournaments, and referrals to level up</div>
-        </div>
-        <div class="bp-section">
-          <div class="section-h2">Achievements</div>
-          <div class="section-sub">Unlock badges by mastering the arena</div>
-          <div class="achievements-grid" id="achievements-grid"></div>
-        </div>
-        <div class="bp-section">
-          <div class="section-h2">REX Activity</div>
-          <div class="section-sub">Recent reward transactions</div>
-          <div class="activity-feed" id="activity-feed"></div>
-        </div>
-        <div class="bp-section">
-          <div class="section-h2">Flex Card</div>
-          <div class="section-sub">Generate a shareable card for social media</div>
-          <button class="flex-btn" onclick="generateFlexCard()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            Generate Flex Card
-          </button>
-          <canvas id="flex-card-canvas" width="600" height="340"></canvas>
-          <div style="margin-top:12px;display:flex;gap:12px;">
-            <button class="flex-btn" id="flex-card-download" onclick="downloadFlexCard()" style="display:none;background:rgba(212,175,55,0.15);border:1px solid rgba(212,175,55,0.3);color:#D4AF37;">Download PNG</button>
-            <button class="flex-btn" id="flex-card-share" onclick="shareFlexCard()" style="display:none;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);color:#22c55e;">Share</button>
+
+          <!-- Achievements & Badges -->
+          <div class="content-card">
+            <div class="section-h2">Achievements & Badges</div>
+            <div class="section-sub">Unlock badges by mastering the arena</div>
+            <div class="achievements-grid" id="achievements-grid"></div>
           </div>
-        </div>
-        <div style="padding:16px;border-top:1px solid #1a1a1a;">
-          <p style="font-size:11px;color:#444;line-height:1.5;">Trading forex and cryptocurrency on margin carries a high level of risk. FORTREX is a skill-based competition platform and does not execute trades or hold funds. Tournament prizes are REX reward points with no cash value.</p>
+
+          <!-- REX Activity Log -->
+          <div class="content-card">
+            <div class="section-h2">REX Activity Log</div>
+            <div class="section-sub">Recent reward transactions</div>
+            <div class="activity-feed" id="activity-feed">
+              <div style="padding:24px;text-align:center;color:#555;font-size:14px;">No activity yet. Start earning REX!</div>
+            </div>
+          </div>
+
+          <!-- Flex Card Generator -->
+          <div class="content-card">
+            <div class="section-h2">Flex Card</div>
+            <div class="section-sub">Generate a shareable card for social media</div>
+            <button class="flex-btn" onclick="generateFlexCard()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+              Generate Flex Card
+            </button>
+            <canvas id="flex-card-canvas" width="600" height="340"></canvas>
+            <div style="margin-top:12px;display:flex;gap:12px;">
+              <button class="flex-btn" id="flex-card-download" onclick="downloadFlexCard()" style="display:none;background:rgba(212,175,55,0.15);border:1px solid rgba(212,175,55,0.3);color:#D4AF37;">Download PNG</button>
+              <button class="flex-btn" id="flex-card-share" onclick="shareFlexCard()" style="display:none;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);color:#22c55e;">Share</button>
+            </div>
+          </div>
+
+          <!-- Risk Disclaimer -->
+          <div style="padding:16px;border-top:1px solid #1a1a1a;">
+            <p style="font-size:11px;color:#444;line-height:1.5;">Trading forex and cryptocurrency on margin carries a high level of risk. FORTREX is a skill-based competition platform and does not execute trades or hold funds. Tournament prizes are REX reward points with no cash value.</p>
+          </div>
         </div>
       </div>
     </div>
   </main>
+
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
@@ -202,7 +396,6 @@
           <a href="contests.html" class="footer-link">Tournaments</a>
           <a href="leaderboard.html" class="footer-link">Leaderboard</a>
           <a href="community.html" class="footer-link">Community</a>
-          
           <a href="terms.html" class="footer-link">Terms</a>
           <a href="privacy.html" class="footer-link">Privacy</a>
           <a href="signin.html" class="footer-link">Sign In</a>
@@ -210,17 +403,14 @@
       </div>
       <div class="footer-bottom">
         <div class="footer-copyright">© 2026 FORTREX — Skill-based trading competitions. Not a broker.</div>
-        <div class="footer-disclaimer" style="font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 8px; line-height: 1.5;">
-          FORTREX organizes skill-based trading competitions and tournaments. We are not a broker, financial institution, or asset manager. REX points are competition utility tokens used for arena rankings and prize distributions.
-        </div>
       </div>
     </div>
   </footer>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast"></div>
+
   <script>
-    (function() {
-      const trader = localStorage.getItem('fortrex_trader');
-      if (trader) document.querySelectorAll('.nav-internal').forEach(el => el.style.display = '');
-    })();
     const CLASS_CONFIG = {
       'Sniper': { icon: '🎯', color: 'sniper', desc: 'Precision entries. Patient exits.' },
       'Scalper': { icon: '⚡', color: 'scalper', desc: 'Fast in, fast out. Quick gains.' },
@@ -228,22 +418,32 @@
       'Rookie': { icon: '🌱', color: 'rookie', desc: 'New to the arena. Learning fast.' }
     };
     const ACHIEVEMENTS = [
-      { id: 'first_steps', icon: '🚀', title: 'First Steps', desc: 'Joined FORTREX' },
-      { id: 'on_fire', icon: '🔥', title: 'On Fire', desc: '7-day check-in streak' },
+      { id: 'genesis', icon: '⭐', title: 'Genesis Early Bird', desc: 'First 2,500 members' },
+      { id: 'on_fire', icon: '🔥', title: '7-Day Streak Master', desc: '7-day check-in streak' },
       { id: 'unstoppable', icon: '💎', title: 'Unstoppable', desc: '30-day streak' },
-      { id: 'champion', icon: '🏆', title: 'Champion', desc: 'Won a tournament' },
+      { id: 'champion', icon: '🏆', title: 'Tournament Contender', desc: 'Won a tournament' },
       { id: 'connector', icon: '🔗', title: 'Connector', desc: '5 qualified referrals' },
-      { id: 'genesis', icon: '⭐', title: 'Genesis Trader', desc: 'First 2,500 members' }
+      { id: 'first_steps', icon: '🚀', title: 'First Steps', desc: 'Joined FORTREX' }
     ];
     const BP_MILESTONES = [
       { level: 5, reward: '50 REX' }, { level: 10, reward: '100 REX' },
       { level: 15, reward: '150 REX' }, { level: 20, reward: '200 REX' },
-      { level: 25, reward: '300 REX' }, { level: 30, reward: '👑 500 REX' }
+      { level: 25, reward: '300 REX' }, { level: 30, reward: '500 REX' }
     ];
+
     async function loadProfile() {
-      const trader = FORTREX_AUTH.isLoggedIn();
+      let trader;
+      try {
+        trader = FORTREX_AUTH.isLoggedIn();
+      } catch(e) {
+        document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:#06070A;color:#E5C158;font-family:Inter,sans-serif;flex-direction:column;gap:16px;"><div style="font-size:18px;font-weight:600;">Session Error</div><a href="signin.html" style="margin-top:12px;padding:12px 32px;background:linear-gradient(135deg,#E5C158,#D4AF37);color:#0B0C0E;border-radius:9999px;font-weight:700;text-decoration:none;">Sign In</a></div>';
+        return;
+      }
       if (!trader) { window.location.href = 'signin.html'; return; }
+
       document.querySelectorAll('.nav-internal').forEach(el => el.style.display = '');
+
+      // Basic profile
       document.getElementById('p-avatar').src = trader.avatar || 'https://cdn.discordapp.com/embed/avatars/0.png';
       document.getElementById('p-name').textContent = trader.username || 'Trader';
       document.getElementById('p-role').textContent = (trader.role || 'trader').toUpperCase();
@@ -252,13 +452,59 @@
       document.getElementById('p-best').textContent = trader.best_streak || 0;
       document.getElementById('p-checkins').textContent = trader.total_checkins || 0;
       document.getElementById('p-refcode').textContent = trader.referral_code || '---';
-      if (trader.mt4_linked && trader.mt4_account) {
-        document.getElementById('p-mt4').textContent = trader.mt4_account;
-        document.getElementById('p-link-mt4').style.display = 'none';
+
+      // Referral link
+      const refLink = 'https://somilsharma2000.github.io/VortexFX/signin.html?ref=' + encodeURIComponent(trader.referral_code || trader.id || 'TRADER');
+      document.getElementById('p-reflink').value = refLink;
+
+      // Contact info
+      document.getElementById('p-fullname').textContent = trader.full_name || trader.username || '—';
+      document.getElementById('p-email').textContent = trader.email || '—';
+      document.getElementById('p-phone').textContent = trader.phone || '—';
+      document.getElementById('p-discord').textContent = trader.discord_username ? (trader.discord_username + (trader.discord_discriminator ? '#' + trader.discord_discriminator : '')) : (trader.username || '—');
+
+      // Trader status badge
+      const statusEl = document.getElementById('p-status-badge');
+      if (trader.verified) {
+        statusEl.className = 'status-badge verified';
+        statusEl.textContent = 'Genesis Verified';
+      } else if (trader.discord_id || trader.discord_username) {
+        statusEl.className = 'status-badge pending';
+        statusEl.textContent = 'Pending Discord';
+      } else {
+        statusEl.className = 'status-badge unverified';
+        statusEl.textContent = 'Unverified';
       }
+
+      // Genesis tier badge
+      const genesisTiers = [
+        { name: 'Tier 1', max: 2500, mult: '3.0x' },
+        { name: 'Tier 2', max: 5000, mult: '2.5x' },
+        { name: 'Tier 3', max: 7500, mult: '2.0x' },
+        { name: 'Tier 4', max: 10000, mult: '1.5x' }
+      ];
+      // Determine tier from trader data or default to Tier 1
+      let tierIdx = 0;
+      if (trader.genesis_tier) {
+        tierIdx = Math.max(0, Math.min(3, parseInt(trader.genesis_tier) - 1));
+      }
+      const tier = genesisTiers[tierIdx];
+      document.getElementById('p-genesis-multiplier').textContent = tier.mult + ' Multiplier';
+      document.getElementById('p-genesis-tier-name').textContent = tier.name;
+
+      // MT5
+      if (trader.mt4_linked && trader.mt4_account) {
+        document.getElementById('p-mt4-status').textContent = 'Linked';
+        document.getElementById('p-mt4-status').style.color = '#22c55e';
+        document.getElementById('p-mt4').textContent = trader.mt4_account;
+      }
+
+      // Class badge
       const cls = trader.trader_class || 'Rookie';
       const cfg = CLASS_CONFIG[cls] || CLASS_CONFIG['Rookie'];
-      document.getElementById('p-class-badge').innerHTML = `<div class="class-badge ${cfg.color}" title="${cfg.desc}">${cfg.icon} ${cls}</div>`;
+      document.getElementById('p-class-badge').innerHTML = '<div class="class-badge ' + cfg.color + '" title="' + cfg.desc + '">' + cfg.icon + ' ' + cls + '</div>';
+
+      // Fetch full profile from backend
       try {
         const result = await FORTREX_AUTH.callFunction('getTraderProfile', { trader_id: trader.id });
         if (result.success) {
@@ -267,43 +513,70 @@
           document.getElementById('p-streak').textContent = t.checkin_streak || 0;
           document.getElementById('p-best').textContent = t.best_streak || 0;
           document.getElementById('p-checkins').textContent = t.total_checkins || 0;
-          document.getElementById('p-refs').textContent = `${result.referrals?.qualified || 0} qualified referrals`;
+          document.getElementById('p-refs').textContent = (result.referrals?.qualified || 0) + ' qualified referrals';
+
+          // Battle Pass
           const bpLevel = t.battlepass_level || 1;
           const bpXp = t.battlepass_xp || 0;
           const xpForNext = bpLevel * 500;
           const xpProgress = Math.min(100, ((bpXp % xpForNext) / xpForNext) * 100);
+          const xpRemaining = xpForNext - (bpXp % xpForNext);
           document.getElementById('bp-level').textContent = bpLevel;
-          document.getElementById('bp-xp').textContent = `${bpXp.toLocaleString()} XP`;
+          document.getElementById('bp-xp').textContent = bpXp.toLocaleString() + ' XP';
+          document.getElementById('bp-next').textContent = xpRemaining + ' XP to Level ' + (bpLevel + 1);
           setTimeout(() => { document.getElementById('bp-fill').style.width = xpProgress + '%'; }, 300);
-          document.getElementById('bp-milestones').innerHTML = BP_MILESTONES.map(m => {
+          document.getElementById('bp-milestones').innerHTML = BP_MILESTONES.map(function(m) {
             const reached = bpLevel >= m.level;
-            return `<div class="bp-milestone"><div class="bp-milestone-dot ${reached ? 'reached' : ''}"></div><div class="bp-milestone-label ${reached ? 'reached' : ''}">Lv ${m.level}</div><div class="bp-milestone-reward ${reached ? 'reached' : ''}">${m.reward}</div></div>`;
+            return '<div class="bp-milestone"><div class="bp-milestone-dot ' + (reached ? 'reached' : '') + '"></div><div class="bp-milestone-label ' + (reached ? 'reached' : '') + '">Lv ' + m.level + '</div><div class="bp-milestone-reward ' + (reached ? 'reached' : '') + '">' + m.reward + '</div></div>';
           }).join('');
+
+          // Achievements
           const achData = {
-            first_steps: true, on_fire: (t.best_streak || 0) >= 7,
+            genesis: true,
+            on_fire: (t.best_streak || 0) >= 7,
             unstoppable: (t.best_streak || 0) >= 30,
-            champion: (result.tournaments || []).some(t => t.rank === 1),
-            connector: (result.referrals?.qualified || 0) >= 5, genesis: true
+            champion: (result.tournaments || []).some(function(t) { return t.rank === 1; }),
+            connector: (result.referrals?.qualified || 0) >= 5,
+            first_steps: true
           };
-          document.getElementById('achievements-grid').innerHTML = ACHIEVEMENTS.map(a => {
+          document.getElementById('achievements-grid').innerHTML = ACHIEVEMENTS.map(function(a) {
             const u = achData[a.id];
-            return `<div class="achievement ${u ? 'unlocked' : 'locked'}"><div class="achievement-icon">${u ? a.icon : '🔒'}</div><div class="achievement-title">${a.title}</div><div class="achievement-desc">${a.desc}</div></div>`;
+            return '<div class="achievement ' + (u ? 'unlocked' : 'locked') + '"><div class="achievement-icon">' + (u ? a.icon : '🔒') + '</div><div class="achievement-title">' + a.title + '</div><div class="achievement-desc">' + a.desc + '</div></div>';
           }).join('');
+
+          // REX Activity Log
           const txs = result.transactions || [];
-          if (txs.length === 0) {
-            document.getElementById('activity-feed').innerHTML = '<div style="padding:24px;text-align:center;color:#555;font-size:14px;">No activity yet. Start earning REX!</div>';
-          } else {
+          if (txs.length > 0) {
             const gainTypes = ['tournament_prize','checkin_reward','genesis_bonus','referral_bonus','battlepass_reward','checkin_milestone'];
-            document.getElementById('activity-feed').innerHTML = txs.slice(0, 10).map((tx, i) => {
+            document.getElementById('activity-feed').innerHTML = txs.slice(0, 10).map(function(tx, i) {
               const g = gainTypes.includes(tx.type);
               const d = tx.transaction_date ? new Date(tx.transaction_date).toLocaleDateString('en-US',{month:'short',day:'numeric'}) : '';
-              return `<div class="activity-row" style="animation-delay:${i*0.1}s"><div class="activity-icon ${g?'gain':'loss'}">${g?'↗':'↘'}</div><div class="activity-info"><div class="activity-desc">${tx.description||tx.type}</div><div class="activity-date">${d}</div></div><div class="activity-amount ${g?'gain':'loss'}">${g?'+':'-'}${tx.amount||0} REX</div></div>`;
+              return '<div class="activity-row" style="animation-delay:' + (i*0.08) + 's"><div class="activity-icon ' + (g?'gain':'loss') + '">' + (g?'↗':'↘') + '</div><div class="activity-info"><div class="activity-desc">' + (tx.description||tx.type) + '</div><div class="activity-date">' + d + '</div></div><div class="activity-amount ' + (g?'gain':'loss') + '">' + (g?'+':'-') + (tx.amount||0) + ' REX</div></div>';
             }).join('');
           }
+
           window._profileData = { trader: t, tournaments: result.tournaments || [], referrals: result.referrals || {} };
         }
       } catch (e) { console.error('Profile fetch error:', e); }
     }
+
+    function copyReferralLink() {
+      const input = document.getElementById('p-reflink');
+      if (!input) return;
+      navigator.clipboard.writeText(input.value).then(function() {
+        showToast('Referral link copied!');
+      }).catch(function() {
+        input.select(); document.execCommand('copy'); showToast('Referral link copied!');
+      });
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      if (!t) return;
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(function() { t.classList.remove('show'); }, 3000);
+    }
+
     function generateFlexCard() {
       const data = window._profileData;
       if (!data) return alert('Profile data still loading...');
@@ -313,64 +586,83 @@
       const grad = ctx.createLinearGradient(0,0,W,H);
       grad.addColorStop(0,'#06070A'); grad.addColorStop(1,'#0a0a12');
       ctx.fillStyle = grad; ctx.fillRect(0,0,W,H);
-      ctx.strokeStyle = '#EACA7A'; ctx.lineWidth = 2; ctx.strokeRect(10,10,W-20,H-20);
-      ctx.strokeStyle = '#EACA7A'; ctx.lineWidth = 2; ctx.beginPath();
+      ctx.strokeStyle = '#E5C158'; ctx.lineWidth = 2; ctx.strokeRect(10,10,W-20,H-20);
+      // Logo hex
+      ctx.strokeStyle='#E5C158'; ctx.lineWidth=2; ctx.beginPath();
       const cx=50,cy=50,r=20;
-      for (let i=0;i<6;i++) { const a=(Math.PI/3)*i-Math.PI/2; const x=cx+r*Math.cos(a); const y=cy+r*Math.sin(a); if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y); }
+      for(let i=0;i<6;i++){const a=(Math.PI/3)*i-Math.PI/2;const x=cx+r*Math.cos(a);const y=cy+r*Math.sin(a);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}
       ctx.closePath(); ctx.stroke();
-      ctx.fillStyle='#EACA7A'; ctx.font='bold 18px Inter,sans-serif'; ctx.fillText('FORTREX',85,55);
+      ctx.fillStyle='#E5C158'; ctx.font='bold 18px Inter,sans-serif'; ctx.fillText('FORTREX',85,55);
       ctx.fillStyle='#555'; ctx.font='11px Inter,sans-serif'; ctx.fillText('WHERE TRADERS RISE',85,70);
       const t = data.trader;
-      ctx.strokeStyle='#EACA7A'; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(W-70,60,35,0,Math.PI*2); ctx.stroke();
+      // Avatar circle
+      ctx.strokeStyle='#E5C158'; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(W-70,60,35,0,Math.PI*2); ctx.stroke();
+      // Name
       ctx.fillStyle='#fff'; ctx.font='bold 24px Inter,sans-serif'; ctx.fillText(t.username||'Trader',30,130);
-      ctx.fillStyle='#EACA7A'; ctx.font='13px Inter,sans-serif'; ctx.fillText(t.trader_class||'Rookie',30,150);
+      ctx.fillStyle='#E5C158'; ctx.font='13px Inter,sans-serif'; ctx.fillText(t.trader_class||'Rookie',30,150);
+      // Stats
       const stats = [
-        {label:'REX BALANCE',value:`${(t.rex_balance||0).toLocaleString()}`},
-        {label:'BEST STREAK',value:`${t.best_streak||0} days`},
-        {label:'CHECK-INS',value:`${t.total_checkins||0}`}
+        {label:'REX BALANCE',value:((t.rex_balance||0).toLocaleString())},
+        {label:'BEST STREAK',value:(t.best_streak||0)+' days'},
+        {label:'CHECK-INS',value:String(t.total_checkins||0)}
       ];
       const tr = data.tournaments||[];
-      const br = tr.length>0 ? Math.min(...tr.map(x=>x.rank||999)) : null;
-      if (br && br<999) stats.push({label:'BEST RANK',value:`#${br}`});
-      stats.forEach((s,i) => { const x=30+i*140; ctx.fillStyle='#EACA7A'; ctx.font='bold 28px Inter,sans-serif'; ctx.fillText(s.value,x,210); ctx.fillStyle='#555'; ctx.font='10px Inter,sans-serif'; ctx.fillText(s.label,x,225); });
+      const wins = tr.filter(function(x){return x.rank===1;}).length;
+      const totalTr = tr.length;
+      const winRate = totalTr > 0 ? Math.round((wins/totalTr)*100)+'%' : '—';
+      stats.push({label:'WIN RATE',value:winRate});
+      const br = tr.length>0 ? Math.min.apply(null, tr.map(function(x){return x.rank||999;})) : null;
+      if (br && br<999) stats.push({label:'BEST RANK',value:'#'+br});
+      stats.forEach(function(s,i){const x=30+i*130;ctx.fillStyle='#E5C158';ctx.font='bold 26px Inter,sans-serif';ctx.fillText(s.value,x,210);ctx.fillStyle='#555';ctx.font='10px Inter,sans-serif';ctx.fillText(s.label,x,225);});
       ctx.fillStyle='#333'; ctx.font='11px Inter,sans-serif'; ctx.fillText('FORTREX — Where Traders Rise · fortrexfx.com',30,H-25);
       canvas.style.display='block';
       document.getElementById('flex-card-download').style.display='inline-flex';
       document.getElementById('flex-card-share').style.display='inline-flex';
     }
-    function downloadFlexCard() { const c=document.getElementById('flex-card-canvas'); const l=document.createElement('a'); l.download='fortrex-flex-card.png'; l.href=c.toDataURL('image/png'); l.click(); }
-    async function shareFlexCard() { const c=document.getElementById('flex-card-canvas'); c.toBlob(async(b)=>{ const f=new File([b],'fortrex-flex-card.png',{type:'image/png'}); if(navigator.share&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:'FORTREX',text:'Check out my FORTREX stats!'});}catch(e){downloadFlexCard();}}else{downloadFlexCard();} }); }
+
+    function downloadFlexCard() {
+      const c=document.getElementById('flex-card-canvas');
+      const l=document.createElement('a');
+      l.download='fortrex-flex-card.png'; l.href=c.toDataURL('image/png'); l.click();
+    }
+
+    async function shareFlexCard() {
+      const c=document.getElementById('flex-card-canvas');
+      c.toBlob(async function(b){
+        const f=new File([b],'fortrex-flex-card.png',{type:'image/png'});
+        if(navigator.share&&navigator.canShare({files:[f]})){
+          try{await navigator.share({files:[f],title:'FORTREX',text:'Check out my FORTREX stats!'});}catch(e){downloadFlexCard();}
+        } else { downloadFlexCard(); }
+      });
+    }
+
     loadProfile();
   </script>
 
-    <script>
-      (function() {
-        const trader = localStorage.getItem('fortrex_trader');
-        if (trader) document.querySelectorAll('.nav-internal').forEach(el => el.style.display = '');
-      })();
-    </script>
+  <script>
+    (function() {
+      const trader = localStorage.getItem('fortrex_trader');
+      if (trader) document.querySelectorAll('.nav-internal').forEach(function(el) { el.style.display = ''; });
+    })();
+  </script>
 
-
-<script>
-// Mobile hamburger toggle
-document.addEventListener('DOMContentLoaded', function() {
-  var hamburger = document.querySelector('.hamburger');
-  var navLinks = document.querySelector('#nav-links-main');
-  if (hamburger && navLinks) {
-    hamburger.addEventListener('click', function() {
-      hamburger.classList.toggle('active');
-      navLinks.classList.toggle('active');
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var hamburger = document.querySelector('.hamburger');
+      var navLinks = document.querySelector('#nav-links-main');
+      if (hamburger && navLinks) {
+        hamburger.addEventListener('click', function() {
+          hamburger.classList.toggle('active');
+          navLinks.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+          });
+        });
+      }
     });
-    // Close on link click
-    navLinks.querySelectorAll('a').forEach(function(link) {
-      link.addEventListener('click', function() {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-      });
-    });
-  }
-});
-</script>
-
+  </script>
 </body>
 </html>

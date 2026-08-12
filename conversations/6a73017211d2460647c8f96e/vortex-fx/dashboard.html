@@ -1060,15 +1060,26 @@
     ];
     let claimedTasks = {};
 
-    // Auth & Init Check
+    // Auth & Init Check — wrapped in try/catch to prevent instant redirect on JS errors
     (function checkAuth() {
-      if (!window.FORTREX_AUTH || typeof window.FORTREX_AUTH.isLoggedIn !== 'function') {
-        window.location.href = 'signin.html';
-        return;
-      }
-      localTrader = FORTREX_AUTH.isLoggedIn();
-      if (!localTrader) {
-        window.location.href = 'signin.html';
+      try {
+        if (!window.FORTREX_AUTH || typeof window.FORTREX_AUTH.isLoggedIn !== 'function') {
+          console.warn('FORTREX_AUTH not loaded, redirecting to signin...');
+          window.location.href = 'signin.html';
+          return;
+        }
+        localTrader = FORTREX_AUTH.isLoggedIn();
+        if (!localTrader) {
+          console.warn('Not logged in, redirecting to signin...');
+          // Show a visible message before redirecting
+          document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:#06070A;color:#E5C158;font-family:Inter,sans-serif;flex-direction:column;gap:16px;"><div style="font-size:18px;font-weight:600;">Redirecting to sign in...</div><div style="font-size:14px;color:#888;">You need to be logged in to access the dashboard.</div></div>';
+          setTimeout(() => { window.location.href = 'signin.html'; }, 1500);
+          return;
+        }
+      } catch(err) {
+        console.error('Auth check error:', err);
+        // Don't redirect on JS error — show message instead
+        document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:#06070A;color:#E5C158;font-family:Inter,sans-serif;flex-direction:column;gap:16px;"><div style="font-size:18px;font-weight:600;">Session Error</div><div style="font-size:14px;color:#888;">Please clear your browser data and sign in again.</div><a href="signin.html" style="margin-top:12px;padding:12px 32px;background:linear-gradient(135deg,#E5C158,#D4AF37);color:#0B0C0E;border-radius:9999px;font-weight:700;text-decoration:none;">Sign In</a></div>';
         return;
       }
     })();
