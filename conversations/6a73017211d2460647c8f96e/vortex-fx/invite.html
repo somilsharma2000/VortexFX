@@ -40,7 +40,7 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--color-electric-iris, #8052FF), #D4AF37, transparent);
+      background: linear-gradient(90deg, transparent, var(--color-electric-iris, #8052FF), #EACA7A, transparent);
     }
 
     .link-input-group {
@@ -157,8 +157,8 @@
     }
 
     .stat-value.gold {
-      color: #D4AF37;
-      text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+      color: #EACA7A;
+      text-shadow: 0 0 20px rgba(234, 202, 122, 0.3);
     }
 
     .stat-label {
@@ -178,7 +178,7 @@
     /* Empty State Styling */
     .empty-state-box {
       background: rgba(12, 13, 18, 0.9);
-      border: 1px dashed rgba(212, 175, 55, 0.35);
+      border: 1px dashed rgba(234, 202, 122, 0.35);
       border-radius: 20px;
       padding: 32px 24px;
       text-align: center;
@@ -259,7 +259,7 @@
 
     .tier-reward span {
       font-size: 16px;
-      color: #D4AF37;
+      color: #EACA7A;
       font-weight: 600;
     }
 
@@ -288,7 +288,7 @@
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #8052FF, #D4AF37);
+      background: linear-gradient(90deg, #8052FF, #EACA7A);
       border-radius: 4px;
       transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -462,7 +462,7 @@
         <!-- LIVE YIELD TICKER BANNER -->
         <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap; border-top: 1px solid #161720; padding-top: 20px;">
           <div class="badge-live">LIVE NETWORK YIELD</div>
-          <p id="ticker-text" style="font-size: 14px; color: #D4AF37; font-weight: 500; transition: opacity 0.3s ease;">
+          <p id="ticker-text" style="font-size: 14px; color: #EACA7A; font-weight: 500; transition: opacity 0.3s ease;">
             <strong>VoidMaster</strong> just claimed +2,500 REX milestone bonus · 2 minutes ago
           </p>
         </div>
@@ -500,7 +500,7 @@
             <span style="font-family: monospace; font-size: 13px; color: #666678; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
               https://somilsharma2000.github.io/VortexFX/signin.html?ref=YOUR_CODE
             </span>
-            <span style="font-size: 12px; font-weight: 600; color: #D4AF37; background: rgba(212, 175, 55, 0.12); padding: 4px 10px; border-radius: 999px; white-space: nowrap;">
+            <span style="font-size: 12px; font-weight: 600; color: #EACA7A; background: rgba(234, 202, 122, 0.12); padding: 4px 10px; border-radius: 999px; white-space: nowrap;">
               🔒 Sign In to Copy
             </span>
           </div>
@@ -513,7 +513,7 @@
           <div class="link-copy-card">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 8px;">
               <div class="section-label accent-violet" style="margin-bottom: 0;">YOUR UNIQUE REFERRAL LINK</div>
-              <span class="badge" style="color: #D4AF37; background: rgba(212, 175, 55, 0.12); border: 1px solid rgba(212, 175, 55, 0.3);">
+              <span class="badge" style="color: #EACA7A; background: rgba(234, 202, 122, 0.12); border: 1px solid rgba(234, 202, 122, 0.3);">
                 ⚡ RECIPROCAL BONUS ACTIVE
               </span>
             </div>
@@ -600,7 +600,7 @@
 
             <!-- REX Earned -->
             <div class="stat-card highlight">
-              <div class="stat-label" style="color: #D4AF37;">REX Earned</div>
+              <div class="stat-label" style="color: #EACA7A;">REX Earned</div>
               <div id="stat-rex-earned" class="stat-value gold">0 REX</div>
               <div class="stat-subtext">Total referral yield</div>
             </div>
@@ -660,7 +660,7 @@
         <div style="background: rgba(10, 11, 16, 0.85); border: 1px solid #1c1d2b; border-radius: 18px; padding: 20px 24px; margin-bottom: 28px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
             <div style="font-size: 14px; font-weight: 600; color: #FFFFFF;">
-              Current Tier: <span id="current-tier-title" style="color: #D4AF37;">Bronze Scout</span>
+              Current Tier: <span id="current-tier-title" style="color: #EACA7A;">Bronze Scout</span>
             </div>
             <div id="tier-next-target" style="font-size: 13px; color: #888898;">
               Invite 5 friends to unlock Tier 2 (+150 REX / ref)
@@ -755,7 +755,7 @@
                 Once your friend completes account verification and setup, you both instantly earn bonus REX rewards!
               </div>
             </div>
-            <div style="margin-top: 24px; font-size: 12px; color: #D4AF37; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">
+            <div style="margin-top: 24px; font-size: 12px; color: #EACA7A; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">
               Step 3: Qualification & Rewards
             </div>
           </div>
@@ -993,7 +993,7 @@
         tbody.innerHTML = list.map(item => {
           const isQual = item.status === 'qualified' || item.is_qualified;
           const statusBadge = isQual 
-            ? '<span class="badge" style="background: rgba(212, 175, 55, 0.15); color: #D4AF37;">Qualified</span>'
+            ? '<span class="badge" style="background: rgba(234, 202, 122, 0.15); color: #EACA7A;">Qualified</span>'
             : '<span class="badge" style="background: rgba(255, 255, 255, 0.08); color: #888898;">Pending Setup</span>';
           
           return `
@@ -1015,7 +1015,7 @@
               <td style="padding: 14px 16px; color: #FFFFFF; font-weight: 500;">Trader Fleet Member #${i + 1}</td>
               <td style="padding: 14px 16px;">
                 ${isQual 
-                  ? '<span class="badge" style="background: rgba(212, 175, 55, 0.15); color: #D4AF37;">Qualified</span>' 
+                  ? '<span class="badge" style="background: rgba(234, 202, 122, 0.15); color: #EACA7A;">Qualified</span>' 
                   : '<span class="badge" style="background: rgba(255, 255, 255, 0.08); color: #888898;">Pending Setup</span>'}
               </td>
               <td style="padding: 14px 16px; color: #888898;">Recent</td>

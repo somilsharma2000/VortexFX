@@ -614,14 +614,14 @@
         if (!checkinFeedback) return;
 
         const milestoneHtml = (info.milestoneBonus > 0 || info.milestoneReached) ? `
-          <div style="margin-top: 12px; padding: 12px 20px; background: rgba(212, 175, 55, 0.15); border: 1px solid var(--color-saffron-spark); border-radius: 12px; color: var(--color-saffron-spark); font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+          <div style="margin-top: 12px; padding: 12px 20px; background: rgba(234, 202, 122, 0.15); border: 1px solid var(--color-saffron-spark); border-radius: 12px; color: var(--color-saffron-spark); font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
             <span>🎉 MILESTONE UNLOCKED!</span>
             <span>+${info.milestoneBonus || 0} BONUS REX EARNED!</span>
           </div>
         ` : '';
 
         checkinFeedback.innerHTML = `
-          <div style="border: 1px solid var(--color-saffron-spark); background: rgba(212, 175, 55, 0.08); border-radius: 20px; padding: 28px; margin-top: 24px; text-align: center; animation: fadeIn 0.4s ease;">
+          <div style="border: 1px solid var(--color-saffron-spark); background: rgba(234, 202, 122, 0.08); border-radius: 20px; padding: 28px; margin-top: 24px; text-align: center; animation: fadeIn 0.4s ease;">
             <div style="font-size: 36px; margin-bottom: 8px;">🔥</div>
             <div style="font-size: 22px; font-weight: 600; color: var(--color-saffron-spark); margin-bottom: 6px;">
               Streak Extended to ${info.newStreak} Days!
@@ -703,7 +703,7 @@
 
           if (isActive) {
             if (isMilestone) {
-              bg = 'rgba(212, 175, 55, 0.2)';
+              bg = 'rgba(234, 202, 122, 0.2)';
               border = '1px solid var(--color-saffron-spark)';
               color = 'var(--color-saffron-spark)';
             } else {
@@ -712,7 +712,7 @@
               color = '#ffffff';
             }
           } else if (isToday && !isCheckedIn) {
-            bg = 'rgba(212, 175, 55, 0.06)';
+            bg = 'rgba(234, 202, 122, 0.06)';
             border = '1px dashed var(--color-saffron-spark)';
             color = 'var(--color-saffron-spark)';
           }
@@ -812,9 +812,9 @@
           let cardBg = 'rgba(10, 11, 15, 0.6)';
 
           if (unlocked) {
-            badgeHtml = `<span class="badge" style="background: rgba(212, 175, 55, 0.18); color: var(--color-saffron-spark); border: 1px solid var(--color-saffron-spark);">UNLOCKED ✓</span>`;
-            cardBorder = '1px solid rgba(212, 175, 55, 0.4)';
-            cardBg = 'rgba(212, 175, 55, 0.05)';
+            badgeHtml = `<span class="badge" style="background: rgba(234, 202, 122, 0.18); color: var(--color-saffron-spark); border: 1px solid var(--color-saffron-spark);">UNLOCKED ✓</span>`;
+            cardBorder = '1px solid rgba(234, 202, 122, 0.4)';
+            cardBg = 'rgba(234, 202, 122, 0.05)';
           } else if (isCurrent) {
             badgeHtml = `<span class="badge" style="background: rgba(128, 82, 255, 0.18); color: var(--color-electric-iris); border: 1px solid var(--color-electric-iris);">IN PROGRESS</span>`;
             cardBorder = '1px solid var(--color-electric-iris)';

@@ -20,8 +20,8 @@
   <style>
     /* --- DESIGN SYSTEM OVERRIDES & CUSTOM REX STYLES --- */
     :root {
-      --color-gold: #D4AF37;
-      --color-gold-glow: rgba(212, 175, 55, 0.25);
+      --color-gold: #EACA7A;
+      --color-gold-glow: rgba(234, 202, 122, 0.25);
       --color-purple: #8B5CF6;
       --color-purple-glow: rgba(139, 92, 246, 0.25);
       --color-emerald: #10B981;
@@ -81,15 +81,15 @@
     }
 
     .btn-gold {
-      background: linear-gradient(135deg, #D4AF37 0%, #AA820A 100%);
+      background: linear-gradient(135deg, #EACA7A 0%, #AA820A 100%);
       color: #000000;
       border: none;
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 0 20px rgba(234, 202, 122, 0.3);
     }
 
     .btn-gold:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+      box-shadow: 0 0 30px rgba(234, 202, 122, 0.5);
       color: #000000;
     }
 
@@ -100,7 +100,7 @@
     }
 
     .btn-outline-gold:hover {
-      background: rgba(212, 175, 55, 0.1);
+      background: rgba(234, 202, 122, 0.1);
       transform: translateY(-2px);
     }
 
@@ -122,13 +122,13 @@
     }
 
     .rex-card-glow-gold {
-      border-color: rgba(212, 175, 55, 0.4);
-      box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+      border-color: rgba(234, 202, 122, 0.4);
+      box-shadow: 0 0 25px rgba(234, 202, 122, 0.15);
     }
 
     .rex-card-glow-gold:hover {
       border-color: var(--color-gold);
-      box-shadow: 0 0 35px rgba(212, 175, 55, 0.25);
+      box-shadow: 0 0 35px rgba(234, 202, 122, 0.25);
     }
 
     /* Top ambient gradient glow */
@@ -213,8 +213,8 @@
       width: 48px;
       height: 48px;
       border-radius: 12px;
-      background: rgba(212, 175, 55, 0.1);
-      border: 1px solid rgba(212, 175, 55, 0.2);
+      background: rgba(234, 202, 122, 0.1);
+      border: 1px solid rgba(234, 202, 122, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -273,7 +273,7 @@
     }
 
     .burn-row:hover {
-      border-color: rgba(212, 175, 55, 0.3);
+      border-color: rgba(234, 202, 122, 0.3);
     }
 
     /* Rarity Distribution Bars */
@@ -335,16 +335,16 @@
       <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
         <div class="nav-logo nav-logo-gold">
           <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#D4AF37" stroke-width="3" fill="rgba(212, 175, 55, 0.05)" stroke-linejoin="round"/>
-            <polygon points="50,30 65,39 65,61 50,70 35,61 35,39" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linejoin="round" opacity="0.6"/>
-            <path d="M50,42 Q58,45 55,52 Q48,55 45,48 Q47,43 50,42" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <circle cx="50" cy="50" r="2.5" fill="#D4AF37"/>
-            <circle cx="50" cy="18" r="3" fill="#D4AF37"/>
-            <circle cx="78" cy="34" r="3" fill="#D4AF37"/>
-            <circle cx="78" cy="66" r="3" fill="#D4AF37"/>
-            <circle cx="50" cy="82" r="3" fill="#D4AF37"/>
-            <circle cx="22" cy="66" r="3" fill="#D4AF37"/>
-            <circle cx="22" cy="34" r="3" fill="#D4AF37"/>
+            <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#EACA7A" stroke-width="3" fill="rgba(234, 202, 122, 0.05)" stroke-linejoin="round"/>
+            <polygon points="50,30 65,39 65,61 50,70 35,61 35,39" stroke="#EACA7A" stroke-width="1.5" fill="none" stroke-linejoin="round" opacity="0.6"/>
+            <path d="M50,42 Q58,45 55,52 Q48,55 45,48 Q47,43 50,42" stroke="#EACA7A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <circle cx="50" cy="50" r="2.5" fill="#EACA7A"/>
+            <circle cx="50" cy="18" r="3" fill="#EACA7A"/>
+            <circle cx="78" cy="34" r="3" fill="#EACA7A"/>
+            <circle cx="78" cy="66" r="3" fill="#EACA7A"/>
+            <circle cx="50" cy="82" r="3" fill="#EACA7A"/>
+            <circle cx="22" cy="66" r="3" fill="#EACA7A"/>
+            <circle cx="22" cy="34" r="3" fill="#EACA7A"/>
           </svg>
         </div>
         <span class="nav-wordmark" style="color: #FFFFFF; font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: 0.05em;">FORTREX FX</span>
@@ -399,7 +399,7 @@
             <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px;">
               <div>
                 <div class="section-label" style="color: var(--color-gold);">YOUR CURRENT REX BALANCE</div>
-                <div class="stat-number jetbrains-mono" id="user-rex-balance" style="font-size: clamp(40px, 6vw, 72px); text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);">
+                <div class="stat-number jetbrains-mono" id="user-rex-balance" style="font-size: clamp(40px, 6vw, 72px); text-shadow: 0 0 30px rgba(234, 202, 122, 0.3);">
                   12,500 <span style="font-size: 28px; color: #888;">REX</span>
                 </div>
                 <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #AAAAAA; margin-top: 8px;">
@@ -407,7 +407,7 @@
                 </div>
               </div>
               <div style="text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 12px;">
-                <span class="coming-soon-badge" style="background: rgba(212,175,55,0.15); border-color: rgba(212,175,55,0.4); color: var(--color-gold);">
+                <span class="coming-soon-badge" style="background: rgba(234,202,122,0.15); border-color: rgba(234,202,122,0.4); color: var(--color-gold);">
                   ACTIVE TRADER
                 </span>
                 <a href="offers.html" class="btn-pill btn-gold">
@@ -456,7 +456,7 @@
           </div>
 
           <!-- Stat Card 3 -->
-          <div class="rex-card" style="border-color: rgba(212, 175, 55, 0.3);">
+          <div class="rex-card" style="border-color: rgba(234, 202, 122, 0.3);">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-gold);">PERMANENTLY BURNED</div>
               <span style="font-size: 18px;" title="Deflationary Fire">🔥</span>
@@ -487,7 +487,7 @@
 
           <!-- Multi-segment visual bar -->
           <div class="earning-bar-container">
-            <div class="earning-segment" style="width: 55%; background: #D4AF37; box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);" data-tooltip="Tournaments: 8,000 REX (55%)"></div>
+            <div class="earning-segment" style="width: 55%; background: #EACA7A; box-shadow: 0 0 10px rgba(234, 202, 122, 0.5);" data-tooltip="Tournaments: 8,000 REX (55%)"></div>
             <div class="earning-segment" style="width: 20%; background: #8B5CF6; box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);" data-tooltip="Check-ins: 3,500 REX (20%)"></div>
             <div class="earning-segment" style="width: 12%; background: #10B981; box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);" data-tooltip="Referrals: 1,500 REX (12%)"></div>
             <div class="earning-segment" style="width: 8%; background: #3B82F6; box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);" data-tooltip="Tasks: 1,000 REX (8%)"></div>
@@ -498,7 +498,7 @@
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 24px;">
             <div style="background: #0D0D0D; padding: 14px; border-radius: 12px; border: 1px solid #1A1A1A;">
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                <span style="width: 10px; height: 10px; border-radius: 50%; background: #D4AF37;"></span>
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #EACA7A;"></span>
                 <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #AAA;">Tournaments</span>
               </div>
               <div class="jetbrains-mono" style="font-size: 18px; font-weight: 700; color: #FFF;">8,000 REX</div>
@@ -744,7 +744,7 @@
                 <span class="jetbrains-mono" style="color: var(--color-gold); font-weight: 700;">2%</span>
               </div>
               <div class="rarity-track">
-                <div class="rarity-fill" style="width: 2%; background: linear-gradient(90deg, #D4AF37, #FFF); box-shadow: 0 0 10px #D4AF37;"></div>
+                <div class="rarity-fill" style="width: 2%; background: linear-gradient(90deg, #EACA7A, #FFF); box-shadow: 0 0 10px #EACA7A;"></div>
               </div>
             </div>
 
@@ -803,8 +803,8 @@
         <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px;">
           <div class="nav-logo nav-logo-gold">
             <svg width="24" height="24" viewBox="0 0 100 100" fill="none">
-              <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#D4AF37" stroke-width="3" fill="none"/>
-              <circle cx="50" cy="50" r="3" fill="#D4AF37"/>
+              <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#EACA7A" stroke-width="3" fill="none"/>
+              <circle cx="50" cy="50" r="3" fill="#EACA7A"/>
             </svg>
           </div>
           <span class="space-grotesk" style="font-weight: 700; font-size: 16px; letter-spacing: 0.05em; color: #FFF;">FORTREX FX</span>

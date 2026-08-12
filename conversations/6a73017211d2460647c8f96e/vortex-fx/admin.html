@@ -18,7 +18,7 @@
   <style>
     /* ==========================================================================
        FORTREX FX — MISSION CONTROL ADMIN DASHBOARD STYLES
-       Obsidian #06070A · Gold #D4AF37 · Electric Iris #8052FF · Inter Font
+       Obsidian #06070A · Gold #EACA7A · Electric Iris #8052FF · Inter Font
        ========================================================================== */
 
     :root {
@@ -29,18 +29,18 @@
       --bg-input: #121522;
       --border-subtle: rgba(255, 255, 255, 0.08);
       --border-glow: rgba(128, 82, 255, 0.3);
-      --border-gold: rgba(212, 175, 55, 0.4);
+      --border-gold: rgba(234, 202, 122, 0.4);
       --text-main: #FFFFFF;
       --text-muted: #9A9A9A;
       --text-dim: #64687A;
       --accent-iris: #8052FF;
       --accent-iris-glow: rgba(128, 82, 255, 0.15);
-      --accent-gold: #D4AF37;
-      --accent-gold-glow: rgba(212, 175, 55, 0.15);
+      --accent-gold: #EACA7A;
+      --accent-gold-glow: rgba(234, 202, 122, 0.15);
       --status-live: #22C55E;
       --status-paused: #F59E0B;
       --status-completed: #3B82F6;
-      --status-revealed: #D4AF37;
+      --status-revealed: #EACA7A;
       --status-draft: #6B7280;
     }
 
@@ -109,7 +109,7 @@
     .sidebar-brand-logo {
       width: 38px;
       height: 38px;
-      background: linear-gradient(135deg, rgba(128, 82, 255, 0.2), rgba(212, 175, 55, 0.2));
+      background: linear-gradient(135deg, rgba(128, 82, 255, 0.2), rgba(234, 202, 122, 0.2));
       border: 1px solid var(--accent-iris);
       border-radius: 10px;
       display: flex;
@@ -497,7 +497,7 @@
     .quick-action-btn.gold-border:hover {
       background: var(--bg-card-hover);
       border-color: var(--accent-gold);
-      box-shadow: 0 0 18px rgba(212, 175, 55, 0.2);
+      box-shadow: 0 0 18px rgba(234, 202, 122, 0.2);
       transform: translateY(-2px);
     }
 
@@ -524,7 +524,7 @@
 
     .quick-action-icon.gold-bg {
       background: var(--accent-gold-glow);
-      border: 1px solid rgba(212, 175, 55, 0.3);
+      border: 1px solid rgba(234, 202, 122, 0.3);
     }
 
     .quick-action-icon.iris-bg {
@@ -563,9 +563,9 @@
     }
 
     .type-badge.badge-championship {
-      background: rgba(212, 175, 55, 0.15);
+      background: rgba(234, 202, 122, 0.15);
       color: var(--accent-gold);
-      border: 1px solid rgba(212, 175, 55, 0.4);
+      border: 1px solid rgba(234, 202, 122, 0.4);
     }
 
     .type-badge.badge-sprint {
@@ -680,9 +680,9 @@
     }
 
     .status-badge.revealed {
-      background: rgba(212, 175, 55, 0.15);
+      background: rgba(234, 202, 122, 0.15);
       color: var(--status-revealed);
-      border: 1px solid rgba(212, 175, 55, 0.3);
+      border: 1px solid rgba(234, 202, 122, 0.3);
     }
 
     .status-badge.upcoming,
@@ -694,7 +694,7 @@
 
     /* Buttons & Form Controls */
     .btn-gold-accent {
-      background: linear-gradient(135deg, var(--accent-gold), #B38F24);
+      background: linear-gradient(135deg, var(--accent-gold), #C8AA78);
       color: #000000;
       font-weight: 700;
       font-size: 13px;
@@ -706,12 +706,12 @@
       align-items: center;
       gap: 8px;
       transition: all 0.2s ease;
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+      box-shadow: 0 0 15px rgba(234, 202, 122, 0.2);
     }
 
     .btn-gold-accent:hover {
       transform: translateY(-1px);
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+      box-shadow: 0 0 20px rgba(234, 202, 122, 0.4);
     }
 
     .btn-primary-accent {
@@ -1169,7 +1169,7 @@
         </div>
 
         <!-- GENESIS PROGRAM TRACKER -->
-        <div class="content-card" style="border: 1px solid rgba(212, 175, 55, 0.3); background: linear-gradient(180deg, #0D0F18 0%, #12101F 100%);">
+        <div class="content-card" style="border: 1px solid rgba(234, 202, 122, 0.3); background: linear-gradient(180deg, #0D0F18 0%, #12101F 100%);">
           <div class="card-header">
             <div>
               <h2 class="card-title" style="color: var(--accent-gold);">
@@ -1201,7 +1201,7 @@
 
             <!-- Gold Gradient Progress Bar -->
             <div style="width: 100%; height: 12px; background: rgba(255, 255, 255, 0.05); border-radius: 999px; overflow: hidden; border: 1px solid var(--border-subtle); padding: 2px;">
-              <div id="genesis-progress-bar" style="width: 73.68%; height: 100%; background: linear-gradient(90deg, #D4AF37 0%, #8052FF 100%); border-radius: 999px; transition: width 1s ease; box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);"></div>
+              <div id="genesis-progress-bar" style="width: 73.68%; height: 100%; background: linear-gradient(90deg, #EACA7A 0%, #8052FF 100%); border-radius: 999px; transition: width 1s ease; box-shadow: 0 0 12px rgba(234, 202, 122, 0.5);"></div>
             </div>
 
             <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-dim);">
@@ -1935,7 +1935,7 @@
           vx: (Math.random() - 0.5) * 0.4,
           vy: (Math.random() - 0.5) * 0.4,
           radius: Math.random() * 2 + 1,
-          color: Math.random() > 0.5 ? 'rgba(212, 175, 55, ' : 'rgba(128, 82, 255, ',
+          color: Math.random() > 0.5 ? 'rgba(234, 202, 122, ' : 'rgba(128, 82, 255, ',
           alpha: Math.random() * 0.5 + 0.2
         });
       }

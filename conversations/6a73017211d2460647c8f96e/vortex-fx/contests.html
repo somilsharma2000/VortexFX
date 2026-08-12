@@ -21,8 +21,8 @@
       --bg-dark: #0a0a0a;
       --card-bg: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
       --card-border: #222222;
-      --gold-accent: #D4AF37;
-      --gold-glow: rgba(212, 175, 55, 0.25);
+      --gold-accent: #EACA7A;
+      --gold-glow: rgba(234, 202, 122, 0.25);
       --purple-accent: #8B5CF6;
       --text-main: #F8FAFC;
       --text-muted: #94A3B8;
@@ -90,7 +90,7 @@
     .nav-logo-svg {
       width: 32px;
       height: 32px;
-      filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.4));
+      filter: drop-shadow(0 0 6px rgba(234, 202, 122, 0.4));
     }
 
     .nav-wordmark {
@@ -99,7 +99,7 @@
       font-size: 20px;
       letter-spacing: 0.05em;
       color: #FFFFFF;
-      background: linear-gradient(135deg, #FFFFFF 0%, #D4AF37 100%);
+      background: linear-gradient(135deg, #FFFFFF 0%, #EACA7A 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -132,7 +132,7 @@
     }
 
     .btn-primary-pill {
-      background: linear-gradient(135deg, #D4AF37 0%, #AA7C11 100%);
+      background: linear-gradient(135deg, #EACA7A 0%, #AA7C11 100%);
       color: #000000;
       font-family: var(--font-body);
       font-weight: 700;
@@ -146,15 +146,15 @@
       align-items: center;
       gap: 8px;
       transition: all 0.25s ease;
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+      box-shadow: 0 0 15px rgba(234, 202, 122, 0.2);
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
     .btn-primary-pill:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
-      background: linear-gradient(135deg, #E5C158 0%, #C4921B 100%);
+      box-shadow: 0 0 25px rgba(234, 202, 122, 0.4);
+      background: linear-gradient(135deg, #EACA7A 0%, #C8AA78 100%);
     }
 
     .btn-ghost-pill {
@@ -179,7 +179,7 @@
     .btn-ghost-pill:hover {
       border-color: var(--gold-accent);
       color: var(--gold-accent);
-      background: rgba(212, 175, 55, 0.08);
+      background: rgba(234, 202, 122, 0.08);
     }
 
     /* Page Header */
@@ -197,8 +197,8 @@
       display: inline-block;
       margin-bottom: 12px;
       padding: 4px 14px;
-      background: rgba(212, 175, 55, 0.1);
-      border: 1px solid rgba(212, 175, 55, 0.25);
+      background: rgba(234, 202, 122, 0.1);
+      border: 1px solid rgba(234, 202, 122, 0.25);
       border-radius: 9999px;
     }
 
@@ -260,8 +260,8 @@
 
     .tournament-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(212, 175, 55, 0.4);
-      box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.9), 0 0 24px rgba(212, 175, 55, 0.12);
+      border-color: rgba(234, 202, 122, 0.4);
+      box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.9), 0 0 24px rgba(234, 202, 122, 0.12);
     }
 
     .status-badge {
@@ -354,7 +354,7 @@
     .meta-item-value.gold {
       color: var(--gold-accent);
       font-size: 20px;
-      text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+      text-shadow: 0 0 10px rgba(234, 202, 122, 0.2);
     }
 
     .rules-summary {
@@ -470,8 +470,8 @@
     }
 
     .winner-spotlight {
-      background: rgba(212, 175, 55, 0.05);
-      border: 1px solid rgba(212, 175, 55, 0.2);
+      background: rgba(234, 202, 122, 0.05);
+      border: 1px solid rgba(234, 202, 122, 0.2);
       border-radius: 12px;
       padding: 16px;
       margin: 16px 0;
@@ -582,9 +582,9 @@
 
     .podium-bar.p1 {
       height: 180px;
-      background: linear-gradient(180deg, rgba(212, 175, 55, 0.3) 0%, rgba(212, 175, 55, 0.05) 100%);
+      background: linear-gradient(180deg, rgba(234, 202, 122, 0.3) 0%, rgba(234, 202, 122, 0.05) 100%);
       border: 1px solid var(--gold-accent);
-      box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+      box-shadow: 0 0 25px rgba(234, 202, 122, 0.15);
     }
 
     .podium-bar.p2 {
@@ -682,16 +682,16 @@
     <header class="navbar">
       <a href="index.html" class="nav-brand">
         <svg class="nav-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#D4AF37" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
-          <polygon points="50,30 65,39 65,61 50,70 35,61 35,39" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linejoin="round" opacity="0.6"/>
-          <path d="M50,42 Q58,45 55,52 Q48,55 45,48 Q47,43 50,42" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <circle cx="50" cy="50" r="2.5" fill="#D4AF37"/>
-          <circle cx="50" cy="18" r="3" fill="#D4AF37"/>
-          <circle cx="78" cy="34" r="3" fill="#D4AF37"/>
-          <circle cx="78" cy="66" r="3" fill="#D4AF37"/>
-          <circle cx="50" cy="82" r="3" fill="#D4AF37"/>
-          <circle cx="22" cy="66" r="3" fill="#D4AF37"/>
-          <circle cx="22" cy="34" r="3" fill="#D4AF37"/>
+          <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#EACA7A" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+          <polygon points="50,30 65,39 65,61 50,70 35,61 35,39" stroke="#EACA7A" stroke-width="1.5" fill="none" stroke-linejoin="round" opacity="0.6"/>
+          <path d="M50,42 Q58,45 55,52 Q48,55 45,48 Q47,43 50,42" stroke="#EACA7A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <circle cx="50" cy="50" r="2.5" fill="#EACA7A"/>
+          <circle cx="50" cy="18" r="3" fill="#EACA7A"/>
+          <circle cx="78" cy="34" r="3" fill="#EACA7A"/>
+          <circle cx="78" cy="66" r="3" fill="#EACA7A"/>
+          <circle cx="50" cy="82" r="3" fill="#EACA7A"/>
+          <circle cx="22" cy="66" r="3" fill="#EACA7A"/>
+          <circle cx="22" cy="34" r="3" fill="#EACA7A"/>
         </svg>
         <span class="nav-wordmark">FORTREX FX</span>
       </a>
@@ -943,7 +943,7 @@
         if (navCtaContainer) {
           navCtaContainer.innerHTML = `
             <a href="profile.html" style="display: flex; align-items: center; gap: 8px; color: var(--gold-accent); text-decoration: none; font-weight: 600; font-size: 13px; text-transform: uppercase;">
-              <div style="width: 30px; height: 30px; border-radius: 50%; background: rgba(212, 175, 55, 0.2); border: 1px solid var(--gold-accent); display: flex; align-items: center; justify-content: center; font-size: 12px; color: #FFF;">
+              <div style="width: 30px; height: 30px; border-radius: 50%; background: rgba(234, 202, 122, 0.2); border: 1px solid var(--gold-accent); display: flex; align-items: center; justify-content: center; font-size: 12px; color: #FFF;">
                 ${(traderObj.username || 'T')[0].toUpperCase()}
               </div>
               <span>${traderObj.username || 'Trader'}</span>
@@ -1122,7 +1122,7 @@
           vx: (Math.random() - 0.5) * 0.4,
           vy: (Math.random() - 0.5) * 0.4,
           radius: Math.random() * 2 + 0.8,
-          color: Math.random() > 0.4 ? 'rgba(212, 175, 55, ' : 'rgba(139, 92, 246, ',
+          color: Math.random() > 0.4 ? 'rgba(234, 202, 122, ' : 'rgba(139, 92, 246, ',
           alpha: Math.random() * 0.5 + 0.15
         });
       }
@@ -1155,7 +1155,7 @@
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(p2.x, p2.y);
-              ctx.strokeStyle = `rgba(212, 175, 55, ${0.15 * (1 - dist / 120)})`;
+              ctx.strokeStyle = `rgba(234, 202, 122, ${0.15 * (1 - dist / 120)})`;
               ctx.lineWidth = 0.6;
               ctx.stroke();
             }

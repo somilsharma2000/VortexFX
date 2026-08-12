@@ -15,41 +15,41 @@
     .profile-grid { display: grid; grid-template-columns: 320px 1fr; gap: 24px; max-width: 1200px; margin: 0 auto; padding: 100px 24px 60px; }
     @media (max-width: 768px) { .profile-grid { grid-template-columns: 1fr; } }
     .profile-card { background: rgba(10,10,10,0.85); border: 1px solid #1a1a1a; border-radius: 12px; padding: 32px 24px; text-align: center; backdrop-filter: blur(12px); }
-    .profile-avatar { width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 16px; border: 3px solid #D4AF37; object-fit: cover; }
+    .profile-avatar { width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 16px; border: 3px solid #EACA7A; object-fit: cover; }
     .profile-name { font-size: 22px; font-weight: 600; color: #fff; margin-bottom: 4px; }
     .profile-role { font-size: 13px; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
     .class-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
     .class-badge.sniper { background: rgba(128,82,255,0.15); color: #8052FF; border: 1px solid rgba(128,82,255,0.3); }
-    .class-badge.scalper { background: rgba(212,175,55,0.15); color: #D4AF37; border: 1px solid rgba(212,175,55,0.3); }
+    .class-badge.scalper { background: rgba(234,202,122,0.15); color: #EACA7A; border: 1px solid rgba(234,202,122,0.3); }
     .class-badge.swing { background: rgba(16,185,129,0.15); color: #10B981; border: 1px solid rgba(16,185,129,0.3); }
     .class-badge.rookie { background: rgba(102,102,102,0.15); color: #999; border: 1px solid rgba(102,102,102,0.3); }
     .stat-tiles { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-top: 20px; }
     .stat-tile { background: rgba(255,255,255,0.02); border: 1px solid #1a1a1a; border-radius: 8px; padding: 14px 12px; text-align: center; }
-    .stat-tile .val { font-size: 24px; font-weight: 700; color: #D4AF37; }
+    .stat-tile .val { font-size: 24px; font-weight: 700; color: #EACA7A; }
     .stat-tile .lbl { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
     .bp-section { background: rgba(10,10,10,0.85); border: 1px solid #1a1a1a; border-radius: 12px; padding: 28px; margin-bottom: 24px; }
     .bp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .bp-level { font-size: 48px; font-weight: 700; color: #D4AF37; line-height: 1; }
+    .bp-level { font-size: 48px; font-weight: 700; color: #EACA7A; line-height: 1; }
     .bp-level-label { font-size: 13px; color: #666; text-transform: uppercase; letter-spacing: 0.05em; }
     .bp-xp-text { font-size: 14px; color: #999; text-align: right; }
     .bp-bar-container { position: relative; height: 40px; background: #0a0a0a; border-radius: 6px; overflow: hidden; margin: 16px 0; }
-    .bp-bar-fill { height: 100%; background: linear-gradient(90deg, #D4AF37, #FFD700); border-radius: 6px; transition: width 1.5s ease; }
+    .bp-bar-fill { height: 100%; background: linear-gradient(90deg, #EACA7A, #FFD700); border-radius: 6px; transition: width 1.5s ease; }
     .bp-milestones { display: flex; justify-content: space-between; position: relative; margin-top: 12px; }
     .bp-milestone { display: flex; flex-direction: column; align-items: center; gap: 4px; }
     .bp-milestone-dot { width: 12px; height: 12px; border-radius: 50%; background: #222; border: 2px solid #333; }
-    .bp-milestone-dot.reached { background: #D4AF37; border-color: #D4AF37; box-shadow: 0 0 8px rgba(212,175,55,0.5); }
+    .bp-milestone-dot.reached { background: #EACA7A; border-color: #EACA7A; box-shadow: 0 0 8px rgba(234,202,122,0.5); }
     .bp-milestone-label { font-size: 10px; color: #555; }
-    .bp-milestone-label.reached { color: #D4AF37; }
+    .bp-milestone-label.reached { color: #EACA7A; }
     .bp-milestone-reward { font-size: 9px; color: #444; }
-    .bp-milestone-reward.reached { color: #D4AF37; }
+    .bp-milestone-reward.reached { color: #EACA7A; }
     .achievements-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 16px; }
     @media (max-width: 600px) { .achievements-grid { grid-template-columns: repeat(2,1fr); } }
     .achievement { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 20px 12px; background: rgba(255,255,255,0.02); border: 1px solid #1a1a1a; border-radius: 10px; text-align: center; transition: all 0.3s; }
-    .achievement.unlocked { border-color: rgba(212,175,55,0.3); }
-    .achievement.unlocked:hover { border-color: #D4AF37; transform: translateY(-2px); }
+    .achievement.unlocked { border-color: rgba(234,202,122,0.3); }
+    .achievement.unlocked:hover { border-color: #EACA7A; transform: translateY(-2px); }
     .achievement.locked { opacity: 0.4; }
     .achievement-icon { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; }
-    .achievement.unlocked .achievement-icon { background: rgba(212,175,55,0.15); border: 2px solid #D4AF37; }
+    .achievement.unlocked .achievement-icon { background: rgba(234,202,122,0.15); border: 2px solid #EACA7A; }
     .achievement.locked .achievement-icon { background: rgba(255,255,255,0.03); border: 2px solid #222; }
     .achievement-title { font-size: 12px; font-weight: 600; color: #ddd; }
     .achievement.locked .achievement-title { color: #555; }
@@ -67,8 +67,8 @@
     .activity-amount { font-size: 14px; font-weight: 700; }
     .activity-amount.gain { color: #22c55e; }
     .activity-amount.loss { color: #ef4444; }
-    .flex-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: linear-gradient(135deg, #D4AF37, #B8941F); color: #06070A; font-weight: 600; font-size: 14px; border: none; border-radius: 6px; cursor: pointer; transition: all 0.3s; }
-    .flex-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,175,55,0.3); }
+    .flex-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: linear-gradient(135deg, #EACA7A, #C8AA78); color: #06070A; font-weight: 600; font-size: 14px; border: none; border-radius: 6px; cursor: pointer; transition: all 0.3s; }
+    .flex-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(234,202,122,0.3); }
     #flex-card-canvas { display: none; max-width: 100%; border-radius: 12px; margin-top: 16px; }
     #flex-card-download { display: none; }
     .section-h2 { font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 4px; }
@@ -82,7 +82,7 @@
     <div class="nav-brand">
       <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
         <div class="nav-logo">
-          <svg width="28" height="28" viewBox="0 0 100 100" fill="none"><polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#D4AF37" stroke-width="2.5" fill="none" stroke-linejoin="round"/><circle cx="50" cy="50" r="2" fill="#D4AF37"/><circle cx="50" cy="18" r="3" fill="#D4AF37"/><circle cx="78" cy="34" r="3" fill="#D4AF37"/><circle cx="78" cy="66" r="3" fill="#D4AF37"/><circle cx="50" cy="82" r="3" fill="#D4AF37"/><circle cx="22" cy="66" r="3" fill="#D4AF37"/><circle cx="22" cy="34" r="3" fill="#D4AF37"/></svg>
+          <svg width="28" height="28" viewBox="0 0 100 100" fill="none"><polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#EACA7A" stroke-width="2.5" fill="none" stroke-linejoin="round"/><circle cx="50" cy="50" r="2" fill="#EACA7A"/><circle cx="50" cy="18" r="3" fill="#EACA7A"/><circle cx="78" cy="34" r="3" fill="#EACA7A"/><circle cx="78" cy="66" r="3" fill="#EACA7A"/><circle cx="50" cy="82" r="3" fill="#EACA7A"/><circle cx="22" cy="66" r="3" fill="#EACA7A"/><circle cx="22" cy="34" r="3" fill="#EACA7A"/></svg>
         </div>
         <span class="nav-wordmark">FORTREX FX</span>
       </a>
@@ -123,13 +123,13 @@
           </div>
           <div style="margin-top:20px;padding-top:16px;border-top:1px solid #1a1a1a;">
             <div style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">Referral Code</div>
-            <div id="p-refcode" style="font-size:18px;font-weight:700;color:#D4AF37;letter-spacing:0.05em;">---</div>
+            <div id="p-refcode" style="font-size:18px;font-weight:700;color:#EACA7A;letter-spacing:0.05em;">---</div>
             <div id="p-refs" style="font-size:11px;color:#666;margin-top:4px;">0 qualified referrals</div>
           </div>
           <div style="margin-top:16px;padding-top:16px;border-top:1px solid #1a1a1a;">
             <div style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">MT4 Account</div>
             <div id="p-mt4" style="font-size:14px;color:#ddd;">Not linked</div>
-            <button id="p-link-mt4" onclick="window.location.href='checkin.html'" style="margin-top:8px;padding:6px 16px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);color:#D4AF37;border-radius:4px;cursor:pointer;font-size:12px;">Link MT4</button>
+            <button id="p-link-mt4" onclick="window.location.href='checkin.html'" style="margin-top:8px;padding:6px 16px;background:rgba(234,202,122,0.1);border:1px solid rgba(234,202,122,0.3);color:#EACA7A;border-radius:4px;cursor:pointer;font-size:12px;">Link MT4</button>
           </div>
         </div>
       </div>
@@ -141,7 +141,7 @@
               <div class="bp-level-label">Battle Pass Level</div>
             </div>
             <div class="bp-xp-text">
-              <div id="bp-xp" style="font-weight:600;color:#D4AF37;">0 XP</div>
+              <div id="bp-xp" style="font-weight:600;color:#EACA7A;">0 XP</div>
               <div style="font-size:11px;color:#555;">Season 1</div>
             </div>
           </div>
@@ -280,17 +280,17 @@
       const grad = ctx.createLinearGradient(0,0,W,H);
       grad.addColorStop(0,'#06070A'); grad.addColorStop(1,'#0a0a12');
       ctx.fillStyle = grad; ctx.fillRect(0,0,W,H);
-      ctx.strokeStyle = '#D4AF37'; ctx.lineWidth = 2; ctx.strokeRect(10,10,W-20,H-20);
-      ctx.strokeStyle = '#D4AF37'; ctx.lineWidth = 2; ctx.beginPath();
+      ctx.strokeStyle = '#EACA7A'; ctx.lineWidth = 2; ctx.strokeRect(10,10,W-20,H-20);
+      ctx.strokeStyle = '#EACA7A'; ctx.lineWidth = 2; ctx.beginPath();
       const cx=50,cy=50,r=20;
       for (let i=0;i<6;i++) { const a=(Math.PI/3)*i-Math.PI/2; const x=cx+r*Math.cos(a); const y=cy+r*Math.sin(a); if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y); }
       ctx.closePath(); ctx.stroke();
-      ctx.fillStyle='#D4AF37'; ctx.font='bold 18px Inter,sans-serif'; ctx.fillText('FORTREX FX',85,55);
+      ctx.fillStyle='#EACA7A'; ctx.font='bold 18px Inter,sans-serif'; ctx.fillText('FORTREX FX',85,55);
       ctx.fillStyle='#555'; ctx.font='11px Inter,sans-serif'; ctx.fillText('WHERE TRADERS RISE',85,70);
       const t = data.trader;
-      ctx.strokeStyle='#D4AF37'; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(W-70,60,35,0,Math.PI*2); ctx.stroke();
+      ctx.strokeStyle='#EACA7A'; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(W-70,60,35,0,Math.PI*2); ctx.stroke();
       ctx.fillStyle='#fff'; ctx.font='bold 24px Inter,sans-serif'; ctx.fillText(t.username||'Trader',30,130);
-      ctx.fillStyle='#D4AF37'; ctx.font='13px Inter,sans-serif'; ctx.fillText(t.trader_class||'Rookie',30,150);
+      ctx.fillStyle='#EACA7A'; ctx.font='13px Inter,sans-serif'; ctx.fillText(t.trader_class||'Rookie',30,150);
       const stats = [
         {label:'REX BALANCE',value:`${(t.rex_balance||0).toLocaleString()}`},
         {label:'BEST STREAK',value:`${t.best_streak||0} days`},
@@ -299,7 +299,7 @@
       const tr = data.tournaments||[];
       const br = tr.length>0 ? Math.min(...tr.map(x=>x.rank||999)) : null;
       if (br && br<999) stats.push({label:'BEST RANK',value:`#${br}`});
-      stats.forEach((s,i) => { const x=30+i*140; ctx.fillStyle='#D4AF37'; ctx.font='bold 28px Inter,sans-serif'; ctx.fillText(s.value,x,210); ctx.fillStyle='#555'; ctx.font='10px Inter,sans-serif'; ctx.fillText(s.label,x,225); });
+      stats.forEach((s,i) => { const x=30+i*140; ctx.fillStyle='#EACA7A'; ctx.font='bold 28px Inter,sans-serif'; ctx.fillText(s.value,x,210); ctx.fillStyle='#555'; ctx.font='10px Inter,sans-serif'; ctx.fillText(s.label,x,225); });
       ctx.fillStyle='#333'; ctx.font='11px Inter,sans-serif'; ctx.fillText('FORTREX FX — Where Traders Rise · fortrexfx.com',30,H-25);
       canvas.style.display='block';
       document.getElementById('flex-card-download').style.display='inline-flex';
