@@ -2,52 +2,59 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.31';
 
 Deno.serve(async (req) => {
   const base44 = createClientFromRequest(req);
+  let body = {};
+  try { body = await req.json(); } catch (e) {}
   
-  try {
-    const body = await req.json();
-    const { email } = body;
-    
-    if (!email || !email.includes('@')) {
-      return new Response(JSON.stringify({ success: false, error: 'Valid email required' }), {
-        headers: { 'Content-Type': 'application/json' }
-      });
-    }
-    
-    const cleanEmail = email.toLowerCase().trim();
-    
-    // Check for duplicates
-    const existing = await base44.entities.WaitlistEntry.list({ email: cleanEmail });
-    if (existing && existing.length > 0) {
-      return new Response(JSON.stringify({ 
-        success: false, 
-        error: 'already_registered', 
-        message: "You're already on the waitlist!" 
-      }), { headers: { 'Content-Type': 'application/json' }});
-    }
-    
-    // Count existing entries for position
-    const allEntries = await base44.entities.WaitlistEntry.list();
-    const position = (allEntries?.length || 0) + 1;
-    
-    // Create new entry
-    await base44.entities.WaitlistEntry.create({
-      email: cleanEmail,
-      position: position,
-      signup_date: new Date().toISOString().split('T')[0],
-      discord_joined: false,
-      telegram_joined: false
-    });
-    
-    return new Response(JSON.stringify({ 
-      success: true, 
-      position: position, 
-      message: "You're on the list. Gates open August 23." 
-    }), { headers: { 'Content-Type': 'application/json' }});
-    
-  } catch (err: any) {
-    return new Response(JSON.stringify({ 
-      success: false, 
-      error: err?.message || 'Server error' 
-    }), { headers: { 'Content-Type': 'application/json' }});
+  const { email, full_name, phone, referred_by } = body;
+  
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return Response.json({ success: false, error: 'Valid email required.' });
   }
+  
+  const cleanEmail = email.toLowerCase().trim();
+  
+  // Check for duplicates using .filter() — NOT list({ email })
+  let isDuplicate = false;
+  try {
+    const existing = await base44.asServiceRole.entities.WaitlistEntry.filter({ email: cleanEmail });
+    if (existing && existing.length > 0) isDuplicate = true;
+  } catch (e) {}
+  
+  if (isDuplicate) {
+    return Response.json({ 
+      success: false, 
+      error: 'already_registered', 
+      message: "You're already on the waitlist!" 
+    });
+  }
+  
+  // Count existing entries for position
+  let position = 1;
+  try {
+    const all = await base44.asServiceRole.entities.WaitlistEntry.list();
+    if (all && all.length) position = all.length + 1;
+  } catch (e) {}
+  
+  // Create new entry
+  let savedEntry = null;
+  try {
+    savedEntry = await base44.asServiceRole.entities.WaitlistEntry.create({
+      email: cleanEmail,
+      phone: phone || '',
+      position,
+      signup_date: new Date().toISOString(),
+      discord_joined: false,
+      telegram_joined: false,
+      status: 'pending_verification',
+      source: 'waitlist_join',
+      referred_by: referred_by || ''
+    });
+  } catch (e) {}
+  
+  return Response.json({ 
+    success: true, 
+    position, 
+    entry_id: savedEntry?.id || null,
+    message: "You're on the list. Gates open soon." 
+  });
 });
