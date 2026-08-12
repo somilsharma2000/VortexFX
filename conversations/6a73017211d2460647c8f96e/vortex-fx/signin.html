@@ -644,7 +644,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (data.success && data.stats) {
         const s = data.stats;
         const tradersEl = document.getElementById('signin-stat-traders');
-        if (tradersEl) tradersEl.textContent = (s.verified_traders || 0).toLocaleString();
+        if (tradersEl) tradersEl.textContent = (s.verified_accounts || 0).toLocaleString();
         const rexEl = document.getElementById('signin-stat-rex');
         if (rexEl) rexEl.textContent = (s.total_rex_distributed || 0).toLocaleString();
         const daysEl = document.getElementById('signin-stat-days');
