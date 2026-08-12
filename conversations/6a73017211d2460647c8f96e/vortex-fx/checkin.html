@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daily Check-In — FORTEX FX</title>
+  <title>Daily Check-In — FORTREX FX</title>
   <link rel="stylesheet" href="css/dala.css">
   <script src="js/dala.js"></script>
   <script src="js/auth.js"></script>
@@ -175,7 +175,7 @@
             <line x1="22" y1="34" x2="50" y2="18" stroke="#8052ff" stroke-width="0.8" opacity="0.3"/>
           </svg>
         </div>
-        <span class="nav-wordmark">FORTEX FX</span>
+        <span class="nav-wordmark">FORTREX FX</span>
       </a>
     </div>
     <ul class="nav-links">
@@ -363,7 +363,7 @@
         <div style="border: 1px solid #1a1a1a; border-radius: 24px; padding: 32px; background: rgba(6, 7, 10, 0.8);">
           <div class="section-label" style="margin-bottom: var(--spacing-12);">RISK WARNING</div>
           <p style="font-size: 13px; font-weight: 200; color: var(--color-silver-mist); line-height: 1.6;">
-            Trading forex and cryptocurrency on margin carries a high level of risk and may not be suitable for all investors. You could lose some or all of your invested capital. FORTEX FX is a skill-based trading competition platform and does not execute trades, hold funds, or provide investment advice. Tournament prizes are distributed as REX reward points, which have no cash value.
+            Trading forex and cryptocurrency on margin carries a high level of risk and may not be suitable for all investors. You could lose some or all of your invested capital. FORTREX FX is a skill-based trading competition platform and does not execute trades, hold funds, or provide investment advice. Tournament prizes are distributed as REX reward points, which have no cash value.
           </p>
           <div style="margin-top: 20px; display: flex; gap: 20px; flex-wrap: wrap;">
             <a href="terms.html" class="btn-ghost" style="font-size: 12px; text-transform: uppercase;">Terms & Conditions</a>
@@ -382,7 +382,7 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 12px;">
             <polygon points="12,3 22,21 2,21" stroke="#8052ff" stroke-width="2" fill="none" stroke-linejoin="round"/>
           </svg>
-          <span class="nav-wordmark">FORTEX FX</span>
+          <span class="nav-wordmark">FORTREX FX</span>
         </div>
         <div class="footer-links">
           <a href="index.html" class="footer-link">Home</a>
@@ -395,7 +395,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-copyright">© 2026 FORTEX FX — Skill-based trading competitions. Not a financial service.</div>
+        <div class="footer-copyright">© 2026 FORTREX FX — Skill-based trading competitions. Not a financial service.</div>
       </div>
     </div>
   </footer>
@@ -414,7 +414,7 @@
       }
 
       // 2. Check Login State
-      const trader = FORTEX_AUTH.isLoggedIn();
+      const trader = FORTREX_AUTH.isLoggedIn();
 
       const authRequiredBanner = document.getElementById('auth-required-banner');
       const checkinMainContent = document.getElementById('checkin-main-content');
@@ -469,7 +469,7 @@
 
         try {
           // REQUIREMENT 3: Call dailyCheckin with { trader_id }
-          const res = await FORTEX_AUTH.callFunction('dailyCheckin', { trader_id: trader.id });
+          const res = await FORTREX_AUTH.callFunction('dailyCheckin', { trader_id: trader.id });
           setButtonLoading(false);
 
           if (res && res.success) {
@@ -493,7 +493,7 @@
             trader.streak = currentStreak;
             trader.best_streak = bestStreak;
             trader.rex_balance = rexBalance;
-            localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(trader));
+            localStorage.setItem(FORTREX_AUTH.TRADER_KEY, JSON.stringify(trader));
 
             // Update UI
             updateDashboardUI({
@@ -523,7 +523,7 @@
             trader.current_streak = currentStreak;
             trader.streak = currentStreak;
             if (res.rex_balance) trader.rex_balance = rexBalance;
-            localStorage.setItem(FORTEX_AUTH.TRADER_KEY, JSON.stringify(trader));
+            localStorage.setItem(FORTREX_AUTH.TRADER_KEY, JSON.stringify(trader));
 
             updateDashboardUI({
               streak: currentStreak,

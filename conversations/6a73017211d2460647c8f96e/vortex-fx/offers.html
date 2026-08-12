@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rewards & REX Wallet — FORTEX FX</title>
+  <title>Rewards & REX Wallet — FORTREX FX</title>
   <link rel="stylesheet" href="css/dala.css">
   <script src="js/dala.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/psychology.js"></script>
   <style>
     /* ==========================================================================
-       FORTEX FX — REWARDS & REX WALLET CUSTOM STYLES
+       FORTREX FX — REWARDS & REX WALLET CUSTOM STYLES
        Color Tokens: Dark Obsidian (#06070A), Gold (#D4AF37), Iris (#8052FF)
        ========================================================================== */
 
@@ -593,7 +593,7 @@
           <line x1="22" y1="34" x2="50" y2="18" stroke="#8052ff" stroke-width="0.8" opacity="0.3"/>
         </svg>
       </div>
-      <span class="nav-wordmark">FORTEX FX</span>
+      <span class="nav-wordmark">FORTREX FX</span>
     </a>
 
     <ul class="nav-links">
@@ -891,10 +891,10 @@
             <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#8052ff" stroke-width="2.5" fill="none"/>
           </svg>
         </div>
-        <span style="font-weight: 600; font-size: 14px; letter-spacing: 0.05em; text-transform: uppercase;">FORTEX FX</span>
+        <span style="font-weight: 600; font-size: 14px; letter-spacing: 0.05em; text-transform: uppercase;">FORTREX FX</span>
       </div>
       <div style="font-size: 13px; color: #9a9a9a;">
-        &copy; 2026 FORTEX FX. All trading involves risk. REX rewards subject to terms.
+        &copy; 2026 FORTREX FX. All trading involves risk. REX rewards subject to terms.
       </div>
       <div style="display: flex; gap: 20px; font-size: 13px; color: #9a9a9a;">
         <a href="terms.html" style="color: inherit;">Terms</a>
@@ -928,12 +928,12 @@
       const signInBtn = document.getElementById('sign-in-btn');
       if (signInBtn) {
         signInBtn.addEventListener('click', () => {
-          FORTEX_AUTH.loginWithDiscord();
+          FORTREX_AUTH.loginWithDiscord();
         });
       }
 
       // Check Login State
-      const currentTrader = FORTEX_AUTH.isLoggedIn();
+      const currentTrader = FORTREX_AUTH.isLoggedIn();
 
       const authRequiredView = document.getElementById('auth-required-view');
       const rewardsDashboard = document.getElementById('rewards-dashboard');
@@ -956,7 +956,7 @@
       const traderId = currentTrader.id || currentTrader.trader_id || currentTrader.discord_id;
 
       try {
-        const response = await FORTEX_AUTH.callFunction('getTraderProfile', { trader_id: traderId });
+        const response = await FORTREX_AUTH.callFunction('getTraderProfile', { trader_id: traderId });
 
         // Hide skeleton, show main content
         loadingSkeleton.style.display = 'none';

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign In — FORTEX FX</title>
+  <title>Sign In — FORTREX FX</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -269,18 +269,18 @@
             <line x1="22" y1="34" x2="50" y2="18" stroke="#8052ff" stroke-width="0.8" opacity="0.3"/>
           </svg>
         </div>
-        <span class="nav-wordmark">FORTEX FX</span>
+        <span class="nav-wordmark">FORTREX FX</span>
       </a>
     </div>
 
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links-main">
       <li><a href="index.html" class="nav-link">Home</a></li>
-      <li><a href="leaderboard.html" class="nav-link">Tournaments</a></li>
-      <li><a href="offers.html" class="nav-link">Rewards</a></li>
-      <li><a href="resources.html" class="nav-link">Resources</a></li>
-      <li><a href="invite.html" class="nav-link">Invite</a></li>
-      <li><a href="profile.html" class="nav-link">Profile</a></li>
-      <li><a href="checkin.html" class="nav-link">Check-In</a></li>
+      <li><a href="leaderboard.html" class="nav-link nav-internal" style="display:none">Tournaments</a></li>
+      <li><a href="offers.html" class="nav-link nav-internal" style="display:none">Rewards</a></li>
+      <li><a href="resources.html" class="nav-link nav-internal" style="display:none">Resources</a></li>
+      <li><a href="invite.html" class="nav-link nav-internal" style="display:none">Invite</a></li>
+      <li><a href="profile.html" class="nav-link nav-internal" style="display:none">Profile</a></li>
+      <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
     </ul>
 
     <div class="nav-cta">
@@ -335,7 +335,7 @@
               </div>
 
               <!-- REAL DISCORD OAUTH BUTTON -->
-              <button class="discord-btn" id="discord-login-btn" onclick="FORTEX_AUTH.loginWithDiscord()">
+              <button class="discord-btn" id="discord-login-btn" onclick="FORTREX_AUTH.loginWithDiscord()">
                 <svg viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
                   <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.68,1.75,1.36,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.89,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.89,96.12,53,91.08,65.69,84.69,65.69Z"/>
                 </svg>
@@ -352,7 +352,7 @@
                 </svg>
               </div>
               <h3>Join Our Discord First</h3>
-              <p>You need to be a member of our Discord server to access FORTEX FX. Join now, then sign in again.</p>
+              <p>You need to be a member of our Discord server to access FORTREX FX. Join now, then sign in again.</p>
               <a href="https://discord.gg/9pTSqeTbn" class="join-discord-btn" target="_blank">
                 <svg viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
                   <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.68,1.75,1.36,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.89,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.89,96.12,53,91.08,65.69,84.69,65.69Z"/>
@@ -437,7 +437,7 @@
           <div style="background: rgba(10,10,10,0.6); border: 1px solid #1a1a1a; border-radius: 8px; padding: 28px;">
             <div style="font-size: 32px; font-weight: 700; color: var(--color-electric-iris); margin-bottom: 12px;">01</div>
             <h3 style="font-size: 16px; font-weight: 600; color: #ffffff; margin-bottom: 8px;">Link Your MT4/MT5</h3>
-            <p style="font-size: 13px; color: var(--color-ash-gray); line-height: 1.6;">Enter your XM broker account number. Admin verifies it manually. No API connections needed.</p>
+            <p style="font-size: 13px; color: var(--color-ash-gray); line-height: 1.6;">Enter your broker account number. Admin verifies it manually. No API connections needed.</p>
           </div>
           <div style="background: rgba(10,10,10,0.6); border: 1px solid #1a1a1a; border-radius: 8px; padding: 28px;">
             <div style="font-size: 32px; font-weight: 700; color: var(--color-electric-iris); margin-bottom: 12px;">02</div>
@@ -483,7 +483,7 @@
               <span class="accordion-icon">+</span>
             </div>
             <div class="accordion-body">
-              <p>No. You trade on your own MT4/MT5 terminal through XM broker. We only track and verify your results for tournaments.</p>
+              <p>No. You trade on your own MT4/MT5 terminal through your broker. We only track and verify your results for tournaments.</p>
             </div>
           </div>
           <div class="accordion-item">
@@ -501,11 +501,21 @@
 
   </main>
 
+  
+    <!-- RISK DISCLAIMER -->
+    <div style="padding: 20px 24px; border-top: 1px solid #0a0a0a; text-align: center;">
+      <p style="font-size: 11px; color: #444; max-width: 600px; margin: 0 auto; line-height: 1.5;">
+        Trading foreign exchange, CFDs and other leveraged products carries a high level of risk and may not be suitable for all investors. 
+        You could lose some or all of your invested capital. Past performance does not guarantee future results. 
+        FORTREX FX is a skill-based trading competition platform and does not provide financial advice or execute trades.
+      </p>
+    </div>
+    
   <!-- FOOTER -->
   <footer style="border-top: 1px solid #111; padding: var(--spacing-36) 0;">
     <div class="container">
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-        <div style="font-size: 12px; color: var(--color-ash-gray);">© 2026 FORTEX FX. All rights reserved.</div>
+        <div style="font-size: 12px; color: var(--color-ash-gray);">© 2026 FORTREX FX. All rights reserved.</div>
         <div style="display: flex; gap: 24px;">
           <a href="terms.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Terms & Conditions</a>
           <a href="privacy.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Privacy Policy</a>
@@ -525,7 +535,7 @@
         document.getElementById('loading-view').classList.add('active');
         
         // Process the callback
-        const result = await FORTEX_AUTH.handleCallback();
+        const result = await FORTREX_AUTH.handleCallback();
         
         if (result && result.success) {
           // Show success view
@@ -566,7 +576,7 @@
       }
       
       // If already logged in, redirect to profile
-      const trader = FORTEX_AUTH.isLoggedIn();
+      const trader = FORTREX_AUTH.isLoggedIn();
       if (trader && !hash) {
         document.getElementById('login-view').style.display = 'none';
         document.getElementById('success-view').classList.add('active');
@@ -577,5 +587,16 @@
     })();
   </script>
 
+
+    <script>
+      // Show internal nav links only when logged in (stealth mode)
+      (function() {
+        const trader = localStorage.getItem('fortex_trader');
+        if (trader) {
+          document.querySelectorAll('.nav-internal').forEach(el => el.style.display = '');
+        }
+      })();
+    </script>
+    
 </body>
 </html>
