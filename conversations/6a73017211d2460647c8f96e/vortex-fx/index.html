@@ -1411,38 +1411,43 @@
     // ===== FETCH REAL STATS FROM DATABASE =====
     async function fetchRealStats() {
       try {
-        // Fetch waitlist count
-        const wlRes = await fetch('https://api.base44.com/v1/apps/6a73016f9b626430a0d26f88/entities/WaitlistEntry');
-        const waitlist = await wlRes.json();
-        const wlCount = Array.isArray(waitlist) ? waitlist.length : 0;
+        // Fetch real stats from getPlatformStats backend function
+        const res = await fetch('https://api.base44.com/v1/apps/6a73016f9b626430a0d26f88/functions/getPlatformStats', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({})
+        });
+        const data = await res.json();
 
-        // Fetch tournaments
-        const tRes = await fetch('https://api.base44.com/v1/apps/6a73016f9b626430a0d26f88/entities/Tournament');
-        const tournaments = await tRes.json();
-        const genesisT = Array.isArray(tournaments) ? tournaments.find(t => t.name === 'Genesis Championship') : null;
-        const genesisClaimed = genesisT ? (genesisT.participant_count || 0) : 0;
-        const genesisMax = 2500;
+        if (data && data.success && data.stats) {
+          const s = data.stats;
+          const wlCount = s.waitlist_count || 0;
 
-        // Update DOM
-        const wlEl = document.getElementById('waitlist-count');
-        if (wlEl) wlEl.textContent = wlCount.toLocaleString();
+          // Update waitlist count
+          const wlEl = document.getElementById('waitlist-count');
+          if (wlEl) wlEl.textContent = wlCount.toLocaleString();
 
-        const genesisClaimedEl = document.getElementById('genesis-claimed');
-        if (genesisClaimedEl) genesisClaimedEl.textContent = genesisClaimed.toLocaleString();
+          // Update genesis progress
+          const genesisMax = 2500;
+          const genesisClaimed = s.registration_count || 0;
 
-        const genesisRemainingEl = document.querySelector('.gold-text');
-        if (genesisRemainingEl && genesisRemainingEl.textContent.includes('Remaining')) {
-          genesisRemainingEl.textContent = (genesisMax - genesisClaimed).toLocaleString() + ' Remaining';
+          const genesisClaimedEl = document.getElementById('genesis-claimed');
+          if (genesisClaimedEl) genesisClaimedEl.textContent = genesisClaimed.toLocaleString();
+
+          const genesisRemainingEl = document.querySelector('.gold-text');
+          if (genesisRemainingEl && genesisRemainingEl.textContent.includes('Remaining')) {
+            genesisRemainingEl.textContent = (genesisMax - genesisClaimed).toLocaleString() + ' Remaining';
+          }
+
+          // Update progress bar
+          const fillEl = document.querySelector('.genesis-progress-fill');
+          if (fillEl) {
+            const pct = genesisMax > 0 ? (genesisClaimed / genesisMax) * 100 : 0;
+            fillEl.style.width = pct + '%';
+          }
+          const pctEl = document.querySelector('.genesis-progress-footer span:first-child');
+          if (pctEl) pctEl.textContent = pct.toFixed(0) + '% Spots Claimed';
         }
-
-        // Update progress bar
-        const fillEl = document.querySelector('.genesis-progress-fill');
-        if (fillEl) {
-          const pct = genesisMax > 0 ? (genesisClaimed / genesisMax) * 100 : 0;
-          fillEl.style.width = pct + '%';
-        }
-        const pctEl = document.querySelector('.genesis-progress-footer span:first-child');
-        if (pctEl) pctEl.textContent = pct.toFixed(0) + '% Spots Claimed';
       } catch (err) {
         console.warn('Stats fetch failed:', err);
       }
