@@ -191,6 +191,18 @@
       flex-direction: column;
       gap: 6px;
       flex-grow: 1;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .nav-list::-webkit-scrollbar {
+      width: 4px;
+    }
+    .nav-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .nav-list::-webkit-scrollbar-thumb {
+      background: rgba(212, 175, 55, 0.3);
+      border-radius: 2px;
     }
 
     .nav-item-btn {
