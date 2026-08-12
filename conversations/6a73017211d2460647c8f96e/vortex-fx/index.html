@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/dala.css">
+  <link rel="stylesheet" href="css/dala.css?v=3">
   <script src="js/dala.js"></script>
   <script src="js/auth.js"></script>
 
@@ -844,7 +844,7 @@
       backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(234, 202, 122, 0.1);
     }
-    .nav-brand { display: flex; align-items: center; flex-shrink: 0; flex: 1; }
+    .nav-brand { display: flex; align-items: center; flex-shrink: 0; position: relative; z-index: 2; }
     .nav-brand a { display: flex; align-items: center; text-decoration: none; }
     .nav-logo img {
       width: 36px; height: 36px; object-fit: contain;
@@ -857,7 +857,7 @@
     .nav-links {
       display: flex; list-style: none;
       gap: 28px; align-items: center;
-      justify-content: center;
+      position: absolute; left: 50%; transform: translateX(-50%);
     }
     .nav-link {
       color: rgba(255, 255, 255, 0.7);
@@ -870,7 +870,7 @@
     .nav-link:hover, .nav-link.active { color: #EACA7A; }
     .nav-cta {
       display: flex; align-items: center; gap: 20px;
-      flex-shrink: 0; flex: 1; justify-content: flex-end;
+      flex-shrink: 0; position: relative; z-index: 2;
     }
     .nav-cta .nav-link {
       font-size: 13px; font-weight: 500;

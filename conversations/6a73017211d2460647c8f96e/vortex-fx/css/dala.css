@@ -224,7 +224,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  flex: 1;
+  position: relative;
+  z-index: 2;
 }
 
 .nav-brand a {
@@ -267,7 +268,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   align-items: center;
   gap: 28px;
   list-style: none;
-  justify-content: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .nav-link {
@@ -290,8 +293,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   align-items: center;
   gap: 20px;
   flex-shrink: 0;
-  flex: 1;
-  justify-content: flex-end;
+  position: relative;
+  z-index: 2;
 }
 
 .nav-cta .nav-link {
