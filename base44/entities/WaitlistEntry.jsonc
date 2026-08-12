@@ -1,4 +1,6 @@
 {
+  "name": "WaitlistEntry",
+  "type": "object",
   "properties": {
     "email": {
       "type": "string"
@@ -21,11 +23,19 @@
     "signup_date": {
       "type": "string",
       "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "default": "pending"
+    },
+    "source": {
+      "type": "string"
+    },
+    "joinedDate": {
+      "type": "string"
     }
   },
-  "type": "object",
   "required": [
     "email"
-  ],
-  "name": "WaitlistEntry"
+  ]
 }

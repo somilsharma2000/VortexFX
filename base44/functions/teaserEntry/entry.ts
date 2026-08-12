@@ -22,13 +22,15 @@ export default async function(req) {
         return Response.json({ ok: true, exists: true, count: all.length });
       }
       const all = await base44.asServiceRole.entities.WaitlistEntry.list("-signup_date", 10000);
-      const today = new Date().toISOString().slice(0, 10);
       await base44.asServiceRole.entities.WaitlistEntry.create({
         email,
-        signup_date: today,
+        signup_date: new Date().toISOString().slice(0, 10),
         position: all.length + 1,
         discord_joined: false,
         telegram_joined: false,
+        status: "pending",
+        source: "teaser",
+        joinedDate: new Date().toISOString(),
       });
       return Response.json({ ok: true, exists: false, count: all.length + 1 });
     }

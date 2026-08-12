@@ -23,19 +23,24 @@ export default function RotatingQuote() {
       setTimeout(() => {
         setI((p) => (p + 1) % QUOTES.length);
         setShow(true);
-      }, 450);
+      }, 500);
     }, 5000);
     return () => clearInterval(iv);
   }, []);
 
   return (
-    <div className="text-center transition-opacity duration-500 px-4" style={{ opacity: show ? 1 : 0, minHeight: "150px" }}>
-      <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-wide max-w-3xl mx-auto leading-snug">
-        “{QUOTES[i]}”
-      </p>
-      <p className="mt-5 text-[0.7rem] sm:text-xs tracking-[0.35em] uppercase" style={{ color: "#666666" }}>
+    <section style={{ marginBottom: 60, textAlign: "center" }}>
+      <div style={{ minHeight: 120, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <p
+          className="text-[22px] md:text-[28px] font-bold text-white mx-auto"
+          style={{ maxWidth: 600, letterSpacing: "0.5px", lineHeight: 1.4, transition: "opacity 0.5s ease", opacity: show ? 1 : 0 }}
+        >
+          {QUOTES[i]}
+        </p>
+      </div>
+      <p className="mt-4 text-xs" style={{ color: "#666666", textTransform: "uppercase", letterSpacing: "3px" }}>
         — Trader's Truth
       </p>
-    </div>
+    </section>
   );
 }

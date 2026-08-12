@@ -1,65 +1,68 @@
 import { useState } from "react";
 import { base44 } from "@/api/base44Client";
-import { ArrowRight } from "lucide-react";
 
 export default function EmailCapture() {
   const [email, setEmail] = useState("");
-  const [state, setState] = useState(null);
+  const [done, setDone] = useState(false);
+  const [msg, setMsg] = useState(null);
   const [busy, setBusy] = useState(false);
 
   const submit = async (e) => {
     e.preventDefault();
-    if (!email.trim() || busy) return;
+    const v = email.trim();
+    if (!v || busy) return;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) {
+      setMsg({ text: "Enter a valid email address.", color: "#ff5a5a" });
+      return;
+    }
     setBusy(true);
-    setState(null);
+    setMsg(null);
     try {
-      const r = await base44.functions.invoke("teaserEntry", { action: "join", email: email.trim() });
+      const r = await base44.functions.invoke("teaserEntry", { action: "join", email: v });
       const d = r.data || {};
       if (d.exists) {
-        setState("exists");
+        setMsg({ text: "You're already on the list. Invite a friend.", color: "#D4AF37" });
       } else {
-        setState("done");
+        setDone(true);
+        setMsg({ text: "SPOT RESERVED. You're a Founding Member.", color: "#00C853" });
         setEmail("");
       }
     } catch {
-      setState("error");
+      setMsg({ text: "Something went wrong. Try again.", color: "#ff5a5a" });
     } finally {
       setBusy(false);
     }
   };
 
-  const msg = {
-    done: "SPOT RESERVED. You're a Founding Member.",
-    exists: "You're already on the list. Invite a friend.",
-    error: "Something went wrong. Try again.",
-  }[state];
-  const msgColor = state === "done" ? "#D4AF37" : state === "exists" ? "#666666" : "#ff5a5a";
-
   return (
-    <form onSubmit={submit} className="w-full max-w-md mx-auto">
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter your email to claim your spot"
-        className="w-full text-white text-center rounded-lg px-4 py-3 outline-none transition-all"
-        style={{ backgroundColor: "#0a0a0a", border: "1px solid rgba(212,175,55,0.25)" }}
-        onFocus={(e) => (e.target.style.borderColor = "#D4AF37")}
-        onBlur={(e) => (e.target.style.borderColor = "rgba(212,175,55,0.25)")}
-      />
-      <button
-        type="submit"
-        disabled={busy}
-        className="w-full mt-3 inline-flex items-center justify-center gap-2 font-bold rounded-lg px-5 py-3 transition-all hover:scale-[1.02] disabled:opacity-60"
-        style={{ backgroundColor: "#D4AF37", color: "#000000" }}
-      >
-        {busy ? "RESERVING…" : "RESERVE MY SPOT"} <ArrowRight className="w-4 h-4" />
-      </button>
+    <section style={{ maxWidth: 500, margin: "0 auto 60px" }}>
+      {!done && (
+        <form onSubmit={submit}>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email to claim your spot"
+            className="w-full text-white"
+            style={{ height: 50, background: "#0A0A0A", border: "1px solid #333333", borderRadius: 8, fontSize: 15, padding: "0 16px", outline: "none" }}
+            onFocus={(e) => (e.target.style.borderColor = "#D4AF37")}
+            onBlur={(e) => (e.target.style.borderColor = "#333333")}
+          />
+          <button
+            type="submit"
+            disabled={busy}
+            className="w-full"
+            style={{ height: 50, background: "#D4AF37", color: "#000000", fontWeight: 700, borderRadius: 8, marginTop: 12, cursor: "pointer", opacity: busy ? 0.6 : 1 }}
+          >
+            {busy ? "RESERVING…" : "RESERVE MY SPOT"}
+          </button>
+        </form>
+      )}
       {msg && (
-        <p className="mt-4 text-center text-sm font-semibold" style={{ color: msgColor }}>
-          {msg}
+        <p className="text-center mt-4 text-sm font-semibold" style={{ color: msg.color }}>
+          {msg.text}
         </p>
       )}
-    </form>
+    </section>
   );
 }

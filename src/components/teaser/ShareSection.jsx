@@ -1,39 +1,40 @@
-import { MessageCircle, Camera, Share2, Users } from "lucide-react";
-
-const WA_URL =
-  "https://wa.me/?text=The%20gates%20open%20at%2010%2C000%20traders.%20Reserve%20your%20spot%20before%20they%20fill.%20https%3A%2F%2Fdiscord.gg%2Fz2qVgJgCg4";
-const IG_URL = "https://www.instagram.com/";
-const X_URL =
-  "https://twitter.com/intent/tweet?text=The%20gates%20open%20at%2010%2C000%20traders.%20Reserve%20your%20spot%20before%20they%20fill.%20";
-const DISCORD_URL = "https://discord.gg/z2qVgJgCg4";
-
 const BUTTONS = [
-  { label: "WhatsApp", icon: MessageCircle, href: WA_URL, bg: "#25D366" },
-  { label: "Instagram", icon: Camera, href: IG_URL, bg: "linear-gradient(135deg, #833AB4, #FD1D1D)" },
-  { label: "X", icon: Share2, href: X_URL, bg: "#000000", border: true },
-  { label: "Discord", icon: Users, href: DISCORD_URL, bg: "#5865F2" },
+  {
+    label: "WhatsApp",
+    href: "https://wa.me/?text=The%20gates%20open%20at%2010%2C000%20traders.%20Reserve%20your%20spot%20before%20they%20fill.%20https%3A%2F%2Fdiscord.gg%2Fz2qVgJgCg4",
+    bg: "#25D366",
+    border: "none",
+  },
+  { label: "Instagram", href: "https://www.instagram.com/", bg: "linear-gradient(135deg, #833AB4, #FD1D1D)", border: "none" },
+  {
+    label: "X",
+    href: "https://twitter.com/intent/tweet?text=The%20gates%20open%20at%2010%2C000%20traders.%20Reserve%20your%20spot%20before%20they%20fill.",
+    bg: "#000000",
+    border: "1px solid #333",
+  },
+  { label: "Discord", href: "https://discord.gg/z2qVgJgCg4", bg: "#5865F2", border: "none" },
 ];
 
 export default function ShareSection() {
   return (
-    <div className="w-full max-w-2xl mx-auto text-center">
+    <section style={{ marginBottom: 80, textAlign: "center" }}>
       <p className="text-sm" style={{ color: "#666666" }}>
         Know a trader who'd want in? Share the gates.
       </p>
-      <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <div className="flex flex-wrap items-center justify-center gap-3 mt-4">
         {BUTTONS.map((b) => (
           <a
             key={b.label}
             href={b.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 text-sm font-bold rounded-lg px-3 py-3 transition-transform hover:scale-105"
-            style={{ backgroundColor: b.bg, color: "#ffffff", border: b.border ? "1px solid #ffffff" : "none" }}
+            className="inline-flex items-center"
+            style={{ background: b.bg, color: "#ffffff", padding: "10px 20px", borderRadius: 8, fontSize: 14, fontWeight: 600, border: b.border, gap: 8 }}
           >
-            <b.icon className="w-4 h-4" /> {b.label}
+            {b.label}
           </a>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

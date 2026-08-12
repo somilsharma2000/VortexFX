@@ -13,25 +13,15 @@ export default function Teaser() {
     <div className="relative min-h-screen flex flex-col">
       <TeaserBackground />
       <TeaserNav />
-      <main className="flex-1 flex flex-col items-center justify-center w-full max-w-3xl mx-auto px-4 pt-28 pb-10 gap-14">
-        <div className="text-center">
-          <h1
-            className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-[0.2em]"
-            style={{ color: "#D4AF37" }}
-          >
-            FORTREX
-          </h1>
-          <div className="mx-auto mt-4 h-px" style={{ width: "200px", backgroundColor: "#D4AF37" }} />
-        </div>
-
+      <main className="flex-1 w-full mx-auto px-5" style={{ maxWidth: 800, paddingTop: 96 }}>
         <RotatingQuote />
         <RegistrationGate />
         <EmailCapture />
         <FoundingSection />
         <DiscordCTA />
         <ShareSection />
+        <TeaserFooter />
       </main>
-      <TeaserFooter />
     </div>
   );
 }

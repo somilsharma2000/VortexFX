@@ -1,23 +1,21 @@
-import { MessageCircle } from "lucide-react";
-
 const DISCORD_URL = "https://discord.gg/z2qVgJgCg4";
 
 export default function DiscordCTA() {
   return (
-    <div className="w-full max-w-md mx-auto text-center">
-      <div className="h-px w-full" style={{ backgroundColor: "rgba(212,175,55,0.2)" }} />
-      <p className="mt-6 text-sm" style={{ color: "#666666" }}>
+    <section style={{ marginBottom: 60, textAlign: "center" }}>
+      <div style={{ height: 1, background: "#333333", maxWidth: 400, margin: "0 auto" }} />
+      <p className="text-[14px] md:text-[16px] mt-10" style={{ color: "#FFFFFF" }}>
         Want early access? Join the inner circle.
       </p>
       <a
         href={DISCORD_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-4 inline-flex items-center gap-2 font-bold rounded-lg px-6 py-3 transition-transform hover:scale-105"
-        style={{ backgroundColor: "#5865F2", color: "#ffffff" }}
+        className="inline-block mt-4"
+        style={{ background: "#5865F2", color: "#ffffff", padding: "14px 32px", borderRadius: 8, fontWeight: 700, cursor: "pointer" }}
       >
-        <MessageCircle className="w-5 h-5" /> JOIN THE COMMUNITY
+        JOIN THE COMMUNITY
       </a>
-    </div>
+    </section>
   );
 }
