@@ -436,7 +436,7 @@
           <!-- AUTH CARD -->
           <div class="auth-card" id="auth-card">
 
-            <!-- DEFAULT LOGIN VIEW -->
+            <!-- MANUAL REGISTRATION VIEW -->
             <div id="login-view">
               <div style="margin-bottom: var(--spacing-24);">
                 <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px;">
@@ -446,19 +446,61 @@
                 </div>
                 <h2 style="font-size: 20px; font-weight: 600; color: #ffffff; margin-bottom: 6px;">Enter the Arena</h2>
                 <p style="font-size: 14px; color: var(--color-ash-gray); font-weight: 200;">
-                  One click with Discord. No password required.
+                  Reserve your Genesis spot. Three fields, zero friction.
                 </p>
               </div>
 
-              <!-- REAL DISCORD OAUTH BUTTON -->
-              <button class="discord-btn" id="discord-login-btn" onclick="FORTREX_AUTH.loginWithDiscord()">
-                <svg viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.68,1.75,1.36,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.89,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.89,96.12,53,91.08,65.69,84.69,65.69Z"/>
-                </svg>
-                Continue with Discord
-              </button>
+              <!-- MANUAL REGISTRATION FORM -->
+              <form id="manual-reg-form" onsubmit="return submitManualRegistration(event)" style="display: flex; flex-direction: column; gap: 16px;">
+                <div>
+                  <label style="display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ash-gray); margin-bottom: 6px;">Full Name</label>
+                  <input type="text" id="reg-full-name" placeholder="e.g. Alex Morgan" required
+                    style="width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(229,193,88,0.15); border-radius: 8px; color: #fff; font-size: 15px; font-family: 'Inter', sans-serif; transition: border 0.2s;"
+                    onfocus="this.style.borderColor='rgba(229,193,88,0.5)'" onblur="this.style.borderColor='rgba(229,193,88,0.15)'" />
+                </div>
+                <div>
+                  <label style="display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ash-gray); margin-bottom: 6px;">Email Address</label>
+                  <input type="email" id="reg-email" placeholder="you@example.com" required
+                    style="width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(229,193,88,0.15); border-radius: 8px; color: #fff; font-size: 15px; font-family: 'Inter', sans-serif; transition: border 0.2s;"
+                    onfocus="this.style.borderColor='rgba(229,193,88,0.5)'" onblur="this.style.borderColor='rgba(229,193,88,0.15)'" />
+                </div>
+                <div>
+                  <label style="display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ash-gray); margin-bottom: 6px;">Phone Number</label>
+                  <input type="tel" id="reg-phone" placeholder="+1 (555) 000-0000" required
+                    style="width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(229,193,88,0.15); border-radius: 8px; color: #fff; font-size: 15px; font-family: 'Inter', sans-serif; transition: border 0.2s;"
+                    onfocus="this.style.borderColor='rgba(229,193,88,0.5)'" onblur="this.style.borderColor='rgba(229,193,88,0.15)'" />
+                </div>
+                <button type="submit"
+                  style="width: 100%; padding: 14px 24px; background: linear-gradient(135deg, #E5C158, #D4AF37); color: #0B0C0E; font-weight: 700; font-size: 15px; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.02em;">
+                  Reserve My Genesis Spot →
+                </button>
+              </form>
 
               <div class="auth-error" id="auth-error"></div>
+
+              <!-- PENDING VERIFICATION MODAL -->
+              <div id="pending-verification" style="display: none; text-align: center; padding: 32px 16px;">
+                <div style="width: 72px; height: 72px; margin: 0 auto 24px; border: 2px solid rgba(229,193,88,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(229,193,88,0.06);">
+                  <svg width="32" height="32" fill="none" stroke="#E5C158" stroke-width="2" viewBox="0 0 24 24" style="animation: spin 2s linear infinite;">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                  </svg>
+                </div>
+                <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #E5C158; margin-bottom: 12px;">Spot Pending — Step 2 of 2</div>
+                <h3 style="font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 12px; line-height: 1.4;">Join the Official FORTREX Discord to complete manual authorization and secure your Genesis spot.</h3>
+                <p style="font-size: 14px; color: var(--color-ash-gray); margin-bottom: 28px; line-height: 1.6;">Your details are saved. Complete verification in our Discord server to activate your account and claim your Genesis Trader benefits.</p>
+                <a href="https://discord.gg/9pTSqeTbn" target="_blank"
+                  style="display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; background: #5865F2; color: #fff; font-weight: 700; font-size: 15px; border-radius: 999px; text-decoration: none; transition: all 0.2s; box-shadow: 0 4px 20px rgba(88,101,242,0.35);"
+                  onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 28px rgba(88,101,242,0.45)'"
+                  onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(88,101,242,0.35)'">
+                  <svg width="22" height="22" viewBox="0 0 127.14 96.36" fill="currentColor">
+                    <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.68,1.75,1.36,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.89,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.89,96.12,53,91.08,65.69,84.69,65.69Z"/>
+                  </svg>
+                  Join Discord to Complete Verification
+                </a>
+                <p style="font-size: 12px; color: rgba(255,255,255,0.25); margin-top: 20px;">Already verified? <a href="#" onclick="location.reload(); return false;" style="color: #E5C158;">Refresh</a></p>
+              </div>
+
+              <style>@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }</style>
 
             <!-- GUILD MEMBERSHIP REQUIRED VIEW -->
             <div class="guild-required" id="guild-view">
@@ -480,27 +522,61 @@
 
             <div class="auth-error" id="auth-error-end" style="display:none"></div>
 
-              <!-- Show profile form after successful auth -->
+              <!-- Handle post-auth state -->
               <script>
-              // Handle post-auth: show profile form
+              // Check if trader is already logged in
               (function() {
                 const trader = FORTREX_AUTH.isLoggedIn();
-                if (trader) {
-                  // Check if profile is already completed
-                  if (!trader.email || !trader.full_name) {
-                    // Show profile completion form
-                    const loginView = document.getElementById('login-view');
-                    if (loginView) loginView.style.display = 'none';
-                    const profileForm = document.getElementById('profile-form');
-                    if (profileForm) profileForm.style.display = 'block';
-                    // Hide Discord/Google buttons
-                    document.querySelectorAll('.discord-btn, .google-btn, .auth-divider').forEach(el => el.style.display = 'none');
-                  } else {
-                    // Profile already complete, redirect to dashboard
-                    window.location.href = 'dashboard.html';
-                  }
+                if (trader && trader.email && trader.full_name) {
+                  window.location.href = 'dashboard.html';
                 }
               })();
+
+              // Manual registration form handler
+              function submitManualRegistration(e) {
+                e.preventDefault();
+                const fullName = document.getElementById('reg-full-name').value.trim();
+                const email = document.getElementById('reg-email').value.trim();
+                const phone = document.getElementById('reg-phone').value.trim();
+                const errorEl = document.getElementById('auth-error');
+
+                // Validation
+                if (!fullName || fullName.length < 2) {
+                  errorEl.textContent = 'Please enter your full name.';
+                  errorEl.style.display = 'block';
+                  return false;
+                }
+                if (!email || !email.includes('@') || !email.includes('.')) {
+                  errorEl.textContent = 'Please enter a valid email address.';
+                  errorEl.style.display = 'block';
+                  return false;
+                }
+                if (!phone || phone.length < 7) {
+                  errorEl.textContent = 'Please enter a valid phone number.';
+                  errorEl.style.display = 'block';
+                  return false;
+                }
+
+                // Save registration data locally
+                const regData = { full_name: fullName, email: email, phone: phone, status: 'pending_verification', registered_at: new Date().toISOString() };
+                localStorage.setItem('fortrex_registration', JSON.stringify(regData));
+
+                // Try to save to backend
+                try {
+                  fetch(FORTREX_AUTH.API_BASE + '/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(regData)
+                  }).catch(function() {});
+                } catch (err) {}
+
+                // Hide form, show pending verification
+                document.getElementById('manual-reg-form').style.display = 'none';
+                document.getElementById('pending-verification').style.display = 'block';
+                errorEl.style.display = 'none';
+
+                return false;
+              }
 
               async function submitProfile() {
                 const fullName = document.getElementById('profile-full-name').value.trim();
@@ -578,7 +654,7 @@
                   <svg class="reassurance-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
-                  <span><strong>Discord verified.</strong> Your username auto-joins the FORTREX community.</span>
+                  <span><strong>Discord verified.</strong> Complete verification in our server to unlock the arena.</span>
                 </div>
                 <div class="reassurance-item">
                   <svg class="reassurance-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -592,8 +668,8 @@
             <!-- LOADING VIEW -->
             <div class="auth-loading" id="loading-view">
               <div class="auth-spinner"></div>
-              <p style="color: var(--color-ash-gray); font-size: 14px;">Connecting to Discord...</p>
-              <p style="color: var(--color-ash-gray); font-size: 12px; opacity: 0.6;">Verifying your identity</p>
+              <p style="color: var(--color-ash-gray); font-size: 14px;">Submitting registration...</p>
+              <p style="color: var(--color-ash-gray); font-size: 12px; opacity: 0.6;">Reserving your Genesis spot</p>
             </div>
 
             <!-- SUCCESS VIEW -->
@@ -640,7 +716,7 @@
           <div style="background: rgba(10,10,10,0.6); border: 1px solid #1a1a1a; border-radius: 8px; padding: 28px;">
             <div style="font-size: 32px; font-weight: 700; color: var(--color-electric-iris); margin-bottom: 12px;">01</div>
             <h3 style="font-size: 16px; font-weight: 600; color: #ffffff; margin-bottom: 8px;">Link Your MT5</h3>
-            <p style="font-size: 13px; color: var(--color-ash-gray); line-height: 1.6;">Enter your broker account number. Admin verifies it manually. No API connections needed.</p>
+            <p style="font-size: 13px; color: var(--color-ash-gray); line-height: 1.6;">Enter your MT5 account number. Admin verifies it manually.</p>
           </div>
           <div style="background: rgba(10,10,10,0.6); border: 1px solid #1a1a1a; border-radius: 8px; padding: 28px;">
             <div style="font-size: 32px; font-weight: 700; color: var(--color-electric-iris); margin-bottom: 12px;">02</div>
@@ -673,11 +749,11 @@
           </div>
           <div class="accordion-item">
             <div class="accordion-header">
-              <span>Why Discord login only?</span>
+              <span>Why Discord verification?</span>
               <span class="accordion-icon">+</span>
             </div>
             <div class="accordion-body">
-              <p>Discord is our community hub (the Community). Your Discord username auto-joins you. No separate account needed.</p>
+              <p>Discord is our community hub. Complete verification in our server to activate your account and claim your Genesis spot. No separate password needed.</p>
             </div>
           </div>
           <div class="accordion-item">
@@ -686,7 +762,7 @@
               <span class="accordion-icon">+</span>
             </div>
             <div class="accordion-body">
-              <p>No. You trade on your own MT5 terminal through your broker. We only track and verify your results for tournaments.</p>
+              <p>No. You trade on your own MT5 terminal. We verify your results for tournaments.</p>
             </div>
           </div>
           <div class="accordion-item">
@@ -735,9 +811,9 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-copyright">© 2026 FORTREX — Skill-based trading competitions. Not a financial service.</div>
+        <div class="footer-copyright">© 2026 FORTREX — Skill-based trading competitions. Not a broker.</div>
         <div class="footer-disclaimer" style="font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 8px; line-height: 1.5;">
-          Trading forex and cryptocurrency on margin carries a high level of risk. FORTREX is a skill-based competition platform and does not execute trades, hold funds, or provide financial advice. Tournament prizes are distributed as REX reward points with no cash value.
+          FORTREX organizes skill-based trading competitions and tournaments. We are not a broker, financial institution, or asset manager. REX points are competition utility tokens used for arena rankings and prize distributions.
         </div>
       </div>
     </div>

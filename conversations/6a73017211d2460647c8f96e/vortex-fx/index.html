@@ -1331,7 +1331,7 @@
     <div class="genesis-hero-bar">
       <div class="genesis-hero-header">
         <span class="genesis-hero-label">GENESIS PROGRAM</span>
-        <span class="genesis-hero-pool">REX PRIZE POOL: <span class="gold-text" style="font-weight: 700;">1,000,000</span></span>
+        <span class="genesis-hero-pool">LIFETIME REX CAP: <span class="gold-text" style="font-weight: 700;">1,000,000,000</span></span>
       </div>
       <div class="genesis-hero-progress">
         <div class="genesis-hero-fill" id="genesis-hero-fill"></div>
@@ -1375,8 +1375,8 @@
         <div class="stat-label">Launch Countdown</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number gold-stat" style="font-size: clamp(28px, 3.2vw, 38px); line-height:1.25;">1,000,000</div>
-        <div class="stat-label">REX Prize Pool</div>
+        <div class="stat-number gold-stat" style="font-size: clamp(28px, 3.2vw, 38px); line-height:1.25;">1,000,000,000</div>
+        <div class="stat-label">Lifetime REX Cap</div>
       </div>
       <div class="stat-card">
         <div class="stat-number white-stat" style="font-size: clamp(28px, 3.2vw, 38px);" id="stat-waitlist">—</div>
@@ -1514,7 +1514,7 @@
   <section class="trust-section reveal-section" id="trust">
     <div class="trust-container">
       <div style="text-align: center; margin-bottom: 60px;">
-        <h2 class="section-headline">Verified. Transparent. Fair.</h2>
+        <h2 class="section-headline">100% Non-Broker & Pure Skill Verification</h2>
       </div>
 
       <div class="trust-grid">
@@ -1527,7 +1527,7 @@
           </div>
           <div>
             <h3 class="trust-title">TWRR Verification</h3>
-            <p class="trust-desc">Time-Weighted Rate of Return — the gold standard used by institutional funds. Every trade is measured fairly, regardless of deposit timing or size.</p>
+            <p class="trust-desc">Time-Weighted Rate of Return — the gold standard used by institutional funds. Every trade is measured fairly, regardless of account size or trading frequency.</p>
           </div>
         </div>
 
@@ -1556,7 +1556,7 @@
           </div>
           <div>
             <h3 class="trust-title">Anti-Cheat System</h3>
-            <p class="trust-desc">Multiple account detection, deposit verification, manual review. Fair play guaranteed.</p>
+            <p class="trust-desc">Sybil detection, multi-account protection, and manual review. Fair play guaranteed.</p>
           </div>
         </div>
       </div>
@@ -1603,9 +1603,9 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-copyright">© 2026 FORTREX — Skill-based trading competitions. Not a financial service.</div>
+        <div class="footer-copyright">© 2026 FORTREX — Skill-based trading competitions. Not a broker.</div>
         <div class="footer-disclaimer" style="font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 8px; line-height: 1.5;">
-          Trading forex and cryptocurrency on margin carries a high level of risk. FORTREX is a skill-based competition platform and does not execute trades, hold funds, or provide financial advice. Tournament prizes are distributed as REX reward points with no cash value.
+          FORTREX organizes skill-based trading competitions and tournaments. We are not a broker, financial institution, or asset manager. REX points are competition utility tokens used for arena rankings and prize distributions.
         </div>
       </div>
     </div>
@@ -1646,7 +1646,7 @@
           if (rexTotalEl) rexTotalEl.textContent = (s.total_rex_distributed || 0).toLocaleString();
 
           const ppEl = document.getElementById('stat-prize-pool');
-          if (ppEl) ppEl.textContent = (s.total_prize_pool_rex || 0).toLocaleString();
+          if (ppEl) ppEl.textContent = '1B';
 
           const trEl = document.getElementById('stat-traders');
           if (trEl) trEl.textContent = (s.verified_accounts || 0).toLocaleString();

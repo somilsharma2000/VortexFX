@@ -619,7 +619,7 @@
             <span id="verif-status-badge" class="status-badge status-unsubmitted">Unsubmitted</span>
           </div>
           <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
-            Link your live broker account to verify active status and qualify for cash prize tournaments.
+            Link your MT5 account to verify active status and qualify for tournaments.
           </p>
 
           <div class="form-group">
@@ -628,7 +628,7 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="deposit-amount-input">Deposit Amount ($) (Optional)</label>
+            <label class="form-label" for="deposit-amount-input">Account Balance ($) (Optional)</label>
             <input type="number" id="deposit-amount-input" class="form-input" placeholder="e.g. 500">
           </div>
         </div>
@@ -1040,9 +1040,9 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-copyright">© 2026 FORTREX — Skill-based trading competitions. Not a financial service.</div>
+        <div class="footer-copyright">© 2026 FORTREX — Skill-based trading competitions. Not a broker.</div>
         <div class="footer-disclaimer" style="font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 8px; line-height: 1.5;">
-          Trading forex and cryptocurrency on margin carries a high level of risk. FORTREX is a skill-based competition platform and does not execute trades, hold funds, or provide financial advice. Tournament prizes are distributed as REX reward points with no cash value.
+          FORTREX organizes skill-based trading competitions and tournaments. We are not a broker, financial institution, or asset manager. REX points are competition utility tokens used for arena rankings and prize distributions.
         </div>
       </div>
     </div>
@@ -1241,7 +1241,7 @@
       const depositAmount = document.getElementById('deposit-amount-input').value.trim();
 
       if (!mt4Account) {
-        return showToast('Please enter your XM broker account number');
+        return showToast('Please enter your MT5 account number');
       }
 
       try {
