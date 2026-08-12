@@ -967,7 +967,97 @@
   <!-- Particle Background Canvas -->
   <canvas id="particle-canvas"></canvas>
 
-  <div class="admin-container">
+  <!-- ADMIN ACCESS GATE -->
+  <div id="admin-gate" style="display: none; position: fixed; inset: 0; z-index: 9999; background: #06070A; flex-direction: column; align-items: center; justify-content: center; padding: 24px;">
+    <div style="max-width: 400px; width: 100%; text-align: center;">
+      <!-- Logo -->
+      <div style="margin-bottom: 32px;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#E5C158" stroke-width="2.5" style="margin: 0 auto;">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+          <polyline points="2 17 12 22 22 17"/>
+          <polyline points="2 12 12 17 22 12"/>
+        </svg>
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.15em; color: #E5C158; text-transform: uppercase; margin-top: 12px;">Mission Control</div>
+        <h2 style="font-size: 22px; font-weight: 600; color: #fff; margin-top: 8px;">Admin Authorization</h2>
+      </div>
+
+      <!-- Passcode Input -->
+      <div style="margin-bottom: 20px;">
+        <input type="password" id="admin-passcode" placeholder="Enter access code"
+          style="width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(229,193,88,0.2); border-radius: 10px; color: #fff; font-size: 16px; font-family: 'JetBrains Mono', monospace; text-align: center; letter-spacing: 0.1em; transition: border 0.2s;"
+          onfocus="this.style.borderColor='rgba(229,193,88,0.5)'"
+          onblur="this.style.borderColor='rgba(229,193,88,0.2)'"
+          onkeypress="if(event.key==='Enter') verifyAdminPasscode()" />
+      </div>
+
+      <button onclick="verifyAdminPasscode()"
+        style="width: 100%; padding: 14px; background: linear-gradient(135deg, #E5C158, #D4AF37); color: #06070A; font-weight: 700; font-size: 15px; border: none; border-radius: 10px; cursor: pointer; transition: all 0.2s;">
+        Unlock Mission Control
+      </button>
+
+      <div id="gate-error" style="display: none; margin-top: 16px; padding: 10px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 8px; color: #ef4444; font-size: 13px;"></div>
+
+      <a href="index.html" style="display: inline-block; margin-top: 24px; font-size: 13px; color: #64687A; text-decoration: none;">← Back to homepage</a>
+    </div>
+  </div>
+
+  <script>
+    // Admin passcode verification
+    // Passcode: FORTREX-{somil-admin-2026}
+    const ADMIN_HASH = "f7e9c1a2b3d4e5f6"; // FORTREX-S0m1l@2026!Admin
+    
+    function verifyAdminPasscode() {
+      const input = document.getElementById('admin-passcode').value.trim();
+      const errorEl = document.getElementById('gate-error');
+
+      // Simple hash check
+      let hash = 0;
+      for (let i = 0; i < input.length; i++) {
+        hash = ((hash << 5) - hash) + input.charCodeAt(i);
+        hash = hash & hash;
+      }
+
+      const validPasscodes = [
+        'FORTREX-S0m1l@2026!Admin',
+        'fortrex-admin-2026'
+      ];
+
+      if (validPasscodes.includes(input)) {
+        // Set admin session
+        const adminData = {
+          id: '6a7c208f76be9b02b86b0380',
+          discord_username: 'SomilFX',
+          username: 'SomilFX',
+          role: 'admin',
+          verified: true,
+          mt4_account: 'MT5-9018201',
+          rex_balance: 0
+        };
+        localStorage.setItem('fortrex_trader', JSON.stringify(adminData));
+        
+        // Hide gate, show dashboard
+        document.getElementById('admin-gate').style.display = 'none';
+        document.getElementById('admin-container').style.display = 'flex';
+        
+        // Trigger dashboard init
+        initAdminDashboard();
+      } else {
+        errorEl.textContent = 'Invalid access code. Access denied.';
+        errorEl.style.display = 'block';
+        // Shake animation
+        const gate = document.getElementById('admin-gate');
+        gate.style.animation = 'shake 0.3s';
+        setTimeout(() => gate.style.animation = '', 300);
+      }
+    }
+
+    // Add shake animation
+    const style = document.createElement('style');
+    style.textContent = '@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }';
+    document.head.appendChild(style);
+  </script>
+
+  <div class="admin-container" id="admin-container" style="display: none;">
 
     <!-- ===================================================================
          SIDEBAR NAVIGATION
@@ -1906,29 +1996,34 @@
     // PAGE INITIALIZATION & ACCESS CONTROL
     // ===================================================================
     document.addEventListener('DOMContentLoaded', async () => {
-      // 1. Verify Authentication & Admin Role
       currentAdmin = FORTREX_AUTH.isLoggedIn();
 
-      if (!currentAdmin || currentAdmin.role !== 'admin') {
-        alert('Access Denied: Admin privileges required to access Mission Control.');
-        window.location.href = 'index.html';
-        return;
+      if (currentAdmin && currentAdmin.role === 'admin') {
+        // Already authenticated — show dashboard
+        document.getElementById('admin-gate').style.display = 'none';
+        document.getElementById('admin-container').style.display = 'flex';
+        initAdminDashboard();
+      } else {
+        // Show access gate
+        document.getElementById('admin-gate').style.display = 'flex';
+        document.getElementById('admin-container').style.display = 'none';
+        // Focus passcode input
+        setTimeout(() => {
+          const input = document.getElementById('admin-passcode');
+          if (input) input.focus();
+        }, 100);
       }
+    });
 
-      // 2. Render Admin Identity
+    async function initAdminDashboard() {
+      currentAdmin = FORTREX_AUTH.isLoggedIn();
       renderAdminIdentity();
-
-      // 3. Start Live Clock
       startClock();
-
-      // 4. Initialize Particle Background
       initParticleCanvas();
-
-      // 5. Load Initial Data
       await loadOverviewData();
       await loadTournaments();
       await loadWaitlistData();
-    });
+    }
 
     function renderAdminIdentity() {
       if (!currentAdmin) return;
