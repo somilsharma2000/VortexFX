@@ -310,22 +310,22 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* --- BUTTONS --- */
 
-/* Primary — violet pill */
+/* Primary — gold pill (black text) */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14.4px 31.92px;
-  background: var(--color-electric-iris);
-  color: var(--color-bone-white);
+  padding: 12px 28px;
+  background: #D0AC73;
+  color: #000000;
   font-family: var(--font);
   font-size: var(--text-nav-label);
-  font-weight: 600;
-  letter-spacing: 0.025em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   border: none;
-  border-radius: var(--radius);
+  border-radius: 9999px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
@@ -333,9 +333,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .btn-primary:hover {
-  background: #C8A531;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+  background: #EACA7A;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(208, 172, 115, 0.45);
+  color: #000000;
 }
 
 .btn-primary:active {
