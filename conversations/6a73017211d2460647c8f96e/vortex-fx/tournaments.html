@@ -15,7 +15,7 @@
   <script src="js/auth.js"></script>
 
   <style>
-    body { background-color: #040813; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    body { background-color: #06070A; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
     .font-display { font-family: 'Space Grotesk', sans-serif; }
     .font-mono { font-family: 'JetBrains Mono', monospace; }
 
@@ -26,8 +26,8 @@
       gap: 28px;
     }
     .t-card {
-      background: linear-gradient(180deg, #0F1419 0%, #1A1A2E 100%);
-      border: 1px solid rgba(208, 172, 115, 0.18);
+      background: linear-gradient(180deg, #0B0C0E 0%, #121317 100%);
+      border: 1px solid rgba(229, 193, 88, 0.18);
       border-radius: 20px;
       padding: 32px 28px;
       display: flex;
@@ -35,14 +35,14 @@
       transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     }
     .t-card:hover {
-      border-color: rgba(208, 172, 115, 0.45);
+      border-color: rgba(229, 193, 88, 0.45);
       transform: translateY(-3px);
-      box-shadow: 0 12px 36px rgba(0,0,0,0.6), 0 0 24px rgba(208,172,115,0.08);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.6), 0 0 24px rgba(229,193,88,0.08);
     }
     .t-card.featured {
-      border-color: rgba(208, 172, 115, 0.5);
-      background: linear-gradient(180deg, rgba(208,172,115,0.08) 0%, #0F1419 60%, #1A1A2E 100%);
-      box-shadow: 0 0 30px rgba(208,172,115,0.1);
+      border-color: rgba(229, 193, 88, 0.5);
+      background: linear-gradient(180deg, rgba(229,193,88,0.08) 0%, #0B0C0E 60%, #121317 100%);
+      box-shadow: 0 0 30px rgba(229,193,88,0.1);
     }
     .t-status {
       display: inline-flex;
@@ -55,31 +55,31 @@
       padding: 5px 12px;
       border-radius: 9999px;
     }
-    .t-status-gates { background: rgba(208,172,115,0.18); color: #D0AC73; border: 1px solid rgba(208,172,115,0.5); }
+    .t-status-gates { background: rgba(229,193,88,0.18); color: #E5C158; border: 1px solid rgba(229,193,88,0.5); }
     .t-status-open { background: rgba(16,185,129,0.15); color: #10B981; border: 1px solid rgba(16,185,129,0.4); }
     .t-status-upcoming { background: rgba(153,153,153,0.12); color: #999999; border: 1px solid rgba(153,153,153,0.3); }
     .t-status-live { background: rgba(16,185,129,0.15); color: #10B981; border: 1px solid rgba(16,185,129,0.4); }
     .t-status-completed { background: rgba(153,153,153,0.1); color: #999999; border: 1px solid rgba(153,153,153,0.25); }
 
     .t-name { font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; color: #ffffff; margin: 18px 0 6px; }
-    .t-prize { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: #D0AC73; margin-bottom: 18px; letter-spacing: 0.02em; }
+    .t-prize { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: #E5C158; margin-bottom: 18px; letter-spacing: 0.02em; }
     .t-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; margin-bottom: 22px; }
     .t-meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #999999; margin-bottom: 4px; }
     .t-meta-val { font-size: 14px; font-weight: 600; color: #ffffff; }
     .t-format { font-size: 12px; color: #999999; line-height: 1.6; margin-bottom: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
     .t-register {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      background: #D0AC73; color: #000000; font-weight: 700; font-size: 14px;
+      background: #E5C158; color: #000000; font-weight: 700; font-size: 14px;
       letter-spacing: 0.05em; text-transform: uppercase;
       padding: 12px 24px; border-radius: 9999px; text-decoration: none;
       transition: all 0.3s cubic-bezier(0.16,1,0.3,1); margin-top: auto;
     }
-    .t-register:hover { background: #EACA7A; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(208,172,115,0.45); color:#000; }
+    .t-register:hover { background: #F5D172; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(229,193,88,0.45); color:#000; }
     .t-register.disabled { background: rgba(153,153,153,0.15); color: #999999; cursor: not-allowed; }
     .t-register.disabled:hover { transform: none; box-shadow: none; background: rgba(153,153,153,0.15); }
 
     @media (max-width: 768px) {
-      .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: #0A0B0F; flex-direction: column; padding: 100px 24px 24px; gap: 8px; z-index: 999; border-left: 1px solid rgba(208,172,115,0.15); transform: translateX(100%); transition: transform 0.3s ease; }
+      .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: #08090C; flex-direction: column; padding: 100px 24px 24px; gap: 8px; z-index: 999; border-left: 1px solid rgba(229,193,88,0.15); transform: translateX(100%); transition: transform 0.3s ease; }
       .nav-links.active { display: flex; transform: translateX(0); }
       .nav-cta > a:not(.hamburger) { display: none; }
       .hamburger { display: flex !important; cursor: pointer; }
@@ -133,7 +133,7 @@
 
       <!-- HEADER -->
       <section style="text-align: center; margin-bottom: 56px;">
-        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #D0AC73; margin-bottom: 16px;">TOURNAMENT ARENA</div>
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #E5C158; margin-bottom: 16px;">TOURNAMENT ARENA</div>
         <h1 class="font-display" style="font-size: clamp(36px, 6vw, 64px); font-weight: 700; color: #ffffff; letter-spacing: -0.02em; margin-bottom: 18px;">Tournament Arena</h1>
         <p style="font-size: 18px; color: #999999; max-width: 620px; margin: 0 auto; line-height: 1.6;">
           Compete for real prizes. Standings remain 100% sealed until reveal day — no live rank distortion, pure trading skill.
@@ -148,18 +148,18 @@
       </div>
 
       <!-- Info strip -->
-      <section style="margin-top: 64px; padding: 36px 28px; border: 1px solid rgba(208,172,115,0.18); border-radius: 20px; background: linear-gradient(180deg, #0F1419 0%, #1A1A2E 100%);">
+      <section style="margin-top: 64px; padding: 36px 28px; border: 1px solid rgba(229,193,88,0.18); border-radius: 20px; background: linear-gradient(180deg, #0B0C0E 0%, #121317 100%);">
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px;">
           <div>
-            <div style="font-size: 11px; letter-spacing:0.1em; text-transform:uppercase; color:#D0AC73; font-weight:700; margin-bottom:8px;">Sealed Standings</div>
+            <div style="font-size: 11px; letter-spacing:0.1em; text-transform:uppercase; color:#E5C158; font-weight:700; margin-bottom:8px;">Sealed Standings</div>
             <p style="font-size: 14px; color:#999999; line-height:1.6; margin:0;">All positions stay locked in a zero-knowledge vault until reveal day. No rank copying, no panic trading.</p>
           </div>
           <div>
-            <div style="font-size: 11px; letter-spacing:0.1em; text-transform:uppercase; color:#D0AC73; font-weight:700; margin-bottom:8px;">MT4 / MT5 Verified</div>
+            <div style="font-size: 11px; letter-spacing:0.1em; text-transform:uppercase; color:#E5C158; font-weight:700; margin-bottom:8px;">MT5 Verified</div>
             <p style="font-size: 14px; color:#999999; line-height:1.6; margin:0;">Trades verified through MT5 investor passwords. Industry-standard TWRR performance metric.</p>
           </div>
           <div>
-            <div style="font-size: 11px; letter-spacing:0.1em; text-transform:uppercase; color:#D0AC73; font-weight:700; margin-bottom:8px;">Variable Prize Pool</div>
+            <div style="font-size: 11px; letter-spacing:0.1em; text-transform:uppercase; color:#E5C158; font-weight:700; margin-bottom:8px;">Variable Prize Pool</div>
             <p style="font-size: 14px; color:#999999; line-height:1.6; margin:0;">No fixed prize cap. The pool is funded by platform revenue — it grows as the community grows.</p>
           </div>
         </div>
@@ -173,8 +173,8 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(208, 172, 115, 0.2));">
-          <span class="nav-wordmark" style="color: #D0AC73; font-weight: 700;">FORTREX</span>
+          <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(229, 193, 88, 0.2));">
+          <span class="nav-wordmark" style="color: #E5C158; font-weight: 700;">FORTREX</span>
         </div>
         <div class="footer-links">
           <a href="index.html" class="footer-link">Home</a>

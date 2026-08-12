@@ -1380,9 +1380,12 @@
       </div>
       <div class="stat-card">
         <div class="stat-number white-stat" style="font-size: clamp(28px, 3.2vw, 38px);" id="stat-waitlist">—</div>
-        <div class="stat-label">On the Waitlist</div>
+        <div class="stat-label">Traders Registered</div>
       </div>
-
+      <div class="stat-card">
+        <div class="stat-number gold-stat" style="font-size: clamp(28px, 3.2vw, 38px); line-height:1.25;" id="stat-rex-total">—</div>
+        <div class="stat-label">Total REX Distributed</div>
+      </div>
 
     </div>
   </section>
@@ -1637,7 +1640,10 @@
 
           // Update stat cards
           const wlEl = document.getElementById('stat-waitlist');
-          if (wlEl) wlEl.textContent = (s.waitlist_count || 0).toLocaleString();
+          if (wlEl) wlEl.textContent = (s.registration_count || s.waitlist_count || 0).toLocaleString();
+
+          const rexTotalEl = document.getElementById('stat-rex-total');
+          if (rexTotalEl) rexTotalEl.textContent = (s.total_rex_distributed || 0).toLocaleString();
 
           const ppEl = document.getElementById('stat-prize-pool');
           if (ppEl) ppEl.textContent = (s.total_prize_pool_rex || 0).toLocaleString();
