@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Court of Kings — Fortrex FX Royal Leaderboards</title>
+    <meta name="description" content="The Court of Kings: Fortrex FX Sovereign Leaderboards. View top prop challenge traders and IB ROI leaders in opulent Royal Obsidian Gold design.">
+    
+    <!-- Google Fonts: Sora, Inter, JetBrains Mono, Cinzel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#030303',
+                        navy: {
+                            950: '#02050A',
+                            900: '#070D18',
+                            800: '#0E1726',
+                            700: '#172338',
+                            600: '#20304D'
+                        },
+                        gold: {
+                            100: '#FFF9E6',
+                            200: '#FFF0B3',
+                            300: '#FFE180',
+                            400: '#F5D061',
+                            500: '#D4AF37',
+                            600: '#B8860B',
+                            700: '#8B6508',
+                            800: '#5C4305',
+                            accent: '#F0B90B'
+                        },
+                        royal: {
+                            50: '#FAF5FF',
+                            100: '#F3E8FF',
+                            500: '#A855F7',
+                            600: '#9333EA',
+                            700: '#7E22CE',
+                            800: '#581C87',
+                            900: '#3B0764',
+                            glow: 'rgba(147, 51, 234, 0.25)'
+                        },
+                        silver: {
+                            300: '#E2E8F0',
+                            400: '#CBD5E1',
+                            500: '#94A3B8'
+                        },
+                        bronze: {
+                            400: '#FB923C',
+                            500: '#CD7F32',
+                            600: '#9A3412'
+                        },
+                        emerald: {
+                            glow: '#00E676',
+                            profit: '#10B981'
+                        },
+                        crimson: {
+                            loss: '#EF4444',
+                            seal: '#991B1B'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        sora: ['Sora', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    },
+                    boxShadow: {
+                        'gold-glow': '0 0 25px rgba(212, 175, 55, 0.3)',
+                        'gold-glow-lg': '0 0 50px rgba(240, 185, 11, 0.5)',
+                        'purple-glow': '0 0 30px rgba(147, 51, 234, 0.3)',
+                        'king-card': '0 0 45px rgba(212, 175, 55, 0.4), inset 0 0 25px rgba(212, 175, 55, 0.1)',
+                        'prince-card': '0 0 35px rgba(203, 213, 225, 0.3)',
+                        'duke-card': '0 0 35px rgba(205, 127, 50, 0.3)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #030303; }
+        ::-webkit-scrollbar-thumb { background: #172338; border-radius: 4px; border: 1px solid rgba(212, 175, 55, 0.3); }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+
+        /* OLED Black with Gold Damask Pattern Overlay */
+        body {
+            background-color: #030303;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(88, 28, 135, 0.22) 0%, transparent 60%),
+                radial-gradient(circle at 20% 40%, rgba(212, 175, 55, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(88, 28, 135, 0.15) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37' fill-opacity='0.035'%3E%3Cpath d='M40 0 C45 15, 60 20, 60 40 C60 60, 45 65, 40 80 C35 65, 20 60, 20 40 C20 20, 35 15, 40 0 Z M40 10 C35 22, 28 28, 28 40 C28 52, 35 58, 40 70 C45 58, 52 52, 52 40 C52 28, 45 22, 40 10 Z'/%3E%3Cpath d='M0 40 C15 45, 20 60, 40 60 C60 60, 65 45, 80 40 C65 35, 60 20, 40 20 C20 20, 15 35, 0 40 Z' fill-opacity='0.025'/%3E%3Ccircle cx='40' cy='40' r='2.5' fill-opacity='0.06'/%3E%3C/g%3E%3C/svg%3E");
+            background-attachment: fixed;
+        }
+
+        .glass-panel-royal {
+            background: linear-gradient(135deg, rgba(14, 23, 38, 0.85) 0%, rgba(7, 13, 24, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.22);
+        }
+
+        .glass-panel-gold {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(14, 23, 38, 0.92) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15);
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF0B3 20%, #F5D061 45%, #D4AF37 70%, #AA771C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .silver-gradient-text {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 40%, #CBD5E1 70%, #94A3B8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bronze-gradient-text {
+            background: linear-gradient(135deg, #FFEDD5 0%, #FDBA74 40%, #CD7F32 70%, #9A3412 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Wax Seal Stamp Design */
+        .wax-seal {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            background: radial-gradient(circle at 30% 30%, #DC2626 0%, #991B1B 60%, #450A0A 100%);
+            border: 1.5px solid #F5D061;
+            color: #FEF08A;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            box-shadow: 0 3px 10px rgba(185, 28, 28, 0.5), inset 0 1px 2px rgba(254, 240, 138, 0.6);
+            transition: all 0.3s ease;
+        }
+        .wax-seal:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(245, 208, 97, 0.6), inset 0 1px 2px rgba(254, 240, 138, 0.8);
+        }
+
+        /* Gold Shimmer Animation */
+        @keyframes goldShimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .animate-shimmer {
+            background: linear-gradient(90deg, rgba(212,175,55,0) 0%, rgba(255,240,179,0.25) 50%, rgba(212,175,55,0) 100%);
+            background-size: 200% 100%;
+            animation: goldShimmer 3.5s infinite;
+        }
+
+        @keyframes crownFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(2deg); }
+        }
+        .animate-float {
+            animation: crownFloat 4s ease-in-out infinite;
+        }
+
+        /* Table Row Gold Hover Effect */
+        .royal-row {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+        }
+        .royal-row:hover {
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.08) 0%, rgba(88, 28, 135, 0.15) 50%, rgba(212, 175, 55, 0.08) 100%);
+            border-bottom-color: rgba(212, 175, 55, 0.3);
+            transform: translateX(4px);
+        }
+
+        /* Royal Tab Switch Active Styling */
+        .royal-tab-active {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(88, 28, 135, 0.3) 100%);
+            border-bottom: 3px solid #F5D061;
+            color: #FFF;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+        }
+
+        /* Ornamental Filigree Divider */
+        .filigree-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2.5rem 0;
+        }
+        .filigree-divider::before, .filigree-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+        }
+    </style>
+</head>
+<body class="text-slate-100 font-sans selection:bg-gold-500 selection:text-black min-h-screen flex flex-col">
+
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-40 w-full glass-panel-royal border-b border-gold-500/25 backdrop-blur-2xl transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- LOGO & BRAND -->
+                <a href="fortrex-fx-landing.html" class="flex items-center gap-3.5 group">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-gold-300 via-gold-500 to-gold-700 p-[1px] shadow-gold-glow flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                        <div class="w-full h-full bg-obsidian rounded-[11px] flex items-center justify-center">
+                            <i class="fa-solid fa-crown text-gold-400 text-lg group-hover:text-gold-300 transition-colors"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-cinzel text-xl font-black tracking-wider text-white">FORTREX<span class="gold-gradient-text">FX</span></span>
+                            <span class="bg-royal-800/80 text-gold-300 border border-gold-500/30 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest shadow-sm">SOVEREIGN</span>
+                        </div>
+                        <p class="text-[10px] font-mono text-gold-400/80 tracking-widest uppercase">The Court of Kings</p>
+                    </div>
+                </a>
+
+                <!-- DESKTOP NAVIGATION -->
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="fortrex-fx-landing.html" class="text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-gold-400 transition-colors">Home</a>
+                    <a href="fortrex-fx-tournaments.html" class="text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-gold-400 transition-colors">Tournaments</a>
+                    <a href="fortrex-royal-leaderboard.html" class="text-xs font-bold uppercase tracking-wider text-gold-400 border-b-2 border-gold-400 pb-1 flex items-center gap-1.5 shadow-gold-glow">
+                        <i class="fa-solid fa-crown text-xs text-gold-400"></i> Court of Kings
+                    </a>
+                    <a href="fortrex-fx-dashboard.html" class="text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-gold-400 transition-colors">Dashboard</a>
+                    <a href="fortrex-fx-tools.html" class="text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-gold-400 transition-colors">Calculators</a>
+                    <a href="fortrex-fx-admin.html" class="text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-gold-400 transition-colors">Admin</a>
+                </nav>
+
+                <!-- RIGHT ACTION BUTTONS -->
+                <div class="flex items-center gap-4">
+                    <div class="hidden sm:flex items-center gap-2 bg-navy-900/90 border border-gold-500/30 px-3 py-1.5 rounded-xl text-xs font-mono">
+                        <i class="fa-solid fa-coins text-gold-400"></i>
+                        <span class="text-slate-400">Vault:</span>
+                        <span class="text-gold-300 font-bold">1,250 $REX</span>
+                    </div>
+
+                    <button onclick="openConnectModal()" class="relative group overflow-hidden rounded-xl p-[1px]">
+                        <span class="absolute inset-0 bg-gradient-to-r from-gold-400 via-gold-500 to-royal-600 rounded-xl transition-all duration-300 group-hover:opacity-100"></span>
+                        <span class="relative block px-5 py-2.5 rounded-xl bg-obsidian transition-colors duration-300 group-hover:bg-opacity-80">
+                            <span class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold-300">
+                                <i class="fa-solid fa-shield-halved text-gold-400"></i> Connect Account
+                            </span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO HEADER: THE COURT OF KINGS -->
+    <section class="relative pt-12 pb-10 overflow-hidden">
+        <!-- Subtle Royal Purple Ambient Glow -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-royal-800/20 blur-[120px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            
+            <!-- CROWN BADGE TOP -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-900/90 border border-gold-500/40 text-gold-300 text-xs font-mono uppercase tracking-widest mb-6 shadow-gold-glow animate-float">
+                <i class="fa-solid fa-crown text-gold-400"></i> SOVEREIGN LEADERBOARD ARCHITECTURE <i class="fa-solid fa-crown text-gold-400"></i>
+            </div>
+
+            <!-- PAGE TITLE -->
+            <h1 class="font-cinzel text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-wider mb-4">
+                THE COURT OF <span class="gold-gradient-text">KINGS</span>
+            </h1>
+            
+            <p class="max-w-2xl mx-auto text-slate-300 text-sm md:text-base font-sora font-light leading-relaxed mb-8">
+                Where Trading Sovereigns are Crowned • Verified MT4/MT5 Real-Time Standings, NPL Risk-Adjusted FPS Scoring & IB ROI Leaderboards.
+            </p>
+
+            <!-- STATS TICKER STRIP -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="glass-panel-gold rounded-2xl p-4 text-center relative overflow-hidden group hover:border-gold-400 transition-all">
+                    <div class="text-[10px] uppercase tracking-widest font-mono text-gold-400/80 mb-1">Total Prize Purse</div>
+                    <div class="font-cinzel text-xl md:text-2xl font-bold text-white">$250,000 USDT</div>
+                    <div class="text-[10px] text-emerald-400 font-mono mt-1">+ $1M Prop Allocation</div>
+                </div>
+
+                <div class="glass-panel-gold rounded-2xl p-4 text-center relative overflow-hidden group hover:border-gold-400 transition-all">
+                    <div class="text-[10px] uppercase tracking-widest font-mono text-gold-400/80 mb-1">Active Sovereigns</div>
+                    <div class="font-cinzel text-xl md:text-2xl font-bold text-white">2,840</div>
+                    <div class="text-[10px] text-gold-300 font-mono mt-1"><i class="fa-solid fa-shield-check text-emerald-400"></i> 100% Verified</div>
+                </div>
+
+                <div class="glass-panel-gold rounded-2xl p-4 text-center relative overflow-hidden group hover:border-gold-400 transition-all">
+                    <div class="text-[10px] uppercase tracking-widest font-mono text-gold-400/80 mb-1">Reigning Peak FPS</div>
+                    <div class="font-cinzel text-xl md:text-2xl font-bold gold-gradient-text">7.94 FPS</div>
+                    <div class="text-[10px] text-slate-300 font-mono mt-1">AlexApex 🇮🇳</div>
+                </div>
+
+                <div class="glass-panel-gold rounded-2xl p-4 text-center relative overflow-hidden group hover:border-gold-400 transition-all">
+                    <div class="text-[10px] uppercase tracking-widest font-mono text-gold-400/80 mb-1">Royal Vault Distributed</div>
+                    <div class="font-cinzel text-xl md:text-2xl font-bold text-purple-300">1,450,000</div>
+                    <div class="text-[10px] text-purple-400 font-mono mt-1">$REX Coins</div>
+                </div>
+            </div>
+
+            <!-- LIVE TICKER BANNER -->
+            <div class="mt-8 max-w-5xl mx-auto bg-navy-950/80 border border-gold-500/20 rounded-xl px-4 py-2.5 flex items-center gap-3 overflow-hidden text-xs font-mono">
+                <span class="bg-red-600 text-white font-bold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider animate-pulse flex items-center gap-1">
+                    <span class="w-2 h-2 rounded-full bg-white"></span> LIVE
+                </span>
+                <div class="truncate text-slate-300 flex items-center gap-6 animate-marquee">
+                    <span><strong class="text-gold-300">👑 AlexApex</strong> retains #1 King spot in Prop Challenge with <span class="text-emerald-400">7.94 FPS</span> score</span>
+                    <span class="text-gold-500/40">•</span>
+                    <span><strong class="text-gold-300">⚡ PipHunter99</strong> surges to #1 King in IB ROI with <span class="text-emerald-400">+185.40% ROI</span></span>
+                    <span class="text-gold-500/40">•</span>
+                    <span><strong class="text-gold-300">🛡️ GoldSeeker</strong> claims #2 Prince position ($200k FundedNext)</span>
+                    <span class="text-gold-500/40">•</span>
+                    <span><strong class="text-gold-300">📜 Wax Seal Verified:</strong> 24 new accounts verified in the last 12 hours</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MAIN LEADERBOARD CONTAINER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pb-20 relative z-20">
+        
+        <!-- ROYAL CONTROLS BAR: TABS & FILTERS -->
+        <div class="glass-panel-royal rounded-2xl p-4 sm:p-6 mb-10 border border-gold-500/30 shadow-2xl">
+            
+            <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6">
+                
+                <!-- FORMAT SWITCH TABS -->
+                <div class="flex items-center bg-navy-950/90 p-1.5 rounded-xl border border-gold-500/25">
+                    <button id="tab-btn-prop" onclick="switchFormatTab('prop')" class="royal-tab-active flex-1 sm:flex-none px-6 py-3 rounded-lg text-xs font-sora font-extrabold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-crown text-gold-400"></i> PROP CHALLENGE <span class="text-[10px] opacity-75 font-mono">(NPL / FPS)</span>
+                    </button>
+                    <button id="tab-btn-ib" onclick="switchFormatTab('ib')" class="text-slate-400 hover:text-white flex-1 sm:flex-none px-6 py-3 rounded-lg text-xs font-sora font-extrabold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-chart-line text-gold-500"></i> IB ROI <span class="text-[10px] opacity-75 font-mono">(ROI %)</span>
+                    </button>
+                </div>
+
+                <!-- TIER FILTER, SEARCH & WAX SEAL TOGGLE -->
+                <div class="flex flex-wrap items-center gap-3">
+                    
+                    <!-- ROYAL TIER DROPDOWN -->
+                    <div class="relative">
+                        <select id="tier-filter" onchange="handleFilterChange()" class="bg-navy-950 text-gold-300 border border-gold-500/35 rounded-xl px-4 py-2.5 text-xs font-sora font-semibold focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 appearance-none pr-9 cursor-pointer shadow-sm">
+                            <option value="all">👑 All Royal Tiers</option>
+                            <option value="squire">📜 Squire ($5k - $10k)</option>
+                            <option value="knight">🗡️ Knight ($25k - $50k)</option>
+                            <option value="duke">🏰 Duke ($100k - $200k)</option>
+                            <option value="apex">👑 Apex ($250k+)</option>
+                        </select>
+                        <i class="fa-solid fa-crown text-gold-400 text-xs absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                    </div>
+
+                    <!-- SEARCH INPUT -->
+                    <div class="relative flex-1 sm:w-64">
+                        <input type="text" id="trader-search" onkeyup="handleFilterChange()" placeholder="Search Sovereign handle or country..." class="w-full bg-navy-950 text-slate-100 placeholder-slate-500 border border-gold-500/25 rounded-xl pl-9 pr-4 py-2.5 text-xs font-sora focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-all">
+                        <i class="fa-solid fa-magnifying-glass text-gold-500/60 text-xs absolute left-3 top-1/2 -translate-y-1/2"></i>
+                    </div>
+
+                    <!-- WAX SEAL VERIFIED TOGGLE -->
+                    <label class="flex items-center gap-2 bg-navy-950 border border-gold-500/25 px-3 py-2 rounded-xl text-xs font-mono text-slate-300 cursor-pointer hover:border-gold-400 transition-colors">
+                        <input type="checkbox" id="verified-only" onchange="handleFilterChange()" class="rounded bg-navy-900 border-gold-500/40 text-gold-500 focus:ring-gold-400 accent-gold-500">
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-stamp text-red-500"></i> Wax Seal Only</span>
+                    </label>
+
+                </div>
+
+            </div>
+
+            <!-- ROYAL RANKS HIERARCHY LEGEND -->
+            <div class="mt-6 pt-5 border-t border-gold-500/15 flex flex-wrap items-center justify-between gap-3 text-[11px] font-sora">
+                <div class="text-gold-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-ranking-star"></i> Royal Hierarchy System:
+                </div>
+                <div class="flex flex-wrap items-center gap-3 text-slate-300">
+                    <span class="bg-gold-500/20 text-gold-300 border border-gold-500/40 px-2 py-0.5 rounded font-bold">#1 KING 👑</span>
+                    <span class="bg-slate-700/40 text-slate-200 border border-slate-400/40 px-2 py-0.5 rounded font-bold">#2 PRINCE 🤴</span>
+                    <span class="bg-amber-900/40 text-amber-300 border border-amber-600/40 px-2 py-0.5 rounded font-bold">#3 DUKE 🏰</span>
+                    <span class="bg-emerald-950/40 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded font-bold">#4-5 EARL 🛡️</span>
+                    <span class="bg-purple-950/40 text-purple-300 border border-purple-500/30 px-2 py-0.5 rounded font-bold">#6-10 BARON ⚔️</span>
+                    <span class="bg-navy-900 text-slate-300 border border-slate-700 px-2 py-0.5 rounded">#11-25 KNIGHT 🗡️</span>
+                    <span class="bg-navy-950 text-slate-400 border border-slate-800 px-2 py-0.5 rounded">#26+ SQUIRE 📜</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- THE ROYAL TRIAD: TOP 3 PODIUM SHOWCASE -->
+        <!-- ======================================================== -->
+        <div class="mb-14">
+            <div class="text-center mb-8">
+                <h2 class="font-cinzel text-2xl md:text-3xl font-bold uppercase tracking-wider text-white">
+                    THE <span class="gold-gradient-text">ROYAL TRIAD</span>
+                </h2>
+                <p class="text-xs font-sora text-slate-400 mt-1">The Highest Order of Trading Sovereigns in the Realm</p>
+            </div>
+
+            <!-- TRIAD GRID (PODIUM ORDER: #2 PRINCE LEFT, #1 KING CENTER HIGHER, #3 DUKE RIGHT) -->
+            <div id="top-3-podium" class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-end">
+                <!-- TOP 3 POPULATED DYNAMICALLY VIA JAVASCRIPT -->
+            </div>
+        </div>
+
+        <!-- FILIGREE DIVIDER TO ROYAL COURT -->
+        <div class="filigree-divider">
+            <div class="flex items-center gap-2 bg-navy-900 border border-gold-500/30 px-4 py-1.5 rounded-full text-xs font-cinzel font-bold text-gold-300 tracking-widest shadow-gold-glow">
+                <i class="fa-solid fa-crown text-gold-400"></i> THE ROYAL COURT (RANKS 4 - 10) <i class="fa-solid fa-crown text-gold-400"></i>
+            </div>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- RANKS 4-10: THE ROYAL COURT TABLE -->
+        <!-- ======================================================== -->
+        <div class="glass-panel-royal rounded-2xl border border-gold-500/30 overflow-hidden shadow-2xl mb-14">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-navy-950/90 text-gold-400 font-cinzel text-xs uppercase tracking-wider border-b border-gold-500/30">
+                            <th class="py-4 px-5">Rank & Title</th>
+                            <th class="py-4 px-5">Sovereign Trader</th>
+                            <th class="py-4 px-5">Kingdom</th>
+                            <th class="py-4 px-5">Account / Broker</th>
+                            <th class="py-4 px-5 text-right">Return %</th>
+                            <th class="py-4 px-5 text-right">Green Days</th>
+                            <th class="py-4 px-5 text-right">Max DD</th>
+                            <th id="court-score-header" class="py-4 px-5 text-right text-gold-300 font-bold">FPS Score</th>
+                            <th class="py-4 px-5 text-center">Royal Ledger</th>
+                        </tr>
+                    </thead>
+                    <tbody id="court-table-body" class="divide-y divide-gold-500/10 text-xs font-sora">
+                        <!-- POPULATED DYNAMICALLY -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- FILIGREE DIVIDER TO NOBLE TRADERS -->
+        <div class="filigree-divider">
+            <div class="flex items-center gap-2 bg-navy-900 border border-slate-700 px-4 py-1.5 rounded-full text-xs font-cinzel font-bold text-slate-300 tracking-widest">
+                <i class="fa-solid fa-shield-halved text-gold-500"></i> NOBLE TRADERS & SQUIRES (RANKS 11+) <i class="fa-solid fa-shield-halved text-gold-500"></i>
+            </div>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- RANKS 11+: NOBLE TRADERS TABLE -->
+        <!-- ======================================================== -->
+        <div class="glass-panel-royal rounded-2xl border border-gold-500/20 overflow-hidden shadow-xl">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-navy-950/80 text-slate-400 font-cinzel text-xs uppercase tracking-wider border-b border-gold-500/20">
+                            <th class="py-3.5 px-5">Rank</th>
+                            <th class="py-3.5 px-5">Sovereign Handle</th>
+                            <th class="py-3.5 px-5">Kingdom</th>
+                            <th class="py-3.5 px-5">Tier / Firm</th>
+                            <th class="py-3.5 px-5 text-right">Return %</th>
+                            <th class="py-3.5 px-5 text-right">Green Days</th>
+                            <th class="py-3.5 px-5 text-right">Max DD</th>
+                            <th id="noble-score-header" class="py-3.5 px-5 text-right text-gold-400 font-bold">FPS Score</th>
+                            <th class="py-3.5 px-5 text-center">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="noble-table-body" class="divide-y divide-gold-500/10 text-xs font-sora">
+                        <!-- POPULATED DYNAMICALLY -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ======================================================== -->
+    <!-- INTERACTIVE ROYAL LEDGER MODAL -->
+    <!-- ======================================================== -->
+    <div id="ledger-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-obsidian/85 backdrop-blur-xl hidden">
+        <div class="glass-panel-gold max-w-2xl w-full rounded-3xl border border-gold-400/50 p-6 sm:p-8 relative shadow-gold-glow-lg animate-float">
+            
+            <!-- CLOSE BUTTON -->
+            <button onclick="closeLedgerModal()" class="absolute top-5 right-5 text-slate-400 hover:text-gold-400 text-lg transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- MODAL HEADER -->
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-gold-300 via-gold-500 to-gold-700 p-[1.5px] shadow-gold-glow flex items-center justify-center">
+                    <div class="w-full h-full bg-obsidian rounded-[14px] flex items-center justify-center">
+                        <i id="modal-crown-icon" class="fa-solid fa-crown text-gold-400 text-2xl"></i>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h3 id="modal-trader-name" class="font-cinzel text-xl font-bold text-white">AlexApex</h3>
+                        <span id="modal-wax-seal" class="wax-seal"><i class="fa-solid fa-stamp"></i> MT5 VERIFIED</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs font-mono text-slate-300 mt-1">
+                        <span id="modal-country">🇮🇳 India</span>
+                        <span>•</span>
+                        <span id="modal-title" class="text-gold-300 font-bold">#1 REIGNING KING</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERFORMANCE EQUITY CURVE SVG GRAPH -->
+            <div class="bg-navy-950/90 rounded-2xl p-4 border border-gold-500/30 mb-6">
+                <div class="flex items-center justify-between text-xs font-mono mb-2">
+                    <span class="text-gold-400"><i class="fa-solid fa-chart-area"></i> Equity Curve Growth</span>
+                    <span id="modal-equity-val" class="text-emerald-400 font-bold">+28.45%</span>
+                </div>
+                <div class="h-32 w-full">
+                    <svg id="equity-svg" class="w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="none">
+                        <!-- DRAWN DYNAMICALLY VIA JS -->
+                    </svg>
+                </div>
+            </div>
+
+            <!-- METRICS GRID -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-sora mb-6">
+                <div class="bg-navy-900/80 rounded-xl p-3 border border-gold-500/20">
+                    <div class="text-[10px] text-slate-400 font-mono">Account Size</div>
+                    <div id="modal-account" class="font-bold text-white mt-1">$200,000</div>
+                </div>
+                <div class="bg-navy-900/80 rounded-xl p-3 border border-gold-500/20">
+                    <div class="text-[10px] text-slate-400 font-mono">Return Rate</div>
+                    <div id="modal-return" class="font-bold text-emerald-400 mt-1">+28.45%</div>
+                </div>
+                <div class="bg-navy-900/80 rounded-xl p-3 border border-gold-500/20">
+                    <div class="text-[10px] text-slate-400 font-mono">Green Days %</div>
+                    <div id="modal-green-days" class="font-bold text-gold-300 mt-1">98%</div>
+                </div>
+                <div class="bg-navy-900/80 rounded-xl p-3 border border-gold-500/20">
+                    <div class="text-[10px] text-slate-400 font-mono">Max Drawdown</div>
+                    <div id="modal-drawdown" class="font-bold text-slate-300 mt-1">2.1%</div>
+                </div>
+            </div>
+
+            <!-- WAX SEAL CERTIFICATE FOOTER -->
+            <div class="p-3 rounded-xl bg-navy-950 border border-gold-500/20 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-certificate text-gold-400"></i>
+                    <span>SHA-256 Hash: <span id="modal-hash" class="text-gold-300">0x8F92...B41A</span></span>
+                </div>
+                <div class="text-emerald-400 font-bold"><i class="fa-solid fa-circle-check"></i> Authentic Sovereign Record</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-navy-950 border-t border-gold-500/20 pt-16 pb-12 text-slate-400 text-xs mt-16 relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+                <div class="col-span-2 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-gold-400 to-gold-600 p-[1px] shadow-gold-glow flex items-center justify-center">
+                            <div class="w-full h-full bg-obsidian rounded-[7px] flex items-center justify-center">
+                                <i class="fa-solid fa-crown text-gold-400"></i>
+                            </div>
+                        </div>
+                        <span class="font-cinzel text-lg font-black text-white">FORTREX<span class="gold-gradient-text">FX</span></span>
+                    </div>
+                    <p class="text-slate-400 leading-relaxed max-w-sm font-sora">
+                        The Sovereign Trading Tournament Platform. Gamified prop challenge leaderboards, real-time MT4/MT5 wax seal verification, and Trade-to-Earn $REX rewards.
+                    </p>
+                    <div class="flex items-center gap-4 text-slate-400">
+                        <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-discord text-base"></i></a>
+                        <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-x-twitter text-base"></i></a>
+                        <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-telegram text-base"></i></a>
+                        <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-youtube text-base"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-cinzel text-gold-400 font-bold uppercase tracking-wider mb-4">Competitions</h4>
+                    <ul class="space-y-2.5 font-sora">
+                        <li><a href="fortrex-fx-tournaments.html" class="hover:text-gold-400 transition-colors">Prop Arena</a></li>
+                        <li><a href="fortrex-royal-leaderboard.html" class="hover:text-gold-400 transition-colors">IB ROI League</a></li>
+                        <li><a href="fortrex-fx-tournaments.html" class="hover:text-gold-400 transition-colors">Micro Challenger</a></li>
+                        <li><a href="fortrex-fx-tournaments.html" class="hover:text-gold-400 transition-colors">Pro Athlete League</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-cinzel text-gold-400 font-bold uppercase tracking-wider mb-4">Platform</h4>
+                    <ul class="space-y-2.5 font-sora">
+                        <li><a href="fortrex-royal-leaderboard.html" class="hover:text-gold-400 transition-colors">The Court of Kings</a></li>
+                        <li><a href="fortrex-fx-dashboard.html" class="hover:text-gold-400 transition-colors">Sovereign Vault</a></li>
+                        <li><a href="fortrex-fx-tools.html" class="hover:text-gold-400 transition-colors">FPS Calculator</a></li>
+                        <li><a href="fortrex-fx-admin.html" class="hover:text-gold-400 transition-colors">Verification Logs</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-cinzel text-gold-400 font-bold uppercase tracking-wider mb-4">Royal Empire</h4>
+                    <ul class="space-y-2.5 font-sora">
+                        <li><a href="#" class="hover:text-gold-400 transition-colors">Brand Identity</a></li>
+                        <li><a href="#" class="hover:text-gold-400 transition-colors">Tournament Rules</a></li>
+                        <li><a href="#" class="hover:text-gold-400 transition-colors">Partner Outreach</a></li>
+                        <li><a href="#" class="hover:text-gold-400 transition-colors">Discord Architecture</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gold-500/15 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[11px]">
+                <p>© 2026 Fortrex FX. All Sovereign Rights Reserved. The Court of Kings.</p>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="hover:text-gold-400 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-gold-400 transition-colors">Terms of Sovereignty</a>
+                    <a href="#" class="hover:text-gold-400 transition-colors">Risk Disclosure</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ======================================================== -->
+    <!-- INTERACTIVE JAVASCRIPT ENGINE -->
+    <!-- ======================================================== -->
+    <script>
+        // DATASET 1: PROP CHALLENGE TRADERS (NPL / FPS SCORING)
+        const propTraders = [
+            { id: 'p1', rank: 1, name: 'AlexApex', flag: '🇮🇳 India', firm: 'FTMO $200k', size: '$200,000', ret: 28.45, cf: 98, dd: 2.1, score: 7.94, verified: true, tier: 'apex', hash: '0x8F92A11C' },
+            { id: 'p2', rank: 2, name: 'GoldSeeker', flag: '🇳🇬 Nigeria', firm: 'FundedNext $200k', size: '$200,000', ret: 24.12, cf: 95, dd: 2.8, score: 6.82, verified: true, tier: 'apex', hash: '0x3E71B49D' },
+            { id: 'p3', rank: 3, name: 'Marcus "Viper" Vance', flag: '🇬🇧 UK', firm: 'FTMO $100k', size: '$100,000', ret: 22.80, cf: 94, dd: 3.1, score: 6.50, verified: true, tier: 'duke', hash: '0x992FA42B' },
+            { id: 'p4', rank: 4, name: 'Elena Rostova', flag: '🇩🇪 Germany', firm: 'The5ers $200k', size: '$200,000', ret: 19.50, cf: 91, dd: 3.4, score: 6.15, verified: true, tier: 'apex', hash: '0x1A22C84F' },
+            { id: 'p5', rank: 5, name: 'Kenji Sato', flag: '🇯🇵 Japan', firm: 'The5ers $200k', size: '$200,000', ret: 18.20, cf: 90, dd: 3.8, score: 5.88, verified: true, tier: 'apex', hash: '0x55B331D8' },
+            { id: 'p6', rank: 6, name: 'David Miller', flag: '🇺🇸 USA', firm: 'FTMO $50k', size: '$50,000', ret: 17.10, cf: 93, dd: 3.9, score: 5.42, verified: true, tier: 'knight', hash: '0x44C118B9' },
+            { id: 'p7', rank: 7, name: 'Carlos Silva', flag: '🇧🇷 Brazil', firm: 'FundedNext $50k', size: '$50,000', ret: 16.40, cf: 89, dd: 4.2, score: 5.10, verified: true, tier: 'knight', hash: '0x77F88210' },
+            { id: 'p8', rank: 8, name: 'Sophie Laurent', flag: '🇫🇷 France', firm: 'FTMO $25k', size: '$25,000', ret: 15.80, cf: 92, dd: 4.0, score: 4.95, verified: true, tier: 'knight', hash: '0x88D2291E' },
+            { id: 'p9', rank: 9, name: 'Ahmed Al-Mansoor', flag: '🇦🇪 UAE', firm: 'The5ers $100k', size: '$100,000', ret: 15.10, cf: 95, dd: 4.5, score: 4.70, verified: true, tier: 'duke', hash: '0x33A9910C' },
+            { id: 'p10', rank: 10, name: 'Liam O'Connor', flag: '🇮🇪 Ireland', firm: 'FTMO $100k', size: '$100,000', ret: 14.90, cf: 88, dd: 4.8, score: 4.52, verified: true, tier: 'duke', hash: '0x22F4419A' },
+            { id: 'p11', rank: 11, name: 'Priya Sharma', flag: '🇮🇳 India', firm: 'FundedNext $25k', size: '$25,000', ret: 14.50, cf: 90, dd: 5.0, score: 4.30, verified: true, tier: 'knight', hash: '0x66B7721C' },
+            { id: 'p12', rank: 12, name: 'Johan Nilsson', flag: '🇸🇪 Sweden', firm: 'FTMO $50k', size: '$50,000', ret: 14.20, cf: 91, dd: 5.1, score: 4.12, verified: true, tier: 'knight', hash: '0x11A3382D' },
+            { id: 'p13', rank: 13, name: 'Alexander Wright', flag: '🇨🇦 Canada', firm: 'The5ers $100k', size: '$100,000', ret: 14.00, cf: 87, dd: 5.3, score: 3.95, verified: true, tier: 'duke', hash: '0x99C4410E' },
+            { id: 'p14', rank: 14, name: 'Alex Vance (You)', flag: '🇬🇧 UK', firm: 'FTMO $50k', size: '$50,000', ret: 13.80, cf: 92, dd: 3.2, score: 3.80, verified: true, tier: 'knight', hash: '0x55E9921B' },
+            { id: 'p15', rank: 15, name: 'Tariq Benali', flag: '🇲🇦 Morocco', firm: 'The5ers $50k', size: '$50,000', ret: 13.50, cf: 89, dd: 5.5, score: 3.65, verified: true, tier: 'knight', hash: '0x44D1100F' },
+            { id: 'p16', rank: 16, name: 'Min-Jun Park', flag: '🇰🇷 Korea', firm: 'FTMO $25k', size: '$25,000', ret: 13.10, cf: 94, dd: 5.2, score: 3.50, verified: true, tier: 'knight', hash: '0x22B5581D' },
+            { id: 'p17', rank: 17, name: 'Oliver Bennett', flag: '🇳🇿 NZ', firm: 'FundedNext $100k', size: '$100,000', ret: 12.80, cf: 86, dd: 5.8, score: 3.38, verified: true, tier: 'duke', hash: '0x88A1132C' },
+            { id: 'p18', rank: 18, name: 'Jan Kowalski', flag: '🇵🇱 Poland', firm: 'FTMO $50k', size: '$50,000', ret: 12.40, cf: 91, dd: 6.0, score: 3.20, verified: true, tier: 'knight', hash: '0x77C3320A' },
+            { id: 'p19', rank: 19, name: 'Aarav Patel', flag: '🇮🇳 India', firm: 'The5ers $100k', size: '$100,000', ret: 12.10, cf: 88, dd: 6.2, score: 3.05, verified: true, tier: 'duke', hash: '0x11D2290B' },
+            { id: 'p20', rank: 20, name: 'Gabriel Santos', flag: '🇵🇹 Portugal', firm: 'FundedNext $25k', size: '$25,000', ret: 11.90, cf: 93, dd: 6.5, score: 2.90, verified: true, tier: 'knight', hash: '0x33E5511F' },
+            { id: 'p21', rank: 21, name: 'Sarah Jenkins', flag: '🇿A S. Africa', firm: 'FTMO $10k', size: '$10,000', ret: 11.20, cf: 85, dd: 6.8, score: 2.75, verified: false, tier: 'squire', hash: '0x66F1122D' },
+            { id: 'p22', rank: 22, name: 'Dmitry Ivanov', flag: '🇰🇿 Kazakhstan', firm: 'FundedNext $50k', size: '$50,000', ret: 10.80, cf: 84, dd: 7.0, score: 2.60, verified: true, tier: 'knight', hash: '0x99B8833E' },
+            { id: 'p23', rank: 23, name: 'Lucas Kim', flag: '🇰🇷 Korea', firm: 'The5ers $10k', size: '$10,000', ret: 10.20, cf: 82, dd: 7.2, score: 2.45, verified: false, tier: 'squire', hash: '0x55A4411C' },
+            { id: 'p24', rank: 24, name: 'Camila Gomez', flag: '🇲🇽 Mexico', firm: 'FTMO $25k', size: '$25,000', ret: 9.80, cf: 81, dd: 7.5, score: 2.30, verified: true, tier: 'knight', hash: '0x44E7722F' },
+            { id: 'p25', rank: 25, name: 'Lars Thorsen', flag: '🇳🇴 Norway', firm: 'FTMO $100k', size: '$100,000', ret: 9.20, cf: 80, dd: 7.8, score: 2.15, verified: true, tier: 'duke', hash: '0x22C9911A' },
+            { id: 'p26', rank: 26, name: 'Marco Polo', flag: '🇮🇹 Italy', firm: 'FundedNext $5k', size: '$5,000', ret: 8.50, cf: 78, dd: 8.1, score: 2.00, verified: false, tier: 'squire', hash: '0x11F3344B' },
+            { id: 'p27', rank: 27, name: 'Hiroshi Tanaka', flag: '🇯🇵 Japan', firm: 'FTMO $10k', size: '$10,000', ret: 8.00, cf: 76, dd: 8.5, score: 1.85, verified: true, tier: 'squire', hash: '0x88E2211D' },
+            { id: 'p28', rank: 28, name: 'Chloe Dubois', flag: '🇫🇷 France', firm: 'FTMO $5k', size: '$5,000', ret: 7.40, cf: 75, dd: 8.9, score: 1.70, verified: false, tier: 'squire', hash: '0x77A5599E' }
+        ];
+
+        // DATASET 2: IB ROI TRADERS (ROI % SCORING)
+        const ibTraders = [
+            { id: 'i1', rank: 1, name: 'PipHunter99', flag: '🇹🇭 Thailand', firm: 'Exness Real', size: '$5,000', ret: 185.40, cf: 96, dd: 4.2, score: 185.40, verified: true, tier: 'squire', hash: '0x77A2211C' },
+            { id: 'i2', rank: 2, name: 'Viktor "Alpha" Petrov', flag: '🇸🇬 Singapore', firm: 'Exness Real', size: '$5,000', ret: 184.20, cf: 95, dd: 4.5, score: 184.20, verified: true, tier: 'squire', hash: '0x11B3322D' },
+            { id: 'i3', rank: 3, name: 'Liam Gallagher', flag: '🇦🇺 Australia', firm: 'Vantage FX', size: '$2,500', ret: 141.80, cf: 92, dd: 5.1, score: 141.80, verified: true, tier: 'squire', hash: '0x44C5566E' },
+            { id: 'i4', rank: 4, name: 'Mateo Rossi', flag: '🇮🇹 Italy', firm: 'IC Markets', size: '$1,000', ret: 119.00, cf: 90, dd: 6.2, score: 119.00, verified: true, tier: 'squire', hash: '0x99D1122F' },
+            { id: 'i5', rank: 5, name: 'Chen Wei', flag: '🇨🇳 China', firm: 'Exness Real', size: '$10,000', ret: 98.00, cf: 88, dd: 6.8, score: 98.00, verified: true, tier: 'squire', hash: '0x33E4455A' },
+            { id: 'i6', rank: 6, name: 'Hannah Schmidt', flag: '🇩🇪 Germany', firm: 'Pepperstone', size: '$500', ret: 85.00, cf: 87, dd: 7.0, score: 85.00, verified: true, tier: 'squire', hash: '0x88F7788B' },
+            { id: 'i7', rank: 7, name: 'Tariq Mansoor', flag: '🇸🇦 S. Arabia', firm: 'Vantage FX', size: '$2,000', ret: 72.00, cf: 86, dd: 7.4, score: 72.00, verified: true, tier: 'squire', hash: '0x22A9900C' },
+            { id: 'i8', rank: 8, name: 'Camila Gomez', flag: '🇲🇽 Mexico', firm: 'IC Markets', size: '$300', ret: 64.33, cf: 84, dd: 8.0, score: 64.33, verified: true, tier: 'squire', hash: '0x55B1122D' },
+            { id: 'i9', rank: 9, name: 'Alex Vance (You)', flag: '🇬🇧 UK', firm: 'Exness Real', size: '$1,000', ret: 48.55, cf: 92, dd: 4.1, score: 48.55, verified: true, tier: 'squire', hash: '0x66C3344E' },
+            { id: 'i10', rank: 10, name: 'Kwapong Owusu', flag: '🇬🇭 Ghana', firm: 'Exness Real', size: '$250', ret: 42.00, cf: 82, dd: 8.5, score: 42.00, verified: true, tier: 'squire', hash: '0x11D5566F' },
+            { id: 'i11', rank: 11, name: 'Lucas Kim', flag: '🇰🇷 Korea', firm: 'Pepperstone', size: '$1,500', ret: 38.00, cf: 81, dd: 9.0, score: 38.00, verified: true, tier: 'squire', hash: '0x88E7788A' },
+            { id: 'i12', rank: 12, name: 'Dmitry Ivanov', flag: '🇰🇿 Kazakhstan', firm: 'Exness Real', size: '$3,000', ret: 35.00, cf: 80, dd: 9.2, score: 35.00, verified: true, tier: 'squire', hash: '0x44F9900B' },
+            { id: 'i13', rank: 13, name: 'Sarah Jenkins', flag: '🇿A S. Africa', firm: 'Vantage FX', size: '$800', ret: 31.00, cf: 79, dd: 9.8, score: 31.00, verified: false, tier: 'squire', hash: '0x77A1122C' },
+            { id: 'i14', rank: 14, name: 'Marco Polo', flag: '🇮🇹 Italy', firm: 'IC Markets', size: '$1,200', ret: 28.00, cf: 78, dd: 10.1, score: 28.00, verified: true, tier: 'squire', hash: '0x22B3344D' },
+            { id: 'i15', rank: 15, name: 'Nguyen Van A', flag: '🇻🇳 Vietnam', firm: 'Exness Real', size: '$400', ret: 26.00, cf: 77, dd: 10.5, score: 26.00, verified: true, tier: 'squire', hash: '0x99C5566E' },
+            { id: 'i16', rank: 16, name: 'Fatima Al-Zahra', flag: '🇪🇬 Egypt', firm: 'Pepperstone', size: '$600', ret: 24.00, cf: 76, dd: 11.0, score: 24.00, verified: true, tier: 'squire', hash: '0x33D7788F' },
+            { id: 'i17', rank: 17, name: 'Lars Thorsen', flag: '🇳🇴 Norway', firm: 'Vantage FX', size: '$5,000', ret: 22.00, cf: 75, dd: 11.4, score: 22.00, verified: true, tier: 'squire', hash: '0x66E9900A' },
+            { id: 'i18', rank: 18, name: 'Hiroshi Tanaka', flag: '🇯🇵 Japan', firm: 'Exness Real', size: '$2,000', ret: 21.00, cf: 74, dd: 12.0, score: 21.00, verified: true, tier: 'squire', hash: '0x11F1122B' },
+            { id: 'i19', rank: 19, name: 'Chloe Dubois', flag: '🇫🇷 France', firm: 'IC Markets', size: '$1,000', ret: 20.00, cf: 73, dd: 12.5, score: 20.00, verified: false, tier: 'squire', hash: '0x88A3344C' },
+            { id: 'i20', rank: 20, name: 'Gabriel Costa', flag: '🇧🇷 Brazil', firm: 'Pepperstone', size: '$750', ret: 18.00, cf: 72, dd: 13.0, score: 18.00, verified: true, tier: 'squire', hash: '0x44B5566D' },
+            { id: 'i21', rank: 21, name: 'Noah Smith', flag: '🇬🇧 UK', firm: 'Exness Real', size: '$500', ret: 17.00, cf: 70, dd: 13.5, score: 17.00, verified: true, tier: 'squire', hash: '0x77C7788E' }
+        ];
+
+        let currentTab = 'prop';
+
+        // Get Title Title Badge
+        function getRoyalRankTitle(rank) {
+            if (rank === 1) return { title: 'King', badge: 'bg-gold-500/25 text-gold-300 border-gold-500/60', icon: 'fa-crown text-gold-400' };
+            if (rank === 2) return { title: 'Prince', badge: 'bg-slate-700/40 text-slate-200 border-slate-400/50', icon: 'fa-crown text-slate-300' };
+            if (rank === 3) return { title: 'Duke', badge: 'bg-amber-900/40 text-amber-300 border-amber-600/50', icon: 'fa-crown text-amber-500' };
+            if (rank <= 5) return { title: 'Earl', badge: 'bg-emerald-950/50 text-emerald-300 border-emerald-500/40', icon: 'fa-shield-halved text-emerald-400' };
+            if (rank <= 10) return { title: 'Baron', badge: 'bg-purple-950/50 text-purple-300 border-purple-500/40', icon: 'fa-khanda text-purple-400' };
+            if (rank <= 25) return { title: 'Knight', badge: 'bg-navy-900 text-slate-300 border-slate-700', icon: 'fa-shield text-slate-400' };
+            return { title: 'Squire', badge: 'bg-navy-950 text-slate-400 border-slate-800', icon: 'fa-scroll text-slate-500' };
+        }
+
+        // RENDER TOP 3 PODIUM
+        function renderTop3(dataset) {
+            const container = document.getElementById('top-3-podium');
+            const top3 = dataset.slice(0, 3);
+            if (top3.length < 3) {
+                container.innerHTML = '<div class="col-span-3 text-center text-slate-400 py-8 font-mono">No Sovereigns match the current filter criteria.</div>';
+                return;
+            }
+
+            const king = top3[0];
+            const prince = top3[1];
+            const duke = top3[2];
+
+            const scoreUnit = currentTab === 'prop' ? 'FPS' : 'ROI %';
+
+            container.innerHTML = `
+                <!-- #2 CROWN PRINCE (LEFT) -->
+                <div class="glass-panel-royal rounded-3xl p-6 border border-slate-400/40 relative shadow-prince-card hover:border-slate-300 transition-all duration-300">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-slate-700 via-slate-500 to-slate-700 text-white font-cinzel font-bold text-[10px] uppercase px-4 py-1 rounded-full border border-slate-300/50 shadow-md flex items-center gap-1.5">
+                        <i class="fa-solid fa-crown text-slate-200"></i> CROWN PRINCE
+                    </div>
+
+                    <div class="text-center pt-3 pb-4">
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-slate-200 via-slate-400 to-slate-600 p-[1.5px] shadow-lg mb-3 flex items-center justify-center">
+                            <div class="w-full h-full bg-obsidian rounded-[14px] flex items-center justify-center">
+                                <i class="fa-solid fa-crown text-slate-300 text-2xl"></i>
+                            </div>
+                        </div>
+
+                        <h3 class="font-cinzel text-xl font-bold text-white">${prince.name}</h3>
+                        <p class="text-xs font-mono text-slate-300 mt-1">${prince.flag} • ${prince.firm}</p>
+                        
+                        ${prince.verified ? '<div class="mt-2"><span class="wax-seal"><i class="fa-solid fa-stamp"></i> MT5 VERIFIED</span></div>' : ''}
+                    </div>
+
+                    <div class="bg-navy-950/80 rounded-2xl p-4 border border-slate-500/20 my-4 text-center">
+                        <div class="text-[10px] uppercase tracking-widest text-slate-400 font-mono">${scoreUnit} Score</div>
+                        <div class="font-cinzel text-3xl font-bold silver-gradient-text mt-0.5">${currentTab === 'prop' ? prince.score.toFixed(2) : '+' + prince.score.toFixed(2) + '%'}</div>
+                        <div class="text-xs text-emerald-400 font-mono mt-1">+${prince.ret.toFixed(2)}% Return</div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 text-[11px] font-mono text-slate-300 mb-5">
+                        <div class="bg-navy-900/60 p-2 rounded-xl text-center">
+                            <span class="text-slate-500 block text-[9px]">Account Size</span>
+                            <span class="font-bold text-slate-200">${prince.size}</span>
+                        </div>
+                        <div class="bg-navy-900/60 p-2 rounded-xl text-center">
+                            <span class="text-slate-500 block text-[9px]">Green Days</span>
+                            <span class="font-bold text-gold-400">${prince.cf}%</span>
+                        </div>
+                    </div>
+
+                    <button onclick="openLedgerModal('${prince.id}')" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-sora font-bold uppercase tracking-wider transition-colors border border-slate-600 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-book-bookmark text-slate-300"></i> Inspect Royal Ledger
+                    </button>
+                </div>
+
+                <!-- #1 REIGNING CHAMPION / KING (CENTER - ELEVATED) -->
+                <div class="glass-panel-gold rounded-3xl p-7 border-2 border-gold-400 relative shadow-king-card transform -translate-y-2 lg:-translate-y-4 hover:scale-[1.02] transition-all duration-300">
+                    
+                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-gold-300 via-gold-500 to-gold-700 text-black font-cinzel font-black text-xs uppercase px-6 py-1.5 rounded-full border-2 border-gold-200 shadow-gold-glow flex items-center gap-2 tracking-widest animate-pulse">
+                        <i class="fa-solid fa-crown text-black"></i> REIGNING CHAMPION • KING 👑
+                    </div>
+
+                    <div class="text-center pt-4 pb-4">
+                        <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-gold-200 via-gold-400 to-gold-600 p-[2px] shadow-gold-glow mb-4 flex items-center justify-center animate-float">
+                            <div class="w-full h-full bg-obsidian rounded-[14px] flex items-center justify-center">
+                                <i class="fa-solid fa-crown text-gold-400 text-3xl"></i>
+                            </div>
+                        </div>
+
+                        <h3 class="font-cinzel text-2xl font-black text-white gold-gradient-text">${king.name}</h3>
+                        <p class="text-xs font-mono text-gold-300 mt-1">${king.flag} • ${king.firm}</p>
+
+                        ${king.verified ? '<div class="mt-2.5"><span class="wax-seal scale-110"><i class="fa-solid fa-stamp"></i> ROYAL VERIFIED MT5</span></div>' : ''}
+                    </div>
+
+                    <div class="bg-navy-950/90 rounded-2xl p-5 border border-gold-400/40 my-4 text-center shadow-inner">
+                        <div class="text-[10px] uppercase tracking-widest text-gold-400 font-mono font-bold">SOVEREIGN ${scoreUnit} SCORE</div>
+                        <div class="font-cinzel text-4xl sm:text-5xl font-black gold-gradient-text my-1">${currentTab === 'prop' ? king.score.toFixed(2) : '+' + king.score.toFixed(2) + '%'}</div>
+                        <div class="text-xs text-emerald-400 font-mono font-bold">+${king.ret.toFixed(2)}% Return • ${king.cf}% Green Days</div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2.5 text-xs font-mono text-slate-300 mb-6">
+                        <div class="bg-navy-900/80 p-2.5 rounded-xl text-center border border-gold-500/20">
+                            <span class="text-slate-400 block text-[10px]">Account Capital</span>
+                            <span class="font-bold text-white text-sm">${king.size}</span>
+                        </div>
+                        <div class="bg-navy-900/80 p-2.5 rounded-xl text-center border border-gold-500/20">
+                            <span class="text-slate-400 block text-[10px]">Max Drawdown</span>
+                            <span class="font-bold text-emerald-400 text-sm">${king.dd}%</span>
+                        </div>
+                    </div>
+
+                    <button onclick="openLedgerModal('${king.id}')" class="w-full py-3 rounded-xl bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 hover:from-gold-300 hover:to-gold-500 text-black text-xs font-sora font-black uppercase tracking-widest transition-all shadow-gold-glow flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-crown text-black"></i> Inspect Royal Ledger
+                    </button>
+                </div>
+
+                <!-- #3 ROYAL DUKE (RIGHT) -->
+                <div class="glass-panel-royal rounded-3xl p-6 border border-bronze-500/40 relative shadow-duke-card hover:border-bronze-400 transition-all duration-300">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-900 via-bronze-500 to-amber-900 text-amber-100 font-cinzel font-bold text-[10px] uppercase px-4 py-1 rounded-full border border-bronze-400/50 shadow-md flex items-center gap-1.5">
+                        <i class="fa-solid fa-crown text-amber-400"></i> ROYAL DUKE
+                    </div>
+
+                    <div class="text-center pt-3 pb-4">
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-amber-300 via-bronze-500 to-amber-800 p-[1.5px] shadow-lg mb-3 flex items-center justify-center">
+                            <div class="w-full h-full bg-obsidian rounded-[14px] flex items-center justify-center">
+                                <i class="fa-solid fa-crown text-amber-500 text-2xl"></i>
+                            </div>
+                        </div>
+
+                        <h3 class="font-cinzel text-xl font-bold text-white">${duke.name}</h3>
+                        <p class="text-xs font-mono text-slate-300 mt-1">${duke.flag} • ${duke.firm}</p>
+                        
+                        ${duke.verified ? '<div class="mt-2"><span class="wax-seal"><i class="fa-solid fa-stamp"></i> MT5 VERIFIED</span></div>' : ''}
+                    </div>
+
+                    <div class="bg-navy-950/80 rounded-2xl p-4 border border-bronze-500/20 my-4 text-center">
+                        <div class="text-[10px] uppercase tracking-widest text-amber-400 font-mono">${scoreUnit} Score</div>
+                        <div class="font-cinzel text-3xl font-bold bronze-gradient-text mt-0.5">${currentTab === 'prop' ? duke.score.toFixed(2) : '+' + duke.score.toFixed(2) + '%'}</div>
+                        <div class="text-xs text-emerald-400 font-mono mt-1">+${duke.ret.toFixed(2)}% Return</div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 text-[11px] font-mono text-slate-300 mb-5">
+                        <div class="bg-navy-900/60 p-2 rounded-xl text-center">
+                            <span class="text-slate-500 block text-[9px]">Account Size</span>
+                            <span class="font-bold text-slate-200">${duke.size}</span>
+                        </div>
+                        <div class="bg-navy-900/60 p-2 rounded-xl text-center">
+                            <span class="text-slate-500 block text-[9px]">Green Days</span>
+                            <span class="font-bold text-gold-400">${duke.cf}%</span>
+                        </div>
+                    </div>
+
+                    <button onclick="openLedgerModal('${duke.id}')" class="w-full py-2.5 rounded-xl bg-amber-950/60 hover:bg-amber-900/80 text-amber-200 text-xs font-sora font-bold uppercase tracking-wider transition-colors border border-amber-700/50 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-book-bookmark text-amber-400"></i> Inspect Royal Ledger
+                    </button>
+                </div>
+            `;
+        }
+
+        // RENDER TABLES (COURT: 4-10, NOBLE: 11+)
+        function renderTables(dataset) {
+            const courtBody = document.getElementById('court-table-body');
+            const nobleBody = document.getElementById('noble-table-body');
+            
+            courtBody.innerHTML = '';
+            nobleBody.innerHTML = '';
+
+            const courtTraders = dataset.filter(t => t.rank >= 4 && t.rank <= 10);
+            const nobleTraders = dataset.filter(t => t.rank >= 11);
+
+            // COURT ROWS (4-10)
+            courtTraders.forEach(t => {
+                const tr = document.createElement('tr');
+                tr.className = 'royal-row cursor-pointer';
+                tr.onclick = () => openLedgerModal(t.id);
+
+                const titleObj = getRoyalRankTitle(t.rank);
+
+                tr.innerHTML = `
+                    <td class="py-4 px-5">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full font-bold text-xs border ${titleObj.badge}">
+                            <i class="fa-solid ${titleObj.icon}"></i> #${t.rank} ${titleObj.title}
+                        </span>
+                    </td>
+                    <td class="py-4 px-5">
+                        <div class="font-bold text-white text-sm ${t.name.includes('(You)') ? 'text-gold-400 font-extrabold' : ''}">${t.name}</div>
+                        ${t.verified ? '<span class="wax-seal text-[9px] py-0.5 px-1.5 mt-0.5"><i class="fa-solid fa-stamp"></i> VERIFIED</span>' : ''}
+                    </td>
+                    <td class="py-4 px-5 text-slate-300 font-medium">${t.flag}</td>
+                    <td class="py-4 px-5 text-slate-400 font-mono">${t.firm}</td>
+                    <td class="py-4 px-5 text-right font-bold text-emerald-400">+${t.ret.toFixed(2)}%</td>
+                    <td class="py-4 px-5 text-right text-gold-400 font-mono font-bold">${t.cf}%</td>
+                    <td class="py-4 px-5 text-right text-slate-400 font-mono">${t.dd}%</td>
+                    <td class="py-4 px-5 text-right font-bold text-gold-300 font-mono text-sm">${currentTab === 'prop' ? t.score.toFixed(2) : '+' + t.score.toFixed(2) + '%'}</td>
+                    <td class="py-4 px-5 text-center">
+                        <button class="px-3 py-1 rounded-lg bg-navy-900 border border-gold-500/30 text-gold-300 hover:bg-gold-500 hover:text-black transition-all text-[11px] font-mono">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </td>
+                `;
+                courtBody.appendChild(tr);
+            });
+
+            // NOBLE ROWS (11+)
+            nobleTraders.forEach(t => {
+                const tr = document.createElement('tr');
+                tr.className = 'royal-row cursor-pointer';
+                tr.onclick = () => openLedgerModal(t.id);
+
+                const titleObj = getRoyalRankTitle(t.rank);
+
+                tr.innerHTML = `
+                    <td class="py-3.5 px-5 font-mono font-bold text-slate-400">
+                        <span class="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded border ${titleObj.badge}">
+                            <i class="fa-solid ${titleObj.icon}"></i> #${t.rank}
+                        </span>
+                    </td>
+                    <td class="py-3.5 px-5">
+                        <span class="font-semibold text-slate-200 ${t.name.includes('(You)') ? 'text-gold-400 font-extrabold' : ''}">${t.name}</span>
+                        ${t.verified ? '<i class="fa-solid fa-circle-check text-emerald-400 text-xs ml-1.5" title="Verified MT4/MT5"></i>' : ''}
+                    </td>
+                    <td class="py-3.5 px-5 text-slate-300">${t.flag}</td>
+                    <td class="py-3.5 px-5 text-slate-400 font-mono">${t.firm}</td>
+                    <td class="py-3.5 px-5 text-right font-bold text-emerald-400">+${t.ret.toFixed(2)}%</td>
+                    <td class="py-3.5 px-5 text-right text-slate-300 font-mono">${t.cf}%</td>
+                    <td class="py-3.5 px-5 text-right text-slate-400 font-mono">${t.dd}%</td>
+                    <td class="py-3.5 px-5 text-right font-bold text-gold-400 font-mono text-xs">${currentTab === 'prop' ? t.score.toFixed(2) : '+' + t.score.toFixed(2) + '%'}</td>
+                    <td class="py-3.5 px-5 text-center">
+                        <i class="fa-solid fa-chevron-right text-slate-500 text-xs"></i>
+                    </td>
+                `;
+                nobleBody.appendChild(tr);
+            });
+        }
+
+        // SWITCH FORMAT TABS (PROP vs IB ROI)
+        function switchFormatTab(type) {
+            currentTab = type;
+            const btnProp = document.getElementById('tab-btn-prop');
+            const btnIb = document.getElementById('tab-btn-ib');
+            const courtHeader = document.getElementById('court-score-header');
+            const nobleHeader = document.getElementById('noble-score-header');
+
+            if (type === 'prop') {
+                btnProp.className = 'royal-tab-active flex-1 sm:flex-none px-6 py-3 rounded-lg text-xs font-sora font-extrabold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2';
+                btnIb.className = 'text-slate-400 hover:text-white flex-1 sm:flex-none px-6 py-3 rounded-lg text-xs font-sora font-extrabold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2';
+                courtHeader.innerText = 'FPS Score';
+                nobleHeader.innerText = 'FPS Score';
+            } else {
+                btnIb.className = 'royal-tab-active flex-1 sm:flex-none px-6 py-3 rounded-lg text-xs font-sora font-extrabold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2';
+                btnProp.className = 'text-slate-400 hover:text-white flex-1 sm:flex-none px-6 py-3 rounded-lg text-xs font-sora font-extrabold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2';
+                courtHeader.innerText = 'ROI % Score';
+                nobleHeader.innerText = 'ROI % Score';
+            }
+
+            handleFilterChange();
+        }
+
+        // FILTER HANDLING
+        function handleFilterChange() {
+            const dataset = currentTab === 'prop' ? propTraders : ibTraders;
+            const tierVal = document.getElementById('tier-filter').value;
+            const searchVal = document.getElementById('trader-search').value.toLowerCase();
+            const verifiedOnly = document.getElementById('verified-only').checked;
+
+            let filtered = dataset.filter(t => {
+                if (verifiedOnly && !t.verified) return false;
+                if (tierVal !== 'all' && t.tier !== tierVal) return false;
+                if (searchVal && !t.name.toLowerCase().includes(searchVal) && !t.flag.toLowerCase().includes(searchVal)) return false;
+                return true;
+            });
+
+            renderTop3(filtered);
+            renderTables(filtered);
+        }
+
+        // ROYAL LEDGER MODAL LOGIC
+        function openLedgerModal(traderId) {
+            const allTraders = [...propTraders, ...ibTraders];
+            const trader = allTraders.find(t => t.id === traderId);
+            if (!trader) return;
+
+            const modal = document.getElementById('ledger-modal');
+            document.getElementById('modal-trader-name').innerText = trader.name;
+            document.getElementById('modal-country').innerText = trader.flag;
+            document.getElementById('modal-account').innerText = trader.size;
+            document.getElementById('modal-return').innerText = '+' + trader.ret.toFixed(2) + '%';
+            document.getElementById('modal-green-days').innerText = trader.cf + '%';
+            document.getElementById('modal-drawdown').innerText = trader.dd + '%';
+            document.getElementById('modal-hash').innerText = trader.hash;
+            document.getElementById('modal-equity-val').innerText = '+' + trader.ret.toFixed(2) + '%';
+
+            const rankObj = getRoyalRankTitle(trader.rank);
+            document.getElementById('modal-title').innerText = `#${trader.rank} ${rankObj.title.toUpperCase()}`;
+
+            // Render Equity SVG
+            const svg = document.getElementById('equity-svg');
+            let points = '0,90 40,75 80,80 120,55 160,60 200,35 240,40 280,15 300,10';
+            svg.innerHTML = `
+                <defs>
+                    <linearGradient id="equityGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#10B981" stop-opacity="0.4"/>
+                        <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
+                    </linearGradient>
+                </defs>
+                <polygon points="0,100 ${points} 300,100" fill="url(#equityGrad)"/>
+                <polyline points="${points}" fill="none" stroke="#10B981" stroke-width="3" stroke-linecap="round"/>
+            `;
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeLedgerModal() {
+            document.getElementById('ledger-modal').classList.add('hidden');
+        }
+
+        function openConnectModal() {
+            alert("Fortrex FX Royal Vault: MT4/MT5 Verification Portal is live. Connect your broker account in Dashboard.");
+        }
+
+        // INITIAL LOAD
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTop3(propTraders);
+            renderTables(propTraders);
+        });
+    </script>
+</body>
+</html>

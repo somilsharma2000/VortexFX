@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortrex FX — Royal Obsidian Gold Sovereign Trading Arena</title>
+    <meta name="description" content="By Royal Decree. Enter the Stronghold of FX Kings. Compete in High-Stakes Arenas, Claim $100K+ Funded Accounts & Earn $REX Tokens in the Royal Treasury.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Sora:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        black: '#000000',
+                        obsidian: '#070707',
+                        charcoal: {
+                            DEFAULT: '#121212',
+                            light: '#1A1A1A',
+                            border: '#2A2A2A'
+                        },
+                        gold: {
+                            100: '#FFF8DC',
+                            200: '#FFE57F',
+                            300: '#FFE066',
+                            400: '#FFD700',
+                            DEFAULT: '#F0B90B',
+                            600: '#D4AF37',
+                            700: '#AA7C11',
+                            800: '#8B6508',
+                            900: '#5C4003'
+                        },
+                        royal: {
+                            purple: '#4A0E4E',
+                            dark: '#2D0830',
+                            glow: 'rgba(74, 14, 78, 0.45)',
+                            crimson: '#8B0000'
+                        }
+                    },
+                    fontFamily: {
+                        sora: ['Sora', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'spin-slow': 'spin 20s linear infinite',
+                        'shimmer': 'shimmer 2.5s infinite',
+                        'crown-glow': 'crownGlow 3s ease-in-out infinite alternate'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-15px)' }
+                        },
+                        shimmer: {
+                            '100%': { transform: 'translateX(100%)' }
+                        },
+                        crownGlow: {
+                            '0%': { filter: 'drop-shadow(0 0 5px rgba(255, 215, 0, 0.4))' },
+                            '100%': { filter: 'drop-shadow(0 0 20px rgba(255, 215, 0, 0.9))' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Smooth Scrolling & Base Styles */
+        html {
+            scroll-behavior: smooth;
+            background-color: #000000;
+            color: #E5E7EB;
+        }
+
+        /* Royal Custom Gold Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #1A1A1A, #2A2A2A);
+            border-radius: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #FFD700, #D4AF37);
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
+        }
+
+        /* Subtle Gold Damask Pattern Overlay */
+        .damask-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0 C32 10 38 16 50 18 C38 20 32 26 30 36 C28 26 22 20 10 18 C22 16 28 10 30 0 Z M30 36 C31 42 35 46 42 47 C35 48 31 52 30 58 C29 52 25 48 18 47 C25 46 29 42 30 36 Z' fill='%23D4AF37' fill-opacity='0.035'/%3E%3C/svg%3E");
+        }
+
+        /* Pure Glassmorphism & Double Line Treatment */
+        .royal-card {
+            background: rgba(18, 18, 18, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.8), inset 0 0 0 3px rgba(212, 175, 55, 0.15), 0 10px 30px rgba(0, 0, 0, 0.8);
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .royal-card:hover {
+            border-color: rgba(255, 215, 0, 0.7);
+            box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.8), inset 0 0 0 3px rgba(255, 215, 0, 0.3), 0 0 35px rgba(212, 175, 55, 0.35);
+            transform: translateY(-4px);
+        }
+
+        /* Double-line frame container */
+        .double-border-gold {
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            outline: 1px solid rgba(212, 175, 55, 0.2);
+            outline-offset: -5px;
+        }
+
+        /* Gold Gradient Text */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #FFF8DC 0%, #FFD700 30%, #F0B90B 70%, #AA7C11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-silver-gradient {
+            background: linear-gradient(135deg, #FFFFFF 0%, #E0E0E0 50%, #9E9E9E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-bronze-gradient {
+            background: linear-gradient(135deg, #FFE0B2 0%, #CD7F32 50%, #8D6E63 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Metallic Gold Button */
+        .btn-gold {
+            background: linear-gradient(135deg, #FFD700 0%, #F0B90B 50%, #D4AF37 100%);
+            color: #000000;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(240, 185, 11, 0.35);
+            transition: all 0.3s ease;
+        }
+        .btn-gold:hover {
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.65);
+            transform: scale(1.02);
+        }
+        .btn-gold::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(60deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: rotate(30deg);
+            transition: all 0.7s;
+        }
+        .btn-gold:hover::after {
+            left: 100%;
+        }
+
+        /* Heraldic Shield Shape for Feature Cards */
+        .heraldic-shield {
+            clip-path: polygon(0 0, 100% 0, 100% 88%, 50% 100%, 0 88%);
+        }
+
+        /* Royal Purple Ambient Glow Layer */
+        .royal-purple-glow {
+            background: radial-gradient(circle at 50% 50%, rgba(74, 14, 78, 0.45) 0%, rgba(74, 14, 78, 0.15) 50%, transparent 75%);
+        }
+
+        /* Wax Seal Styling */
+        .wax-seal {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #B71C1C 0%, #8B0000 60%, #4A0000 100%);
+            border: 2px solid #FFD700;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8), inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -2px 4px rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: -16px;
+            right: 20px;
+            z-index: 20;
+        }
+        .wax-seal::before {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px dashed rgba(255, 215, 0, 0.6);
+        }
+
+        /* Proclamation Banner Scroll Ends */
+        .proclamation-banner {
+            background: linear-gradient(90deg, rgba(212,175,55,0.15) 0%, rgba(26,26,26,0.95) 15%, rgba(26,26,26,0.95) 85%, rgba(212,175,55,0.15) 100%);
+            border-top: 2px solid #D4AF37;
+            border-bottom: 2px solid #D4AF37;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Royal Treasury Vault Grid */
+        .vault-door {
+            background: radial-gradient(circle, #2A2A2A 0%, #121212 70%, #050505 100%);
+            border: 3px solid #D4AF37;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.9), 0 0 25px rgba(212,175,55,0.3);
+        }
+
+        /* Film Grain Texture Overlay */
+        .bg-grain {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+        }
+
+        /* Reveal Animation Classes */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Corner Crown Filigree Accents */
+        .crown-corner-tl {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            color: rgba(212, 175, 55, 0.5);
+            font-size: 10px;
+        }
+        .crown-corner-tr {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            color: rgba(212, 175, 55, 0.5);
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-200 font-inter antialiased selection:bg-amber-500 selection:text-black overflow-x-hidden relative">
+
+    <!-- Film Grain Overlay -->
+    <div class="fixed inset-0 bg-grain pointer-events-none z-50"></div>
+
+    <!-- Gold Particle Canvas Background -->
+    <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+
+    <!-- SVG Definitions for Royal Icons & Gradients -->
+    <svg class="hidden">
+        <defs>
+            <linearGradient id="royalGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFF8DC" />
+                <stop offset="40%" stop-color="#FFD700" />
+                <stop offset="80%" stop-color="#F0B90B" />
+                <stop offset="100%" stop-color="#AA7C11" />
+            </linearGradient>
+            <linearGradient id="silverGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF" />
+                <stop offset="50%" stop-color="#E0E0E0" />
+                <stop offset="100%" stop-color="#9E9E9E" />
+            </linearGradient>
+            <linearGradient id="bronzeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFE0B2" />
+                <stop offset="50%" stop-color="#CD7F32" />
+                <stop offset="100%" stop-color="#8D6E63" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- Royal Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center transition-opacity duration-700">
+        <div class="relative flex flex-col items-center">
+            <!-- Royal Crown Loader -->
+            <div class="w-24 h-24 mb-6 relative flex items-center justify-center animate-bounce">
+                <svg class="w-20 h-20 text-amber-400 drop-shadow-[0_0_15px_rgba(255,215,0,0.8)]" viewBox="0 0 24 24" fill="url(#royalGold)">
+                    <path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5Z" stroke="#FFD700" stroke-width="0.5"/>
+                    <circle cx="3" cy="5" r="1" fill="#FFF8DC"/>
+                    <circle cx="12" cy="4" r="1.2" fill="#FFF8DC"/>
+                    <circle cx="21" cy="5" r="1" fill="#FFF8DC"/>
+                    <path d="M5 18H19V20H5V18Z" fill="url(#royalGold)"/>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-sora font-bold text-gold-gradient tracking-widest mb-2">FORTREX FX</h2>
+            <p class="text-xs font-mono text-amber-400/70 tracking-wider mb-6">PREPARING SOVEREIGN COURT...</p>
+            
+            <div class="w-64 h-1.5 bg-charcoal border border-amber-500/30 rounded-full overflow-hidden p-0.5">
+                <div id="loading-progress" class="h-full bg-gradient-to-r from-amber-600 via-amber-400 to-amber-200 rounded-full transition-all duration-200 w-0"></div>
+            </div>
+            <span id="loading-percent" class="mt-2 text-xs font-mono text-amber-400">0%</span>
+        </div>
+    </div>
+
+    <!-- Live Market & $REX Ticker Bar -->
+    <div class="bg-charcoal/90 border-b border-amber-500/30 py-1.5 px-4 text-xs font-mono text-gray-400 overflow-hidden relative z-30">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-6 overflow-x-auto whitespace-nowrap no-scrollbar py-0.5">
+                <span class="flex items-center text-amber-400 font-bold">
+                    <i class="fa-solid fa-crown mr-1.5 text-xs text-amber-300"></i> ROYAL TICKER:
+                </span>
+                <span class="inline-flex items-center"><span class="text-gray-300 mr-1">EUR/USD:</span> <span class="text-emerald-400">1.0924 ▲ +0.32%</span></span>
+                <span class="inline-flex items-center"><span class="text-gray-300 mr-1">GBP/USD:</span> <span class="text-emerald-400">1.2785 ▲ +0.45%</span></span>
+                <span class="inline-flex items-center"><span class="text-gray-300 mr-1">USD/JPY:</span> <span class="text-rose-400">154.20 ▼ -0.18%</span></span>
+                <span class="inline-flex items-center"><span class="text-amber-300 font-semibold mr-1">$REX TREASURY:</span> <span class="text-gold-gradient font-bold">$0.485 USDT ▲ +12.4%</span></span>
+                <span class="inline-flex items-center"><span class="text-gray-300 mr-1">CURRENT COURT CHAMPION:</span> <span class="text-amber-300">King_Alexander (94.2% WR)</span></span>
+            </div>
+            <div class="hidden lg:flex items-center space-x-3 text-amber-400/80 text-[11px]">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                <span>COURT SERVER: ONLINE</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Royal Navigation Bar -->
+    <nav class="sticky top-0 z-40 bg-black/80 backdrop-blur-xl border-b border-amber-500/30 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo Area with Integrated Crown -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="relative w-10 h-10 flex items-center justify-center bg-charcoal rounded-lg border border-amber-500/50 group-hover:border-amber-400 transition-all">
+                    <!-- Subtle purple glow behind logo -->
+                    <div class="absolute inset-0 bg-royal-purple/40 rounded-lg blur-md group-hover:bg-royal-purple/70 transition-all"></div>
+                    <svg class="w-7 h-7 text-amber-400 relative z-10 transform group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="url(#royalGold)">
+                        <path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5Z" stroke="#FFD700" stroke-width="0.5"/>
+                        <circle cx="3" cy="5" r="1" fill="#FFF8DC"/>
+                        <circle cx="12" cy="4" r="1.2" fill="#FFF8DC"/>
+                        <circle cx="21" cy="5" r="1" fill="#FFF8DC"/>
+                        <path d="M5 18H19V20H5V18Z" fill="url(#royalGold)"/>
+                    </svg>
+                </div>
+                <div>
+                    <span class="font-sora font-extrabold text-xl tracking-wider text-gold-gradient block leading-none">FORTREX<span class="text-amber-400">.FX</span></span>
+                    <span class="text-[9px] font-mono tracking-widest text-amber-400/80 block mt-1 uppercase">Sovereign Trading Realm</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#how-it-works" class="hover:text-amber-400 transition-colors py-1 border-b-2 border-transparent hover:border-amber-400">How It Works</a>
+                <a href="#tournaments" class="hover:text-amber-400 transition-colors py-1 border-b-2 border-transparent hover:border-amber-400">Decrees</a>
+                <a href="#features" class="hover:text-amber-400 transition-colors py-1 border-b-2 border-transparent hover:border-amber-400">Features</a>
+                <a href="#rex-economy" class="hover:text-amber-400 transition-colors py-1 border-b-2 border-transparent hover:border-amber-400">$REX Treasury</a>
+                <a href="#calculator" class="hover:text-amber-400 transition-colors py-1 border-b-2 border-transparent hover:border-amber-400">Calculator</a>
+                <a href="#leaderboard" class="hover:text-amber-400 transition-colors py-1 border-b-2 border-transparent hover:border-amber-400">Court of Kings</a>
+                <a href="#faq" class="hover:text-amber-400 transition-colors py-1 border-b-2 border-transparent hover:border-amber-400">FAQ</a>
+            </div>
+
+            <!-- Header Action Button -->
+            <div class="hidden sm:flex items-center space-x-4">
+                <a href="#cta" class="btn-gold px-5 py-2.5 rounded-lg text-xs tracking-wider uppercase font-bold flex items-center space-x-2 border border-amber-300/50">
+                    <i class="fa-solid fa-crown text-amber-900"></i>
+                    <span>CLAIM YOUR CROWN</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-amber-400 p-2 focus:outline-none">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-charcoal border-b border-amber-500/30 px-6 py-4 space-y-3 font-medium text-sm">
+            <a href="#how-it-works" class="block hover:text-amber-400 transition-colors py-1">How It Works</a>
+            <a href="#tournaments" class="block hover:text-amber-400 transition-colors py-1">Royal Decrees</a>
+            <a href="#features" class="block hover:text-amber-400 transition-colors py-1">Heraldic Features</a>
+            <a href="#rex-economy" class="block hover:text-amber-400 transition-colors py-1">$REX Treasury</a>
+            <a href="#calculator" class="block hover:text-amber-400 transition-colors py-1">Yield Calculator</a>
+            <a href="#leaderboard" class="block hover:text-amber-400 transition-colors py-1">Court of Kings</a>
+            <a href="#faq" class="block hover:text-amber-400 transition-colors py-1">FAQ</a>
+            <div class="pt-2">
+                <a href="#cta" class="btn-gold w-full py-3 rounded-lg text-xs text-center tracking-wider uppercase font-bold block">
+                    👑 CLAIM YOUR CROWN
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION with Damask Pattern & Royal Purple Glow -->
+    <section id="hero" class="relative pt-12 pb-24 md:pt-20 md:pb-32 overflow-hidden z-20 damask-pattern">
+        
+        <!-- Royal Purple Radial Glow behind Hero -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] royal-purple-glow rounded-full blur-3xl pointer-events-none z-0"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left Column: Copy & CTAs -->
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                    
+                    <!-- Royal Badge -->
+                    <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-charcoal/90 border border-amber-500/40 text-amber-400 text-xs font-mono tracking-wider shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                        <span>👑</span>
+                        <span class="text-amber-300 font-bold uppercase tracking-widest">BY ROYAL DECREE</span>
+                        <span class="text-gray-500">•</span>
+                        <span class="text-gray-300">SEASON IV ARENA OPEN</span>
+                    </div>
+
+                    <!-- Main Headline -->
+                    <h1 class="font-sora font-black text-4xl sm:text-5xl lg:text-6xl tracking-tight text-white leading-none">
+                        THE SOVEREIGN <br/>
+                        <span class="text-gold-gradient drop-shadow-[0_4px_12px_rgba(240,185,11,0.3)]">STRONGHOLD OF</span> <br/>
+                        FX KINGS.
+                    </h1>
+
+                    <!-- Typing Tagline -->
+                    <div class="h-10 text-lg sm:text-xl font-mono text-amber-300 flex items-center justify-center lg:justify-start">
+                        <span class="text-amber-500 mr-2">👑</span>
+                        <span id="typing-text" class="border-r-2 border-amber-400 pr-1 animate-pulse">Fortify Your Strategy.</span>
+                    </div>
+
+                    <!-- Value Proposition Paragraph -->
+                    <p class="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Step into the premier forex trading arena where discipline is rewarded with sovereign capital. Compete in high-stakes trading tournaments, claim <span class="text-amber-300 font-bold">$100,000+ funded accounts</span>, and build lasting wealth in the <span class="text-amber-300 font-bold">$REX Royal Treasury</span>.
+                    </p>
+
+                    <!-- Dual CTAs -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-5 pt-2">
+                        <a href="#cta" class="btn-gold px-8 py-4 rounded-xl text-sm font-extrabold uppercase tracking-widest flex items-center justify-center space-x-3 w-full sm:w-auto shadow-[0_0_25px_rgba(255,215,0,0.4)]">
+                            <i class="fa-solid fa-crown text-base text-amber-950"></i>
+                            <span>CLAIM YOUR CROWN</span>
+                        </a>
+                        <a href="#tournaments" class="px-8 py-4 rounded-xl text-sm font-bold uppercase tracking-widest text-amber-400 bg-charcoal/80 hover:bg-charcoal border border-amber-500/40 hover:border-amber-400 transition-all flex items-center justify-center space-x-3 w-full sm:w-auto double-border-gold">
+                            <i class="fa-solid fa-scroll text-amber-400"></i>
+                            <span>VIEW ROYAL DECREES</span>
+                        </a>
+                    </div>
+
+                    <!-- Quick Trust Indicators -->
+                    <div class="pt-6 border-t border-amber-500/20 grid grid-cols-3 gap-4 text-center lg:text-left">
+                        <div>
+                            <span class="block text-2xl font-mono font-extrabold text-amber-400">$100K+</span>
+                            <span class="text-xs text-gray-400 uppercase tracking-wider">Funded Accounts</span>
+                        </div>
+                        <div>
+                            <span class="block text-2xl font-mono font-extrabold text-amber-400">0.0 Pips</span>
+                            <span class="text-xs text-gray-400 uppercase tracking-wider">Spread Spreads</span>
+                        </div>
+                        <div>
+                            <span class="block text-2xl font-mono font-extrabold text-amber-400">100%</span>
+                            <span class="text-xs text-gray-400 uppercase tracking-wider">Verified Payouts</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Hero Right Column: 3D Royal Fortress / Citadel Graphic -->
+                <div class="lg:col-span-5 flex justify-center relative">
+                    
+                    <div class="relative w-80 h-80 sm:w-96 sm:h-96 flex items-center justify-center">
+                        
+                        <!-- Rotating Gold Outer Ring -->
+                        <div class="absolute inset-0 rounded-full border-2 border-dashed border-amber-500/40 animate-spin-slow"></div>
+                        <div class="absolute inset-4 rounded-full border border-amber-400/20 animate-pulse"></div>
+
+                        <!-- Central CSS 3D Citadel Crest -->
+                        <div class="relative z-10 w-64 h-64 royal-card rounded-2xl flex flex-col items-center justify-center p-6 text-center transform hover:rotate-2 transition-transform duration-500 shadow-[0_0_50px_rgba(212,175,55,0.3)]">
+                            
+                            <!-- Crown Filigree Corner Accents -->
+                            <i class="fa-solid fa-crown crown-corner-tl"></i>
+                            <i class="fa-solid fa-crown crown-corner-tr"></i>
+
+                            <!-- Animated Glowing Crown Apex -->
+                            <div class="w-20 h-20 mb-4 bg-charcoal rounded-full border-2 border-amber-400/60 flex items-center justify-center relative shadow-[0_0_20px_rgba(255,215,0,0.5)]">
+                                <div class="absolute inset-0 rounded-full bg-royal-purple/50 blur-sm"></div>
+                                <svg class="w-12 h-12 text-amber-300 relative z-10 animate-crown-glow" viewBox="0 0 24 24" fill="url(#royalGold)">
+                                    <path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5Z" stroke="#FFD700" stroke-width="0.5"/>
+                                    <circle cx="3" cy="5" r="1" fill="#FFF8DC"/>
+                                    <circle cx="12" cy="4" r="1.2" fill="#FFF8DC"/>
+                                    <circle cx="21" cy="5" r="1" fill="#FFF8DC"/>
+                                    <path d="M5 18H19V20H5V18Z" fill="url(#royalGold)"/>
+                                </svg>
+                            </div>
+
+                            <span class="text-xs font-mono tracking-widest text-amber-400 uppercase mb-1">SOVEREIGN CITADEL</span>
+                            <h3 class="font-sora font-extrabold text-xl text-white">FORTREX ARENA</h3>
+                            <div class="mt-3 inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-300 text-xs font-mono">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                                <span>14,820 KINGS ACTIVE</span>
+                            </div>
+
+                            <!-- Floating Currency Badges -->
+                            <div class="absolute -top-4 -left-4 bg-charcoal border border-amber-500/50 px-3 py-1.5 rounded-lg text-xs font-mono text-amber-300 shadow-lg animate-float">
+                                👑 EUR/USD +140%
+                            </div>
+                            <div class="absolute -bottom-4 -right-4 bg-charcoal border border-amber-500/50 px-3 py-1.5 rounded-lg text-xs font-mono text-amber-300 shadow-lg animate-float" style="animation-delay: 2s;">
+                                🪙 $REX +52,000
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION DIVIDER WITH ROYAL CROWN EMBLEM -->
+    <div class="relative z-20 max-w-7xl mx-auto px-4 my-4 flex items-center justify-center space-x-4">
+        <div class="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent flex-1"></div>
+        <div class="flex items-center space-x-2 text-amber-400 px-3 py-1 rounded-full bg-charcoal border border-amber-500/40 text-xs font-mono">
+            <span>👑</span>
+            <span class="tracking-widest">ROYAL PROCLAMATION</span>
+            <span>👑</span>
+        </div>
+        <div class="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent flex-1"></div>
+    </div>
+
+    <!-- STATS BAR: ROYAL PROCLAMATION BANNER -->
+    <section class="relative z-20 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="proclamation-banner rounded-2xl p-8 sm:p-10 relative overflow-hidden double-border-gold">
+                
+                <!-- Background Seal Watermark -->
+                <div class="absolute right-10 -bottom-10 opacity-10 pointer-events-none text-amber-400">
+                    <i class="fa-solid fa-crown text-9xl"></i>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center relative z-10">
+                    
+                    <div class="space-y-2 border-r border-amber-500/20 last:border-0 pr-4">
+                        <div class="text-3xl sm:text-4xl font-mono font-extrabold text-gold-gradient flex items-center justify-center">
+                            $<span class="counter" data-target="1250000">0</span>+
+                        </div>
+                        <p class="text-xs font-mono text-amber-300/80 uppercase tracking-wider">Funded Capital Awarded</p>
+                    </div>
+
+                    <div class="space-y-2 border-r border-amber-500/20 last:border-0 pr-4">
+                        <div class="text-3xl sm:text-4xl font-mono font-extrabold text-gold-gradient flex items-center justify-center">
+                            <span class="counter" data-target="14820">0</span>+
+                        </div>
+                        <p class="text-xs font-mono text-amber-300/80 uppercase tracking-wider">Sovereign Traders</p>
+                    </div>
+
+                    <div class="space-y-2 border-r border-amber-500/20 last:border-0 pr-4">
+                        <div class="text-3xl sm:text-4xl font-mono font-extrabold text-gold-gradient flex items-center justify-center">
+                            <span class="counter" data-target="99">0</span>.8%
+                        </div>
+                        <p class="text-xs font-mono text-amber-300/80 uppercase tracking-wider">Execution Accuracy</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="text-3xl sm:text-4xl font-mono font-extrabold text-gold-gradient flex items-center justify-center">
+                            $<span class="counter" data-target="520000">0</span>+
+                        </div>
+                        <p class="text-xs font-mono text-amber-300/80 uppercase tracking-wider">$REX Vault Distributed</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 1: HOW IT WORKS (4 SOVEREIGN STEPS) -->
+    <section id="how-it-works" class="py-20 relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+                <div class="inline-flex items-center space-x-2 text-amber-400 text-xs font-mono tracking-widest uppercase mb-3 px-3 py-1 rounded-full bg-charcoal border border-amber-500/30">
+                    <span>👑</span>
+                    <span>FOUR STEPS TO REIGN</span>
+                </div>
+                <h2 class="font-sora font-extrabold text-3xl sm:text-4xl text-white">
+                    HOW THE <span class="text-gold-gradient">SOVEREIGN FORTRESS</span> OPERATES
+                </h2>
+                <p class="text-gray-400 mt-4 text-sm sm:text-base">
+                    From initial entry to court reign: a structured path designed for disciplined forex execution and exponential rewards.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Step 1 -->
+                <div class="royal-card rounded-2xl p-6 relative fade-in-up">
+                    <i class="fa-solid fa-crown crown-corner-tl"></i>
+                    <i class="fa-solid fa-crown crown-corner-tr"></i>
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 font-mono font-bold text-lg mb-6 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                        01
+                    </div>
+                    <h3 class="font-sora font-bold text-lg text-white mb-2 flex items-center">
+                        <span class="mr-2 text-amber-400">👑</span> Select Royal Decree
+                    </h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Choose your arena—from daily micro-sprints to major $100K prop challenge decrees. Connect MetaTrader 4/5 or cTrader seamlessly.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="royal-card rounded-2xl p-6 relative fade-in-up" style="transition-delay: 100ms;">
+                    <i class="fa-solid fa-crown crown-corner-tl"></i>
+                    <i class="fa-solid fa-crown crown-corner-tr"></i>
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 font-mono font-bold text-lg mb-6 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                        02
+                    </div>
+                    <h3 class="font-sora font-bold text-lg text-white mb-2 flex items-center">
+                        <span class="mr-2 text-amber-400">👑</span> Trade & Build FPS
+                    </h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Execute trades with institutional 0.0 pip spreads. Your Fortress Performance Score (FPS) calculates risk-adjusted profit consistency.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="royal-card rounded-2xl p-6 relative fade-in-up" style="transition-delay: 200ms;">
+                    <i class="fa-solid fa-crown crown-corner-tl"></i>
+                    <i class="fa-solid fa-crown crown-corner-tr"></i>
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 font-mono font-bold text-lg mb-6 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                        03
+                    </div>
+                    <h3 class="font-sora font-bold text-lg text-white mb-2 flex items-center">
+                        <span class="mr-2 text-amber-400">👑</span> Ascend Court Rank
+                    </h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Climb the live Court of Kings leaderboard. Earn rank multipliers and unlock royal crown badges as you outperform competitor lords.
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="royal-card rounded-2xl p-6 relative fade-in-up" style="transition-delay: 300ms;">
+                    <i class="fa-solid fa-crown crown-corner-tl"></i>
+                    <i class="fa-solid fa-crown crown-corner-tr"></i>
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 font-mono font-bold text-lg mb-6 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                        04
+                    </div>
+                    <h3 class="font-sora font-bold text-lg text-white mb-2 flex items-center">
+                        <span class="mr-2 text-amber-400">👑</span> Claim Royal Treasury
+                    </h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Receive instant USDT payouts, redeem $REX tokens in the Royal Treasury, and secure up to $100K+ in funded trading capital.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION DIVIDER WITH CROWN -->
+    <div class="relative z-20 max-w-7xl mx-auto px-4 my-4 flex items-center justify-center space-x-4">
+        <div class="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent flex-1"></div>
+        <span class="text-amber-400 text-sm">👑</span>
+        <div class="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent flex-1"></div>
+    </div>
+
+    <!-- SECTION 2: TOURNAMENT SHOWCASE ('ROYAL DECREES' WITH WAX SEALS) -->
+    <section id="tournaments" class="py-20 relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+                <div class="inline-flex items-center space-x-2 text-amber-400 text-xs font-mono tracking-widest uppercase mb-3 px-3 py-1 rounded-full bg-charcoal border border-amber-500/30">
+                    <span>👑</span>
+                    <span>OFFICIAL ARENA PROCLAMATIONS</span>
+                </div>
+                <h2 class="font-sora font-extrabold text-3xl sm:text-4xl text-white">
+                    ACTIVE <span class="text-gold-gradient">ROYAL DECREES</span>
+                </h2>
+                <p class="text-gray-400 mt-4 text-sm sm:text-base">
+                    Every tournament is a legally binding royal decree backed by Fortrex FX capital reserves. Select your arena and enter the arena.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Decree Card 1: Sovereign Prop Challenge -->
+                <div class="royal-card rounded-2xl p-8 relative pt-12 fade-in-up">
+                    
+                    <!-- Wax Seal Effect -->
+                    <div class="wax-seal">
+                        <span class="font-sora font-black text-amber-300 text-xl drop-shadow">F</span>
+                    </div>
+
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-300 text-xs font-mono">
+                            👑 MAJOR DECREE
+                        </span>
+                        <span class="text-xs font-mono text-emerald-400 flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping mr-1.5"></span>
+                            REGISTRATION OPEN
+                        </span>
+                    </div>
+
+                    <h3 class="font-sora font-extrabold text-2xl text-white mb-2">SOVEREIGN PROP CHALLENGE</h3>
+                    <p class="text-xs text-gray-400 mb-6">14-Day High-Stakes Evaluation Arena for Professional Forex Traders</p>
+
+                    <div class="bg-charcoal/90 rounded-xl p-4 border border-amber-500/20 space-y-3 mb-6 font-mono text-xs">
+                        <div class="flex justify-between border-b border-gray-800 pb-2">
+                            <span class="text-gray-400">1ST PLACE CAPITAL:</span>
+                            <span class="text-amber-300 font-bold">$100,000 FUNDED ACCOUNT</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-800 pb-2">
+                            <span class="text-gray-400">TREASURY REWARD:</span>
+                            <span class="text-amber-300 font-bold">50,000 $REX COINS</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-800 pb-2">
+                            <span class="text-gray-400">ENTRY DECREE:</span>
+                            <span class="text-emerald-400 font-bold">FREE WITH VERIFIED MT4/5</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">ARENA CLOSES:</span>
+                            <span class="text-amber-400">03d 14h 22m</span>
+                        </div>
+                    </div>
+
+                    <a href="#cta" class="btn-gold w-full py-3.5 rounded-xl text-xs uppercase font-extrabold tracking-widest flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-crown text-amber-950"></i>
+                        <span>CLAIM YOUR CROWN</span>
+                    </a>
+                </div>
+
+                <!-- Decree Card 2: IB ROI Kingdom Tournament -->
+                <div class="royal-card rounded-2xl p-8 relative pt-12 fade-in-up" style="transition-delay: 150ms;">
+                    
+                    <!-- Wax Seal Effect -->
+                    <div class="wax-seal">
+                        <span class="font-sora font-black text-amber-300 text-xl drop-shadow">F</span>
+                    </div>
+
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-300 text-xs font-mono">
+                            👑 WEEKLY KINGDOM
+                        </span>
+                        <span class="text-xs font-mono text-emerald-400 flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping mr-1.5"></span>
+                            342 LORDS ENTERED
+                        </span>
+                    </div>
+
+                    <h3 class="font-sora font-extrabold text-2xl text-white mb-2">IB ROI KINGDOM BATTLE</h3>
+                    <p class="text-xs text-gray-400 mb-6">Weekly Volume & ROI Sprint for High-Yield Community Leaders</p>
+
+                    <div class="bg-charcoal/90 rounded-xl p-4 border border-amber-500/20 space-y-3 mb-6 font-mono text-xs">
+                        <div class="flex justify-between border-b border-gray-800 pb-2">
+                            <span class="text-gray-400">GRAND POOL:</span>
+                            <span class="text-amber-300 font-bold">$25,000 USDT CASH</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-800 pb-2">
+                            <span class="text-gray-400">TREASURY REWARD:</span>
+                            <span class="text-amber-300 font-bold">100,000 $REX COINS</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-800 pb-2">
+                            <span class="text-gray-400">CALCULATION:</span>
+                            <span class="text-gray-200 font-bold">% ROI + LOT VOLUME</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">RESET PERIOD:</span>
+                            <span class="text-amber-400">EVERY SUNDAY 00:00 UTC</span>
+                        </div>
+                    </div>
+
+                    <a href="#cta" class="btn-gold w-full py-3.5 rounded-xl text-xs uppercase font-extrabold tracking-widest flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-crown text-amber-950"></i>
+                        <span>CLAIM YOUR CROWN</span>
+                    </a>
+                </div>
+
+                <!-- Decree Card 3: Sovereign Sprint Arena -->
+                <div class="royal-card rounded-2xl p-8 relative pt-12 fade-in-up" style="transition-delay: 300ms;">
+                    
+                    <!-- Wax Seal Effect -->
+                    <div class="wax-seal">
+                        <span class="font-sora font-black text-amber-300 text-xl drop-shadow">F</span>
+                    </div>
+
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-300 text-xs font-mono">
+                            👑 DAILY MICRO-SPRINT
+                        </span>
+                        <span class="text-xs font-mono text-emerald-400 flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping mr-1.5"></span>
+                            ACTIVE NOW
+                        </span>
+                    </div>
+
+                    <h3 class="font-sora font-extrabold text-2xl text-white mb-2">SOVEREIGN SPRINT ARENA</h3>
+                    <p class="text-xs text-gray-400 mb-6">24-Hour Fast-Paced Forex Duel for Day Traders & Scalpers</p>
+
+                    <div class="bg-charcoal/90 rounded-xl p-4 border border-amber-500/20 space-y-3 mb-6 font-mono text-xs">
+                        <div class="flex justify-between border-b border-gray-800 pb-2">
+                            <span class="text-gray-400">DAILY POOL:</span>
+                            <span class="text-amber-300 font-bold">$1,000 INSTANT USDT</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-800 pb-2">
+                            <span class="text-gray-400">TREASURY REWARD:</span>
+                            <span class="text-amber-300 font-bold">10,000 $REX COINS</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-800 pb-2">
+                            <span class="text-gray-400">MAX DRAWDOWN:</span>
+                            <span class="text-rose-400 font-bold">5% HARD LIMIT</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">TIME REMAINING:</span>
+                            <span class="text-amber-400">06h 41m 10s</span>
+                        </div>
+                    </div>
+
+                    <a href="#cta" class="btn-gold w-full py-3.5 rounded-xl text-xs uppercase font-extrabold tracking-widest flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-crown text-amber-950"></i>
+                        <span>CLAIM YOUR CROWN</span>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION DIVIDER WITH CROWN -->
+    <div class="relative z-20 max-w-7xl mx-auto px-4 my-4 flex items-center justify-center space-x-4">
+        <div class="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent flex-1"></div>
+        <span class="text-amber-400 text-sm">👑</span>
+        <div class="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent flex-1"></div>
+    </div>
+
+    <!-- SECTION 3: FEATURES GRID (HERALDIC SHIELD CARDS) -->
+    <section id="features" class="py-20 relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+                <div class="inline-flex items-center space-x-2 text-amber-400 text-xs font-mono tracking-widest uppercase mb-3 px-3 py-1 rounded-full bg-charcoal border border-amber-500/30">
+                    <span>👑</span>
+                    <span>HERALDIC PILLARS</span>
+                </div>
+                <h2 class="font-sora font-extrabold text-3xl sm:text-4xl text-white">
+                    ENGINEERED FOR <span class="text-gold-gradient">MARKET SOVEREIGNTY</span>
+                </h2>
+                <p class="text-gray-400 mt-4 text-sm sm:text-base">
+                    Six structural pillars combining quantitative institutional infrastructure with gamified crown rewards.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Shield Card 1 -->
+                <div class="royal-card rounded-2xl p-8 relative heraldic-shield pb-12 fade-in-up">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 text-xl mb-6 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="font-sora font-bold text-xl text-white mb-2 flex items-center">
+                        <span class="text-amber-400 text-sm mr-2">👑</span> Institutional Execution
+                    </h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Direct LP routing via Equinix NY4 data servers. Experience 0.0 pip raw spreads and ultra-low sub-10ms execution latencies.
+                    </p>
+                </div>
+
+                <!-- Shield Card 2 -->
+                <div class="royal-card rounded-2xl p-8 relative heraldic-shield pb-12 fade-in-up" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 text-xl mb-6 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="font-sora font-bold text-xl text-white mb-2 flex items-center">
+                        <span class="text-amber-400 text-sm mr-2">👑</span> Fortified Risk Controls
+                    </h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Automated drawdown guards prevent emotional wipeouts. Keep your trading equity protected under strict risk architecture.
+                    </p>
+                </div>
+
+                <!-- Shield Card 3 -->
+                <div class="royal-card rounded-2xl p-8 relative heraldic-shield pb-12 fade-in-up" style="transition-delay: 200ms;">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 text-xl mb-6 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                    <h3 class="font-sora font-bold text-xl text-white mb-2 flex items-center">
+                        <span class="text-amber-400 text-sm mr-2">👑</span> $REX Trade-To-Earn
+                    </h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Every single lot traded automatically mints $REX coins directly into your Royal Treasury wallet regardless of trade outcome.
+                    </p>
+                </div>
+
+                <!-- Shield Card 4 -->
+                <div class="royal-card rounded-2xl p-8 relative heraldic-shield pb-12 fade-in-up" style="transition-delay: 300ms;">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 text-xl mb-6 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="font-sora font-bold text-xl text-white mb-2 flex items-center">
+                        <span class="text-amber-400 text-sm mr-2">👑</span> FPS Rating Engine
+                    </h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Proprietary Fortress Performance Score algorithm evaluates consistency, risk-reward ratio, and drawdown management.
+                    </p>
+                </div>
+
+                <!-- Shield Card 5 -->
+                <div class="royal-card rounded-2xl p-8 relative heraldic-shield pb-12 fade-in-up" style="transition-delay: 400ms;">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 text-xl mb-6 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                        <i class="fa-solid fa-building-columns"></i>
+                    </div>
+                    <h3 class="font-sora font-bold text-xl text-white mb-2 flex items-center">
+                        <span class="text-amber-400 text-sm mr-2">👑</span> Institutional Capital Scaling
+                    </h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Top-performing kings scale funded accounts up to $2,000,000 with up to 90% profit split retainment.
+                    </p>
+                </div>
+
+                <!-- Shield Card 6 -->
+                <div class="royal-card rounded-2xl p-8 relative heraldic-shield pb-12 fade-in-up" style="transition-delay: 500ms;">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 text-xl mb-6 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                        <i class="fa-solid fa-crown text-amber-400"></i>
+                    </div>
+                    <h3 class="font-sora font-bold text-xl text-white mb-2 flex items-center">
+                        <span class="text-amber-400 text-sm mr-2">👑</span> Sovereign Court Syndicate
+                    </h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Private high-signal Discord court for verified funded kings, offering institutional orderflow research & live trade calls.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION DIVIDER WITH CROWN -->
+    <div class="relative z-20 max-w-7xl mx-auto px-4 my-4 flex items-center justify-center space-x-4">
+        <div class="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent flex-1"></div>
+        <span class="text-amber-400 text-sm">👑</span>
+        <div class="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent flex-1"></div>
+    </div>
+
+    <!-- SECTION 4: $REX ECONOMY ('THE ROYAL TREASURY' VAULT AESTHETIC) -->
+    <section id="rex-economy" class="py-20 relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="vault-door rounded-3xl p-8 sm:p-12 relative overflow-hidden double-border-gold fade-in-up">
+                
+                <!-- Purple Radial Background Glow -->
+                <div class="absolute inset-0 bg-royal-purple/20 pointer-events-none blur-2xl"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                    
+                    <div class="lg:col-span-6 space-y-6">
+                        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-300 text-xs font-mono">
+                            <span>👑</span>
+                            <span>THE ROYAL TREASURY VAULT</span>
+                        </div>
+
+                        <h2 class="font-sora font-extrabold text-3xl sm:text-4xl text-white">
+                            $REX TOKEN: <br/><span class="text-gold-gradient">SOVEREIGN WEALTH</span> UTILITY
+                        </h2>
+
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                            $REX is the native currency of the Fortrex FX ecosystem. Minted through active tournament volume and ranking performance, $REX unlocks instant cashouts, high-tier prop challenges, and luxury vault assets.
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-4 font-mono text-xs">
+                            <div class="bg-charcoal/90 p-4 rounded-xl border border-amber-500/30">
+                                <span class="text-gray-400 block mb-1">TOTAL MINTED:</span>
+                                <span class="text-amber-300 text-lg font-bold">10,000,000 $REX</span>
+                            </div>
+                            <div class="bg-charcoal/90 p-4 rounded-xl border border-amber-500/30">
+                                <span class="text-gray-400 block mb-1">CURRENT SWAP VALUE:</span>
+                                <span class="text-emerald-400 text-lg font-bold">$0.485 USDT</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <a href="#cta" class="btn-gold px-8 py-4 rounded-xl text-xs uppercase font-extrabold tracking-widest inline-flex items-center space-x-2">
+                                <i class="fa-solid fa-vault text-amber-950"></i>
+                                <span>ENTER ROYAL TREASURY</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Vault Interactive Showcase -->
+                    <div class="lg:col-span-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            
+                            <!-- Vault Item 1 -->
+                            <div class="royal-card rounded-xl p-5 border border-amber-500/40 relative">
+                                <div class="text-amber-400 text-2xl mb-2"><i class="fa-solid fa-briefcase"></i></div>
+                                <h4 class="font-sora font-bold text-white text-sm mb-1">$100K Funded Pass</h4>
+                                <p class="text-xs text-gray-400 mb-3">Redeem for immediate evaluation account</p>
+                                <span class="text-xs font-mono text-amber-300 font-bold bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/30 inline-block">50,000 $REX</span>
+                            </div>
+
+                            <!-- Vault Item 2 -->
+                            <div class="royal-card rounded-xl p-5 border border-amber-500/40 relative">
+                                <div class="text-amber-400 text-2xl mb-2"><i class="fa-solid fa-money-bill-wave"></i></div>
+                                <h4 class="font-sora font-bold text-white text-sm mb-1">$1,000 USDT Cashout</h4>
+                                <p class="text-xs text-gray-400 mb-3">Instant crypto wallet payout</p>
+                                <span class="text-xs font-mono text-amber-300 font-bold bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/30 inline-block">10,000 $REX</span>
+                            </div>
+
+                            <!-- Vault Item 3 -->
+                            <div class="royal-card rounded-xl p-5 border border-amber-500/40 relative">
+                                <div class="text-amber-400 text-2xl mb-2"><i class="fa-solid fa-crown"></i></div>
+                                <h4 class="font-sora font-bold text-white text-sm mb-1">VIP Court Pass</h4>
+                                <p class="text-xs text-gray-400 mb-3">Lifetime access to research syndicate</p>
+                                <span class="text-xs font-mono text-amber-300 font-bold bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/30 inline-block">15,000 $REX</span>
+                            </div>
+
+                            <!-- Vault Item 4 -->
+                            <div class="royal-card rounded-xl p-5 border border-amber-500/40 relative">
+                                <div class="text-amber-400 text-2xl mb-2"><i class="fa-solid fa-gem"></i></div>
+                                <h4 class="font-sora font-bold text-white text-sm mb-1">Rolex Submariner Vault</h4>
+                                <p class="text-xs text-gray-400 mb-3">Physical delivery to Champion</p>
+                                <span class="text-xs font-mono text-amber-300 font-bold bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/30 inline-block">250,000 $REX</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION DIVIDER WITH CROWN -->
+    <div class="relative z-20 max-w-7xl mx-auto px-4 my-4 flex items-center justify-center space-x-4">
+        <div class="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent flex-1"></div>
+        <span class="text-amber-400 text-sm">👑</span>
+        <div class="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent flex-1"></div>
+    </div>
+
+    <!-- SECTION 5: PROFIT & $REX ESTIMATOR CALCULATOR -->
+    <section id="calculator" class="py-20 relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+                <div class="inline-flex items-center space-x-2 text-amber-400 text-xs font-mono tracking-widest uppercase mb-3 px-3 py-1 rounded-full bg-charcoal border border-amber-500/30">
+                    <span>👑</span>
+                    <span>ROYAL TREASURY CALCULATOR</span>
+                </div>
+                <h2 class="font-sora font-extrabold text-3xl sm:text-4xl text-white">
+                    ESTIMATE YOUR <span class="text-gold-gradient">SOVEREIGN YIELD</span>
+                </h2>
+                <p class="text-gray-400 mt-4 text-sm sm:text-base">
+                    Adjust your monthly trading volume and win rate to simulate your earned $REX treasury rewards and funded capital status.
+                </p>
+            </div>
+
+            <div class="royal-card rounded-3xl p-8 sm:p-12 max-w-4xl mx-auto relative double-border-gold fade-in-up">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                    
+                    <!-- Sliders Side -->
+                    <div class="space-y-6">
+                        
+                        <!-- Volume Slider -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs font-mono">
+                                <span class="text-gray-300 uppercase">Monthly Trading Volume:</span>
+                                <span id="volume-val" class="text-amber-300 font-bold">50 Lots</span>
+                            </div>
+                            <input type="range" id="volume-range" min="5" max="200" value="50" class="w-full accent-amber-400 bg-charcoal h-2 rounded-lg cursor-pointer">
+                        </div>
+
+                        <!-- Win Rate Slider -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs font-mono">
+                                <span class="text-gray-300 uppercase">Win Rate Consistency:</span>
+                                <span id="winrate-val" class="text-amber-300 font-bold">65% Win Rate</span>
+                            </div>
+                            <input type="range" id="winrate-range" min="30" max="90" value="65" class="w-full accent-amber-400 bg-charcoal h-2 rounded-lg cursor-pointer">
+                        </div>
+
+                        <!-- Target Court Rank Slider -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs font-mono">
+                                <span class="text-gray-300 uppercase">Target Decree Rank:</span>
+                                <span id="rank-val" class="text-amber-300 font-bold">Top 10 Finalist</span>
+                            </div>
+                            <input type="range" id="rank-range" min="1" max="3" value="2" class="w-full accent-amber-400 bg-charcoal h-2 rounded-lg cursor-pointer">
+                        </div>
+
+                    </div>
+
+                    <!-- Live Yield Display Box -->
+                    <div class="bg-charcoal/90 rounded-2xl p-6 border border-amber-500/40 space-y-4 text-center relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 text-amber-400">
+                            <i class="fa-solid fa-crown text-7xl"></i>
+                        </div>
+
+                        <span class="text-xs font-mono text-gray-400 uppercase tracking-widest block">PROJECTED MONTHLY $REX YIELD</span>
+                        <div id="calc-rex" class="text-4xl font-mono font-extrabold text-gold-gradient">
+                            12,500 $REX
+                        </div>
+                        <span id="calc-usd" class="text-sm font-mono text-emerald-400 block font-semibold">
+                            ≈ $6,062.50 USD Value
+                        </span>
+
+                        <div class="pt-4 border-t border-gray-800 grid grid-cols-2 gap-2 text-xs font-mono text-left">
+                            <div>
+                                <span class="text-gray-500 block">TRADE REBATE:</span>
+                                <span id="calc-rebate" class="text-gray-200">2,500 $REX</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500 block">PRIZE BONUS:</span>
+                                <span id="calc-prize" class="text-gray-200">10,000 $REX</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <span class="text-[11px] font-mono text-gray-400 block">FUNDED CAPITAL EVALUATION:</span>
+                            <span id="calc-score" class="text-emerald-400 font-bold font-mono text-xs">QUALIFIED ($100K FUNDED)</span>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION DIVIDER WITH CROWN -->
+    <div class="relative z-20 max-w-7xl mx-auto px-4 my-4 flex items-center justify-center space-x-4">
+        <div class="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent flex-1"></div>
+        <span class="text-amber-400 text-sm">👑</span>
+        <div class="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent flex-1"></div>
+    </div>
+
+    <!-- SECTION 6: LEADERBOARD PREVIEW ('COURT OF KINGS' - TOP 3 GET CROWN BADGES) -->
+    <section id="leaderboard" class="py-20 relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+                <div class="inline-flex items-center space-x-2 text-amber-400 text-xs font-mono tracking-widest uppercase mb-3 px-3 py-1 rounded-full bg-charcoal border border-amber-500/30">
+                    <span>👑</span>
+                    <span>COURT OF KINGS ROSTER</span>
+                </div>
+                <h2 class="font-sora font-extrabold text-3xl sm:text-4xl text-white">
+                    THE <span class="text-gold-gradient">COURT OF KINGS</span> LEADERBOARD
+                </h2>
+                <p class="text-gray-400 mt-4 text-sm sm:text-base">
+                    Real-time standings of top forex commanders competing across active decrees. Crown badges represent sovereign ranking status.
+                </p>
+            </div>
+
+            <!-- Top 3 Royal Podium -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 items-end">
+                
+                <!-- Rank 2: Silver Crown Duke -->
+                <div class="royal-card rounded-2xl p-6 text-center relative border-slate-400/50 order-2 md:order-1 fade-in-up">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-charcoal rounded-full border-2 border-slate-300 flex items-center justify-center shadow-[0_0_20px_rgba(224,224,224,0.4)]">
+                        <svg class="w-10 h-10 text-slate-200" viewBox="0 0 24 24" fill="url(#silverGradient)">
+                            <path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5Z" stroke="#E0E0E0" stroke-width="0.5"/>
+                            <path d="M5 18H19V20H5V18Z" fill="url(#silverGradient)"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-mono text-slate-300 font-bold uppercase tracking-widest block mb-1">ROYAL DUKE • RANK #2</span>
+                    <h3 class="font-sora font-extrabold text-xl text-white">Duke_Valerius</h3>
+                    <div class="mt-3 bg-charcoal/90 p-3 rounded-xl border border-slate-700/50 space-y-1 font-mono text-xs">
+                        <div class="flex justify-between"><span class="text-gray-400">GAIN:</span><span class="text-emerald-400 font-bold">+184.2%</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">FPS SCORE:</span><span class="text-slate-200 font-bold">962</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">PRIZE:</span><span class="text-amber-300 font-bold">$20K + $50K ACC</span></div>
+                    </div>
+                </div>
+
+                <!-- Rank 1: Gold Crown King -->
+                <div class="royal-card rounded-2xl p-8 text-center relative border-amber-400 scale-105 z-10 order-1 md:order-2 shadow-[0_0_40px_rgba(255,215,0,0.4)] fade-in-up">
+                    
+                    <!-- Purple Glow Ambient behind King -->
+                    <div class="absolute inset-0 bg-royal-purple/30 rounded-2xl blur-md pointer-events-none"></div>
+
+                    <div class="w-20 h-20 mx-auto mb-4 bg-charcoal rounded-full border-2 border-amber-400 flex items-center justify-center relative shadow-[0_0_25px_rgba(255,215,0,0.8)]">
+                        <svg class="w-12 h-12 text-amber-300 animate-crown-glow" viewBox="0 0 24 24" fill="url(#royalGold)">
+                            <path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5Z" stroke="#FFD700" stroke-width="0.5"/>
+                            <circle cx="3" cy="5" r="1" fill="#FFF8DC"/>
+                            <circle cx="12" cy="4" r="1.2" fill="#FFF8DC"/>
+                            <circle cx="21" cy="5" r="1" fill="#FFF8DC"/>
+                            <path d="M5 18H19V20H5V18Z" fill="url(#royalGold)"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-mono text-amber-300 font-extrabold uppercase tracking-widest block mb-1">👑 SOVEREIGN KING • RANK #1</span>
+                    <h3 class="font-sora font-extrabold text-2xl text-white">King_Alexander</h3>
+                    <div class="mt-4 bg-charcoal/90 p-4 rounded-xl border border-amber-500/40 space-y-1.5 font-mono text-xs">
+                        <div class="flex justify-between"><span class="text-gray-400">GAIN:</span><span class="text-emerald-400 font-bold text-sm">+248.5%</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">FPS SCORE:</span><span class="text-amber-300 font-bold">994</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">PRIZE:</span><span class="text-amber-300 font-bold">$50K + $100K ACC</span></div>
+                    </div>
+                </div>
+
+                <!-- Rank 3: Bronze Crown Earl -->
+                <div class="royal-card rounded-2xl p-6 text-center relative border-amber-700/50 order-3 fade-in-up">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-charcoal rounded-full border-2 border-amber-700 flex items-center justify-center shadow-[0_0_20px_rgba(205,127,50,0.4)]">
+                        <svg class="w-10 h-10 text-amber-600" viewBox="0 0 24 24" fill="url(#bronzeGradient)">
+                            <path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5Z" stroke="#CD7F32" stroke-width="0.5"/>
+                            <path d="M5 18H19V20H5V18Z" fill="url(#bronzeGradient)"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-mono text-amber-600 font-bold uppercase tracking-widest block mb-1">ROYAL EARL • RANK #3</span>
+                    <h3 class="font-sora font-extrabold text-xl text-white">Earl_Oberon</h3>
+                    <div class="mt-3 bg-charcoal/90 p-3 rounded-xl border border-amber-900/50 space-y-1 font-mono text-xs">
+                        <div class="flex justify-between"><span class="text-gray-400">GAIN:</span><span class="text-emerald-400 font-bold">+142.1%</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">FPS SCORE:</span><span class="text-amber-600 font-bold">920</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">PRIZE:</span><span class="text-amber-300 font-bold">$10K + $25K ACC</span></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Court Roster Table (Ranks 4-10) -->
+            <div class="royal-card rounded-2xl overflow-hidden double-border-gold fade-in-up">
+                <div class="p-4 bg-charcoal border-b border-amber-500/30 flex items-center justify-between font-mono text-xs text-amber-400">
+                    <span>👑 COURT ROSTER STANDINGS</span>
+                    <span>LIVE MT4/MT5 SYNC</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left font-mono text-xs">
+                        <thead class="bg-charcoal/90 text-gray-400 uppercase border-b border-gray-800">
+                            <tr>
+                                <th class="p-4">Rank</th>
+                                <th class="p-4">Commander</th>
+                                <th class="p-4">Gain %</th>
+                                <th class="p-4">Win Rate</th>
+                                <th class="p-4">FPS Rating</th>
+                                <th class="p-4 text-right">$REX Earned</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-800 text-gray-300">
+                            <tr class="hover:bg-amber-500/5 transition-colors">
+                                <td class="p-4 font-bold text-amber-400">#4</td>
+                                <td class="p-4 font-sora font-bold text-white">Lord_Aethelred</td>
+                                <td class="p-4 text-emerald-400 font-bold">+118.4%</td>
+                                <td class="p-4">71.2%</td>
+                                <td class="p-4 text-amber-300">895</td>
+                                <td class="p-4 text-right text-amber-300 font-bold">24,500 $REX</td>
+                            </tr>
+                            <tr class="hover:bg-amber-500/5 transition-colors">
+                                <td class="p-4 font-bold text-amber-400">#5</td>
+                                <td class="p-4 font-sora font-bold text-white">Baron_Soren</td>
+                                <td class="p-4 text-emerald-400 font-bold">+98.2%</td>
+                                <td class="p-4">68.5%</td>
+                                <td class="p-4 text-amber-300">870</td>
+                                <td class="p-4 text-right text-amber-300 font-bold">18,200 $REX</td>
+                            </tr>
+                            <tr class="hover:bg-amber-500/5 transition-colors">
+                                <td class="p-4 font-bold text-amber-400">#6</td>
+                                <td class="p-4 font-sora font-bold text-white">Sir_Galahad_FX</td>
+                                <td class="p-4 text-emerald-400 font-bold">+84.6%</td>
+                                <td class="p-4">65.0%</td>
+                                <td class="p-4 text-amber-300">842</td>
+                                <td class="p-4 text-right text-amber-300 font-bold">14,100 $REX</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION DIVIDER WITH CROWN -->
+    <div class="relative z-20 max-w-7xl mx-auto px-4 my-4 flex items-center justify-center space-x-4">
+        <div class="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent flex-1"></div>
+        <span class="text-amber-400 text-sm">👑</span>
+        <div class="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent flex-1"></div>
+    </div>
+
+    <!-- SECTION 7: FREQUENTLY ASKED QUESTIONS -->
+    <section id="faq" class="py-20 relative z-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-16 fade-in-up">
+                <div class="inline-flex items-center space-x-2 text-amber-400 text-xs font-mono tracking-widest uppercase mb-3 px-3 py-1 rounded-full bg-charcoal border border-amber-500/30">
+                    <span>👑</span>
+                    <span>COURT INQUIRIES</span>
+                </div>
+                <h2 class="font-sora font-extrabold text-3xl sm:text-4xl text-white">
+                    FREQUENTLY ASKED <span class="text-gold-gradient">QUESTIONS</span>
+                </h2>
+            </div>
+
+            <div class="space-y-4 fade-in-up">
+                
+                <!-- FAQ Item 1 -->
+                <div class="royal-card rounded-2xl overflow-hidden border border-amber-500/30">
+                    <button class="faq-toggle w-full p-6 text-left flex justify-between items-center font-sora font-bold text-base text-white focus:outline-none hover:text-amber-300 transition-colors">
+                        <span class="flex items-center"><i class="fa-solid fa-crown text-amber-400 text-xs mr-3"></i> How are tournament payout prizes guaranteed?</span>
+                        <i class="fa-solid fa-chevron-down text-amber-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-xs text-gray-300 leading-relaxed border-t border-amber-500/10 pt-4">
+                        All tournament prize pools are locked in audited smart contracts and liquidity reserve accounts prior to the commencement of each decree. USDT payouts and $REX token distributions occur instantly upon tournament closure.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="royal-card rounded-2xl overflow-hidden border border-amber-500/30">
+                    <button class="faq-toggle w-full p-6 text-left flex justify-between items-center font-sora font-bold text-base text-white focus:outline-none hover:text-amber-300 transition-colors">
+                        <span class="flex items-center"><i class="fa-solid fa-crown text-amber-400 text-xs mr-3"></i> Can I connect my existing MT4 / MT5 / cTrader account?</span>
+                        <i class="fa-solid fa-chevron-down text-amber-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-xs text-gray-300 leading-relaxed border-t border-amber-500/10 pt-4">
+                        Yes. Fortrex FX integrates seamlessly with read-only investor API credentials across MetaTrader 4, MetaTrader 5, and cTrader accounts. Your trade execution remains uninterrupted on your primary broker while stats sync live to our leaderboard.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="royal-card rounded-2xl overflow-hidden border border-amber-500/30">
+                    <button class="faq-toggle w-full p-6 text-left flex justify-between items-center font-sora font-bold text-base text-white focus:outline-none hover:text-amber-300 transition-colors">
+                        <span class="flex items-center"><i class="fa-solid fa-crown text-amber-400 text-xs mr-3"></i> How does $REX token accumulate and scale?</span>
+                        <i class="fa-solid fa-chevron-down text-amber-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-xs text-gray-300 leading-relaxed border-t border-amber-500/10 pt-4">
+                        $REX is minted at a standard baseline rate of 50 $REX per lot traded, with higher multipliers for top Court of Kings placements. $REX can be swapped for USDT or redeemed for $100K funded trading passes in the Royal Treasury.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="royal-card rounded-2xl overflow-hidden border border-amber-500/30">
+                    <button class="faq-toggle w-full p-6 text-left flex justify-between items-center font-sora font-bold text-base text-white focus:outline-none hover:text-amber-300 transition-colors">
+                        <span class="flex items-center"><i class="fa-solid fa-crown text-amber-400 text-xs mr-3"></i> What are the strict risk limits during tournament decrees?</span>
+                        <i class="fa-solid fa-chevron-down text-amber-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-xs text-gray-300 leading-relaxed border-t border-amber-500/10 pt-4">
+                        To maintain institutional discipline, decrees enforce a maximum daily drawdown of 5% and a maximum total drawdown of 10%. Adhering to strict risk management yields a higher FPS score bonus.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FINAL CALL TO ACTION SECTION: CLAIM YOUR CROWN -->
+    <section id="cta" class="py-24 relative z-20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="royal-card rounded-3xl p-10 sm:p-16 text-center relative overflow-hidden double-border-gold shadow-[0_0_60px_rgba(212,175,55,0.3)] fade-in-up">
+                
+                <!-- Giant Ambient Purple Radial Background -->
+                <div class="absolute inset-0 bg-royal-purple/35 blur-3xl pointer-events-none"></div>
+
+                <!-- Floating Crown Graphic -->
+                <div class="w-24 h-24 mx-auto mb-6 bg-charcoal rounded-full border-2 border-amber-400 flex items-center justify-center relative shadow-[0_0_30px_rgba(255,215,0,0.8)]">
+                    <svg class="w-14 h-14 text-amber-300 animate-crown-glow" viewBox="0 0 24 24" fill="url(#royalGold)">
+                        <path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5Z" stroke="#FFD700" stroke-width="0.5"/>
+                        <circle cx="3" cy="5" r="1" fill="#FFF8DC"/>
+                        <circle cx="12" cy="4" r="1.2" fill="#FFF8DC"/>
+                        <circle cx="21" cy="5" r="1" fill="#FFF8DC"/>
+                        <path d="M5 18H19V20H5V18Z" fill="url(#royalGold)"/>
+                    </svg>
+                </div>
+
+                <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-300 text-xs font-mono tracking-widest uppercase mb-4">
+                    <span>👑</span>
+                    <span>YOUR KINGDOM AWAITS</span>
+                </div>
+
+                <h2 class="font-sora font-black text-3xl sm:text-5xl text-white mb-6 leading-tight">
+                    ENTER THE SOVEREIGN ARENA. <br/>
+                    <span class="text-gold-gradient drop-shadow">CLAIM YOUR CROWN TODAY.</span>
+                </h2>
+
+                <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto mb-8 leading-relaxed">
+                    Join 14,820+ traders competing in structured forex tournaments. Secure $100K funded accounts and build lasting treasury wealth.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="#" class="btn-gold px-10 py-5 rounded-2xl text-sm font-extrabold uppercase tracking-widest flex items-center space-x-3 w-full sm:w-auto shadow-[0_0_35px_rgba(255,215,0,0.6)]">
+                        <i class="fa-solid fa-crown text-lg text-amber-950"></i>
+                        <span>CLAIM YOUR CROWN NOW</span>
+                    </a>
+                    <a href="https://discord.gg" target="_blank" class="px-8 py-5 rounded-2xl text-sm font-bold uppercase tracking-widest text-amber-300 bg-charcoal/80 hover:bg-charcoal border border-amber-500/40 hover:border-amber-400 transition-all flex items-center space-x-3 w-full sm:w-auto double-border-gold">
+                        <i class="fa-brands fa-discord text-lg text-indigo-400"></i>
+                        <span>JOIN DISCORD COURT</span>
+                    </a>
+                </div>
+
+                <p class="mt-6 text-xs font-mono text-gray-500 uppercase tracking-widest">
+                    ⚡ Instant Account Connection • Zero Credit Card Required • Instant $REX Registration Bonus
+                </p>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ROYAL FOOTER WITH HERBAL CREST DIVIDER & BY ROYAL DECREE MICROCOPY -->
+    <footer class="bg-black border-t border-amber-500/30 pt-16 pb-12 relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Royal Crest Divider -->
+            <div class="flex items-center justify-center space-x-6 mb-12">
+                <div class="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent flex-1"></div>
+                <div class="flex items-center space-x-3 text-amber-400">
+                    <i class="fa-solid fa-crown text-base"></i>
+                    <span class="font-sora font-extrabold text-sm tracking-widest text-gold-gradient">FORTREX FX</span>
+                    <i class="fa-solid fa-crown text-base"></i>
+                </div>
+                <div class="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent flex-1"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12 text-xs">
+                
+                <!-- Col 1: Brand & Decree -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <svg class="w-6 h-6 text-amber-400" viewBox="0 0 24 24" fill="url(#royalGold)">
+                            <path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5Z" stroke="#FFD700" stroke-width="0.5"/>
+                            <path d="M5 18H19V20H5V18Z" fill="url(#royalGold)"/>
+                        </svg>
+                        <span class="font-sora font-extrabold text-lg text-gold-gradient">FORTREX FX</span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">
+                        The Stronghold of Forex Kings. Gamified trading tournaments, sovereign treasury rewards, and direct $100K+ prop capital scaling.
+                    </p>
+                    <div class="text-amber-400/80 font-mono text-[11px]">
+                        BY ROYAL DECREE OF FORTREX COURT
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation -->
+                <div class="space-y-3">
+                    <h4 class="font-sora font-bold text-white uppercase tracking-wider text-xs border-b border-amber-500/20 pb-2">Arena Decrees</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#tournaments" class="hover:text-amber-400 transition-colors">Sovereign Prop Challenge</a></li>
+                        <li><a href="#tournaments" class="hover:text-amber-400 transition-colors">IB ROI Kingdom Battle</a></li>
+                        <li><a href="#tournaments" class="hover:text-amber-400 transition-colors">Daily Sprint Duel</a></li>
+                        <li><a href="#leaderboard" class="hover:text-amber-400 transition-colors">Court of Kings Roster</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Treasury & Community -->
+                <div class="space-y-3">
+                    <h4 class="font-sora font-bold text-white uppercase tracking-wider text-xs border-b border-amber-500/20 pb-2">Royal Treasury</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#rex-economy" class="hover:text-amber-400 transition-colors">$REX Utility Vault</a></li>
+                        <li><a href="#calculator" class="hover:text-amber-400 transition-colors">Yield Estimator</a></li>
+                        <li><a href="#features" class="hover:text-amber-400 transition-colors">FPS Rating Standard</a></li>
+                        <li><a href="#" class="hover:text-amber-400 transition-colors">Audit & Transparency</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Social & Status -->
+                <div class="space-y-3">
+                    <h4 class="font-sora font-bold text-white uppercase tracking-wider text-xs border-b border-amber-500/20 pb-2">Syndicate Court</h4>
+                    <div class="flex space-x-3 text-lg text-amber-400">
+                        <a href="#" class="w-9 h-9 rounded-lg bg-charcoal border border-amber-500/30 flex items-center justify-center hover:border-amber-400 transition-colors"><i class="fa-brands fa-discord"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-charcoal border border-amber-500/30 flex items-center justify-center hover:border-amber-400 transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-charcoal border border-amber-500/30 flex items-center justify-center hover:border-amber-400 transition-colors"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-charcoal border border-amber-500/30 flex items-center justify-center hover:border-amber-400 transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                    <div class="pt-2 text-gray-500 text-[11px] font-mono">
+                        Server Time: <span id="server-time" class="text-amber-400">00:00:00 UTC</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Legal & Microcopy -->
+            <div class="border-t border-amber-500/20 pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-500 font-mono space-y-4 sm:space-y-0">
+                <div>
+                    By Royal Decree • © 2026 FORTREX FX. All Sovereign Rights Reserved.
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-amber-400 transition-colors">Privacy Decree</a>
+                    <a href="#" class="hover:text-amber-400 transition-colors">Terms of Realm</a>
+                    <a href="#" class="hover:text-amber-400 transition-colors">Risk Disclosure</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT -->
+    <script>
+        // 1. Loading Screen & Progress Bar
+        window.addEventListener('load', () => {
+            const progressBar = document.getElementById('loading-progress');
+            const progressPercent = document.getElementById('loading-percent');
+            const loadingScreen = document.getElementById('loading-screen');
+            let progress = 0;
+
+            const interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 25) + 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                        }, 700);
+                    }, 200);
+                }
+                progressBar.style.width = progress + '%';
+                progressPercent.innerText = progress + '%';
+            }, 80);
+        });
+
+        // 2. Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileBtn && mobileMenu) {
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // 3. Canvas Gold Particle Background
+        const canvas = document.getElementById('particle-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2.5 + 0.5;
+                    this.speedY = -(Math.random() * 0.4 + 0.1);
+                    this.speedX = (Math.random() - 0.5) * 0.2;
+                    this.opacity = Math.random() * 0.6 + 0.2;
+                }
+                update() {
+                    this.y += this.speedY;
+                    this.x += this.speedX;
+                    if (this.y < 0) this.y = canvas.height;
+                    if (this.x < 0) this.x = canvas.width;
+                    if (this.x > canvas.width) this.x = 0;
+                }
+                draw() {
+                    ctx.fillStyle = `rgba(255, 215, 0, ${this.opacity})`;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < 80; i++) {
+                particles.push(new Particle());
+            }
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
+        }
+
+        // 4. Tagline Typing Effect
+        const typingText = document.getElementById('typing-text');
+        if (typingText) {
+            const phrases = [
+                "Fortify Your Strategy.",
+                "Compete in Royal Decrees.",
+                "Earn $REX & Claim $100K Funding.",
+                "Reign Over Forex Markets."
+            ];
+            let phraseIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function typeLoop() {
+                const currentPhrase = phrases[phraseIndex];
+                if (isDeleting) {
+                    typingText.innerText = currentPhrase.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    typingText.innerText = currentPhrase.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+
+                let typeSpeed = isDeleting ? 30 : 70;
+
+                if (!isDeleting && charIndex === currentPhrase.length) {
+                    typeSpeed = 2200;
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    typeSpeed = 400;
+                }
+
+                setTimeout(typeLoop, typeSpeed);
+            }
+            document.addEventListener('DOMContentLoaded', typeLoop);
+        }
+
+        // 5. Counter-Up Animation with Intersection Observer
+        const counters = document.querySelectorAll('.counter');
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    const duration = 2000;
+                    const stepTime = 20;
+                    const steps = duration / stepTime;
+                    const increment = target / steps;
+                    let current = 0;
+
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            counter.innerText = target.toLocaleString();
+                            clearInterval(timer);
+                        } else {
+                            counter.innerText = Math.floor(current).toLocaleString();
+                        }
+                    }, stepTime);
+
+                    observer.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        counters.forEach(counter => counterObserver.observe(counter));
+
+        // 6. Section Reveal Animation
+        const fadeElements = document.querySelectorAll('.fade-in-up');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(el => revealObserver.observe(el));
+
+        // 7. FAQ Accordion Toggle
+        const faqToggles = document.querySelectorAll('.faq-toggle');
+        faqToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const content = toggle.nextElementSibling;
+                const icon = toggle.querySelector('.fa-chevron-down');
+                const isHidden = content.classList.contains('hidden');
+
+                document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+                document.querySelectorAll('.faq-toggle .fa-chevron-down').forEach(i => i.style.transform = 'rotate(0deg)');
+
+                if (isHidden) {
+                    content.classList.remove('hidden');
+                    if (icon) icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // 8. Yield Calculator Logic
+        const volumeRange = document.getElementById('volume-range');
+        const winrateRange = document.getElementById('winrate-range');
+        const rankRange = document.getElementById('rank-range');
+
+        const volumeVal = document.getElementById('volume-val');
+        const winrateVal = document.getElementById('winrate-val');
+        const rankVal = document.getElementById('rank-val');
+
+        const calcRex = document.getElementById('calc-rex');
+        const calcUsd = document.getElementById('calc-usd');
+        const calcRebate = document.getElementById('calc-rebate');
+        const calcPrize = document.getElementById('calc-prize');
+        const calcScore = document.getElementById('calc-score');
+
+        function updateCalculator() {
+            if (!volumeRange) return;
+            const volume = parseInt(volumeRange.value);
+            const winrate = parseInt(winrateRange.value);
+            const rank = parseInt(rankRange.value);
+
+            volumeVal.innerText = volume + ' Lots';
+            winrateVal.innerText = winrate + '% Win Rate';
+
+            let rankText = 'Top 50';
+            let prizeBonus = 2000;
+            if (rank === 2) {
+                rankText = 'Top 10 Finalist';
+                prizeBonus = 10000;
+            } else if (rank === 3) {
+                rankText = '1st Champion';
+                prizeBonus = 50000;
+            }
+            rankVal.innerText = rankText;
+
+            const rebateRex = volume * 50;
+            const totalRex = rebateRex + prizeBonus;
+            const usdVal = (totalRex * 0.485).toFixed(2);
+
+            calcRex.innerText = totalRex.toLocaleString() + ' $REX';
+            calcUsd.innerText = '≈ $' + parseFloat(usdVal).toLocaleString('en-US', {minimumFractionDigits: 2}) + ' USD Value';
+            calcRebate.innerText = rebateRex.toLocaleString() + ' $REX';
+            calcPrize.innerText = prizeBonus.toLocaleString() + ' $REX';
+
+            if (volume >= 30 && winrate >= 60) {
+                calcScore.innerText = 'QUALIFIED ($100K FUNDED)';
+                calcScore.className = 'text-emerald-400 font-bold font-mono text-xs';
+            } else {
+                calcScore.innerText = 'DEVELOPING KING';
+                calcScore.className = 'text-amber-400 font-bold font-mono text-xs';
+            }
+        }
+
+        if (volumeRange) {
+            volumeRange.addEventListener('input', updateCalculator);
+            winrateRange.addEventListener('input', updateCalculator);
+            rankRange.addEventListener('input', updateCalculator);
+            updateCalculator();
+        }
+
+        // 9. Live UTC Server Clock
+        function updateClock() {
+            const serverTimeEl = document.getElementById('server-time');
+            if (serverTimeEl) {
+                const now = new Date();
+                serverTimeEl.innerText = now.toUTCString().split(' ')[4] + ' UTC';
+            }
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>

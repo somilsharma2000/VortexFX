@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE THRONE ROOM — Fortrex FX Royal Dashboard</title>
+
+    <!-- Google Fonts: Sora (Headings), Inter (Body), JetBrains Mono (Numbers/Codes) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome 6.5.1 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            100: '#FFF9E6',
+                            200: '#FFEDAA',
+                            300: '#FFE16F',
+                            400: '#FFD700', // Metallic Gold
+                            500: '#F0B90B',
+                            600: '#D4AF37', // Royal Gold
+                            700: '#AA771C',
+                            800: '#7A540D',
+                            900: '#4A3204',
+                        },
+                        obsidian: {
+                            950: '#030303', // OLED Pure Black
+                            900: '#08070B',
+                            800: '#0E0C13',
+                            700: '#16131F',
+                            600: '#211D2E',
+                        },
+                        royal: {
+                            purple: '#4A0E4E',
+                            darkpurple: '#2A062E',
+                            deepbg: '#0A050D',
+                        },
+                        emerald: {
+                            400: '#34D399',
+                            500: '#10B981',
+                        },
+                        crimson: {
+                            loss: '#EF4444',
+                            seal: '#881337',
+                        }
+                    },
+                    fontFamily: {
+                        sora: ['Sora', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    boxShadow: {
+                        'gold-glow': '0 0 25px rgba(212, 175, 55, 0.3)',
+                        'gold-glow-lg': '0 0 45px rgba(255, 215, 0, 0.4)',
+                        'purple-glow': '0 0 35px rgba(74, 14, 78, 0.55)',
+                        'wax-seal': '0 4px 18px rgba(185, 28, 28, 0.65)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Royal Obsidian Gold Master Styles */
+        :root {
+            --gold-primary: #D4AF37;
+            --gold-light: #FFD700;
+            --gold-dark: #AA771C;
+            --obsidian-bg: #030303;
+        }
+
+        body {
+            background-color: var(--obsidian-bg);
+            color: #E2E8F0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* OLED Black with Subtle Gold Damask Pattern Overlay */
+        .damask-bg {
+            background-color: #030303;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(74, 14, 78, 0.35) 0%, transparent 75%),
+                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37' fill-opacity='0.04'%3E%3Cpath d='M40 0 C25 20 15 20 0 40 C15 60 25 60 40 80 C55 60 65 60 80 40 C65 20 55 20 40 0 Z M40 15 C50 28 60 33 68 40 C60 47 50 52 40 65 C30 52 20 47 12 40 C20 33 30 28 40 15 Z'/%3E%3Ccircle cx='40' cy='40' r='4'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Royal Picture Frame Effect (Double Gold Line Borders) */
+        .royal-frame {
+            position: relative;
+            background: rgba(212, 175, 55, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            box-shadow: inset 0 0 0 2px rgba(212, 175, 55, 0.1), 0 10px 30px rgba(0, 0, 0, 0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .royal-frame::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: inherit;
+            pointer-events: none;
+        }
+
+        .royal-frame:hover {
+            border-color: rgba(255, 215, 0, 0.65);
+            box-shadow: inset 0 0 0 2px rgba(212, 175, 55, 0.2), 0 0 30px rgba(212, 175, 55, 0.3), 0 15px 35px rgba(0, 0, 0, 0.9);
+            transform: translateY(-2px);
+        }
+
+        /* Filigree Corner Accents */
+        .filigree-tl { position: absolute; top: 3px; left: 3px; width: 10px; height: 10px; border-top: 2px solid rgba(255, 215, 0, 0.7); border-left: 2px solid rgba(255, 215, 0, 0.7); border-top-left-radius: 2px; }
+        .filigree-tr { position: absolute; top: 3px; right: 3px; width: 10px; height: 10px; border-top: 2px solid rgba(255, 215, 0, 0.7); border-right: 2px solid rgba(255, 215, 0, 0.7); border-top-right-radius: 2px; }
+        .filigree-bl { position: absolute; bottom: 3px; left: 3px; width: 10px; height: 10px; border-bottom: 2px solid rgba(255, 215, 0, 0.7); border-left: 2px solid rgba(255, 215, 0, 0.7); border-bottom-left-radius: 2px; }
+        .filigree-br { position: absolute; bottom: 3px; right: 3px; width: 10px; height: 10px; border-bottom: 2px solid rgba(255, 215, 0, 0.7); border-right: 2px solid rgba(255, 215, 0, 0.7); border-bottom-right-radius: 2px; }
+
+        /* Corner Shimmer Crown Effect */
+        .corner-crown-shimmer {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 12px;
+            color: rgba(212, 175, 55, 0.35);
+            transition: all 0.3s ease;
+        }
+
+        .royal-frame:hover .corner-crown-shimmer {
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        /* Primary Metallic Gold Gradient Text */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #FFF099 0%, #FFD700 35%, #D4AF37 70%, #997A15 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Gold Gradient Button */
+        .btn-royal-gold {
+            background: linear-gradient(135deg, #D4AF37 0%, #F0B90B 50%, #FFD700 100%);
+            color: #000000;
+            font-weight: 800;
+            border: 1px solid #FFE885;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            transition: all 0.25s ease;
+        }
+
+        .btn-royal-gold:hover {
+            background: linear-gradient(135deg, #FFD700 0%, #F0B90B 50%, #D4AF37 100%);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.6);
+            transform: translateY(-1px);
+        }
+
+        /* Glassmorphism Container */
+        .royal-glass {
+            background: rgba(212, 175, 55, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        /* Shield Card Clip-Path Styling */
+        .shield-card {
+            position: relative;
+            background: linear-gradient(180deg, rgba(22, 18, 30, 0.9) 0%, rgba(9, 7, 14, 0.95) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 1.25rem;
+            box-shadow: inset 0 0 0 2px rgba(212, 175, 55, 0.1), 0 8px 25px rgba(0,0,0,0.7);
+            transition: all 0.3s ease;
+        }
+
+        .shield-card:hover {
+            border-color: rgba(255, 215, 0, 0.7);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3), inset 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Wax Seal Stamp Effect */
+        .wax-seal {
+            width: 78px;
+            height: 78px;
+            background: radial-gradient(circle, #DC2626 0%, #991B1B 65%, #450A0A 100%);
+            border-radius: 50%;
+            border: 2.5px dashed #FCA5A5;
+            box-shadow: 0 0 22px rgba(220, 38, 38, 0.75), inset 0 0 10px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #FEF08A;
+            font-weight: 900;
+            font-size: 8.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transform: rotate(-14deg);
+            position: absolute;
+            top: -12px;
+            right: 12px;
+            z-index: 20;
+            animation: waxSealPop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+        }
+
+        @keyframes waxSealPop {
+            0% { transform: scale(0) rotate(45deg); opacity: 0; }
+            80% { transform: scale(1.15) rotate(-18deg); opacity: 1; }
+            100% { transform: scale(1) rotate(-14deg); opacity: 1; }
+        }
+
+        /* Custom Royal Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030303;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4A3204;
+            border-radius: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        /* Royal Progress Bar Glow Animation */
+        .progress-glow {
+            background: linear-gradient(90deg, #AA771C 0%, #F0B90B 50%, #FFD700 100%);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Gold Coin Glow */
+        .gold-coin-glow {
+            filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.65));
+        }
+
+        /* Table Gold Row Hover */
+        .royal-table-row {
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+        }
+        .royal-table-row:hover {
+            background-color: rgba(212, 175, 55, 0.06);
+            border-bottom-color: rgba(212, 175, 55, 0.35);
+        }
+    </style>
+</head>
+<body class="damask-bg min-h-screen flex flex-col justify-between selection:bg-gold-500 selection:text-black">
+
+    <!-- TOP SOVEREIGN ANNOUNCEMENT BANNER -->
+    <div class="bg-gradient-to-r from-royal-purple via-obsidian-900 to-royal-darkpurple border-b border-gold-600/40 py-2.5 px-4 text-xs font-inter z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            <div class="flex items-center gap-2 overflow-hidden whitespace-nowrap">
+                <span class="bg-gold-500/20 text-gold-400 text-[10px] font-sora font-extrabold px-2 py-0.5 rounded border border-gold-500/40 uppercase tracking-wider flex items-center gap-1">
+                    <i class="fa-solid fa-crown text-[10px]"></i> Royal Proclamation
+                </span>
+                <span class="text-slate-300 font-medium truncate">
+                    FTMO $50,000 Grand Slam Conquest ends in <strong class="text-gold-400 font-mono" id="top-timer">02d : 14h : 32m</strong> — Current Realm Leader: <strong class="text-white">Duke AlexApex (+34.8% ROI)</strong>
+                </span>
+            </div>
+            <div class="hidden md:flex items-center gap-4 shrink-0 text-slate-400 text-xs">
+                <span><i class="fa-solid fa-shield-halved text-gold-400 mr-1"></i> Citadel Shield: Fortified</span>
+                <span><i class="fa-solid fa-bolt text-gold-400 mr-1"></i> Duke Multiplier: 1.5x Active</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP CONTAINER -->
+    <div class="flex-1 flex flex-col lg:flex-row max-w-[1600px] w-full mx-auto relative">
+
+        <!-- NAVIGATION SIDEBAR (DESKTOP FIXED & MOBILE DRAWER) -->
+        <aside id="sidebar" class="w-full lg:w-72 bg-obsidian-950/90 border-r border-gold-600/30 p-5 flex flex-col justify-between shrink-0 z-40 backdrop-blur-xl relative">
+            <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+            
+            <div>
+                <!-- BRAND LOGO & ROYAL EMBLEM -->
+                <div class="flex items-center justify-between pb-6 border-b border-gold-600/20 mb-6">
+                    <a href="#" class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-gold-400 via-gold-600 to-gold-800 p-[1.5px] shadow-gold-glow flex items-center justify-center">
+                            <div class="w-full h-full bg-obsidian-950 rounded-[10.5px] flex items-center justify-center text-gold-400">
+                                <i class="fa-solid fa-crown text-xl text-gold-400 drop-shadow-[0_0_8px_rgba(255,215,0,0.8)]"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h1 class="font-sora font-black text-lg tracking-wider text-white flex items-center gap-1">
+                                FORTREX <span class="text-gold-gradient">FX</span>
+                            </h1>
+                            <p class="text-[10px] font-sora tracking-widest text-gold-500 uppercase font-bold">Stronghold of Kings</p>
+                        </div>
+                    </a>
+                    
+                    <!-- Mobile Hamburger Toggle -->
+                    <button onclick="toggleMobileSidebar()" class="lg:hidden text-gold-400 hover:text-white p-2 text-xl">
+                        <i class="fa-solid fa-bars" id="sidebar-icon"></i>
+                    </button>
+                </div>
+
+                <!-- NAV NAVIGATION MENU -->
+                <nav id="nav-menu" class="space-y-2 hidden lg:block">
+                    <div class="text-[10px] font-sora font-extrabold uppercase tracking-widest text-slate-500 px-3 py-1">Sovereign Realm</div>
+                    
+                    <a href="#throne-room" class="flex items-center gap-3 px-3.5 py-3 rounded-xl bg-gradient-to-r from-gold-500/20 to-gold-600/5 text-gold-300 font-sora font-semibold text-xs border border-gold-500/40 shadow-gold-glow transition-all">
+                        <i class="fa-solid fa-crown text-gold-400 text-sm"></i>
+                        <span>The Throne Room</span>
+                        <span class="ml-auto text-[9px] bg-gold-400 text-black px-1.5 py-0.5 rounded font-black font-mono">ACTIVE</span>
+                    </a>
+
+                    <a href="#decrees-section" class="flex items-center gap-3 px-3.5 py-3 rounded-xl text-slate-400 hover:text-gold-300 hover:bg-gold-500/10 font-sora font-semibold text-xs border border-transparent hover:border-gold-500/20 transition-all group">
+                        <i class="fa-solid fa-scroll text-slate-500 group-hover:text-gold-400 text-sm"></i>
+                        <span>Royal Decrees</span>
+                        <span class="ml-auto text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full font-mono">5 Ready</span>
+                    </a>
+
+                    <a href="#treasury-section" class="flex items-center gap-3 px-3.5 py-3 rounded-xl text-slate-400 hover:text-gold-300 hover:bg-gold-500/10 font-sora font-semibold text-xs border border-transparent hover:border-gold-500/20 transition-all group">
+                        <i class="fa-solid fa-vault text-slate-500 group-hover:text-gold-400 text-sm"></i>
+                        <span>Royal Treasury</span>
+                    </a>
+
+                    <a href="#store-section" class="flex items-center gap-3 px-3.5 py-3 rounded-xl text-slate-400 hover:text-gold-300 hover:bg-gold-500/10 font-sora font-semibold text-xs border border-transparent hover:border-gold-500/20 transition-all group">
+                        <i class="fa-solid fa-store text-slate-500 group-hover:text-gold-400 text-sm"></i>
+                        <span>Royal Marketplace</span>
+                        <span class="ml-auto text-[9px] bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded font-bold">REWARDS</span>
+                    </a>
+
+                    <a href="#referral-section" class="flex items-center gap-3 px-3.5 py-3 rounded-xl text-slate-400 hover:text-gold-300 hover:bg-gold-500/10 font-sora font-semibold text-xs border border-transparent hover:border-gold-500/20 transition-all group">
+                        <i class="fa-solid fa-sitemap text-slate-500 group-hover:text-gold-400 text-sm"></i>
+                        <span>Expand Kingdom</span>
+                    </a>
+
+                    <div class="text-[10px] font-sora font-extrabold uppercase tracking-widest text-slate-500 px-3 py-1 pt-4">Arena & Governance</div>
+
+                    <a href="fortrex-fx-tournaments.html" class="flex items-center gap-3 px-3.5 py-3 rounded-xl text-slate-400 hover:text-gold-300 hover:bg-gold-500/10 font-sora font-semibold text-xs border border-transparent hover:border-gold-500/20 transition-all group">
+                        <i class="fa-solid fa-trophy text-slate-500 group-hover:text-gold-400 text-sm"></i>
+                        <span>Conquest Arenas</span>
+                    </a>
+
+                    <a href="fortrex-fx-leaderboard.html" class="flex items-center gap-3 px-3.5 py-3 rounded-xl text-slate-400 hover:text-gold-300 hover:bg-gold-500/10 font-sora font-semibold text-xs border border-transparent hover:border-gold-500/20 transition-all group">
+                        <i class="fa-solid fa-chess-king text-slate-500 group-hover:text-gold-400 text-sm"></i>
+                        <span>Sovereign Ranks</span>
+                    </a>
+
+                    <a href="#ledger-section" class="flex items-center gap-3 px-3.5 py-3 rounded-xl text-slate-400 hover:text-gold-300 hover:bg-gold-500/10 font-sora font-semibold text-xs border border-transparent hover:border-gold-500/20 transition-all group">
+                        <i class="fa-solid fa-book-bookmark text-slate-500 group-hover:text-gold-400 text-sm"></i>
+                        <span>Royal Ledger</span>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- USER ROYAL PROFILE CARD AT BOTTOM OF SIDEBAR -->
+            <div class="pt-6 border-t border-gold-600/20 mt-6">
+                <div class="p-3.5 rounded-2xl bg-gradient-to-b from-royal-purple/40 to-obsidian-900 border border-gold-500/30 flex items-center justify-between relative overflow-hidden">
+                    <div class="flex items-center gap-3 z-10">
+                        <div class="relative">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-gold-400 to-gold-600 p-[1.5px] shadow-gold-glow flex items-center justify-center bg-obsidian-950">
+                                <i class="fa-solid fa-user-ninja text-gold-400 text-base"></i>
+                            </div>
+                            <span class="absolute -bottom-1 -right-1 bg-gold-400 text-black text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-black">👑</span>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1.5">
+                                <h4 class="font-sora font-bold text-xs text-white">AlexApex</h4>
+                                <span class="text-xs">🇮🇳</span>
+                            </div>
+                            <p class="text-[10px] text-gold-400 font-mono font-semibold">Rank #3 • Duke 💎</p>
+                        </div>
+                    </div>
+                    <a href="#throne-room" class="text-slate-400 hover:text-gold-400 transition-colors z-10 p-1">
+                        <i class="fa-solid fa-gear text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN DASHBOARD CONTENT AREA -->
+        <main class="flex-1 p-4 sm:p-6 lg:p-8 space-y-8 overflow-x-hidden relative">
+
+            <!-- BACKGROUND AMBIENT PURPLE ROYAL GLOW -->
+            <div class="absolute top-0 right-1/4 w-[500px] h-[500px] bg-royal-purple/25 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+
+            <!-- HEADER AREA: THE THRONE ROOM & USER RANK -->
+            <div id="throne-room" class="royal-frame p-6 sm:p-8 rounded-2xl flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 relative overflow-hidden">
+                <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+                <div class="corner-crown-shimmer"><i class="fa-solid fa-crown"></i></div>
+
+                <div class="space-y-3 z-10">
+                    <div class="flex items-center gap-3 flex-wrap">
+                        <span class="bg-gradient-to-r from-gold-500/20 to-royal-purple/60 border border-gold-500/40 text-gold-300 text-xs font-sora font-extrabold px-3 py-1 rounded-full uppercase tracking-widest flex items-center gap-1.5 shadow-gold-glow">
+                            <i class="fa-solid fa-crown text-gold-400"></i> The Throne Room
+                        </span>
+                        <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> MT4/MT5 Account Verified
+                        </span>
+                    </div>
+
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-sora font-black text-white tracking-tight">
+                        Welcome back, <span class="text-gold-gradient">Duke Alex</span> 👑
+                    </h1>
+
+                    <p class="text-slate-300 text-sm max-w-2xl font-inter flex items-center gap-4 flex-wrap">
+                        <span><i class="fa-solid fa-earth-asia text-gold-400"></i> Sovereign of India 🇮🇳</span>
+                        <span><i class="fa-solid fa-shield text-gold-400"></i> Global Rank: <strong class="text-white font-mono">#3</strong></span>
+                        <span><i class="fa-solid fa-fire text-amber-400"></i> Conquest Streak: <strong class="text-gold-400 font-mono">5 Days 🔥</strong></span>
+                    </p>
+                </div>
+
+                <!-- QUICK ACTIONS CTA BUTTONS -->
+                <div class="flex flex-wrap items-center gap-3 z-10">
+                    <a href="#decrees-section" class="btn-royal-gold px-5 py-3 rounded-xl text-xs font-sora font-extrabold tracking-wider uppercase flex items-center gap-2">
+                        <i class="fa-solid fa-scroll text-sm"></i> Claim Royal Tribute
+                    </a>
+                    <a href="#store-section" class="bg-obsidian-900 hover:bg-obsidian-800 text-slate-200 border border-gold-500/30 px-5 py-3 rounded-xl text-xs font-sora font-bold tracking-wider uppercase transition-all hover:border-gold-400 flex items-center gap-2">
+                        <i class="fa-solid fa-store text-gold-400"></i> Royal Marketplace
+                    </a>
+                </div>
+            </div>
+
+            <!-- PATH TO SOVEREIGNTY: RANK SYSTEM PROGRESSION BAR -->
+            <div class="royal-frame p-6 rounded-2xl space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                        <h3 class="font-sora font-bold text-sm text-white flex items-center gap-2">
+                            <i class="fa-solid fa-chess-king text-gold-400"></i> Sovereign Rank Ascension Path
+                        </h3>
+                        <p class="text-xs text-slate-400">Current Rank: <strong class="text-gold-300 font-sora">Duke (Diamond Rank)</strong> • Progressing towards <strong class="text-gold-400">King (Apex Sovereign)</strong></p>
+                    </div>
+                    <div class="text-right font-mono text-xs text-gold-400 font-bold bg-gold-500/10 border border-gold-500/20 px-3 py-1.5 rounded-lg shrink-0">
+                        8,200 / 15,000 $REX (54.6%)
+                    </div>
+                </div>
+
+                <!-- PROGRESS METER BAR -->
+                <div class="w-full h-3.5 bg-obsidian-950 rounded-full border border-gold-600/30 p-0.5 overflow-hidden">
+                    <div class="h-full rounded-full progress-glow transition-all duration-1000" style="width: 54.6%;"></div>
+                </div>
+
+                <!-- RANK MILESTONE STEPS -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 pt-2 text-center text-[11px] font-sora font-semibold">
+                    <div class="p-2 rounded-xl bg-obsidian-900/60 border border-slate-800 text-slate-500">
+                        <div class="text-xs">🥉 Peasant</div>
+                        <div class="font-mono text-[10px] text-slate-600">0 - 500</div>
+                    </div>
+                    <div class="p-2 rounded-xl bg-obsidian-900/60 border border-slate-800 text-slate-400">
+                        <div class="text-xs">🥈 Knight</div>
+                        <div class="font-mono text-[10px] text-slate-500">501 - 2.0k</div>
+                    </div>
+                    <div class="p-2 rounded-xl bg-obsidian-900/60 border border-slate-800 text-amber-400">
+                        <div class="text-xs">🥇 Baron</div>
+                        <div class="font-mono text-[10px] text-amber-500/80">2.0k - 5.0k</div>
+                    </div>
+                    <div class="p-2 rounded-xl bg-obsidian-900/60 border border-slate-700 text-slate-300">
+                        <div class="text-xs">💎 Earl</div>
+                        <div class="font-mono text-[10px] text-slate-400">5.0k - 7.5k</div>
+                    </div>
+                    <!-- CURRENT USER RANK: DUKE -->
+                    <div class="p-2 rounded-xl bg-gradient-to-b from-gold-500/20 to-royal-purple/40 border border-gold-400 text-gold-300 shadow-gold-glow relative">
+                        <div class="text-xs font-extrabold flex items-center justify-center gap-1">👑 Duke <span class="bg-gold-400 text-black text-[8px] px-1 rounded">YOU</span></div>
+                        <div class="font-mono text-[10px] text-gold-400">7.5k - 15k</div>
+                    </div>
+                    <div class="p-2 rounded-xl bg-obsidian-900/60 border border-amber-500/30 text-amber-400/60">
+                        <div class="text-xs">⚜️ King (Apex)</div>
+                        <div class="font-mono text-[10px] text-amber-500/50">15,000+</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STATS SHIELD CARDS GRID & ROYAL TREASURY -->
+            <div id="treasury-section" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- CARD 1: ROYAL TREASURY BALANCE -->
+                <div class="royal-frame p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden group">
+                    <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+                    <div class="corner-crown-shimmer"><i class="fa-solid fa-crown"></i></div>
+
+                    <div class="flex items-center justify-between pb-3 border-b border-gold-600/20">
+                        <span class="text-xs font-sora font-bold tracking-wider text-gold-400 uppercase flex items-center gap-2">
+                            <i class="fa-solid fa-coins text-gold-400"></i> Royal Treasury
+                        </span>
+                        <span class="bg-gold-500/20 text-gold-300 text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-gold-500/30">LIFETIME</span>
+                    </div>
+
+                    <div class="my-5 flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-gold-300 via-gold-500 to-gold-700 p-[1.5px] shadow-gold-glow flex items-center justify-center shrink-0">
+                            <div class="w-full h-full bg-obsidian-950 rounded-[14.5px] flex items-center justify-center">
+                                <i class="fa-solid fa-coins text-2xl text-gold-400 gold-coin-glow"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-3xl sm:text-4xl font-mono font-extrabold text-white tracking-tight flex items-baseline gap-1" id="rex-main-balance">
+                                8,200 <span class="text-base text-gold-400 font-sora font-bold">$REX</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-0.5">Approx. Royal Value: <span class="text-emerald-400 font-mono font-bold">$820.00</span></p>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 border-t border-gold-600/20 flex items-center justify-between text-xs text-slate-400 font-inter">
+                        <span>Duke Yield Multiplier:</span>
+                        <span class="text-gold-400 font-mono font-bold bg-gold-500/10 px-2 py-0.5 rounded border border-gold-500/20">1.5x ACTIVE</span>
+                    </div>
+                </div>
+
+                <!-- CARD 2: GLOBAL REALM RANK -->
+                <div class="shield-card p-6 flex flex-col justify-between relative overflow-hidden group">
+                    <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+
+                    <div class="flex items-center justify-between pb-3 border-b border-gold-600/20">
+                        <span class="text-xs font-sora font-bold tracking-wider text-slate-300 uppercase flex items-center gap-2">
+                            <i class="fa-solid fa-ranking-star text-gold-400"></i> Realm Rank
+                        </span>
+                        <span class="bg-royal-purple/60 text-gold-300 text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-gold-500/30">TOP 0.02%</span>
+                    </div>
+
+                    <div class="my-5">
+                        <div class="text-3xl sm:text-4xl font-mono font-extrabold text-white flex items-baseline gap-2">
+                            #3 <span class="text-xs text-slate-400 font-inter font-normal">/ 14,280 Sovereigns</span>
+                        </div>
+                        <div class="mt-2 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gold-500/10 border border-gold-500/30 text-gold-300 text-xs font-sora font-bold">
+                            <i class="fa-solid fa-gem text-gold-400"></i> Diamond Duke Rank
+                        </div>
+                    </div>
+
+                    <div class="pt-3 border-t border-gold-600/20 flex items-center justify-between text-xs text-slate-400">
+                        <span>Pacesetter Behind #2:</span>
+                        <span class="text-white font-mono font-semibold">+120 ROI Pts</span>
+                    </div>
+                </div>
+
+                <!-- CARD 3: TOURNAMENT CONQUEST ROI -->
+                <div class="shield-card p-6 flex flex-col justify-between relative overflow-hidden group">
+                    <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+
+                    <div class="flex items-center justify-between pb-3 border-b border-gold-600/20">
+                        <span class="text-xs font-sora font-bold tracking-wider text-slate-300 uppercase flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line text-emerald-400"></i> Active Conquest
+                        </span>
+                        <span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-emerald-500/30">FTMO SPRINT</span>
+                    </div>
+
+                    <div class="my-5">
+                        <div class="text-3xl sm:text-4xl font-mono font-extrabold text-emerald-400 flex items-baseline gap-1">
+                            +34.8% <span class="text-xs text-slate-400 font-sora">ROI</span>
+                        </div>
+                        <p class="text-xs text-slate-300 mt-1 font-inter">Equity: <span class="text-white font-mono font-bold">$53,420.00</span> ($50k Challenge)</p>
+                    </div>
+
+                    <div class="pt-3 border-t border-gold-600/20 flex items-center justify-between text-xs text-slate-400">
+                        <span>Current Arena Position:</span>
+                        <span class="text-gold-400 font-sora font-bold">👑 1st Place</span>
+                    </div>
+                </div>
+
+                <!-- CARD 4: ROYAL LINEAGE EARNINGS -->
+                <div class="shield-card p-6 flex flex-col justify-between relative overflow-hidden group">
+                    <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+
+                    <div class="flex items-center justify-between pb-3 border-b border-gold-600/20">
+                        <span class="text-xs font-sora font-bold tracking-wider text-slate-300 uppercase flex items-center gap-2">
+                            <i class="fa-solid fa-users text-gold-400"></i> Lineage Yield
+                        </span>
+                        <span class="bg-gold-500/20 text-gold-300 text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-gold-500/30">12 RECRUITS</span>
+                    </div>
+
+                    <div class="my-5">
+                        <div class="text-3xl sm:text-4xl font-mono font-extrabold text-white flex items-baseline gap-1">
+                            1,850 <span class="text-base text-gold-400 font-sora font-bold">$REX</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1">Conversions: <strong class="text-white font-mono">8 / 12 Vassals (66.7%)</strong></p>
+                    </div>
+
+                    <div class="pt-3 border-t border-gold-600/20 flex items-center justify-between text-xs text-slate-400">
+                        <span>Overriding Dividend:</span>
+                        <span class="text-emerald-400 font-mono font-bold">10% Royal Share</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ACTIVE CONQUESTS / TOURNAMENTS SECTION -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-sora font-bold text-white flex items-center gap-2.5">
+                        <i class="fa-solid fa-fire text-amber-500"></i> Active Conquest Arenas
+                    </h2>
+                    <a href="fortrex-fx-tournaments.html" class="text-xs font-sora text-gold-400 hover:text-gold-300 font-bold flex items-center gap-1 transition-colors">
+                        View All Arenas <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- TOURNAMENT 1 -->
+                    <div class="royal-frame p-6 rounded-2xl relative space-y-4">
+                        <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span class="bg-gold-500/20 text-gold-300 border border-gold-500/30 text-[10px] font-sora font-extrabold px-2.5 py-0.5 rounded uppercase">PROP CHALLENGE ARENA</span>
+                                <h3 class="text-lg font-sora font-bold text-white mt-1">FTMO $50,000 Monthly Sprint</h3>
+                                <p class="text-xs text-slate-400">Trading Instrument: MT5 Forex Pairs & Indices</p>
+                            </div>
+                            <span class="bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-mono font-bold px-3 py-1 rounded-full flex items-center gap-1 shrink-0">
+                                <i class="fa-solid fa-trophy text-gold-400"></i> Rank #1
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-3 p-3 bg-obsidian-950/80 rounded-xl border border-gold-600/20 text-center font-mono">
+                            <div>
+                                <div class="text-[10px] text-slate-500 font-inter">Current Equity</div>
+                                <div class="text-sm font-bold text-white">$53,420</div>
+                            </div>
+                            <div>
+                                <div class="text-[10px] text-slate-500 font-inter">Net ROI</div>
+                                <div class="text-sm font-bold text-emerald-400">+34.8%</div>
+                            </div>
+                            <div>
+                                <div class="text-[10px] text-slate-500 font-inter">Time Remaining</div>
+                                <div class="text-sm font-bold text-gold-400" id="arena1-timer">2d 14h</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between text-xs pt-1">
+                            <span class="text-slate-400 font-inter">Max Drawdown: <strong class="text-emerald-400 font-mono">2.1%</strong> (Allowed 10%)</span>
+                            <a href="fortrex-fx-tournaments.html" class="text-gold-400 hover:underline font-sora font-semibold">Arena Details <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- TOURNAMENT 2 -->
+                    <div class="royal-frame p-6 rounded-2xl relative space-y-4">
+                        <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span class="bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[10px] font-sora font-extrabold px-2.5 py-0.5 rounded uppercase">IB ROI GRAND SLAM</span>
+                                <h3 class="text-lg font-sora font-bold text-white mt-1">Exness $10,000 ROI Grand Slam</h3>
+                                <p class="text-xs text-slate-400">Trading Instrument: Exness Real Capital</p>
+                            </div>
+                            <span class="bg-slate-800 text-slate-300 border border-slate-700 text-xs font-mono font-bold px-3 py-1 rounded-full flex items-center gap-1 shrink-0">
+                                <i class="fa-solid fa-medal text-gold-400"></i> Rank #3
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-3 p-3 bg-obsidian-950/80 rounded-xl border border-gold-600/20 text-center font-mono">
+                            <div>
+                                <div class="text-[10px] text-slate-500 font-inter">Current Equity</div>
+                                <div class="text-sm font-bold text-white">$11,850</div>
+                            </div>
+                            <div>
+                                <div class="text-[10px] text-slate-500 font-inter">Net ROI</div>
+                                <div class="text-sm font-bold text-emerald-400">+18.5%</div>
+                            </div>
+                            <div>
+                                <div class="text-[10px] text-slate-500 font-inter">Time Remaining</div>
+                                <div class="text-sm font-bold text-gold-400" id="arena2-timer">5d 08h</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between text-xs pt-1">
+                            <span class="text-slate-400 font-inter">Win Rate: <strong class="text-emerald-400 font-mono">78.5%</strong> (14 Trades)</span>
+                            <a href="fortrex-fx-tournaments.html" class="text-gold-400 hover:underline font-sora font-semibold">Arena Details <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROYAL DECREES & DAILY MISSIONS SECTION -->
+            <div id="decrees-section" class="space-y-4 pt-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gold-600/20 pb-3">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-sora font-bold text-white flex items-center gap-2.5">
+                            <i class="fa-solid fa-scroll text-gold-400"></i> Royal Decrees & Sovereign Quests
+                        </h2>
+                        <p class="text-xs text-slate-400">Fulfill daily decrees to earn $REX coins and elevate your realm ranking.</p>
+                    </div>
+                    <div class="bg-gold-500/10 border border-gold-500/30 px-3 py-1.5 rounded-xl text-xs font-mono text-gold-300 flex items-center gap-2 self-start sm:self-auto">
+                        <i class="fa-solid fa-clock text-gold-400"></i> Next Reset: <span class="font-bold text-white" id="mission-countdown">08h 24m 15s</span>
+                    </div>
+                </div>
+
+                <!-- DECREES GRID -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <!-- DECREE 1: DAILY CHECK-IN -->
+                    <div class="royal-frame p-6 rounded-2xl relative space-y-4 flex flex-col justify-between overflow-hidden" id="decree-card-daily">
+                        <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+                        
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="bg-gold-500/20 text-gold-300 border border-gold-500/30 text-[10px] font-sora font-bold px-2.5 py-0.5 rounded uppercase">DAILY ALLEGIANCE</span>
+                                <span class="text-gold-400 font-mono font-bold text-sm bg-gold-500/10 px-2 py-0.5 rounded border border-gold-500/20">+50 $REX</span>
+                            </div>
+                            <h3 class="font-sora font-bold text-lg text-white flex items-center gap-2">
+                                <i class="fa-solid fa-calendar-check text-gold-400"></i> Daily Sovereign Homage
+                            </h3>
+                            <p class="text-xs text-slate-400 font-inter">Log in daily to claim your allegiance tribute and preserve your 5-day streak multiplier.</p>
+                        </div>
+
+                        <div class="pt-3">
+                            <button onclick="claimDecree('Daily Check-In', 50, this, 'decree-card-daily')" id="btn-claim-daily" class="btn-royal-gold w-full py-2.5 rounded-xl text-xs font-sora font-extrabold uppercase tracking-wider flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-stamp"></i> Claim Homage (+50 $REX)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- DECREE 2: CONNECT DISCORD -->
+                    <div class="royal-frame p-6 rounded-2xl relative space-y-4 flex flex-col justify-between overflow-hidden" id="decree-card-discord">
+                        <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-[10px] font-sora font-bold px-2.5 py-0.5 rounded uppercase">ROYAL CHAMBER</span>
+                                <span class="text-gold-400 font-mono font-bold text-sm bg-gold-500/10 px-2 py-0.5 rounded border border-gold-500/20">+250 $REX</span>
+                            </div>
+                            <h3 class="font-sora font-bold text-lg text-white flex items-center gap-2">
+                                <i class="fa-brands fa-discord text-indigo-400"></i> Forge Discord Allegiance
+                            </h3>
+                            <p class="text-xs text-slate-400 font-inter">Link your Discord account to enter the Private Sovereign Chamber and sync trading roles.</p>
+                        </div>
+
+                        <div class="pt-3">
+                            <button onclick="claimDecree('Discord Allegiance', 250, this, 'decree-card-discord')" id="btn-claim-discord" class="btn-royal-gold w-full py-2.5 rounded-xl text-xs font-sora font-extrabold uppercase tracking-wider flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-stamp"></i> Seal Allegiance (+250 $REX)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- DECREE 3: FOLLOW TWITTER -->
+                    <div class="royal-frame p-6 rounded-2xl relative space-y-4 flex flex-col justify-between overflow-hidden" id="decree-card-twitter">
+                        <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="bg-sky-500/20 text-sky-300 border border-sky-500/30 text-[10px] font-sora font-bold px-2.5 py-0.5 rounded uppercase">REALM PROCLAMATION</span>
+                                <span class="text-gold-400 font-mono font-bold text-sm bg-gold-500/10 px-2 py-0.5 rounded border border-gold-500/20">+100 $REX</span>
+                            </div>
+                            <h3 class="font-sora font-bold text-lg text-white flex items-center gap-2">
+                                <i class="fa-brands fa-x-twitter text-slate-200"></i> Proclaim @FortrexFX
+                            </h3>
+                            <p class="text-xs text-slate-400 font-inter">Follow our official X handle for market intelligence proclamations and tournament alerts.</p>
+                        </div>
+
+                        <div class="pt-3">
+                            <button onclick="claimDecree('Follow Twitter', 100, this, 'decree-card-twitter')" id="btn-claim-twitter" class="btn-royal-gold w-full py-2.5 rounded-xl text-xs font-sora font-extrabold uppercase tracking-wider flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-stamp"></i> Proclaim Decree (+100 $REX)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- DECREE 4: VERIFY MT4 / MT5 -->
+                    <div class="royal-frame p-6 rounded-2xl relative space-y-4 flex flex-col justify-between overflow-hidden" id="decree-card-mt4">
+                        <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-sora font-bold px-2.5 py-0.5 rounded uppercase">PROP BOND</span>
+                                <span class="text-gold-400 font-mono font-bold text-sm bg-gold-500/10 px-2 py-0.5 rounded border border-gold-500/20">+500 $REX</span>
+                            </div>
+                            <h3 class="font-sora font-bold text-lg text-white flex items-center gap-2">
+                                <i class="fa-solid fa-key text-emerald-400"></i> Verify MT4/MT5 Credentials
+                            </h3>
+                            <p class="text-xs text-slate-400 font-inter">Connect read-only investor password to verify genuine trading performance audit.</p>
+                        </div>
+
+                        <div class="pt-3">
+                            <button onclick="claimDecree('Verify MT4/MT5', 500, this, 'decree-card-mt4')" id="btn-claim-mt4" class="btn-royal-gold w-full py-2.5 rounded-xl text-xs font-sora font-extrabold uppercase tracking-wider flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-stamp"></i> Seal MT4 Bond (+500 $REX)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- DECREE 5: JOIN TOURNAMENT -->
+                    <div class="royal-frame p-6 rounded-2xl relative space-y-4 flex flex-col justify-between overflow-hidden" id="decree-card-arena">
+                        <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-sora font-bold px-2.5 py-0.5 rounded uppercase">CONQUEST ENTRY</span>
+                                <span class="text-gold-400 font-mono font-bold text-sm bg-gold-500/10 px-2 py-0.5 rounded border border-gold-500/20">+300 $REX</span>
+                            </div>
+                            <h3 class="font-sora font-bold text-lg text-white flex items-center gap-2">
+                                <i class="fa-solid fa-shield-halved text-amber-400"></i> Enter The Tournament Arena
+                            </h3>
+                            <p class="text-xs text-slate-400 font-inter">Register for any active or upcoming prop challenge tournament arena.</p>
+                        </div>
+
+                        <div class="pt-3">
+                            <button onclick="claimDecree('Join Arena', 300, this, 'decree-card-arena')" id="btn-claim-arena" class="btn-royal-gold w-full py-2.5 rounded-xl text-xs font-sora font-extrabold uppercase tracking-wider flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-stamp"></i> Enter Arena (+300 $REX)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- DECREE 6: CONSISTENCY MAESTRO -->
+                    <div class="royal-frame p-6 rounded-2xl relative space-y-4 flex flex-col justify-between overflow-hidden" id="decree-card-consistency">
+                        <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[10px] font-sora font-bold px-2.5 py-0.5 rounded uppercase">MASTER MASTERY</span>
+                                <span class="text-gold-400 font-mono font-bold text-sm bg-gold-500/10 px-2 py-0.5 rounded border border-gold-500/20">+400 $REX</span>
+                            </div>
+                            <h3 class="font-sora font-bold text-lg text-white flex items-center gap-2">
+                                <i class="fa-solid fa-bullseye text-purple-400"></i> Achieve 90%+ Risk Discipline
+                            </h3>
+                            <p class="text-xs text-slate-400 font-inter">Maintain 15 consecutive trades adhering to strict 1.5% max lot size rule.</p>
+                        </div>
+
+                        <div class="pt-3">
+                            <button onclick="claimDecree('Risk Mastery', 400, this, 'decree-card-consistency')" id="btn-claim-consistency" class="btn-royal-gold w-full py-2.5 rounded-xl text-xs font-sora font-extrabold uppercase tracking-wider flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-stamp"></i> Claim Mastery (+400 $REX)
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- REFERRAL SECTION: EXPAND YOUR KINGDOM (ROYAL LINEAGE CHART) -->
+            <div id="referral-section" class="space-y-6 pt-6">
+                <div class="border-b border-gold-600/20 pb-3">
+                    <h2 class="text-xl sm:text-2xl font-sora font-bold text-white flex items-center gap-2.5">
+                        <i class="fa-solid fa-sitemap text-gold-400"></i> Expand Your Kingdom (Royal Lineage)
+                    </h2>
+                    <p class="text-xs text-slate-400">Recruit ambitious traders into your vassal network and claim 250 $REX per verified recruit + 10% royalty.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- REFERRAL LINK & SHARE TOOLKIT -->
+                    <div class="royal-frame p-6 rounded-2xl space-y-5 lg:col-span-1 flex flex-col justify-between">
+                        <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+
+                        <div class="space-y-4">
+                            <h3 class="font-sora font-bold text-base text-white flex items-center gap-2">
+                                <i class="fa-solid fa-link text-gold-400"></i> Royal Invitation Proclamation
+                            </h3>
+                            <p class="text-xs text-slate-300">Share your personal royal decree link. Recruits receive 100 $REX bonus upon joining your realm.</p>
+
+                            <div class="space-y-2">
+                                <label class="text-[11px] font-sora font-semibold text-slate-400 uppercase">Your Royal Referral Scroll:</label>
+                                <div class="flex items-center gap-2">
+                                    <input type="text" readonly id="ref-link-input" value="https://fortrex.fx/ref/alex_vance_88" class="bg-obsidian-950 border border-gold-500/40 text-gold-300 font-mono text-xs px-3 py-2.5 rounded-xl w-full focus:outline-none">
+                                    <button onclick="copyReferralLink()" class="btn-royal-gold px-4 py-2.5 rounded-xl text-xs font-sora font-bold shrink-0">
+                                        <i class="fa-solid fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SOCIAL SHARE BUTTONS -->
+                        <div class="space-y-2 pt-4 border-t border-gold-600/20">
+                            <div class="text-[11px] font-sora font-semibold text-slate-400 uppercase">Dispatch Proclamation Via:</div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button onclick="shareSocial('whatsapp')" class="bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5">
+                                    <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+                                </button>
+                                <button onclick="shareSocial('twitter')" class="bg-sky-600/20 hover:bg-sky-600/30 text-sky-400 border border-sky-500/30 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5">
+                                    <i class="fa-brands fa-x-twitter text-sm"></i> Twitter
+                                </button>
+                                <button onclick="shareSocial('telegram')" class="bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-400 border border-indigo-500/30 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5">
+                                    <i class="fa-brands fa-telegram text-sm"></i> Telegram
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ROYAL LINEAGE DYNASTY TREE GRAPH -->
+                    <div class="royal-frame p-6 rounded-2xl space-y-4 lg:col-span-2">
+                        <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+
+                        <div class="flex items-center justify-between pb-3 border-b border-gold-600/20">
+                            <h3 class="font-sora font-bold text-base text-white flex items-center gap-2">
+                                <i class="fa-solid fa-diagram-project text-gold-400"></i> Royal Dynasty Lineage Chart
+                            </h3>
+                            <span class="text-xs font-mono text-gold-400 font-bold bg-gold-500/10 px-2.5 py-1 rounded border border-gold-500/20">
+                                12 Invites • 8 Active Vassals
+                            </span>
+                        </div>
+
+                        <!-- TREE NODE CHART GRAPHIC -->
+                        <div class="p-6 bg-obsidian-950/80 rounded-xl border border-gold-600/20 flex flex-col items-center justify-center space-y-6 relative overflow-hidden">
+                            
+                            <!-- ROOT SOVEREIGN (YOU) -->
+                            <div class="flex flex-col items-center z-10">
+                                <div class="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-gold-500/30 via-royal-purple/60 to-gold-500/30 border-2 border-gold-400 text-center shadow-gold-glow">
+                                    <div class="text-[10px] font-sora font-black text-gold-400 uppercase tracking-widest flex items-center justify-center gap-1">
+                                        👑 Sovereign Founder
+                                    </div>
+                                    <div class="font-sora font-black text-sm text-white">Duke AlexApex (India 🇮🇳)</div>
+                                    <div class="font-mono text-[10px] text-emerald-400 font-bold">1,850 $REX Total Lineage Yield</div>
+                                </div>
+                            </div>
+
+                            <!-- CONNECTING BRANCH LINES -->
+                            <div class="w-1 h-6 bg-gradient-to-b from-gold-400 to-gold-600/40"></div>
+
+                            <!-- TIER 1 VASSALS GRID -->
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full z-10">
+                                
+                                <!-- VASSAL 1 -->
+                                <div class="p-3 rounded-xl bg-obsidian-900 border border-gold-500/30 text-center space-y-1 hover:border-gold-400 transition-colors">
+                                    <div class="text-[10px] text-gold-400 font-sora font-bold flex items-center justify-center gap-1">
+                                        🥇 Baron Marcus
+                                    </div>
+                                    <div class="font-mono text-xs text-white">🇮🇳 MT5 Verified</div>
+                                    <div class="text-[10px] text-emerald-400 font-mono">+650 $REX Earned</div>
+                                </div>
+
+                                <!-- VASSAL 2 -->
+                                <div class="p-3 rounded-xl bg-obsidian-900 border border-gold-500/30 text-center space-y-1 hover:border-gold-400 transition-colors">
+                                    <div class="text-[10px] text-gold-400 font-sora font-bold flex items-center justify-center gap-1">
+                                        🥈 Knight Chen
+                                    </div>
+                                    <div class="font-mono text-xs text-white">🇸🇬 FTMO Challenge</div>
+                                    <div class="text-[10px] text-emerald-400 font-mono">+500 $REX Earned</div>
+                                </div>
+
+                                <!-- VASSAL 3 -->
+                                <div class="p-3 rounded-xl bg-obsidian-900 border border-gold-500/30 text-center space-y-1 hover:border-gold-400 transition-colors">
+                                    <div class="text-[10px] text-gold-400 font-sora font-bold flex items-center justify-center gap-1">
+                                        🥈 Knight Vance
+                                    </div>
+                                    <div class="font-mono text-xs text-white">🇬🇧 Exness Trader</div>
+                                    <div class="text-[10px] text-emerald-400 font-mono">+450 $REX Earned</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- $REX STORE: ROYAL MARKETPLACE SECTION -->
+            <div id="store-section" class="space-y-6 pt-6">
+                <div class="border-b border-gold-600/20 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-sora font-bold text-white flex items-center gap-2.5">
+                            <i class="fa-solid fa-store text-gold-400"></i> Royal Marketplace & Sovereign Rewards
+                        </h2>
+                        <p class="text-xs text-slate-400">Exchange your $REX treasury for funded account charters, court passes, and raffle entries.</p>
+                    </div>
+                    <div class="text-xs font-mono text-slate-300">
+                        Available Treasury: <strong class="text-gold-400 font-bold" id="store-rex-display">8,200 $REX</strong>
+                    </div>
+                </div>
+
+                <!-- STORE REWARDS GRID -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                    <!-- ITEM 1: FUNDED ACCOUNT CHARTER -->
+                    <div class="royal-frame p-6 rounded-2xl flex flex-col justify-between relative space-y-4 group">
+                        <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="bg-gold-500/20 text-gold-300 border border-gold-500/30 text-[10px] font-sora font-bold px-2.5 py-0.5 rounded uppercase">ROYAL CHARTER</span>
+                                <span class="text-xs font-mono font-bold text-amber-400">POPULAR</span>
+                            </div>
+
+                            <div class="w-12 h-12 rounded-xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 text-2xl">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+
+                            <h3 class="font-sora font-bold text-base text-white">$10,000 Royal Funded Charter Voucher</h3>
+                            <p class="text-xs text-slate-400 font-inter">100% fee coverage voucher for FTMO / Exness $10k Prop Challenge.</p>
+                        </div>
+
+                        <div class="pt-4 border-t border-gold-600/20 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs text-slate-400">Charter Cost:</span>
+                                <span class="font-mono font-bold text-gold-400 text-base">1,500 $REX</span>
+                            </div>
+
+                            <button onclick="redeemStoreItem('$10,000 Royal Funded Charter', 1500)" class="btn-royal-gold w-full py-2.5 rounded-xl text-xs font-sora font-extrabold uppercase tracking-wider flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cart-shopping"></i> Redeem Charter
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ITEM 2: 50% FEE DISCOUNT -->
+                    <div class="royal-frame p-6 rounded-2xl flex flex-col justify-between relative space-y-4 group">
+                        <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[10px] font-sora font-bold px-2.5 py-0.5 rounded uppercase">ROYAL EXEMPTION</span>
+                                <span class="text-xs font-mono font-bold text-emerald-400">50% OFF</span>
+                            </div>
+
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl">
+                                <i class="fa-solid fa-percent"></i>
+                            </div>
+
+                            <h3 class="font-sora font-bold text-base text-white">50% Partner Challenge Exemption</h3>
+                            <p class="text-xs text-slate-400 font-inter">Halves entry fee for any partner prop firm evaluation challenge.</p>
+                        </div>
+
+                        <div class="pt-4 border-t border-gold-600/20 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs text-slate-400">Exemption Cost:</span>
+                                <span class="font-mono font-bold text-gold-400 text-base">800 $REX</span>
+                            </div>
+
+                            <button onclick="redeemStoreItem('50% Challenge Fee Exemption', 800)" class="btn-royal-gold w-full py-2.5 rounded-xl text-xs font-sora font-extrabold uppercase tracking-wider flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cart-shopping"></i> Redeem Exemption
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ITEM 3: ROYAL COURT VIP PASS -->
+                    <div class="royal-frame p-6 rounded-2xl flex flex-col justify-between relative space-y-4 group">
+                        <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-[10px] font-sora font-bold px-2.5 py-0.5 rounded uppercase">ROYAL COURT ACCESS</span>
+                                <span class="text-xs font-mono font-bold text-indigo-400">LIFETIME</span>
+                            </div>
+
+                            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-2xl">
+                                <i class="fa-solid fa-crown"></i>
+                            </div>
+
+                            <h3 class="font-sora font-bold text-base text-white">Royal Court Lifetime VIP Signals</h3>
+                            <p class="text-xs text-slate-400 font-inter">Unlimited access to institutional market research & private Discord war room.</p>
+                        </div>
+
+                        <div class="pt-4 border-t border-gold-600/20 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs text-slate-400">Pass Cost:</span>
+                                <span class="font-mono font-bold text-gold-400 text-base">3,000 $REX</span>
+                            </div>
+
+                            <button onclick="redeemStoreItem('Royal Court Lifetime VIP Pass', 3000)" class="btn-royal-gold w-full py-2.5 rounded-xl text-xs font-sora font-extrabold uppercase tracking-wider flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cart-shopping"></i> Claim VIP Access
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ITEM 4: TESLA / $10K RAFFLE CHARTER -->
+                    <div class="royal-frame p-6 rounded-2xl flex flex-col justify-between relative space-y-4 group">
+                        <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-sora font-bold px-2.5 py-0.5 rounded uppercase">RAFFLE CHARTER</span>
+                                <span class="text-xs font-mono font-bold text-amber-400">DRAW IN 12D</span>
+                            </div>
+
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl">
+                                <i class="fa-solid fa-ticket"></i>
+                            </div>
+
+                            <h3 class="font-sora font-bold text-base text-white">Tesla Model 3 / $10,000 Sovereign Draw</h3>
+                            <p class="text-xs text-slate-400 font-inter">1 Official Ticket into the monthly Fortrex FX grand prize raffle.</p>
+                        </div>
+
+                        <div class="pt-4 border-t border-gold-600/20 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs text-slate-400">Ticket Price:</span>
+                                <span class="font-mono font-bold text-gold-400 text-base">200 $REX / Tkt</span>
+                            </div>
+
+                            <button onclick="redeemStoreItem('Tesla Model 3 Raffle Ticket', 200)" class="btn-royal-gold w-full py-2.5 rounded-xl text-xs font-sora font-extrabold uppercase tracking-wider flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-ticket"></i> Purchase Ticket
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TRANSACTION HISTORY: ROYAL LEDGER SECTION -->
+            <div id="ledger-section" class="space-y-4 pt-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gold-600/20 pb-3">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-sora font-bold text-white flex items-center gap-2.5">
+                            <i class="fa-solid fa-book-bookmark text-gold-400"></i> Royal Ledger & Audit Scroll
+                        </h2>
+                        <p class="text-xs text-slate-400">Immutable ledger of all sovereign $REX tributes, conquest rewards, and marketplace redemptions.</p>
+                    </div>
+
+                    <!-- FILTER DROPDOWN -->
+                    <div class="flex items-center gap-2">
+                        <label for="ledger-filter" class="text-xs text-slate-400 font-sora shrink-0">Filter Tributes:</label>
+                        <select id="ledger-filter" onchange="filterLedger()" class="bg-obsidian-950 border border-gold-500/30 text-gold-300 font-sora text-xs px-3 py-2 rounded-xl focus:outline-none">
+                            <option value="all">All Transactions</option>
+                            <option value="credit">Royal Credits (+)</option>
+                            <option value="debit">Royal Debits (-)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- TABLE CONTAINER -->
+                <div class="royal-frame rounded-2xl overflow-hidden">
+                    <div class="filigree-tl"></div><div class="filigree-tr"></div><div class="filigree-bl"></div><div class="filigree-br"></div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs font-inter">
+                            <thead class="bg-obsidian-950 text-gold-400 font-sora font-bold uppercase tracking-wider border-b border-gold-600/30 text-[10px]">
+                                <tr>
+                                    <th class="py-3.5 px-4">Date & Time</th>
+                                    <th class="py-3.5 px-4">Decree / Description</th>
+                                    <th class="py-3.5 px-4">Ledger Hash ID</th>
+                                    <th class="py-3.5 px-4">Audit Status</th>
+                                    <th class="py-3.5 px-4 text-right">Royal Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ledger-tbody" class="divide-y divide-gold-600/10">
+
+                                <tr class="royal-table-row">
+                                    <td class="py-3.5 px-4 font-mono text-slate-400">2026-08-04 09:15</td>
+                                    <td class="py-3.5 px-4 text-white font-semibold flex items-center gap-2">
+                                        <i class="fa-solid fa-trophy text-gold-400"></i> Conquest Arena Prize (FTMO Sprint #1)
+                                    </td>
+                                    <td class="py-3.5 px-4 font-mono text-slate-500">ROYAL-TX-984210</td>
+                                    <td class="py-3.5 px-4"><span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded text-[10px] font-mono font-bold">SEALED</span></td>
+                                    <td class="py-3.5 px-4 text-right font-mono font-bold text-emerald-400">+2,500 $REX</td>
+                                </tr>
+
+                                <tr class="royal-table-row">
+                                    <td class="py-3.5 px-4 font-mono text-slate-400">2026-08-03 18:40</td>
+                                    <td class="py-3.5 px-4 text-white font-semibold flex items-center gap-2">
+                                        <i class="fa-solid fa-users text-gold-400"></i> Royal Lineage Recruit Bonus (Baron Marcus)
+                                    </td>
+                                    <td class="py-3.5 px-4 font-mono text-slate-500">ROYAL-TX-883192</td>
+                                    <td class="py-3.5 px-4"><span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded text-[10px] font-mono font-bold">SEALED</span></td>
+                                    <td class="py-3.5 px-4 text-right font-mono font-bold text-emerald-400">+250 $REX</td>
+                                </tr>
+
+                                <tr class="royal-table-row">
+                                    <td class="py-3.5 px-4 font-mono text-slate-400">2026-08-02 12:10</td>
+                                    <td class="py-3.5 px-4 text-white font-semibold flex items-center gap-2">
+                                        <i class="fa-solid fa-cart-shopping text-red-400"></i> Store Redemption: $10k Funded Charter
+                                    </td>
+                                    <td class="py-3.5 px-4 font-mono text-slate-500">ROYAL-TX-771049</td>
+                                    <td class="py-3.5 px-4"><span class="bg-gold-500/20 text-gold-400 px-2 py-0.5 rounded text-[10px] font-mono font-bold">ISSUED</span></td>
+                                    <td class="py-3.5 px-4 text-right font-mono font-bold text-red-400">-1,500 $REX</td>
+                                </tr>
+
+                                <tr class="royal-table-row">
+                                    <td class="py-3.5 px-4 font-mono text-slate-400">2026-08-01 08:00</td>
+                                    <td class="py-3.5 px-4 text-white font-semibold flex items-center gap-2">
+                                        <i class="fa-solid fa-crown text-gold-400"></i> Sovereign Allegiance Tribute (Signup)
+                                    </td>
+                                    <td class="py-3.5 px-4 font-mono text-slate-500">ROYAL-TX-660182</td>
+                                    <td class="py-3.5 px-4"><span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded text-[10px] font-mono font-bold">SEALED</span></td>
+                                    <td class="py-3.5 px-4 text-right font-mono font-bold text-emerald-400">+1,000 $REX</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- ROYAL FOOTER -->
+    <footer class="bg-obsidian-950 border-t border-gold-600/30 mt-12 py-8 px-4 text-slate-400 text-xs font-inter relative z-30">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-gold-500/20 border border-gold-500/40 flex items-center justify-center text-gold-400">
+                    <i class="fa-solid fa-crown text-sm"></i>
+                </div>
+                <div>
+                    <div class="font-sora font-bold text-white text-sm">FORTREX FX — THE THRONE ROOM</div>
+                    <p class="text-[11px] text-slate-500">© 2026 Fortrex FX. Stronghold of Market Sovereigns. All Rights Reserved.</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-6 text-slate-400 font-sora text-xs">
+                <a href="fortrex-fx-tournaments.html" class="hover:text-gold-400 transition-colors">Conquest Arenas</a>
+                <a href="fortrex-fx-leaderboard.html" class="hover:text-gold-400 transition-colors">Sovereign Ranks</a>
+                <a href="fortrex-fx-tools.html" class="hover:text-gold-400 transition-colors">Trading Tools</a>
+                <span class="text-gold-500/60">•</span>
+                <span class="text-gold-400 font-bold">Royal Obsidian Gold Architecture</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="royal-frame p-4 rounded-xl shadow-gold-glow flex items-center gap-3 max-w-sm">
+            <div id="toast-icon-bg" class="w-10 h-10 rounded-lg bg-gold-500/20 border border-gold-500/40 flex items-center justify-center shrink-0">
+                <i id="toast-icon" class="fa-solid fa-crown text-gold-400 text-lg"></i>
+            </div>
+            <div>
+                <h4 id="toast-title" class="font-sora font-bold text-xs text-white">Decree Royal Proclamation</h4>
+                <p id="toast-message" class="text-xs text-slate-300 font-inter">Action completed successfully.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        let currentBalance = 8200;
+
+        function showToast(title, message, iconClass = 'fa-crown', isError = false) {
+            const toast = document.getElementById('toast');
+            const toastTitle = document.getElementById('toast-title');
+            const toastMsg = document.getElementById('toast-message');
+            const toastIcon = document.getElementById('toast-icon');
+            const toastIconBg = document.getElementById('toast-icon-bg');
+
+            toastTitle.innerText = title;
+            toastMsg.innerText = message;
+            
+            if (isError) {
+                toastIcon.className = `fa-solid ${iconClass} text-red-400 text-lg`;
+                toastIconBg.className = 'w-10 h-10 rounded-lg bg-red-500/20 border border-red-500/40 flex items-center justify-center shrink-0';
+            } else {
+                toastIcon.className = `fa-solid ${iconClass} text-gold-400 text-lg`;
+                toastIconBg.className = 'w-10 h-10 rounded-lg bg-gold-500/20 border border-gold-500/40 flex items-center justify-center shrink-0';
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3500);
+        }
+
+        function updateBalanceUI(newVal) {
+            currentBalance = newVal;
+            document.getElementById('rex-main-balance').innerHTML = `${currentBalance.toLocaleString()} <span class="text-base text-gold-400 font-sora font-bold">$REX</span>`;
+            document.getElementById('store-rex-display').innerText = `${currentBalance.toLocaleString()} $REX`;
+        }
+
+        function claimDecree(title, reward, btn, cardId) {
+            updateBalanceUI(currentBalance + reward);
+
+            // Trigger Gold Confetti
+            confetti({
+                particleCount: 80,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#FFD700', '#F0B90B', '#D4AF37', '#FFFFFF']
+            });
+
+            btn.disabled = true;
+            btn.className = "w-full py-2.5 rounded-xl text-xs font-sora font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 cursor-default flex items-center justify-center gap-2";
+            btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Decree Sealed (+${reward} $REX)`;
+
+            // Attach Wax Seal Stamp onto Card
+            const card = document.getElementById(cardId);
+            const seal = document.createElement('div');
+            seal.className = 'wax-seal';
+            seal.innerHTML = `<i class="fa-solid fa-crown text-sm"></i><span>SEALED</span><span class="text-[7px]">+$REX</span>`;
+            card.appendChild(seal);
+
+            showToast('Royal Decree Fulfilled!', `You have earned +${reward} $REX for completing ${title}.`, 'fa-stamp');
+
+            // Insert into Royal Ledger Table
+            const tbody = document.getElementById('ledger-tbody');
+            const newRow = document.createElement('tr');
+            newRow.className = 'royal-table-row bg-gold-500/10';
+            const now = new Date().toISOString().replace('T', ' ').substring(0, 16);
+            newRow.innerHTML = `
+                <td class="py-3.5 px-4 font-mono text-slate-400">${now}</td>
+                <td class="py-3.5 px-4 text-white font-semibold flex items-center gap-2">
+                    <i class="fa-solid fa-stamp text-gold-400"></i> Royal Decree Fulfilled (${title})
+                </td>
+                <td class="py-3.5 px-4 font-mono text-slate-500">ROYAL-TX-${Math.floor(100000 + Math.random() * 900000)}</td>
+                <td class="py-3.5 px-4"><span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded text-[10px] font-mono font-bold">SEALED</span></td>
+                <td class="py-3.5 px-4 text-right font-mono font-bold text-emerald-400">+${reward} $REX</td>
+            `;
+            tbody.insertBefore(newRow, tbody.firstChild);
+        }
+
+        function redeemStoreItem(itemName, cost) {
+            if (currentBalance < cost) {
+                showToast('Treasury Insufficient', `You need ${cost.toLocaleString()} $REX to claim this charter. Earn more via Royal Decrees!`, 'fa-triangle-exclamation', true);
+                return;
+            }
+
+            updateBalanceUI(currentBalance - cost);
+
+            confetti({
+                particleCount: 120,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: ['#FFD700', '#F0B90B', '#881337', '#34D399']
+            });
+
+            showToast('Charter Redeemed!', `Successfully claimed: ${itemName}. Confirmation dispatched to your Discord/Email.`, 'fa-cart-shopping');
+
+            // Insert debit into Royal Ledger
+            const tbody = document.getElementById('ledger-tbody');
+            const newRow = document.createElement('tr');
+            newRow.className = 'royal-table-row bg-red-500/10';
+            const now = new Date().toISOString().replace('T', ' ').substring(0, 16);
+            newRow.innerHTML = `
+                <td class="py-3.5 px-4 font-mono text-slate-400">${now}</td>
+                <td class="py-3.5 px-4 text-white font-semibold flex items-center gap-2">
+                    <i class="fa-solid fa-cart-shopping text-red-400"></i> Marketplace Redemption: ${itemName}
+                </td>
+                <td class="py-3.5 px-4 font-mono text-slate-500">ROYAL-TX-${Math.floor(100000 + Math.random() * 900000)}</td>
+                <td class="py-3.5 px-4"><span class="bg-gold-500/20 text-gold-400 px-2 py-0.5 rounded text-[10px] font-mono font-bold">ISSUED</span></td>
+                <td class="py-3.5 px-4 text-right font-mono font-bold text-red-400">-${cost.toLocaleString()} $REX</td>
+            `;
+            tbody.insertBefore(newRow, tbody.firstChild);
+        }
+
+        function copyReferralLink() {
+            const input = document.getElementById('ref-link-input');
+            navigator.clipboard.writeText(input.value);
+            showToast('Scroll Copied!', 'Royal invitation link copied to clipboard.', 'fa-copy');
+        }
+
+        function shareSocial(platform) {
+            const link = "https://fortrex.fx/ref/alex_vance_88";
+            const text = "Ascend the trading throne on Fortrex FX! Compete in high-stakes trading tournaments and claim 100 $REX coins upon arrival.";
+            let url = "";
+            if (platform === 'whatsapp') url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + " " + link)}`;
+            if (platform === 'twitter') url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(link)}`;
+            if (platform === 'telegram') url = `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        }
+
+        function filterLedger() {
+            const val = document.getElementById('ledger-filter').value;
+            const rows = document.querySelectorAll('#ledger-tbody tr');
+            rows.forEach(row => {
+                const amountText = row.children[4].innerText;
+                if (val === 'all') row.style.display = '';
+                else if (val === 'credit') row.style.display = amountText.includes('+') ? '' : 'none';
+                else if (val === 'debit') row.style.display = amountText.includes('-') ? '' : 'none';
+            });
+        }
+
+        function toggleMobileSidebar() {
+            const nav = document.getElementById('nav-menu');
+            nav.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
