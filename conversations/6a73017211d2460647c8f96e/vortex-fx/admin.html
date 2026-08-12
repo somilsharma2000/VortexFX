@@ -56,7 +56,7 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       min-height: 100vh;
       height: 100vh;
-      width: 100vw;
+      width: 100%;
       overflow: hidden;
       display: flex;
     }
@@ -66,8 +66,8 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       z-index: 0;
       pointer-events: none;
       opacity: 0.35;
@@ -76,7 +76,7 @@
     /* Layout Containers */
     .admin-container {
       display: flex;
-      width: 100vw;
+      width: 100%;
       min-height: 100vh;
       height: 100vh;
       position: relative;
@@ -86,7 +86,7 @@
 
     /* Sidebar Navigation */
     .sidebar {
-      width: 260px;
+      width: 240px;
       flex-shrink: 0;
       height: 100vh;
       overflow-y: auto;
@@ -98,7 +98,7 @@
       top: 0;
       left: 0;
       z-index: 100;
-      padding: 24px 16px;
+      padding: 20px 14px;
       backdrop-filter: blur(12px);
       transition: width 0.2s ease-in-out;
     }
@@ -298,10 +298,12 @@
     .main-content {
       flex-grow: 1;
       min-width: 0;
-      padding: 2rem;
+      padding: 1.25rem 1.5rem;
       overflow-y: auto;
       height: 100vh;
-      max-width: calc(100vw - 260px);
+      max-width: calc(100% - 240px);
+      display: flex;
+      flex-direction: column;
     }
     .main-content::-webkit-scrollbar {
       width: 6px;
@@ -323,10 +325,11 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-      padding-bottom: 1.25rem;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
       border-bottom: 1px solid var(--border-subtle);
+      flex-shrink: 0;
     }
 
     .header-title-group {
@@ -336,7 +339,7 @@
     }
 
     .header-title {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 700;
       color: #FFFFFF;
       letter-spacing: -0.5px;
@@ -402,6 +405,7 @@
 
     .tab-pane.active {
       display: block;
+      flex-grow: 1;
     }
 
     @keyframes fadeIn {
@@ -412,17 +416,18 @@
     /* 6 ANALYTICS CARDS (3x2 Grid) */
     .stats-grid-6 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
       width: 100%;
-      margin-bottom: 2rem;
+      margin-bottom: 1.25rem;
+      flex-shrink: 0;
     }
 
     .stat-card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 1.5rem;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
       height: 100%;
       position: relative;
       overflow: hidden;
@@ -481,7 +486,7 @@
     }
 
     .stat-value-gold {
-      font-size: 32px;
+      font-size: 26px;
       font-weight: 800;
       color: var(--accent-gold);
       letter-spacing: -0.5px;
@@ -855,7 +860,7 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
+      width: 100%;
       height: 100vh;
       background: rgba(0, 0, 0, 0.8);
       backdrop-filter: blur(8px);
@@ -3371,7 +3376,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   <!-- FOOTER -->
-  <footer style="background: #06070A; padding: 24px 32px; border-top: 1px solid rgba(234,202,122,0.1); text-align: center; margin-top: auto;">
+  <footer style="background: #06070A; padding: 16px 24px; border-top: 1px solid rgba(234,202,122,0.1); text-align: center; margin-top: auto; flex-shrink: 0;">
     <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px;">
       <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 24px; height: 24px; border-radius: 4px;">
       <span style="color: #EACA7A; font-weight: 700; font-size: 14px; letter-spacing: 0.05em;">FORTREX</span>
