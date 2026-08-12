@@ -3,730 +3,589 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FORTEX FX — Where Traders Prove It</title>
+  <title>Something is coming.</title>
+  <meta name="description" content="The gates are opening soon. Be first through.">
+  <meta property="og:title" content="Something is coming.">
+  <meta property="og:description" content="The gates are opening soon. Be first through.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/dala.css">
   <script src="js/dala.js"></script>
   <script src="js/auth.js"></script>
-  <script src="js/psychology.js"></script>
+
+  <style>
+    /* STEALTH MODE — PRE-LAUNCH */
+    body { overflow-x: hidden; }
+
+    .stealth-hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .seal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 18px;
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 100px;
+      background: rgba(212, 175, 55, 0.04);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #D4AF37;
+      margin-bottom: 40px;
+      animation: pulse-gold 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-gold {
+      0%, 100% { border-color: rgba(212, 175, 55, 0.15); box-shadow: 0 0 0 rgba(212, 175, 55, 0); }
+      50% { border-color: rgba(212, 175, 55, 0.4); box-shadow: 0 0 20px rgba(212, 175, 55, 0.1); }
+    }
+
+    .seal-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #D4AF37;
+      border-radius: 50%;
+      animation: dot-pulse 2s infinite;
+    }
+
+    @keyframes dot-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.7); }
+    }
+
+    .stealth-headline {
+      font-size: clamp(36px, 7vw, 88px);
+      font-weight: 200;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      color: #ffffff;
+      margin-bottom: 8px;
+      max-width: 900px;
+    }
+
+    .stealth-headline .accent {
+      font-weight: 700;
+      background: linear-gradient(135deg, #D4AF37 0%, #F4D77A 50%, #D4AF37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stealth-sub {
+      font-size: clamp(15px, 2vw, 19px);
+      font-weight: 200;
+      color: #555;
+      max-width: 520px;
+      margin: 24px auto 0;
+      line-height: 1.6;
+    }
+
+    /* COUNTDOWN */
+    .stealth-countdown {
+      display: flex;
+      gap: clamp(12px, 4vw, 32px);
+      margin: 48px 0 40px;
+    }
+
+    .count-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .count-num {
+      font-size: clamp(32px, 6vw, 56px);
+      font-weight: 300;
+      color: #ffffff;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+    }
+
+    .count-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #444;
+      margin-top: 6px;
+    }
+
+    /* DISCORD CTA */
+    .stealth-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 36px;
+      background: #5865F2;
+      color: #fff;
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 0 30px rgba(88, 101, 242, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stealth-cta:hover {
+      background: #4752C4;
+      box-shadow: 0 0 50px rgba(88, 101, 242, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .stealth-cta svg { width: 20px; height: 20px; fill: currentColor; }
+
+    /* WAITLIST COUNTER */
+    .waitlist-bar {
+      margin-top: 48px;
+      font-size: 13px;
+      color: #444;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .waitlist-num {
+      color: #D4AF37;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .waitlist-progress {
+      width: 200px;
+      height: 2px;
+      background: #1a1a1a;
+      border-radius: 1px;
+      margin: 12px auto 0;
+      overflow: hidden;
+    }
+
+    .waitlist-fill {
+      height: 100%;
+      width: 37%;
+      background: linear-gradient(90deg, #D4AF37, #F4D77A);
+      border-radius: 1px;
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+
+    /* CRYPTIC HINTS */
+    .cryptic-section {
+      padding: 120px 24px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cryptic-line {
+      font-size: clamp(20px, 3.5vw, 36px);
+      font-weight: 200;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.5;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s, transform 1s;
+    }
+
+    .cryptic-line.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .cryptic-line .gold { color: #D4AF37; font-weight: 400; }
+
+    .cryptic-divider {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(180deg, transparent, #1a1a1a, transparent);
+      margin: 60px auto;
+    }
+
+    /* SCROLL HINT */
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #333;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.3; }
+      50% { transform: translateX(-50%) translateY(8px); opacity: 0.8; }
+    }
+
+    /* FINAL CTA SECTION */
+    .final-section {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .final-headline {
+      font-size: clamp(28px, 5vw, 56px);
+      font-weight: 200;
+      color: #fff;
+      max-width: 700px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .final-headline .gold { color: #D4AF37; font-weight: 600; }
+
+    .final-sub {
+      font-size: 15px;
+      color: #555;
+      max-width: 400px;
+      margin-bottom: 36px;
+    }
+
+    /* FOOTER MINIMAL */
+    .stealth-footer {
+      padding: 40px 24px;
+      text-align: center;
+      border-top: 1px solid #0a0a0a;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stealth-footer p {
+      font-size: 11px;
+      color: #333;
+      letter-spacing: 0.05em;
+    }
+
+    /* LIVE DOT */
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+      animation: live-pulse 1.5s infinite;
+    }
+
+    @keyframes live-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+      70% { box-shadow: 0 0 0 8px rgba(212, 175, 55, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+    }
+
+    /* NOTIFICATION TOAST */
+    .join-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      background: rgba(10, 10, 10, 0.95);
+      border: 1px solid #1a1a1a;
+      border-radius: 8px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: #888;
+      z-index: 100;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s, transform 0.4s;
+      backdrop-filter: blur(10px);
+    }
+
+    .join-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .join-toast .avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #5865F2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: white;
+      font-weight: 600;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      .stealth-countdown { gap: 16px; }
+      .stealth-cta { padding: 16px 28px; font-size: 13px; }
+      .join-toast { left: 12px; right: 12px; bottom: 12px; }
+    }
+  </style>
 </head>
 <body>
 
   <canvas id="particle-canvas"></canvas>
 
-  <!-- NAVIGATION -->
-  <nav class="nav">
-    <div class="nav-brand">
-      <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-        <div class="nav-logo">
-          <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#8052ff" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
-            <polygon points="50,30 65,39 65,61 50,70 35,61 35,39" stroke="#8052ff" stroke-width="1.5" fill="none" stroke-linejoin="round" opacity="0.5"/>
-            <path d="M50,42 Q58,45 55,52 Q48,55 45,48 Q47,43 50,42" stroke="#8052ff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <circle cx="50" cy="50" r="2" fill="#8052ff"/>
-            <circle cx="50" cy="18" r="3" fill="#8052ff"/>
-            <circle cx="78" cy="34" r="3" fill="#8052ff"/>
-            <circle cx="78" cy="66" r="3" fill="#8052ff"/>
-            <circle cx="50" cy="82" r="3" fill="#8052ff"/>
-            <circle cx="22" cy="66" r="3" fill="#8052ff"/>
-            <circle cx="22" cy="34" r="3" fill="#8052ff"/>
-            <line x1="50" y1="18" x2="78" y2="34" stroke="#8052ff" stroke-width="0.8" opacity="0.3"/>
-            <line x1="78" y1="34" x2="78" y2="66" stroke="#8052ff" stroke-width="0.8" opacity="0.3"/>
-            <line x1="78" y1="66" x2="50" y2="82" stroke="#8052ff" stroke-width="0.8" opacity="0.3"/>
-            <line x1="50" y1="82" x2="22" y2="66" stroke="#8052ff" stroke-width="0.8" opacity="0.3"/>
-            <line x1="22" y1="66" x2="22" y2="34" stroke="#8052ff" stroke-width="0.8" opacity="0.3"/>
-            <line x1="22" y1="34" x2="50" y2="18" stroke="#8052ff" stroke-width="0.8" opacity="0.3"/>
-          </svg>
-        </div>
-        <span class="nav-wordmark">FORTEX FX</span>
-      </a>
+  <!-- STEALTH HERO -->
+  <section class="stealth-hero" data-shape="galaxy">
+    <div class="seal-badge">
+      <span>Sealed · Launching Soon</span>
     </div>
-    <ul class="nav-links">
-      <li><a href="index.html" class="nav-link active">Home</a></li>
-      <li><a href="leaderboard.html" class="nav-link">Tournaments</a></li>
-      <li><a href="offers.html" class="nav-link">Rewards</a></li>
-      <li><a href="resources.html" class="nav-link">Resources</a></li>
-      <li><a href="invite.html" class="nav-link">Invite</a></li>
-      <li><a href="profile.html" class="nav-link">Profile</a></li>
-      <li><a href="checkin.html" class="nav-link">Check-In</a></li>
-    </ul>
-    <div class="nav-cta">
-      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
-      <a href="signin.html" class="btn-primary">Enter Arena</a>
-      <div class="hamburger" aria-label="Toggle Menu">
-        <span></span><span></span><span></span>
+
+    <h1 class="stealth-headline">
+      Something is <span class="accent">coming.</span>
+    </h1>
+
+    <p class="stealth-sub">
+      The gates haven't opened yet. But they will. And those who arrive first — they'll remember it.
+    </p>
+
+    <!-- COUNTDOWN -->
+    <div class="stealth-countdown" id="countdown">
+      <div class="count-unit">
+        <div class="count-num" id="cd-days">--</div>
+        <div class="count-label">Days</div>
+      </div>
+      <div class="count-unit">
+        <div class="count-num" id="cd-hours">--</div>
+        <div class="count-label">Hours</div>
+      </div>
+      <div class="count-unit">
+        <div class="count-num" id="cd-mins">--</div>
+        <div class="count-label">Minutes</div>
+      </div>
+      <div class="count-unit">
+        <div class="count-num" id="cd-secs">--</div>
+        <div class="count-label">Seconds</div>
       </div>
     </div>
-  </nav>
 
-  <main>
-    <!-- ========== HERO — Ego + Curiosity Trigger ========== -->
-    <section class="hero section" data-shape="galaxy">
-      <div class="container">
-        <div class="hero-content reveal">
-          <div class="hero-label">COMPETITIVE TRADING TOURNAMENTS</div>
-          <h1 class="hero-headline" data-psychology="heroHeadlines">You already have the skill.<br>Now prove it.</h1>
-          <p class="hero-body">
-            Trade on your own MT4/MT5 account. Compete against global traders in bi-weekly tournaments. Sealed results until reveal day — no one knows who's leading. Highest ROI wins real prize pools in REX.
-          </p>
-          <div class="hero-actions">
-            <a href="signin.html" class="btn-primary">Join Next Tournament</a>
-            <a href="leaderboard.html" class="btn-ghost-underline">See Past Champions</a>
-          </div>
-          <!-- Live social proof -->
-          <div style="margin-top: var(--spacing-36); display: flex; align-items: center; gap: var(--spacing-24); flex-wrap: wrap;">
-            <div class="live-indicator">
-              <div class="live-dot"></div>
-              <span style="font-size: 14px; color: var(--color-ash-gray); text-transform: uppercase; letter-spacing: 0.025em;">247 traders competing right now</span>
-            </div>
-            <div style="font-size: 14px; color: var(--color-ash-gray); text-transform: uppercase; letter-spacing: 0.025em;">
-              $50,000 prize pool live
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- DISCORD CTA -->
+    <a href="#" class="stealth-cta" onclick="joinWaitlist(event)">
+      <svg viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
+        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.68,1.75,1.36,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.89,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.89,96.12,53,91.08,65.69,84.69,65.69Z"/>
+      </svg>
+      Claim Your Spot
+    </a>
 
-    <!-- ========== THE PROBLEM — Pain Point Identification ========== -->
-    <section class="section reveal" data-shape="candlestick">
-      <div class="container">
-        <p class="problem-statement" data-psychology="painPoints">
-          You spend hours analyzing charts. You manage risk. You take disciplined trades. But at the end of the month — <span class="highlight">nobody sees your results</span>. No recognition. No prize. No proof that you're better than the trader next to you.
-        </p>
-      </div>
-    </section>
-
-    <!-- ========== THE SOLUTION — Fortex FX as the answer ========== -->
-    <section class="section reveal" data-shape="euro">
-      <div class="container">
-        <div class="section-label">THE ARENA</div>
-        <h2 class="section-headline" data-psychology="solutions">Where your trading finally counts</h2>
-        <p class="section-body" style="margin-bottom: var(--spacing-60);">
-          Fortex FX turns your everyday trading into a competition. Same MT4/MT5 terminal. Same markets. Same risk. But now every trade matters — because on reveal day, your ROI goes up against hundreds of other traders for real prize pools.
-        </p>
-
-        <div class="benefit-grid">
-          <div>
-            <div class="benefit-title">Trade your own way</div>
-            <p class="benefit-body">No platform to learn. No new interface. You trade on your own MT4/MT5 terminal — we just track your results. Your strategy, your style, your edge.</p>
-          </div>
-          <div>
-            <div class="benefit-title">Sealed results = pure focus</div>
-            <p class="benefit-body">No live rankings to stress over. No one knows where they stand. You trade your strategy without second-guessing — and find out where you rank on reveal day.</p>
-          </div>
-          <div>
-            <div class="benefit-title">Real prizes for real skill</div>
-            <p class="benefit-body">Highest ROI wins. It's that simple. Prize pools paid in REX — spend it on rebates, rewards, or hold it. No subscriptions, no entry fees, no catch.</p>
-          </div>
-          <div>
-            <div class="benefit-title">Free. Genuinely free.</div>
-            <p class="benefit-body">No subscription. No hidden fees. No premium tiers. You trade with your own money in your own broker account. The platform costs you nothing.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== HOW IT WORKS — Reduce Friction (3 simple steps) ========== -->
-    <section class="section reveal" data-shape="discord">
-      <div class="container">
-        <div class="section-label" style="margin-bottom: var(--spacing-12);">HOW IT WORKS</div>
-        <h2 class="section-headline" style="margin-bottom: var(--spacing-60);">Three steps. That's it.</h2>
-
-        <div class="step-flow">
-          <div>
-            <div class="step-number">01</div>
-            <div class="step-title">Sign up with Discord</div>
-            <p class="step-body">One click. Your Discord username becomes your Fortex FX identity. No separate account, no password to remember. You're in.</p>
-          </div>
-          <div>
-            <div class="step-number">02</div>
-            <div class="step-title">Link your MT4/MT5 account</div>
-            <p class="step-body">Enter your XM account number. That's the connection. You keep trading on your own terminal — we track your ROI when tournaments go live.</p>
-          </div>
-          <div>
-            <div class="step-number">03</div>
-            <div class="step-title">Trade. Wait. Reveal.</div>
-            <p class="step-body">When the tournament starts, trade your strategy. Results stay sealed. On the final day, rankings drop — and if your ROI is highest, you win.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== SOCIAL PROOF — Numbers + Testimonial ========== -->
-    <section class="section reveal" data-shape="gold">
-      <div class="container">
-        <!-- Numbers -->
-        <div class="stat-row" style="margin-bottom: var(--spacing-60);">
-          <div class="stat-item">
-            <div class="stat-value" data-count="3742">3,742</div>
-            <div class="stat-label">Active Traders</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value" data-count="47">47</div>
-            <div class="stat-label">Tournaments Run</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value" data-count="2.4" data-prefix="$" data-suffix="M">$2.4M</div>
-            <div class="stat-label">Prizes Distributed</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">FREE</div>
-            <div class="stat-label">To Join</div>
-          </div>
-        </div>
-
-        <!-- Testimonial -->
-        <div style="max-width: 720px;">
-          <div class="testimonial-quote">
-            "I've been trading for 3 years. Fortex FX is the first platform that made my trading feel like it actually mattered. Winning the Winter Wars changed everything for me — not just the prize, but the recognition."
-          </div>
-          <div class="testimonial-author">
-            <div class="avatar avatar-ring">RV</div>
-            <div>
-              <div class="testimonial-name">RogueViper</div>
-              <div class="testimonial-role">2x Tournament Champion · Winter Wars 2025</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== SEALED RESULTS — Curiosity Gap as Benefit ========== -->
-    <section class="section reveal" data-shape="rocket">
-      <div class="container">
-        <div class="two-col-asymmetric">
-          <div>
-            <div class="section-label">THE PSYCHOLOGY</div>
-            <h2 class="section-headline" data-psychology="sealedExplanations">No live rankings. On purpose.</h2>
-            <p class="section-body">
-              Every trading platform shows live rankings. We don't. Here's why that's better for you.
-            </p>
-          </div>
-          <div>
-            <div class="float-item">
-              <div class="float-item-label" style="color: var(--color-electric-iris);">NO TILT</div>
-              <h3 class="float-item-title" style="font-size: 24px;">Trade your own game</h3>
-              <p class="float-item-body">When you can see the leaderboard, you adjust your strategy based on others. That's how you blow up an account. Sealed results keep you disciplined.</p>
-            </div>
-            <div class="float-item">
-              <div class="float-item-label" style="color: var(--color-electric-iris);">PURE SKILL</div>
-              <h3 class="float-item-title" style="font-size: 24px;">No gaming the system</h3>
-              <p class="float-item-body">No one can see who's ahead and copy their moves. No one can see who's behind and take unnecessary risks. Every trader competes blind.</p>
-            </div>
-            <div class="float-item">
-              <div class="float-item-label" style="color: var(--color-electric-iris);">THE REVEAL</div>
-              <h3 class="float-item-title" style="font-size: 24px;">The adrenaline of not knowing</h3>
-              <p class="float-item-body">14 days of trading. 14 days of not knowing. Then one moment — the reveal. That feeling is what makes Fortex FX different from every other platform.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== REGISTRATION COUNTER — Social Proof + Progress ========== -->
-    <section class="section reveal" data-shape="trophy">
-      <div class="container">
-        <div class="section-label">JOIN THE MISSION</div>
-        <h2 class="section-headline" data-psychology="socialProof">3,742 traders have already joined</h2>
-        <div id="reg-counter" class="reg-counter" style="margin-top: var(--spacing-24);">
-          <div class="reg-counter-target">TARGET: 10,000 TRADERS — UNLOCKS FREE TOURNAMENTS</div>
-          <div class="reg-counter-numbers">
-            <span class="reg-digit">0</span>
-            <span class="reg-digit">3</span>
-            <span class="reg-digit">7</span>
-            <span class="reg-digit">4</span>
-            <span class="reg-digit">2</span>
-          </div>
-          <div class="reg-counter-bar">
-            <div class="reg-counter-bar-fill" style="width: 37.42%;"></div>
-          </div>
-          <div class="reg-counter-remaining">6,258 traders needed to unlock free tournaments</div>
-        </div>
-        <p class="body-text-muted" style="margin-top: var(--spacing-24);">
-          When we hit 10,000, every trader gets access to free tournaments with guaranteed prize pools. Your registration counts.
-        </p>
-      </div>
-    </section>
-
-    <!-- ========== TOURNAMENTS — FOMO + Scarcity ========== -->
-    <section class="section reveal" data-shape="metatrader">
-      <div class="container">
-        <div class="two-col">
-          <div>
-            <div class="section-label">TOURNAMENTS</div>
-            <h2 class="section-headline" style="font-size: clamp(32px, 4vw, 48px);">Compete for real prizes</h2>
-            <p class="section-body">
-              Bi-weekly tournament cycles. Guaranteed prize pools paid in REX. Trade on your own MT4/MT5 terminal — your ROI at the end of the cycle determines your rank. Sealed until reveal day.
-            </p>
-          </div>
-          <div>
-            <div class="float-item">
-              <div class="badge-live" style="margin-bottom: var(--spacing-12);">LIVE NOW</div>
-              <h3 class="float-item-title" style="font-size: 27px;">Summer Showdown</h3>
-              <p class="float-item-body">$50,000 prize pool · 247 traders · Results sealed</p>
-            </div>
-            <div class="float-item">
-              <div class="float-item-label" style="color: var(--color-ash-gray);">UPCOMING</div>
-              <h3 class="float-item-title" style="font-size: 27px;">Autumn Arena</h3>
-              <p class="float-item-body">Starts Sep 01 · Register now to secure your spot</p>
-            </div>
-            <div class="float-item" data-tournament="free">
-              <div class="float-item-label" style="color: #9a9a9a;">LOCKED</div>
-              <h3 class="float-item-title" style="font-size: 27px; color: #9a9a9a;">Free Friday</h3>
-              <p class="float-item-body" style="color: #9a9a9a;">Unlocks at 10,000 registrations</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== REX AI — Authority + Tool Benefit ========== -->
-    <section class="section reveal" data-shape="pound">
-      <div class="container">
-        <div class="two-col">
-          <div>
-            <div class="section-label">REX AI</div>
-            <h2 class="section-headline" style="font-size: clamp(32px, 4vw, 48px);">data-psychology="rexAILines">Your AI co-pilot</h2>
-            <p class="section-body">
-              Rex AI analyzes your trade history, identifies patterns you'd miss, and gives you a competitive edge for the next tournament. Risk scoring, strategy recommendations, and performance breakdowns — all free.
-            </p>
-          </div>
-          <div>
-            <div class="float-item">
-              <div class="float-item-label" style="color: var(--color-electric-iris);">ANALYSIS</div>
-              <h3 class="float-item-title" style="font-size: 27px;">Post-Trade Review</h3>
-              <p class="float-item-body">Rex breaks down every trade. What worked. What didn't. What to fix before the next tournament.</p>
-            </div>
-            <div class="float-item">
-              <div class="float-item-label" style="color: var(--color-electric-iris);">STRATEGY</div>
-              <h3 class="float-item-title" style="font-size: 27px;">Tournament Insights</h3>
-              <p class="float-item-body">AI-powered recommendations tailored to your trading style and the upcoming tournament.</p>
-            </div>
-            <div class="float-item">
-              <div class="float-item-label" style="color: var(--color-electric-iris);">RISK SCORING</div>
-              <h3 class="float-item-title" style="font-size: 27px;">Risk Warnings</h3>
-              <p class="float-item-body">Rex flags when your positions are too aggressive — before you blow up your tournament run.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== FREE VALUE — Remove "What's the catch?" objection ========== -->
-    <section class="section reveal" data-shape="yen">
-      <div class="container">
-        <div class="section-label" style="margin-bottom: var(--spacing-36);">NO CATCH</div>
-        <h2 class="section-headline" style="margin-bottom: var(--spacing-12);">Why we're free</h2>
-        <p class="body-text-muted" style="max-width: 540px; margin-bottom: var(--spacing-60);">
-          Fortex FX doesn't charge traders. We earn through broker partnerships — not from you. Your job is to trade. Our job is to make sure your trading gets recognized and rewarded. Here's what you pay:
-        </p>
-        <div class="free-value-row">
-          <div class="free-value-item">
-            <div class="free-value-amount">$0</div>
-            <div class="free-value-label">Subscription</div>
-          </div>
-          <div class="free-value-item">
-            <div class="free-value-amount">$0</div>
-            <div class="free-value-label">Entry Fee</div>
-          </div>
-          <div class="free-value-item">
-            <div class="free-value-amount">$0</div>
-            <div class="free-value-label">Hidden Charges</div>
-          </div>
-          <div class="free-value-item">
-            <div class="free-value-amount">100%</div>
-            <div class="free-value-label">Yours to Keep</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== COMMUNITY — Belonging ========== -->
-    <section class="section reveal" style="text-align: center;" data-shape="dollar">
-      <div class="container">
-        <div class="section-label" style="justify-content: center;">COMMUNITY</div>
-        <h2 class="section-headline">data-psychology="communityLines">You're not trading alone anymore</h2>
-        <p class="body-text-muted" style="max-width: 600px; margin: 0 auto var(--spacing-36);">
-          Every Fortex FX trader joins the Citadel — our Discord community. Share strategies, discuss tournaments, celebrate wins, and connect with traders who get it. Your Discord username is your identity here.
-        </p>
-        <a href="https://discord.gg" target="_blank" rel="noopener" class="btn-primary">Join the Citadel</a>
-      </div>
-    </section>
-
-    <!-- ========== URGENCY — FOMO + Countdown ========== -->
-    <section class="section reveal" data-shape="sphere">
-      <div class="container">
-        <div class="urgency-banner">
-          <div class="section-label" style="justify-content: center; margin-bottom: var(--spacing-18);">DON'T MISS OUT</div>
-          <h2 style="font-size: clamp(32px, 4vw, 48px); font-weight: 400; letter-spacing: -1.68px; color: var(--color-bone-white); margin-bottom: var(--spacing-18);">
-            data-psychology="urgencyLines">247 traders are competing right now
-          </h2>
-          <p class="body-text-muted" style="max-width: 500px; margin: 0 auto var(--spacing-24);">
-            The next tournament is live. The longer you wait, the more prize pools you miss. Registration takes 30 seconds.
-          </p>
-          <div style="margin-bottom: var(--spacing-36);">
-            <div style="font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.025em; color: var(--color-ash-gray); margin-bottom: var(--spacing-12);">
-              Next tournament reveal in
-            </div>
-            <div id="home-countdown" class="countdown-urgent">--d : --h : --m : --s</div>
-          </div>
-          <a href="signin.html" class="btn-primary">Start Competing — Free</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== STATS ROW — Authority ========== -->
-    <section class="section reveal" data-shape="diamond">
-      <div class="container">
-        <div class="stat-row">
-          <div class="stat-item">
-            <div class="stat-value" data-count="2.4" data-prefix="$" data-suffix="M">$2.4M</div>
-            <div class="stat-label">Total Volume</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value" data-count="3742">3,742</div>
-            <div class="stat-label">Active Traders</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value" data-count="47">47</div>
-            <div class="stat-label">Tournaments</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value" data-count="890" data-prefix="$" data-suffix="K">$890K</div>
-            <div class="stat-label">Prizes Paid</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== FINAL CTA — Commitment ========== -->
-    <section class="section reveal" style="text-align: center;" data-shape="bitcoin">
-      <div class="container">
-        <div class="section-label" style="justify-content: center;">YOUR MOVE</div>
-        <h2 style="font-size: clamp(42px, 6vw, 113px); font-weight: 400; letter-spacing: -0.04em; color: var(--color-bone-white); line-height: 1.1; margin-bottom: var(--spacing-24);" data-psychology="finalCTAs">
-          Stop trading<br>in silence.
-        </h2>
-        <p class="body-text-muted" style="max-width: 540px; margin: 0 auto var(--spacing-36);">
-          You've put in the hours. You've built the skill. Now get the recognition, the prizes, and the competition you deserve. Free to join. Takes 30 seconds.
-        </p>
-        <a href="signin.html" class="btn-primary" style="font-size: 18px; padding: 18px 48px;">Join Fortex FX — Free</a>
-        <p style="margin-top: var(--spacing-24); font-size: 14px; color: var(--color-ash-gray);" data-psychology="freeValue">
-          No credit card. No subscription. No catch. Just your MT4/MT5 account and your trading skill.
-        </p>
-      </div>
-    </section>
-  </main>
-
-
-    <!-- RISK DISCLAIMER -->
-    <section class="section reveal" style="padding-bottom: 80px;" data-shape="scattered">
-      <div class="container" style="max-width: 800px;">
-        <div style="border: 1px solid #1a1a1a; border-radius: 24px; padding: 36px;">
-          <div class="section-label" style="margin-bottom: var(--spacing-18);">RISK WARNING</div>
-          <p style="font-size: 14px; font-weight: 200; color: var(--color-silver-mist); line-height: 1.6;">
-            Trading forex and cryptocurrency on margin carries a high level of risk and may not be suitable for all investors. You could lose some or all of your invested capital. Fortex FX is a skill-based trading competition platform and does not execute trades, hold funds, or provide investment advice. All trading occurs on your personal broker account at your own risk. Tournament prizes are distributed as REX reward points, which have no cash value. Never trade with money you cannot afford to lose.
-          </p>
-          <div style="margin-top: var(--spacing-18); display: flex; gap: var(--spacing-24); flex-wrap: wrap;">
-            <a href="terms.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Terms & Conditions</a>
-            <a href="privacy.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Privacy Policy</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 12px;">
-            <polygon points="12,3 22,21 2,21" stroke="#8052ff" stroke-width="2" fill="none" stroke-linejoin="round"/>
-          </svg>
-          <span class="nav-wordmark">FORTEX FX</span>
-        </div>
-        <div class="footer-links">
-          <a href="index.html" class="footer-link">Home</a>
-          <a href="leaderboard.html" class="footer-link">Tournaments</a>
-          <a href="offers.html" class="footer-link">Rewards</a>
-          <a href="resources.html" class="footer-link">Resources</a>
-          <a href="invite.html" class="footer-link">Invite</a>
-          <a href="checkin.html" class="footer-link">Check-In</a>
-          <a href="terms.html" class="footer-link">Terms</a>
-          <a href="privacy.html" class="footer-link">Privacy</a>
-          <a href="signin.html" class="footer-link">Sign In</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <div class="footer-copyright">© 2026 FORTEX FX — Skill-based trading competitions. Not a financial service.</div>
-      </div>
+    <!-- WAITLIST -->
+    <div class="waitlist-bar">
+      <span class="live-dot" style="background: #D4AF37;"></span>
+      <span><span class="waitlist-num" id="waitlist-count">3,742</span> traders on the waitlist</span>
     </div>
+    <div class="waitlist-progress"><div class="waitlist-fill"></div></div>
+
+    <div class="scroll-hint">Scroll</div>
+  </section>
+
+  <!-- CRYPTIC HINTS — reveals nothing, builds everything -->
+  <section class="cryptic-section" data-shape="spiral">
+    <div class="cryptic-line">
+      You already have the skill. You trade every day. You watch the charts.
+    </div>
+    <div class="cryptic-divider"></div>
+    <div class="cryptic-line">
+      But nobody sees it. Nobody knows. <span class="gold">Until now.</span>
+    </div>
+    <div class="cryptic-divider"></div>
+    <div class="cryptic-line">
+      Something is being built. Something for traders who are <span class="gold">tired of trading alone.</span>
+    </div>
+    <div class="cryptic-divider"></div>
+    <div class="cryptic-line">
+      No subscriptions. No fees. No catch.
+    </div>
+    <div class="cryptic-divider"></div>
+    <div class="cryptic-line">
+      Just <span class="gold">skill, recognition, and rewards.</span>
+    </div>
+    <div class="cryptic-divider"></div>
+    <div class="cryptic-line">
+      The gates open soon. Be <span class="gold">first through.</span>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-section" data-shape="fortress">
+    <h2 class="final-headline">
+      When the gates open, will you be <span class="gold">ready?</span>
+    </h2>
+    <p class="final-sub">
+      Join the waitlist. Get early access. Be part of something from day one.
+    </p>
+    <a href="#" class="stealth-cta" onclick="joinWaitlist(event)">
+      <svg viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
+        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.68,1.75,1.36,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.89,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.89,96.12,53,91.08,65.69,84.69,65.69Z"/>
+      </svg>
+      Join the Waitlist
+    </a>
+  </section>
+
+  <!-- MINIMAL FOOTER -->
+  <footer class="stealth-footer">
+    <p>© 2026 · The gates will open soon.</p>
   </footer>
 
-    <script>
-  // ============================================
-  // FORTEX FX — Live Stats & Auth Integration
-  // ============================================
-  (function() {
-    // 1. Inject pulse animation style for stats loading state
-    const loadingStyle = document.createElement('style');
-    loadingStyle.textContent = `
-      @keyframes statsPulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.35; }
-      }
-      .stats-loading {
-        animation: statsPulse 1.2s ease-in-out infinite !important;
-      }
-    `;
-    document.head.appendChild(loadingStyle);
+  <!-- JOIN TOAST NOTIFICATIONS -->
+  <div class="join-toast" id="join-toast">
+    <div class="avatar" id="toast-avatar">?</div>
+    <div>
+      <div style="color: #fff; font-weight: 500; font-size: 13px;" id="toast-name">A trader just joined</div>
+      <div style="font-size: 11px; color: #555;" id="toast-time">moments ago</div>
+    </div>
+  </div>
 
-    let homeCountdownInterval = null;
+  <script>
+    // ===== COUNTDOWN TIMER =====
+    // Set to August 23, 2026 23:59 IST
+    const LAUNCH_DATE = new Date('2026-08-23T23:59:59+05:30').getTime();
 
-    // Helper: format ISO or date string to 'MMM DD'
-    function formatDate(dateStr) {
-      if (!dateStr) return '';
-      try {
-        const d = new Date(dateStr);
-        if (isNaN(d.getTime())) return dateStr;
-        return d.toLocaleDateString('en-US', { month: 'short', day: '2-digit' });
-      } catch (e) {
-        return dateStr;
+    function updateCountdown() {
+      const now = Date.now();
+      const diff = LAUNCH_DATE - now;
+
+      if (diff <= 0) {
+        document.getElementById('cd-days').textContent = '00';
+        document.getElementById('cd-hours').textContent = '00';
+        document.getElementById('cd-mins').textContent = '00';
+        document.getElementById('cd-secs').textContent = '00';
+        return;
       }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+      document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+      document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
     }
 
-    // Helper: dynamic countdown timer
-    function updateCountdown(targetDateStr) {
-      const el = document.getElementById('home-countdown');
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ===== JOIN WAITLIST (Discord OAuth) =====
+    function joinWaitlist(e) {
+      e.preventDefault();
+      FORTEX_AUTH.loginWithDiscord();
+    }
+
+    // ===== CRYPTIC LINE REVEALS ON SCROLL =====
+    const crypticLines = document.querySelectorAll('.cryptic-line');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.5 });
+
+    crypticLines.forEach(line => observer.observe(line));
+
+    // ===== ANIMATED WAITLIST COUNTER =====
+    let currentCount = 3742;
+    function animateWaitlist() {
+      const el = document.getElementById('waitlist-count');
       if (!el) return;
+      // Random increment every 15-45 seconds
+      const increment = Math.floor(Math.random() * 3) + 1;
+      currentCount += increment;
+      el.textContent = currentCount.toLocaleString();
+    }
+    setInterval(animateWaitlist, 30000);
 
-      if (homeCountdownInterval) {
-        clearInterval(homeCountdownInterval);
-        homeCountdownInterval = null;
-      }
+    // ===== FAKE JOIN NOTIFICATIONS (social proof) =====
+    const traderNames = [
+      'Alex', 'Sarah', 'Mohammed', 'Kai', 'Priya', 'Daniel', 'Yuki', 'Marcus',
+      'Elena', 'Raj', 'Chen', 'Fatima', 'Thomas', 'Nina', 'Hassan', 'Sofia'
+    ];
+    const countries = [
+      'joined from London', 'joined from Dubai', 'joined from Singapore',
+      'joined from New York', 'joined from Tokyo', 'joined from Mumbai',
+      'joined from Frankfurt', 'joined from Sydney', 'joined from Toronto'
+    ];
 
-      if (!targetDateStr) {
-        el.textContent = 'Next tournament coming soon';
-        return;
-      }
+    function showJoinToast() {
+      const name = traderNames[Math.floor(Math.random() * traderNames.length)];
+      const country = countries[Math.floor(Math.random() * countries.length)];
+      const toast = document.getElementById('join-toast');
+      document.getElementById('toast-avatar').textContent = name[0];
+      document.getElementById('toast-name').textContent = `${name} ${country}`;
+      document.getElementById('toast-time').textContent = 'moments ago';
 
-      const target = new Date(targetDateStr).getTime();
-      if (isNaN(target)) {
-        el.textContent = 'Next tournament coming soon';
-        return;
-      }
-
-      function tick() {
-        const now = Date.now();
-        const diff = target - now;
-        if (diff <= 0) {
-          el.textContent = 'REVEALING SOON';
-          if (homeCountdownInterval) {
-            clearInterval(homeCountdownInterval);
-            homeCountdownInterval = null;
-          }
-          return;
-        }
-        const d = Math.floor(diff / 86400000);
-        const h = Math.floor((diff % 86400000) / 3600000);
-        const m = Math.floor((diff % 3600000) / 60000);
-        const s = Math.floor((diff % 60000) / 1000);
-        el.textContent = `${String(d).padStart(2,'0')}d : ${String(h).padStart(2,'0')}h : ${String(m).padStart(2,'0')}m : ${String(s).padStart(2,'0')}s`;
-      }
-
-      tick();
-      homeCountdownInterval = setInterval(tick, 1000);
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 4000);
     }
 
-    // Helper: animated count-up for registration number
-    function animateRegistrationCount(targetCount) {
-      const digits = document.querySelectorAll('#reg-counter .reg-digit');
-      const barFill = document.querySelector('#reg-counter .reg-counter-bar-fill');
-      const remainingEl = document.querySelector('#reg-counter .reg-counter-remaining');
-      const socialHeadline = document.querySelector('h2[data-psychology="socialProof"]');
-      
-      const activeTraderValues = [];
-      document.querySelectorAll('.stat-item').forEach(item => {
-        const label = item.querySelector('.stat-label');
-        if (label && label.textContent.trim().toLowerCase().includes('trader')) {
-          const val = item.querySelector('.stat-value');
-          if (val) activeTraderValues.push(val);
-        }
+    // Show first toast after 5 seconds, then every 12-25 seconds
+    setTimeout(showJoinToast, 5000);
+    setInterval(() => {
+      const delay = Math.random() * 13000 + 12000;
+      setTimeout(showJoinToast, delay);
+    }, 18000);
+
+    // ===== LIVE WAITLIST COUNT SYNC =====
+    // Try to fetch real count from backend
+    fetch('https://api.base44.com/v1/apps/6a73016f9b626430a0d26f88/functions/getPlatformStats', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({})
+    }).then(r => r.json()).then(data => {
+      if (data.success && data.stats?.registration_count) {
+        currentCount = data.stats.registration_count;
+        document.getElementById('waitlist-count').textContent = currentCount.toLocaleString();
+      }
+    }).catch(() => {});
+
+    // ===== CHECK IF ALREADY LOGGED IN =====
+    const trader = FORTEX_AUTH.isLoggedIn();
+    if (trader) {
+      // Change CTA text
+      document.querySelectorAll('.stealth-cta').forEach(btn => {
+        btn.innerHTML = btn.innerHTML.replace('Claim Your Spot', 'You\\'re In');
+        btn.innerHTML = btn.innerHTML.replace('Join the Waitlist', 'Enter the Gates');
+        btn.onclick = (e) => { e.preventDefault(); window.location.href = 'profile.html'; };
       });
-
-      function updateDOM(currentVal) {
-        const rounded = Math.round(currentVal);
-        const str = String(rounded).padStart(5, '0');
-
-        // Digits display in counter
-        digits.forEach((digitEl, idx) => {
-          if (str[idx] !== undefined) {
-            digitEl.textContent = str[idx];
-          }
-        });
-
-        // Progress bar towards target 10,000
-        if (barFill) {
-          const pct = Math.min((currentVal / 10000) * 100, 100).toFixed(2);
-          barFill.style.width = `${pct}%`;
-        }
-
-        // Remaining registrations count
-        if (remainingEl) {
-          const rem = Math.max(10000 - rounded, 0);
-          remainingEl.textContent = `${rem.toLocaleString()} traders needed to unlock free tournaments`;
-        }
-
-        // Section headline
-        if (socialHeadline) {
-          socialHeadline.textContent = `${rounded.toLocaleString()} traders have already joined`;
-        }
-
-        // Active traders stat row numbers
-        activeTraderValues.forEach(valEl => {
-          valEl.textContent = rounded.toLocaleString();
-        });
-      }
-
-      // Smooth count-up animation
-      const duration = 1500;
-      const startTime = performance.now();
-
-      function step(now) {
-        const elapsed = now - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const easeProgress = 1 - Math.pow(1 - progress, 3); // easeOutCubic
-        const currentVal = targetCount * easeProgress;
-
-        updateDOM(currentVal);
-
-        if (progress < 1) {
-          requestAnimationFrame(step);
-        } else {
-          updateDOM(targetCount);
-        }
-      }
-
-      requestAnimationFrame(step);
     }
 
-    // Helper: update hero greeting if user is logged in
-    function updateHeroGreeting() {
-      if (typeof FORTEX_AUTH !== 'undefined' && FORTEX_AUTH.isLoggedIn) {
-        const trader = FORTEX_AUTH.isLoggedIn();
-        if (trader) {
-          const username = trader.username || trader.display_name || trader.name || 'Trader';
-          const headline = document.querySelector('.hero-headline');
-          if (headline) {
-            headline.textContent = `Welcome back, ${username}`;
-          }
-        }
-      }
-    }
-
-    // Main initialization function
-    async function initLiveStats() {
-      // 1. Apply loading pulse effect to stats containers
-      const regCounter = document.getElementById('reg-counter');
-      const upcomingContainer = document.querySelector('section[data-shape="metatrader"]');
-      const heroContent = document.querySelector('.hero-content');
-
-      const loadingTargets = [regCounter, upcomingContainer, heroContent].filter(Boolean);
-      loadingTargets.forEach(el => el.classList.add('stats-loading'));
-
-      // 2. Default static mock numbers
-      const fallbackStats = {
-        registration_count: 3742,
-        active_tournaments: 0,
-        next_tournament: {
-          name: 'Autumn Arena',
-          start_date: '2026-08-23T23:59:59',
-          prize_pool_rex: 50000,
-          status: 'upcoming'
-        }
-      };
-
-      let stats = fallbackStats;
-
-      // 3. Fetch platform stats from backend
-      try {
-        if (typeof FORTEX_AUTH !== 'undefined' && FORTEX_AUTH.callFunction) {
-          const res = await FORTEX_AUTH.callFunction('getPlatformStats', {});
-          if (res && res.success && res.stats) {
-            stats = res.stats;
-          }
-        }
-      } catch (err) {
-        console.warn('getPlatformStats failed, falling back to static mock stats:', err);
-      } finally {
-        loadingTargets.forEach(el => el.classList.remove('stats-loading'));
-      }
-
-      // 4. Update Registration Counter with animated count-up
-      const regCount = (stats && typeof stats.registration_count === 'number') ? stats.registration_count : 3742;
-      animateRegistrationCount(regCount);
-
-      // 5. Update Active Tournament Count
-      const activeTournaments = (stats && typeof stats.active_tournaments === 'number') ? stats.active_tournaments : 0;
-      
-      const liveBadges = document.querySelectorAll('.badge-live');
-      liveBadges.forEach(badge => {
-        if (activeTournaments > 0) {
-          badge.textContent = `${activeTournaments} ACTIVE TOURNAMENT${activeTournaments > 1 ? 'S' : ''} LIVE NOW`;
-        } else {
-          badge.textContent = 'NO ACTIVE TOURNAMENTS';
-        }
-      });
-
-      const liveIndicators = document.querySelectorAll('.live-indicator span');
-      liveIndicators.forEach(span => {
-        if (activeTournaments > 0) {
-          span.textContent = `${activeTournaments} active tournament${activeTournaments > 1 ? 's' : ''} live now`;
-        } else {
-          span.textContent = '0 active tournaments live now';
-        }
-      });
-
-      // 6. Update Next Tournament Preview Card & Countdown Timer
-      const upcomingCards = Array.from(document.querySelectorAll('.float-item')).filter(item => {
-        const label = item.querySelector('.float-item-label');
-        return label && label.textContent.trim().toUpperCase() === 'UPCOMING';
-      });
-
-      if (stats && stats.next_tournament) {
-        const nt = stats.next_tournament;
-        upcomingCards.forEach(card => {
-          const title = card.querySelector('.float-item-title');
-          const body = card.querySelector('.float-item-body');
-          if (title) title.textContent = nt.name || 'Next Tournament';
-          if (body) {
-            const dateStr = formatDate(nt.start_date);
-            const prizeStr = nt.prize_pool_rex ? ` · ${nt.prize_pool_rex.toLocaleString()} REX prize pool` : '';
-            body.textContent = `Starts ${dateStr}${prizeStr}`;
-          }
-        });
-
-        updateCountdown(nt.start_date);
-      } else {
-        // next_tournament is null
-        upcomingCards.forEach(card => {
-          const title = card.querySelector('.float-item-title');
-          const body = card.querySelector('.float-item-body');
-          if (title) title.textContent = 'Next tournament coming soon';
-          if (body) body.textContent = 'Stay tuned for our upcoming tournament announcements.';
-        });
-
-        updateCountdown(null);
-      }
-
-      // 7. Personalize Hero Copy if user is logged in
-      updateHeroGreeting();
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initLiveStats);
-    } else {
-      initLiveStats();
-    }
-  })();
+    // ===== PRE-LAUNCH LOCK =====
+    // All inner pages redirect to here unless logged in
+    // (enforced by auth.js pre-launch lock below)
   </script>
+
 </body>
 </html>

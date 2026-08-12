@@ -1,30 +1,27 @@
 /* ============================================
    FORTEX FX — SHARED AUTH MODULE
    Handles Discord OAuth, session management,
-   and API calls to Base44 backend functions.
-   Included on every page for auth state.
+   API calls, and PRE-LAUNCH STEALTH MODE.
    ============================================ */
 
 const FORTEX_AUTH = {
-  // Base44 backend function endpoint
   API_BASE: 'https://api.base44.com/v1/apps/6a73016f9b626430a0d26f88/functions',
   
-  // Discord OAuth config
   DISCORD_CLIENT_ID: '1536976658836230254',
   DISCORD_REDIRECT_URI: 'https://somilsharma2000.github.io/VortexFX/signin.html',
   DISCORD_SCOPES: 'identify',
   
-  // Storage keys
   TRADER_KEY: 'fortex_trader',
   TOKEN_KEY: 'fortex_discord_token',
   
-  // ===== CHECK IF LOGGED IN =====
+  // Pre-launch: pages that require login
+  LOCKED_PAGES: ['profile.html', 'checkin.html', 'leaderboard.html', 'offers.html', 'invite.html', 'admin.html', 'resources.html'],
+  
   isLoggedIn() {
     const trader = localStorage.getItem(this.TRADER_KEY);
     return trader ? JSON.parse(trader) : null;
   },
   
-  // ===== INITIATE DISCORD LOGIN =====
   loginWithDiscord(referralCode) {
     const params = new URLSearchParams({
       client_id: this.DISCORD_CLIENT_ID,
@@ -40,20 +37,16 @@ const FORTEX_AUTH = {
     window.location.href = `https://discord.com/api/oauth2/authorize?${params.toString()}`;
   },
   
-  // ===== HANDLE OAUTH CALLBACK =====
   async handleCallback() {
-    // Check URL fragment for access_token (implicit flow)
     const hash = window.location.hash.substring(1);
     const params = new URLSearchParams(hash);
     const accessToken = params.get('access_token');
-    const state = params.get('state'); // referral code
+    const state = params.get('state');
     
     if (!accessToken) return null;
     
-    // Clean the URL
     window.history.replaceState({}, document.title, window.location.pathname);
     
-    // Call backend function to verify and create trader
     try {
       const response = await fetch(`${this.API_BASE}/discordAuth`, {
         method: 'POST',
@@ -67,7 +60,6 @@ const FORTEX_AUTH = {
       const data = await response.json();
       
       if (data.success) {
-        // Store trader info
         localStorage.setItem(this.TRADER_KEY, JSON.stringify(data.trader));
         localStorage.setItem(this.TOKEN_KEY, accessToken);
         return data;
@@ -79,14 +71,12 @@ const FORTEX_AUTH = {
     }
   },
   
-  // ===== LOGOUT =====
   logout() {
     localStorage.removeItem(this.TRADER_KEY);
     localStorage.removeItem(this.TOKEN_KEY);
     window.location.href = 'index.html';
   },
   
-  // ===== CALL BACKEND FUNCTION =====
   async callFunction(name, payload) {
     try {
       const response = await fetch(`${this.API_BASE}/${name}`, {
@@ -100,14 +90,12 @@ const FORTEX_AUTH = {
     }
   },
   
-  // ===== UPDATE NAV BASED ON LOGIN STATE =====
   updateNav() {
     const trader = this.isLoggedIn();
     const navCta = document.querySelector('.nav-cta');
     if (!navCta) return;
     
     if (trader) {
-      // User is logged in — show profile + logout
       const signinLink = navCta.querySelector('a[href="signin.html"]');
       if (signinLink) {
         signinLink.textContent = trader.username || 'Profile';
@@ -126,6 +114,18 @@ const FORTEX_AUTH = {
     }
   }
 };
+
+// ===== PRE-LAUNCH STEALTH MODE LOCK =====
+// All inner pages redirect to homepage unless logged in
+(function() {
+  const currentPage = window.location.pathname.split('/').pop();
+  const trader = FORTEX_AUTH.isLoggedIn();
+  
+  if (FORTEX_AUTH.LOCKED_PAGES.includes(currentPage) && !trader) {
+    window.location.href = 'index.html';
+    return;
+  }
+})();
 
 // Auto-update nav on every page
 if (document.readyState === 'loading') {
