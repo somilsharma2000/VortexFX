@@ -18,7 +18,7 @@
       padding-bottom: var(--spacing-12, 12px);
       margin-bottom: var(--spacing-24, 24px);
       scrollbar-width: thin;
-      scrollbar-color: var(--color-electric-iris, #8052ff) transparent;
+      scrollbar-color: var(--color-electric-iris, #D4AF37) transparent;
     }
 
     .tournament-tab {
@@ -38,23 +38,23 @@
     }
 
     .tournament-tab:hover {
-      border-color: var(--color-electric-iris, #8052ff);
+      border-color: var(--color-electric-iris, #D4AF37);
       color: var(--color-bone-white, #F8FAFC);
-      background: rgba(128, 82, 255, 0.08);
+      background: rgba(212, 175, 55, 0.08);
     }
 
     .tournament-tab.active {
-      background: linear-gradient(135deg, rgba(128, 82, 255, 0.25), rgba(128, 82, 255, 0.05));
-      border-color: var(--color-electric-iris, #8052ff);
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(212, 175, 55, 0.05));
+      border-color: var(--color-electric-iris, #D4AF37);
       color: var(--color-bone-white, #F8FAFC);
-      box-shadow: 0 0 20px rgba(128, 82, 255, 0.2);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
     }
 
     .tournament-select-mobile {
       display: none;
       width: 100%;
       background: #0a0b10;
-      border: 1px solid rgba(128, 82, 255, 0.3);
+      border: 1px solid rgba(212, 175, 55, 0.3);
       color: var(--color-bone-white, #F8FAFC);
       padding: 14px 18px;
       border-radius: 12px;
@@ -122,10 +122,10 @@
 
     /* Master Tab: Iris/Purple */
     .tier-tab.tier-master:hover, .tier-tab.tier-master.active {
-      background: rgba(128, 82, 255, 0.18);
-      border-color: #8052FF;
-      color: #C084FC;
-      box-shadow: 0 0 16px rgba(128, 82, 255, 0.3);
+      background: rgba(212, 175, 55, 0.18);
+      border-color: #D4AF37;
+      color: #EACA7A;
+      box-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
     }
 
     /* All Tiers Tab */
@@ -144,7 +144,7 @@
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.5px;
-      background: linear-gradient(135deg, rgba(234, 202, 122, 0.2), rgba(128, 82, 255, 0.2));
+      background: linear-gradient(135deg, rgba(234, 202, 122, 0.2), rgba(212, 175, 55, 0.2));
       border: 1px solid #EACA7A;
       color: #FFD700;
       box-shadow: 0 0 12px rgba(234, 202, 122, 0.3);
@@ -343,7 +343,7 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 3px;
-      background: linear-gradient(90deg, transparent, #EACA7A, #8052FF, transparent);
+      background: linear-gradient(90deg, transparent, #EACA7A, #D4AF37, transparent);
     }
 
     .gold-lock-icon {
@@ -506,8 +506,8 @@
     .spinner-ring {
       width: 48px;
       height: 48px;
-      border: 3px solid rgba(128, 82, 255, 0.15);
-      border-top-color: var(--color-electric-iris, #8052ff);
+      border: 3px solid rgba(212, 175, 55, 0.15);
+      border-top-color: var(--color-electric-iris, #D4AF37);
       border-radius: 50%;
       animation: spin 1s linear infinite;
       margin: 0 auto var(--spacing-18, 18px);
@@ -529,9 +529,9 @@
     }
 
     .search-input-box:focus {
-      border-color: var(--color-electric-iris, #8052ff);
-      box-shadow: 0 0 12px rgba(128, 82, 255, 0.25);
-      background: rgba(128, 82, 255, 0.05);
+      border-color: var(--color-electric-iris, #D4AF37);
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
+      background: rgba(212, 175, 55, 0.05);
     }
   </style>
     <link rel="icon" type="image/png" sizes="32x32" href="assets/fortrex-icon-32.png">
@@ -695,7 +695,7 @@
                 </div>
               </div>
               <div style="display: flex; gap: 14px; align-items: flex-start;">
-                <div style="color: #8052FF; font-size: 20px;">⚡</div>
+                <div style="color: #D4AF37; font-size: 20px;">⚡</div>
                 <div>
                   <strong style="color: #FFF; display: block; margin-bottom: 2px;">Pure Risk Management</strong>
                   <span style="font-size: 14px; color: #94A3B8;">Focus strictly on execution without chasing unnatural risk to move up a live public ladder.</span>
@@ -703,7 +703,7 @@
               </div>
             </div>
           </div>
-          <div style="border: 1px solid rgba(128,82,255,0.2); background: rgba(10,11,16,0.8); border-radius: 24px; padding: 36px; text-align: center;">
+          <div style="border: 1px solid rgba(212,175,55,0.2); background: rgba(10,11,16,0.8); border-radius: 24px; padding: 36px; text-align: center;">
             <div style="font-size: 42px; margin-bottom: 12px;">🏆</div>
             <h3 style="font-size: 24px; font-weight: 600; color: #FFF; margin-bottom: 12px;">Tiered Tournament Prize Vaults</h3>
             <p style="font-size: 14px; color: #94A3B8; margin-bottom: 24px;">
@@ -978,7 +978,7 @@
             <button class="tournament-tab ${t.id === activeMainTournamentId ? 'active' : ''}" data-id="${t.id}">
               <span>${isSealed ? '🔒' : '🏆'}</span>
               <span>${t.name}</span>
-              <span class="badge" style="font-size: 11px; padding: 2px 8px; ${isSealed ? 'background: rgba(255,184,41,0.2); color:#FFB829;' : 'background: rgba(128,82,255,0.2); color:#8052FF;'}">
+              <span class="badge" style="font-size: 11px; padding: 2px 8px; ${isSealed ? 'background: rgba(255,184,41,0.2); color:#FFB829;' : 'background: rgba(212,175,55,0.2); color:#D4AF37;'}">
                 ${isSealed ? 'SEALED' : 'REVEALED'}
               </span>
             </button>
@@ -1102,9 +1102,9 @@
             statusBadge.style.display = 'inline-flex';
           } else {
             statusBadge.innerHTML = `✓ UNLOCKED`;
-            statusBadge.style.borderColor = '#8052FF';
-            statusBadge.style.color = '#8052FF';
-            statusBadge.style.background = 'rgba(128,82,255,0.15)';
+            statusBadge.style.borderColor = '#D4AF37';
+            statusBadge.style.color = '#D4AF37';
+            statusBadge.style.background = 'rgba(212,175,55,0.15)';
           }
         }
 
@@ -1146,7 +1146,7 @@
         container.innerHTML = `
           <div class="timeline-wrapper" style="${isSprint ? 'border-color: rgba(234,202,122,0.25); background: rgba(10,11,16,0.9);' : ''}">
             <div class="timeline-title-row">
-              <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: ${isSprint ? '#FFD700' : 'var(--color-electric-iris, #8052ff)'};">
+              <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: ${isSprint ? '#FFD700' : 'var(--color-electric-iris, #D4AF37)'};">
                 ${isSprint ? '⚡ SPRINT TIMELINE' : 'TOURNAMENT PHASE TIMELINE'}
               </div>
               <div style="font-size: 13px; color: #94A3B8;">
@@ -1560,7 +1560,7 @@
           if (balance >= 1000 && balance <= 10000) {
             tierBadge = `<span style="font-size: 11px; padding: 2px 8px; border-radius: 6px; background: rgba(234,202,122,0.15); color: #FFD700; border: 1px solid #EACA7A;">Pro</span>`;
           } else if (balance > 10000) {
-            tierBadge = `<span style="font-size: 11px; padding: 2px 8px; border-radius: 6px; background: rgba(128,82,255,0.15); color: #C084FC; border: 1px solid #8052FF;">Master</span>`;
+            tierBadge = `<span style="font-size: 11px; padding: 2px 8px; border-radius: 6px; background: rgba(212,175,55,0.15); color: #EACA7A; border: 1px solid #D4AF37;">Master</span>`;
           }
 
           const equityFormatted = `$${(item.final_equity || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -1613,7 +1613,7 @@
           <div class="prize-distribution-container">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
               <div>
-                <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: ${isSprint ? '#FFD700' : '#8052FF'};">
+                <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: ${isSprint ? '#FFD700' : '#D4AF37'};">
                   PRIZE POOL BREAKDOWN VISUAL
                 </div>
                 <h3 style="font-size: 20px; font-weight: 600; color: #FFF; margin: 4px 0 0 0;">
@@ -1685,7 +1685,7 @@
         const el = document.getElementById(containerId);
         if (!el) return;
         el.innerHTML = `
-          <div style="border: 1px solid rgba(128, 82, 255, 0.2); border-radius: 20px; padding: 60px 24px; text-align: center; background: rgba(10, 11, 16, 0.6);">
+          <div style="border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 60px 24px; text-align: center; background: rgba(10, 11, 16, 0.6);">
             <div class="spinner-ring"></div>
             <div style="font-size: 18px; font-weight: 500; color: #FFF; margin-bottom: 6px;">
               Loading Tournament Vault...

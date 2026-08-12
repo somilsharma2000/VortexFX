@@ -18,7 +18,7 @@
   <style>
     /* ==========================================================================
        FORTREX — MISSION CONTROL ADMIN DASHBOARD STYLES
-       Obsidian #06070A · Gold #EACA7A · Electric Iris #8052FF · Inter Font
+       Obsidian #06070A · Gold #EACA7A · Electric Iris #D4AF37 · Inter Font
        ========================================================================== */
 
     :root {
@@ -28,13 +28,13 @@
       --bg-sidebar: #090B12;
       --bg-input: #121522;
       --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-glow: rgba(128, 82, 255, 0.3);
+      --border-glow: rgba(212, 175, 55, 0.3);
       --border-gold: rgba(234, 202, 122, 0.4);
       --text-main: #FFFFFF;
       --text-muted: #9A9A9A;
       --text-dim: #64687A;
-      --accent-iris: #8052FF;
-      --accent-iris-glow: rgba(128, 82, 255, 0.15);
+      --accent-iris: #D4AF37;
+      --accent-iris-glow: rgba(212, 175, 55, 0.15);
       --accent-gold: #EACA7A;
       --accent-gold-glow: rgba(234, 202, 122, 0.15);
       --status-live: #22C55E;
@@ -109,13 +109,13 @@
     .sidebar-brand-logo {
       width: 38px;
       height: 38px;
-      background: linear-gradient(135deg, rgba(128, 82, 255, 0.2), rgba(234, 202, 122, 0.2));
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(234, 202, 122, 0.2));
       border: 1px solid var(--accent-iris);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 15px rgba(128, 82, 255, 0.2);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
     }
 
     .sidebar-brand-title {
@@ -229,10 +229,10 @@
 
     .nav-item-btn.active {
       color: #FFFFFF;
-      background: linear-gradient(90deg, rgba(128, 82, 255, 0.15), rgba(128, 82, 255, 0.03));
-      border-color: rgba(128, 82, 255, 0.4);
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.03));
+      border-color: rgba(212, 175, 55, 0.4);
       font-weight: 600;
-      box-shadow: 0 0 15px rgba(128, 82, 255, 0.1);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
     }
 
     .nav-item-btn.active svg {
@@ -508,7 +508,7 @@
     .quick-action-btn.iris-border:hover {
       background: var(--bg-card-hover);
       border-color: var(--accent-iris);
-      box-shadow: 0 0 18px rgba(128, 82, 255, 0.2);
+      box-shadow: 0 0 18px rgba(212, 175, 55, 0.2);
       transform: translateY(-2px);
     }
 
@@ -529,7 +529,7 @@
 
     .quick-action-icon.iris-bg {
       background: var(--accent-iris-glow);
-      border: 1px solid rgba(128, 82, 255, 0.3);
+      border: 1px solid rgba(212, 175, 55, 0.3);
     }
 
     .quick-action-text {
@@ -569,14 +569,14 @@
     }
 
     .type-badge.badge-sprint {
-      background: rgba(128, 82, 255, 0.15);
+      background: rgba(212, 175, 55, 0.15);
       color: var(--accent-iris);
-      border: 1px solid rgba(128, 82, 255, 0.4);
+      border: 1px solid rgba(212, 175, 55, 0.4);
     }
 
     .sprint-row {
       border-left: 3px solid var(--accent-iris) !important;
-      background: rgba(128, 82, 255, 0.02);
+      background: rgba(212, 175, 55, 0.02);
     }
 
     /* Content Cards & Tables */
@@ -727,12 +727,12 @@
       align-items: center;
       gap: 8px;
       transition: all 0.2s ease;
-      box-shadow: 0 0 15px rgba(128, 82, 255, 0.2);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
     }
 
     .btn-primary-accent:hover {
       transform: translateY(-1px);
-      box-shadow: 0 0 20px rgba(128, 82, 255, 0.4);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
     }
 
     .btn-outline-sm {
@@ -800,7 +800,7 @@
 
     .form-control:focus {
       border-color: var(--accent-iris);
-      box-shadow: 0 0 12px rgba(128, 82, 255, 0.25);
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
     }
 
     textarea.form-control {
@@ -1231,7 +1231,7 @@
                 </div>
               </div>
               <div style="text-align: right;">
-                <span style="font-size: 12px; color: var(--accent-iris); font-weight: 600; background: rgba(128, 82, 255, 0.15); padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(128, 82, 255, 0.3);">
+                <span style="font-size: 12px; color: var(--accent-iris); font-weight: 600; background: rgba(212, 175, 55, 0.15); padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(212, 175, 55, 0.3);">
                   <span id="genesis-tx-count">1,842</span> Traders Received <strong style="color: var(--accent-gold);">genesis_bonus</strong> (+500 REX)
                 </span>
               </div>
@@ -1239,7 +1239,7 @@
 
             <!-- Gold Gradient Progress Bar -->
             <div style="width: 100%; height: 12px; background: rgba(255, 255, 255, 0.05); border-radius: 999px; overflow: hidden; border: 1px solid var(--border-subtle); padding: 2px;">
-              <div id="genesis-progress-bar" style="width: 73.68%; height: 100%; background: linear-gradient(90deg, #EACA7A 0%, #8052FF 100%); border-radius: 999px; transition: width 1s ease; box-shadow: 0 0 12px rgba(234, 202, 122, 0.5);"></div>
+              <div id="genesis-progress-bar" style="width: 73.68%; height: 100%; background: linear-gradient(90deg, #EACA7A 0%, #D4AF37 100%); border-radius: 999px; transition: width 1s ease; box-shadow: 0 0 12px rgba(234, 202, 122, 0.5);"></div>
             </div>
 
             <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-dim);">
@@ -1973,7 +1973,7 @@
           vx: (Math.random() - 0.5) * 0.4,
           vy: (Math.random() - 0.5) * 0.4,
           radius: Math.random() * 2 + 1,
-          color: Math.random() > 0.5 ? 'rgba(234, 202, 122, ' : 'rgba(128, 82, 255, ',
+          color: Math.random() > 0.5 ? 'rgba(234, 202, 122, ' : 'rgba(212, 175, 55, ',
           alpha: Math.random() * 0.5 + 0.2
         });
       }

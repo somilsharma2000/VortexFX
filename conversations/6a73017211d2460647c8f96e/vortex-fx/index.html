@@ -367,7 +367,7 @@
     }
 
     .iris-text {
-      color: #8052FF;
+      color: #D4AF37;
       font-weight: 600;
     }
 
@@ -957,7 +957,7 @@
     <!-- WAITLIST -->
     <div class="waitlist-bar">
       <span class="live-dot" style="background: #EACA7A;"></span>
-      <span><span class="waitlist-num" id="waitlist-count">3,742</span> traders on the waitlist</span>
+      <span><span class="waitlist-num" id="waitlist-count">847</span> traders on the waitlist</span>
     </div>
     <div class="waitlist-progress"><div class="waitlist-fill"></div></div>
 
@@ -972,12 +972,12 @@
         <div class="stat-label">Genesis Spots Available</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number gold-stat" id="stat-prize-pool">$0</div>
-        <div class="stat-label">Prize Pool</div>
+        <div class="stat-number gold-stat" id="stat-prize-pool">0</div>
+        <div class="stat-label">Prize Pool (REX)</div>
       </div>
       <div class="stat-card">
         <div class="stat-number white-stat" id="stat-active-traders">0</div>
-        <div class="stat-label">Active Traders</div>
+        <div class="stat-label">Traders Ready</div>
       </div>
       <div class="stat-card">
         <div class="stat-number white-stat" id="stat-verified-accounts">0</div>
@@ -1030,7 +1030,7 @@
     <div class="genesis-progress-wrapper">
       <div class="genesis-progress-header">
         <span>Genesis Spots Claimed</span>
-        <span><span class="gold-text">1,247</span> / 2,500</span>
+        <span><span class="gold-text" id="genesis-claimed">0</span> / 2,500</span>
       </div>
       <div class="genesis-progress-bar">
         <div class="genesis-progress-fill"></div>
@@ -1320,9 +1320,9 @@
     // ===== PLATFORM STATS & SOCIAL PROOF COUNT-UP =====
     let platformStats = {
       genesis_spots: 2500,
-      total_prize_pool_rex: 10000,
-      active_traders: 500,
-      verified_accounts: 8,
+      total_prize_pool_rex: 0,
+      active_traders: 0,
+      verified_accounts: 0,
       completed_championships: 0
     };
 

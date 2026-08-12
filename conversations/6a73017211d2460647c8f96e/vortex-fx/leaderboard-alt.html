@@ -13,16 +13,16 @@
 <style>
   :root {
     --bg: #050508;
-    --violet: #8B5CF6;
+    --violet: #D4AF37;
     --violet-bright: #A78BFA;
-    --violet-deep: #6D28D9;
+    --violet-deep: #AA7C11;
     --cyan: #06B6D4;
     --cyan-bright: #22D3EE;
     --magenta: #EC4899;
     --text: #FFFFFF;
     --text-dim: #94A3B8;
-    --border: rgba(139, 92, 246, 0.2);
-    --glow: rgba(139, 92, 246, 0.4);
+    --border: rgba(212, 175, 55, 0.2);
+    --glow: rgba(212, 175, 55, 0.4);
     --font-heading: 'Orbitron', sans-serif;
     --font-body: 'Space Grotesk', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
@@ -149,7 +149,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
@@ -162,7 +162,7 @@
   }
 
   .btn-ghost {
-    background: rgba(139, 92, 246, 0.05);
+    background: rgba(212, 175, 55, 0.05);
     color: var(--text);
     font-family: var(--font-heading);
     font-size: 0.85rem;
@@ -233,19 +233,19 @@
   }
 
   .glass:hover {
-    border-color: rgba(139, 92, 246, 0.5);
-    box-shadow: 0 8px 32px 0 rgba(139, 92, 246, 0.2);
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(212, 175, 55, 0.2);
   }
 
   .holo-panel {
     background: linear-gradient(135deg, rgba(20, 15, 38, 0.8) 0%, rgba(10, 20, 35, 0.8) 100%);
     backdrop-filter: blur(16px);
-    border: 1px solid rgba(139, 92, 246, 0.3);
+    border: 1px solid rgba(212, 175, 55, 0.3);
     border-radius: 16px;
     padding: 32px;
     position: relative;
     overflow: hidden;
-    box-shadow: inset 0 0 20px rgba(139, 92, 246, 0.1), 0 10px 40px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.1), 0 10px 40px rgba(0, 0, 0, 0.5);
   }
 
   .holo-panel::before {
@@ -285,7 +285,7 @@
   }
 
   .badge-diamond {
-    background: rgba(139, 92, 246, 0.2);
+    background: rgba(212, 175, 55, 0.2);
     color: var(--violet-bright);
     border: 1px solid var(--violet);
   }
@@ -335,7 +335,7 @@
   }
 
   @keyframes glowPulse {
-    from { box-shadow: 0 0 10px rgba(139, 92, 246, 0.3); }
+    from { box-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
     to { box-shadow: 0 0 25px rgba(34, 211, 238, 0.6); }
   }
 
@@ -516,7 +516,7 @@
 
     .rank-table th, .rank-table td {
       padding: 14px 18px;
-      border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
       font-size: 0.9rem;
     }
 
@@ -533,7 +533,7 @@
     }
 
     .rank-table tr:hover {
-      background: rgba(139, 92, 246, 0.1);
+      background: rgba(212, 175, 55, 0.1);
       transform: translateX(4px);
     }
 
@@ -968,7 +968,7 @@
           vx: (Math.random() - 0.5) * 0.6,
           vy: (Math.random() - 0.5) * 0.6,
           radius: Math.random() * 2 + 1,
-          color: Math.random() > 0.5 ? '#8B5CF6' : '#06B6D4',
+          color: Math.random() > 0.5 ? '#D4AF37' : '#06B6D4',
           alpha: Math.random() * 0.5 + 0.2
         }));
 
@@ -996,7 +996,7 @@
                 ctx.beginPath();
                 ctx.moveTo(p.x, p.y);
                 ctx.lineTo(p2.x, p2.y);
-                ctx.strokeStyle = '#8B5CF6';
+                ctx.strokeStyle = '#D4AF37';
                 ctx.globalAlpha = (1 - dist / 110) * 0.18;
                 ctx.lineWidth = 0.8;
                 ctx.stroke();

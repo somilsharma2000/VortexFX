@@ -760,12 +760,28 @@ class MorphingConstellation {
 function initScrollReveal() {
   const reveals = document.querySelectorAll('.reveal');
   if (!reveals.length) return;
+  
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add('visible');
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  }, { threshold: 0.01, rootMargin: '0px 0px -10px 0px' });
   reveals.forEach(el => observer.observe(el));
+  
+  // FALLBACK: Make all reveal elements visible after 2.5s, even if observer didn't fire
+  setTimeout(() => {
+    reveals.forEach(el => el.classList.add('visible'));
+  }, 2500);
+  
+  // Also immediately mark elements already in viewport
+  requestAnimationFrame(() => {
+    reveals.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('visible');
+      }
+    });
+  });
 }
 
 function initNavScroll() {
@@ -816,7 +832,7 @@ function initCounters() {
 }
 
 const REG_TARGET = 10000;
-let regCount = 3742;
+let regCount = 847;
 
 function initRegCounter(elementId) {
   const el = document.getElementById(elementId);
