@@ -1,0 +1,273 @@
+/* ==========================================================================
+   FORTREX FX — ROYAL DESIGN UPGRADES
+   Extracted from Royal Reference Designs, adapted to Obsidian+Gold theme
+   ========================================================================== */
+
+/* Damask Pattern Background (subtle gold filigree) */
+.damask-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0 C32 10 38 16 50 18 C38 20 32 26 30 36 C28 26 22 20 10 18 C22 16 28 10 30 0 Z M30 36 C31 42 35 46 42 47 C35 48 31 52 30 58 C29 52 25 48 18 47 C25 46 29 42 30 36 Z' fill='%23D4AF37' fill-opacity='0.035'/%3E%3C/svg%3E");
+}
+
+/* Royal Glass — frosted dark panel with blur */
+.royal-glass {
+    background: rgba(10, 8, 18, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+/* Royal Purple Glow — radial purple gradient for backgrounds */
+.royal-glow {
+    background: radial-gradient(circle at 50% 50%, rgba(74, 14, 78, 0.25) 0%, rgba(74, 14, 78, 0.08) 50%, transparent 75%);
+}
+
+/* Gold Shimmer Animation — moving light across gold buttons */
+@keyframes goldShimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.shimmer-effect {
+    position: relative;
+    overflow: hidden;
+}
+.shimmer-effect::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.15) 50%, transparent 70%);
+    animation: goldShimmer 2.5s infinite;
+    pointer-events: none;
+}
+
+/* Crown Glow — pulsing gold drop-shadow */
+@keyframes crownGlow {
+    0% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4)); }
+    100% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.9)); }
+}
+
+.crown-glow {
+    animation: crownGlow 3s ease-in-out infinite alternate;
+}
+
+/* Float Animation — gentle vertical bob */
+@keyframes crownFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+.float-animation {
+    animation: crownFloat 4s ease-in-out infinite;
+}
+
+/* Slow Spin — for decorative rings */
+@keyframes spinSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.spin-slow {
+    animation: spinSlow 20s linear infinite;
+}
+
+/* Gold Gradient Text */
+.text-gold-gradient {
+    background: linear-gradient(135deg, #FFD700 0%, #F0B90B 50%, #D4AF37 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Gold Button with Shimmer */
+.btn-gold-royal {
+    background: linear-gradient(135deg, #FFD700 0%, #F0B90B 50%, #D4AF37 100%);
+    color: #000000;
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+    transition: all 0.3s ease;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 12px 32px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.btn-gold-royal:hover {
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.65);
+    transform: scale(1.02);
+}
+
+.btn-gold-royal::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+    animation: goldShimmer 2.5s infinite;
+    pointer-events: none;
+}
+
+/* Double Gold Border — vault door effect */
+.double-border-gold {
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.15), 0 0 40px rgba(212, 175, 55, 0.1);
+}
+
+/* Vault Door Effect — for treasury sections */
+.vault-door {
+    background: linear-gradient(135deg, rgba(13, 15, 24, 0.95) 0%, rgba(6, 7, 10, 0.98) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.1), 0 10px 60px rgba(0, 0, 0, 0.8);
+}
+
+/* Royal Card — enhanced card with gold accents */
+.royal-card {
+    background: linear-gradient(135deg, rgba(13, 15, 24, 0.95) 0%, rgba(10, 8, 18, 0.98) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.royal-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+}
+
+/* Filigree Divider — ornamental section divider */
+.filigree-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 40px 0;
+}
+
+.filigree-divider::before,
+.filigree-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+}
+
+/* Gold Shadow Glow */
+.shadow-royal-gold {
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25), 0 0 40px rgba(212, 175, 55, 0.1);
+}
+
+/* Crown Pulse — for icons/badges */
+@keyframes crownPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+.crown-pulse {
+    animation: crownPulse 2s ease-in-out infinite;
+}
+
+/* Fade In Up — scroll-triggered animation */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Royal Badge — for tournament/prize indicators */
+.royal-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: #EACA7A;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Glass Panel Royal — for navbar/headers */
+.glass-panel-royal {
+    background: rgba(6, 7, 10, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-color: rgba(212, 175, 55, 0.25);
+}
+
+/* Tournament Proclamation Card */
+.proclamation-card {
+    background: linear-gradient(135deg, rgba(13, 15, 24, 0.95), rgba(10, 8, 18, 0.98));
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.proclamation-card:hover {
+    border-color: rgba(234, 202, 122, 0.6);
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.2);
+    transform: translateY(-2px);
+}
+
+.proclamation-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #D4AF37, #EACA7A, #D4AF37);
+}
+
+/* Tier Badges — for leaderboard ranking */
+.tier-apex {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(212, 175, 55, 0.1));
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    color: #FFD700;
+}
+
+.tier-duke {
+    background: linear-gradient(135deg, rgba(192, 192, 192, 0.15), rgba(168, 168, 168, 0.05));
+    border: 1px solid rgba(192, 192, 192, 0.4);
+    color: #C0C0C0;
+}
+
+.tier-knight {
+    background: linear-gradient(135deg, rgba(205, 127, 50, 0.15), rgba(184, 115, 51, 0.05));
+    border: 1px solid rgba(205, 127, 50, 0.4);
+    color: #CD7F32;
+}
+
+/* Verified Trader Badge */
+.verified-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    color: #22C55E;
+    font-size: 10px;
+    font-weight: 600;
+}
