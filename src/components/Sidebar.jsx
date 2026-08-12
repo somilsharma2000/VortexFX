@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { Menu, X, Zap, LayoutDashboard, Trophy, Users, BarChart3, Gift, Wallet, CalendarCheck, Shield, Flame, Sword } from "lucide-react";
 import { useCurrentTrader } from "@/hooks/useCurrentTrader";
 
-const DISCORD_URL = "https://discord.gg/9pTSqeTbn";
+const DISCORD_URL = "https://discord.gg/z2qVgJgCg4";
 import Logo from "@/components/Logo";
 
 const navItems = [

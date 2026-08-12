@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Users, Calendar, ArrowRight, Sword } from "lucide-react";
 
-const DISCORD_URL = "https://discord.gg/9pTSqeTbn";
+const DISCORD_URL = "https://discord.gg/z2qVgJgCg4";
 
 const statusStyles = {
   upcoming: { className: "badge badge-muted", text: "Upcoming" },

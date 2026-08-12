@@ -44,7 +44,7 @@ export default function Footer() {
               Trade. Compete. Win. The FORTREX Trading Community — free education, monthly trading championships, and real cash prizes.
             </p>
             <div className="flex items-center gap-3">
-              <a href="#" aria-label="Discord" className="w-9 h-9 rounded-lg flex items-center justify-center text-[#A0A8C0] hover:text-[#D4AF37] transition-colors" style={{ backgroundColor: "#111634", border: "1px solid rgba(212,175,55,0.15)" }}><MessageCircle className="w-4 h-4" /></a>
+              <a href="https://discord.gg/z2qVgJgCg4" target="_blank" rel="noopener noreferrer" aria-label="Discord" className="w-9 h-9 rounded-lg flex items-center justify-center text-[#A0A8C0] hover:text-[#D4AF37] transition-colors" style={{ backgroundColor: "#111634", border: "1px solid rgba(212,175,55,0.15)" }}><MessageCircle className="w-4 h-4" /></a>
               <a href="#" aria-label="Instagram" className="w-9 h-9 rounded-lg flex items-center justify-center text-[#A0A8C0] hover:text-[#D4AF37] transition-colors" style={{ backgroundColor: "#111634", border: "1px solid rgba(212,175,55,0.15)" }}><Instagram className="w-4 h-4" /></a>
               <a href="#" aria-label="YouTube" className="w-9 h-9 rounded-lg flex items-center justify-center text-[#A0A8C0] hover:text-[#D4AF37] transition-colors" style={{ backgroundColor: "#111634", border: "1px solid rgba(212,175,55,0.15)" }}><Youtube className="w-4 h-4" /></a>
               <a href="#" aria-label="Telegram" className="w-9 h-9 rounded-lg flex items-center justify-center text-[#A0A8C0] hover:text-[#D4AF37] transition-colors" style={{ backgroundColor: "#111634", border: "1px solid rgba(212,175,55,0.15)" }}><Send className="w-4 h-4" /></a>
