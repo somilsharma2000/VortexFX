@@ -405,15 +405,15 @@
           <!-- SOCIAL PROOF -->
           <div class="social-proof-grid">
             <div>
-              <div style="font-size: 28px; font-weight: 700; color: #ffffff;">3,742</div>
+              <div style="font-size: 28px; font-weight: 700; color: #ffffff;" id="signin-stat-traders">—</div>
               <div style="font-size: 12px; color: var(--color-ash-gray); text-transform: uppercase; letter-spacing: 0.05em;">Traders Registered</div>
             </div>
             <div>
-              <div style="font-size: 28px; font-weight: 700; color: #ffffff;">6,258</div>
+              <div style="font-size: 28px; font-weight: 700; color: #ffffff;" id="signin-stat-rex">—</div>
               <div style="font-size: 12px; color: var(--color-ash-gray); text-transform: uppercase; letter-spacing: 0.05em;">REX Distributed</div>
             </div>
             <div>
-              <div style="font-size: 28px; font-weight: 700; color: #ffffff;">14</div>
+              <div style="font-size: 28px; font-weight: 700; color: #ffffff;" id="signin-stat-days">—</div>
               <div style="font-size: 12px; color: var(--color-ash-gray); text-transform: uppercase; letter-spacing: 0.05em;">Days to Launch</div>
             </div>
           </div>
@@ -632,5 +632,31 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<script>
+    // Fetch real stats from backend
+    fetch('https://koda-a0d26f88.base44.app/functions/getPublicStats', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({})
+    })
+    .then(r => r.json())
+    .then(data => {
+      if (data.success && data.stats) {
+        const s = data.stats;
+        const tradersEl = document.getElementById('signin-stat-traders');
+        if (tradersEl) tradersEl.textContent = (s.verified_traders || 0).toLocaleString();
+        const rexEl = document.getElementById('signin-stat-rex');
+        if (rexEl) rexEl.textContent = (s.total_rex_distributed || 0).toLocaleString();
+        const daysEl = document.getElementById('signin-stat-days');
+        if (daysEl) {
+          const launch = new Date('2026-08-23');
+          const now = new Date();
+          const days = Math.max(0, Math.ceil((launch - now) / (1000 * 60 * 60 * 24)));
+          daysEl.textContent = days;
+        }
+      }
+    })
+    .catch(() => {});
+  </script>
 </body>
 </html>

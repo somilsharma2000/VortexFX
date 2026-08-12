@@ -2109,21 +2109,21 @@
           }
         } else {
           // Fallback stats count up
-          animateCountUp('stat-total-traders', 3742);
-          animateCountUp('stat-verified-accounts', 2150);
-          animateCountUp('stat-active-tournaments', 2);
-          animateCountUp('stat-rex-distributed', 2450000);
-          animateCountUp('stat-prize-pool-rex', 500000);
-          animateCountUp('stat-waitlist-count', 849);
+          animateCountUp('stat-total-traders', 0);
+          animateCountUp('stat-verified-accounts', 0);
+          animateCountUp('stat-active-tournaments', 0);
+          animateCountUp('stat-rex-distributed', 0);
+          animateCountUp('stat-prize-pool-rex', 0);
+          animateCountUp('stat-waitlist-count', 0);
         }
       } catch (err) {
-        console.warn('getPlatformStats fallback active:', err);
-        animateCountUp('stat-total-traders', 3742);
-        animateCountUp('stat-verified-accounts', 2150);
-        animateCountUp('stat-active-tournaments', 2);
-        animateCountUp('stat-rex-distributed', 2450000);
-        animateCountUp('stat-prize-pool-rex', 500000);
-        animateCountUp('stat-waitlist-count', 849);
+        console.warn('getAdminData failed:', err);
+        animateCountUp('stat-total-traders', 0);
+        animateCountUp('stat-verified-accounts', 0);
+        animateCountUp('stat-active-tournaments', 0);
+        animateCountUp('stat-rex-distributed', 0);
+        animateCountUp('stat-prize-pool-rex', 0);
+        animateCountUp('stat-waitlist-count', 0);
       }
     }
 
@@ -2139,7 +2139,7 @@
           allTournaments = FALLBACK_TOURNAMENTS;
         }
       } catch (err) {
-        console.warn('getTournaments failed, using fallback data:', err);
+        console.warn('getPublicTournaments failed, using fallback data:', err);
         allTournaments = FALLBACK_TOURNAMENTS;
       }
 
