@@ -5,18 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign In — FORTEX FX</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Core CSS & JS -->
   <link rel="stylesheet" href="css/dala.css">
   <script src="js/dala.js"></script>
   <script src="js/psychology.js"></script>
+  <script src="js/auth.js"></script>
 
   <style>
-    /* Page-specific minimal extensions */
     .signin-hero {
       padding: var(--spacing-36) 0 var(--spacing-60);
       display: flex;
@@ -88,6 +86,12 @@
       transform: translateY(-1px);
     }
 
+    .discord-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
     .discord-btn svg {
       width: 22px;
       height: 22px;
@@ -111,9 +115,7 @@
       margin-bottom: 10px;
     }
 
-    .reassurance-item:last-child {
-      margin-bottom: 0;
-    }
+    .reassurance-item:last-child { margin-bottom: 0; }
 
     .reassurance-icon {
       color: var(--color-electric-iris);
@@ -130,6 +132,73 @@
       text-align: center;
     }
 
+    /* Loading state */
+    .auth-loading {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding: var(--spacing-24) 0;
+    }
+
+    .auth-loading.active { display: flex; }
+
+    .auth-spinner {
+      width: 48px;
+      height: 48px;
+      border: 3px solid rgba(128, 82, 255, 0.2);
+      border-top-color: #8052ff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .auth-error {
+      display: none;
+      padding: 12px 16px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 4px;
+      color: #ef4444;
+      font-size: 14px;
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    .auth-error.active { display: block; }
+
+    .auth-success {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: var(--spacing-24) 0;
+    }
+
+    .auth-success.active { display: flex; }
+
+    .auth-success-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(34, 197, 94, 0.15);
+      border: 2px solid #22c55e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .auth-success-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: #22c55e;
+      stroke-width: 3;
+      fill: none;
+    }
+
     @media (max-width: 640px) {
       .social-proof-grid {
         grid-template-columns: 1fr;
@@ -143,7 +212,6 @@
 </head>
 <body>
 
-  <!-- PARTICLE CANVAS -->
   <canvas id="particle-canvas"></canvas>
 
   <!-- NAVIGATION -->
@@ -218,163 +286,238 @@
             Stop trading in isolation. Connect your account in 30 seconds and let your trading skill speak for itself.
           </p>
 
-          <!-- CENTERED AUTH CARD WITH DISCORD OAUTH BUTTON -->
-          <div class="auth-card">
+          <!-- AUTH CARD -->
+          <div class="auth-card" id="auth-card">
 
-            <div style="margin-bottom: var(--spacing-24);">
-              <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px;">
-                <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-electric-iris); background: rgba(128, 82, 255, 0.12); padding: 4px 12px; border-radius: 12px;">
-                  ⚡ 30 Seconds to Join
-                </span>
-              </div>
-              <h2 style="font-size: 20px; font-weight: 600; color: #ffffff; margin-bottom: 6px;">Enter the Arena</h2>
-              <p style="font-size: 14px; color: var(--color-ash-gray); font-weight: 200;">
-                One click with Discord. No password required.
-              </p>
-            </div>
-
-            <!-- PRIMARY CTA BUTTON -->
-            <a href="index.html" class="discord-btn" onclick="event.preventDefault(); alert('Connecting with Discord... Redirecting to Fortex FX Arena.'); window.location.href='index.html';">
-              <svg viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
-                <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.68,1.75,1.36,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.89,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.89,96.12,53,91.08,65.69,84.69,65.69Z"/>
-              </svg>
-              Continue with Discord
-            </a>
-
-            <!-- REASSURANCE TEXT -->
-            <div class="reassurance-list">
-              <div class="reassurance-item">
-                <svg class="reassurance-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                <span><strong>Free forever. No card needed.</strong> Zero subscription or hidden costs.</span>
-              </div>
-              <div class="reassurance-item">
-                <svg class="reassurance-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                <span><strong>Instant Identity:</strong> Your Discord username becomes your Fortex FX identity.</span>
-              </div>
-              <div class="reassurance-item">
-                <svg class="reassurance-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                <span><strong>Effortless Entry:</strong> Zero passwords to remember, 30 seconds and you're in.</span>
-              </div>
-            </div>
-
-            <!-- MOCK T&C AND PRIVACY POLICY LINKS -->
-            <div style="margin-top: var(--spacing-24); font-size: 12px; color: #5a5a5a; text-align: center;">
-              By continuing, you agree to our 
-              <a href="#" style="color: var(--color-silver-mist); text-decoration: underline;">Terms of Service</a> 
-              and 
-              <a href="#" style="color: var(--color-silver-mist); text-decoration: underline;">Privacy Policy</a>.
-            </div>
-
-          </div>
-
-          <!-- SOCIAL PROOF BELOW BUTTON -->
-          <div style="max-width: 680px; width: 100%; margin-top: var(--spacing-48);">
-            <div class="social-proof-grid">
-              <div class="float-item" style="margin-bottom: 0; padding: 20px; text-align: center;">
-                <div class="float-item-label" style="justify-content: center; color: var(--color-electric-iris);">COMMUNITY</div>
-                <div class="stat-value" style="font-size: 32px;" data-count="3742">3,742</div>
-                <div class="float-item-body" style="font-size: 13px;">Traders already here</div>
-              </div>
-
-              <div class="float-item" style="margin-bottom: 0; padding: 20px; text-align: center;">
-                <div class="float-item-label" style="justify-content: center; color: var(--color-electric-iris);">
-                  <span class="live-dot" style="margin-right: 4px;"></span> LIVE ARENA
+            <!-- DEFAULT LOGIN VIEW -->
+            <div id="login-view">
+              <div style="margin-bottom: var(--spacing-24);">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px;">
+                  <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-electric-iris); background: rgba(128, 82, 255, 0.12); padding: 4px 12px; border-radius: 12px;">
+                    ⚡ 30 Seconds to Join
+                  </span>
                 </div>
-                <div class="stat-value" style="font-size: 32px;" data-count="247">247</div>
-                <div class="float-item-body" style="font-size: 13px;">Competing right now</div>
+                <h2 style="font-size: 20px; font-weight: 600; color: #ffffff; margin-bottom: 6px;">Enter the Arena</h2>
+                <p style="font-size: 14px; color: var(--color-ash-gray); font-weight: 200;">
+                  One click with Discord. No password required.
+                </p>
               </div>
 
-              <div class="float-item" style="margin-bottom: 0; padding: 20px; text-align: center;">
-                <div class="float-item-label" style="justify-content: center; color: #ffb829;">PRIZES PAID</div>
-                <div class="stat-value" style="font-size: 32px;">$2.4M</div>
-                <div class="float-item-body" style="font-size: 13px;">Distributed in rewards</div>
+              <!-- REAL DISCORD OAUTH BUTTON -->
+              <button class="discord-btn" id="discord-login-btn" onclick="FORTEX_AUTH.loginWithDiscord()">
+                <svg viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.68,1.75,1.36,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.89,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.89,96.12,53,91.08,65.69,84.69,65.69Z"/>
+                </svg>
+                Continue with Discord
+              </button>
+
+              <div class="auth-error" id="auth-error"></div>
+
+              <div class="reassurance-list">
+                <div class="reassurance-item">
+                  <svg class="reassurance-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span><strong>Free forever. No card needed.</strong> Zero subscription or hidden costs.</span>
+                </div>
+                <div class="reassurance-item">
+                  <svg class="reassurance-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span><strong>Discord verified.</strong> Your username auto-joins the Citadel community.</span>
+                </div>
+                <div class="reassurance-item">
+                  <svg class="reassurance-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span><strong>No trading on this platform.</strong> Trade on your own MT4 terminal. We track results.</span>
+                </div>
               </div>
+            </div>
+
+            <!-- LOADING VIEW -->
+            <div class="auth-loading" id="loading-view">
+              <div class="auth-spinner"></div>
+              <p style="color: var(--color-ash-gray); font-size: 14px;">Connecting to Discord...</p>
+              <p style="color: var(--color-ash-gray); font-size: 12px; opacity: 0.6;">Verifying your identity</p>
+            </div>
+
+            <!-- SUCCESS VIEW -->
+            <div class="auth-success" id="success-view">
+              <div class="auth-success-icon">
+                <svg viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <h2 style="font-size: 20px; font-weight: 600; color: #ffffff;" id="welcome-text">Welcome to the Arena!</h2>
+              <p style="color: var(--color-ash-gray); font-size: 14px;" id="welcome-subtext">Redirecting you...</p>
+            </div>
+
+          </div>
+
+          <!-- SOCIAL PROOF -->
+          <div class="social-proof-grid">
+            <div>
+              <div style="font-size: 28px; font-weight: 700; color: #ffffff;">3,742</div>
+              <div style="font-size: 12px; color: var(--color-ash-gray); text-transform: uppercase; letter-spacing: 0.05em;">Traders Registered</div>
+            </div>
+            <div>
+              <div style="font-size: 28px; font-weight: 700; color: #ffffff;">6,258</div>
+              <div style="font-size: 12px; color: var(--color-ash-gray); text-transform: uppercase; letter-spacing: 0.05em;">REX Distributed</div>
+            </div>
+            <div>
+              <div style="font-size: 28px; font-weight: 700; color: #ffffff;">14</div>
+              <div style="font-size: 12px; color: var(--color-ash-gray); text-transform: uppercase; letter-spacing: 0.05em;">Days to Launch</div>
             </div>
           </div>
 
         </div>
-
       </div>
     </section>
 
-    <!-- SECTION: LOSS AVERSION & RECIPROCITY TRIGGER HIGHLIGHTS -->
-    <section class="section reveal" data-shape="discord" style="border-top: 1px solid #111;">
+    <!-- WHAT HAPPENS NEXT -->
+    <section class="section reveal" data-shape="metatrader" style="border-top: 1px solid #111;">
       <div class="container">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-36);">
-
-          <!-- LOSS AVERSION -->
-          <div class="float-item">
-            <div class="float-item-label" style="color: #ff5252;">LOSS AVERSION</div>
-            <h3 class="float-item-title">Don't trade in isolation</h3>
-            <p class="float-item-body">
-              Every tournament you miss is prize money you'll never earn. You're already trading every day on your MT4/MT5 account — why execute trades in silence when every setup could be building your ranking and winning prize pools?
-            </p>
+        <div class="section-label">YOUR JOURNEY</div>
+        <h2 class="section-headline" style="max-width: 600px; margin: 0 0 var(--spacing-36);">
+          What happens after you sign in
+        </h2>
+        <div class="three-col-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+          <div style="background: rgba(10,10,10,0.6); border: 1px solid #1a1a1a; border-radius: 8px; padding: 28px;">
+            <div style="font-size: 32px; font-weight: 700; color: var(--color-electric-iris); margin-bottom: 12px;">01</div>
+            <h3 style="font-size: 16px; font-weight: 600; color: #ffffff; margin-bottom: 8px;">Link Your MT4/MT5</h3>
+            <p style="font-size: 13px; color: var(--color-ash-gray); line-height: 1.6;">Enter your XM broker account number. Admin verifies it manually. No API connections needed.</p>
           </div>
-
-          <!-- RECIPROCITY -->
-          <div class="float-item">
-            <div class="float-item-label" style="color: var(--color-electric-iris);">RECIPROCITY</div>
-            <h3 class="float-item-title">Free forever. No card needed.</h3>
-            <p class="float-item-body">
-              No credit card required. No subscription. No catch. Keep 100% of your trading profits while competing for real tournament prize pools paid in REX.
-            </p>
+          <div style="background: rgba(10,10,10,0.6); border: 1px solid #1a1a1a; border-radius: 8px; padding: 28px;">
+            <div style="font-size: 32px; font-weight: 700; color: var(--color-electric-iris); margin-bottom: 12px;">02</div>
+            <h3 style="font-size: 16px; font-weight: 600; color: #ffffff; margin-bottom: 8px;">Join Tournaments</h3>
+            <p style="font-size: 13px; color: var(--color-ash-gray); line-height: 1.6;">Trade on your own MT4 terminal. Highest ROI wins. Results revealed on the final day as a surprise.</p>
           </div>
-
+          <div style="background: rgba(10,10,10,0.6); border: 1px solid #1a1a1a; border-radius: 8px; padding: 28px;">
+            <div style="font-size: 32px; font-weight: 700; color: var(--color-electric-iris); margin-bottom: 12px;">03</div>
+            <h3 style="font-size: 16px; font-weight: 600; color: #ffffff; margin-bottom: 8px;">Earn REX</h3>
+            <p style="font-size: 13px; color: var(--color-ash-gray); line-height: 1.6;">Win tournaments, check in daily, refer friends. REX is your platform currency for prizes.</p>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- FAQ -->
+    <section class="section reveal" data-shape="scattered" style="border-top: 1px solid #111;">
+      <div class="container" style="max-width: 720px;">
+        <div class="section-label">QUESTIONS</div>
+        <h2 class="section-headline" style="margin: 0 0 var(--spacing-36);">Before you ask</h2>
+        <div class="accordion">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>Do I need to pay anything?</span>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-body">
+              <p>No. Fortex FX is completely free. No subscriptions, no entry fees. Prizes are paid in REX, our platform currency.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>Why Discord login only?</span>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-body">
+              <p>Discord is our community hub (the Citadel). Your Discord username auto-joins you. No separate account needed.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>Do I trade on this platform?</span>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-body">
+              <p>No. You trade on your own MT4/MT5 terminal through XM broker. We only track and verify your results for tournaments.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>How are tournament winners decided?</span>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-body">
+              <p>Highest ROI wins. Results are kept secret until the final day and revealed as a surprise. No live leaderboards during the tournament.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-
-    <!-- RISK DISCLAIMER -->
-    <section class="section reveal" style="padding-bottom: 80px;" data-shape="metatrader">
-      <div class="container" style="max-width: 800px;">
-        <div style="border: 1px solid #1a1a1a; border-radius: 24px; padding: 36px;">
-          <div class="section-label" style="margin-bottom: var(--spacing-18);">RISK WARNING</div>
-          <p style="font-size: 14px; font-weight: 200; color: var(--color-silver-mist); line-height: 1.6;">
-            Trading forex and cryptocurrency on margin carries a high level of risk and may not be suitable for all investors. You could lose some or all of your invested capital. Fortex FX is a skill-based trading competition platform and does not execute trades, hold funds, or provide investment advice. All trading occurs on your personal broker account at your own risk. Tournament prizes are distributed as REX reward points, which have no cash value. Never trade with money you cannot afford to lose.
-          </p>
-          <div style="margin-top: var(--spacing-18); display: flex; gap: var(--spacing-24); flex-wrap: wrap;">
-            <a href="terms.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Terms & Conditions</a>
-            <a href="privacy.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Privacy Policy</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
   <!-- FOOTER -->
-  <footer class="footer">
+  <footer style="border-top: 1px solid #111; padding: var(--spacing-36) 0;">
     <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 12px;">
-            <polygon points="12,3 22,21 2,21" stroke="#8052ff" stroke-width="2" fill="none" stroke-linejoin="round"/>
-          </svg>
-          <span class="nav-wordmark">FORTEX FX</span>
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div style="font-size: 12px; color: var(--color-ash-gray);">© 2026 FORTEX FX. All rights reserved.</div>
+        <div style="display: flex; gap: 24px;">
+          <a href="terms.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Terms & Conditions</a>
+          <a href="privacy.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Privacy Policy</a>
         </div>
-        <div class="footer-links">
-          <a href="index.html" class="footer-link">Home</a>
-          <a href="leaderboard.html" class="footer-link">Tournaments</a>
-          <a href="offers.html" class="footer-link">Rewards</a>
-          <a href="resources.html" class="footer-link">Resources</a>
-          <a href="invite.html" class="footer-link">Invite</a>
-          <a href="checkin.html" class="footer-link">Check-In</a>
-          <a href="terms.html" class="footer-link">Terms</a>
-          <a href="privacy.html" class="footer-link">Privacy</a>
-          <a href="signin.html" class="footer-link">Sign In</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <div class="footer-copyright">© 2026 FORTEX FX — Skill-based trading competitions. Not a financial service.</div>
       </div>
     </div>
   </footer>
+
+  <script>
+    // ===== DISCORD OAUTH CALLBACK HANDLER =====
+    (async function() {
+      // Check if we're receiving an OAuth callback
+      const hash = window.location.hash.substring(1);
+      if (hash && hash.includes('access_token')) {
+        // Show loading view
+        document.getElementById('login-view').style.display = 'none';
+        document.getElementById('loading-view').classList.add('active');
+        
+        // Process the callback
+        const result = await FORTEX_AUTH.handleCallback();
+        
+        if (result && result.success) {
+          // Show success view
+          document.getElementById('loading-view').classList.remove('active');
+          document.getElementById('success-view').classList.add('active');
+          
+          const welcomeText = document.getElementById('welcome-text');
+          const welcomeSubtext = document.getElementById('welcome-subtext');
+          
+          if (result.is_new) {
+            welcomeText.textContent = `Welcome, ${result.trader.username}!`;
+            welcomeSubtext.textContent = 'Your account is ready. Redirecting...';
+          } else {
+            welcomeText.textContent = `Welcome back, ${result.trader.username}!`;
+            welcomeSubtext.textContent = 'Redirecting to your profile...';
+          }
+          
+          // Redirect after 2 seconds
+          setTimeout(() => {
+            window.location.href = result.is_new ? 'profile.html' : 'index.html';
+          }, 2000);
+        } else {
+          // Show error, revert to login view
+          document.getElementById('loading-view').classList.remove('active');
+          document.getElementById('login-view').style.display = 'block';
+          
+          const errorEl = document.getElementById('auth-error');
+          errorEl.textContent = result?.error || 'Authentication failed. Please try again.';
+          errorEl.classList.add('active');
+        }
+      }
+      
+      // If already logged in, redirect to profile
+      const trader = FORTEX_AUTH.isLoggedIn();
+      if (trader && !hash) {
+        document.getElementById('login-view').style.display = 'none';
+        document.getElementById('success-view').classList.add('active');
+        document.getElementById('welcome-text').textContent = `Welcome back, ${trader.username}!`;
+        document.getElementById('welcome-subtext').textContent = 'Redirecting...';
+        setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+      }
+    })();
+  </script>
 
 </body>
 </html>

@@ -6,6 +6,9 @@
     "description": {
       "type": "string"
     },
+    "reason": {
+      "type": "string"
+    },
     "reference_id": {
       "type": "string"
     },
@@ -16,15 +19,6 @@
       "type": "string"
     },
     "type": {
-      "enum": [
-        "tournament_prize",
-        "referral_reward",
-        "checkin_reward",
-        "checkin_milestone",
-        "rebate",
-        "admin_adjustment",
-        "deduction"
-      ],
       "type": "string"
     }
   },

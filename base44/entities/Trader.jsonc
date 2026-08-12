@@ -43,11 +43,12 @@
       "type": "number"
     },
     "role": {
+      "type": "string",
       "enum": [
-        "trader",
-        "admin"
+        "admin",
+        "member"
       ],
-      "type": "string"
+      "default": "member"
     },
     "total_checkins": {
       "type": "number"

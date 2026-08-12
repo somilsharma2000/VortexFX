@@ -19,11 +19,6 @@
       "type": "boolean"
     },
     "markets": {
-      "enum": [
-        "forex",
-        "crypto",
-        "both"
-      ],
       "type": "string"
     },
     "name": {
@@ -42,14 +37,14 @@
       "type": "string"
     },
     "status": {
+      "type": "string",
       "enum": [
         "upcoming",
-        "live",
+        "active",
         "revealing",
         "completed",
         "cancelled"
-      ],
-      "type": "string"
+      ]
     }
   },
   "type": "object",

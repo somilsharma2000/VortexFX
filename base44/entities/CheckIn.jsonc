@@ -4,13 +4,6 @@
       "type": "string"
     },
     "milestone_reached": {
-      "enum": [
-        "none",
-        "7",
-        "14",
-        "30",
-        "90"
-      ],
       "type": "string"
     },
     "milestone_bonus_rex": {

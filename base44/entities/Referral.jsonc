@@ -25,11 +25,6 @@
       "type": "number"
     },
     "status": {
-      "enum": [
-        "pending",
-        "qualified",
-        "rewarded"
-      ],
       "type": "string"
     }
   },

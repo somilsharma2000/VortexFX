@@ -1,12 +1,6 @@
 {
   "properties": {
     "category": {
-      "enum": [
-        "checkin",
-        "tournament",
-        "referral",
-        "general"
-      ],
       "type": "string"
     },
     "description": {
