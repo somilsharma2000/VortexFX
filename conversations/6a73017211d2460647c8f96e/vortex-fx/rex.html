@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REX Economy Hub — FORTREX FX</title>
+  
+  <!-- CSS Dependencies -->
+  <link rel="stylesheet" href="css/dala.css">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+
+  <!-- JS Dependencies -->
+  <script src="js/dala.js"></script>
+  <script src="js/auth.js"></script>
+
+  <style>
+    /* --- DESIGN SYSTEM OVERRIDES & CUSTOM REX STYLES --- */
+    :root {
+      --color-gold: #D4AF37;
+      --color-gold-glow: rgba(212, 175, 55, 0.25);
+      --color-purple: #8B5CF6;
+      --color-purple-glow: rgba(139, 92, 246, 0.25);
+      --color-emerald: #10B981;
+      --color-blue: #3B82F6;
+      --color-amber: #F59E0B;
+      --color-card-bg: linear-gradient(145deg, #111111 0%, #1A1A1A 100%);
+      --border-card: 1px solid #222222;
+      --radius-xl: 16px;
+      --radius-pill: 9999px;
+    }
+
+    body {
+      background-color: #000000;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* Headings font */
+    h1, h2, h3, h4, .font-heading, .space-grotesk {
+      font-family: 'Space Grotesk', 'Inter', sans-serif !important;
+    }
+
+    /* Numbers font */
+    .font-mono, .mono-num, .jetbrains-mono {
+      font-family: 'JetBrains Mono', monospace !important;
+    }
+
+    /* Labels */
+    .label-uppercase, .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-gold);
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    /* Buttons */
+    .btn-pill {
+      border-radius: var(--radius-pill);
+      padding: 12px 28px;
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #D4AF37 0%, #AA820A 100%);
+      color: #000000;
+      border: none;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+      color: #000000;
+    }
+
+    .btn-outline-gold {
+      background: transparent;
+      color: var(--color-gold);
+      border: 1px solid var(--color-gold);
+    }
+
+    .btn-outline-gold:hover {
+      background: rgba(212, 175, 55, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Cards */
+    .rex-card {
+      background: var(--color-card-bg);
+      border: var(--border-card);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .rex-card:hover {
+      border-color: #333333;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .rex-card-glow-gold {
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+    }
+
+    .rex-card-glow-gold:hover {
+      border-color: var(--color-gold);
+      box-shadow: 0 0 35px rgba(212, 175, 55, 0.25);
+    }
+
+    /* Top ambient gradient glow */
+    .glow-header {
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+    }
+
+    /* Navbar Hexagon Gold Logo Styling */
+    .nav-logo-gold polygon, .nav-logo-gold circle {
+      stroke: var(--color-gold) !important;
+    }
+    .nav-logo-gold circle[fill] {
+      fill: var(--color-gold) !important;
+    }
+
+    /* Section container styling */
+    .rex-section {
+      padding: 48px 0;
+      position: relative;
+    }
+
+    /* Stat Card Numbers */
+    .stat-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      color: var(--color-gold);
+      line-height: 1.1;
+      margin: 8px 0;
+    }
+
+    /* REX Shop Grid */
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 1024px) {
+      .shop-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shop-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Shop Product Card */
+    .shop-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      min-height: 260px;
+      position: relative;
+    }
+
+    .coming-soon-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      color: var(--color-purple);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+    }
+
+    .shop-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+      color: var(--color-gold);
+    }
+
+    /* Segmented Bar for Earnings */
+    .earning-bar-container {
+      width: 100%;
+      height: 18px;
+      background: #0A0A0A;
+      border: 1px solid #222222;
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      display: flex;
+      margin: 20px 0 24px;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+    }
+
+    .earning-segment {
+      height: 100%;
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .earning-segment:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1A1A1A;
+      border: 1px solid #333;
+      color: #FFF;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      border-radius: 4px;
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    /* Burn Feed Table / List */
+    .burn-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      background: #0D0D0D;
+      border: 1px solid #1F1F1F;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      transition: border-color 0.2s ease;
+    }
+
+    .burn-row:hover {
+      border-color: rgba(212, 175, 55, 0.3);
+    }
+
+    /* Rarity Distribution Bars */
+    .rarity-bar-wrapper {
+      margin-bottom: 16px;
+    }
+
+    .rarity-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .rarity-track {
+      width: 100%;
+      height: 12px;
+      background: #0A0A0A;
+      border: 1px solid #222222;
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+    }
+
+    .rarity-fill {
+      height: 100%;
+      border-radius: var(--radius-pill);
+    }
+
+    /* Nav Internal links visibility */
+    .nav-internal {
+      display: none;
+    }
+    body.user-logged-in .nav-internal {
+      display: inline-block;
+    }
+
+    /* Custom grid layouts */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 868px) {
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PARTICLE BACKGROUND -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+        <div class="nav-logo nav-logo-gold">
+          <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#D4AF37" stroke-width="3" fill="rgba(212, 175, 55, 0.05)" stroke-linejoin="round"/>
+            <polygon points="50,30 65,39 65,61 50,70 35,61 35,39" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linejoin="round" opacity="0.6"/>
+            <path d="M50,42 Q58,45 55,52 Q48,55 45,48 Q47,43 50,42" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <circle cx="50" cy="50" r="2.5" fill="#D4AF37"/>
+            <circle cx="50" cy="18" r="3" fill="#D4AF37"/>
+            <circle cx="78" cy="34" r="3" fill="#D4AF37"/>
+            <circle cx="78" cy="66" r="3" fill="#D4AF37"/>
+            <circle cx="50" cy="82" r="3" fill="#D4AF37"/>
+            <circle cx="22" cy="66" r="3" fill="#D4AF37"/>
+            <circle cx="22" cy="34" r="3" fill="#D4AF37"/>
+          </svg>
+        </div>
+        <span class="nav-wordmark" style="color: #FFFFFF; font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: 0.05em;">FORTREX FX</span>
+      </a>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="leaderboard.html" class="nav-link">Tournaments</a></li>
+      <li><a href="offers.html" class="nav-link">Rewards</a></li>
+      <li><a href="rex.html" class="nav-link active" style="color: var(--color-gold);">REX Hub</a></li>
+      <li><a href="community.html" class="nav-link">Community</a></li>
+      <!-- Internal links when logged in -->
+      <li class="nav-internal"><a href="checkin.html" class="nav-link">Check-In</a></li>
+      <li class="nav-internal"><a href="invite.html" class="nav-link">Invite</a></li>
+      <li class="nav-internal"><a href="profile.html" class="nav-link">Profile</a></li>
+    </ul>
+
+    <div class="nav-cta">
+      <a href="signin.html" class="nav-link id-signin-link" style="text-transform: uppercase;">Sign In</a>
+      <a href="signin.html" class="btn-primary id-auth-btn" style="border-radius: 9999px;">Enter Arena</a>
+      <div class="hamburger" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- HEADER SECTION -->
+    <section class="section" style="padding-top: 140px; padding-bottom: 40px;">
+      <div class="container reveal">
+        <div class="section-label">THE REX ECONOMY</div>
+        <h1 class="display space-grotesk" style="margin-bottom: 16px; font-weight: 700;">Your rewards, your status.</h1>
+        <p class="body-text-muted" style="max-width: 680px; font-size: 18px; color: #9A9A9A; line-height: 1.6;">
+          REX are closed-loop loyalty points. Not crypto. Not currency. Not withdrawable as cash.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 1: REX BALANCE (Dynamic state based on auth) -->
+    <section class="rex-section">
+      <div class="container reveal">
+        <div id="rex-balance-container">
+          <!-- LOGGED IN VIEW -->
+          <div id="logged-in-balance-card" class="rex-card rex-card-glow-gold" style="display: none;">
+            <div class="glow-header"></div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px;">
+              <div>
+                <div class="section-label" style="color: var(--color-gold);">YOUR CURRENT REX BALANCE</div>
+                <div class="stat-number jetbrains-mono" id="user-rex-balance" style="font-size: clamp(40px, 6vw, 72px); text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);">
+                  12,500 <span style="font-size: 28px; color: #888;">REX</span>
+                </div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #AAAAAA; margin-top: 8px;">
+                  Earned <span id="user-rex-earned" style="color: #FFF;">14,500</span> / Spent <span id="user-rex-spent" style="color: var(--color-gold);">2,000</span>
+                </div>
+              </div>
+              <div style="text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 12px;">
+                <span class="coming-soon-badge" style="background: rgba(212,175,55,0.15); border-color: rgba(212,175,55,0.4); color: var(--color-gold);">
+                  ACTIVE TRADER
+                </span>
+                <a href="offers.html" class="btn-pill btn-gold">
+                  Redeem Rewards
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- LOGGED OUT VIEW -->
+          <div id="logged-out-balance-card" class="rex-card" style="text-align: center; padding: 48px 24px; background: linear-gradient(135deg, #0A0A0A 0%, #141414 100%);">
+            <div style="font-size: 40px; margin-bottom: 12px;">🔐</div>
+            <h3 class="space-grotesk" style="font-size: 24px; margin-bottom: 8px;">Sign In to View Your REX Balance</h3>
+            <p style="color: #888; max-width: 480px; margin: 0 auto 24px; font-size: 14px; line-height: 1.6;">
+              Connect your Discord trader identity to track your loyalty rewards, level status, and active trade requirements.
+            </p>
+            <a href="signin.html" class="btn-pill btn-gold">
+              Sign In with Discord
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: FIXED SUPPLY -->
+    <section class="rex-section">
+      <div class="container reveal">
+        <div style="margin-bottom: 24px;">
+          <div class="section-label">TOKENOMICS & ARCHITECTURE</div>
+          <h2 class="subheading space-grotesk" style="font-size: 32px; font-weight: 700;">Fixed Supply Mechanics</h2>
+        </div>
+
+        <div class="grid-3">
+          <!-- Stat Card 1 -->
+          <div class="rex-card">
+            <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">TOTAL FIXED SUPPLY</div>
+            <div class="stat-number jetbrains-mono">100,000,000</div>
+            <div style="font-size: 13px; color: #666; font-family: 'JetBrains Mono', monospace;">Capped Maximum Points</div>
+          </div>
+
+          <!-- Stat Card 2 -->
+          <div class="rex-card">
+            <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #888;">IN CIRCULATION</div>
+            <div class="stat-number jetbrains-mono" style="color: #FFFFFF;">42,850,000</div>
+            <div style="font-size: 13px; color: #666; font-family: 'JetBrains Mono', monospace;">Distributed via Competitions</div>
+          </div>
+
+          <!-- Stat Card 3 -->
+          <div class="rex-card" style="border-color: rgba(212, 175, 55, 0.3);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-gold);">PERMANENTLY BURNED</div>
+              <span style="font-size: 18px;" title="Deflationary Fire">🔥</span>
+            </div>
+            <div class="stat-number jetbrains-mono" id="burn-counter-val">1,420,500</div>
+            <div style="font-size: 13px; color: var(--color-gold); font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 6px;">
+              <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--color-gold); box-shadow: 0 0 8px var(--color-gold);"></span>
+              Live deflation counter
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: EARNING BREAKDOWN (if logged in) -->
+    <section class="rex-section">
+      <div class="container reveal">
+        <div class="rex-card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 12px;">
+            <div>
+              <div class="section-label">REWARD SOURCES</div>
+              <h2 class="space-grotesk" style="font-size: 24px; font-weight: 700; margin: 0;">Earning Breakdown</h2>
+            </div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #888;">
+              <span id="breakdown-auth-note">Personal Distribution</span>
+            </div>
+          </div>
+
+          <!-- Multi-segment visual bar -->
+          <div class="earning-bar-container">
+            <div class="earning-segment" style="width: 55%; background: #D4AF37; box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);" data-tooltip="Tournaments: 8,000 REX (55%)"></div>
+            <div class="earning-segment" style="width: 20%; background: #8B5CF6; box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);" data-tooltip="Check-ins: 3,500 REX (20%)"></div>
+            <div class="earning-segment" style="width: 12%; background: #10B981; box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);" data-tooltip="Referrals: 1,500 REX (12%)"></div>
+            <div class="earning-segment" style="width: 8%; background: #3B82F6; box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);" data-tooltip="Tasks: 1,000 REX (8%)"></div>
+            <div class="earning-segment" style="width: 5%; background: #F59E0B; box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);" data-tooltip="Bonuses: 500 REX (5%)"></div>
+          </div>
+
+          <!-- Legend Table -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 24px;">
+            <div style="background: #0D0D0D; padding: 14px; border-radius: 12px; border: 1px solid #1A1A1A;">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #D4AF37;"></span>
+                <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #AAA;">Tournaments</span>
+              </div>
+              <div class="jetbrains-mono" style="font-size: 18px; font-weight: 700; color: #FFF;">8,000 REX</div>
+            </div>
+
+            <div style="background: #0D0D0D; padding: 14px; border-radius: 12px; border: 1px solid #1A1A1A;">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #8B5CF6;"></span>
+                <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #AAA;">Check-ins</span>
+              </div>
+              <div class="jetbrains-mono" style="font-size: 18px; font-weight: 700; color: #FFF;">3,500 REX</div>
+            </div>
+
+            <div style="background: #0D0D0D; padding: 14px; border-radius: 12px; border: 1px solid #1A1A1A;">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #10B981;"></span>
+                <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #AAA;">Referrals</span>
+              </div>
+              <div class="jetbrains-mono" style="font-size: 18px; font-weight: 700; color: #FFF;">1,500 REX</div>
+            </div>
+
+            <div style="background: #0D0D0D; padding: 14px; border-radius: 12px; border: 1px solid #1A1A1A;">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #3B82F6;"></span>
+                <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #AAA;">Tasks</span>
+              </div>
+              <div class="jetbrains-mono" style="font-size: 18px; font-weight: 700; color: #FFF;">1,000 REX</div>
+            </div>
+
+            <div style="background: #0D0D0D; padding: 14px; border-radius: 12px; border: 1px solid #1A1A1A;">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #F59E0B;"></span>
+                <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #AAA;">Bonuses</span>
+              </div>
+              <div class="jetbrains-mono" style="font-size: 18px; font-weight: 700; color: #FFF;">500 REX</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: REX SHOP -->
+    <section class="rex-section">
+      <div class="container reveal">
+        <div style="margin-bottom: 28px;">
+          <div class="section-label">REDEEM & UPGRADE</div>
+          <h2 class="subheading space-grotesk" style="font-size: 32px; font-weight: 700;">REX Shop</h2>
+          <p style="color: #888; font-size: 15px;">Unlock exclusive trader perks, role boosts, and capital allocations with your accumulated points.</p>
+        </div>
+
+        <div class="shop-grid">
+          <!-- Product Card 1 -->
+          <div class="rex-card shop-card">
+            <span class="coming-soon-badge">COMING SOON</span>
+            <div>
+              <div class="shop-card-icon">🏆</div>
+              <h3 class="space-grotesk" style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">Funded Account Challenge</h3>
+              <p style="font-size: 13px; color: #888; line-height: 1.5; margin-bottom: 16px;">Get funded. Trade bigger.</p>
+            </div>
+            <div>
+              <div class="jetbrains-mono" style="font-size: 22px; font-weight: 700; color: var(--color-gold); margin-bottom: 12px;">10,000 REX</div>
+              <button class="btn-pill btn-outline-gold" style="width: 100%; opacity: 0.6; cursor: not-allowed;" disabled>Locked</button>
+            </div>
+          </div>
+
+          <!-- Product Card 2 -->
+          <div class="rex-card shop-card">
+            <span class="coming-soon-badge">COMING SOON</span>
+            <div>
+              <div class="shop-card-icon">⚡</div>
+              <h3 class="space-grotesk" style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">Contest Boost</h3>
+              <p style="font-size: 13px; color: #888; line-height: 1.5; margin-bottom: 16px;">Boost your next tournament entry.</p>
+            </div>
+            <div>
+              <div class="jetbrains-mono" style="font-size: 22px; font-weight: 700; color: var(--color-gold); margin-bottom: 12px;">500 REX</div>
+              <button class="btn-pill btn-outline-gold" style="width: 100%; opacity: 0.6; cursor: not-allowed;" disabled>Locked</button>
+            </div>
+          </div>
+
+          <!-- Product Card 3 -->
+          <div class="rex-card shop-card">
+            <span class="coming-soon-badge">COMING SOON</span>
+            <div>
+              <div class="shop-card-icon">👑</div>
+              <h3 class="space-grotesk" style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">VIP Discord Role</h3>
+              <p style="font-size: 13px; color: #888; line-height: 1.5; margin-bottom: 16px;">Exclusive role in the Discord.</p>
+            </div>
+            <div>
+              <div class="jetbrains-mono" style="font-size: 22px; font-weight: 700; color: var(--color-gold); margin-bottom: 12px;">2,000 REX<span style="font-size: 12px; color: #888;">/mo</span></div>
+              <button class="btn-pill btn-outline-gold" style="width: 100%; opacity: 0.6; cursor: not-allowed;" disabled>Locked</button>
+            </div>
+          </div>
+
+          <!-- Product Card 4 -->
+          <div class="rex-card shop-card">
+            <span class="coming-soon-badge">COMING SOON</span>
+            <div>
+              <div class="shop-card-icon">🎓</div>
+              <h3 class="space-grotesk" style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">Trading Course</h3>
+              <p style="font-size: 13px; color: #888; line-height: 1.5; margin-bottom: 16px;">Learn from the champions.</p>
+            </div>
+            <div>
+              <div class="jetbrains-mono" style="font-size: 22px; font-weight: 700; color: var(--color-gold); margin-bottom: 12px;">1,500 REX</div>
+              <button class="btn-pill btn-outline-gold" style="width: 100%; opacity: 0.6; cursor: not-allowed;" disabled>Locked</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: ACTIVE TRADER STATUS -->
+    <section class="rex-section">
+      <div class="container reveal">
+        <div class="rex-card" style="background: linear-gradient(135deg, #0f120e 0%, #111a14 100%); border-color: rgba(16, 185, 129, 0.3);">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+            <div style="max-width: 620px;">
+              <div class="section-label" style="color: var(--color-emerald);">ELIGIBILITY RULE</div>
+              <h2 class="space-grotesk" style="font-size: 24px; font-weight: 700; margin-bottom: 8px;">Active Trader Status</h2>
+              <p style="color: #A0A0A0; font-size: 14px; line-height: 1.6;">
+                Active Trader Status requires 1 trade per week (7-day rolling). Required to redeem REX.
+              </p>
+            </div>
+
+            <div style="text-align: right;" id="active-trader-badge-container">
+              <!-- Logged-in state indicator (Dynamic JS) -->
+              <div id="status-active-badge" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); padding: 10px 20px; border-radius: var(--radius-pill); color: var(--color-emerald); font-weight: 700; font-size: 16px;">
+                <span style="font-size: 18px;">✓</span> Active Trader
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: BURN FEED -->
+    <section class="rex-section">
+      <div class="container reveal">
+        <div style="margin-bottom: 24px;">
+          <div class="section-label">DEFLATIONARY MECHANICS</div>
+          <h2 class="subheading space-grotesk" style="font-size: 32px; font-weight: 700;">Live REX Burn Feed</h2>
+          <p style="color: var(--color-gold); font-size: 15px; font-weight: 600; font-family: 'JetBrains Mono', monospace; margin-top: 4px;">
+            🔥 10% of every REX send is permanently burned. Deflationary by design.
+          </p>
+        </div>
+
+        <div>
+          <!-- Burn entry 1 -->
+          <div class="burn-row">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 18px;">🔥</span>
+              <div>
+                <span style="font-weight: 700; color: #FFF;">@AlexT</span>
+                <span style="font-size: 12px; color: #666; margin-left: 8px;">P2P Transfer</span>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <span class="jetbrains-mono" style="color: var(--color-gold); font-weight: 700; font-size: 16px;">-250 REX</span>
+              <div style="font-size: 11px; color: #555;">2 mins ago</div>
+            </div>
+          </div>
+
+          <!-- Burn entry 2 -->
+          <div class="burn-row">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 18px;">🔥</span>
+              <div>
+                <span style="font-weight: 700; color: #FFF;">@CryptoViper</span>
+                <span style="font-size: 12px; color: #666; margin-left: 8px;">Store Claim</span>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <span class="jetbrains-mono" style="color: var(--color-gold); font-weight: 700; font-size: 16px;">-100 REX</span>
+              <div style="font-size: 11px; color: #555;">14 mins ago</div>
+            </div>
+          </div>
+
+          <!-- Burn entry 3 -->
+          <div class="burn-row">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 18px;">🔥</span>
+              <div>
+                <span style="font-weight: 700; color: #FFF;">@SatoshiN</span>
+                <span style="font-size: 12px; color: #666; margin-left: 8px;">Challenge Ticket</span>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <span class="jetbrains-mono" style="color: var(--color-gold); font-weight: 700; font-size: 16px;">-500 REX</span>
+              <div style="font-size: 11px; color: #555;">1 hour ago</div>
+            </div>
+          </div>
+
+          <!-- Burn entry 4 -->
+          <div class="burn-row">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 18px;">🔥</span>
+              <div>
+                <span style="font-weight: 700; color: #FFF;">@ZenTrader</span>
+                <span style="font-size: 12px; color: #666; margin-left: 8px;">P2P Transfer</span>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <span class="jetbrains-mono" style="color: var(--color-gold); font-weight: 700; font-size: 16px;">-75 REX</span>
+              <div style="font-size: 11px; color: #555;">3 hours ago</div>
+            </div>
+          </div>
+
+          <!-- Burn entry 5 -->
+          <div class="burn-row">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 18px;">🔥</span>
+              <div>
+                <span style="font-weight: 700; color: #FFF;">@MaverickFX</span>
+                <span style="font-size: 12px; color: #666; margin-left: 8px;">VIP Role Boost</span>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <span class="jetbrains-mono" style="color: var(--color-gold); font-weight: 700; font-size: 16px;">-1,200 REX</span>
+              <div style="font-size: 11px; color: #555;">5 hours ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: MYSTERY DROPS -->
+    <section class="rex-section">
+      <div class="container reveal">
+        <div class="rex-card" style="background: linear-gradient(145deg, #120e1a 0%, #1a1228 100%); border-color: rgba(139, 92, 246, 0.3);">
+          <div style="margin-bottom: 24px;">
+            <div class="section-label" style="color: var(--color-purple);">GAMIFIED REWARDS</div>
+            <h2 class="subheading space-grotesk" style="font-size: 32px; font-weight: 700;">Mystery Drops</h2>
+            <p style="color: #B3A4D0; font-size: 15px; margin-top: 4px;">
+              Every 5 verified invites, a drop rolls. What will you get?
+            </p>
+          </div>
+
+          <!-- Rarity Bars -->
+          <div>
+            <!-- Legendary -->
+            <div class="rarity-bar-wrapper">
+              <div class="rarity-header">
+                <span style="font-weight: 700; color: var(--color-gold); text-transform: uppercase; letter-spacing: 0.05em; font-size: 12px;">Legendary Drop</span>
+                <span class="jetbrains-mono" style="color: var(--color-gold); font-weight: 700;">2%</span>
+              </div>
+              <div class="rarity-track">
+                <div class="rarity-fill" style="width: 2%; background: linear-gradient(90deg, #D4AF37, #FFF); box-shadow: 0 0 10px #D4AF37;"></div>
+              </div>
+            </div>
+
+            <!-- Epic -->
+            <div class="rarity-bar-wrapper">
+              <div class="rarity-header">
+                <span style="font-weight: 700; color: var(--color-purple); text-transform: uppercase; letter-spacing: 0.05em; font-size: 12px;">Epic Drop</span>
+                <span class="jetbrains-mono" style="color: var(--color-purple); font-weight: 700;">12%</span>
+              </div>
+              <div class="rarity-track">
+                <div class="rarity-fill" style="width: 12%; background: linear-gradient(90deg, #8B5CF6, #C084FC); box-shadow: 0 0 10px #8B5CF6;"></div>
+              </div>
+            </div>
+
+            <!-- Rare -->
+            <div class="rarity-bar-wrapper">
+              <div class="rarity-header">
+                <span style="font-weight: 700; color: var(--color-blue); text-transform: uppercase; letter-spacing: 0.05em; font-size: 12px;">Rare Drop</span>
+                <span class="jetbrains-mono" style="color: var(--color-blue); font-weight: 700;">26%</span>
+              </div>
+              <div class="rarity-track">
+                <div class="rarity-fill" style="width: 26%; background: linear-gradient(90deg, #3B82F6, #60A5FA); box-shadow: 0 0 10px #3B82F6;"></div>
+              </div>
+            </div>
+
+            <!-- Common -->
+            <div class="rarity-bar-wrapper">
+              <div class="rarity-header">
+                <span style="font-weight: 700; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.05em; font-size: 12px;">Common Drop</span>
+                <span class="jetbrains-mono" style="color: #9CA3AF; font-weight: 700;">60%</span>
+              </div>
+              <div class="rarity-track">
+                <div class="rarity-fill" style="width: 60%; background: #6B7280;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div style="font-size: 14px; color: #BBB;">
+              Invite traders to unlock your next mystery loot roll.
+            </div>
+            <a href="invite.html" class="btn-pill btn-gold">
+              Get Invite Link
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer style="background: #000000; border-top: 1px solid #1A1A1A; padding: 60px 0 30px; margin-top: 80px;">
+    <div class="container">
+      <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px;">
+          <div class="nav-logo nav-logo-gold">
+            <svg width="24" height="24" viewBox="0 0 100 100" fill="none">
+              <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#D4AF37" stroke-width="3" fill="none"/>
+              <circle cx="50" cy="50" r="3" fill="#D4AF37"/>
+            </svg>
+          </div>
+          <span class="space-grotesk" style="font-weight: 700; font-size: 16px; letter-spacing: 0.05em; color: #FFF;">FORTREX FX</span>
+        </div>
+
+        <p style="font-size: 12px; color: #555555; line-height: 1.7; margin-bottom: 24px;">
+          Trading forex and cryptocurrency on margin carries a high level of risk and may not be suitable for all investors. You could lose some or all of your invested capital. FORTREX FX is a skill-based trading competition platform and does not execute trades, hold funds, or provide investment advice. Tournament prizes are distributed as REX reward points, which have no cash value. REX are closed-loop loyalty points, not crypto, not currency, and not withdrawable as cash.
+        </p>
+
+        <div style="font-size: 12px; color: #444444; font-family: 'JetBrains Mono', monospace;">
+          © 2026 FORTREX FX — Skill-based trading competitions. All rights reserved.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT IMPLEMENTATION -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check Auth Status
+      const trader = FORTEX_AUTH.isLoggedIn();
+
+      const loggedInCard = document.getElementById('logged-in-balance-card');
+      const loggedOutCard = document.getElementById('logged-out-balance-card');
+      const activeTraderBadge = document.getElementById('active-trader-badge-container');
+      const breakdownNote = document.getElementById('breakdown-auth-note');
+
+      if (trader) {
+        document.body.classList.add('user-logged-in');
+
+        // Toggle Balance Card
+        if (loggedInCard && loggedOutCard) {
+          loggedInCard.style.display = 'block';
+          loggedOutCard.style.display = 'none';
+        }
+
+        // Set user REX data
+        const balanceEl = document.getElementById('user-rex-balance');
+        const earnedEl = document.getElementById('user-rex-earned');
+        const spentEl = document.getElementById('user-rex-spent');
+
+        if (balanceEl && trader.rex_balance !== undefined) {
+          balanceEl.innerHTML = `${Number(trader.rex_balance).toLocaleString()} <span style="font-size: 28px; color: #888;">REX</span>`;
+        }
+        if (earnedEl && trader.rex_earned !== undefined) {
+          earnedEl.textContent = Number(trader.rex_earned).toLocaleString();
+        }
+        if (spentEl && trader.rex_spent !== undefined) {
+          spentEl.textContent = Number(trader.rex_spent).toLocaleString();
+        }
+
+        if (breakdownNote) {
+          breakdownNote.textContent = `@${trader.username || 'trader'} Distribution`;
+        }
+
+        if (activeTraderBadge) {
+          activeTraderBadge.innerHTML = `
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); padding: 10px 20px; border-radius: 9999px; color: #10B981; font-weight: 700; font-size: 16px;">
+              <span style="font-size: 18px;">✓</span> Active Trader
+            </div>
+          `;
+        }
+      } else {
+        if (loggedInCard && loggedOutCard) {
+          loggedInCard.style.display = 'none';
+          loggedOutCard.style.display = 'block';
+        }
+
+        if (activeTraderBadge) {
+          activeTraderBadge.innerHTML = `
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); padding: 10px 20px; border-radius: 9999px; color: #F59E0B; font-weight: 700; font-size: 14px;">
+              <span>⚠</span> Trade this week to maintain status
+            </div>
+          `;
+        }
+      }
+
+      // Mobile Hamburger toggle
+      const hamburger = document.querySelector('.hamburger');
+      const navLinks = document.querySelector('.nav-links');
+      if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+          hamburger.classList.toggle('open');
+          navLinks.classList.toggle('open');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

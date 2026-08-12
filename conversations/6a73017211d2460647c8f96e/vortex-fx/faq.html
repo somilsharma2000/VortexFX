@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequently Asked Questions — FORTREX FX</title>
+  <meta name="description" content="Questions and answers about FORTREX FX free trading competitions, REX reward points, MT4/MT5 verification, and platform rules.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/dala.css">
+  <script src="js/dala.js"></script>
+  <script src="js/auth.js"></script>
+
+  <style>
+    /* DESIGN SYSTEM OVERRIDES & EXTENSIONS */
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .font-display {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* NAV LOGO & LINKS CONTROL */
+    .nav-internal {
+      display: none;
+    }
+    body.is-logged-in .nav-internal {
+      display: inline-block;
+    }
+
+    /* GOLD & PURPLE ACCENTS */
+    .text-gold { color: #D4AF37; }
+    .text-purple { color: #8B8CF6; }
+
+    .uppercase-label {
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* SEARCH BAR */
+    .search-container {
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto 36px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: #0D0D0D;
+      border: 1px solid #282828;
+      border-radius: 9999px;
+      padding: 16px 24px 16px 52px;
+      color: #ffffff;
+      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.25s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #D4AF37;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+      background: #121212;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #D4AF37;
+      pointer-events: none;
+    }
+
+    .clear-search {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #222;
+      border: none;
+      color: #999;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .clear-search:hover {
+      background: #D4AF37;
+      color: #000;
+    }
+
+    /* CATEGORY PILLS */
+    .cat-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 48px;
+    }
+
+    .cat-pill {
+      background: #111111;
+      border: 1px solid #222222;
+      color: #9A9A9A;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .cat-pill:hover, .cat-pill.active {
+      background: rgba(212, 175, 55, 0.12);
+      border-color: #D4AF37;
+      color: #D4AF37;
+    }
+
+    /* ACCORDION CATEGORIES */
+    .faq-category {
+      margin-bottom: 40px;
+    }
+
+    .faq-category-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #D4AF37;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid #222222;
+      padding-bottom: 10px;
+    }
+
+    /* ACCORDION ITEMS */
+    .faq-item {
+      background: linear-gradient(145deg, #111111 0%, #1A1A1A 100%);
+      border: 1px solid #222222;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .faq-item:hover {
+      border-color: rgba(212, 175, 55, 0.35);
+    }
+
+    .faq-item.active {
+      border-color: #D4AF37;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.08);
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 20px 24px;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      gap: 16px;
+    }
+
+    .faq-chevron {
+      width: 20px;
+      height: 20px;
+      color: #D4AF37;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .faq-item.active .faq-chevron {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s ease;
+      padding: 0 24px;
+      color: #B0B0B0;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding: 0 24px 22px 24px;
+    }
+
+    /* EMPTY STATE */
+    .faq-empty {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+      background: #111111;
+      border: 1px solid #222;
+      border-radius: 16px;
+      margin-top: 20px;
+    }
+
+    /* BUTTONS & CTA */
+    .btn-pill-gold {
+      background: #D4AF37;
+      color: #000000;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 9999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 14px;
+      transition: all 0.25s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-pill-gold:hover {
+      background: #F3E5AB;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.35);
+    }
+
+    .cta-banner {
+      background: linear-gradient(135deg, #0A0A0A 0%, #151320 50%, #0A0A0A 100%);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 24px;
+      padding: 48px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+        <div class="nav-logo">
+          <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,10 88,30 88,70 50,90 12,70 12,30" stroke="#D4AF37" stroke-width="4" fill="rgba(212, 175, 55, 0.1)" stroke-linejoin="round"/>
+            <polygon points="50,24 74,38 74,62 50,76 26,62 26,38" stroke="#D4AF37" stroke-width="2" fill="none" opacity="0.6"/>
+            <path d="M42,38 L60,38 L42,50 L56,50 L42,64" stroke="#D4AF37" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="50" cy="10" r="3" fill="#D4AF37"/>
+            <circle cx="88" cy="30" r="3" fill="#D4AF37"/>
+            <circle cx="88" cy="70" r="3" fill="#D4AF37"/>
+            <circle cx="50" cy="90" r="3" fill="#D4AF37"/>
+            <circle cx="12" cy="70" r="3" fill="#D4AF37"/>
+            <circle cx="12" cy="30" r="3" fill="#D4AF37"/>
+          </svg>
+        </div>
+        <span class="nav-wordmark"><span style="color: #ffffff; font-weight: 700;">FORTREX</span> <span style="color: #D4AF37; font-weight: 700;">FX</span></span>
+      </a>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="tools.html" class="nav-link">Tools</a></li>
+      <li><a href="faq.html" class="nav-link active">FAQ</a></li>
+      <!-- INTERNAL LINKS SHOWN ONLY IF LOGGED IN -->
+      <li class="nav-internal"><a href="leaderboard.html" class="nav-link">Tournaments</a></li>
+      <li class="nav-internal"><a href="offers.html" class="nav-link">Rewards</a></li>
+      <li class="nav-internal"><a href="resources.html" class="nav-link">Resources</a></li>
+      <li class="nav-internal"><a href="invite.html" class="nav-link">Invite</a></li>
+      <li class="nav-internal"><a href="profile.html" class="nav-link">Profile</a></li>
+      <li class="nav-internal"><a href="checkin.html" class="nav-link">Check-In</a></li>
+    </ul>
+
+    <div class="nav-cta">
+      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
+      <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
+      <div class="hamburger" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <main style="padding-top: 130px; padding-bottom: 80px;">
+    <div class="container" style="max-width: 900px;">
+
+      <!-- HEADER -->
+      <div style="text-align: center; margin-bottom: 40px;">
+        <div class="uppercase-label text-gold" style="margin-bottom: 12px; display: inline-flex; align-items: center; gap: 8px;">
+          <span style="width: 8px; height: 8px; background: #D4AF37; border-radius: 50%; display: inline-block;"></span>
+          FAQ
+        </div>
+        <h1 class="font-display" style="font-size: clamp(36px, 5vw, 60px); font-weight: 700; margin-bottom: 16px; color: #ffffff;">
+          Questions, answered.
+        </h1>
+        <p style="font-size: 18px; color: #9A9A9A; max-width: 540px; margin: 0 auto; line-height: 1.6;">
+          Everything you need to know before you join.
+        </p>
+      </div>
+
+      <!-- SEARCH BAR -->
+      <div class="search-container">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="faq-search" class="search-input" placeholder="Search questions, topics, keywords..." oninput="filterFAQ()">
+        <button id="search-clear-btn" class="clear-search" style="display: none;" onclick="clearSearch()">✕</button>
+      </div>
+
+      <!-- CATEGORY FILTER PILLS -->
+      <div class="cat-pills">
+        <button class="cat-pill active" data-category="all" onclick="setCategory('all', this)">All Questions</button>
+        <button class="cat-pill" data-category="getting-started" onclick="setCategory('getting-started', this)">Getting Started</button>
+        <button class="cat-pill" data-category="tournaments" onclick="setCategory('tournaments', this)">Tournaments</button>
+        <button class="cat-pill" data-category="rex" onclick="setCategory('rex', this)">REX Points</button>
+        <button class="cat-pill" data-category="verification" onclick="setCategory('verification', this)">Verification</button>
+        <button class="cat-pill" data-category="referrals" onclick="setCategory('referrals', this)">Referrals</button>
+        <button class="cat-pill" data-category="trust" onclick="setCategory('trust', this)">Trust & Security</button>
+      </div>
+
+      <!-- FAQ ACCORDIONS -->
+      <div id="faq-container">
+
+        <!-- 1. GETTING STARTED -->
+        <div class="faq-category" data-category="getting-started">
+          <div class="faq-category-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            Getting Started
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              Is this free?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              Yes. No subscriptions, no fees, no card required. Tournaments are free to enter. You trade your own capital on your own MT4/MT5 terminal.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              Why Discord login only?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              Discord verification prevents multi-accounting and builds community. One Discord identity = one FORTREX account.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              Do I trade on this platform?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              No. FORTREX FX does not execute trades. You trade on your own MT4/MT5 terminal through your regulated broker. We track results.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              How do tournaments work?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              Trade on your own terminal during the tournament period. Highest ROI wins. Results are sealed until reveal day. Free to enter.
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. TOURNAMENTS -->
+        <div class="faq-category" data-category="tournaments">
+          <div class="faq-category-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+              <path d="M4 22h16"></path>
+              <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+              <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+              <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path>
+            </svg>
+            Tournaments
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              How are winners decided?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              By ROI (Return on Investment). Your starting balance vs final equity. Verified against your broker account. Highest ROI wins.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              What's the prize pool?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              40% of partnership revenue, split among top performers. The more members, the bigger the pools.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              Are results live?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              No. Results are sealed during the tournament. Revealed on the final day. This prevents manipulation and builds excitement.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              What strategies are banned?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              Multi-accounting, coordinated trading, funding inflation, and unauthorized EAs. Full rules in the terms.
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. REX -->
+        <div class="faq-category" data-category="rex">
+          <div class="faq-category-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            REX Rewards
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              What is REX?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              REX are closed-loop loyalty reward points. Not crypto, not currency, not withdrawable as cash. Earn them through tournaments, check-ins, referrals.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              Can I withdraw REX?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              No. REX has no cash value. They convert to: Funded Account Challenges, contest boosts, VIP roles, courses, and merch.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              How do I earn REX?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              Welcome bonus (150), daily check-in (20), profile completion (250), tasks (15-100 each), tournament prizes, referrals (100 + 20% of referee earnings).
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              What can I spend REX on?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              Funded Account Challenge (10K), Contest Boost (500), VIP Discord Role (2K/mo), Trading Course (1.5K). More items coming.
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. VERIFICATION -->
+        <div class="faq-category" data-category="verification">
+          <div class="faq-category-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            Verification
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              Why verify?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              Only verified traders can enter tournaments. We verify your MT4/MT5 account to ensure fair play.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              How long?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              Admin verifies manually, usually within 24 hours. You'll get a Discord notification.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              What if I use a different broker?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              Contact admin in Discord. We support multiple regulated brokers.
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. REFERRALS -->
+        <div class="faq-category" data-category="referrals">
+          <div class="faq-category-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            Referrals & Drops
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              How does invite work?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              Share your link. Friend gets 100 REX welcome gift. When they verify, you get 100 REX + 20% of their earnings (capped 500 REX).
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              What are mystery drops?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              Every 5 verified invites, a mystery drop rolls. Rarity: Legendary 2% / Epic 12% / Rare 26% / Common 60%.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              What are passes?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              You get 3 invite passes per month. Resets monthly. Bonus passes earned through tournaments.
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. TRUST -->
+        <div class="faq-category" data-category="trust">
+          <div class="faq-category-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            Trust & Security
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              Is this a scam?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              No. Every contest rule is public. Every result is verified against your broker account. We take 0% of your deposits — you trade with your own capital. REX has no cash value.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              How are results verified?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              Admin reviews your MT4/MT5 account data. We check starting balance, final equity, and trade history. Results are sealed until verified.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              What happens to my data?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              We collect Discord username/ID/avatar, broker account number (NOT password), and platform activity. We DON'T collect broker passwords, trading funds, or Discord DMs. See our privacy policy.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              Is this gambling?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              No. Tournaments are skill-based (ROI ranking). You trade your own capital on your own terminal. Free to enter. No purchase necessary.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- EMPTY SEARCH RESULT -->
+      <div id="faq-empty" class="faq-empty">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.5" style="margin-bottom: 12px;">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <h3 class="font-display" style="font-size: 20px; color: #fff; margin-bottom: 8px;">No matching questions found</h3>
+        <p style="font-size: 14px; color: #888; margin-bottom: 20px;">Try adjusting your search terms or browse all categories.</p>
+        <button class="btn-pill-gold" style="font-size: 12px; padding: 10px 20px;" onclick="clearSearch()">Clear Search</button>
+      </div>
+
+      <!-- BOTTOM CTA -->
+      <div class="cta-banner">
+        <h2 class="font-display" style="font-size: clamp(26px, 4vw, 38px); font-weight: 700; color: #ffffff; margin-bottom: 12px;">
+          Still have questions?
+        </h2>
+        <p style="font-size: 16px; color: #9A9A9A; max-width: 480px; margin: 0 auto 28px; line-height: 1.6;">
+          Our community admins and traders are active 24/7 in the Discord server.
+        </p>
+        <a href="https://discord.gg/9pTSqeTbn" target="_blank" class="btn-pill-gold">
+          Ask in the Discord →
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 12px;">
+            <polygon points="12,3 22,21 2,21" stroke="#D4AF37" stroke-width="2" fill="none" stroke-linejoin="round"/>
+          </svg>
+          <span class="nav-wordmark"><span style="color:#fff;">FORTREX</span> <span style="color:#D4AF37;">FX</span></span>
+        </div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="tools.html" class="footer-link">Tools</a>
+          <a href="faq.html" class="footer-link">FAQ</a>
+          <a href="terms.html" class="footer-link">Terms</a>
+          <a href="privacy.html" class="footer-link">Privacy</a>
+          <a href="signin.html" class="footer-link">Sign In</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2026 FORTREX FX — Skill-based trading competitions & FAQ. Not a financial service.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FAQ SEARCH & ACCORDION SCRIPT -->
+  <script>
+    // --- AUTH & NAV LINK CHECK ---
+    (function() {
+      const trader = localStorage.getItem('fortex_trader');
+      if (trader) {
+        document.body.classList.add('is-logged-in');
+      }
+    })();
+
+    let currentCategory = 'all';
+
+    function toggleFAQ(button) {
+      const item = button.parentElement;
+      const isActive = item.classList.contains('active');
+      
+      // Close all other items in the same category if desired, or keep independent
+      item.classList.toggle('active');
+    }
+
+    function setCategory(cat, btnEl) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-pill').forEach(el => el.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+      filterFAQ();
+    }
+
+    function clearSearch() {
+      const searchInput = document.getElementById('faq-search');
+      searchInput.value = '';
+      document.getElementById('search-clear-btn').style.display = 'none';
+      filterFAQ();
+    }
+
+    function filterFAQ() {
+      const query = document.getElementById('faq-search').value.toLowerCase().trim();
+      const clearBtn = document.getElementById('search-clear-btn');
+      
+      if (clearBtn) {
+        clearBtn.style.display = query ? 'flex' : 'none';
+      }
+
+      let totalVisible = 0;
+
+      document.querySelectorAll('.faq-category').forEach(catEl => {
+        const catName = catEl.dataset.category;
+        const matchesCategory = (currentCategory === 'all' || currentCategory === catName);
+        let visibleInCat = 0;
+
+        const items = catEl.querySelectorAll('.faq-item');
+        items.forEach(item => {
+          const qText = item.querySelector('.faq-question').textContent.toLowerCase();
+          const aText = item.querySelector('.faq-answer').textContent.toLowerCase();
+
+          const matchesQuery = !query || qText.includes(query) || aText.includes(query);
+
+          if (matchesCategory && matchesQuery) {
+            item.style.display = 'block';
+            visibleInCat++;
+            totalVisible++;
+            if (query.length >= 2) {
+              item.classList.add('active');
+            }
+          } else {
+            item.style.display = 'none';
+            if (query) item.classList.remove('active');
+          }
+        });
+
+        if (matchesCategory && visibleInCat > 0) {
+          catEl.style.display = 'block';
+        } else {
+          catEl.style.display = 'none';
+        }
+      });
+
+      const emptyEl = document.getElementById('faq-empty');
+      if (emptyEl) {
+        emptyEl.style.display = totalVisible === 0 ? 'block' : 'none';
+      }
+    }
+  </script>
+</body>
+</html>
