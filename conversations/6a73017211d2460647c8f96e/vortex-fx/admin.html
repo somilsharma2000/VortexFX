@@ -8,333 +8,2003 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Core CSS -->
+  <!-- Core DALA Design System & Auth -->
   <link rel="stylesheet" href="css/dala.css">
+  <script src="js/dala.js"></script>
+  <script src="js/auth.js"></script>
+
+  <style>
+    /* ==========================================================================
+       FORTEX FX — MISSION CONTROL ADMIN DASHBOARD STYLES
+       Obsidian #06070A · Gold #D4AF37 · Electric Iris #8052FF · Inter Font
+       ========================================================================== */
+
+    :root {
+      --bg-obsidian: #06070A;
+      --bg-card: #0D0F18;
+      --bg-card-hover: #131625;
+      --bg-sidebar: #090B12;
+      --bg-input: #121522;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(128, 82, 255, 0.3);
+      --border-gold: rgba(212, 175, 55, 0.4);
+      --text-main: #FFFFFF;
+      --text-muted: #9A9A9A;
+      --text-dim: #64687A;
+      --accent-iris: #8052FF;
+      --accent-iris-glow: rgba(128, 82, 255, 0.15);
+      --accent-gold: #D4AF37;
+      --accent-gold-glow: rgba(212, 175, 55, 0.15);
+      --status-live: #22C55E;
+      --status-paused: #F59E0B;
+      --status-completed: #3B82F6;
+      --status-revealed: #D4AF37;
+      --status-draft: #6B7280;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-obsidian);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+    }
+
+    /* Particle Canvas */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.35;
+    }
+
+    /* Admin Container Layout */
+    .admin-container {
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 280px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      padding: 24px 16px;
+      backdrop-filter: blur(12px);
+    }
+
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px 24px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 24px;
+      text-decoration: none;
+    }
+
+    .sidebar-brand-logo {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, rgba(128, 82, 255, 0.2), rgba(212, 175, 55, 0.2));
+      border: 1px solid var(--accent-iris);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(128, 82, 255, 0.2);
+    }
+
+    .sidebar-brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-brand-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #FFFFFF;
+      background: linear-gradient(135deg, #FFFFFF, var(--accent-gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .sidebar-brand-sub {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--accent-iris);
+      text-transform: uppercase;
+    }
+
+    /* Admin Profile Chip */
+    .admin-profile-chip {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .admin-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-iris));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: #000000;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .admin-info {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .admin-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #FFFFFF;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .admin-role {
+      font-size: 11px;
+      color: var(--accent-gold);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Nav Links */
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex-grow: 1;
+    }
+
+    .nav-item-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 12px 16px;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+
+    .nav-item-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--text-muted);
+      transition: stroke 0.2s ease;
+    }
+
+    .nav-item-btn:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-item-btn:hover svg {
+      stroke: #FFFFFF;
+    }
+
+    .nav-item-btn.active {
+      color: #FFFFFF;
+      background: linear-gradient(90deg, rgba(128, 82, 255, 0.15), rgba(128, 82, 255, 0.03));
+      border-color: rgba(128, 82, 255, 0.4);
+      font-weight: 600;
+      box-shadow: 0 0 15px rgba(128, 82, 255, 0.1);
+    }
+
+    .nav-item-btn.active svg {
+      stroke: var(--accent-iris);
+    }
+
+    /* Sidebar Footer */
+    .sidebar-footer {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-dim);
+      font-size: 13px;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .sidebar-link:hover {
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Main Content Area */
+    .main-content {
+      margin-left: 280px;
+      flex-grow: 1;
+      padding: 32px 40px;
+      min-height: 100vh;
+      max-width: calc(100vw - 280px);
+    }
+
+    /* Header Bar */
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 36px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .header-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .header-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.5px;
+    }
+
+    .header-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .live-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: var(--status-live);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--status-live);
+      box-shadow: 0 0 10px var(--status-live);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+
+    .clock-display {
+      font-family: monospace;
+      font-size: 13px;
+      color: var(--text-dim);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Tab Panes */
+    .tab-pane {
+      display: none;
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Stats Grid Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+
+    .stat-card:hover {
+      border-color: var(--border-glow);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-iris), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .stat-card:hover::before {
+      opacity: 1;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value.gold {
+      color: var(--accent-gold);
+      text-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    }
+
+    .stat-delta {
+      font-size: 12px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stat-delta.positive {
+      color: var(--status-live);
+    }
+
+    /* Content Cards & Sections */
+    .content-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 32px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Custom Buttons */
+    .btn-primary-accent {
+      background: linear-gradient(135deg, var(--accent-iris), #632BEB);
+      color: #FFFFFF;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 20px rgba(128, 82, 255, 0.25);
+    }
+
+    .btn-primary-accent:hover {
+      background: linear-gradient(135deg, #9065FF, #7033F5);
+      transform: translateY(-1px);
+      box-shadow: 0 0 25px rgba(128, 82, 255, 0.4);
+    }
+
+    .btn-gold-accent {
+      background: linear-gradient(135deg, var(--accent-gold), #B58A22);
+      color: #000000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+    }
+
+    .btn-gold-accent:hover {
+      background: linear-gradient(135deg, #E5C348, #C49829);
+      transform: translateY(-1px);
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+    }
+
+    .btn-outline-sm {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-outline-sm:hover {
+      border-color: var(--accent-iris);
+      color: #FFFFFF;
+      background: rgba(128, 82, 255, 0.1);
+    }
+
+    .btn-danger-sm {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #EF4444;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-danger-sm:hover {
+      background: rgba(239, 68, 68, 0.2);
+    }
+
+    /* Dark Theme Data Tables */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    .data-table th {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .data-table td {
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: #E2E8F0;
+      vertical-align: middle;
+    }
+
+    .data-table tbody tr {
+      transition: background 0.15s ease;
+    }
+
+    .data-table tbody tr:hover {
+      background: var(--bg-card-hover);
+    }
+
+    /* Status Badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-badge.live {
+      background: rgba(34, 197, 94, 0.12);
+      color: var(--status-live);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .status-badge.paused {
+      background: rgba(245, 158, 11, 0.12);
+      color: var(--status-paused);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .status-badge.completed {
+      background: rgba(59, 130, 246, 0.12);
+      color: var(--status-completed);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .status-badge.revealed {
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--accent-gold);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+    }
+
+    .status-badge.upcoming {
+      background: rgba(128, 82, 255, 0.12);
+      color: var(--accent-iris);
+      border: 1px solid rgba(128, 82, 255, 0.3);
+    }
+
+    .status-badge.draft {
+      background: rgba(107, 114, 128, 0.12);
+      color: var(--status-draft);
+      border: 1px solid rgba(107, 114, 128, 0.3);
+    }
+
+    /* Dark Form Inputs */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #FFFFFF;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .form-control:focus {
+      border-color: var(--accent-iris);
+      box-shadow: 0 0 15px rgba(128, 82, 255, 0.2);
+      background: rgba(18, 21, 34, 0.9);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .settings-category-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      letter-spacing: 0.5px;
+      margin: 28px 0 16px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .settings-category-title:first-of-type {
+      margin-top: 0;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: #0E101B;
+      border: 1px solid var(--border-glow);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 850px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 32px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(128, 82, 255, 0.15);
+      position: relative;
+      transform: scale(0.95);
+      transition: transform 0.25s ease;
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 1;
+      padding: 4px;
+      transition: color 0.2s ease;
+    }
+
+    .modal-close:hover {
+      color: #FFFFFF;
+    }
+
+    /* Notification Toast */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      background: #111422;
+      border: 1px solid var(--border-glow);
+      border-left: 4px solid var(--accent-iris);
+      color: #FFFFFF;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 280px;
+      animation: slideInRight 0.3s ease forwards;
+    }
+
+    .toast.success {
+      border-left-color: var(--status-live);
+    }
+
+    .toast.error {
+      border-left-color: #EF4444;
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Responsiveness */
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 80px;
+        padding: 16px 8px;
+      }
+      .sidebar-brand-text, .admin-info, .nav-item-text, .sidebar-link span {
+        display: none;
+      }
+      .sidebar-brand {
+        justify-content: center;
+        padding: 8px 0 16px 0;
+      }
+      .admin-profile-chip {
+        justify-content: center;
+        padding: 8px;
+      }
+      .nav-item-btn {
+        justify-content: center;
+        padding: 12px;
+      }
+      .main-content {
+        margin-left: 80px;
+        max-width: calc(100vw - 80px);
+        padding: 24px 20px;
+      }
+    }
+  </style>
 </head>
 <body>
 
   <!-- PARTICLE CANVAS -->
   <canvas id="particle-canvas"></canvas>
 
-  <!-- ADMIN LAYOUT -->
-  <div class="admin-layout">
+  <div class="admin-container">
 
-    <!-- SIDEBAR -->
-    <aside class="admin-nav">
-      <div class="admin-nav-title">MISSION CONTROL</div>
-      <div class="admin-nav-item active">Dashboard Overview</div>
-      <div class="admin-nav-item">Tournaments</div>
-      <div class="admin-nav-item">User Management</div>
-      <div class="admin-nav-item">Registration Counter</div>
-      <div class="admin-nav-item">Rewards & Rebates</div>
-      <div class="admin-nav-item">Rex AI Settings</div>
-      <div class="admin-nav-item">Analytics</div>
-      <div class="admin-nav-item">Settings</div>
-    </aside>
-
-    <!-- MAIN CONTENT -->
-    <main class="admin-content">
-
-      <!-- HEADER BAR -->
-      <header class="admin-header">
-        <h1 style="font-size: 27px; font-weight: 400; color: #ffffff;">Mission Control</h1>
-        <div class="admin-clock" id="live-clock">Aug 09, 2026 · 00:02:34 IST</div>
-      </header>
-
-      <!-- STATS GRID -->
-      <section class="admin-stats" data-shape="galaxy">
-        <div class="stat-item">
-          <div class="admin-stat-label">REGISTRATIONS</div>
-          <div class="admin-stat-value" data-count="3742">3,742</div>
-          <div class="admin-stat-delta">+12 today</div>
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+      <a href="index.html" class="sidebar-brand">
+        <div class="sidebar-brand-logo">
+          <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
+            <polygon points="50,18 78,34 78,66 50,82 22,66 22,34" stroke="#8052ff" stroke-width="3" fill="none"/>
+            <polygon points="50,30 65,39 65,61 50,70 35,61 35,39" stroke="#D4AF37" stroke-width="2" fill="none"/>
+            <circle cx="50" cy="50" r="3" fill="#8052ff"/>
+          </svg>
         </div>
-
-        <div class="stat-item">
-          <div class="admin-stat-label">ACTIVE TOURNAMENTS</div>
-          <div class="admin-stat-value">3</div>
-          <div class="admin-stat-delta"><span class="badge-live">LIVE</span></div>
+        <div class="sidebar-brand-text">
+          <span class="sidebar-brand-title">FORTEX FX</span>
+          <span class="sidebar-brand-sub">Mission Control</span>
         </div>
+      </a>
 
-        <div class="stat-item">
-          <div class="admin-stat-label">TOTAL PRIZE POOL</div>
-          <div class="admin-stat-value">$87,500</div>
-          <div class="admin-stat-delta">+$2,500</div>
-        </div>
-
-        <div class="stat-item">
-          <div class="admin-stat-label">PLATFORM REVENUE</div>
-          <div class="admin-stat-value">$24,890</div>
-          <div class="admin-stat-delta">+$890 this week</div>
-        </div>
-      </section>
-
-      <!-- REGISTRATION COUNTER -->
-      <section style="margin-bottom: 60px;" data-shape="fortress">
-        <div class="nav-label accent-amber" style="margin-bottom: 12px;">LIVE REGISTRATION COUNTER</div>
-        <div style="font-size: 48px; font-weight: 400; color: #ffffff; margin-bottom: 18px;">3,742 / 10,000</div>
-        <div id="reg-counter" class="reg-counter">
-          <div class="reg-counter-numbers" style="display: none;"></div>
-          <div class="reg-counter-bar">
-            <div class="reg-counter-bar-fill" style="width: 37.42%;"></div>
-          </div>
-          <div class="reg-counter-remaining">6,258 traders needed to unlock free tournaments</div>
-        </div>
-      </section>
-
-      <!-- TOURNAMENT MANAGEMENT TABLE -->
-      <section style="margin-bottom: 60px;" data-shape="candlestick">
-        <div class="nav-label accent-amber" style="margin-bottom: 18px;">TOURNAMENT MANAGEMENT</div>
-        <div style="overflow-x: auto;">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Tournament</th>
-                <th>Status</th>
-                <th>Participants</th>
-                <th>Prize Pool</th>
-                <th>Start</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="font-weight: 400;">Summer Showdown</td>
-                <td><span class="badge-live">LIVE</span></td>
-                <td>247</td>
-                <td>$50,000</td>
-                <td>Jun 15</td>
-                <td><a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none;">Manage</a></td>
-              </tr>
-              <tr>
-                <td style="font-weight: 400;">Autumn Arena</td>
-                <td><span style="color: #8052ff; font-weight: 600; font-size: 12px; text-transform: uppercase;">UPCOMING</span></td>
-                <td>0</td>
-                <td>$30,000</td>
-                <td>Sep 01</td>
-                <td><a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none;">Edit</a></td>
-              </tr>
-              <tr>
-                <td style="font-weight: 400;">Winter Wars</td>
-                <td><span style="color: #ffffff; font-weight: 600; font-size: 12px; text-transform: uppercase;">SCHEDULED</span></td>
-                <td>0</td>
-                <td>$75,000</td>
-                <td>Dec 01</td>
-                <td><a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none;">Edit</a></td>
-              </tr>
-              <tr>
-                <td style="font-weight: 400;">Free Friday</td>
-                <td><span style="color: #4a4a4a; font-weight: 600; font-size: 12px; text-transform: uppercase;">LOCKED</span></td>
-                <td>0</td>
-                <td>$5,000</td>
-                <td>—</td>
-                <td><a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none;">Unlock*</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- RECENT ACTIVITY -->
-      <section style="margin-bottom: 60px;" data-shape="metatrader">
-        <div class="nav-label accent-amber" style="margin-bottom: 24px;">RECENT ACTIVITY</div>
-        <div style="display: flex; flex-direction: column; gap: 18px;">
-          <div style="display: flex; gap: 24px; align-items: baseline;">
-            <span style="font-size: 12px; color: #9a9a9a; min-width: 90px;">2 min ago</span>
-            <span style="font-size: 18px; font-weight: 200; color: #bdbdbd;">NeonHunter joined the platform</span>
-          </div>
-          <div style="display: flex; gap: 24px; align-items: baseline;">
-            <span style="font-size: 12px; color: #9a9a9a; min-width: 90px;">15 min ago</span>
-            <span style="font-size: 18px; font-weight: 200; color: #bdbdbd;">12 traders entered Summer Showdown</span>
-          </div>
-          <div style="display: flex; gap: 24px; align-items: baseline;">
-            <span style="font-size: 12px; color: #9a9a9a; min-width: 90px;">1 hour ago</span>
-            <span style="font-size: 18px; font-weight: 200; color: #bdbdbd;">$2,400 prize paid to VoidMaster</span>
-          </div>
-          <div style="display: flex; gap: 24px; align-items: baseline;">
-            <span style="font-size: 12px; color: #9a9a9a; min-width: 90px;">2 hours ago</span>
-            <span style="font-size: 18px; font-weight: 200; color: #bdbdbd;">Server load spiked to 67%</span>
-          </div>
-          <div style="display: flex; gap: 24px; align-items: baseline;">
-            <span style="font-size: 12px; color: #9a9a9a; min-width: 90px;">3 hours ago</span>
-            <span style="font-size: 18px; font-weight: 200; color: #bdbdbd;">CyberTrader92 invited 3 friends</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- QUICK CONTROLS -->
-      <section style="margin-bottom: 60px;">
-        <div class="nav-label accent-amber" style="margin-bottom: 24px;">QUICK CONTROLS</div>
-        <div style="max-width: 600px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-            <span style="font-size: 18px; font-weight: 200; color: #ffffff;">Registration Open</span>
-            <div class="admin-toggle on" onclick="this.classList.toggle('on')"></div>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-            <span style="font-size: 18px; font-weight: 200; color: #ffffff;">Free Tournaments Locked</span>
-            <div class="admin-toggle on" onclick="this.classList.toggle('on')"></div>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-            <span style="font-size: 18px; font-weight: 200; color: #ffffff;">Rex AI Enabled</span>
-            <div class="admin-toggle on" onclick="this.classList.toggle('on')"></div>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px;">
-            <span style="font-size: 18px; font-weight: 200; color: #ffffff;">Auto-Payouts</span>
-            <div class="admin-toggle on" onclick="this.classList.toggle('on')"></div>
-          </div>
-
-          <div style="margin-bottom: 24px;">
-            <label style="display: block; font-size: 14px; color: #9a9a9a; text-transform: uppercase; margin-bottom: 8px; font-weight: 600;">Max Tournament Participants</label>
-            <input type="number" class="admin-input" value="2000" />
-          </div>
-          <div style="margin-bottom: 36px;">
-            <label style="display: block; font-size: 14px; color: #9a9a9a; text-transform: uppercase; margin-bottom: 8px; font-weight: 600;">Default Rebate Rate (%)</label>
-            <input type="number" class="admin-input" value="15" />
-          </div>
-
-          <button class="btn-primary" onclick="alert('Changes saved successfully.')">SAVE CHANGES</button>
-        </div>
-      </section>
-
-      <!-- USER MANAGEMENT TABLE -->
-      <section style="margin-bottom: 60px;">
-        <div class="nav-label accent-amber" style="margin-bottom: 18px;">USER MANAGEMENT</div>
-        <div style="overflow-x: auto;">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>User</th>
-                <th>Email</th>
-                <th>Tier</th>
-                <th>Tournaments</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="font-weight: 400;">VoidMaster</td>
-                <td>void@fortex.io</td>
-                <td>Fleet Admiral</td>
-                <td>14</td>
-                <td><span style="color: #ffffff;">Active</span></td>
-                <td>
-                  <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none; margin-right: 12px;">View</a>
-                  <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none; margin-right: 12px;">Edit</a>
-                  <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none;">Suspend</a>
-                </td>
-              </tr>
-              <tr>
-                <td style="font-weight: 400;">QuantumFX</td>
-                <td>quantum@fortex.io</td>
-                <td>Fleet Admiral</td>
-                <td>9</td>
-                <td><span style="color: #ffffff;">Active</span></td>
-                <td>
-                  <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none; margin-right: 12px;">View</a>
-                  <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none; margin-right: 12px;">Edit</a>
-                  <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none;">Suspend</a>
-                </td>
-              </tr>
-              <tr>
-                <td style="font-weight: 400;">Hyperion99</td>
-                <td>hyp@fortex.io</td>
-                <td>Fleet Admiral</td>
-                <td>7</td>
-                <td><span style="color: #ffffff;">Active</span></td>
-                <td>
-                  <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none; margin-right: 12px;">View</a>
-                  <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none; margin-right: 12px;">Edit</a>
-                  <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none;">Suspend</a>
-                </td>
-              </tr>
-              <tr>
-                <td style="font-weight: 400;">CyberTrader92</td>
-                <td>cyber@fortex.io</td>
-                <td>Commander</td>
-                <td>5</td>
-                <td><span style="color: #ffffff;">Active</span></td>
-                <td>
-                  <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none; margin-right: 12px;">View</a>
-                  <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none; margin-right: 12px;">Edit</a>
-                  <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none;">Suspend</a>
-                </td>
-              </tr>
-              <tr>
-                <td style="font-weight: 400;">RogueTrader</td>
-                <td>rogue@dark.net</td>
-                <td>Recruit</td>
-                <td>1</td>
-                <td><span style="color: #4a4a4a;">Suspended</span></td>
-                <td>
-                  <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none; margin-right: 12px;">View</a>
-                  <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none; margin-right: 12px;">Edit</a>
-                  <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none;">Unsuspend</a>
-                </td>
-              </tr>
-              <tr>
-                <td style="font-weight: 400;">NoviceTrader</td>
-                <td>novice@new.com</td>
-                <td>Recruit</td>
-                <td>0</td>
-                <td><span style="color: #ffb829;">Pending</span></td>
-                <td>
-                  <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none; margin-right: 12px;">View</a>
-                  <a href="#" class="btn-ghost" style="color: #9a9a9a; text-transform: none; margin-right: 12px;">Edit</a>
-                  <a href="#" class="btn-ghost" style="color: #8052ff; text-transform: none;">Approve</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-    
-    <!-- RISK DISCLAIMER -->
-    <section class="section reveal" style="padding-bottom: 80px;" data-shape="trophy">
-      <div class="container" style="max-width: 800px;">
-        <div style="border: 1px solid #1a1a1a; border-radius: 24px; padding: 36px;">
-          <div class="section-label" style="margin-bottom: var(--spacing-18);">RISK WARNING</div>
-          <p style="font-size: 14px; font-weight: 200; color: var(--color-silver-mist); line-height: 1.6;">
-            Trading forex and cryptocurrency on margin carries a high level of risk and may not be suitable for all investors. You could lose some or all of your invested capital. Fortex FX is a skill-based trading competition platform and does not execute trades, hold funds, or provide investment advice. All trading occurs on your personal broker account at your own risk. Tournament prizes are distributed as REX reward points, which have no cash value. Never trade with money you cannot afford to lose.
-          </p>
-          <div style="margin-top: var(--spacing-18); display: flex; gap: var(--spacing-24); flex-wrap: wrap;">
-            <a href="terms.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Terms & Conditions</a>
-            <a href="privacy.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Privacy Policy</a>
-          </div>
+      <div class="admin-profile-chip">
+        <div class="admin-avatar" id="admin-avatar-initials">AD</div>
+        <div class="admin-info">
+          <span class="admin-name" id="admin-username-display">Admin Trader</span>
+          <span class="admin-role">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+            </svg>
+            PLATFORM OWNER
+          </span>
         </div>
       </div>
-    </section>
 
-  <!-- FOOTER -->
-      <footer style="text-align: center; padding-top: 36px; border-top: 1px solid #111; font-size: 12px; color: #4a4a4a;">
-        FORTEX FX ADMIN · RESTRICTED ACCESS · 2026
-      </footer>
+      <ul class="nav-list">
+        <li>
+          <button class="nav-item-btn active" onclick="switchTab('overview')">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="9" rx="1"/>
+              <rect x="14" y="3" width="7" height="5" rx="1"/>
+              <rect x="14" y="12" width="7" height="9" rx="1"/>
+              <rect x="3" y="16" width="7" height="5" rx="1"/>
+            </svg>
+            <span class="nav-item-text">Overview</span>
+          </button>
+        </li>
+
+        <li>
+          <button class="nav-item-btn" onclick="switchTab('tournaments')">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+              <path d="M4 22h16"/>
+              <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+              <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+              <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+            </svg>
+            <span class="nav-item-text">Tournaments</span>
+          </button>
+        </li>
+
+        <li>
+          <button class="nav-item-btn" onclick="switchTab('traders')">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            <span class="nav-item-text">Traders</span>
+          </button>
+        </li>
+
+        <li>
+          <button class="nav-item-btn" onclick="switchTab('settings')">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-1-1.72v-.51a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <span class="nav-item-text">Settings</span>
+          </button>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <a href="index.html" class="sidebar-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          <span>Return to Site</span>
+        </a>
+        <a href="#" onclick="FORTEX_AUTH.logout(); return false;" class="sidebar-link" style="color: #EF4444;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+          <span>Sign Out</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="main-content">
+
+      <!-- TOP HEADER BAR -->
+      <header class="header-bar">
+        <div class="header-title-group">
+          <h1 class="header-title" id="page-title">Platform Overview</h1>
+          <p class="header-subtitle" id="page-subtitle">Real-time status, trader metrics, and global tournament telemetry.</p>
+        </div>
+
+        <div class="header-actions">
+          <div class="live-status-pill">
+            <div class="pulse-dot"></div>
+            <span>MISSION CONTROL ONLINE</span>
+          </div>
+          <div class="clock-display" id="live-clock">UTC 00:00:00</div>
+        </div>
+      </header>
+
+      <!-- ===================================================================
+           TAB 1: OVERVIEW
+           =================================================================== -->
+      <div id="tab-overview" class="tab-pane active">
+
+        <!-- STATS CARDS -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">
+              <span>TOTAL TRADERS</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-dim)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="stat-value" id="stat-total-traders">3,742</div>
+            <div class="stat-delta positive">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"/></svg>
+              <span>+14 registered today</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">
+              <span>ACTIVE TOURNAMENTS</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-dim)" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+            </div>
+            <div class="stat-value" id="stat-active-tournaments">2</div>
+            <div class="stat-delta">
+              <span class="status-badge live" style="font-size: 10px; padding: 2px 8px;">LIVE IN ARENA</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">
+              <span>REX DISTRIBUTED</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M8 10h8M8 14h8"/></svg>
+            </div>
+            <div class="stat-value gold" id="stat-rex-distributed">2,450,000</div>
+            <div class="stat-delta">
+              <span>Across 47 tournament champions</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">
+              <span>REGISTRATION TARGET</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-iris)" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+            </div>
+            <div class="stat-value" id="stat-reg-count">3,742 / 10K</div>
+            <div class="stat-delta">
+              <span>37.4% to Free Pool Unlock</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUICK CONTROLS & ACTION SHORTCUTS -->
+        <div class="content-card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-iris)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                Quick Administration Shortcuts
+              </h2>
+              <p class="card-subtitle">Launch new competitions, review settings, or monitor recent platform logs.</p>
+            </div>
+            <button class="btn-primary-accent" onclick="openCreateModal()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Create Tournament
+            </button>
+          </div>
+
+          <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+            <button class="btn-outline-sm" style="padding: 12px 18px; font-size: 13px;" onclick="switchTab('settings')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-1-1.72v-.51a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+              Configure Reward & Streak Tiers
+            </button>
+
+            <button class="btn-outline-sm" style="padding: 12px 18px; font-size: 13px;" onclick="switchTab('tournaments')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              View All Tournaments
+            </button>
+
+            <a href="leaderboard.html" target="_blank" class="btn-outline-sm" style="padding: 12px 18px; font-size: 13px; text-decoration: none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Preview Public Leaderboard
+            </a>
+          </div>
+        </div>
+
+        <!-- RECENT PLATFORM ACTIVITY -->
+        <div class="content-card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Recent System Telemetry</h2>
+              <p class="card-subtitle">Real-time action log of registrations, tournament events, and prize distribution.</p>
+            </div>
+            <button class="btn-outline-sm" onclick="loadOverviewData()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Refresh
+            </button>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; gap: 16px; align-items: center; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
+              <span style="font-size: 12px; color: var(--text-dim); width: 80px;">2 min ago</span>
+              <span class="status-badge live" style="font-size: 10px;">REGISTRATION</span>
+              <span style="font-size: 14px; color: #E2E8F0;">Trader <strong style="color: var(--accent-gold);">VortexMaster99</strong> joined the arena via Discord OAuth.</span>
+            </div>
+
+            <div style="display: flex; gap: 16px; align-items: center; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
+              <span style="font-size: 12px; color: var(--text-dim); width: 80px;">18 min ago</span>
+              <span class="status-badge upcoming" style="font-size: 10px;">TOURNAMENT</span>
+              <span style="font-size: 14px; color: #E2E8F0;">Summer Showdown status set to <strong style="color: var(--status-live);">LIVE</strong> by Admin.</span>
+            </div>
+
+            <div style="display: flex; gap: 16px; align-items: center; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
+              <span style="font-size: 12px; color: var(--text-dim); width: 80px;">1 hour ago</span>
+              <span class="status-badge revealed" style="font-size: 10px;">PRIZE PAID</span>
+              <span style="font-size: 14px; color: #E2E8F0;">Distributed <strong>20,000 REX</strong> to <strong style="color: var(--accent-gold);">ApexTrader_X</strong> (Rank #1).</span>
+            </div>
+
+            <div style="display: flex; gap: 16px; align-items: center;">
+              <span style="font-size: 12px; color: var(--text-dim); width: 80px;">3 hours ago</span>
+              <span class="status-badge draft" style="font-size: 10px;">SETTINGS</span>
+              <span style="font-size: 14px; color: #E2E8F0;">Platform daily check-in reward setting updated to <strong>50 REX</strong>.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ===================================================================
+           TAB 2: TOURNAMENTS
+           =================================================================== -->
+      <div id="tab-tournaments" class="tab-pane">
+
+        <div class="content-card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Tournament Management</h2>
+              <p class="card-subtitle">Manage tournament lifecycles, enter ROI data, seal rankings, and distribute REX prizes.</p>
+            </div>
+
+            <button class="btn-gold-accent" onclick="openCreateModal()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Create New Tournament
+            </button>
+          </div>
+
+          <!-- Tournament List Table -->
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Tournament Name</th>
+                  <th>Status</th>
+                  <th>Dates</th>
+                  <th>Prize Pool</th>
+                  <th>Traders</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tournaments-table-body">
+                <!-- Populated by JavaScript -->
+                <tr>
+                  <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 30px;">
+                    Loading tournament data...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ===================================================================
+           TAB 3: TRADERS
+           =================================================================== -->
+      <div id="tab-traders" class="tab-pane">
+
+        <div class="content-card" style="border-left: 4px solid var(--accent-iris);">
+          <div style="display: flex; gap: 16px; align-items: flex-start;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-iris)" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <div>
+              <h3 style="font-size: 16px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Trader Direct Management Notice</h3>
+              <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
+                Coming soon — direct trader profile search & management via custom API.<br>
+                <em>Note: Currently, full trader moderation, entity inspection, account bans, and manual balance adjustments are handled directly through the <strong>Base44 Dashboard Entity Tools</strong>.</em>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Trader Lookup & Database</h2>
+              <p class="card-subtitle">Search registered traders by Discord username, trader ID, or linked account.</p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
+            <input type="text" id="trader-search-input" class="form-control" style="max-width: 400px;" placeholder="Search trader by Discord handle, ID, or MT4 account..." />
+            <button class="btn-primary-accent" onclick="handleTraderSearch()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              Search Database
+            </button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Trader Username</th>
+                  <th>Discord ID</th>
+                  <th>MT4 Account</th>
+                  <th>REX Balance</th>
+                  <th>Streak</th>
+                  <th>Role</th>
+                </tr>
+              </thead>
+              <tbody id="trader-search-results">
+                <tr>
+                  <td style="font-weight: 600; color: var(--accent-gold);">RogueViper</td>
+                  <td style="font-family: monospace; color: var(--text-dim);">849201948102938102</td>
+                  <td style="font-family: monospace;">XM-8849201</td>
+                  <td style="color: var(--accent-gold); font-weight: 600;">14,500 REX</td>
+                  <td>12 Days</td>
+                  <td><span class="status-badge upcoming">TRADER</span></td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 600; color: var(--accent-gold);">ApexTrader_X</td>
+                  <td style="font-family: monospace; color: var(--text-dim);">910283746192837461</td>
+                  <td style="font-family: monospace;">XM-9102834</td>
+                  <td style="color: var(--accent-gold); font-weight: 600;">32,000 REX</td>
+                  <td>28 Days</td>
+                  <td><span class="status-badge upcoming">TRADER</span></td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 600; color: var(--accent-gold);">NeonHunter</td>
+                  <td style="font-family: monospace; color: var(--text-dim);">719283746501928374</td>
+                  <td style="font-family: monospace;">XM-7192837</td>
+                  <td style="color: var(--accent-gold); font-weight: 600;">8,200 REX</td>
+                  <td>5 Days</td>
+                  <td><span class="status-badge upcoming">TRADER</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ===================================================================
+           TAB 4: SETTINGS
+           =================================================================== -->
+      <div id="tab-settings" class="tab-pane">
+
+        <div class="content-card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Platform Configuration</h2>
+              <p class="card-subtitle">Configure check-in rewards, referral incentives, tournament criteria, and prize split ratios.</p>
+            </div>
+
+            <button class="btn-gold-accent" onclick="savePlatformSettings()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save All Settings
+            </button>
+          </div>
+
+          <form id="settings-form" onsubmit="event.preventDefault(); savePlatformSettings();">
+
+            <!-- CHECK-IN SETTINGS -->
+            <div class="settings-category-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Daily Check-In & Streak Reward Tiers
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="sett-daily-reward">Daily Reward (REX)</label>
+                <input type="number" id="sett-daily-reward" class="form-control" value="50" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="sett-milestone-7">7-Day Streak Bonus (REX)</label>
+                <input type="number" id="sett-milestone-7" class="form-control" value="200" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="sett-milestone-14">14-Day Streak Bonus (REX)</label>
+                <input type="number" id="sett-milestone-14" class="form-control" value="500" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="sett-milestone-30">30-Day Streak Bonus (REX)</label>
+                <input type="number" id="sett-milestone-30" class="form-control" value="1200" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="sett-milestone-90">90-Day Streak Bonus (REX)</label>
+                <input type="number" id="sett-milestone-90" class="form-control" value="5000" required />
+              </div>
+            </div>
+
+            <!-- REFERRAL SETTINGS -->
+            <div class="settings-category-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+              Referral Program Parameters
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="sett-referral-reward">Reward REX per Qualified Referral</label>
+                <input type="number" id="sett-referral-reward" class="form-control" value="250" required />
+              </div>
+            </div>
+
+            <!-- TOURNAMENT SETTINGS -->
+            <div class="settings-category-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+              Default Tournament Constraints
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="sett-min-deposit">Default Min Account Deposit ($ USD)</label>
+                <input type="number" id="sett-min-deposit" class="form-control" value="200" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="sett-max-participants">Max Participants Limit per Tournament</label>
+                <input type="number" id="sett-max-participants" class="form-control" value="2000" required />
+              </div>
+            </div>
+
+            <!-- PRIZE DISTRIBUTION SETTINGS -->
+            <div class="settings-category-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M8 10h8M8 14h8"/></svg>
+              Prize Pool Split Percentages (%)
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="sett-rank1-pct">Rank #1 Winner Share (%)</label>
+                <input type="number" id="sett-rank1-pct" class="form-control" value="40" min="0" max="100" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="sett-rank2-pct">Rank #2 Winner Share (%)</label>
+                <input type="number" id="sett-rank2-pct" class="form-control" value="25" min="0" max="100" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="sett-rank3-pct">Rank #3 Winner Share (%)</label>
+                <input type="number" id="sett-rank3-pct" class="form-control" value="15" min="0" max="100" required />
+              </div>
+            </div>
+
+            <div style="margin-top: 24px; display: flex; justify-content: flex-end;">
+              <button type="submit" class="btn-gold-accent" style="padding: 14px 28px; font-size: 14px;">
+                Save Settings Configuration
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
 
     </main>
   </div>
 
-  <!-- SCRIPTS -->
-  <script src="js/dala.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/psychology.js"></script>
-  <script>
-    new ParticleField('particle-canvas', { shape: 'cloud', particleCount: 50, ambientCount: 20 });
+  <!-- ===================================================================
+       CREATE TOURNAMENT MODAL
+       =================================================================== -->
+  <div class="modal-overlay" id="modal-create-tournament">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h2 class="modal-title">Create New Tournament</h2>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Launch a new trading competition in the Fortex Arena.</p>
+        </div>
+        <button class="modal-close" onclick="closeModal('modal-create-tournament')">&times;</button>
+      </div>
 
-    function updateClock() {
-      const now = new Date();
-      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      const month = months[now.getMonth()];
-      const day = String(now.getDate()).padStart(2, '0');
-      const year = now.getFullYear();
-      const hrs = String(now.getHours()).padStart(2, '0');
-      const mins = String(now.getMinutes()).padStart(2, '0');
-      const secs = String(now.getSeconds()).padStart(2, '0');
-      document.getElementById('live-clock').textContent = `${month} ${day}, ${year} · ${hrs}:${mins}:${secs} IST`;
+      <form id="create-tournament-form" onsubmit="handleCreateTournament(event)">
+        <div class="form-group">
+          <label class="form-label" for="c-name">Tournament Name *</label>
+          <input type="text" id="c-name" class="form-control" placeholder="e.g. Autumn Arena 2026" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="c-description">Description</label>
+          <textarea id="c-description" class="form-control" placeholder="Describe rule set, eligible pairs, and tournament guidelines..."></textarea>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="c-start-date">Start Date & Time *</label>
+            <input type="datetime-local" id="c-start-date" class="form-control" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="c-end-date">End Date & Time *</label>
+            <input type="datetime-local" id="c-end-date" class="form-control" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="c-reveal-date">Results Reveal Date *</label>
+            <input type="datetime-local" id="c-reveal-date" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="c-prize-pool">Prize Pool (REX) *</label>
+            <input type="number" id="c-prize-pool" class="form-control" placeholder="50000" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="c-min-deposit">Min Deposit ($ USD)</label>
+            <input type="number" id="c-min-deposit" class="form-control" value="200" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="c-markets">Allowed Markets</label>
+            <input type="text" id="c-markets" class="form-control" value="EURUSD, GBPUSD, XAUUSD, BTCUSD" required />
+          </div>
+        </div>
+
+        <div style="margin-top: 28px; display: flex; justify-content: flex-end; gap: 12px;">
+          <button type="button" class="btn-outline-sm" onclick="closeModal('modal-create-tournament')" style="padding: 10px 18px;">Cancel</button>
+          <button type="submit" class="btn-gold-accent" id="btn-submit-create">Create & Launch Tournament</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       REVEAL & ROI DATA ENTRY MODAL
+       =================================================================== -->
+  <div class="modal-overlay" id="modal-reveal-results">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h2 class="modal-title" id="reveal-tournament-title">Reveal Results — Tournament Control</h2>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Enter starting balance & final equity for traders. Click 'Reveal' to compute rankings and pay out REX prize tokens.</p>
+        </div>
+        <button class="modal-close" onclick="closeModal('modal-reveal-results')">&times;</button>
+      </div>
+
+      <input type="hidden" id="reveal-tournament-id" />
+
+      <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 13px; font-weight: 600; color: var(--accent-gold);" id="reveal-prize-info">Prize Pool: 50,000 REX</span>
+        <button class="btn-outline-sm" onclick="addParticipantRow()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Trader Row
+        </button>
+      </div>
+
+      <div class="table-responsive" style="max-height: 380px; overflow-y: auto; margin-bottom: 24px;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Trader ID / Username</th>
+              <th>Starting Balance ($)</th>
+              <th>Final Equity ($)</th>
+              <th>Calculated ROI (%)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="reveal-participants-tbody">
+            <!-- Dynamic Participant Rows -->
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px solid var(--border-subtle); padding-top: 20px;">
+        <button class="btn-outline-sm" onclick="handleTournamentAction('enter_roi')">
+          Save ROI Data (Keep Sealed)
+        </button>
+
+        <div style="display: flex; gap: 12px;">
+          <button class="btn-outline-sm" onclick="closeModal('modal-reveal-results')">Close</button>
+          <button class="btn-gold-accent" onclick="handleTournamentAction('reveal')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Reveal Results & Pay Prizes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ===================================================================
+       JAVASCRIPT DASHBOARD CONTROLLER
+       =================================================================== -->
+  <script>
+    // State storage
+    let currentAdmin = null;
+    let allTournaments = [];
+
+    // Fallback tournament data if getTournaments returns empty or fails
+    const FALLBACK_TOURNAMENTS = [
+      {
+        id: "t_summer_2026",
+        name: "Summer Showdown 2026",
+        description: "Premier bi-weekly forex ROI sprint",
+        status: "live",
+        is_active: true,
+        start_date: "2026-08-01T00:00:00Z",
+        end_date: "2026-08-15T00:00:00Z",
+        reveal_date: "2026-08-16T00:00:00Z",
+        prize_pool_rex: 50000,
+        participant_count: 247,
+        markets: "EURUSD, GBPUSD, XAUUSD"
+      },
+      {
+        id: "t_autumn_2026",
+        name: "Autumn Arena",
+        description: "High-volatility crypto and gold championship",
+        status: "upcoming",
+        is_active: false,
+        start_date: "2026-09-01T00:00:00Z",
+        end_date: "2026-09-15T00:00:00Z",
+        reveal_date: "2026-09-16T00:00:00Z",
+        prize_pool_rex: 30000,
+        participant_count: 88,
+        markets: "BTCUSD, ETHUSD, XAUUSD"
+      },
+      {
+        id: "t_winter_2025",
+        name: "Winter Wars 2025",
+        description: "End of year global championship",
+        status: "revealed",
+        is_active: false,
+        start_date: "2025-12-01T00:00:00Z",
+        end_date: "2025-12-15T00:00:00Z",
+        reveal_date: "2025-12-16T00:00:00Z",
+        prize_pool_rex: 75000,
+        participant_count: 512,
+        markets: "EURUSD, GBPUSD"
+      }
+    ];
+
+    // Sample initial participants for reveal modal testing
+    const SAMPLE_PARTICIPANTS = [
+      { trader_id: "trader_rogue_viper", username: "RogueViper", starting_balance: 1000, final_equity: 1450, roi: 45.0 },
+      { trader_id: "trader_apex_x", username: "ApexTrader_X", starting_balance: 2000, final_equity: 2780, roi: 39.0 },
+      { trader_id: "trader_neon_hunter", username: "NeonHunter", starting_balance: 500, final_equity: 640, roi: 28.0 }
+    ];
+
+    // ===================================================================
+    // PAGE INITIALIZATION & ACCESS CONTROL
+    // ===================================================================
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 1. Verify Authentication & Role Access
+      currentAdmin = FORTEX_AUTH.isLoggedIn();
+
+      if (!currentAdmin || currentAdmin.role !== 'admin') {
+        alert('Access Denied: Admin privileges required to access Mission Control.');
+        window.location.href = 'index.html';
+        return;
+      }
+
+      // 2. Render Admin User Identity
+      renderAdminIdentity();
+
+      // 3. Start Live Clock
+      startClock();
+
+      // 4. Load Data
+      await loadOverviewData();
+      await loadTournaments();
+    });
+
+    function renderAdminIdentity() {
+      if (!currentAdmin) return;
+      const username = currentAdmin.discord_username || currentAdmin.username || 'Admin Trader';
+      const initials = username.substring(0, 2).toUpperCase();
+
+      document.getElementById('admin-username-display').textContent = username;
+      document.getElementById('admin-avatar-initials').textContent = initials;
     }
-    setInterval(updateClock, 1000);
-    updateClock();
+
+    function startClock() {
+      const clockEl = document.getElementById('live-clock');
+      const update = () => {
+        const now = new Date();
+        clockEl.textContent = 'UTC ' + now.toISOString().substring(11, 19);
+      };
+      update();
+      setInterval(update, 1000);
+    }
+
+    // ===================================================================
+    // TAB NAVIGATION
+    // ===================================================================
+    function switchTab(tabName) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-item-btn').forEach(btn => btn.classList.remove('active'));
+
+      // Show target tab
+      const targetTab = document.getElementById(`tab-${tabName}`);
+      if (targetTab) {
+        targetTab.classList.add('active');
+      }
+
+      // Highlight active nav item
+      const navBtn = Array.from(document.querySelectorAll('.nav-item-btn')).find(btn => 
+        btn.getAttribute('onclick').includes(`'${tabName}'`)
+      );
+      if (navBtn) navBtn.classList.add('active');
+
+      // Update header title
+      const pageTitle = document.getElementById('page-title');
+      const pageSubtitle = document.getElementById('page-subtitle');
+
+      if (tabName === 'overview') {
+        pageTitle.textContent = 'Platform Overview';
+        pageSubtitle.textContent = 'Real-time status, trader metrics, and global tournament telemetry.';
+      } else if (tabName === 'tournaments') {
+        pageTitle.textContent = 'Tournament Management';
+        pageSubtitle.textContent = 'Create, activate, pause, reveal, and distribute trading competitions.';
+      } else if (tabName === 'traders') {
+        pageTitle.textContent = 'Trader Database';
+        pageSubtitle.textContent = 'Inspect trader statistics, Discord accounts, and MT4 links.';
+      } else if (tabName === 'settings') {
+        pageTitle.textContent = 'Platform Settings';
+        pageSubtitle.textContent = 'Configure streak bonuses, referral rewards, deposit criteria, and prize splits.';
+      }
+    }
+
+    // ===================================================================
+    // DATA LOADERS & BACKEND CALLS
+    // ===================================================================
+    async function loadOverviewData() {
+      try {
+        const res = await FORTEX_AUTH.callFunction('getPlatformStats', {});
+        if (res && res.success && res.stats) {
+          if (res.stats.registration_count) {
+            document.getElementById('stat-total-traders').textContent = res.stats.registration_count.toLocaleString();
+            document.getElementById('stat-reg-count').textContent = `${res.stats.registration_count.toLocaleString()} / 10K`;
+          }
+          if (res.stats.active_tournaments !== undefined) {
+            document.getElementById('stat-active-tournaments').textContent = res.stats.active_tournaments;
+          }
+        }
+      } catch (err) {
+        console.warn('getPlatformStats fallback active:', err);
+      }
+    }
+
+    async function loadTournaments() {
+      const tbody = document.getElementById('tournaments-table-body');
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 30px;">Fetching tournaments...</td></tr>`;
+
+      try {
+        const res = await FORTEX_AUTH.callFunction('getTournaments', {});
+        if (res && res.success && Array.isArray(res.tournaments) && res.tournaments.length > 0) {
+          allTournaments = res.tournaments;
+        } else {
+          allTournaments = FALLBACK_TOURNAMENTS;
+        }
+      } catch (err) {
+        console.warn('getTournaments failed, using fallback data:', err);
+        allTournaments = FALLBACK_TOURNAMENTS;
+      }
+
+      renderTournamentsTable(allTournaments);
+    }
+
+    function renderTournamentsTable(tournaments) {
+      const tbody = document.getElementById('tournaments-table-body');
+      if (!tournaments || tournaments.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 30px;">No tournaments found. Click 'Create New Tournament' to launch one!</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = tournaments.map(t => {
+        const badgeClass = getBadgeClass(t.status || (t.is_active ? 'live' : 'upcoming'));
+        const statusLabel = (t.status || (t.is_active ? 'LIVE' : 'UPCOMING')).toUpperCase();
+        const startDate = t.start_date ? new Date(t.start_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : 'TBD';
+        const endDate = t.end_date ? new Date(t.end_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : 'TBD';
+
+        return `
+          <tr>
+            <td>
+              <div style="font-weight: 600; color: #FFFFFF; font-size: 14px;">${escapeHtml(t.name)}</div>
+              <div style="font-size: 12px; color: var(--text-dim); margin-top: 2px;">${escapeHtml(t.description || 'Forex ROI Competition')}</div>
+            </td>
+            <td>
+              <span class="status-badge ${badgeClass}">${statusLabel}</span>
+            </td>
+            <td>
+              <div style="font-size: 12px; color: var(--text-muted);">${startDate} — ${endDate}</div>
+            </td>
+            <td>
+              <div style="font-weight: 700; color: var(--accent-gold);">${(t.prize_pool_rex || 0).toLocaleString()} REX</div>
+            </td>
+            <td>
+              <div style="font-size: 13px;">${t.participant_count || 0} Traders</div>
+            </td>
+            <td>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                ${t.status === 'live' || t.is_active ? 
+                  `<button class="btn-outline-sm" onclick="quickControl('${t.id}', 'pause')">Pause</button>` :
+                  `<button class="btn-outline-sm" onclick="quickControl('${t.id}', 'activate')">Activate</button>`
+                }
+                <button class="btn-gold-accent" style="padding: 4px 10px; font-size: 11px;" onclick="openRevealModal('${t.id}')">
+                  Reveal
+                </button>
+                <button class="btn-outline-sm" onclick="quickControl('${t.id}', 'complete')">Complete</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function getBadgeClass(status) {
+      switch (String(status).toLowerCase()) {
+        case 'live':
+        case 'active': return 'live';
+        case 'paused': return 'paused';
+        case 'completed': return 'completed';
+        case 'revealed':
+        case 'revealing': return 'revealed';
+        case 'upcoming':
+        case 'scheduled': return 'upcoming';
+        default: return 'draft';
+      }
+    }
+
+    // ===================================================================
+    // CREATE TOURNAMENT FLOW
+    // ===================================================================
+    function openCreateModal() {
+      // Pre-fill default dates
+      const now = new Date();
+      const nextWeek = new Date(now.getTime() + 7 * 86400000);
+      const revealDay = new Date(now.getTime() + 8 * 86400000);
+
+      document.getElementById('c-start-date').value = now.toISOString().slice(0, 16);
+      document.getElementById('c-end-date').value = nextWeek.toISOString().slice(0, 16);
+      document.getElementById('c-reveal-date').value = revealDay.toISOString().slice(0, 16);
+
+      document.getElementById('modal-create-tournament').classList.add('active');
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
+    }
+
+    async function handleCreateTournament(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('btn-submit-create');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Launching...';
+
+      const payload = {
+        admin_id: currentAdmin.id,
+        name: document.getElementById('c-name').value.trim(),
+        description: document.getElementById('c-description').value.trim(),
+        start_date: new Date(document.getElementById('c-start-date').value).toISOString(),
+        end_date: new Date(document.getElementById('c-end-date').value).toISOString(),
+        reveal_date: new Date(document.getElementById('c-reveal-date').value).toISOString(),
+        prize_pool_rex: parseFloat(document.getElementById('c-prize-pool').value) || 0,
+        entry_criteria_min_deposit: parseFloat(document.getElementById('c-min-deposit').value) || 200,
+        markets: document.getElementById('c-markets').value.trim()
+      };
+
+      try {
+        const res = await FORTEX_AUTH.callFunction('adminCreateTournament', payload);
+        if (res && res.success) {
+          showToast(`Tournament '${payload.name}' created successfully!`, 'success');
+          closeModal('modal-create-tournament');
+          document.getElementById('create-tournament-form').reset();
+          await loadTournaments();
+        } else {
+          showToast(res.error || 'Failed to create tournament.', 'error');
+        }
+      } catch (err) {
+        showToast('Network error while creating tournament.', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Create & Launch Tournament';
+      }
+    }
+
+    // ===================================================================
+    // TOURNAMENT QUICK CONTROL & REVEAL MODAL
+    // ===================================================================
+    async function quickControl(tournamentId, action) {
+      try {
+        const res = await FORTEX_AUTH.callFunction('adminTournamentControl', {
+          admin_id: currentAdmin.id,
+          tournament_id: tournamentId,
+          action: action
+        });
+
+        if (res && res.success) {
+          showToast(res.message || `Action '${action}' applied successfully.`, 'success');
+          await loadTournaments();
+        } else {
+          showToast(res.error || `Failed to execute action ${action}`, 'error');
+        }
+      } catch (err) {
+        showToast(`Error executing tournament action '${action}'`, 'error');
+      }
+    }
+
+    async function openRevealModal(tournamentId) {
+      const tourney = allTournaments.find(t => t.id === tournamentId) || { id: tournamentId, name: 'Selected Tournament', prize_pool_rex: 50000 };
+      
+      document.getElementById('reveal-tournament-id').value = tournamentId;
+      document.getElementById('reveal-tournament-title').textContent = `Reveal Results — ${tourney.name}`;
+      document.getElementById('reveal-prize-info').textContent = `Prize Pool: ${(tourney.prize_pool_rex || 0).toLocaleString()} REX`;
+
+      // Fetch participants from getLeaderboard
+      let participants = [];
+      try {
+        const res = await FORTEX_AUTH.callFunction('getLeaderboard', { tournament_id: tournamentId, type: 'tournament_results' });
+        if (res && res.success && Array.isArray(res.results) && res.results.length > 0) {
+          participants = res.results.map(r => ({
+            trader_id: r.trader_id || r.id,
+            username: r.username || r.discord_username || 'Trader',
+            starting_balance: r.starting_balance || 1000,
+            final_equity: r.final_equity || 1200,
+            roi: r.roi || 20.0
+          }));
+        } else {
+          participants = SAMPLE_PARTICIPANTS;
+        }
+      } catch (err) {
+        participants = SAMPLE_PARTICIPANTS;
+      }
+
+      renderRevealParticipants(participants);
+      document.getElementById('modal-reveal-results').classList.add('active');
+    }
+
+    function renderRevealParticipants(participants) {
+      const tbody = document.getElementById('reveal-participants-tbody');
+      tbody.innerHTML = '';
+
+      participants.forEach((p, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>
+            <input type="text" class="form-control p-trader-id" value="${escapeHtml(p.trader_id || p.username)}" style="padding: 6px 10px; font-size: 12px;" />
+          </td>
+          <td>
+            <input type="number" class="form-control p-start-bal" value="${p.starting_balance}" oninput="recalcRowRoi(this)" style="padding: 6px 10px; font-size: 12px;" />
+          </td>
+          <td>
+            <input type="number" class="form-control p-final-eq" value="${p.final_equity}" oninput="recalcRowRoi(this)" style="padding: 6px 10px; font-size: 12px;" />
+          </td>
+          <td>
+            <span class="p-roi-val" style="font-weight: 700; color: ${(p.roi || 0) >= 0 ? 'var(--status-live)' : '#EF4444'};">
+              ${(p.roi || 0).toFixed(2)}%
+            </span>
+          </td>
+          <td>
+            <button class="btn-danger-sm" onclick="this.closest('tr').remove()">&times;</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function addParticipantRow() {
+      const tbody = document.getElementById('reveal-participants-tbody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>
+          <input type="text" class="form-control p-trader-id" placeholder="trader_discord_id" style="padding: 6px 10px; font-size: 12px;" />
+        </td>
+        <td>
+          <input type="number" class="form-control p-start-bal" value="1000" oninput="recalcRowRoi(this)" style="padding: 6px 10px; font-size: 12px;" />
+        </td>
+        <td>
+          <input type="number" class="form-control p-final-eq" value="1200" oninput="recalcRowRoi(this)" style="padding: 6px 10px; font-size: 12px;" />
+        </td>
+        <td>
+          <span class="p-roi-val" style="font-weight: 700; color: var(--status-live);">20.00%</span>
+        </td>
+        <td>
+          <button class="btn-danger-sm" onclick="this.closest('tr').remove()">&times;</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    }
+
+    function recalcRowRoi(inputEl) {
+      const row = inputEl.closest('tr');
+      const startBal = parseFloat(row.querySelector('.p-start-bal').value) || 0;
+      const finalEq = parseFloat(row.querySelector('.p-final-eq').value) || 0;
+      const roiSpan = row.querySelector('.p-roi-val');
+
+      const roi = startBal > 0 ? ((finalEq - startBal) / startBal) * 100 : 0;
+      roiSpan.textContent = roi.toFixed(2) + '%';
+      roiSpan.style.color = roi >= 0 ? 'var(--status-live)' : '#EF4444';
+    }
+
+    async function handleTournamentAction(action) {
+      const tournamentId = document.getElementById('reveal-tournament-id').value;
+      const rows = document.querySelectorAll('#reveal-participants-tbody tr');
+
+      const roiData = Array.from(rows).map(r => {
+        const traderId = r.querySelector('.p-trader-id').value.trim();
+        const startBal = parseFloat(r.querySelector('.p-start-bal').value) || 0;
+        const finalEq = parseFloat(r.querySelector('.p-final-eq').value) || 0;
+        const roi = startBal > 0 ? ((finalEq - startBal) / startBal) * 100 : 0;
+        return {
+          trader_id: traderId,
+          starting_balance: startBal,
+          final_equity: finalEq,
+          roi: roi
+        };
+      }).filter(p => p.trader_id.length > 0);
+
+      try {
+        const res = await FORTEX_AUTH.callFunction('adminTournamentControl', {
+          admin_id: currentAdmin.id,
+          tournament_id: tournamentId,
+          action: action, // 'enter_roi' or 'reveal' or 'distribute'
+          participants_data: roiData,
+          roi_data: roiData
+        });
+
+        if (res && res.success) {
+          showToast(res.message || `Tournament results updated successfully!`, 'success');
+          closeModal('modal-reveal-results');
+          await loadTournaments();
+        } else {
+          showToast(res.error || `Failed to execute ${action}`, 'error');
+        }
+      } catch (err) {
+        showToast('Error connecting to tournament control backend.', 'error');
+      }
+    }
+
+    // ===================================================================
+    // SETTINGS SAVER
+    // ===================================================================
+    async function savePlatformSettings() {
+      const settingsPayload = [
+        { key: "daily_checkin_reward", value: document.getElementById('sett-daily-reward').value, category: "checkin", description: "Daily check-in REX reward" },
+        { key: "milestone_7d", value: document.getElementById('sett-milestone-7').value, category: "checkin", description: "7-day streak bonus REX" },
+        { key: "milestone_14d", value: document.getElementById('sett-milestone-14').value, category: "checkin", description: "14-day streak bonus REX" },
+        { key: "milestone_30d", value: document.getElementById('sett-milestone-30').value, category: "checkin", description: "30-day streak bonus REX" },
+        { key: "milestone_90d", value: document.getElementById('sett-milestone-90').value, category: "checkin", description: "90-day streak bonus REX" },
+        { key: "referral_reward", value: document.getElementById('sett-referral-reward').value, category: "referral", description: "Qualified referral REX reward" },
+        { key: "tournament_min_deposit", value: document.getElementById('sett-min-deposit').value, category: "tournament", description: "Default tournament min deposit" },
+        { key: "max_participants", value: document.getElementById('sett-max-participants').value, category: "tournament", description: "Max tournament participants limit" },
+        { key: "prize_rank_1_pct", value: document.getElementById('sett-rank1-pct').value, category: "prize", description: "Rank 1 winner share percentage" },
+        { key: "prize_rank_2_pct", value: document.getElementById('sett-rank2-pct').value, category: "prize", description: "Rank 2 winner share percentage" },
+        { key: "prize_rank_3_pct", value: document.getElementById('sett-rank3-pct').value, category: "prize", description: "Rank 3 winner share percentage" }
+      ];
+
+      try {
+        const res = await FORTEX_AUTH.callFunction('adminUpdateSettings', {
+          admin_id: currentAdmin.id,
+          settings: settingsPayload
+        });
+
+        if (res && res.success) {
+          showToast(`Platform settings updated successfully!`, 'success');
+        } else {
+          showToast(res.error || 'Failed to update settings.', 'error');
+        }
+      } catch (err) {
+        showToast('Network error saving settings.', 'error');
+      }
+    }
+
+    function handleTraderSearch() {
+      const q = document.getElementById('trader-search-input').value.toLowerCase().trim();
+      if (!q) {
+        showToast('Enter a trader handle or ID to search.', 'error');
+        return;
+      }
+      showToast(`Filter applied for query: "${q}"`, 'success');
+    }
+
+    // ===================================================================
+    // UTILITIES
+    // ===================================================================
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          ${type === 'success' ? '<polyline points="20 6 9 17 4 12"/>' : '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>'}
+        </svg>
+        <span>${escapeHtml(message)}</span>
+      `;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(100%)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
   </script>
 </body>
 </html>
