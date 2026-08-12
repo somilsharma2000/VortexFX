@@ -1,5 +1,5 @@
 /* ============================================
-   FORTREX FX — SHARED AUTH MODULE
+   FORTREX — SHARED AUTH MODULE
    Handles Discord OAuth, guild membership check,
    session management, API calls, and
    PRE-LAUNCH STEALTH MODE.

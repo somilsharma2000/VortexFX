@@ -1,5 +1,5 @@
 /* ============================================
-   FORTEX FX — DEEP SPACE THEME JS
+   FORTREX — DEEP SPACE THEME JS
    Auto-injects star fields, nebula, glow orbs on ALL pages
    Scroll-triggered particle burst effects
    ============================================ */

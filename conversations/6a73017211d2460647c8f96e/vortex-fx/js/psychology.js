@@ -1,5 +1,5 @@
 /**
- * FORTREX FX — Psychology Rotation Engine
+ * FORTREX — Psychology Rotation Engine
  * Randomizes psychological trigger phrases on every page load.
  * Future: Rex AI will analyze which phrases drive engagement per trader
  * and personalize the copy based on individual behavior patterns.

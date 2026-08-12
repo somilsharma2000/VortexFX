@@ -1,5 +1,5 @@
 /* ============================================
-   FORTEX FX — NEBULA GALAXY PARTICLE SYSTEM
+   FORTREX — NEBULA GALAXY PARTICLE SYSTEM
    450+ particles forming a massive galaxy that
    morphs through 20 trading-themed shapes on
    every scroll. Touch/cursor reactive, fills
