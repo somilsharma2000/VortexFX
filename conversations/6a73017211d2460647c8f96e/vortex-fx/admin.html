@@ -2223,7 +2223,7 @@
           allWaitlist = statsRes.stats.waitlist_entries;
         } else {
           try {
-            const entRes = await fetch('https://api.base44.com/v1/apps/6a73016f9b626430a0d26f88/entities/WaitlistEntry');
+            const entRes = await fetch('https://koda-a0d26f88.base44.app/entities/WaitlistEntry');
             if (entRes.ok) {
               const entData = await entRes.json();
               if (Array.isArray(entData) && entData.length > 0) {

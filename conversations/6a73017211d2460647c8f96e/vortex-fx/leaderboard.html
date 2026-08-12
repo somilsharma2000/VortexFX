@@ -274,13 +274,13 @@
   </script>
 
 <script>
-const API_BASE = 'https://api.base44.com/v1/apps/6a73016f9b626430a0d26f88';
+const API_BASE = 'https://koda-a0d26f88.base44.app';
 let allTournaments = [];
 let selectedTournamentId = '';
 
 async function loadTournamentDropdown() {
   try {
-    const res = await fetch(API_BASE + '/functions/getTournaments', {
+    const res = await fetch(API_BASE + '/functions/getPublicTournaments', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({})
@@ -323,7 +323,7 @@ async function loadLeaderboard() {
   }
 
   try {
-    const res = await fetch(API_BASE + '/functions/getLeaderboard', {
+    const res = await fetch(API_BASE + '/functions/getPublicLeaderboard', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ tournament_id: selectedTournamentId })

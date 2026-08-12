@@ -1374,7 +1374,7 @@
       msgEl.className = 'waitlist-msg waitlist-loading';
 
       try {
-        const res = await fetch('https://api.base44.com/v1/apps/6a73016f9b626430a0d26f88/functions/joinWaitlist', {
+        const res = await fetch('https://koda-a0d26f88.base44.app/functions/joinWaitlist', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email })
@@ -1412,7 +1412,7 @@
     async function fetchRealStats() {
       try {
         // Fetch real stats from getPlatformStats backend function
-        const res = await fetch('https://api.base44.com/v1/apps/6a73016f9b626430a0d26f88/functions/getPlatformStats', {
+        const res = await fetch('https://koda-a0d26f88.base44.app/functions/getPublicStats', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({})
