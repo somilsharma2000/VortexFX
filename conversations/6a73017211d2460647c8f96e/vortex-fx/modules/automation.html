@@ -58,14 +58,16 @@
     /* Module Base Container */
     .at-wrapper {
       font-family: var(--font-sans);
-      background-color: var(--bg-obsidian);
+      background-color: #0b0c10;
       color: var(--text-main);
-      padding: 24px;
+      padding: 2rem;
       width: 100%;
+      min-height: 100vh;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      gap: 28px;
+      gap: 2rem;
+      overflow-x: hidden;
     }
 
     .at-wrapper * {
@@ -77,10 +79,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-card);
-      padding: 22px 28px;
+      padding: 1.5rem;
       position: relative;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
@@ -154,7 +158,8 @@
     .at-header-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      flex-wrap: wrap;
+      gap: 0.75rem;
     }
 
     /* Tactical Buttons */
@@ -163,6 +168,7 @@
       font-size: 13px;
       font-weight: 600;
       padding: 10px 18px;
+      transition: all 0.2s ease-in-out;
       border-radius: var(--radius-btn);
       border: 1px solid var(--border-subtle);
       background: rgba(255, 255, 255, 0.04);
@@ -220,28 +226,23 @@
     /* Key Telemetry Summary Grid */
     .at-telemetry-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-
-    @media (max-width: 1024px) {
-      .at-telemetry-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 640px) {
-      .at-telemetry-grid { grid-template-columns: 1fr; }
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      width: 100%;
     }
 
     .at-telemetry-card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-card);
-      padding: 18px 20px;
+      padding: 1.5rem;
+      height: 100%;
       display: flex;
       flex-direction: column;
       gap: 8px;
       position: relative;
       overflow: hidden;
-      transition: border-color 0.2s ease, transform 0.2s ease;
+      transition: all 0.2s ease-in-out;
     }
 
     .at-telemetry-card:hover {
@@ -345,16 +346,12 @@
     /* 5. INTEGRATION HEALTH MONITORS */
     .at-health-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
     }
 
-    @media (max-width: 1024px) {
-      .at-health-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 640px) {
-      .at-health-grid { grid-template-columns: 1fr; }
-    }
+
+
 
     .at-health-card {
       background: rgba(255, 255, 255, 0.02);

@@ -214,11 +214,7 @@
       gap: 24px;
     }
 
-    @media (max-width: 1180px) {
-      .cockpit-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+    
 
     .cockpit-main-column, .cockpit-sidebar-column {
       display: flex;
@@ -653,15 +649,11 @@
     /* Template Cards Grid */
     .templates-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 14px;
     }
 
-    @media (max-width: 768px) {
-      .templates-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+    
 
     .template-card {
       background: var(--bg-input);
@@ -997,7 +989,7 @@
 
     .webhook-kpi-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 10px;
     }
 
