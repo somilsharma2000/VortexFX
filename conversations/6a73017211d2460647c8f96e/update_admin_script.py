@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+import sys
+
+html_parts = [
+    r'''<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -2714,3 +2717,10 @@
   </script>
 </body>
 </html>
+'''
+]
+
+with open('vortex-fx/admin.html', 'w') as f:
+    f.write(''.join(html_parts))
+
+print("Successfully written vortex-fx/admin.html!")

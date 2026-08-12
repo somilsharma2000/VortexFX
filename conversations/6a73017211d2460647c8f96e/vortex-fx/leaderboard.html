@@ -13,21 +13,21 @@
     /* Tournament selector tabs & mobile dropdown */
     .tournament-tabs-wrapper {
       display: flex;
-      gap: var(--spacing-12);
+      gap: var(--spacing-12, 12px);
       overflow-x: auto;
-      padding-bottom: var(--spacing-12);
-      margin-bottom: var(--spacing-24);
+      padding-bottom: var(--spacing-12, 12px);
+      margin-bottom: var(--spacing-24, 24px);
       scrollbar-width: thin;
-      scrollbar-color: var(--color-electric-iris) transparent;
+      scrollbar-color: var(--color-electric-iris, #8052ff) transparent;
     }
 
     .tournament-tab {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--color-ash-gray);
+      color: var(--color-ash-gray, #94A3B8);
       padding: 12px 22px;
-      border-radius: var(--radius-pill);
-      font-size: var(--text-nav-label);
+      border-radius: var(--radius-pill, 999px);
+      font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
@@ -38,15 +38,15 @@
     }
 
     .tournament-tab:hover {
-      border-color: var(--color-electric-iris);
-      color: var(--color-bone-white);
+      border-color: var(--color-electric-iris, #8052ff);
+      color: var(--color-bone-white, #F8FAFC);
       background: rgba(128, 82, 255, 0.08);
     }
 
     .tournament-tab.active {
       background: linear-gradient(135deg, rgba(128, 82, 255, 0.25), rgba(128, 82, 255, 0.05));
-      border-color: var(--color-electric-iris);
-      color: var(--color-bone-white);
+      border-color: var(--color-electric-iris, #8052ff);
+      color: var(--color-bone-white, #F8FAFC);
       box-shadow: 0 0 20px rgba(128, 82, 255, 0.2);
     }
 
@@ -55,11 +55,11 @@
       width: 100%;
       background: #0a0b10;
       border: 1px solid rgba(128, 82, 255, 0.3);
-      color: var(--color-bone-white);
+      color: var(--color-bone-white, #F8FAFC);
       padding: 14px 18px;
       border-radius: 12px;
       font-size: 16px;
-      font-family: var(--font);
+      font-family: var(--font, sans-serif);
       margin-bottom: 24px;
     }
 
@@ -68,12 +68,217 @@
       .tournament-select-mobile { display: block; }
     }
 
+    /* FEATURE 1: TIER TABS & BADGES */
+    .tier-selector-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      background: rgba(15, 16, 23, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+
+    .tier-tabs-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tier-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94A3B8;
+    }
+
+    /* Rookie Tab: Gray */
+    .tier-tab.tier-rookie:hover, .tier-tab.tier-rookie.active {
+      background: rgba(148, 163, 184, 0.18);
+      border-color: #94A3B8;
+      color: #F1F5F9;
+      box-shadow: 0 0 16px rgba(148, 163, 184, 0.25);
+    }
+
+    /* Pro Tab: Gold */
+    .tier-tab.tier-pro:hover, .tier-tab.tier-pro.active {
+      background: rgba(212, 175, 55, 0.18);
+      border-color: #D4AF37;
+      color: #FFD700;
+      box-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
+    }
+
+    /* Master Tab: Iris/Purple */
+    .tier-tab.tier-master:hover, .tier-tab.tier-master.active {
+      background: rgba(128, 82, 255, 0.18);
+      border-color: #8052FF;
+      color: #C084FC;
+      box-shadow: 0 0 16px rgba(128, 82, 255, 0.3);
+    }
+
+    /* All Tiers Tab */
+    .tier-tab.tier-all:hover, .tier-tab.tier-all.active {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: #E2E8F0;
+      color: #FFFFFF;
+    }
+
+    .your-tier-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(128, 82, 255, 0.2));
+      border: 1px solid #D4AF37;
+      color: #FFD700;
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+    }
+
+    /* FEATURE 2: TOURNAMENT STATUS TIMELINE */
+    .timeline-wrapper {
+      background: rgba(10, 11, 16, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .timeline-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .timeline-track-container {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 10px;
+    }
+
+    .timeline-line-bg {
+      position: absolute;
+      top: 19px;
+      left: 12%;
+      right: 12%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.1);
+      z-index: 1;
+    }
+
+    .timeline-line-progress {
+      position: absolute;
+      top: 19px;
+      left: 12%;
+      height: 3px;
+      background: linear-gradient(90deg, #94A3B8, #22c55e, #EAB308, #D4AF37);
+      z-index: 2;
+      transition: width 0.4s ease;
+    }
+
+    .timeline-step {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+    }
+
+    .step-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #0A0B10;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+      color: #94A3B8;
+    }
+
+    .step-dot.gray-dot {
+      border-color: #64748B;
+      background: rgba(100, 116, 139, 0.2);
+      color: #CBD5E1;
+    }
+
+    .step-dot.green-active {
+      border-color: #22c55e;
+      background: rgba(34, 197, 94, 0.25);
+      color: #22c55e;
+      box-shadow: 0 0 18px rgba(34, 197, 94, 0.6);
+      animation: pulse-green-ring 1.8s infinite;
+    }
+
+    .step-dot.yellow-dot {
+      border-color: #EAB308;
+      background: rgba(234, 179, 8, 0.25);
+      color: #EAB308;
+      box-shadow: 0 0 15px rgba(234, 179, 8, 0.5);
+    }
+
+    .step-dot.gold-reveal {
+      border-color: #D4AF37;
+      background: rgba(212, 175, 55, 0.25);
+      color: #FFD700;
+      box-shadow: 0 0 18px rgba(212, 175, 55, 0.6);
+    }
+
+    .step-dot.completed {
+      background: #22c55e;
+      border-color: #22c55e;
+      color: #000;
+    }
+
+    @keyframes pulse-green-ring {
+      0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+      70% { box-shadow: 0 0 0 12px rgba(34, 197, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+
+    .step-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #F8FAFC;
+      margin-bottom: 4px;
+    }
+
+    .step-dates {
+      font-size: 11px;
+      color: #94A3B8;
+    }
+
     /* Podium styling for top 3 */
     .podium-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: var(--spacing-24);
-      margin-bottom: var(--spacing-36);
+      gap: var(--spacing-24, 24px);
+      margin-bottom: var(--spacing-36, 36px);
     }
 
     .podium-card {
@@ -122,32 +327,179 @@
       gap: 4px;
     }
 
-    /* Sealed Banner */
+    /* FEATURE 5: SEALED OVERLAY & CARD */
     .sealed-banner-card {
-      border: 1px solid rgba(128, 82, 255, 0.35);
-      background: linear-gradient(180deg, rgba(15, 12, 28, 0.9) 0%, rgba(6, 7, 10, 0.95) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      background: linear-gradient(180deg, rgba(20, 16, 35, 0.95) 0%, rgba(6, 7, 10, 0.98) 100%);
       border-radius: 28px;
-      padding: 48px 32px;
+      padding: 54px 32px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), inset 0 0 30px rgba(128, 82, 255, 0.08);
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.8), inset 0 0 40px rgba(212, 175, 55, 0.12);
     }
 
     .sealed-banner-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--color-electric-iris), var(--color-saffron-spark), transparent);
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #D4AF37, #8052FF, transparent);
+    }
+
+    .gold-lock-icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: rgba(212, 175, 55, 0.12);
+      border: 2px solid rgba(212, 175, 55, 0.4);
+      box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      animation: float-lock 3s ease-in-out infinite;
+    }
+
+    @keyframes float-lock {
+      0%, 100% { transform: translateY(0); box-shadow: 0 0 35px rgba(212, 175, 55, 0.3); }
+      50% { transform: translateY(-8px); box-shadow: 0 0 50px rgba(212, 175, 55, 0.5); }
     }
 
     .countdown-box {
       font-size: clamp(32px, 5vw, 56px);
       font-weight: 700;
-      color: var(--color-electric-iris);
+      color: #FFD700;
       font-variant-numeric: tabular-nums;
       letter-spacing: -1.5px;
-      text-shadow: 0 0 20px rgba(128, 82, 255, 0.4);
+      text-shadow: 0 0 24px rgba(212, 175, 55, 0.5);
+    }
+
+    /* FEATURE 4: PRIZE DISTRIBUTION VISUAL */
+    .prize-distribution-container {
+      margin-top: 36px;
+      background: rgba(15, 16, 23, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 28px;
+    }
+
+    .prize-split-bar {
+      display: flex;
+      height: 22px;
+      border-radius: 11px;
+      overflow: hidden;
+      margin: 20px 0;
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.6);
+    }
+
+    .prize-split-1st {
+      width: 50%;
+      background: linear-gradient(90deg, #D4AF37, #FFD700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .prize-split-2nd {
+      width: 30%;
+      background: linear-gradient(90deg, #9CA3AF, #E5E7EB);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .prize-split-3rd {
+      width: 20%;
+      background: linear-gradient(90deg, #CD7F32, #F97316);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .prize-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .prize-dist-card {
+      padding: 20px;
+      border-radius: 16px;
+      background: rgba(10, 11, 16, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.25s ease;
+    }
+
+    .prize-dist-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .prize-dist-card.gold-card { border-color: rgba(212, 175, 55, 0.4); background: linear-gradient(180deg, rgba(212, 175, 55, 0.08) 0%, rgba(10, 11, 16, 0.8) 100%); }
+    .prize-dist-card.silver-card { border-color: rgba(192, 192, 192, 0.4); background: linear-gradient(180deg, rgba(192, 192, 192, 0.08) 0%, rgba(10, 11, 16, 0.8) 100%); }
+    .prize-dist-card.bronze-card { border-color: rgba(205, 127, 50, 0.4); background: linear-gradient(180deg, rgba(205, 127, 50, 0.08) 0%, rgba(10, 11, 16, 0.8) 100%); }
+
+    /* FEATURE 3: SPRINT TOURNAMENT SECTION */
+    .sprint-section-wrapper {
+      margin-top: 60px;
+      padding: 36px 32px;
+      background: linear-gradient(180deg, rgba(212, 175, 55, 0.06) 0%, rgba(10, 11, 16, 0.98) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 28px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 50px rgba(212, 175, 55, 0.08);
+    }
+
+    .sprint-badge {
+      background: linear-gradient(135deg, #D4AF37, #FFD700);
+      color: #000;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      padding: 5px 14px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+    }
+
+    .live-now-badge {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid #22c55e;
+      color: #22c55e;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pulsing-green-dot {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #22c55e;
+      animation: dot-pulse 1.5s infinite ease-in-out;
+    }
+
+    @keyframes dot-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.6); }
     }
 
     /* Spinner Loader */
@@ -155,10 +507,10 @@
       width: 48px;
       height: 48px;
       border: 3px solid rgba(128, 82, 255, 0.15);
-      border-top-color: var(--color-electric-iris);
+      border-top-color: var(--color-electric-iris, #8052ff);
       border-radius: 50%;
       animation: spin 1s linear infinite;
-      margin: 0 auto var(--spacing-18);
+      margin: 0 auto var(--spacing-18, 18px);
     }
 
     @keyframes spin { to { transform: rotate(360deg); } }
@@ -170,14 +522,14 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
       padding: 12px 18px;
-      color: var(--color-bone-white);
+      color: var(--color-bone-white, #F8FAFC);
       font-size: 14px;
       outline: none;
       transition: all 0.2s ease;
     }
 
     .search-input-box:focus {
-      border-color: var(--color-electric-iris);
+      border-color: var(--color-electric-iris, #8052ff);
       box-shadow: 0 0 12px rgba(128, 82, 255, 0.25);
       background: rgba(128, 82, 255, 0.05);
     }
@@ -237,7 +589,7 @@
     <section class="section" style="padding-top: 140px; padding-bottom: 40px;" data-shape="galaxy">
       <div class="container reveal">
         <div class="section-label">TOURNAMENT ARENA</div>
-        <h1 class="display" style="margin-bottom: var(--spacing-24);">Tournaments & Leaderboard</h1>
+        <h1 class="display" style="margin-bottom: var(--spacing-24, 24px);">Tournaments & Leaderboard</h1>
         <p class="body-text-muted" style="max-width: 620px;">
           Compete for real prizes. Standings remain 100% sealed until reveal day—no live rank distortion, pure trading skill.
         </p>
@@ -248,11 +600,11 @@
     <section id="leaderboard-section" class="section reveal" style="padding-top: 0;" data-shape="trophy">
       <div class="container">
         <!-- Tournament Selector Tabs / Dropdown -->
-        <div style="margin-bottom: var(--spacing-24);">
+        <div style="margin-bottom: var(--spacing-24, 24px);">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 12px;">
-            <div class="section-label" style="margin-bottom: 0;">SELECT TOURNAMENT</div>
-            <div style="font-size: 13px; color: var(--color-silver-mist);">
-              All live tournaments are locked until reveal
+            <div class="section-label" style="margin-bottom: 0;">SELECT CHAMPIONSHIP TOURNAMENT</div>
+            <div style="font-size: 13px; color: var(--color-silver-mist, #94A3B8);">
+              All live tournaments remain locked in vault until reveal
             </div>
           </div>
 
@@ -267,351 +619,215 @@
           </select>
         </div>
 
+        <!-- FEATURE 2: TOURNAMENT STATUS TIMELINE -->
+        <div id="tournament-timeline-container">
+          <!-- Dynamically populated by JavaScript -->
+        </div>
+
+        <!-- FEATURE 1: TIER FILTER BAR (Rookie / Pro / Master) -->
+        <div id="tier-selector-container">
+          <!-- Dynamically populated by JavaScript -->
+        </div>
+
         <!-- Leaderboard Output Container (Loading / Sealed Banner / Revealed Leaderboard / Empty State) -->
         <div id="leaderboard-container">
           <!-- Dynamically populated by JavaScript -->
         </div>
+
+        <!-- FEATURE 4: PRIZE DISTRIBUTION VISUAL -->
+        <div id="prize-distribution-container">
+          <!-- Dynamically populated by JavaScript -->
+        </div>
+
+        <!-- FEATURE 3: WEEKLY SPRINT TOURNAMENT SECTION -->
+        <div class="sprint-section-wrapper">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                <span class="sprint-badge">⚡ SPRINT</span>
+                <span id="sprint-live-status-badge" class="live-now-badge">
+                  <span class="pulsing-green-dot"></span> LIVE NOW
+                </span>
+              </div>
+              <h2 style="font-size: clamp(26px, 4vw, 38px); font-weight: 400; color: #FFFFFF; margin: 0;">
+                Weekly Speed Sprints
+              </h2>
+              <p style="font-size: 14px; color: #94A3B8; margin-top: 6px; max-width: 580px;">
+                Fast-paced 72-hour trading sprints. High leverage, fast payouts, and separate tier rankings.
+              </p>
+            </div>
+            <div>
+              <!-- Sprint Tournament Selector Tabs -->
+              <div id="sprint-tabs" class="tournament-tabs-wrapper" style="margin-bottom: 0;">
+                <!-- Rendered by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Sprint Timeline -->
+          <div id="sprint-timeline-container"></div>
+
+          <!-- Sprint Tier Filter Bar -->
+          <div id="sprint-tier-container"></div>
+
+          <!-- Sprint Leaderboard Container -->
+          <div id="sprint-leaderboard-container"></div>
+
+          <!-- Sprint Prize Breakdown -->
+          <div id="sprint-prize-container"></div>
+        </div>
+
       </div>
     </section>
 
-    <!-- SEASONAL STANDINGS (AGGREGATE VIEW) -->
+    <!-- PSYCHOLOGY & SECRECY EDUCATION SECTION -->
     <section class="section reveal" data-shape="crown">
       <div class="container">
-        <div class="section-label" style="margin-bottom: var(--spacing-24);">SEASON 2026 STANDINGS</div>
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: var(--spacing-36);">
+        <div class="grid grid-2" style="align-items: center; gap: 48px;">
           <div>
-            <h2 style="font-size: clamp(32px, 4vw, 48px); font-weight: 400; color: var(--color-bone-white); margin-bottom: 12px;">
-              Annual Leaderboard
-            </h2>
-            <p class="body-text-muted" style="max-width: 600px;">
-              Aggregate view across all 2026 tournaments. Points and total REX accumulators determine seeding for the Annual Grand Championship.
+            <div class="section-label">THE FORTEX ARCHITECTURE</div>
+            <h2 class="section-title">Why Sealed Leaderboards Guarantee Fair Play</h2>
+            <p class="body-text-muted" style="margin-bottom: 24px;">
+              In standard trading competitions, live leaderboards cause 'position copying', targeted hunting, and extreme panic trading near deadlines. Fortex FX seals all positions in an encrypted zero-knowledge vault until reveal hour.
             </p>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <div style="display: flex; gap: 14px; align-items: flex-start;">
+                <div style="color: #D4AF37; font-size: 20px;">🛡️</div>
+                <div>
+                  <strong style="color: #FFF; display: block; margin-bottom: 2px;">Anti-Frontrunning Engine</strong>
+                  <span style="font-size: 14px; color: #94A3B8;">No competitor can analyze your trade history or mirror your winning entries while the match is active.</span>
+                </div>
+              </div>
+              <div style="display: flex; gap: 14px; align-items: flex-start;">
+                <div style="color: #8052FF; font-size: 20px;">⚡</div>
+                <div>
+                  <strong style="color: #FFF; display: block; margin-bottom: 2px;">Pure Risk Management</strong>
+                  <span style="font-size: 14px; color: #94A3B8;">Focus strictly on execution without chasing unnatural risk to move up a live public ladder.</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="badge" style="background: rgba(255, 184, 41, 0.15); border: 1px solid #FFB829; color: #FFB829; font-size: 14px; padding: 8px 18px;">
-            ✨ SEASON 2026 ACTIVE
-          </div>
-        </div>
-
-        <div style="border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 28px; background: rgba(10, 11, 16, 0.8); overflow-x: auto;">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th style="width: 80px;">Season Rank</th>
-                <th>Trader</th>
-                <th>Total REX Won</th>
-                <th>Tournaments Played</th>
-                <th>Best ROI</th>
-                <th style="text-align: right;">Titles Won</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="background: rgba(212, 175, 55, 0.05);">
-                <td class="rank-1" style="font-weight: 700; font-size: 16px;">🥇 #1</td>
-                <td style="font-weight: 600; color: var(--color-bone-white);">TitanMaverick</td>
-                <td><span class="rex-badge">💰 35,000 REX</span></td>
-                <td style="color: var(--color-silver-mist);">3 Tournaments</td>
-                <td class="roi-positive">+182.4%</td>
-                <td style="text-align: right; color: var(--color-saffron-spark); font-weight: 600;">2x Champion 🏆</td>
-              </tr>
-              <tr style="background: rgba(192, 192, 192, 0.03);">
-                <td class="rank-2" style="font-weight: 700; font-size: 16px;">🥈 #2</td>
-                <td style="font-weight: 600; color: var(--color-bone-white);">RogueViper</td>
-                <td><span class="rex-badge">💰 24,000 REX</span></td>
-                <td style="color: var(--color-silver-mist);">3 Tournaments</td>
-                <td class="roi-positive">+167.8%</td>
-                <td style="text-align: right; color: var(--color-saffron-spark); font-weight: 600;">1x Champion 🏆</td>
-              </tr>
-              <tr style="background: rgba(205, 127, 50, 0.03);">
-                <td class="rank-3" style="font-weight: 700; font-size: 16px;">🥉 #3</td>
-                <td style="font-weight: 600; color: var(--color-bone-white);">FluxKairos</td>
-                <td><span class="rex-badge">💰 18,500 REX</span></td>
-                <td style="color: var(--color-silver-mist);">2 Tournaments</td>
-                <td class="roi-positive">+134.7%</td>
-                <td style="text-align: right; color: var(--color-saffron-spark); font-weight: 600;">1x Champion 🏆</td>
-              </tr>
-              <tr>
-                <td style="font-weight: 600; color: var(--color-ash-gray);">#4</td>
-                <td style="color: var(--color-bone-white);">ApexBull</td>
-                <td><span class="rex-badge">💰 14,200 REX</span></td>
-                <td style="color: var(--color-silver-mist);">3 Tournaments</td>
-                <td class="roi-positive">+112.3%</td>
-                <td style="text-align: right; color: var(--color-ash-gray);">Runner-up</td>
-              </tr>
-              <tr>
-                <td style="font-weight: 600; color: var(--color-ash-gray);">#5</td>
-                <td style="color: var(--color-bone-white);">ShadowTrader</td>
-                <td><span class="rex-badge">💰 11,800 REX</span></td>
-                <td style="color: var(--color-silver-mist);">2 Tournaments</td>
-                <td class="roi-positive">+98.6%</td>
-                <td style="text-align: right; color: var(--color-ash-gray);">Top 5</td>
-              </tr>
-              <tr>
-                <td style="font-weight: 600; color: var(--color-ash-gray);">#6</td>
-                <td style="color: var(--color-bone-white);">QuantumPips</td>
-                <td><span class="rex-badge">💰 9,500 REX</span></td>
-                <td style="color: var(--color-silver-mist);">2 Tournaments</td>
-                <td class="roi-positive">+88.1%</td>
-                <td style="text-align: right; color: var(--color-ash-gray);">Top 5</td>
-              </tr>
-              <tr>
-                <td style="font-weight: 600; color: var(--color-ash-gray);">#7</td>
-                <td style="color: var(--color-bone-white);">CyberWhale</td>
-                <td><span class="rex-badge">💰 7,800 REX</span></td>
-                <td style="color: var(--color-silver-mist);">2 Tournaments</td>
-                <td class="roi-positive">+76.4%</td>
-                <td style="text-align: right; color: var(--color-ash-gray);">Top 10</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- PAST TOURNAMENTS ARCHIVE -->
-    <section class="section reveal" data-shape="candlestick">
-      <div class="container">
-        <div class="section-label" style="margin-bottom: var(--spacing-24);">PAST TOURNAMENTS ARCHIVE</div>
-        <h2 style="font-size: 48px; font-weight: 400; letter-spacing: -1.68px; color: var(--color-bone-white); margin-bottom: var(--spacing-36);">
-          Previous Completed Tournaments
-        </h2>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-24);">
-          <!-- Archive Item 1 -->
-          <div class="float-item" style="border-color: rgba(255,255,255,0.1);">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-              <span class="badge" style="background: rgba(34,197,94,0.15); color:#22c55e; border:1px solid #22c55e;">REVEALED</span>
-              <span style="font-size: 13px; color: var(--color-ash-gray);">July 2026</span>
-            </div>
-            <div style="font-size: 24px; font-weight: 400; color: var(--color-bone-white); margin-bottom: 8px;">
-              Spring Smash 2026
-            </div>
-            <div style="font-size: 14px; color: var(--color-silver-mist); margin-bottom: 16px;">
-              Prize Pool: <strong style="color: var(--color-saffron-spark);">$40,000 in REX</strong> · 312 Participants
-            </div>
-            <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
-              <span style="font-size: 13px; color: var(--color-ash-gray);">Champion: <strong style="color:#fff;">TitanMaverick</strong></span>
-              <span class="roi-positive">+182.4% ROI</span>
-            </div>
-            <button class="btn-ghost" style="width: 100%; font-size: 13px; padding: 10px;" data-select-tournament="spring_2026">
-              Inspect Leaderboard →
-            </button>
-          </div>
-
-          <!-- Archive Item 2 -->
-          <div class="float-item" style="border-color: rgba(255,255,255,0.1);">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-              <span class="badge" style="background: rgba(34,197,94,0.15); color:#22c55e; border:1px solid #22c55e;">REVEALED</span>
-              <span style="font-size: 13px; color: var(--color-ash-gray);">Dec 2025</span>
-            </div>
-            <div style="font-size: 24px; font-weight: 400; color: var(--color-bone-white); margin-bottom: 8px;">
-              Winter Warfare 2025
-            </div>
-            <div style="font-size: 14px; color: var(--color-silver-mist); margin-bottom: 16px;">
-              Prize Pool: <strong style="color: var(--color-saffron-spark);">$30,000 in REX</strong> · 198 Participants
-            </div>
-            <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
-              <span style="font-size: 13px; color: var(--color-ash-gray);">Champion: <strong style="color:#fff;">RogueViper</strong></span>
-              <span class="roi-positive">+167.8% ROI</span>
-            </div>
-            <button class="btn-ghost" style="width: 100%; font-size: 13px; padding: 10px;" data-select-tournament="winter_2025">
-              Inspect Leaderboard →
-            </button>
-          </div>
-
-          <!-- Archive Item 3 -->
-          <div class="float-item" style="border-color: rgba(255,255,255,0.1);">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-              <span class="badge" style="background: rgba(34,197,94,0.15); color:#22c55e; border:1px solid #22c55e;">REVEALED</span>
-              <span style="font-size: 13px; color: var(--color-ash-gray);">Oct 2025</span>
-            </div>
-            <div style="font-size: 24px; font-weight: 400; color: var(--color-bone-white); margin-bottom: 8px;">
-              Autumn Apex 2025
-            </div>
-            <div style="font-size: 14px; color: var(--color-silver-mist); margin-bottom: 16px;">
-              Prize Pool: <strong style="color: var(--color-saffron-spark);">$25,000 in REX</strong> · 175 Participants
-            </div>
-            <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
-              <span style="font-size: 13px; color: var(--color-ash-gray);">Champion: <strong style="color:#fff;">FluxKairos</strong></span>
-              <span class="roi-positive">+134.7% ROI</span>
-            </div>
-            <button class="btn-ghost" style="width: 100%; font-size: 13px; padding: 10px;" data-select-tournament="autumn_2025">
-              Inspect Leaderboard →
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- HALL OF FAME -->
-    <section class="section reveal" data-shape="pound">
-      <div class="container">
-        <div class="section-label" style="margin-bottom: var(--spacing-36);">HALL OF FAME</div>
-        <h2 style="font-size: 48px; font-weight: 400; letter-spacing: -1.68px; color: var(--color-bone-white); margin-bottom: var(--spacing-36);">
-          All-time champions
-        </h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-36);">
-          <div class="float-item">
-            <div class="float-item-label" style="color: var(--color-electric-iris);">3x CHAMPION</div>
-            <div style="font-size: 27px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-6);">TitanMaverick</div>
-            <div style="font-size: 14px; color: var(--color-silver-mist);">Highest career ROI: +182.4%</div>
-          </div>
-          <div class="float-item">
-            <div class="float-item-label" style="color: var(--color-electric-iris);">2x CHAMPION</div>
-            <div style="font-size: 27px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-6);">RogueViper</div>
-            <div style="font-size: 14px; color: var(--color-silver-mist);">Highest career ROI: +167.8%</div>
-          </div>
-          <div class="float-item">
-            <div class="float-item-label" style="color: var(--color-electric-iris);">2x CHAMPION</div>
-            <div style="font-size: 27px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-6);">FluxKairos</div>
-            <div style="font-size: 14px; color: var(--color-silver-mist);">Highest career ROI: +134.7%</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TRADER OF THE MONTH -->
-    <section class="section reveal" data-shape="yen">
-      <div class="container">
-        <div class="section-label" style="margin-bottom: var(--spacing-36);">TRADER OF THE MONTH</div>
-        <div class="two-col-asymmetric">
-          <div>
-            <h2 style="font-size: 48px; font-weight: 400; letter-spacing: -1.68px; color: var(--color-bone-white); margin-bottom: var(--spacing-24);">
-              TitanMaverick
-            </h2>
-            <p class="body-text-muted" style="margin-bottom: var(--spacing-24);">
-              Dominated the Spring Smash with a record-breaking +182.4% ROI. 58 trades executed with a 79% win rate. The benchmark for what's possible in a 14-day tournament cycle.
+          <div style="border: 1px solid rgba(128,82,255,0.2); background: rgba(10,11,16,0.8); border-radius: 24px; padding: 36px; text-align: center;">
+            <div style="font-size: 42px; margin-bottom: 12px;">🏆</div>
+            <h3 style="font-size: 24px; font-weight: 600; color: #FFF; margin-bottom: 12px;">Tiered Tournament Prize Vaults</h3>
+            <p style="font-size: 14px; color: #94A3B8; margin-bottom: 24px;">
+              Whether you start with $500 in Rookie or $25,000 in Master, rewards are proportionally split so traders compete on a level playing field.
             </p>
-            <div style="font-size: 14px; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase; color: var(--color-saffron-spark);">
-              July 2026
-            </div>
-          </div>
-          <div>
-            <div class="float-item">
-              <div class="float-item-label" style="color: var(--color-electric-iris);">TOURNAMENT ROI</div>
-              <div style="font-size: 48px; font-weight: 400; color: var(--color-bone-white);">+182.4%</div>
-            </div>
-            <div class="float-item">
-              <div class="float-item-label" style="color: var(--color-electric-iris);">WIN RATE</div>
-              <div style="font-size: 48px; font-weight: 400; color: var(--color-bone-white);">79%</div>
-            </div>
-            <div class="float-item">
-              <div class="float-item-label" style="color: var(--color-electric-iris);">PRIZE WON</div>
-              <div style="font-size: 48px; font-weight: 400; color: var(--color-bone-white);">$20,000</div>
-            </div>
+            <a href="signin.html" class="btn-primary" style="width: 100%;">Claim Trader Pass</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="section reveal" style="text-align: center;" data-shape="dollar">
-      <div class="container">
-        <div class="section-label" style="justify-content: center;">READY?</div>
-        <h2 style="font-size: clamp(36px, 5vw, 78px); font-weight: 400; letter-spacing: -0.04em; color: var(--color-bone-white); margin-bottom: var(--spacing-24);">
-          Think you can top the charts?
-        </h2>
-        <p class="body-text-muted" style="max-width: 500px; margin: 0 auto var(--spacing-36);">
-          Join the next tournament. Trade your strategy. Wait for the reveal.
-        </p>
-        <a href="signin.html" class="btn-primary">Join Next Tournament</a>
-      </div>
-    </section>
-
-    <!-- RISK DISCLAIMER -->
-    <section class="section reveal" style="padding-bottom: 80px;" data-shape="diamond">
-      <div class="container" style="max-width: 800px;">
-        <div style="border: 1px solid #1a1a1a; border-radius: 24px; padding: 36px;">
-          <div class="section-label" style="margin-bottom: var(--spacing-18);">RISK WARNING</div>
-          <p style="font-size: 14px; font-weight: 200; color: var(--color-silver-mist); line-height: 1.6;">
-            Trading forex and cryptocurrency on margin carries a high level of risk and may not be suitable for all investors. You could lose some or all of your invested capital. Fortex FX is a skill-based trading competition platform and does not execute trades, hold funds, or provide investment advice. All trading occurs on your personal broker account at your own risk. Tournament prizes are distributed as REX reward points, which have no cash value. Never trade with money you cannot afford to lose.
-          </p>
-          <div style="margin-top: var(--spacing-18); display: flex; gap: var(--spacing-24); flex-wrap: wrap;">
-            <a href="terms.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Terms & Conditions</a>
-            <a href="privacy.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Privacy Policy</a>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right: 12px;">
-            <polygon points="12,3 22,21 2,21" stroke="#8052ff" stroke-width="2" fill="none" stroke-linejoin="round"/>
-          </svg>
-          <span class="nav-wordmark">FORTEX FX</span>
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-weight: 700; color: #FFF;">FORTEX FX</span>
+          <span style="color: #64748B; font-size: 13px;">© 2026 All Rights Reserved</span>
         </div>
-        <div class="footer-links">
-          <a href="index.html" class="footer-link">Home</a>
-          <a href="leaderboard.html" class="footer-link">Tournaments</a>
-          <a href="offers.html" class="footer-link">Rewards</a>
-          <a href="resources.html" class="footer-link">Resources</a>
-          <a href="invite.html" class="footer-link">Invite</a>
-          <a href="checkin.html" class="footer-link">Check-In</a>
-          <a href="terms.html" class="footer-link">Terms</a>
-          <a href="privacy.html" class="footer-link">Privacy</a>
-          <a href="signin.html" class="footer-link">Sign In</a>
+        <div style="display: flex; gap: 20px; font-size: 14px;">
+          <a href="terms.html" style="color: #94A3B8; text-decoration: none;">Terms</a>
+          <a href="privacy.html" style="color: #94A3B8; text-decoration: none;">Privacy</a>
+          <a href="resources.html" style="color: #94A3B8; text-decoration: none;">Rules</a>
         </div>
-      </div>
-      <div class="footer-bottom">
-        <div class="footer-copyright">© 2026 FORTEX FX — Skill-based trading competitions. Not a financial service.</div>
       </div>
     </div>
   </footer>
 
-  <!-- SCRIPT FOR BACKEND LEADERBOARD INTEGRATION & LOGIC -->
+  <!-- SCRIPT -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Tournament List Config
+      // Main Championship Tournaments Fallback
       const TOURNAMENTS_FALLBACK = [
         {
           id: 'summer_2026',
           name: 'Summer Showdown 2026',
           status: 'sealed',
-          prize_pool: '$50,000 in REX',
-          participants: 247,
-          duration: 'Aug 10 - Aug 23, 2026'
+          revealed: false,
+          prize_pool_rex: 50000,
+          participant_count: 247,
+          start_date: '2026-08-01',
+          end_date: '2026-08-20',
+          reveal_date: '2026-08-23T23:59:59.000Z',
+          type: 'championship',
+          is_active: true
         },
         {
           id: 'spring_2026',
           name: 'Spring Smash 2026',
           status: 'revealed',
-          prize_pool: '$40,000 in REX',
-          participants: 312,
-          duration: 'July 15 - July 30, 2026'
+          revealed: true,
+          prize_pool_rex: 40000,
+          participant_count: 312,
+          start_date: '2026-07-01',
+          end_date: '2026-07-25',
+          reveal_date: '2026-07-31T23:59:59.000Z',
+          type: 'championship',
+          is_active: false
         },
         {
           id: 'winter_2025',
           name: 'Winter Warfare 2025',
           status: 'revealed',
-          prize_pool: '$30,000 in REX',
-          participants: 198,
-          duration: 'Dec 10 - Dec 24, 2025'
-        },
-        {
-          id: 'autumn_2025',
-          name: 'Autumn Apex 2025',
-          status: 'revealed',
-          prize_pool: '$25,000 in REX',
-          participants: 175,
-          duration: 'Oct 01 - Oct 14, 2025'
+          revealed: true,
+          prize_pool_rex: 30000,
+          participant_count: 198,
+          start_date: '2025-12-01',
+          end_date: '2025-12-24',
+          reveal_date: '2025-12-28T23:59:59.000Z',
+          type: 'championship',
+          is_active: false
         }
       ];
 
-      // Local fallback data for offline/standalone execution or API fallback
+      // Sprint Tournaments Fallback
+      const SPRINTS_FALLBACK = [
+        {
+          id: 'sprint_week_32',
+          name: '72-Hour FX Volatility Sprint',
+          status: 'sealed',
+          revealed: false,
+          prize_pool_rex: 15000,
+          participant_count: 120,
+          start_date: '2026-08-10',
+          end_date: '2026-08-13',
+          reveal_date: '2026-08-14T18:00:00.000Z',
+          type: 'sprint',
+          is_active: true
+        },
+        {
+          id: 'sprint_week_31',
+          name: 'Weekend Crypto Scalp Sprint',
+          status: 'revealed',
+          revealed: true,
+          prize_pool_rex: 10000,
+          participant_count: 145,
+          start_date: '2026-08-01',
+          end_date: '2026-08-03',
+          reveal_date: '2026-08-04T12:00:00.000Z',
+          type: 'sprint',
+          is_active: false
+        }
+      ];
+
+      // Fallback Leaderboard Datasets with starting_balance tiers
       const LEADERBOARD_FALLBACKS = {
         summer_2026: {
           success: true,
           revealed: false,
           tournament_id: 'summer_2026',
           tournament_name: 'Summer Showdown 2026',
-          message: 'Results sealed',
+          message: 'Results sealed in vault',
           reveal_date: '2026-08-23T23:59:59.000Z',
           prize_pool_rex: 50000,
-          participants: 247
+          participant_count: 247,
+          start_date: '2026-08-01',
+          end_date: '2026-08-20',
+          status: 'sealed'
         },
         spring_2026: {
           success: true,
@@ -620,22 +836,29 @@
           tournament_name: 'Spring Smash 2026',
           revealed_date: 'July 31, 2026',
           prize_pool_rex: 40000,
-          participants: 312,
+          participant_count: 312,
+          start_date: '2026-07-01',
+          end_date: '2026-07-25',
+          reveal_date: '2026-07-31T23:59:59.000Z',
+          status: 'revealed',
           leaderboard: [
-            { rank: 1, trader_id: 't_101', username: 'TitanMaverick', roi: 182.4, final_equity: 28240, prize_won_rex: 15000 },
-            { rank: 2, trader_id: 't_102', username: 'FluxKairos', roi: 134.7, final_equity: 23470, prize_won_rex: 10000 },
-            { rank: 3, trader_id: 't_103', username: 'RogueViper', roi: 118.2, final_equity: 21820, prize_won_rex: 6000 },
-            { rank: 4, trader_id: 't_104', username: 'ApexBull', roi: 94.5, final_equity: 19450, prize_won_rex: 4000 },
-            { rank: 5, trader_id: 't_105', username: 'ShadowTrader', roi: 76.1, final_equity: 17610, prize_won_rex: 2500 },
-            { rank: 6, trader_id: 't_106', username: 'QuantumPips', roi: 62.8, final_equity: 16280, prize_won_rex: 1500 },
-            { rank: 7, trader_id: 't_107', username: 'CyberWhale', roi: 51.3, final_equity: 15130, prize_won_rex: 1000 },
-            { rank: 8, trader_id: 't_108', username: 'VeloceFX', roi: 43.0, final_equity: 14300, prize_won_rex: 500 },
-            { rank: 9, trader_id: 't_109', username: 'AuraScalper', roi: 31.5, final_equity: 13150, prize_won_rex: 250 },
-            { rank: 10, trader_id: 't_110', username: 'NeonGrid', roi: 22.4, final_equity: 12240, prize_won_rex: 250 },
-            { rank: 11, trader_id: 't_111', username: 'ZenithAlpha', roi: 14.8, final_equity: 11480, prize_won_rex: 0 },
-            { rank: 12, trader_id: 't_112', username: 'KryptoKnight', roi: 5.2, final_equity: 10520, prize_won_rex: 0 },
-            { rank: 13, trader_id: 't_113', username: 'VortexRider', roi: -3.8, final_equity: 9620, prize_won_rex: 0 },
-            { rank: 14, trader_id: 't_114', username: 'SolarFlare', roi: -12.6, final_equity: 8740, prize_won_rex: 0 }
+            // Master Tier (>= 10,000)
+            { rank: 1, trader_id: 't_101', username: 'TitanMaverick', roi: 182.4, final_equity: 28240, starting_balance: 10000, prize_won_rex: 15000 },
+            { rank: 2, trader_id: 't_102', username: 'FluxKairos', roi: 134.7, final_equity: 23470, starting_balance: 10000, prize_won_rex: 9000 },
+            { rank: 3, trader_id: 't_103', username: 'RogueViper', roi: 118.2, final_equity: 21820, starting_balance: 12000, prize_won_rex: 5000 },
+            { rank: 7, trader_id: 't_107', username: 'CyberWhale', roi: 51.3, final_equity: 18130, starting_balance: 12000, prize_won_rex: 1000 },
+
+            // Pro Tier (1,000 - 10,000)
+            { rank: 4, trader_id: 't_104', username: 'ApexBull', roi: 245.5, final_equity: 17275, starting_balance: 5000, prize_won_rex: 4000 },
+            { rank: 5, trader_id: 't_105', username: 'ShadowTrader', roi: 212.1, final_equity: 15605, starting_balance: 5000, prize_won_rex: 2500 },
+            { rank: 6, trader_id: 't_106', username: 'QuantumPips', roi: 185.8, final_equity: 14290, starting_balance: 5000, prize_won_rex: 1500 },
+            { rank: 10, trader_id: 't_110', username: 'NeonGrid', roi: 92.4, final_equity: 4810, starting_balance: 2500, prize_won_rex: 250 },
+
+            // Rookie Tier (< 1,000)
+            { rank: 8, trader_id: 't_108', username: 'VeloceFX', roi: 860.0, final_equity: 4800, starting_balance: 500, prize_won_rex: 1000 },
+            { rank: 9, trader_id: 't_109', username: 'AuraScalper', roi: 720.5, final_equity: 4102, starting_balance: 500, prize_won_rex: 500 },
+            { rank: 11, trader_id: 't_111', username: 'ZenithAlpha', roi: 540.8, final_equity: 3204, starting_balance: 500, prize_won_rex: 250 },
+            { rank: 12, trader_id: 't_112', username: 'SolarFlare', roi: 310.2, final_equity: 1640, starting_balance: 400, prize_won_rex: 0 }
           ]
         },
         winter_2025: {
@@ -645,59 +868,98 @@
           tournament_name: 'Winter Warfare 2025',
           revealed_date: 'December 28, 2025',
           prize_pool_rex: 30000,
-          participants: 198,
+          participant_count: 198,
+          start_date: '2025-12-01',
+          end_date: '2025-12-24',
+          reveal_date: '2025-12-28T23:59:59.000Z',
+          status: 'revealed',
           leaderboard: [
-            { rank: 1, trader_id: 't_103', username: 'RogueViper', roi: 167.8, final_equity: 26780, prize_won_rex: 12000 },
-            { rank: 2, trader_id: 't_101', username: 'TitanMaverick', roi: 142.1, final_equity: 24210, prize_won_rex: 8000 },
-            { rank: 3, trader_id: 't_105', username: 'ShadowTrader', roi: 98.6, final_equity: 19860, prize_won_rex: 5000 },
-            { rank: 4, trader_id: 't_106', username: 'QuantumPips', roi: 88.1, final_equity: 18810, prize_won_rex: 2500 },
-            { rank: 5, trader_id: 't_107', username: 'CyberWhale', roi: 64.2, final_equity: 16420, prize_won_rex: 1500 },
-            { rank: 6, trader_id: 't_108', username: 'VeloceFX', roi: 49.5, final_equity: 14950, prize_won_rex: 1000 }
+            { rank: 1, trader_id: 't_103', username: 'RogueViper', roi: 167.8, final_equity: 26780, starting_balance: 10000, prize_won_rex: 12000 },
+            { rank: 2, trader_id: 't_101', username: 'TitanMaverick', roi: 142.1, final_equity: 24210, starting_balance: 10000, prize_won_rex: 8000 },
+            { rank: 3, trader_id: 't_105', username: 'ShadowTrader', roi: 220.6, final_equity: 16030, starting_balance: 5000, prize_won_rex: 5000 },
+            { rank: 4, trader_id: 't_106', username: 'QuantumPips', roi: 176.1, final_equity: 13805, starting_balance: 5000, prize_won_rex: 2500 },
+            { rank: 5, trader_id: 't_108', username: 'VeloceFX', roi: 940.0, final_equity: 5200, starting_balance: 500, prize_won_rex: 1500 },
+            { rank: 6, trader_id: 't_109', username: 'AuraScalper', roi: 680.2, final_equity: 3901, starting_balance: 500, prize_won_rex: 1000 }
           ]
         },
-        autumn_2025: {
+        sprint_week_32: {
+          success: true,
+          revealed: false,
+          tournament_id: 'sprint_week_32',
+          tournament_name: '72-Hour FX Volatility Sprint',
+          message: 'Sprint live - Standings sealed',
+          reveal_date: '2026-08-14T18:00:00.000Z',
+          prize_pool_rex: 15000,
+          participant_count: 120,
+          start_date: '2026-08-10',
+          end_date: '2026-08-13',
+          status: 'sealed'
+        },
+        sprint_week_31: {
           success: true,
           revealed: true,
-          tournament_id: 'autumn_2025',
-          tournament_name: 'Autumn Apex 2025',
-          revealed_date: 'October 15, 2025',
-          prize_pool_rex: 25000,
-          participants: 175,
+          tournament_id: 'sprint_week_31',
+          tournament_name: 'Weekend Crypto Scalp Sprint',
+          revealed_date: 'August 4, 2026',
+          prize_pool_rex: 10000,
+          participant_count: 145,
+          start_date: '2026-08-01',
+          end_date: '2026-08-03',
+          reveal_date: '2026-08-04T12:00:00.000Z',
+          status: 'revealed',
           leaderboard: [
-            { rank: 1, trader_id: 't_102', username: 'FluxKairos', roi: 134.7, final_equity: 23470, prize_won_rex: 10000 },
-            { rank: 2, trader_id: 't_104', username: 'ApexBull', roi: 112.3, final_equity: 21230, prize_won_rex: 7000 },
-            { rank: 3, trader_id: 't_101', username: 'TitanMaverick', roi: 95.0, final_equity: 19500, prize_won_rex: 4000 },
-            { rank: 4, trader_id: 't_109', username: 'AuraScalper', roi: 58.4, final_equity: 15840, prize_won_rex: 2500 },
-            { rank: 5, trader_id: 't_110', username: 'NeonGrid', roi: 41.2, final_equity: 14120, prize_won_rex: 1500 }
+            { rank: 1, trader_id: 't_104', username: 'ApexBull', roi: 312.4, final_equity: 20620, starting_balance: 5000, prize_won_rex: 5000 },
+            { rank: 2, trader_id: 't_102', username: 'FluxKairos', roi: 198.2, final_equity: 29820, starting_balance: 10000, prize_won_rex: 3000 },
+            { rank: 3, trader_id: 't_108', username: 'VeloceFX', roi: 1140.0, final_equity: 6200, starting_balance: 500, prize_won_rex: 2000 },
+            { rank: 4, trader_id: 't_109', username: 'AuraScalper', roi: 890.5, final_equity: 4952, starting_balance: 500, prize_won_rex: 0 }
           ]
         }
       };
 
-      let activeTournamentId = 'summer_2026';
-      let countdownTimerId = null;
+      // Active state parameters
+      let activeMainTournamentId = 'summer_2026';
+      let activeSprintTournamentId = 'sprint_week_32';
+
+      let mainActiveTier = 'all'; // 'rookie', 'pro', 'master', 'all'
+      let sprintActiveTier = 'all';
+
+      let mainCountdownTimer = null;
+      let sprintCountdownTimer = null;
+
+      let cachedMainData = null;
+      let cachedSprintData = null;
 
       // Master Initialization
       async function init() {
-        let tournaments = TOURNAMENTS_FALLBACK;
+        let mainTournaments = TOURNAMENTS_FALLBACK;
+        let sprintTournaments = SPRINTS_FALLBACK;
 
-        // Try calling backend function if available
+        // Call backend function getTournaments
         if (window.FORTEX_AUTH && typeof FORTEX_AUTH.callFunction === 'function') {
           try {
             const tourneyRes = await FORTEX_AUTH.callFunction('getTournaments', {});
             if (tourneyRes && tourneyRes.success && Array.isArray(tourneyRes.tournaments) && tourneyRes.tournaments.length > 0) {
-              tournaments = tourneyRes.tournaments;
+              const allT = tourneyRes.tournaments;
+              const mainFiltered = allT.filter(t => t.type !== 'sprint');
+              const sprintFiltered = allT.filter(t => t.type === 'sprint');
+
+              if (mainFiltered.length > 0) mainTournaments = mainFiltered;
+              if (sprintFiltered.length > 0) sprintTournaments = sprintFiltered;
             }
           } catch (e) {
-            console.log('Using default tournament roster:', e);
+            console.log('Using default tournament dataset:', e);
           }
         }
 
-        renderTabs(tournaments);
-        await selectTournament(activeTournamentId);
+        renderMainTabs(mainTournaments);
+        renderSprintTabs(sprintTournaments);
+
+        await loadMainTournament(activeMainTournamentId);
+        await loadSprintTournament(activeSprintTournamentId);
       }
 
-      // Render Tabs & Dropdown Options
-      function renderTabs(tournaments) {
+      // Render Main Championship Tabs
+      function renderMainTabs(tournaments) {
         const tabsContainer = document.getElementById('tournament-tabs');
         const selectContainer = document.getElementById('tournament-select');
         if (!tabsContainer || !selectContainer) return;
@@ -705,7 +967,7 @@
         tabsContainer.innerHTML = tournaments.map(t => {
           const isSealed = t.status === 'sealed' || t.revealed === false;
           return `
-            <button class="tournament-tab ${t.id === activeTournamentId ? 'active' : ''}" data-id="${t.id}">
+            <button class="tournament-tab ${t.id === activeMainTournamentId ? 'active' : ''}" data-id="${t.id}">
               <span>${isSealed ? '🔒' : '🏆'}</span>
               <span>${t.name}</span>
               <span class="badge" style="font-size: 11px; padding: 2px 8px; ${isSealed ? 'background: rgba(255,184,41,0.2); color:#FFB829;' : 'background: rgba(128,82,255,0.2); color:#8052FF;'}">
@@ -718,190 +980,376 @@
         selectContainer.innerHTML = tournaments.map(t => {
           const isSealed = t.status === 'sealed' || t.revealed === false;
           return `
-            <option value="${t.id}" ${t.id === activeTournamentId ? 'selected' : ''}>
+            <option value="${t.id}" ${t.id === activeMainTournamentId ? 'selected' : ''}>
               ${isSealed ? '🔒 [SEALED]' : '🏆 [REVEALED]'} ${t.name}
             </option>
           `;
         }).join('');
 
-        // Tab click listeners
         tabsContainer.querySelectorAll('.tournament-tab').forEach(btn => {
           btn.addEventListener('click', () => {
             const id = btn.getAttribute('data-id');
-            selectTournament(id);
+            loadMainTournament(id);
           });
         });
 
-        // Mobile select listener
         selectContainer.addEventListener('change', (e) => {
-          selectTournament(e.target.value);
+          loadMainTournament(e.target.value);
         });
       }
 
-      // Select & Load Tournament Leaderboard
-      async function selectTournament(tournamentId) {
-        activeTournamentId = tournamentId;
+      // Render Sprint Tabs
+      function renderSprintTabs(tournaments) {
+        const tabsContainer = document.getElementById('sprint-tabs');
+        if (!tabsContainer) return;
 
-        // Update active styling
-        document.querySelectorAll('.tournament-tab').forEach(btn => {
+        tabsContainer.innerHTML = tournaments.map(t => {
+          const isSealed = t.status === 'sealed' || t.revealed === false;
+          return `
+            <button class="tournament-tab ${t.id === activeSprintTournamentId ? 'active' : ''}" data-sprint-id="${t.id}" style="border-color: rgba(212, 175, 55, 0.3);">
+              <span>⚡</span>
+              <span>${t.name}</span>
+              <span class="badge" style="font-size: 11px; padding: 2px 8px; ${isSealed ? 'background: rgba(212,175,55,0.2); color:#FFD700;' : 'background: rgba(34,197,94,0.2); color:#22C55E;'}">
+                ${isSealed ? 'LIVE / SEALED' : 'REVEALED'}
+              </span>
+            </button>
+          `;
+        }).join('');
+
+        tabsContainer.querySelectorAll('[data-sprint-id]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-sprint-id');
+            loadSprintTournament(id);
+          });
+        });
+      }
+
+      // Load Main Championship Tournament Leaderboard
+      async function loadMainTournament(tournamentId) {
+        activeMainTournamentId = tournamentId;
+
+        // Highlight tab
+        document.querySelectorAll('#tournament-tabs .tournament-tab').forEach(btn => {
           if (btn.getAttribute('data-id') === tournamentId) btn.classList.add('active');
           else btn.classList.remove('active');
         });
 
-        const selectEl = document.getElementById('tournament-select');
-        if (selectEl) selectEl.value = tournamentId;
-
-        // Render loading state immediately
-        renderLoadingState();
+        renderLoading('leaderboard-container');
 
         let data = null;
-
-        // Call backend function getLeaderboard with tournament_id
         if (window.FORTEX_AUTH && typeof FORTEX_AUTH.callFunction === 'function') {
           try {
             const res = await FORTEX_AUTH.callFunction('getLeaderboard', { tournament_id: tournamentId });
-            if (res && res.success) {
-              data = res;
-            }
-          } catch (err) {
-            console.warn('Backend call failed, loading fallback dataset:', err);
+            if (res && res.success) data = res;
+          } catch (e) {
+            console.warn('Backend call error, using fallback:', e);
           }
         }
 
-        // Use fallback if response empty or errored
         if (!data || !data.success) {
-          data = LEADERBOARD_FALLBACKS[tournamentId] || null;
+          data = LEADERBOARD_FALLBACKS[tournamentId] || LEADERBOARD_FALLBACKS['summer_2026'];
         }
 
-        // Render appropriate state
-        if (!data) {
-          renderEmptyState();
-        } else if (data.revealed === false) {
-          renderSealedState(data);
-        } else if (data.revealed === true) {
-          if (!data.leaderboard || data.leaderboard.length === 0) {
-            renderEmptyState();
-          } else {
-            renderRevealedState(data);
-          }
-        } else {
-          renderEmptyState();
-        }
+        cachedMainData = data;
+
+        // Render Features
+        renderTimeline('tournament-timeline-container', data);
+        renderTierBar('tier-selector-container', 'main', mainActiveTier);
+        renderMainLeaderboard();
+        renderPrizeVisual('prize-distribution-container', data);
       }
 
-      // Loading state HTML
-      function renderLoadingState() {
-        if (countdownTimerId) clearInterval(countdownTimerId);
-        const container = document.getElementById('leaderboard-container');
+      // Load Sprint Tournament
+      async function loadSprintTournament(sprintId) {
+        activeSprintTournamentId = sprintId;
+
+        document.querySelectorAll('#sprint-tabs .tournament-tab').forEach(btn => {
+          if (btn.getAttribute('data-sprint-id') === sprintId) btn.classList.add('active');
+          else btn.classList.remove('active');
+        });
+
+        renderLoading('sprint-leaderboard-container');
+
+        let data = null;
+        if (window.FORTEX_AUTH && typeof FORTEX_AUTH.callFunction === 'function') {
+          try {
+            const res = await FORTEX_AUTH.callFunction('getLeaderboard', { tournament_id: sprintId });
+            if (res && res.success) data = res;
+          } catch (e) {
+            console.warn('Backend call error, using fallback:', e);
+          }
+        }
+
+        if (!data || !data.success) {
+          data = LEADERBOARD_FALLBACKS[sprintId] || LEADERBOARD_FALLBACKS['sprint_week_32'];
+        }
+
+        cachedSprintData = data;
+
+        // Update Sprint Live Status Badge
+        const statusBadge = document.getElementById('sprint-live-status-badge');
+        if (statusBadge) {
+          if (data.revealed === false) {
+            statusBadge.innerHTML = `<span class="pulsing-green-dot"></span> LIVE NOW`;
+            statusBadge.style.display = 'inline-flex';
+          } else {
+            statusBadge.innerHTML = `✓ UNLOCKED`;
+            statusBadge.style.borderColor = '#8052FF';
+            statusBadge.style.color = '#8052FF';
+            statusBadge.style.background = 'rgba(128,82,255,0.15)';
+          }
+        }
+
+        renderTimeline('sprint-timeline-container', data, true);
+        renderTierBar('sprint-tier-container', 'sprint', sprintActiveTier);
+        renderSprintLeaderboard();
+        renderPrizeVisual('sprint-prize-container', data, true);
+      }
+
+      // FEATURE 2: TOURNAMENT STATUS TIMELINE RENDERER
+      function renderTimeline(containerId, data, isSprint = false) {
+        const container = document.getElementById(containerId);
         if (!container) return;
 
+        const isRevealed = data.revealed === true || data.status === 'revealed';
+
+        // Phase definitions
+        const phases = [
+          { key: 'registration', name: 'Registration', dates: 'Aug 01 - Aug 09' },
+          { key: 'active', name: 'Active Phase', dates: 'Aug 10 - Aug 20' },
+          { key: 'verification', name: 'Verification', dates: 'Aug 21 - Aug 22' },
+          { key: 'reveal', name: 'Reveal Day', dates: new Date(data.reveal_date || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }
+        ];
+
+        let progressPercent = 33;
+        let activeIndex = 1; // 0: reg, 1: active, 2: verify, 3: reveal
+
+        if (isRevealed) {
+          progressPercent = 100;
+          activeIndex = 3;
+        } else if (data.status === 'registration') {
+          progressPercent = 0;
+          activeIndex = 0;
+        } else if (data.status === 'verification') {
+          progressPercent = 66;
+          activeIndex = 2;
+        }
+
         container.innerHTML = `
-          <div style="border: 1px solid rgba(128, 82, 255, 0.2); border-radius: 24px; padding: 60px 24px; text-align: center; background: rgba(10, 11, 16, 0.6);">
-            <div class="spinner-ring"></div>
-            <div style="font-size: 20px; font-weight: 400; color: var(--color-bone-white); margin-bottom: 8px;">
-              Connecting to Results Vault...
+          <div class="timeline-wrapper" style="${isSprint ? 'border-color: rgba(212,175,55,0.25); background: rgba(10,11,16,0.9);' : ''}">
+            <div class="timeline-title-row">
+              <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: ${isSprint ? '#FFD700' : 'var(--color-electric-iris, #8052ff)'};">
+                ${isSprint ? '⚡ SPRINT TIMELINE' : 'TOURNAMENT PHASE TIMELINE'}
+              </div>
+              <div style="font-size: 13px; color: #94A3B8;">
+                Current Phase: <strong style="color: #FFF;">${isRevealed ? '✓ Reveal & Payout Unlocked' : (activeIndex === 1 ? '🟢 Live Active Trading' : '🔒 Verification Vault')}</strong>
+              </div>
             </div>
-            <p style="font-size: 14px; color: var(--color-ash-gray);">
-              Checking tournament authorization and encryption seal
-            </p>
+
+            <div class="timeline-track-container">
+              <div class="timeline-line-bg"></div>
+              <div class="timeline-line-progress" style="width: ${progressPercent}%;"></div>
+
+              ${phases.map((p, idx) => {
+                let nodeClass = 'gray-dot';
+                let content = idx + 1;
+
+                if (isRevealed) {
+                  nodeClass = 'completed';
+                  content = '✓';
+                } else if (idx < activeIndex) {
+                  nodeClass = 'completed';
+                  content = '✓';
+                } else if (idx === activeIndex) {
+                  if (p.key === 'active') nodeClass = 'green-active';
+                  else if (p.key === 'verification') nodeClass = 'yellow-dot';
+                  else nodeClass = 'gold-reveal';
+                } else if (p.key === 'reveal' && isRevealed) {
+                  content = '✓';
+                  nodeClass = 'completed';
+                }
+
+                return `
+                  <div class="timeline-step">
+                    <div class="step-dot ${nodeClass}">
+                      ${content}
+                    </div>
+                    <div class="step-name">${p.name}</div>
+                    <div class="step-dates">${p.dates}</div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
           </div>
         `;
       }
 
-      // Sealed state HTML
-      function renderSealedState(data) {
-        if (countdownTimerId) clearInterval(countdownTimerId);
-        const container = document.getElementById('leaderboard-container');
+      // FEATURE 1: TIER FILTER BAR RENDERER
+      function renderTierBar(containerId, scope, activeTier) {
+        const container = document.getElementById(containerId);
         if (!container) return;
 
+        const loggedInUser = window.FORTEX_AUTH ? FORTEX_AUTH.isLoggedIn() : null;
+        const userTierBadgeHtml = loggedInUser 
+          ? `<span class="your-tier-badge">⚡ Your Tier: Pro</span>` 
+          : `<span style="font-size: 12px; color: #94A3B8; font-style: italic;">Sign in to see your active tier badge</span>`;
+
+        container.innerHTML = `
+          <div class="tier-selector-bar">
+            <div>
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #94A3B8; margin-bottom: 6px;">
+                LEADERBOARD ACCOUNT TIER FILTER
+              </div>
+              <div class="tier-tabs-container">
+                <button class="tier-tab tier-all ${activeTier === 'all' ? 'active' : ''}" data-scope="${scope}" data-tier="all">
+                  <span>🌐</span> All Tiers
+                </button>
+                <button class="tier-tab tier-rookie ${activeTier === 'rookie' ? 'active' : ''}" data-scope="${scope}" data-tier="rookie">
+                  <span>🛡️</span> Rookie (&lt; $1,000)
+                </button>
+                <button class="tier-tab tier-pro ${activeTier === 'pro' ? 'active' : ''}" data-scope="${scope}" data-tier="pro">
+                  <span>⚡</span> Pro ($1k - $10k)
+                </button>
+                <button class="tier-tab tier-master ${activeTier === 'master' ? 'active' : ''}" data-scope="${scope}" data-tier="master">
+                  <span>👑</span> Master ($10k+)
+                </button>
+              </div>
+            </div>
+
+            <div style="text-align: right;">
+              ${userTierBadgeHtml}
+            </div>
+          </div>
+        `;
+
+        container.querySelectorAll('[data-tier]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const tier = btn.getAttribute('data-tier');
+            if (scope === 'main') {
+              mainActiveTier = tier;
+              renderTierBar('tier-selector-container', 'main', mainActiveTier);
+              renderMainLeaderboard();
+            } else {
+              sprintActiveTier = tier;
+              renderTierBar('sprint-tier-container', 'sprint', sprintActiveTier);
+              renderSprintLeaderboard();
+            }
+          });
+        });
+      }
+
+      // Filter Leaderboard by Starting Balance Tier
+      function filterLeaderboardByTier(leaderboard, tier) {
+        if (!leaderboard || !Array.isArray(leaderboard)) return [];
+        if (tier === 'all') return leaderboard;
+
+        return leaderboard.filter(item => {
+          const balance = parseFloat(item.starting_balance || 0);
+          if (tier === 'rookie') return balance < 1000;
+          if (tier === 'pro') return balance >= 1000 && balance <= 10000;
+          if (tier === 'master') return balance > 10000;
+          return true;
+        });
+      }
+
+      // Render Main Leaderboard Output
+      function renderMainLeaderboard() {
+        const container = document.getElementById('leaderboard-container');
+        if (!container || !cachedMainData) return;
+
+        if (mainCountdownTimer) clearInterval(mainCountdownTimer);
+
+        if (cachedMainData.revealed === false) {
+          renderSealedState(container, cachedMainData, 'main');
+        } else {
+          renderRevealedState(container, cachedMainData, mainActiveTier, 'main');
+        }
+      }
+
+      // Render Sprint Leaderboard Output
+      function renderSprintLeaderboard() {
+        const container = document.getElementById('sprint-leaderboard-container');
+        if (!container || !cachedSprintData) return;
+
+        if (sprintCountdownTimer) clearInterval(sprintCountdownTimer);
+
+        if (cachedSprintData.revealed === false) {
+          renderSealedState(container, cachedSprintData, 'sprint');
+        } else {
+          renderRevealedState(container, cachedSprintData, sprintActiveTier, 'sprint');
+        }
+      }
+
+      // FEATURE 5: SEALED STATE OVERLAY
+      function renderSealedState(container, data, scope) {
         const revealDateIso = data.reveal_date || '2026-08-23T23:59:59.000Z';
-        const tourneyName = data.tournament_name || 'Summer Showdown 2026';
+        const formattedDate = new Date(revealDateIso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
         container.innerHTML = `
           <div class="sealed-banner-card">
             <div style="text-align: center; max-width: 780px; margin: 0 auto;">
-              <!-- Vault Lock Icon Visual -->
-              <div style="margin-bottom: var(--spacing-24); display: inline-flex; align-items: center; justify-content: center; width: 88px; height: 88px; border-radius: 50%; background: rgba(128, 82, 255, 0.12); border: 1px solid rgba(128, 82, 255, 0.3); box-shadow: 0 0 30px rgba(128, 82, 255, 0.2);">
-                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#8052ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Gold Lock Icon -->
+              <div class="gold-lock-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                   <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                  <circle cx="12" cy="16" r="1.5" fill="#8052ff"></circle>
+                  <circle cx="12" cy="16" r="1.5" fill="#FFD700"></circle>
                 </svg>
               </div>
 
-              <!-- Vault Sealed Badge -->
-              <div style="margin-bottom: var(--spacing-18);">
-                <span class="rex-badge" style="background: rgba(255, 184, 41, 0.15); border-color: #FFB829; color: #FFB829; font-size: 14px; padding: 6px 18px;">
+              <div style="margin-bottom: 16px;">
+                <span class="rex-badge" style="background: rgba(212, 175, 55, 0.2); border-color: #D4AF37; color: #FFD700; font-size: 13px; padding: 6px 18px;">
                   🔒 RESULTS SEALED IN VAULT
                 </span>
               </div>
 
-              <h2 style="font-size: clamp(32px, 5vw, 56px); font-weight: 400; letter-spacing: -0.04em; color: var(--color-bone-white); margin-bottom: var(--spacing-18); line-height: 1.1;">
-                Nobody Knows Where They Stand
+              <h2 style="font-size: clamp(30px, 5vw, 52px); font-weight: 400; letter-spacing: -0.03em; color: #FFFFFF; margin-bottom: 16px; line-height: 1.1;">
+                Results Sealed Until ${formattedDate}
               </h2>
 
-              <p class="body-text-muted" style="max-width: 640px; margin: 0 auto var(--spacing-36); font-size: 18px; line-height: 1.6;">
-                Fortex FX leaderboards are strictly hidden during live tournament play. No live ranks, no position feedback, no psychological mind games. Trade your strategy with total focus—the truth will be revealed when the vault opens.
+              <p class="body-text-muted" style="max-width: 640px; margin: 0 auto 32px; font-size: 17px; line-height: 1.6; color: #CBD5E1;">
+                Fortex FX leaderboards are strictly hidden during live tournament play. No position leaks, zero psychological distortion. Trade your edge with 100% focus—the standings unseal live on reveal day.
               </p>
 
-              <!-- Reveal Date Countdown Box -->
-              <div style="border: 1px solid rgba(128, 82, 255, 0.25); background: rgba(0, 0, 0, 0.5); border-radius: 20px; padding: 24px; margin-bottom: var(--spacing-36); display: inline-block; min-width: 280px;">
-                <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-ash-gray); margin-bottom: 8px;">
-                  OFFICIAL UNVEILING COUNTDOWN
+              <!-- Countdown Timer Box -->
+              <div style="border: 1px solid rgba(212, 175, 55, 0.35); background: rgba(0, 0, 0, 0.6); border-radius: 20px; padding: 24px; margin-bottom: 32px; display: inline-block; min-width: 320px; box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);">
+                <div style="font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #94A3B8; margin-bottom: 8px;">
+                  OFFICIAL UNSEALING COUNTDOWN
                 </div>
-                <div id="sealed-countdown" class="countdown-box">
+                <div id="${scope}-sealed-countdown" class="countdown-box">
                   --d : --h : --m : --s
                 </div>
-                <div style="font-size: 13px; color: var(--color-silver-mist); margin-top: 8px;">
-                  Scheduled Reveal Date: <span style="color: var(--color-saffron-spark); font-weight: 600;">${new Date(revealDateIso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                <div style="font-size: 13px; color: #94A3B8; margin-top: 10px;">
+                  Reveal Target: <span style="color: #FFD700; font-weight: 600;">${formattedDate}</span>
                 </div>
               </div>
 
-              <!-- Anticipation Message -->
-              <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: var(--spacing-24); margin-top: var(--spacing-12);">
-                <p style="font-size: 16px; color: var(--color-saffron-spark); font-style: italic; margin-bottom: 0;">
-                  "The surprise is worth the wait. All trader positions, final equity, and REX prizes unlock simultaneously on reveal day."
+              <!-- Hype Footer Quote -->
+              <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 20px; margin-top: 10px;">
+                <p style="font-size: 15px; color: #FFB829; font-style: italic; margin-bottom: 0;">
+                  "No rank anxiety. All position ROI, final equity, and REX rewards drop simultaneously when the clock strikes zero."
                 </p>
-              </div>
-            </div>
-
-            <!-- Curiosity Gap Psychology Cards -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--spacing-24); margin-top: var(--spacing-60);">
-              <div class="float-item" style="border-color: rgba(128, 82, 255, 0.2);">
-                <div class="float-item-label" style="color: var(--color-electric-iris);">01 · ABSOLUTE SECRECY</div>
-                <div style="font-size: 20px; font-weight: 400; color: var(--color-bone-white); margin-bottom: 8px;">No Position Leakage</div>
-                <p class="float-item-body">Zero live leaderboards prevent competitors from targeting or copying your positions.</p>
-              </div>
-              <div class="float-item" style="border-color: rgba(128, 82, 255, 0.2);">
-                <div class="float-item-label" style="color: var(--color-electric-iris);">02 · PURE FOCUS</div>
-                <div style="font-size: 20px; font-weight: 400; color: var(--color-bone-white); margin-bottom: 8px;">Zero Rank Anxiety</div>
-                <p class="float-item-body">Execute your trading plan cleanly without chasing high-risk trades out of ranking panic.</p>
-              </div>
-              <div class="float-item" style="border-color: rgba(128, 82, 255, 0.2);">
-                <div class="float-item-label" style="color: var(--color-electric-iris);">03 · THE BIG UNVEIL</div>
-                <div style="font-size: 20px; font-weight: 400; color: var(--color-bone-white); margin-bottom: 8px;">Eruptive Reveal Day</div>
-                <p class="float-item-body">Experience the ultimate thrill when the clock strikes zero and the winner list drops live.</p>
               </div>
             </div>
           </div>
         `;
 
-        startSealedCountdown(revealDateIso);
+        startCountdown(`${scope}-sealed-countdown`, revealDateIso, scope);
       }
 
-      // Countdown Timer Function
-      function startSealedCountdown(revealDateIso) {
-        const el = document.getElementById('sealed-countdown');
+      // Ticking Countdown Logic
+      function startCountdown(elementId, targetIso, scope) {
+        const el = document.getElementById(elementId);
         if (!el) return;
 
-        const target = new Date(revealDateIso).getTime();
+        const target = new Date(targetIso).getTime();
 
         function update() {
           const now = Date.now();
           const diff = target - now;
 
           if (diff <= 0) {
-            el.textContent = 'REVEALING NOW';
+            el.textContent = 'UNSEALING NOW';
             return;
           }
 
@@ -914,30 +1362,29 @@
         }
 
         update();
-        countdownTimerId = setInterval(update, 1000);
+        const timer = setInterval(update, 1000);
+        if (scope === 'main') mainCountdownTimer = timer;
+        else sprintCountdownTimer = timer;
       }
 
-      // Revealed state HTML
-      function renderRevealedState(data) {
-        if (countdownTimerId) clearInterval(countdownTimerId);
-        const container = document.getElementById('leaderboard-container');
-        if (!container) return;
-
+      // Render Revealed Leaderboard State
+      function renderRevealedState(container, data, tierFilter, scope) {
         const tourneyName = data.tournament_name || 'Tournament Results';
         const prizePool = data.prize_pool_rex ? `${data.prize_pool_rex.toLocaleString()} REX` : '$40,000 in REX';
         const revealedDate = data.revealed_date || 'Recently';
-        const leaderboard = data.leaderboard || [];
+        const fullList = data.leaderboard || [];
 
-        const top3 = leaderboard.slice(0, 3);
+        const filteredList = filterLeaderboardByTier(fullList, tierFilter);
+
+        const top3 = filteredList.slice(0, 3);
         const rank1 = top3[0] || null;
         const rank2 = top3[1] || null;
         const rank3 = top3[2] || null;
 
         let podiumHtml = '';
-        if (top3.length > 0) {
+        if (filteredList.length > 0) {
           podiumHtml = `
             <div class="podium-grid">
-              <!-- 1st Place - Gold -->
               ${rank1 ? `
               <div class="podium-card podium-gold">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
@@ -946,20 +1393,19 @@
                   </span>
                   <div style="font-size: 28px;">🥇</div>
                 </div>
-                <div style="font-size: 28px; font-weight: 600; color: var(--color-bone-white); margin-bottom: 6px;">
+                <div style="font-size: 26px; font-weight: 600; color: #FFF; margin-bottom: 6px;">
                   ${rank1.username}
                 </div>
-                <div class="roi-positive" style="font-size: 32px; font-weight: 700; margin-bottom: 12px;">
+                <div class="roi-positive" style="font-size: 30px; font-weight: 700; margin-bottom: 12px;">
                   +${rank1.roi}% ROI
                 </div>
-                <div style="display: flex; justify-content: space-between; font-size: 14px; border-top: 1px solid rgba(212,175,55,0.2); padding-top: 12px; margin-top: 12px;">
-                  <span style="color: var(--color-silver-mist);">Final Equity: <strong style="color:#fff;">$${(rank1.final_equity || 0).toLocaleString()}</strong></span>
+                <div style="display: flex; justify-content: space-between; font-size: 13px; border-top: 1px solid rgba(212,175,55,0.2); padding-top: 12px; margin-top: 12px;">
+                  <span style="color: #94A3B8;">Equity: <strong style="color:#fff;">$${(rank1.final_equity || 0).toLocaleString()}</strong></span>
                   <span class="rex-badge">💰 ${(rank1.prize_won_rex || 0).toLocaleString()} REX</span>
                 </div>
               </div>
               ` : ''}
 
-              <!-- 2nd Place - Silver -->
               ${rank2 ? `
               <div class="podium-card podium-silver">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
@@ -968,20 +1414,19 @@
                   </span>
                   <div style="font-size: 28px;">🥈</div>
                 </div>
-                <div style="font-size: 24px; font-weight: 600; color: var(--color-bone-white); margin-bottom: 6px;">
+                <div style="font-size: 24px; font-weight: 600; color: #FFF; margin-bottom: 6px;">
                   ${rank2.username}
                 </div>
                 <div class="roi-positive" style="font-size: 28px; font-weight: 700; margin-bottom: 12px;">
                   +${rank2.roi}% ROI
                 </div>
-                <div style="display: flex; justify-content: space-between; font-size: 14px; border-top: 1px solid rgba(192,192,192,0.2); padding-top: 12px; margin-top: 12px;">
-                  <span style="color: var(--color-silver-mist);">Final Equity: <strong style="color:#fff;">$${(rank2.final_equity || 0).toLocaleString()}</strong></span>
+                <div style="display: flex; justify-content: space-between; font-size: 13px; border-top: 1px solid rgba(192,192,192,0.2); padding-top: 12px; margin-top: 12px;">
+                  <span style="color: #94A3B8;">Equity: <strong style="color:#fff;">$${(rank2.final_equity || 0).toLocaleString()}</strong></span>
                   <span class="rex-badge">💰 ${(rank2.prize_won_rex || 0).toLocaleString()} REX</span>
                 </div>
               </div>
               ` : ''}
 
-              <!-- 3rd Place - Bronze -->
               ${rank3 ? `
               <div class="podium-card podium-bronze">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
@@ -990,14 +1435,14 @@
                   </span>
                   <div style="font-size: 28px;">🥉</div>
                 </div>
-                <div style="font-size: 24px; font-weight: 600; color: var(--color-bone-white); margin-bottom: 6px;">
+                <div style="font-size: 24px; font-weight: 600; color: #FFF; margin-bottom: 6px;">
                   ${rank3.username}
                 </div>
                 <div class="roi-positive" style="font-size: 28px; font-weight: 700; margin-bottom: 12px;">
                   +${rank3.roi}% ROI
                 </div>
-                <div style="display: flex; justify-content: space-between; font-size: 14px; border-top: 1px solid rgba(205,127,50,0.2); padding-top: 12px; margin-top: 12px;">
-                  <span style="color: var(--color-silver-mist);">Final Equity: <strong style="color:#fff;">$${(rank3.final_equity || 0).toLocaleString()}</strong></span>
+                <div style="display: flex; justify-content: space-between; font-size: 13px; border-top: 1px solid rgba(205,127,50,0.2); padding-top: 12px; margin-top: 12px;">
+                  <span style="color: #94A3B8;">Equity: <strong style="color:#fff;">$${(rank3.final_equity || 0).toLocaleString()}</strong></span>
                   <span class="rex-badge">💰 ${(rank3.prize_won_rex || 0).toLocaleString()} REX</span>
                 </div>
               </div>
@@ -1007,53 +1452,53 @@
         }
 
         container.innerHTML = `
-          <div style="margin-bottom: var(--spacing-36);">
-            <!-- Revealed Header & Timestamp -->
-            <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 18px; margin-bottom: var(--spacing-24);">
+          <div style="margin-bottom: 28px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 18px; margin-bottom: 20px;">
               <div>
                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
                   <span class="badge" style="background: rgba(34,197,94,0.15); border: 1px solid #22c55e; color:#22c55e;">
                     ✓ RESULTS UNLOCKED
                   </span>
-                  <span style="font-size: 14px; color: var(--color-ash-gray);">
-                    Revealed on <strong style="color: var(--color-bone-white);">${revealedDate}</strong>
+                  <span style="font-size: 14px; color: #94A3B8;">
+                    Revealed on <strong style="color: #FFF;">${revealedDate}</strong>
                   </span>
                 </div>
-                <h2 style="font-size: clamp(32px, 4vw, 52px); font-weight: 400; color: var(--color-bone-white); margin: 0;">
+                <h2 style="font-size: clamp(28px, 4vw, 48px); font-weight: 400; color: #FFF; margin: 0;">
                   ${tourneyName}
                 </h2>
               </div>
               <div style="text-align: right;">
-                <div style="font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--color-ash-gray);">Total Distributed Pool</div>
-                <div style="font-size: 32px; font-weight: 600; color: var(--color-saffron-spark);">${prizePool}</div>
+                <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #94A3B8;">Distributed Prize Pool</div>
+                <div style="font-size: 30px; font-weight: 700; color: #FFD700;">${prizePool}</div>
               </div>
             </div>
 
             <!-- Top 3 Podium Highlights -->
             ${podiumHtml}
 
-            <!-- Ranked Table Card -->
-            <div style="border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 28px; background: rgba(10, 11, 16, 0.8);">
-              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
-                <div style="font-size: 20px; font-weight: 400; color: var(--color-bone-white);">
-                  Full Tournament Standings (${leaderboard.length} Traders)
+            <!-- Ranked Standings Table -->
+            <div style="border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 24px; background: rgba(10, 11, 16, 0.85);">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 20px;">
+                <div style="font-size: 18px; font-weight: 500; color: #FFF;">
+                  Standings Table (${filteredList.length} Traders ${tierFilter !== 'all' ? `· ${tierFilter.toUpperCase()} TIER` : ''})
                 </div>
-                <input type="text" id="trader-search-input" class="search-input-box" placeholder="🔍 Search trader username..." />
+                <input type="text" id="${scope}-search-input" class="search-input-box" placeholder="🔍 Search trader username..." />
               </div>
 
               <div style="overflow-x: auto;">
                 <table class="data-table">
                   <thead>
                     <tr>
-                      <th style="width: 90px;">Rank</th>
+                      <th style="width: 80px;">Rank</th>
                       <th>Trader Username</th>
+                      <th>Starting Tier</th>
                       <th>ROI (%)</th>
                       <th>Final Equity</th>
                       <th style="text-align: right;">Prize Won</th>
                     </tr>
                   </thead>
-                  <tbody id="leaderboard-tbody">
-                    ${renderTableRows(leaderboard)}
+                  <tbody id="${scope}-tbody">
+                    ${renderTableRows(filteredList)}
                   </tbody>
                 </table>
               </div>
@@ -1061,28 +1506,27 @@
           </div>
         `;
 
-        // Search filter input event
-        const searchInput = document.getElementById('trader-search-input');
+        const searchInput = document.getElementById(`${scope}-search-input`);
         if (searchInput) {
           searchInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase().trim();
-            const filtered = leaderboard.filter(item => 
-              item.username.toLowerCase().includes(query) || 
+            const searched = filteredList.filter(item =>
+              item.username.toLowerCase().includes(query) ||
               String(item.rank).includes(query)
             );
-            const tbody = document.getElementById('leaderboard-tbody');
-            if (tbody) tbody.innerHTML = renderTableRows(filtered);
+            const tbody = document.getElementById(`${scope}-tbody`);
+            if (tbody) tbody.innerHTML = renderTableRows(searched);
           });
         }
       }
 
-      // Render Table Row Elements
+      // Render Table Rows
       function renderTableRows(rows) {
         if (!rows || rows.length === 0) {
           return `
             <tr>
-              <td colspan="5" style="text-align: center; padding: 36px; color: var(--color-ash-gray);">
-                No traders match your search query.
+              <td colspan="6" style="text-align: center; padding: 36px; color: #94A3B8;">
+                No traders match the selected tier or search criteria.
               </td>
             </tr>
           `;
@@ -1103,10 +1547,18 @@
           const roiFormatted = (roiVal >= 0 ? `+${roiVal.toFixed(1)}%` : `${roiVal.toFixed(1)}%`);
           const roiClass = roiVal >= 0 ? 'roi-positive' : 'roi-negative';
 
+          const balance = parseFloat(item.starting_balance || 0);
+          let tierBadge = `<span style="font-size: 11px; padding: 2px 8px; border-radius: 6px; background: rgba(148,163,184,0.15); color: #94A3B8; border: 1px solid #94A3B8;">Rookie</span>`;
+          if (balance >= 1000 && balance <= 10000) {
+            tierBadge = `<span style="font-size: 11px; padding: 2px 8px; border-radius: 6px; background: rgba(212,175,55,0.15); color: #FFD700; border: 1px solid #D4AF37;">Pro</span>`;
+          } else if (balance > 10000) {
+            tierBadge = `<span style="font-size: 11px; padding: 2px 8px; border-radius: 6px; background: rgba(128,82,255,0.15); color: #C084FC; border: 1px solid #8052FF;">Master</span>`;
+          }
+
           const equityFormatted = `$${(item.final_equity || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
           const prizeFormatted = item.prize_won_rex && item.prize_won_rex > 0 
             ? `<span class="rex-badge">💰 ${item.prize_won_rex.toLocaleString()} REX</span>` 
-            : '<span style="color: var(--color-ash-gray); font-size: 13px;">—</span>';
+            : '<span style="color: #64748B; font-size: 13px;">—</span>';
 
           const rowStyle = isTop1 
             ? 'background: rgba(212, 175, 55, 0.05);' 
@@ -1115,16 +1567,19 @@
 
           return `
             <tr style="${rowStyle}">
-              <td class="${rankClass}" style="font-weight: 600; font-size: 16px;">
+              <td class="${rankClass}" style="font-weight: 600; font-size: 15px;">
                 ${rankDisplay}
               </td>
-              <td style="font-weight: 400; color: var(--color-bone-white);">
+              <td style="font-weight: 500; color: #FFF;">
                 ${item.username}
               </td>
-              <td class="${roiClass}" style="font-size: 16px;">
+              <td>
+                ${tierBadge}
+              </td>
+              <td class="${roiClass}" style="font-size: 15px;">
                 ${roiFormatted}
               </td>
-              <td style="color: var(--color-silver-mist); font-variant-numeric: tabular-nums;">
+              <td style="color: #94A3B8; font-variant-numeric: tabular-nums;">
                 ${equityFormatted}
               </td>
               <td style="text-align: right;">
@@ -1135,43 +1590,106 @@
         }).join('');
       }
 
-      // Empty State HTML
-      function renderEmptyState() {
-        if (countdownTimerId) clearInterval(countdownTimerId);
-        const container = document.getElementById('leaderboard-container');
+      // FEATURE 4: PRIZE DISTRIBUTION VISUAL RENDERER
+      function renderPrizeVisual(containerId, data, isSprint = false) {
+        const container = document.getElementById(containerId);
         if (!container) return;
 
+        const totalRex = data.prize_pool_rex || (isSprint ? 15000 : 50000);
+
+        const rex1st = Math.round(totalRex * 0.50);
+        const rex2nd = Math.round(totalRex * 0.30);
+        const rex3rd = Math.round(totalRex * 0.20);
+
         container.innerHTML = `
-          <div style="border: 1px dashed rgba(128, 82, 255, 0.3); border-radius: 24px; padding: 80px 24px; text-align: center; background: rgba(10, 11, 16, 0.4);">
-            <div style="margin-bottom: 20px; font-size: 48px;">✨</div>
-            <div class="badge" style="background: rgba(128,82,255,0.15); color:#8052FF; border:1px solid #8052FF; margin-bottom: 16px; font-size: 13px; padding: 6px 16px;">
-              UNTOUCHED VAULT
+          <div class="prize-distribution-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: ${isSprint ? '#FFD700' : '#8052FF'};">
+                  PRIZE POOL BREAKDOWN VISUAL
+                </div>
+                <h3 style="font-size: 20px; font-weight: 600; color: #FFF; margin: 4px 0 0 0;">
+                  Official ${isSprint ? 'Sprint' : 'Championship'} Allocation (50% / 30% / 20%)
+                </h3>
+              </div>
+              <div class="rex-badge" style="font-size: 14px; padding: 6px 16px;">
+                Total Pool: ${totalRex.toLocaleString()} REX
+              </div>
             </div>
-            <h3 style="font-size: 32px; font-weight: 400; color: var(--color-bone-white); margin-bottom: 16px;">
-              No tournaments have been revealed yet. The first reveal will be epic.
-            </h3>
-            <p style="max-width: 520px; margin: 0 auto 28px; color: var(--color-silver-mist); font-size: 16px; line-height: 1.6;">
-              When an active competition finishes and the vault seal is broken by the administrator, the entire ranking table will instantly appear right here.
-            </p>
-            <a href="signin.html" class="btn-primary">Compete in Current Tournament</a>
+
+            <!-- Segmented Bar Visual -->
+            <div class="prize-split-bar">
+              <div class="prize-split-1st">1ST PLACE (50%)</div>
+              <div class="prize-split-2nd">2ND (30%)</div>
+              <div class="prize-split-3rd">3RD (20%)</div>
+            </div>
+
+            <!-- Detailed Cards Grid -->
+            <div class="prize-cards-grid">
+              <!-- 1st Place Card -->
+              <div class="prize-dist-card gold-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <span style="font-size: 12px; font-weight: 700; color: #FFD700; letter-spacing: 0.5px;">🥇 1ST PLACE</span>
+                  <span style="font-size: 13px; font-weight: 800; color: #FFD700;">50% SHARE</span>
+                </div>
+                <div style="font-size: 26px; font-weight: 700; color: #FFF; margin-bottom: 4px;">
+                  ${rex1st.toLocaleString()} REX
+                </div>
+                <div style="font-size: 12px; color: #94A3B8;">
+                  Top Champion Award & Gold Tier Badge
+                </div>
+              </div>
+
+              <!-- 2nd Place Card -->
+              <div class="prize-dist-card silver-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <span style="font-size: 12px; font-weight: 700; color: #E5E7EB; letter-spacing: 0.5px;">🥈 2ND PLACE</span>
+                  <span style="font-size: 13px; font-weight: 800; color: #E5E7EB;">30% SHARE</span>
+                </div>
+                <div style="font-size: 24px; font-weight: 700; color: #FFF; margin-bottom: 4px;">
+                  ${rex2nd.toLocaleString()} REX
+                </div>
+                <div style="font-size: 12px; color: #94A3B8;">
+                  Runner-Up Award & Silver Tier Badge
+                </div>
+              </div>
+
+              <!-- 3rd Place Card -->
+              <div class="prize-dist-card bronze-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <span style="font-size: 12px; font-weight: 700; color: #CD7F32; letter-spacing: 0.5px;">🥉 3RD PLACE</span>
+                  <span style="font-size: 13px; font-weight: 800; color: #CD7F32;">20% SHARE</span>
+                </div>
+                <div style="font-size: 24px; font-weight: 700; color: #FFF; margin-bottom: 4px;">
+                  ${rex3rd.toLocaleString()} REX
+                </div>
+                <div style="font-size: 12px; color: #94A3B8;">
+                  Podium Award & Bronze Tier Badge
+                </div>
+              </div>
+            </div>
           </div>
         `;
       }
 
-      // Past Archive inspect buttons event listeners
-      document.querySelectorAll('[data-select-tournament]').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const id = btn.getAttribute('data-select-tournament');
-          selectTournament(id);
-          const target = document.getElementById('leaderboard-section');
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-          }
-        });
-      });
+      // Render Loading Placeholder
+      function renderLoading(containerId) {
+        const el = document.getElementById(containerId);
+        if (!el) return;
+        el.innerHTML = `
+          <div style="border: 1px solid rgba(128, 82, 255, 0.2); border-radius: 20px; padding: 60px 24px; text-align: center; background: rgba(10, 11, 16, 0.6);">
+            <div class="spinner-ring"></div>
+            <div style="font-size: 18px; font-weight: 500; color: #FFF; margin-bottom: 6px;">
+              Loading Tournament Vault...
+            </div>
+            <p style="font-size: 13px; color: #94A3B8; margin: 0;">
+              Retrieving cryptographic records & sealed rank calculations
+            </p>
+          </div>
+        `;
+      }
 
-      // Run Init
+      // Run Initialization
       init();
     });
   </script>
