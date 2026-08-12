@@ -203,21 +203,25 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* --- NAVIGATION --- */
 .nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000; width: 100%; max-width: 100%;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 2rem; box-sizing: border-box;
-  background: rgba(6, 7, 10, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(234, 202, 122, 0.1);
-  transition: background 0.3s ease;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 2rem;
+  box-sizing: border-box;
+  background: rgba(11, 12, 14, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid #262930;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .nav.scrolled {
-  background: rgba(6, 7, 10, 0.92);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+  background: rgba(11, 12, 14, 0.95);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .nav-brand {
@@ -357,13 +361,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .nav-links.open {
     display: flex;
     flex-direction: column;
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    background: #0A0B0F;
-    padding: 80px 24px 40px;
-    gap: 24px;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: rgba(11, 12, 14, 0.98);
+    backdrop-filter: blur(12px);
+    padding: 24px;
+    gap: 20px;
     z-index: 999;
-    border-bottom: 1px solid rgba(234, 202, 122, 0.15);
+    border-bottom: 1px solid #262930;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   }
   .hamburger { display: flex; z-index: 1001; }
 }
@@ -1622,5 +1628,117 @@ main, section, footer, .page-content {
   }
   .calendar-grid-container {
     gap: 4px !important;
+  }
+}
+
+
+/* ==========================================================================
+   GLOBAL POLISH — STANDARDIZED LAYOUT SYSTEM v6
+   ========================================================================== */
+
+/* Main wrapper — centers all page content */
+.main-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+/* Standardized stat/card blocks */
+.stat-block {
+  background: #14161A;
+  border: 1px solid #262930;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.stat-block:hover {
+  border-color: #3a3d44;
+  transform: translateY(-2px);
+}
+
+/* Standardized gold button */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #E5C158;
+  color: #0B0C0E;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 28px;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-gold:hover {
+  background: #F0D070;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(229, 193, 88, 0.35);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+/* Elevated card with depth */
+.card-elevated {
+  background: #14161A;
+  border: 1px solid #262930;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Profile wrapper for navbar right side */
+.profile-wrapper {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-left: auto;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+}
+
+.profile-wrapper .nav-link {
+  white-space: nowrap;
+}
+
+/* Ensure first section after nav has enough top spacing */
+main > .section:first-child {
+  padding-top: 80px;
+}
+
+/* Standardized stat grid */
+.stats-grid-uniform {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .stats-grid-uniform {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid-uniform {
+    grid-template-columns: 1fr;
   }
 }
