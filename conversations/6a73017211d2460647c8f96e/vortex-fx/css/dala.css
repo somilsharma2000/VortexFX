@@ -1649,7 +1649,7 @@ main, section, footer, .page-content {
 
 /* Standardized stat/card blocks */
 .stat-block {
-  background: #14161A;
+  background: #0B0C0E;
   border: 1px solid #262930;
   border-radius: 12px;
   padding: 32px;
@@ -1695,7 +1695,7 @@ main, section, footer, .page-content {
 
 /* Elevated card with depth */
 .card-elevated {
-  background: #14161A;
+  background: #0B0C0E;
   border: 1px solid #262930;
   border-radius: 12px;
   padding: 32px;

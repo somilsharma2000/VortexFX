@@ -6,7 +6,7 @@
 
 /* --- CSS VARIABLES --- */
 :root {
-  --bg: #050508;
+  --bg: #06070A;
   --bg-card: rgba(10, 10, 18, 0.6);
   --violet: #8B5CF6;
   --violet-bright: #A78BFA;
@@ -84,7 +84,7 @@ img, svg {
 #boot-sequence {
   position: fixed;
   inset: 0;
-  background: #020204;
+  background: #06070A;
   z-index: 9999;
   display: flex;
   flex-direction: column;
