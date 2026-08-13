@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Shield backdrop -->
+  <path d="M256 40 L440 100 L440 280 C440 380 370 450 256 482 C142 450 72 380 72 280 L72 100 Z" 
+        fill="#06070A" stroke="#D4AF37" stroke-width="6" stroke-linejoin="round"/>
+  
+  <!-- Inner shield border (subtle) -->
+  <path d="M256 58 L422 112 L422 280 C422 370 360 432 256 462 C152 432 90 370 90 280 L90 112 Z" 
+        fill="none" stroke="#D4AF37" stroke-width="1.5" stroke-opacity="0.3" stroke-linejoin="round"/>
+  
+  <!-- F-monogram: top horizontal bar -->
+  <rect x="160" y="130" width="200" height="26" rx="3" fill="#D4AF37"/>
+  
+  <!-- F-monogram: left vertical stem -->
+  <rect x="160" y="130" width="26" height="260" rx="3" fill="#D4AF37"/>
+  
+  <!-- F-monogram: middle horizontal bar -->
+  <rect x="160" y="240" width="140" height="22" rx="3" fill="#D4AF37"/>
+  
+  <!-- Decorative crown points above the F -->
+  <path d="M186 118 L196 100 L206 114 L216 96 L226 114 L236 100 L246 118 L256 104 L266 118 L276 100 L286 114 L296 96 L306 114 L316 100 L326 118" 
+        stroke="#D4AF37" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+  
+  <!-- Crown base bar -->
+  <rect x="180" y="120" width="160" height="6" rx="2" fill="#D4AF37"/>
+  
+  <!-- Bottom decorative element (base/foundation) -->
+  <rect x="190" y="370" width="130" height="8" rx="2" fill="#D4AF37"/>
+  <rect x="200" y="382" width="110" height="5" rx="2" fill="#D4AF37" opacity="0.6"/>
+  
+  <!-- Glow accents (small diamonds) -->
+  <circle cx="256" cy="90" r="3" fill="#E5C17A"/>
+  <circle cx="200" cy="200" r="2" fill="#E5C17A" opacity="0.5"/>
+  <circle cx="312" cy="200" r="2" fill="#E5C17A" opacity="0.5"/>
+  <circle cx="256" cy="410" r="2" fill="#E5C17A" opacity="0.4"/>
+</svg>

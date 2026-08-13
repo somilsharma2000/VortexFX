@@ -54,6 +54,36 @@
   .hero-image-side img { max-width: 100%; max-height: 350px; border-radius: 16px; box-shadow: 0 0 40px rgba(234, 202, 122, 0.15); }
   .caption { color: #555; font-size: 12px; text-align: center; margin-top: 16px; letter-spacing: 1px; }
 </style>
+
+<!-- LOGO ANIMATION FIX: isolate logo from background particles -->
+<style>
+/* Logo isolation fix - prevents background animation from bleeding through */
+.brand-logo, .nav-logo, .signin-logo, .footer-brand img, 
+.hero-logo, .logo-container, [alt="FORTREX"] {
+  position: relative;
+  z-index: 100;
+  isolation: isolate;
+  -webkit-isolation: isolate;
+}
+/* Dark backdrop behind logo so particles don't show through */
+.brand-logo {
+  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.85) 0%, rgba(6, 7, 10, 0) 70%);
+  border-radius: 50%;
+  padding: 8px;
+}
+.nav-logo {
+  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.9) 0%, rgba(6, 7, 10, 0) 80%);
+  border-radius: 8px;
+  padding: 2px;
+}
+/* Ensure SVG logos are crisp */
+img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor;
+}
+</style>
+
 </head>
 <body>
   <nav class="nav-bar">
