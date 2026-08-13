@@ -1,8 +1,8 @@
 /* ============================================
    FORTREX — SHARED AUTH MODULE
    Handles Discord OAuth, guild membership check,
-   session management, API calls, and
-   FULL STEALTH MODE — nothing visible until login.
+   session management, API calls.
+   Stealth Mode: DISABLED — site is open.
    ============================================ */
 
 const FORTREX_AUTH = {
@@ -17,10 +17,12 @@ const FORTREX_AUTH = {
   TRADER_KEY: 'fortrex_trader',
   TOKEN_KEY: 'fortrex_discord_token',
   
-  // PUBLIC pages — accessible without login
+  // Stealth Mode toggle — set to false to open the site
+  STEALTH_MODE: false,
+  
+  // PUBLIC pages — accessible without login (only used in stealth mode)
   PUBLIC_PAGES: ['index.html', 'terms.html', 'privacy.html', 'signin.html', '404.html', ''],
   
-  // ALL other pages require authentication
   isLoggedIn() {
     try {
       const trader = localStorage.getItem(this.TRADER_KEY);
@@ -107,26 +109,23 @@ const FORTREX_AUTH = {
   }
 };
 
-// ===== FULL STEALTH MODE LOCK =====
-// Only index.html, terms.html, privacy.html, signin.html are public.
-// EVERYTHING else requires authentication — redirect to index.html if not logged in.
+// ===== STEALTH MODE LOCK (currently DISABLED) =====
+// When STEALTH_MODE is true, only public pages are accessible without login.
+// When false (current), the entire site is open.
 (function() {
+  if (!FORTREX_AUTH.STEALTH_MODE) return;
+  
   const currentPage = window.location.pathname.split('/').pop();
   const trader = FORTREX_AUTH.isLoggedIn();
   
-  // If on a public page, allow access
   if (FORTREX_AUTH.PUBLIC_PAGES.includes(currentPage)) return;
-  
-  // admin.html has its own passcode gate — don't redirect it
   if (currentPage === 'admin.html') return;
   
-  // All other pages — require login
   if (!trader) {
     window.location.href = 'index.html';
     return;
   }
   
-  // If banned, redirect to index
   if (trader.banned) {
     localStorage.removeItem(FORTREX_AUTH.TRADER_KEY);
     localStorage.removeItem(FORTREX_AUTH.TOKEN_KEY);

@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FORTREX</title>
-  <meta name="description" content="FORTREX">
-  <meta property="og:title" content="FORTREX">
-  <meta property="og:description" content="FORTREX">
+  <title>FORTREX — Master the Charts. Reclaim Your Throne.</title>
+  <meta name="description" content="FORTREX. The competitive trading arena. Tournaments, REX rewards, and a community of elite traders.">
+  <meta property="og:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
+  <meta property="og:description" content="The competitive trading arena. Join the elite.">
   <meta property="og:type" content="website">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/fortrex-theme.css">
-  <link rel="stylesheet" href="css/dala.css?v=5">
+  <link rel="stylesheet" href="css/dala.css?v=6">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,14 +24,10 @@
       color: #fff;
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+      overflow-x: hidden;
       position: relative;
     }
 
-    /* Background animation canvas */
     #dala-canvas {
       position: fixed;
       top: 0; left: 0;
@@ -40,89 +36,142 @@
       pointer-events: none;
     }
 
-    /* Stealth content container */
-    .stealth-container {
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(6, 7, 10, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(229, 193, 88, 0.08);
+      padding: 0 24px;
+    }
+
+    .navbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .nav-logo svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .nav-logo span {
+      font-size: 18px;
+      font-weight: 200;
+      letter-spacing: 4px;
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #E5C158;
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-signin {
+      padding: 8px 20px;
+      background: #E5C158;
+      color: #06070A;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-signin:hover {
+      background: #F0CE6A;
+      transform: translateY(-1px);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
       position: relative;
       z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0;
-      max-width: 500px;
-      width: 100%;
-      padding: 40px 24px;
+      justify-content: center;
+      min-height: calc(100vh - 64px);
+      padding: 80px 24px 60px;
       text-align: center;
     }
 
-    /* Logo — clean, premium, isolated from animation */
-    .logo-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 28px;
-      isolation: isolate;
-      z-index: 20;
-    }
-
-    .logo-backdrop {
-      position: absolute;
-      width: 96px;
-      height: 96px;
-      background: rgba(6, 7, 10, 0.85);
-      border-radius: 50%;
-      filter: blur(8px);
-      z-index: -1;
-    }
-
-    .logo-icon {
+    .hero-logo {
       width: 72px;
       height: 72px;
-      position: relative;
-      z-index: 21;
-      shape-rendering: geometricPrecision;
+      margin-bottom: 32px;
+      filter: drop-shadow(0 0 20px rgba(229, 193, 88, 0.25));
     }
 
-    .logo-icon svg {
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 0 12px rgba(229, 193, 88, 0.3));
-    }
-
-    /* Brand name */
-    .brand-name {
-      font-size: 32px;
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px);
       font-weight: 200;
-      letter-spacing: 12px;
+      letter-spacing: clamp(4px, 1vw, 10px);
       color: #fff;
-      margin-bottom: 8px;
-      padding-left: 12px; /* compensate for letter-spacing */
+      margin-bottom: 16px;
     }
 
-    /* Tagline */
-    .stealth-tagline {
-      font-size: 14px;
+    .hero h1 .gold {
+      color: #E5C158;
+      font-weight: 600;
+    }
+
+    .hero p.tagline {
+      font-size: clamp(14px, 2vw, 18px);
       font-weight: 300;
-      letter-spacing: 2px;
-      color: rgba(255, 255, 255, 0.4);
-      margin-bottom: 48px;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 1px;
+      max-width: 600px;
+      margin-bottom: 40px;
     }
 
-    /* Auth buttons */
-    .auth-buttons {
+    .hero-buttons {
       display: flex;
-      flex-direction: column;
-      gap: 14px;
-      width: 100%;
-      max-width: 340px;
-    }
-
-    .btn-discord {
-      display: flex;
-      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
       justify-content: center;
-      gap: 10px;
-      padding: 16px 24px;
+    }
+
+    .btn-primary {
+      padding: 16px 36px;
       background: #E5C158;
       color: #06070A;
       font-size: 15px;
@@ -131,196 +180,407 @@
       border-radius: 10px;
       cursor: pointer;
       transition: all 0.25s ease;
+      text-decoration: none;
       letter-spacing: 0.5px;
-      width: 100%;
-      font-family: 'Inter', sans-serif;
     }
 
-    .btn-discord:hover {
+    .btn-primary:hover {
       background: #F0CE6A;
       transform: translateY(-2px);
       box-shadow: 0 8px 30px rgba(229, 193, 88, 0.25);
     }
 
-    .btn-discord svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    .btn-google {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 16px 24px;
+    .btn-ghost {
+      padding: 16px 36px;
       background: transparent;
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(255, 255, 255, 0.8);
       font-size: 15px;
       font-weight: 500;
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 10px;
       cursor: pointer;
       transition: all 0.25s ease;
-      letter-spacing: 0.5px;
-      width: 100%;
-      font-family: 'Inter', sans-serif;
+      text-decoration: none;
     }
 
-    .btn-google:hover {
-      border-color: rgba(255, 255, 255, 0.3);
-      color: rgba(255, 255, 255, 0.9);
-      background: rgba(255, 255, 255, 0.03);
-      transform: translateY(-2px);
+    .btn-ghost:hover {
+      border-color: rgba(229, 193, 88, 0.3);
+      color: #E5C158;
+      background: rgba(229, 193, 88, 0.03);
     }
 
-    .btn-google svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    /* Loading state */
-    .loading-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: #06070A;
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      position: relative;
+      z-index: 10;
       display: flex;
-      align-items: center;
       justify-content: center;
-      z-index: 100;
-      transition: opacity 0.5s ease;
+      gap: 48px;
+      padding: 40px 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      background: rgba(10, 11, 15, 0.5);
+      flex-wrap: wrap;
     }
 
-    .loading-overlay.hidden {
-      opacity: 0;
-      pointer-events: none;
+    .stat {
+      text-align: center;
     }
 
-    .loading-spinner {
+    .stat-value {
+      font-size: 28px;
+      font-weight: 600;
+      color: #E5C158;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ===== FEATURES ===== */
+    .features {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 200;
+      letter-spacing: 4px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 48px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: rgba(10, 11, 15, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 32px 24px;
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(229, 193, 88, 0.2);
+      background: rgba(229, 193, 88, 0.02);
+    }
+
+    .feature-icon {
       width: 40px;
       height: 40px;
-      border: 2px solid rgba(229, 193, 88, 0.15);
-      border-top-color: #E5C158;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
+      margin-bottom: 20px;
+      color: #E5C158;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
     }
 
-    /* Already logged in — redirect */
-    .redirect-notice {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.3);
-      margin-top: 24px;
+    .feature-card p {
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.6;
     }
 
-    /* Mobile */
-    @media (max-width: 480px) {
-      .brand-name {
-        font-size: 26px;
-        letter-spacing: 8px;
+    /* ===== CTA SECTION ===== */
+    .cta-section {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 80px 24px;
+      background: rgba(10, 11, 15, 0.5);
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .cta-section h2 {
+      font-size: 32px;
+      font-weight: 200;
+      letter-spacing: 4px;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 32px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      position: relative;
+      z-index: 10;
+      background: #06070A;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 16px;
+      font-weight: 200;
+      letter-spacing: 6px;
+      color: #E5C158;
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.4);
+      text-decoration: none;
+      font-size: 12px;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: #E5C158;
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* ===== MOBILE ===== */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: rgba(6, 7, 10, 0.95);
+        backdrop-filter: blur(12px);
+        padding: 20px 24px;
+        gap: 16px;
+        border-bottom: 1px solid rgba(229, 193, 88, 0.08);
       }
-      .stealth-tagline {
-        font-size: 12px;
-      }
+      .stats-bar { gap: 24px; }
+      .stat-value { font-size: 22px; }
     }
   </style>
 </head>
 <body>
-  <!-- Background animation -->
   <canvas id="dala-canvas"></canvas>
 
-  <!-- Loading overlay (shown while checking auth) -->
-  <div class="loading-overlay" id="loadingOverlay">
-    <div class="loading-spinner"></div>
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="nav-logo">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M32 4 L56 14 L56 32 C56 46 44 56 32 60 C20 56 8 46 8 32 L8 14 Z" stroke="#E5C158" stroke-width="1.5" fill="none" opacity="0.4"/>
+          <path d="M22 18 L42 18 L42 24 L28 24 L28 30 L38 30 L38 36 L28 36 L28 46 L22 46 Z" fill="#E5C158"/>
+        </svg>
+        <span>FORTREX</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="tournaments.html">Tournaments</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="rex.html">REX Wallet</a></li>
+        <li><a href="checkin.html">Daily Check-in</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="signin.html" class="btn-signin">Sign In</a>
+      </div>
+      <button class="mobile-menu-btn" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-logo">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+        <path d="M32 4 L56 14 L56 32 C56 46 44 56 32 60 C20 56 8 46 8 32 L8 14 Z" stroke="#E5C158" stroke-width="1.5" fill="none" opacity="0.4"/>
+        <path d="M22 18 L42 18 L42 24 L28 24 L28 30 L38 30 L38 36 L28 36 L28 46 L22 46 Z" fill="#E5C158"/>
+      </svg>
+    </div>
+    <h1>Master the Charts.<br><span class="gold">Reclaim Your Throne.</span></h1>
+    <p class="tagline">FORTREX is the competitive trading arena where skill meets reward. Compete in tournaments, earn REX, and rise through the ranks.</p>
+    <div class="hero-buttons">
+      <a href="signin.html" class="btn-primary">Get Started</a>
+      <a href="tournaments.html" class="btn-ghost">View Tournaments</a>
+    </div>
+  </section>
+
+  <!-- ===== STATS BAR ===== -->
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-value" id="statTraders">0</div>
+      <div class="stat-label">Traders</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="statTournaments">0</div>
+      <div class="stat-label">Tournaments</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="statPrizePool">0</div>
+      <div class="stat-label">REX Prize Pool</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="statDiscord">0</div>
+      <div class="stat-label">Discord Members</div>
+    </div>
   </div>
 
-  <!-- Stealth mode content -->
-  <div class="stealth-container" id="stealthContent" style="display: none;">
-    <!-- Logo — F monogram in shield, clean gold strokes -->
-    <div class="logo-wrap">
-      <div class="logo-backdrop"></div>
-      <div class="logo-icon">
-        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Shield outline -->
-          <path d="M32 4 L56 14 L56 32 C56 46 44 56 32 60 C20 56 8 46 8 32 L8 14 Z"
-            stroke="#E5C158" stroke-width="1.5" fill="none" opacity="0.4"/>
-          <!-- F monogram — two angular strokes -->
-          <path d="M22 18 L42 18 L42 24 L28 24 L28 30 L38 30 L38 36 L28 36 L28 46 L22 46 Z"
-            fill="#E5C158"/>
+  <!-- ===== FEATURES ===== -->
+  <section class="features">
+    <h2 class="section-title">THE ARENA</h2>
+    <p class="section-subtitle">Everything you need to compete, earn, and dominate.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
         </svg>
+        <h3>Tournaments</h3>
+        <p>Compete in bi-weekly trading tournaments. Highest ROI wins. Prize pools in REX. Standings sealed until reveal day.</p>
+      </div>
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+        </svg>
+        <h3>Daily Check-ins</h3>
+        <p>Earn REX every day you check in. Build streaks for milestone bonuses. Consistency compounds.</p>
+      </div>
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+        </svg>
+        <h3>REX Economy</h3>
+        <p>Earn REX through check-ins, referrals, and tournament wins. Your rewards, your currency, your wallet.</p>
+      </div>
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <h3>Community</h3>
+        <p>Join the Citadel Discord. Connect with elite traders, share strategies, and build your reputation.</p>
+      </div>
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/>
+        </svg>
+        <h3>Leaderboard</h3>
+        <p>Results revealed on tournament end. See where you rank among the best. No live rankings — pure surprise.</p>
+      </div>
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
+        <h3>Genesis Program</h3>
+        <p>Founding members get REX multipliers up to 3.0x. The first 2,500 traders get permanent status.</p>
       </div>
     </div>
+  </section>
 
-    <!-- Brand name -->
-    <h1 class="brand-name">FORTREX</h1>
-
-    <!-- Single tagline — no trading hints -->
-    <p class="stealth-tagline">Access by invitation only.</p>
-
-    <!-- Auth buttons -->
-    <div class="auth-buttons">
-      <button class="btn-discord" onclick="FORTREX_AUTH.loginWithDiscord()">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-        </svg>
-        Continue with Discord
-      </button>
-
-      <button class="btn-google" onclick="handleGoogleSignIn()">
-        <svg viewBox="0 0 24 24">
-          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-        </svg>
-        Continue with Google
-      </button>
+  <!-- ===== CTA ===== -->
+  <section class="cta-section">
+    <h2>READY TO COMPETE?</h2>
+    <p>Join the arena. Earn REX. Prove your skill.</p>
+    <div class="hero-buttons">
+      <a href="signin.html" class="btn-primary">Sign In with Discord</a>
+      <a href="https://discord.gg/9pTSqeTbn" class="btn-ghost" target="_blank">Join Discord</a>
     </div>
+  </section>
 
-    <div class="redirect-notice" id="redirectNotice" style="display:none;">
-      Already signed in — taking you inside...
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-logo">FORTREX</div>
+    <div class="footer-links">
+      <a href="tournaments.html">Tournaments</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="rex.html">REX Wallet</a>
+      <a href="checkin.html">Check-in</a>
+      <a href="faq.html">FAQ</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="https://discord.gg/9pTSqeTbn" target="_blank">Discord</a>
     </div>
-  </div>
+    <p class="footer-copy">© 2026 FORTREX. Seychelles IBC. All rights reserved.</p>
+  </footer>
 
   <script src="js/dala.js?v=3"></script>
-  <script src="js/auth.js?v=5"></script>
+  <script src="js/auth.js?v=6"></script>
   <script>
-    // Stealth mode controller
-    (function() {
-      const trader = FORTREX_AUTH.isLoggedIn();
-      const loading = document.getElementById('loadingOverlay');
-      const content = document.getElementById('stealthContent');
-      const notice = document.getElementById('redirectNotice');
-
-      // If already logged in, redirect to dashboard
-      if (trader) {
-        notice.style.display = 'block';
-        setTimeout(() => {
-          window.location.href = 'dashboard.html';
-        }, 1500);
-        loading.classList.add('hidden');
-        content.style.display = 'flex';
-        return;
-      }
-
-      // Not logged in — show stealth landing
-      setTimeout(() => {
-        loading.classList.add('hidden');
-        content.style.display = 'flex';
-      }, 600);
-    })();
-
-    function handleGoogleSignIn() {
-      // Google OAuth — redirect to Google sign-in
-      // For now, show a message that Google auth requires the full app
-      const btn = document.querySelector('.btn-google');
-      btn.textContent = 'Coming Soon';
-      btn.style.opacity = '0.5';
-      btn.style.cursor = 'not-allowed';
+    // Animate stats counters
+    function animateStat(id, target, suffix) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      let current = 0;
+      const step = Math.ceil(target / 40);
+      const interval = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          current = target;
+          clearInterval(interval);
+        }
+        el.textContent = current.toLocaleString() + (suffix || '');
+      }, 30);
     }
+
+    // Load stats from backend
+    fetch(FORTREX_AUTH.API_BASE + '/getPublicStats')
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          animateStat('statTraders', data.traders || 0);
+          animateStat('statTournaments', data.tournaments || 0);
+          animateStat('statPrizePool', data.prize_pool || 0);
+          animateStat('statDiscord', data.discord_members || 0);
+        }
+      })
+      .catch(() => {
+        // Fallback if API not available
+        animateStat('statTraders', 0);
+        animateStat('statTournaments', 0);
+        animateStat('statPrizePool', 0);
+        animateStat('statDiscord', 0);
+      });
   </script>
 </body>
 </html>
