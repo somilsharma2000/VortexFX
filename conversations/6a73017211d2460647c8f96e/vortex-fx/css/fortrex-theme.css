@@ -516,3 +516,30 @@ main, .page-content {
   transition: border-color var(--t-fast);
 }
 .accordion-item:hover { border-color: rgba(229, 193, 88, 0.2); }
+
+/* ── LOGO ── */
+.fortrex-logo-svg, .brand-logo-svg {
+  filter: drop-shadow(0px 2px 6px rgba(212, 175, 55, 0.2));
+  transition: filter var(--t-base);
+}
+.fortrex-logo-svg:hover, .brand-logo-svg:hover {
+  filter: drop-shadow(0px 2px 10px rgba(212, 175, 55, 0.35));
+}
+.nav-logo svg, .footer-logo svg {
+  filter: drop-shadow(0px 2px 6px rgba(212, 175, 55, 0.2));
+}
+
+/* ── LOGO DROP-SHADOW ── */
+.fortrex-logo-svg {
+  filter: drop-shadow(0px 2px 6px rgba(212, 175, 55, 0.2));
+  transition: filter var(--t-base);
+}
+.fortrex-logo-svg:hover {
+  filter: drop-shadow(0px 2px 10px rgba(212, 175, 55, 0.35));
+}
+.footer-logo-svg {
+  filter: drop-shadow(0px 2px 6px rgba(212, 175, 55, 0.2));
+}
+.nav-logo svg {
+  filter: drop-shadow(0px 2px 6px rgba(212, 175, 55, 0.2));
+}
