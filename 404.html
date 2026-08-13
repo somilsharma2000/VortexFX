@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 Page Liquidated — FORTREX</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- System Styles and Scripts -->
+  <link rel="stylesheet" href="css/dala.css?v=2">
+  <script src="js/dala.js?v=2"></script>
+  <script src="js/auth.js?v=2"></script>
+
+  <style>
+    :root {
+      --bg-black: #000000;
+      --bg-dark: #0a0a0a;
+      --gold-accent: #EACA7A;
+      --purple-accent: #D4AF37;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --font-body: 'Inter', sans-serif;
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-black);
+      background-image: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Background Particle Canvas */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* App Wrapper */
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+    }
+
+    /* Minimal Navbar */
+    .minimal-nav {
+      padding: 28px 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo-svg {
+      width: 36px;
+      height: 36px;
+      filter: drop-shadow(0 0 8px rgba(234, 202, 122, 0.4));
+    }
+
+    .nav-wordmark {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: 0.05em;
+      color: #FFFFFF;
+      background: linear-gradient(135deg, #FFFFFF 0%, #EACA7A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* 404 Main Hero Container */
+    .error-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .error-code {
+      font-family: var(--font-heading);
+      font-size: 120px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--gold-accent);
+      background: linear-gradient(180deg, #F5D77F 0%, #EACA7A 60%, #997A15 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 35px rgba(234, 202, 122, 0.35);
+      margin-bottom: 16px;
+      letter-spacing: -0.04em;
+    }
+
+    .error-title {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .error-description {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 500px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    .btn-gold-pill {
+      background: linear-gradient(135deg, #EACA7A 0%, #AA7C11 100%);
+      color: #000000;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 14px 36px;
+      border-radius: 9999px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 20px rgba(234, 202, 122, 0.25);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-gold-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(234, 202, 122, 0.5);
+      background: linear-gradient(135deg, #EACA7A 0%, #C8AA78 100%);
+    }
+
+    /* Minimal Footer */
+    .minimal-footer {
+      padding: 30px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      text-align: center;
+      font-size: 12px;
+      color: #475569;
+      font-family: var(--font-mono);
+    }
+
+    @media (max-width: 768px) {
+      .error-code {
+        font-size: 90px;
+      }
+      .error-title {
+        font-size: 26px;
+      }
+    }
+  
+    /* MOBILE RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: #0A0B0F; flex-direction: column; padding: 40px 24px 24px; gap: 8px; z-index: 999; border-left: 1px solid rgba(234,202,122,0.15); transform: translateX(100%); transition: transform 0.3s ease; }
+      .nav-links.active { display: flex; transform: translateX(0); }
+      .nav-cta > a:not(.hamburger) { display: none; }
+      .hamburger { display: flex !important; cursor: pointer; }
+      .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      .hamburger.active span:nth-child(2) { opacity: 0; }
+      .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+      .footer-content { flex-direction: column; gap: 24px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 12px !important; }
+      .container { padding-left: 16px; padding-right: 16px; }
+      main { padding-top: 100px !important; padding-bottom: 40px !important; }
+      h1, .section-headline { font-size: 28px !important; }
+      h2 { font-size: 22px !important; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr !important; }
+      .auth-card, .card, .panel { width: 100% !important; max-width: 100% !important; }
+      table { font-size: 12px; }
+      .hide-mobile { display: none !important; }
+    }
+    @media (max-width: 480px) {
+      .nav-wordmark { font-size: 16px; }
+      .footer-links { gap: 8px !important; }
+      h1, .section-headline { font-size: 24px !important; }
+      .container { padding-left: 12px; padding-right: 12px; }
+    }
+
+    </style>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/fortrex-icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/fortrex-icon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/fortrex-icon-180.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="assets/fortrex-icon-512.png">
+    <meta property="og:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
+</head>
+<body>
+
+  <!-- Background Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="page-wrapper">
+    <!-- Minimal Nav with FORTREX Logo -->
+      <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <a href="index.html" class="navbar-brand">
+        <div class="nav-logo"><img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 36px; height: 36px; object-fit: contain;"></div>
+      </a>
+    </div>
+    <ul class="nav-links" id="nav-links-main">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="tools.html" class="nav-link">Tools</a></li>
+      <li><a href="contests.html" class="nav-link">Tournaments</a></li>
+      <li><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+      <li><a href="rex.html" class="nav-link">REX</a></li>
+      <li><a href="journal.html" class="nav-link">Journal</a></li>
+      <li><a href="community.html" class="nav-link">Community</a></li>
+      
+      <li><a href="dashboard.html" class="nav-link nav-internal" style="display:none">Dashboard</a></li>
+      <li><a href="invite.html" class="nav-link nav-internal" style="display:none">Invite</a></li>
+      <li><a href="profile.html" class="nav-link nav-internal" style="display:none">Profile</a></li>
+      <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
+      <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
+      <div class="hamburger" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+    <!-- Main Content -->
+    <main class="error-container">
+      <div class="error-code">404</div>
+      <h1 class="error-title">This page got liquidated.</h1>
+      <p class="error-description">
+        The page you're looking for doesn't exist — or it's been sealed until launch.
+      </p>
+      <a href="index.html" class="btn-gold-pill">
+        ← BACK TO SAFETY
+      </a>
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(234, 202, 122, 0.2));">
+          <span class="nav-wordmark" style="color: #EACA7A; font-weight: 700;">FORTREX</span>
+        </div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="tools.html" class="footer-link">Tools</a>
+          <a href="contests.html" class="footer-link">Tournaments</a>
+          <a href="leaderboard.html" class="footer-link">Leaderboard</a>
+          <a href="community.html" class="footer-link">Community</a>
+          
+          <a href="terms.html" class="footer-link">Terms</a>
+          <a href="privacy.html" class="footer-link">Privacy</a>
+          <a href="signin.html" class="footer-link">Sign In</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2026 FORTREX — Skill-based trading competitions. Not a broker.</div>
+        <div class="footer-disclaimer" style="font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 8px; line-height: 1.5;">
+          FORTREX organizes skill-based trading competitions and tournaments. We are not a broker, financial institution, or asset manager. REX points are competition utility tokens used for arena rankings and prize distributions.
+        </div>
+      </div>
+    </div>
+  </footer>
+  </div>
+
+  <script>
+    // Particle Canvas Animation
+    function initParticleCanvas() {
+      const canvas = document.getElementById('particle-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const particles = [];
+      const numParticles = 35;
+
+      for (let i = 0; i < numParticles; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          radius: Math.random() * 2 + 0.8,
+          color: Math.random() > 0.4 ? 'rgba(234, 202, 122, ' : 'rgba(212, 175, 55, ',
+          alpha: Math.random() * 0.5 + 0.15
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color + p.alpha + ')';
+          ctx.fill();
+
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dx = p.x - p2.x;
+            const dy = p.y - p2.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 120) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `rgba(234, 202, 122, ${0.15 * (1 - dist / 120)})`;
+              ctx.lineWidth = 0.6;
+              ctx.stroke();
+            }
+          }
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initParticleCanvas();
+    });
+  </script>
+
+<script>
+// Mobile hamburger toggle
+document.addEventListener('DOMContentLoaded', function() {
+  var hamburger = document.querySelector('.hamburger');
+  var navLinks = document.querySelector('#nav-links-main');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+    // Close on link click
+    navLinks.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+  }
+});
+</script>
+
+</body>
+</html>

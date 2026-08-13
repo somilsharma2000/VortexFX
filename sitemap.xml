@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://fortrexfx.com/</loc><changefreq>daily</changefreq><priority>1.0</url>
+  <url><loc>https://fortrexfx.com/signin.html</loc><changefreq>weekly</changefreq><priority>0.9</url>
+  <url><loc>https://fortrexfx.com/tools.html</loc><changefreq>monthly</changefreq><priority>0.8</url>
+  <url><loc>https://fortrexfx.com/faq.html</loc><changefreq>monthly</changefreq><priority>0.7</url>
+  <url><loc>https://fortrexfx.com/leaderboard.html</loc><changefreq>daily</changefreq><priority>0.8</url>
+  <url><loc>https://fortrexfx.com/contests.html</loc><changefreq>daily</changefreq><priority>0.8</url>
+  <url><loc>https://fortrexfx.com/rex.html</loc><changefreq>weekly</changefreq><priority>0.7</url>
+  <url><loc>https://fortrexfx.com/invite.html</loc><changefreq>weekly</changefreq><priority>0.7</url>
+  <url><loc>https://fortrexfx.com/journal.html</loc><changefreq>daily</changefreq><priority>0.6</url>
+  <url><loc>https://fortrexfx.com/community.html</loc><changefreq>weekly</changefreq><priority>0.6</url>
+  <url><loc>https://fortrexfx.com/terms.html</loc><changefreq>monthly</changefreq><priority>0.5</url>
+  <url><loc>https://fortrexfx.com/privacy.html</loc><changefreq>monthly</changefreq><priority>0.5</url>
+</urlset>

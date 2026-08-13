@@ -1,0 +1,2376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FORTREX FX — Automation & Workflows Engine</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       FORTREX FX — AUTOMATION & WORKFLOWS DESIGN SYSTEM
+       Background: #06070A (obsidian) · Cards: #0D0F18
+       Accent Gold: #EACA7A · Accent Iris: #D4AF37
+       Text: White (#FFFFFF) · Muted: #9A9A9A · Dim: #64687A
+       Status: Live #22C55E · Paused #F59E0B · Danger #EF4444
+       Radius: Cards 16px · Buttons 12px · Borders: rgba(255,255,255,0.08)
+       ========================================================================== */
+
+    :root {
+      --bg-obsidian: #06070A;
+      --bg-card: #0D0F18;
+      --bg-card-hover: #131726;
+      --bg-card-active: #181D30;
+      --bg-input: #111422;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-gold-glow: rgba(234, 202, 122, 0.35);
+      --border-iris-glow: rgba(212, 175, 55, 0.35);
+      --border-live-glow: rgba(34, 197, 94, 0.35);
+
+      --text-main: #FFFFFF;
+      --text-muted: #9A9A9A;
+      --text-dim: #64687A;
+
+      --accent-gold: #EACA7A;
+      --accent-gold-glow: rgba(234, 202, 122, 0.18);
+      --accent-iris: #D4AF37;
+      --accent-iris-glow: rgba(212, 175, 55, 0.18);
+
+      --status-live: #22C55E;
+      --status-live-glow: rgba(34, 197, 94, 0.22);
+      --status-paused: #F59E0B;
+      --status-paused-glow: rgba(245, 158, 11, 0.22);
+      --status-danger: #EF4444;
+      --status-danger-glow: rgba(239, 68, 68, 0.22);
+
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --radius-card: 16px;
+      --radius-btn: 12px;
+      --radius-sm: 8px;
+    }
+
+    /* Module Base Container */
+    .at-wrapper {
+      font-family: var(--font-sans);
+      background-color: #0b0c10;
+      color: var(--text-main);
+      padding: 1.5rem;
+      width: 100%;
+      min-height: 100vh;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      overflow-x: hidden;
+    }
+
+    .at-wrapper * {
+      box-sizing: border-box;
+    }
+
+    /* Header HUD Banner */
+    .at-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 1.25rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .at-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--accent-gold) 0%, var(--accent-iris) 100%);
+      box-shadow: 0 0 12px var(--accent-gold);
+    }
+
+    .at-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .at-header-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      margin: 0;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-transform: uppercase;
+    }
+
+    .at-badge-live {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--status-live);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      letter-spacing: 1px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+    }
+
+    .at-badge-live::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--status-live);
+      box-shadow: 0 0 8px var(--status-live);
+      animation: pulseGlow 1.8s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .at-header-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .at-header-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    /* Tactical Buttons */
+    .at-btn {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 18px;
+      transition: all 0.2s ease-in-out;
+      border-radius: var(--radius-btn);
+      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      user-select: none;
+    }
+
+    .at-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .at-btn:active {
+      transform: translateY(0);
+    }
+
+    .at-btn-primary {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-iris) 100%);
+      color: #06070A;
+      border: none;
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(234, 202, 122, 0.25);
+    }
+
+    .at-btn-primary:hover {
+      background: linear-gradient(135deg, #f0d588 0%, #e0bd42 100%);
+      box-shadow: 0 6px 20px rgba(234, 202, 122, 0.4);
+      color: #06070A;
+    }
+
+    .at-btn-outline-gold {
+      border: 1px solid rgba(234, 202, 122, 0.4);
+      color: var(--accent-gold);
+      background: rgba(234, 202, 122, 0.06);
+    }
+
+    .at-btn-outline-gold:hover {
+      background: rgba(234, 202, 122, 0.15);
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 12px var(--accent-gold-glow);
+    }
+
+    .at-btn-sm {
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 8px;
+    }
+
+    /* Key Telemetry Summary Grid */
+    .at-telemetry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .at-telemetry-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 1.25rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .at-telemetry-card:hover {
+      border-color: rgba(234, 202, 122, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .at-telemetry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .at-telemetry-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .at-telemetry-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .at-telemetry-val {
+      font-family: var(--font-mono);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.5px;
+      margin-top: 2px;
+    }
+
+    .at-telemetry-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .at-telemetry-sub .trend-up {
+      color: var(--status-live);
+      font-weight: 600;
+    }
+
+    /* Section Component Containers */
+    .at-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+    }
+
+    .at-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 16px;
+    }
+
+    .at-section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-main);
+      margin: 0;
+    }
+
+    .at-section-title svg {
+      color: var(--accent-gold);
+    }
+
+    .at-section-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: normal;
+    }
+
+    /* 5. INTEGRATION HEALTH MONITORS */
+    .at-health-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+
+
+
+    .at-health-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .at-health-card:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .at-health-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .at-health-name-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .at-health-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(234, 202, 122, 0.1);
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(234, 202, 122, 0.2);
+    }
+
+    .at-health-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .at-status-pill {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .at-status-pill.operational {
+      background: rgba(34, 197, 94, 0.12);
+      color: var(--status-live);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .at-status-pill.degraded {
+      background: rgba(245, 158, 11, 0.12);
+      color: var(--status-paused);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .at-status-pill.offline {
+      background: rgba(239, 68, 68, 0.12);
+      color: var(--status-danger);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .at-health-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      font-size: 11px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 8px;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .at-health-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .at-health-meta-label {
+      color: var(--text-dim);
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .at-health-meta-val {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .at-health-bar-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .at-health-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .at-health-bar-track {
+      height: 4px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .at-health-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--status-live) 0%, var(--accent-gold) 100%);
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+
+    .at-refresh-counter {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .at-timer-ring {
+      width: 14px;
+      height: 14px;
+      border: 2px solid var(--border-subtle);
+      border-top-color: var(--accent-gold);
+      border-radius: 50%;
+      animation: spinRing 2s linear infinite;
+    }
+
+    @keyframes spinRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* 6. WORKFLOW CHAIN BUILDER */
+    .at-workflow-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .at-chain-pills {
+      display: flex;
+      gap: 8px;
+    }
+
+    .at-chain-btn {
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .at-chain-btn.active {
+      background: rgba(234, 202, 122, 0.15);
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+      font-weight: 600;
+      box-shadow: 0 0 10px rgba(234, 202, 122, 0.15);
+    }
+
+    .at-chain-diagram {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 16px 8px 24px 8px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-gold) transparent;
+    }
+
+    .at-chain-step-card {
+      min-width: 240px;
+      max-width: 260px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      flex-shrink: 0;
+    }
+
+    .at-chain-step-card.executing {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 20px rgba(234, 202, 122, 0.3);
+      transform: scale(1.02);
+      background: rgba(234, 202, 122, 0.08);
+    }
+
+    .at-chain-step-card.completed {
+      border-color: var(--status-live);
+      background: rgba(34, 197, 94, 0.05);
+    }
+
+    .at-chain-step-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      background: rgba(234, 202, 122, 0.12);
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      align-self: flex-start;
+      border: 1px solid rgba(234, 202, 122, 0.2);
+    }
+
+    .at-chain-step-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 0;
+    }
+
+    .at-chain-step-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    .at-chain-step-tag {
+      font-size: 11px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+    }
+
+    .at-chain-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    .at-chain-arrow svg {
+      filter: drop-shadow(0 0 6px var(--accent-gold));
+      animation: pulseArrow 1.5s infinite ease-in-out;
+    }
+
+    @keyframes pulseArrow {
+      0%, 100% { opacity: 0.4; transform: translateX(0); }
+      50% { opacity: 1; transform: translateX(3px); }
+    }
+
+    /* 2. PRE-BUILT AUTOMATIONS GRID */
+    .at-prebuilt-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .at-prebuilt-grid { grid-template-columns: 1fr; }
+    }
+
+    .at-prebuilt-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .at-prebuilt-card:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(234, 202, 122, 0.25);
+    }
+
+    .at-prebuilt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .at-prebuilt-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .at-prebuilt-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .at-prebuilt-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .at-prebuilt-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 12px;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .at-prebuilt-code {
+      font-family: var(--font-mono);
+      background: rgba(0, 0, 0, 0.3);
+      padding: 3px 8px;
+      border-radius: 6px;
+      color: var(--accent-gold);
+      border: 1px solid rgba(234, 202, 122, 0.15);
+    }
+
+    /* Tactile Toggle Switch */
+    .at-switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .at-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .at-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(255, 255, 255, 0.12);
+      transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 24px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .at-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 2px;
+      bottom: 2px;
+      background-color: var(--text-muted);
+      transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 50%;
+    }
+
+    input:checked + .at-slider {
+      background: linear-gradient(135deg, var(--status-live) 0%, #16a34a 100%);
+      border-color: rgba(34, 197, 94, 0.5);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+    }
+
+    input:checked + .at-slider:before {
+      transform: translateX(20px);
+      background-color: #FFFFFF;
+    }
+
+    /* 1. AUTOMATION RULES LIST & SEARCH BAR */
+    .at-filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .at-search-input-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .at-search-input-wrap svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+    }
+
+    .at-input {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 9px 12px 9px 38px;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .at-input:focus {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 10px var(--accent-gold-glow);
+    }
+
+    .at-select {
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 9px 14px;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .at-select:focus {
+      border-color: var(--accent-gold);
+    }
+
+    .at-rules-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .at-rules-grid { grid-template-columns: 1fr; }
+    }
+
+    .at-rule-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      transition: all 0.25s ease;
+    }
+
+    .at-rule-card:hover {
+      border-color: rgba(234, 202, 122, 0.3);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .at-rule-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .at-rule-identity {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .at-rule-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .at-rule-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 0;
+    }
+
+    .at-tag-custom {
+      font-size: 9px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(212, 175, 55, 0.2);
+      color: var(--accent-iris);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .at-rule-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .at-rule-condition-box {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+
+    .at-cond-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+    }
+
+    .at-cond-kw {
+      color: var(--accent-gold);
+      font-weight: 700;
+    }
+
+    .at-cond-val {
+      color: #38bdf8;
+    }
+
+    .at-rule-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 12px;
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .at-rule-stats {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .at-rule-stat-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .at-rule-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 4. AUTOMATION HISTORY TABLE */
+    .at-table-container {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .at-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    .at-table th {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-dim);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.6px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    .at-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    .at-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .at-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .at-badge-res {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .at-badge-res.success {
+      background: rgba(34, 197, 94, 0.12);
+      color: var(--status-live);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .at-badge-res.failed {
+      background: rgba(239, 68, 68, 0.12);
+      color: var(--status-danger);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    /* Modal Styling */
+    .at-modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(6, 7, 10, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .at-modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .at-modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold-glow);
+      border-radius: var(--radius-card);
+      width: 100%;
+      max-width: 620px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-gold-glow);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: translateY(20px);
+      transition: transform 0.25s ease;
+    }
+
+    .at-modal-overlay.active .at-modal {
+      transform: translateY(0);
+    }
+
+    .at-modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .at-modal-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+    }
+
+    .at-modal-close {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .at-modal-close:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .at-modal-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      max-height: 75vh;
+      overflow-y: auto;
+    }
+
+    .at-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .at-form-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .at-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .at-modal-footer {
+      padding: 18px 24px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    /* Toast Notification System */
+    .at-toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .at-toast {
+      pointer-events: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--accent-gold);
+      border-radius: 12px;
+      padding: 14px 18px;
+      color: var(--text-main);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px var(--accent-gold-glow);
+      animation: toastIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes toastIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="at-wrapper">
+
+  <!-- HEADER HUD BANNER -->
+  <header class="at-header">
+    <div class="at-header-left">
+      <h1 class="at-header-title">
+        Automation & Workflows
+        <span class="at-badge-live">Live Engine</span>
+      </h1>
+      <p class="at-header-subtitle">FORTREX FX Cockpit Telemetry · Rule Engine, Pre-built Triggers & Integration Monitors</p>
+    </div>
+    <div class="at-header-actions">
+      <button class="at-btn at-btn-outline-gold" onclick="window.pingHealthMonitors()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M23 12a11 11 0 1 1-22 0 11 11 0 0 1 22 0z"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+        Ping Monitors
+      </button>
+      <button class="at-btn at-btn-outline-gold" onclick="window.executeWorkflowChain()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        Test Flow Chain
+      </button>
+      <button class="at-btn at-btn-primary" onclick="window.openCreateRuleModal()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="12" y1="5" x2="12" y2="19"/>
+          <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        Create Custom Rule
+      </button>
+    </div>
+  </header>
+
+  <!-- KEY TELEMETRY CARDS -->
+  <div class="at-telemetry-grid">
+    <div class="at-telemetry-card">
+      <div class="at-telemetry-header">
+        <span class="at-telemetry-label">Active Rules</span>
+        <div class="at-telemetry-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+      </div>
+      <div class="at-telemetry-val" id="kpi-active-rules">10 / 11</div>
+      <div class="at-telemetry-sub">
+        <span class="trend-up">3 Custom + 7 Pre-built</span> active
+      </div>
+    </div>
+
+    <div class="at-telemetry-card">
+      <div class="at-telemetry-header">
+        <span class="at-telemetry-label">Total Triggers Today</span>
+        <div class="at-telemetry-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+      </div>
+      <div class="at-telemetry-val" id="kpi-total-triggers">12,840</div>
+      <div class="at-telemetry-sub">
+        <span class="trend-up">+342</span> runs in last hour
+      </div>
+    </div>
+
+    <div class="at-telemetry-card">
+      <div class="at-telemetry-header">
+        <span class="at-telemetry-label">Execution Success Rate</span>
+        <div class="at-telemetry-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+        </div>
+      </div>
+      <div class="at-telemetry-val" id="kpi-success-rate">99.82%</div>
+      <div class="at-telemetry-sub">
+        <span style="color: var(--status-live);">2 failures</span> out of 12.8k
+      </div>
+    </div>
+
+    <div class="at-telemetry-card">
+      <div class="at-telemetry-header">
+        <span class="at-telemetry-label">Avg System Latency</span>
+        <div class="at-telemetry-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+      </div>
+      <div class="at-telemetry-val" id="kpi-avg-latency">29.4 ms</div>
+      <div class="at-telemetry-sub">
+        <span class="trend-up">Optimal</span> (Target: &lt;50ms)
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: INTEGRATION HEALTH MONITORS -->
+  <section class="at-section">
+    <div class="at-section-header">
+      <div>
+        <h2 class="at-section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+            <line x1="6" y1="6" x2="6.01" y2="6"/>
+            <line x1="6" y1="18" x2="6.01" y2="18"/>
+          </svg>
+          Integration Health Monitors
+        </h2>
+        <div class="at-section-subtitle">Real-time ping telemetry for external interfaces & APIs (Auto-refreshes every 60s)</div>
+      </div>
+      <div class="at-refresh-counter">
+        <div class="at-timer-ring"></div>
+        <span>Auto-refreshing in <strong id="refresh-timer-val">58s</strong></span>
+      </div>
+    </div>
+
+    <div class="at-health-grid" id="health-monitors-container">
+      <!-- Health Cards loaded dynamically -->
+    </div>
+  </section>
+
+  <!-- SECTION 6: WORKFLOW CHAIN BUILDER -->
+  <section class="at-section">
+    <div class="at-section-header">
+      <div>
+        <h2 class="at-section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="18" cy="18" r="3"/>
+            <circle cx="6" cy="6" r="3"/>
+            <path d="M13 6h3a2 2 0 0 1 2 2v7"/>
+            <line x1="6" y1="9" x2="6" y2="21"/>
+          </svg>
+          Workflow Chain Builder
+        </h2>
+        <div class="at-section-subtitle">Visual sequence showing how automations chain together into multi-stage workflows</div>
+      </div>
+      <div class="at-workflow-controls">
+        <div class="at-chain-pills">
+          <button class="at-chain-btn active" onclick="window.switchWorkflowChain(0)">Tournament Conclude Chain</button>
+          <button class="at-chain-btn" onclick="window.switchWorkflowChain(1)">Onboarding Flow</button>
+          <button class="at-chain-btn" onclick="window.switchWorkflowChain(2)">Midnight Maintenance</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="at-chain-diagram" id="workflow-chain-container">
+      <!-- Chain steps rendered here -->
+    </div>
+  </section>
+
+  <!-- SECTION 2: PRE-BUILT AUTOMATIONS (TOGGLEABLE) -->
+  <section class="at-section">
+    <div class="at-section-header">
+      <div>
+        <h2 class="at-section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+          </svg>
+          Pre-Built System Automations
+        </h2>
+        <div class="at-section-subtitle">Toggle core platform routines, tournament schedulers & reward distribution engines</div>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="at-btn at-btn-sm" onclick="window.toggleAllPrebuilts(true)">Enable All</button>
+        <button class="at-btn at-btn-sm" onclick="window.toggleAllPrebuilts(false)">Disable All</button>
+      </div>
+    </div>
+
+    <div class="at-prebuilt-grid" id="prebuilt-automations-container">
+      <!-- 8 Pre-built items rendered dynamically -->
+    </div>
+  </section>
+
+  <!-- SECTION 1 & 3: AUTOMATION RULES LIST & CREATE CUSTOM RULE -->
+  <section class="at-section">
+    <div class="at-section-header">
+      <div>
+        <h2 class="at-section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <line x1="9" y1="3" x2="9" y2="21"/>
+          </svg>
+          Automation Rules Registry
+        </h2>
+        <div class="at-section-subtitle">Manage custom rules, active trigger conditions, and target entities</div>
+      </div>
+      <button class="at-btn at-btn-primary" onclick="window.openCreateRuleModal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="12" y1="5" x2="12" y2="19"/>
+          <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        New Rule
+      </button>
+    </div>
+
+    <!-- Filter & Search Controls -->
+    <div class="at-filter-bar">
+      <div class="at-search-input-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" id="rule-search-input" class="at-input" placeholder="Search rules by name, entity, condition..." oninput="window.renderRulesList()">
+      </div>
+
+      <div style="display: flex; gap: 10px;">
+        <select id="rule-filter-status" class="at-select" onchange="window.renderRulesList()">
+          <option value="ALL">All Statuses</option>
+          <option value="ACTIVE">Active Only</option>
+          <option value="PAUSED">Paused Only</option>
+        </select>
+
+        <select id="rule-filter-trigger" class="at-select" onchange="window.renderRulesList()">
+          <option value="ALL">All Trigger Types</option>
+          <option value="Entity created">Entity Created</option>
+          <option value="Entity updated">Entity Updated</option>
+          <option value="Scheduled">Scheduled</option>
+          <option value="Manual">Manual</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="at-rules-grid" id="custom-rules-container">
+      <!-- Rules rendered here -->
+    </div>
+  </section>
+
+  <!-- SECTION 4: AUTOMATION HISTORY LOG -->
+  <section class="at-section">
+    <div class="at-section-header">
+      <div>
+        <h2 class="at-section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 8v4l3 3"/>
+            <circle cx="12" cy="12" r="9"/>
+          </svg>
+          Automation Trigger History
+        </h2>
+        <div class="at-section-subtitle">Real-time log of recent trigger executions, durations, and outputs</div>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="at-btn at-btn-sm" onclick="window.clearHistoryFilter()">Reset Filters</button>
+      </div>
+    </div>
+
+    <!-- History Filter Bar -->
+    <div class="at-filter-bar">
+      <div class="at-search-input-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" id="history-search-input" class="at-input" placeholder="Search history target or rule..." oninput="window.renderHistoryTable()">
+      </div>
+
+      <div style="display: flex; gap: 10px;">
+        <select id="history-filter-rule" class="at-select" onchange="window.renderHistoryTable()">
+          <option value="ALL">All Rules</option>
+          <!-- Rule names dynamically inserted -->
+        </select>
+
+        <select id="history-filter-result" class="at-select" onchange="window.renderHistoryTable()">
+          <option value="ALL">All Results</option>
+          <option value="success">Success</option>
+          <option value="failed">Failed</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="at-table-container">
+      <table class="at-table">
+        <thead>
+          <tr>
+            <th>Rule Name</th>
+            <th>Triggered At</th>
+            <th>Target Entity</th>
+            <th>Result Status</th>
+            <th>Duration</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="history-table-body">
+          <!-- Rows inserted here -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</div>
+
+<!-- CREATE / EDIT RULE MODAL -->
+<div class="at-modal-overlay" id="rule-modal-overlay">
+  <div class="at-modal">
+    <div class="at-modal-header">
+      <h3 class="at-modal-title" id="modal-title-text">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+        </svg>
+        Create Custom Rule
+      </h3>
+      <button class="at-modal-close" onclick="window.closeRuleModal()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <form id="rule-form" onsubmit="window.saveRuleForm(event)">
+      <input type="hidden" id="modal-rule-id" value="">
+      <div class="at-modal-body">
+        
+        <div class="at-form-group">
+          <label class="at-form-label">Rule Name *</label>
+          <input type="text" id="modal-rule-name" class="at-input" style="padding-left: 12px;" placeholder="e.g. High Volatility Risk Alert" required>
+        </div>
+
+        <div class="at-form-group">
+          <label class="at-form-label">Description</label>
+          <input type="text" id="modal-rule-desc" class="at-input" style="padding-left: 12px;" placeholder="Brief explanation of why and when this rule fires...">
+        </div>
+
+        <div class="at-form-row">
+          <div class="at-form-group">
+            <label class="at-form-label">Trigger Type *</label>
+            <select id="modal-trigger-type" class="at-select" style="width: 100%;" required>
+              <option value="Entity created">Entity created</option>
+              <option value="Entity updated">Entity updated</option>
+              <option value="Scheduled">Scheduled</option>
+              <option value="Manual">Manual</option>
+            </select>
+          </div>
+
+          <div class="at-form-group">
+            <label class="at-form-label">Target Entity *</label>
+            <select id="modal-target-entity" class="at-select" style="width: 100%;" required>
+              <option value="trader_profile">trader_profile</option>
+              <option value="tournament_session">tournament_session</option>
+              <option value="rex_treasury">rex_treasury</option>
+              <option value="battle_pass">battle_pass</option>
+              <option value="waitlist_entry">waitlist_entry</option>
+              <option value="genesis_nft">genesis_nft</option>
+              <option value="audit_log">audit_log</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- IF THIS THEN THAT CONDITION BUILDER -->
+        <div class="at-form-group">
+          <label class="at-form-label">Condition ("If This Then That")</label>
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+            <input type="text" id="modal-cond-field" class="at-input" style="padding-left: 10px;" placeholder="Field (e.g. deposit_usd)" required>
+            <select id="modal-cond-op" class="at-select">
+              <option value=">">Greater Than (&gt;)</option>
+              <option value="<">Less Than (&lt;)</option>
+              <option value="==">Equals (==)</option>
+              <option value="!=">Not Equals (!=)</option>
+              <option value="contains">Contains</option>
+            </select>
+            <input type="text" id="modal-cond-val" class="at-input" style="padding-left: 10px;" placeholder="Value (e.g. 10000)" required>
+          </div>
+        </div>
+
+        <div class="at-form-group">
+          <label class="at-form-label">Action To Perform *</label>
+          <select id="modal-action-type" class="at-select" style="width: 100%;" required>
+            <option value="Update Entity Status">Update Entity Status</option>
+            <option value="Distribute REX Tokens">Distribute REX Tokens</option>
+            <option value="Send Discord Alert">Send Discord Alert</option>
+            <option value="Reset Field Streak">Reset Field Streak</option>
+            <option value="Assign Genesis Class">Assign Genesis Class</option>
+            <option value="Lock Account Gate">Lock Security Gate</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="at-modal-footer">
+        <button type="button" class="at-btn" onclick="window.closeRuleModal()">Cancel</button>
+        <button type="submit" class="at-btn at-btn-primary">Save Rule</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="at-toast-container" id="at-toast-container"></div>
+
+<!-- API & SCRIPT INTEGRATION -->
+<script>
+  /* Base44 API authentication helper function matching standard pattern */
+  const FORTREX_AUTH = {
+    APP_ID: '6a7c208f76be9b02b86b0380',
+    callFunction: async function(name, payload) {
+      const token = localStorage.getItem('fortrex_auth_token');
+      try {
+        const res = await fetch('https://api.base44.com/v1/apps/' + this.APP_ID + '/functions/' + name, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify(payload || {})
+        });
+        return await res.json();
+      } catch (e) {
+        console.warn('FORTREX_AUTH call failed (mocking response):', name, e);
+        return { success: true, mocked: true };
+      }
+    }
+  };
+
+  /* Module Global State */
+  window.AT_STATE = {
+    prebuiltRules: [
+      {
+        id: 'pb-1',
+        name: 'Auto-Start Tournament',
+        desc: 'Start tournament when entry criteria met (min deposit threshold).',
+        trigger: 'Entity updated',
+        target: 'tournament_session',
+        condition: 'total_deposits >= 100,000 USD',
+        action: 'Set status = ACTIVE',
+        active: true,
+        lastTriggered: '14 mins ago',
+        runCount: 428
+      },
+      {
+        id: 'pb-2',
+        name: 'Auto-Reveal Scheduler',
+        desc: 'Set reveal date/time in advance, auto-trigger reveal.',
+        trigger: 'Scheduled',
+        target: 'tournament_results',
+        condition: 'now() >= reveal_timestamp',
+        action: 'Publish Unveiled Ranks',
+        active: true,
+        lastTriggered: '1 hour ago',
+        runCount: 189
+      },
+      {
+        id: 'pb-3',
+        name: 'Auto-REX Distribution',
+        desc: 'Distribute prizes on tournament completion to eligible traders.',
+        trigger: 'Entity updated',
+        target: 'tournament_session',
+        condition: 'status == CONCLUDED',
+        action: 'Batch Transfer REX',
+        active: true,
+        lastTriggered: '3 hours ago',
+        runCount: 312
+      },
+      {
+        id: 'pb-4',
+        name: 'Daily Check-in Reset',
+        desc: 'Reset check-in streaks at midnight IST automatically.',
+        trigger: 'Scheduled',
+        target: 'trader_checkin',
+        condition: 'time == 00:00 IST',
+        action: 'Reset Streak Locks',
+        active: true,
+        lastTriggered: '23 hours ago',
+        runCount: 1450
+      },
+      {
+        id: 'pb-5',
+        name: 'Battle Pass Auto-Level',
+        desc: 'Auto-level up when XP threshold reached in trading journal.',
+        trigger: 'Entity updated',
+        target: 'trader_profile',
+        condition: 'xp_total >= level_threshold',
+        action: 'Increment Level & Reward',
+        active: true,
+        lastTriggered: '3 mins ago',
+        runCount: 3890
+      },
+      {
+        id: 'pb-6',
+        name: 'Waitlist Position Update',
+        desc: 'Auto-update position on referral signup.',
+        trigger: 'Entity created',
+        target: 'waitlist_entry',
+        condition: 'referral_code != null',
+        action: 'Re-rank Waitlist Pool',
+        active: true,
+        lastTriggered: '8 mins ago',
+        runCount: 942
+      },
+      {
+        id: 'pb-7',
+        name: 'Genesis Auto-Assign',
+        desc: 'Auto-assign Genesis class to first 2500 traders.',
+        trigger: 'Entity created',
+        target: 'trader_profile',
+        condition: 'trader_id <= 2500',
+        action: 'Assign Genesis Class',
+        active: false,
+        lastTriggered: '2 days ago',
+        runCount: 2500
+      },
+      {
+        id: 'pb-8',
+        name: 'Discord Sync',
+        desc: 'Auto-check guild membership on login and sync role badges.',
+        trigger: 'Entity created',
+        target: 'discord_user',
+        condition: 'session_type == LOGIN',
+        action: 'Verify Guild Role & Sync',
+        active: true,
+        lastTriggered: '1 min ago',
+        runCount: 3120
+      }
+    ],
+
+    customRules: [
+      {
+        id: 'cr-101',
+        name: 'Whale Deposit Alert',
+        desc: 'Dispatch high-priority alert to Discord #treasury-alerts if deposit > $50,000.',
+        trigger: 'Entity created',
+        target: 'rex_treasury',
+        condField: 'amount_usd',
+        condOp: '>',
+        condVal: '50000',
+        action: 'Send Discord Alert',
+        active: true,
+        lastTriggered: '22 mins ago',
+        runCount: 64
+      },
+      {
+        id: 'cr-102',
+        name: 'Risk Leverage Guardrail',
+        desc: 'Lock account access gate if single transaction leverage exceeds 100x.',
+        trigger: 'Entity updated',
+        target: 'trader_profile',
+        condField: 'leverage',
+        condOp: '>',
+        condVal: '100',
+        action: 'Lock Account Gate',
+        active: true,
+        lastTriggered: '4 hours ago',
+        runCount: 18
+      },
+      {
+        id: 'cr-103',
+        name: 'Top 10 Badge Distributor',
+        desc: 'Grant Gold Crest NFT badge to top 10 traders when weekly season ends.',
+        trigger: 'Scheduled',
+        target: 'tournament_results',
+        condField: 'rank',
+        condOp: '<=',
+        condVal: '10',
+        action: 'Assign Genesis Class',
+        active: true,
+        lastTriggered: '1 day ago',
+        runCount: 40
+      }
+    ],
+
+    healthMonitors: [
+      { id: 'hm-1', name: 'Discord API', status: 'operational', latency: '24ms', uptime: '99.98%', lastCheck: 'Just now' },
+      { id: 'hm-2', name: 'Base44 Backend', status: 'operational', latency: '14ms', uptime: '99.99%', lastCheck: 'Just now' },
+      { id: 'hm-3', name: 'GitHub Pages', status: 'operational', latency: '32ms', uptime: '100.0%', lastCheck: 'Just now' },
+      { id: 'hm-4', name: 'MT4 API', status: 'operational', latency: '48ms', uptime: '99.91%', lastCheck: 'Just now' }
+    ],
+
+    workflowChains: [
+      {
+        name: 'Tournament Conclude Chain',
+        steps: [
+          { num: 'STEP 01', title: 'Tournament Ends', desc: 'Triggered when tournament schedule timer hits 0', tag: 'Scheduled · Cron' },
+          { num: 'STEP 02', title: 'Auto-Reveal Results', desc: 'Auto-trigger reveal date & unveil rankings', tag: 'target: tournament_results' },
+          { num: 'STEP 03', title: 'Auto-Distribute Prizes', desc: 'Distribute REX prize pool to winners', tag: 'target: rex_treasury' },
+          { num: 'STEP 04', title: 'Auto-Notify Discord', desc: 'Post result announcement to Discord channel', tag: 'target: discord_webhook' }
+        ]
+      },
+      {
+        name: 'Onboarding Sequence',
+        steps: [
+          { num: 'STEP 01', title: 'Trader Sign Up', desc: 'Triggered on new trader registration', tag: 'Entity Created' },
+          { num: 'STEP 02', title: 'Waitlist Position Update', desc: 'Auto-update position on referral signup', tag: 'target: waitlist_entry' },
+          { num: 'STEP 03', title: 'Genesis Auto-Assign', desc: 'Auto-assign Genesis class to first 2500', tag: 'target: trader_profile' },
+          { num: 'STEP 04', title: 'Discord Sync', desc: 'Auto-check guild membership on login', tag: 'target: discord_user' }
+        ]
+      },
+      {
+        name: 'Midnight Maintenance',
+        steps: [
+          { num: 'STEP 01', title: 'Midnight IST Bell', desc: 'Fires at midnight IST (18:30 UTC) daily', tag: 'Scheduled · Daily' },
+          { num: 'STEP 02', title: 'Daily Check-in Reset', desc: 'Reset check-in streaks at midnight IST', tag: 'target: trader_checkin' },
+          { num: 'STEP 03', title: 'Leaderboard Re-index', desc: 'Recalculate global XP standings', tag: 'target: leaderboard' },
+          { num: 'STEP 04', title: 'Audit Trail Snapshot', desc: 'Snapshot daily execution telemetry', tag: 'target: audit_log' }
+        ]
+      }
+    ],
+
+    activeChainIndex: 0,
+    historyLogs: [],
+    autoRefreshSeconds: 58
+  };
+
+  /* Initialize Sample History Logs */
+  (function initHistoryLogs() {
+    const rules = ['Tournament Ends -> Auto-Reveal Results', 'Auto-Start Tournament', 'Battle Pass Auto-Level', 'Discord Sync', 'Waitlist Position Update', 'Whale Deposit Alert', 'Auto-REX Distribution'];
+    const targets = ['Tournament #302', 'Trader #8849', 'Discord Guild #fortrex', 'Waitlist #1204', 'REX Wallet #09', 'Tournament #301'];
+    
+    for (let i = 0; i < 15; i++) {
+      const isSuccess = Math.random() > 0.08;
+      const rule = rules[i % rules.length];
+      const target = targets[i % targets.length];
+      const duration = Math.floor(Math.random() * 80) + 12;
+      const minsAgo = (i * 7) + 2;
+      
+      window.AT_STATE.historyLogs.push({
+        id: 'hist-' + (1000 + i),
+        ruleName: rule,
+        triggeredAt: minsAgo + ' mins ago',
+        target: target,
+        status: isSuccess ? 'success' : 'failed',
+        duration: duration + ' ms'
+      });
+    }
+  })();
+
+  /* Main Initialization function */
+  window.initAutomationModule = function() {
+    console.log('FORTREX FX: Automation & Workflows Module Initializing...');
+    
+    window.renderHealthMonitors();
+    window.renderWorkflowChain();
+    window.renderPrebuiltGrid();
+    window.renderRulesList();
+    window.renderHistoryTable();
+    window.populateHistoryRuleFilter();
+    window.updateTelemetryKPIs();
+    
+    if (!window.AT_TIMER_INTERVAL) {
+      window.AT_TIMER_INTERVAL = setInterval(function() {
+        window.AT_STATE.autoRefreshSeconds--;
+        if (window.AT_STATE.autoRefreshSeconds <= 0) {
+          window.AT_STATE.autoRefreshSeconds = 60;
+          window.pingHealthMonitors(true);
+        }
+        const timerElem = document.getElementById('refresh-timer-val');
+        if (timerElem) timerElem.textContent = window.AT_STATE.autoRefreshSeconds + 's';
+      }, 1000);
+    }
+  };
+
+  /* Render 5. Health Monitors */
+  window.renderHealthMonitors = function() {
+    const container = document.getElementById('health-monitors-container');
+    if (!container) return;
+
+    container.innerHTML = window.AT_STATE.healthMonitors.map(m => `
+      <div class="at-health-card">
+        <div class="at-health-top">
+          <div class="at-health-name-wrap">
+            <div class="at-health-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+              </svg>
+            </div>
+            <span class="at-health-name">${m.name}</span>
+          </div>
+          <span class="at-status-pill ${m.status}">${m.status}</span>
+        </div>
+
+        <div class="at-health-meta">
+          <div class="at-health-meta-item">
+            <span class="at-health-meta-label">Latency</span>
+            <span class="at-health-meta-val">${m.latency}</span>
+          </div>
+          <div class="at-health-meta-item">
+            <span class="at-health-meta-label">Uptime</span>
+            <span class="at-health-meta-val">${m.uptime}</span>
+          </div>
+        </div>
+
+        <div class="at-health-bar-wrap">
+          <div class="at-health-bar-label">
+            <span>Ping Telemetry</span>
+            <span>Last check: ${m.lastCheck}</span>
+          </div>
+          <div class="at-health-bar-track">
+            <div class="at-health-bar-fill" style="width: 100%;"></div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  };
+
+  /* Ping Monitors Action */
+  window.pingHealthMonitors = function(silent) {
+    window.AT_STATE.healthMonitors.forEach(m => {
+      const ping = Math.floor(Math.random() * 25) + 12;
+      m.latency = ping + 'ms';
+      m.lastCheck = 'Just now';
+    });
+    window.renderHealthMonitors();
+    if (!silent) window.showToast('Pinged all 4 integration endpoints successfully!');
+  };
+
+  /* Render 6. Workflow Chain Builder */
+  window.renderWorkflowChain = function() {
+    const container = document.getElementById('workflow-chain-container');
+    if (!container) return;
+
+    const chain = window.AT_STATE.workflowChains[window.AT_STATE.activeChainIndex];
+    if (!chain) return;
+
+    let html = '';
+    chain.steps.forEach((step, idx) => {
+      html += `
+        <div class="at-chain-step-card" id="chain-step-${idx}">
+          <span class="at-chain-step-num">${step.num}</span>
+          <h4 class="at-chain-step-title">${step.title}</h4>
+          <p class="at-chain-step-desc">${step.desc}</p>
+          <div class="at-chain-step-tag">${step.tag}</div>
+        </div>
+      `;
+
+      if (idx < chain.steps.length - 1) {
+        html += `
+          <div class="at-chain-arrow">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </div>
+        `;
+      }
+    });
+
+    container.innerHTML = html;
+  };
+
+  window.switchWorkflowChain = function(idx) {
+    window.AT_STATE.activeChainIndex = idx;
+    const btns = document.querySelectorAll('.at-chain-btn');
+    btns.forEach((b, i) => {
+      if (i === idx) b.classList.add('active');
+      else b.classList.remove('active');
+    });
+    window.renderWorkflowChain();
+  };
+
+  window.executeWorkflowChain = function() {
+    const chain = window.AT_STATE.workflowChains[window.AT_STATE.activeChainIndex];
+    window.showToast('Executing workflow chain: ' + chain.name);
+
+    chain.steps.forEach((step, idx) => {
+      setTimeout(() => {
+        const card = document.getElementById('chain-step-' + idx);
+        if (card) {
+          card.classList.add('executing');
+          setTimeout(() => {
+            card.classList.remove('executing');
+            card.classList.add('completed');
+          }, 800);
+        }
+
+        window.AT_STATE.historyLogs.unshift({
+          id: 'hist-' + Date.now(),
+          ruleName: step.title,
+          triggeredAt: 'Just now',
+          target: step.tag,
+          status: 'success',
+          duration: (Math.floor(Math.random() * 40) + 15) + ' ms'
+        });
+        window.renderHistoryTable();
+        window.updateTelemetryKPIs();
+
+        if (idx === chain.steps.length - 1) {
+          setTimeout(() => {
+            window.showToast('Workflow Chain Completed Successfully!', 'success');
+          }, 900);
+        }
+      }, idx * 600);
+    });
+  };
+
+  /* Render 2. Pre-Built Automations */
+  window.renderPrebuiltGrid = function() {
+    const container = document.getElementById('prebuilt-automations-container');
+    if (!container) return;
+
+    container.innerHTML = window.AT_STATE.prebuiltRules.map(r => `
+      <div class="at-prebuilt-card">
+        <div class="at-prebuilt-header">
+          <div class="at-prebuilt-title-wrap">
+            <div class="at-prebuilt-title">${r.name}</div>
+            <div class="at-prebuilt-desc">${r.desc}</div>
+          </div>
+          <label class="at-switch">
+            <input type="checkbox" ${r.active ? 'checked' : ''} onchange="window.togglePrebuiltRule('${r.id}', this.checked)">
+            <span class="at-slider"></span>
+          </label>
+        </div>
+
+        <div class="at-prebuilt-meta">
+          <span class="at-prebuilt-code">IF ${r.condition} THEN ${r.action}</span>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <span>${r.runCount} runs</span>
+            <button class="at-btn at-btn-sm" style="padding: 2px 8px; font-size: 10px;" onclick="window.runPrebuiltManual('${r.id}')">Run Now</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  };
+
+  window.togglePrebuiltRule = function(id, state) {
+    const rule = window.AT_STATE.prebuiltRules.find(r => r.id === id);
+    if (rule) {
+      rule.active = state;
+      window.showToast(rule.name + ' is now ' + (state ? 'ACTIVE' : 'PAUSED'));
+      FORTREX_AUTH.callFunction('toggleRuleStatus', { ruleId: id, active: state }).catch(() => {});
+      window.updateTelemetryKPIs();
+    }
+  };
+
+  window.runPrebuiltManual = function(id) {
+    const rule = window.AT_STATE.prebuiltRules.find(r => r.id === id);
+    if (!rule) return;
+
+    rule.runCount++;
+    rule.lastTriggered = 'Just now';
+
+    window.AT_STATE.historyLogs.unshift({
+      id: 'hist-' + Date.now(),
+      ruleName: rule.name,
+      triggeredAt: 'Just now',
+      target: rule.target,
+      status: 'success',
+      duration: (Math.floor(Math.random() * 50) + 12) + ' ms'
+    });
+
+    window.renderPrebuiltGrid();
+    window.renderHistoryTable();
+    window.updateTelemetryKPIs();
+    window.showToast('Triggered rule manually: ' + rule.name);
+    FORTREX_AUTH.callFunction('executeRuleManual', { ruleId: id }).catch(() => {});
+  };
+
+  window.toggleAllPrebuilts = function(state) {
+    window.AT_STATE.prebuiltRules.forEach(r => r.active = state);
+    window.renderPrebuiltGrid();
+    window.updateTelemetryKPIs();
+    window.showToast('All pre-built automations have been ' + (state ? 'ENABLED' : 'DISABLED'));
+  };
+
+  /* Render 1 & 3. Custom Automation Rules Registry */
+  window.renderRulesList = function() {
+    const container = document.getElementById('custom-rules-container');
+    if (!container) return;
+
+    const search = (document.getElementById('rule-search-input')?.value || '').toLowerCase();
+    const statusFilter = document.getElementById('rule-filter-status')?.value || 'ALL';
+    const triggerFilter = document.getElementById('rule-filter-trigger')?.value || 'ALL';
+
+    const filtered = window.AT_STATE.customRules.filter(r => {
+      const matchSearch = r.name.toLowerCase().includes(search) || r.desc.toLowerCase().includes(search) || r.target.toLowerCase().includes(search);
+      const matchStatus = statusFilter === 'ALL' || (statusFilter === 'ACTIVE' && r.active) || (statusFilter === 'PAUSED' && !r.active);
+      const matchTrigger = triggerFilter === 'ALL' || r.trigger === triggerFilter;
+      return matchSearch && matchStatus && matchTrigger;
+    });
+
+    if (filtered.length === 0) {
+      container.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 30px; color: var(--text-dim);">
+          No automation rules found matching your filters.
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = filtered.map(r => `
+      <div class="at-rule-card">
+        <div class="at-rule-top">
+          <div class="at-rule-identity">
+            <div class="at-rule-title-row">
+              <h3 class="at-rule-title">${r.name}</h3>
+              <span class="at-tag-custom">Custom</span>
+            </div>
+            <p class="at-rule-desc">${r.desc}</p>
+          </div>
+          <label class="at-switch">
+            <input type="checkbox" ${r.active ? 'checked' : ''} onchange="window.toggleCustomRule('${r.id}', this.checked)">
+            <span class="at-slider"></span>
+          </label>
+        </div>
+
+        <div class="at-rule-condition-box">
+          <div class="at-cond-line">
+            <span class="at-cond-kw">IF</span>
+            <span>${r.target}.${r.condField}</span>
+            <span style="color: var(--accent-gold);">${r.condOp}</span>
+            <span class="at-cond-val">${r.condVal}</span>
+          </div>
+          <div class="at-cond-line">
+            <span class="at-cond-kw">THEN</span>
+            <span style="color: var(--status-live); font-weight: 600;">${r.action}</span>
+          </div>
+        </div>
+
+        <div class="at-rule-footer">
+          <div class="at-rule-stats">
+            <div class="at-rule-stat-item">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span>${r.lastTriggered}</span>
+            </div>
+            <div class="at-rule-stat-item">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              <span>${r.runCount} runs</span>
+            </div>
+          </div>
+
+          <div class="at-rule-actions">
+            <button class="at-btn at-btn-sm" onclick="window.runCustomManual('${r.id}')">Run</button>
+            <button class="at-btn at-btn-sm" onclick="window.openEditRuleModal('${r.id}')">Edit</button>
+            <button class="at-btn at-btn-sm" style="color: var(--status-danger);" onclick="window.deleteCustomRule('${r.id}')">Delete</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  };
+
+  window.toggleCustomRule = function(id, state) {
+    const rule = window.AT_STATE.customRules.find(r => r.id === id);
+    if (rule) {
+      rule.active = state;
+      window.showToast(rule.name + ' is now ' + (state ? 'ACTIVE' : 'PAUSED'));
+      FORTREX_AUTH.callFunction('toggleCustomRule', { ruleId: id, active: state }).catch(() => {});
+      window.updateTelemetryKPIs();
+    }
+  };
+
+  window.runCustomManual = function(id) {
+    const rule = window.AT_STATE.customRules.find(r => r.id === id);
+    if (!rule) return;
+
+    rule.runCount++;
+    rule.lastTriggered = 'Just now';
+
+    window.AT_STATE.historyLogs.unshift({
+      id: 'hist-' + Date.now(),
+      ruleName: rule.name,
+      triggeredAt: 'Just now',
+      target: rule.target,
+      status: 'success',
+      duration: (Math.floor(Math.random() * 45) + 18) + ' ms'
+    });
+
+    window.renderRulesList();
+    window.renderHistoryTable();
+    window.updateTelemetryKPIs();
+    window.showToast('Executed rule manually: ' + rule.name);
+    FORTREX_AUTH.callFunction('executeCustomRuleManual', { ruleId: id }).catch(() => {});
+  };
+
+  window.deleteCustomRule = function(id) {
+    if (confirm('Are you sure you want to delete this custom automation rule?')) {
+      window.AT_STATE.customRules = window.AT_STATE.customRules.filter(r => r.id !== id);
+      window.renderRulesList();
+      window.populateHistoryRuleFilter();
+      window.updateTelemetryKPIs();
+      window.showToast('Rule deleted.');
+      FORTREX_AUTH.callFunction('deleteCustomRule', { ruleId: id }).catch(() => {});
+    }
+  };
+
+  /* Modal Form Handling */
+  window.openCreateRuleModal = function() {
+    document.getElementById('modal-title-text').innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2">
+        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+      </svg>
+      Create Custom Rule
+    `;
+    document.getElementById('modal-rule-id').value = '';
+    document.getElementById('modal-rule-name').value = '';
+    document.getElementById('modal-rule-desc').value = '';
+    document.getElementById('modal-cond-field').value = '';
+    document.getElementById('modal-cond-val').value = '';
+
+    document.getElementById('rule-modal-overlay').classList.add('active');
+  };
+
+  window.openEditRuleModal = function(id) {
+    const rule = window.AT_STATE.customRules.find(r => r.id === id);
+    if (!rule) return;
+
+    document.getElementById('modal-title-text').innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+      </svg>
+      Edit Automation Rule
+    `;
+
+    document.getElementById('modal-rule-id').value = rule.id;
+    document.getElementById('modal-rule-name').value = rule.name;
+    document.getElementById('modal-rule-desc').value = rule.desc;
+    document.getElementById('modal-trigger-type').value = rule.trigger;
+    document.getElementById('modal-target-entity').value = rule.target;
+    document.getElementById('modal-cond-field').value = rule.condField || 'status';
+    document.getElementById('modal-cond-op').value = rule.condOp || '==';
+    document.getElementById('modal-cond-val').value = rule.condVal || 'ACTIVE';
+    document.getElementById('modal-action-type').value = rule.action;
+
+    document.getElementById('rule-modal-overlay').classList.add('active');
+  };
+
+  window.closeRuleModal = function() {
+    document.getElementById('rule-modal-overlay').classList.remove('active');
+  };
+
+  window.saveRuleForm = function(event) {
+    event.preventDefault();
+    const id = document.getElementById('modal-rule-id').value;
+    const name = document.getElementById('modal-rule-name').value;
+    const desc = document.getElementById('modal-rule-desc').value;
+    const trigger = document.getElementById('modal-trigger-type').value;
+    const target = document.getElementById('modal-target-entity').value;
+    const condField = document.getElementById('modal-cond-field').value;
+    const condOp = document.getElementById('modal-cond-op').value;
+    const condVal = document.getElementById('modal-cond-val').value;
+    const action = document.getElementById('modal-action-type').value;
+
+    if (id) {
+      /* Update existing rule */
+      const rule = window.AT_STATE.customRules.find(r => r.id === id);
+      if (rule) {
+        rule.name = name;
+        rule.desc = desc;
+        rule.trigger = trigger;
+        rule.target = target;
+        rule.condField = condField;
+        rule.condOp = condOp;
+        rule.condVal = condVal;
+        rule.action = action;
+      }
+      window.showToast('Rule updated: ' + name);
+    } else {
+      /* Create new rule */
+      const newRule = {
+        id: 'cr-' + Date.now(),
+        name,
+        desc: desc || 'Custom trigger rule for ' + target,
+        trigger,
+        target,
+        condField,
+        condOp,
+        condVal,
+        action,
+        active: true,
+        lastTriggered: 'Never',
+        runCount: 0
+      };
+      window.AT_STATE.customRules.unshift(newRule);
+      window.showToast('Created rule successfully: ' + name, 'success');
+    }
+
+    FORTREX_AUTH.callFunction('saveAutomationRule', { name, trigger, target, action }).catch(() => {});
+    window.closeRuleModal();
+    window.renderRulesList();
+    window.populateHistoryRuleFilter();
+    window.updateTelemetryKPIs();
+  };
+
+  /* Render 4. Automation History Table */
+  window.renderHistoryTable = function() {
+    const tbody = document.getElementById('history-table-body');
+    if (!tbody) return;
+
+    const search = (document.getElementById('history-search-input')?.value || '').toLowerCase();
+    const ruleFilter = document.getElementById('history-filter-rule')?.value || 'ALL';
+    const resultFilter = document.getElementById('history-filter-result')?.value || 'ALL';
+
+    const logs = window.AT_STATE.historyLogs.filter(l => {
+      const matchSearch = l.ruleName.toLowerCase().includes(search) || l.target.toLowerCase().includes(search);
+      const matchRule = ruleFilter === 'ALL' || l.ruleName === ruleFilter;
+      const matchResult = resultFilter === 'ALL' || l.status === resultFilter;
+      return matchSearch && matchRule && matchResult;
+    });
+
+    if (logs.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="6" style="text-align: center; color: var(--text-dim); padding: 24px;">
+            No execution logs matching filter criteria.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = logs.map(l => `
+      <tr>
+        <td style="font-weight: 600; color: var(--text-main);">${l.ruleName}</td>
+        <td style="font-family: var(--font-mono); color: var(--text-muted); font-size: 12px;">${l.triggeredAt}</td>
+        <td><span style="font-family: var(--font-mono); background: rgba(255,255,255,0.05); padding: 3px 8px; border-radius: 4px; font-size: 11px;">${l.target}</span></td>
+        <td>
+          <span class="at-badge-res ${l.status}">
+            ${l.status === 'success' ? '✓ SUCCESS' : '✕ FAILED'}
+          </span>
+        </td>
+        <td style="font-family: var(--font-mono); font-weight: 600;">${l.duration}</td>
+        <td>
+          <button class="at-btn at-btn-sm" onclick="window.showToast('Inspecting output payload for ' + '${l.id}')">Payload</button>
+        </td>
+      </tr>
+    `).join('');
+  };
+
+  window.populateHistoryRuleFilter = function() {
+    const select = document.getElementById('history-filter-rule');
+    if (!select) return;
+
+    const allNames = new Set([
+      ...window.AT_STATE.prebuiltRules.map(r => r.name),
+      ...window.AT_STATE.customRules.map(r => r.name)
+    ]);
+
+    select.innerHTML = '<option value="ALL">All Rules</option>' +
+      Array.from(allNames).map(n => `<option value="${n}">${n}</option>`).join('');
+  };
+
+  window.clearHistoryFilter = function() {
+    const sInput = document.getElementById('history-search-input');
+    const rSelect = document.getElementById('history-filter-rule');
+    const resSelect = document.getElementById('history-filter-result');
+
+    if (sInput) sInput.value = '';
+    if (rSelect) rSelect.value = 'ALL';
+    if (resSelect) resSelect.value = 'ALL';
+
+    window.renderHistoryTable();
+    window.showToast('Cleared history table filters.');
+  };
+
+  /* Helper KPI Telemetry Updater */
+  window.updateTelemetryKPIs = function() {
+    const activePb = window.AT_STATE.prebuiltRules.filter(r => r.active).length;
+    const activeCr = window.AT_STATE.customRules.filter(r => r.active).length;
+    const totalPb = window.AT_STATE.prebuiltRules.length;
+    const totalCr = window.AT_STATE.customRules.length;
+
+    const kpiActive = document.getElementById('kpi-active-rules');
+    if (kpiActive) kpiActive.textContent = (activePb + activeCr) + ' / ' + (totalPb + totalCr);
+
+    let sumRuns = 0;
+    window.AT_STATE.prebuiltRules.forEach(r => sumRuns += r.runCount);
+    window.AT_STATE.customRules.forEach(r => sumRuns += r.runCount);
+
+    const kpiTriggers = document.getElementById('kpi-total-triggers');
+    if (kpiTriggers) kpiTriggers.textContent = sumRuns.toLocaleString();
+  };
+
+  /* Toast Helper */
+  window.showToast = function(message, type = 'info') {
+    const container = document.getElementById('at-toast-container');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.className = 'at-toast';
+    toast.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="16" x2="12" y2="12"/>
+        <line x1="12" y1="8" x2="12.01" y2="8"/>
+      </svg>
+      <span>${message}</span>
+    `;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transition = 'opacity 0.3s ease';
+      setTimeout(() => toast.remove(), 300);
+    }, 3200);
+  };
+
+  /* Auto-run initialization */
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(window.initAutomationModule, 50);
+  } else {
+    document.addEventListener('DOMContentLoaded', window.initAutomationModule);
+  }
+</script>
+
+<!-- Trigger execution fallback when injected via innerHTML -->
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+     style="display:none;"
+     onload="if(window.initAutomationModule){window.initAutomationModule();}"
+     onerror="if(window.initAutomationModule){window.initAutomationModule();}" />
+
+</body>
+</html>

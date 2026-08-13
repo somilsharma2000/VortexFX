@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Check-In — FORTREX</title>
+  <link rel="stylesheet" href="css/dala.css?v=4">
+  <script src="js/dala.js?v=2"></script>
+  <script src="js/auth.js?v=2"></script>
+  <script src="js/psychology.js"></script>
+  <style>
+    /* --- CUSTOM CHECKIN STYLES --- */
+    .checkin-card-box {
+      border: 1px solid #1a1a1a;
+      border-radius: 32px;
+      padding: 48px;
+      position: relative;
+      background: rgba(8, 9, 13, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    }
+
+    .top-glow-border {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--color-electric-iris), var(--color-saffron-spark), transparent);
+    }
+
+    .streak-display-number {
+      font-size: clamp(64px, 10vw, 120px);
+      font-weight: 400;
+      color: var(--color-bone-white);
+      line-height: 1;
+      letter-spacing: -4px;
+      text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .metric-box-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+    @media (max-width: 700px) {
+      .metric-box-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .metric-card-item {
+      background: rgba(12, 13, 18, 0.7);
+      border: 1px solid #1a1a1a;
+      border-radius: 20px;
+      padding: 24px;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .metric-card-item:hover {
+      border-color: #333333;
+      transform: translateY(-2px);
+    }
+
+    .metric-val {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--color-bone-white);
+      margin-bottom: 6px;
+    }
+
+    .metric-lbl {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-ash-gray);
+    }
+
+    /* Progress bar */
+    .progress-track {
+      width: 100%;
+      height: 12px;
+      background: #111218;
+      border: 1px solid #1a1a1a;
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--color-electric-iris), var(--color-saffron-spark));
+      border-radius: 999px;
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+    }
+
+    /* Calendar Grid */
+    .calendar-grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 12px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 600px) {
+      .calendar-grid-container {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 6px;
+      }
+      .checkin-card-box {
+        padding: 24px 16px;
+      }
+    }
+    @media (max-width: 480px) {
+      .metric-box-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .streak-display-number {
+        font-size: 56px !important;
+      }
+    }
+
+    /* Loading Spinner */
+    .checkin-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #ffffff;
+      animation: spin 0.8s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+  </style>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/fortrex-icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/fortrex-icon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/fortrex-icon-180.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="assets/fortrex-icon-512.png">
+    <meta property="og:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
+  <meta property="og:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
+  <meta property="og:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
+  <meta name="twitter:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
+  <meta name="twitter:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
+  <style>body { overflow-x: hidden; max-width: 100vw; }</style>
+    <style>@media (max-width: 768px) { .stats-grid, .rex-shop-grid, .profile-grid, .tier-grid, .achievements-grid, .step-grid { grid-template-columns: 1fr !important; } }</style>
+  <style>
+
+
+
+.profile-wrapper { display: flex; gap: 0.75rem; align-items: center; margin-left: auto; flex-shrink: 0; }
+.profile-wrapper .nav-link { white-space: nowrap; }
+</style>
+</head>
+<body>
+
+  <!-- PARTICLE BACKGROUND -->
+  <canvas id="particle-canvas"></canvas>
+
+    <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <a href="index.html" class="navbar-brand">
+        <div class="nav-logo"><img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 36px; height: 36px; object-fit: contain;"></div>
+      </a>
+    </div>
+    <ul class="nav-links" id="nav-links-main">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="tools.html" class="nav-link">Tools</a></li>
+      <li><a href="contests.html" class="nav-link">Tournaments</a></li>
+      <li><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+      <li><a href="rex.html" class="nav-link">REX</a></li>
+      <li><a href="journal.html" class="nav-link">Journal</a></li>
+      <li><a href="community.html" class="nav-link">Community</a></li>
+      
+      <li><a href="dashboard.html" class="nav-link nav-internal" style="display:none">Dashboard</a></li>
+      <li><a href="invite.html" class="nav-link nav-internal" style="display:none">Invite</a></li>
+      <li><a href="profile.html" class="nav-link nav-internal" style="display:none">Profile</a></li>
+      <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
+      <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
+      <div class="hamburger" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- SECTION 1: HEADER (data-shape="brain") -->
+    <section class="section" style="padding-top: 60px; padding-bottom: 40px; text-align: center;" data-shape="brain">
+      <div class="container reveal" style="max-width: 800px; margin: 0 auto;">
+        <div class="section-label" style="justify-content: center;">DAILY RITUAL</div>
+        <h1 class="display" style="margin-bottom: var(--spacing-24);">Check In</h1>
+        <p class="body-text-muted" data-psychology="checkinLines" style="max-width: 500px; margin: 0 auto;">Don't break the streak. Your future self will thank you.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: MAIN CHECK-IN ACTION CARD (data-shape="diamond") -->
+    <section class="section reveal" style="padding-top: 0;" data-shape="diamond">
+      <div class="container" style="max-width: 840px;">
+        <div class="checkin-card-box">
+          <div class="top-glow-border"></div>
+
+          <!-- LOGGED OUT VIEW -->
+          <div id="auth-required-banner" style="display: none; text-align: center; padding: 20px 0;">
+            <div style="font-size: 42px; margin-bottom: 16px;">🔐</div>
+            <h2 class="subheading" style="margin-bottom: 12px;">Sign In Required</h2>
+            <p style="font-size: 16px; color: var(--color-silver-mist); max-width: 480px; margin: 0 auto 28px; line-height: 1.6;">
+              Connect your Discord account to log your daily check-in, build your streak, and earn REX rewards.
+            </p>
+            <a href="signin.html" class="btn-primary" style="font-size: 16px; padding: 16px 40px;">
+              Please Sign In
+            </a>
+          </div>
+
+          <!-- LOGGED IN CHECK-IN INTERFACE -->
+          <div id="checkin-main-content">
+            <!-- Streak Display -->
+            <div style="text-align: center; margin-bottom: 40px;">
+              <div class="section-label" style="justify-content: center; margin-bottom: var(--spacing-12); color: var(--color-saffron-spark);">CURRENT STREAK</div>
+              <div id="streak-number" class="streak-display-number">0</div>
+              <div style="font-size: 18px; font-weight: 200; color: var(--color-silver-mist); margin-top: 8px;">days in a row</div>
+            </div>
+
+            <!-- Big Check-In Button & Status -->
+            <div style="text-align: center; margin-bottom: 32px;">
+              <button id="checkin-btn" class="btn-primary" style="font-size: 18px; padding: 18px 52px; min-width: 260px;">
+                Check In Today (+5 REX)
+              </button>
+              <p id="checkin-status" style="margin-top: 16px; font-size: 14px; color: var(--color-ash-gray);">
+                Daily check-in resets at 00:00 UTC
+              </p>
+            </div>
+
+            <!-- Feedback Container (Celebration / Already Checked In / Error with Retry) -->
+            <div id="checkin-feedback"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: METRICS OVERVIEW (data-shape="fortress") -->
+    <section class="section reveal" style="padding-top: 20px;" data-shape="fortress">
+      <div class="container" style="max-width: 840px;">
+        <div class="metric-box-grid">
+          <div class="metric-card-item">
+            <div class="metric-lbl">Current Streak</div>
+            <div id="overview-current-streak" class="metric-val" style="color: var(--color-electric-iris);">0 Days</div>
+            <div style="font-size: 12px; color: var(--color-ash-gray);">Active daily streak</div>
+          </div>
+          <div class="metric-card-item">
+            <div class="metric-lbl">Best Streak</div>
+            <div id="overview-best-streak" class="metric-val" style="color: var(--color-saffron-spark);">0 Days</div>
+            <div style="font-size: 12px; color: var(--color-ash-gray);">All-time record</div>
+          </div>
+          <div class="metric-card-item">
+            <div class="metric-lbl">REX Earned Today</div>
+            <div id="overview-rex-today" class="metric-val" style="color: #15846e;">0 REX</div>
+            <div style="font-size: 12px; color: var(--color-ash-gray);">Daily check-in + bonus</div>
+          </div>
+          <div class="metric-card-item">
+            <div class="metric-lbl">REX Balance</div>
+            <div id="overview-rex-balance" class="metric-val" style="color: var(--color-bone-white);">0 REX</div>
+            <div style="font-size: 12px; color: var(--color-ash-gray);">Total rewards balance</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: STREAK CALENDAR VISUALIZATION (data-shape="spiral") -->
+    <section class="section reveal" data-shape="spiral">
+      <div class="container" style="max-width: 840px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <div class="section-label">30-DAY STREAK HISTORY</div>
+            <h2 class="subheading">Consistency Grid</h2>
+          </div>
+          <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--color-ash-gray);">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-electric-iris); box-shadow: 0 0 6px var(--color-electric-iris);"></div>
+              <span>Checked in</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-saffron-spark); box-shadow: 0 0 6px var(--color-saffron-spark);"></div>
+              <span>Milestone</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <div style="width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid #333;"></div>
+              <span>Unfilled</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="calendar-grid" class="calendar-grid-container">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: MILESTONE PROGRESS BAR & REWARDS (data-shape="wave") -->
+    <section class="section reveal" data-shape="wave">
+      <div class="container" style="max-width: 840px;">
+        <div class="section-label">MILESTONE PROGRESS</div>
+        <h2 class="subheading" style="margin-bottom: 12px;">Streak Milestones</h2>
+        <p style="font-size: 15px; color: var(--color-silver-mist); margin-bottom: 28px;">
+          Unlock exponentially larger REX bonuses as you reach key streak milestones.
+        </p>
+
+        <!-- Progress Bar Container -->
+        <div style="background: rgba(10, 11, 15, 0.7); border: 1px solid #1a1a1a; border-radius: 20px; padding: 28px; margin-bottom: 32px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span style="font-size: 14px; font-weight: 600; color: var(--color-bone-white);">NEXT MILESTONE PROGRESS</span>
+            <span id="milestone-percentage" style="font-size: 14px; font-weight: 600; color: var(--color-saffron-spark);">0%</span>
+          </div>
+          
+          <div class="progress-track" style="margin-bottom: 12px;">
+            <div id="milestone-bar-fill" class="progress-fill"></div>
+          </div>
+
+          <div id="milestone-progress-label" style="font-size: 13px; color: var(--color-ash-gray);">
+            0 / 7 Days — 7 days until +50 REX Bonus!
+          </div>
+        </div>
+
+        <!-- 4 Milestone Cards Grid -->
+        <div id="milestones-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px;">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: PSYCHOLOGY & DISCIPLINE (data-shape="sphere") -->
+    <section class="section reveal" data-shape="sphere">
+      <div class="container" style="max-width: 840px;">
+        <div style="border: 1px solid #1a1a1a; border-radius: 28px; padding: 40px; background: rgba(8, 9, 13, 0.6);">
+          <div class="section-label" style="margin-bottom: var(--spacing-18);">PSYCHOLOGICAL ADVANTAGE</div>
+          <h2 class="heading-sm" style="margin-bottom: 16px;">The Power of Rhythmic Discipline</h2>
+          <p style="font-size: 15px; font-weight: 200; color: var(--color-silver-mist); line-height: 1.7; margin-bottom: 20px;">
+            In market trading, consistency beats intensity every time. Daily check-ins build the psychological habit of daily review, risk control, and emotional grounding.
+          </p>
+          <div style="padding: 16px 20px; border-left: 2px solid var(--color-electric-iris); background: rgba(212, 175, 55, 0.05); font-size: 14px; color: var(--color-silver-mist);">
+            Traders with a 7+ day check-in streak exhibit a 23% higher tournament ROI and 3.2x greater likelihood of reaching top leaderboard ranks.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: RISK DISCLAIMER & FOOTER (data-shape="scattered") -->
+    <section class="section reveal" style="padding-bottom: 80px;" data-shape="scattered">
+      <div class="container" style="max-width: 840px;">
+        <div style="border: 1px solid #1a1a1a; border-radius: 24px; padding: 32px; background: rgba(6, 7, 10, 0.8);">
+          <div class="section-label" style="margin-bottom: var(--spacing-12);">RISK WARNING</div>
+          <p style="font-size: 13px; font-weight: 200; color: var(--color-silver-mist); line-height: 1.6;">
+            Trading forex and cryptocurrency on margin carries a high level of risk and may not be suitable for all investors. You could lose some or all of your invested capital. FORTREX is a skill-based trading competition platform and does not execute trades, hold funds, or provide investment advice. Tournament prizes are distributed as REX reward points, which have no cash value.
+          </p>
+          <div style="margin-top: 20px; display: flex; gap: 20px; flex-wrap: wrap;">
+            <a href="terms.html" class="btn-ghost" style="font-size: 12px; text-transform: uppercase;">Terms & Conditions</a>
+            <a href="privacy.html" class="btn-ghost" style="font-size: 12px; text-transform: uppercase;">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+    <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(234, 202, 122, 0.2));">
+          <span class="nav-wordmark" style="color: #EACA7A; font-weight: 700;">FORTREX</span>
+        </div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="tools.html" class="footer-link">Tools</a>
+          <a href="contests.html" class="footer-link">Tournaments</a>
+          <a href="leaderboard.html" class="footer-link">Leaderboard</a>
+          <a href="community.html" class="footer-link">Community</a>
+          
+          <a href="terms.html" class="footer-link">Terms</a>
+          <a href="privacy.html" class="footer-link">Privacy</a>
+          <a href="signin.html" class="footer-link">Sign In</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2026 FORTREX — Skill-based trading competitions. Not a broker.</div>
+        <div class="footer-disclaimer" style="font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 8px; line-height: 1.5;">
+          FORTREX organizes skill-based trading competitions and tournaments. We are not a broker, financial institution, or asset manager. REX points are competition utility tokens used for arena rankings and prize distributions.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- COMPLETE INLINE JAVASCRIPT AT BOTTOM -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Mobile Menu Toggle
+      const hamburger = document.querySelector('.hamburger');
+      const navLinks = document.querySelector('.nav-links');
+      if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+          hamburger.classList.toggle('open');
+          navLinks.classList.toggle('open');
+        });
+      }
+
+      // 2. Check Login State
+      const trader = FORTREX_AUTH.isLoggedIn();
+
+      const authRequiredBanner = document.getElementById('auth-required-banner');
+      const checkinMainContent = document.getElementById('checkin-main-content');
+      const checkinBtn = document.getElementById('checkin-btn');
+      const checkinStatus = document.getElementById('checkin-status');
+      const checkinFeedback = document.getElementById('checkin-feedback');
+
+      if (!trader || !trader.id) {
+        // REQUIREMENT 1: Show 'Please sign in' message if not logged in
+        if (authRequiredBanner) authRequiredBanner.style.display = 'block';
+        if (checkinMainContent) checkinMainContent.style.display = 'none';
+        renderGuestState();
+        return;
+      }
+
+      // User is logged in
+      if (authRequiredBanner) authRequiredBanner.style.display = 'none';
+      if (checkinMainContent) checkinMainContent.style.display = 'block';
+
+      // Initialize state variables from trader object
+      let currentStreak = parseInt(trader.current_streak ?? trader.streak ?? 0, 10);
+      let bestStreak = parseInt(trader.best_streak ?? currentStreak, 10);
+      let rexBalance = parseInt(trader.rex_balance ?? trader.rex ?? 0, 10);
+      let rexEarnedToday = 0;
+
+      const todayStr = new Date().toISOString().split('T')[0];
+      const lastCheckinDate = localStorage.getItem(`fortrex_checkin_date_${trader.id}`);
+      let checkedInToday = (lastCheckinDate === todayStr);
+
+      // REQUIREMENT 2: Show current streak on load
+      updateDashboardUI({
+        streak: currentStreak,
+        bestStreak: bestStreak,
+        rexBalance: rexBalance,
+        rexEarnedToday: rexEarnedToday,
+        checkedIn: checkedInToday
+      });
+
+      // REQUIREMENT 3, 4, 5, 6, 7: Handle Check-In Button Click
+      if (checkinBtn) {
+        checkinBtn.addEventListener('click', async () => {
+          await performCheckin();
+        });
+      }
+
+      async function performCheckin() {
+        if (!trader || !trader.id) return;
+
+        // REQUIREMENT 4: Show loading state on button
+        setButtonLoading(true);
+        clearFeedback();
+
+        try {
+          // REQUIREMENT 3: Call dailyCheckin with { trader_id }
+          const res = await FORTREX_AUTH.callFunction('dailyCheckin', { trader_id: trader.id });
+          setButtonLoading(false);
+
+          if (res && res.success) {
+            // REQUIREMENT 5: Success celebration
+            const newStreak = res.new_streak ?? (currentStreak + 1);
+            const earned = res.rex_earned ?? 5;
+            const milestoneBonus = res.milestone_bonus ?? 0;
+            const totalEarnedToday = earned + milestoneBonus;
+            const newBalance = res.new_rex_balance ?? (rexBalance + totalEarnedToday);
+            const updatedBest = Math.max(bestStreak, res.best_streak ?? newStreak);
+
+            currentStreak = newStreak;
+            bestStreak = updatedBest;
+            rexBalance = newBalance;
+            rexEarnedToday = totalEarnedToday;
+            checkedInToday = true;
+
+            // Persist locally
+            localStorage.setItem(`fortrex_checkin_date_${trader.id}`, todayStr);
+            trader.current_streak = currentStreak;
+            trader.streak = currentStreak;
+            trader.best_streak = bestStreak;
+            trader.rex_balance = rexBalance;
+            localStorage.setItem(FORTREX_AUTH.TRADER_KEY, JSON.stringify(trader));
+
+            // Update UI
+            updateDashboardUI({
+              streak: currentStreak,
+              bestStreak: bestStreak,
+              rexBalance: rexBalance,
+              rexEarnedToday: rexEarnedToday,
+              checkedIn: true
+            });
+
+            // Show Celebration Banner
+            showSuccessCelebration({
+              newStreak: currentStreak,
+              earned: earned,
+              milestoneBonus: milestoneBonus,
+              milestoneReached: res.milestone_reached,
+              message: res.message || 'Check-in recorded! Streak extended.'
+            });
+
+          } else if (res && res.error && res.error.toLowerCase().includes('already checked in')) {
+            // REQUIREMENT 6: Already checked in state
+            checkedInToday = true;
+            if (res.current_streak) currentStreak = res.current_streak;
+            if (res.rex_balance) rexBalance = res.rex_balance;
+
+            localStorage.setItem(`fortrex_checkin_date_${trader.id}`, todayStr);
+            trader.current_streak = currentStreak;
+            trader.streak = currentStreak;
+            if (res.rex_balance) trader.rex_balance = rexBalance;
+            localStorage.setItem(FORTREX_AUTH.TRADER_KEY, JSON.stringify(trader));
+
+            updateDashboardUI({
+              streak: currentStreak,
+              bestStreak: bestStreak,
+              rexBalance: rexBalance,
+              rexEarnedToday: rexEarnedToday,
+              checkedIn: true
+            });
+
+            showAlreadyCheckedInState(res.error, currentStreak);
+
+          } else {
+            // REQUIREMENT 7: Show error message with retry button
+            const errorMsg = (res && res.error) ? res.error : 'Check-in failed. Please try again.';
+            showErrorState(errorMsg);
+          }
+        } catch (err) {
+          showErrorState('Network connection error. Please try again.');
+        }
+      }
+
+      function setButtonLoading(isLoading) {
+        if (!checkinBtn) return;
+        if (isLoading) {
+          checkinBtn.disabled = true;
+          checkinBtn.innerHTML = `<span class="checkin-spinner"></span> Checking in...`;
+          checkinBtn.style.opacity = '0.7';
+          checkinBtn.style.cursor = 'wait';
+          checkinBtn.style.background = '#333';
+          checkinBtn.style.border = 'none';
+          checkinBtn.style.color = '#999';
+        } else {
+          checkinBtn.disabled = false;
+          checkinBtn.style.cursor = 'pointer';
+          checkinBtn.style.opacity = '1';
+          checkinBtn.style.background = 'var(--color-electric-iris)';
+          checkinBtn.style.border = 'none';
+          checkinBtn.style.color = 'var(--color-bone-white)';
+          checkinBtn.innerHTML = checkedInToday ? `Retry Check-In (+5 REX)` : `Check In Today (+5 REX)`;
+        }
+      }
+
+      function updateDashboardUI(data) {
+        // Current streak display
+        const streakEl = document.getElementById('streak-number');
+        if (streakEl) streakEl.textContent = data.streak;
+
+        const overviewStreak = document.getElementById('overview-current-streak');
+        if (overviewStreak) overviewStreak.textContent = `${data.streak} Days`;
+
+        // REQUIREMENT 10: Best streak display
+        const overviewBest = document.getElementById('overview-best-streak');
+        if (overviewBest) overviewBest.textContent = `${data.bestStreak} Days`;
+
+        // REQUIREMENT 11: REX earned today display
+        const overviewEarned = document.getElementById('overview-rex-today');
+        if (overviewEarned) overviewEarned.textContent = data.rexEarnedToday > 0 ? `+${data.rexEarnedToday} REX` : '0 REX';
+
+        // Balance display
+        const overviewBalance = document.getElementById('overview-rex-balance');
+        if (overviewBalance) overviewBalance.textContent = `${data.rexBalance} REX`;
+
+        // Button state
+        if (data.checkedIn) {
+          checkinBtn.disabled = true;
+          checkinBtn.innerHTML = `Checked In Today ✓`;
+          checkinBtn.style.background = 'rgba(212, 175, 55, 0.15)';
+          checkinBtn.style.border = '1px solid var(--color-electric-iris)';
+          checkinBtn.style.color = 'var(--color-electric-iris)';
+          checkinBtn.style.cursor = 'default';
+          if (checkinStatus) checkinStatus.textContent = `Check-in locked for today. Next reset at 00:00 UTC.`;
+        } else {
+          checkinBtn.disabled = false;
+          checkinBtn.innerHTML = `Check In Today (+5 REX)`;
+          checkinBtn.style.background = 'var(--color-electric-iris)';
+          checkinBtn.style.border = 'none';
+          checkinBtn.style.color = 'var(--color-bone-white)';
+          if (checkinStatus) checkinStatus.textContent = `Daily check-in resets at 00:00 UTC`;
+        }
+
+        // REQUIREMENT 8: Streak calendar visualization
+        render30DayCalendar(data.streak, data.checkedIn);
+
+        // REQUIREMENT 9: Milestone progress bar
+        renderMilestones(data.streak);
+      }
+
+      function showSuccessCelebration(info) {
+        if (!checkinFeedback) return;
+
+        const milestoneHtml = (info.milestoneBonus > 0 || info.milestoneReached) ? `
+          <div style="margin-top: 12px; padding: 12px 20px; background: rgba(234, 202, 122, 0.15); border: 1px solid var(--color-saffron-spark); border-radius: 12px; color: var(--color-saffron-spark); font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+            <span>🎉 MILESTONE UNLOCKED!</span>
+            <span>+${info.milestoneBonus || 0} BONUS REX EARNED!</span>
+          </div>
+        ` : '';
+
+        checkinFeedback.innerHTML = `
+          <div style="border: 1px solid var(--color-saffron-spark); background: rgba(234, 202, 122, 0.08); border-radius: 20px; padding: 28px; margin-top: 24px; text-align: center; animation: fadeIn 0.4s ease;">
+            <div style="font-size: 36px; margin-bottom: 8px;">🔥</div>
+            <div style="font-size: 22px; font-weight: 600; color: var(--color-saffron-spark); margin-bottom: 6px;">
+              Streak Extended to ${info.newStreak} Days!
+            </div>
+            <div style="font-size: 15px; color: var(--color-silver-mist); margin-bottom: 8px;">
+              ${escapeHtml(info.message)}
+            </div>
+            <div style="font-size: 16px; color: var(--color-bone-white); font-weight: 600;">
+              Earned <span style="color: var(--color-electric-iris);">+${info.earned} REX</span> Today
+            </div>
+            ${milestoneHtml}
+          </div>
+        `;
+      }
+
+      function showAlreadyCheckedInState(msg, streak) {
+        if (!checkinFeedback) return;
+        checkinFeedback.innerHTML = `
+          <div style="border: 1px solid rgba(212, 175, 55, 0.4); background: rgba(212, 175, 55, 0.08); border-radius: 20px; padding: 24px; margin-top: 24px; text-align: center; animation: fadeIn 0.4s ease;">
+            <div style="font-size: 32px; margin-bottom: 8px;">✨</div>
+            <div style="font-size: 20px; font-weight: 600; color: var(--color-bone-white); margin-bottom: 6px;">
+              Come Back Tomorrow!
+            </div>
+            <div style="font-size: 14px; color: var(--color-silver-mist);">
+              You've already checked in today. Your active streak is <strong style="color: var(--color-saffron-spark);">${streak} days</strong>. Check back after 00:00 UTC to maintain your rhythm.
+            </div>
+          </div>
+        `;
+      }
+
+      function showErrorState(errorMsg) {
+        // FIRST: reset primary button from loading state
+        setButtonLoading(false);
+        if (checkinBtn) {
+          checkinBtn.innerHTML = checkinBtn.innerHTML.replace(/<span class="checkin-spinner"><\/span>\s*Checking in\.\.\./, 'Retry Check-In (+5 REX)');
+        }
+
+        if (!checkinFeedback) return;
+        checkinFeedback.innerHTML = `
+          <div id="check-in-error" style="border: 1px solid #ff4d4d; background: rgba(255, 77, 77, 0.1); border-radius: 20px; padding: 24px; margin-top: 24px; text-align: center; animation: fadeIn 0.4s ease;">
+            <div style="font-size: 24px; margin-bottom: 8px; color: #ff4d4d;">⚠️ Check-In Warning</div>
+            <div style="font-size: 14px; color: var(--color-bone-white); margin-bottom: 16px;">
+              ${escapeHtml(errorMsg)}
+            </div>
+            <button id="retry-checkin-btn" class="btn-primary" style="background: #ff4d4d; font-size: 13px; padding: 10px 28px;">
+              Retry Check-In
+            </button>
+          </div>
+        `;
+
+        const retryBtn = document.getElementById('retry-checkin-btn');
+        if (retryBtn) {
+          retryBtn.addEventListener('click', () => {
+            clearFeedback();
+            performCheckin();
+          });
+        }
+      }
+
+      function clearFeedback() {
+        if (checkinFeedback) checkinFeedback.innerHTML = '';
+      }
+
+      // REQUIREMENT 8: 30-Day Calendar Grid
+      function render30DayCalendar(streak, isCheckedIn) {
+        const grid = document.getElementById('calendar-grid');
+        if (!grid) return;
+
+        grid.innerHTML = '';
+        const totalDays = 30;
+        const milestones = [7, 14, 30];
+
+        // Day 30 corresponds to Today.
+        const activeEnd = isCheckedIn ? 30 : 29;
+        const activeStart = Math.max(1, activeEnd - streak + 1);
+
+        for (let d = 1; d <= totalDays; d++) {
+          const isActive = (d >= activeStart && d <= activeEnd && streak > 0);
+          const isMilestone = milestones.includes(d);
+          const isToday = (d === 30);
+
+          let bg = 'rgba(255, 255, 255, 0.02)';
+          let border = '1px solid #1a1a1a';
+          let color = '#555555';
+
+          if (isActive) {
+            if (isMilestone) {
+              bg = 'rgba(234, 202, 122, 0.2)';
+              border = '1px solid var(--color-saffron-spark)';
+              color = 'var(--color-saffron-spark)';
+            } else {
+              bg = 'rgba(212, 175, 55, 0.2)';
+              border = '1px solid var(--color-electric-iris)';
+              color = '#ffffff';
+            }
+          } else if (isToday && !isCheckedIn) {
+            bg = 'rgba(234, 202, 122, 0.06)';
+            border = '1px dashed var(--color-saffron-spark)';
+            color = 'var(--color-saffron-spark)';
+          }
+
+          const cell = document.createElement('div');
+          cell.style.cssText = `
+            background: ${bg};
+            border: ${border};
+            color: ${color};
+            border-radius: 12px;
+            padding: 12px 6px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+          `;
+
+          const dot = document.createElement('div');
+          dot.style.cssText = `
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: ${isActive ? (isMilestone ? 'var(--color-saffron-spark)' : 'var(--color-electric-iris)') : (isToday ? 'var(--color-saffron-spark)' : '#222')};
+            box-shadow: ${isActive ? (isMilestone ? '0 0 8px var(--color-saffron-spark)' : '0 0 8px var(--color-electric-iris)') : 'none'};
+          `;
+
+          const label = document.createElement('span');
+          label.style.cssText = `font-size: 12px; font-weight: ${isActive || isToday ? '600' : '400'};`;
+          label.textContent = isToday ? 'Today' : `D${d}`;
+
+          cell.appendChild(dot);
+          cell.appendChild(label);
+
+          if (isMilestone) {
+            const badge = document.createElement('span');
+            badge.style.cssText = `font-size: 9px; color: var(--color-saffron-spark); font-weight: 600; text-transform: uppercase;`;
+            badge.textContent = `${d}D`;
+            cell.appendChild(badge);
+          }
+
+          grid.appendChild(cell);
+        }
+      }
+
+      // REQUIREMENT 9: Milestone Progress Bar (7/14/30/90 days)
+      function renderMilestones(streak) {
+        const milestones = [
+          { days: 7, bonus: 50, title: "7-Day Bronze" },
+          { days: 14, bonus: 150, title: "14-Day Silver" },
+          { days: 30, bonus: 500, title: "30-Day Gold" },
+          { days: 90, bonus: 2000, title: "90-Day Legend" }
+        ];
+
+        let nextM = milestones.find(m => streak < m.days);
+        let prevDays = 0;
+
+        if (!nextM) {
+          nextM = milestones[milestones.length - 1];
+          prevDays = 30;
+        } else {
+          const idx = milestones.indexOf(nextM);
+          prevDays = idx > 0 ? milestones[idx - 1].days : 0;
+        }
+
+        const targetDays = nextM.days;
+        const remainingDays = Math.max(0, targetDays - streak);
+        const percent = Math.min(100, Math.max(0, Math.round(((streak - prevDays) / (targetDays - prevDays)) * 100)));
+
+        const barFill = document.getElementById('milestone-bar-fill');
+        if (barFill) barFill.style.width = `${percent}%`;
+
+        const barPctLabel = document.getElementById('milestone-percentage');
+        if (barPctLabel) barPctLabel.textContent = `${percent}%`;
+
+        const barTextLabel = document.getElementById('milestone-progress-label');
+        if (barTextLabel) {
+          if (streak >= 90) {
+            barTextLabel.textContent = `🎉 90+ Days Streak Legend! All milestones unlocked.`;
+          } else {
+            barTextLabel.textContent = `${streak} / ${targetDays} Days — ${remainingDays} day${remainingDays === 1 ? '' : 's'} until +${nextM.bonus} REX Bonus!`;
+          }
+        }
+
+        // Render Cards Grid
+        const cardsGrid = document.getElementById('milestones-grid');
+        if (!cardsGrid) return;
+
+        cardsGrid.innerHTML = milestones.map(m => {
+          const unlocked = streak >= m.days;
+          const isCurrent = !unlocked && (nextM.days === m.days);
+
+          let badgeHtml = `<span class="badge" style="background: rgba(255,255,255,0.05); color: var(--color-ash-gray); border: 1px solid #222;">LOCKED</span>`;
+          let cardBorder = '1px solid #1a1a1a';
+          let cardBg = 'rgba(10, 11, 15, 0.6)';
+
+          if (unlocked) {
+            badgeHtml = `<span class="badge" style="background: rgba(234, 202, 122, 0.18); color: var(--color-saffron-spark); border: 1px solid var(--color-saffron-spark);">UNLOCKED ✓</span>`;
+            cardBorder = '1px solid rgba(234, 202, 122, 0.4)';
+            cardBg = 'rgba(234, 202, 122, 0.05)';
+          } else if (isCurrent) {
+            badgeHtml = `<span class="badge" style="background: rgba(212, 175, 55, 0.18); color: var(--color-electric-iris); border: 1px solid var(--color-electric-iris);">IN PROGRESS</span>`;
+            cardBorder = '1px solid var(--color-electric-iris)';
+            cardBg = 'rgba(212, 175, 55, 0.08)';
+          }
+
+          return `
+            <div style="border: ${cardBorder}; background: ${cardBg}; border-radius: 20px; padding: 24px; text-align: center; transition: all 0.2s ease;">
+              <div style="margin-bottom: 12px;">${badgeHtml}</div>
+              <div style="font-size: 32px; font-weight: 600; color: ${unlocked ? 'var(--color-saffron-spark)' : 'var(--color-bone-white)'}; margin-bottom: 4px;">
+                +${m.bonus}
+              </div>
+              <div style="font-size: 12px; color: var(--color-electric-iris); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">
+                REX BONUS
+              </div>
+              <div style="font-size: 16px; font-weight: 600; color: var(--color-bone-white); margin-bottom: 2px;">
+                ${m.days} Days
+              </div>
+              <div style="font-size: 12px; color: var(--color-ash-gray);">
+                ${m.title}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function renderGuestState() {
+        render30DayCalendar(0, false);
+        renderMilestones(0);
+      }
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+    });
+  </script>
+
+    <script>
+      (function() {
+        const trader = localStorage.getItem('fortrex_trader');
+        if (trader) document.querySelectorAll('.nav-internal').forEach(el => el.style.display = '');
+      })();
+    </script>
+
+
+<script>
+// Mobile hamburger toggle
+document.addEventListener('DOMContentLoaded', function() {
+  var hamburger = document.querySelector('.hamburger');
+  var navLinks = document.querySelector('#nav-links-main');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+    // Close on link click
+    navLinks.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+  }
+});
+</script>
+
+</body>
+</html>

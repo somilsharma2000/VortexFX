@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Trade Wall — FORTREX</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- System Styles and Scripts -->
+  <link rel="stylesheet" href="css/dala.css?v=4">
+  <script src="js/dala.js?v=2"></script>
+  <script src="js/auth.js?v=2"></script>
+
+  <style>
+    :root {
+      --bg-black: #000000;
+      --bg-dark: #0a0a0a;
+      --card-bg: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
+      --card-border: #222222;
+      --gold-accent: #EACA7A;
+      --gold-glow: rgba(234, 202, 122, 0.25);
+      --purple-accent: #D4AF37;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --green-bull: #10B981;
+      --red-bear: #EF4444;
+      --font-body: 'Inter', sans-serif;
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-black);
+      background-image: radial-gradient(circle at 50% 0%, #0a0a0a 0%, #000000 100%);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* Background Particle Canvas */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Container */
+    .app-container {
+      position: relative;
+      z-index: 1;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      z-index: 100;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      text-decoration: none;
+    }
+
+    .nav-logo-svg {
+      width: 32px;
+      height: 32px;
+      filter: drop-shadow(0 0 6px rgba(234, 202, 122, 0.4));
+    }
+
+    .nav-wordmark {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 0.05em;
+      color: #FFFFFF;
+      background: linear-gradient(135deg, #FFFFFF 0%, #EACA7A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--gold-accent);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-primary-pill {
+      background: linear-gradient(135deg, #EACA7A 0%, #AA7C11 100%);
+      color: #000000;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 24px;
+      border-radius: 9999px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 15px rgba(234, 202, 122, 0.2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-primary-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(234, 202, 122, 0.4);
+      background: linear-gradient(135deg, #EACA7A 0%, #C8AA78 100%);
+    }
+
+    .btn-ghost-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 22px;
+      border-radius: 9999px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-ghost-pill:hover {
+      border-color: var(--gold-accent);
+      color: var(--gold-accent);
+      background: rgba(234, 202, 122, 0.08);
+    }
+
+    /* Mobile Hamburger */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Page Header */
+    .header-section {
+      padding: 60px 0 32px;
+      text-align: center;
+    }
+
+    .label-gold {
+      color: var(--gold-accent);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 4px 14px;
+      background: rgba(234, 202, 122, 0.1);
+      border: 1px solid rgba(234, 202, 122, 0.25);
+      border-radius: 9999px;
+    }
+
+    .headline {
+      font-family: var(--font-heading);
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #A1A1AA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtext {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 36px 0 48px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(234, 202, 122, 0.4);
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-accent), transparent);
+      opacity: 0.5;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .stat-value.gold {
+      color: var(--gold-accent);
+      text-shadow: 0 0 12px rgba(234, 202, 122, 0.3);
+    }
+
+    .stat-value.green {
+      color: var(--green-bull);
+    }
+
+    /* Filters & Search */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .filter-tabs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: rgba(234, 202, 122, 0.12);
+      border-color: var(--gold-accent);
+      color: var(--gold-accent);
+    }
+
+    .search-input {
+      background: #111111;
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 10px 18px;
+      border-radius: 9999px;
+      font-size: 14px;
+      outline: none;
+      min-width: 240px;
+      transition: border-color 0.2s ease;
+      font-family: var(--font-body);
+    }
+
+    .search-input:focus {
+      border-color: var(--gold-accent);
+    }
+
+    /* Trade Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    .trade-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .trade-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(234, 202, 122, 0.4);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(234, 202, 122, 0.1);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .direction-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .direction-badge.long {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--green-bull);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .direction-badge.short {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--red-bear);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .card-date {
+      color: var(--text-muted);
+      font-size: 12px;
+      font-family: var(--font-mono);
+    }
+
+    .pair-title {
+      font-family: var(--font-mono);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .trade-details {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .detail-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .detail-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .detail-value {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .pnl-badge {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .pnl-badge.positive {
+      color: var(--green-bull);
+      text-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+    }
+
+    .pnl-badge.negative {
+      color: var(--red-bear);
+      text-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+    }
+
+    .setup-notes {
+      font-size: 13px;
+      color: #CBD5E1;
+      margin-bottom: 20px;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-author {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .author-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-accent), var(--purple-accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: #000;
+    }
+
+    .author-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .verified-icon {
+      color: var(--gold-accent);
+      display: inline-flex;
+    }
+
+    .card-likes {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .card-likes:hover {
+      color: var(--gold-accent);
+      border-color: rgba(234, 202, 122, 0.3);
+    }
+
+    /* Log Own Trade Bottom Section */
+    .bottom-cta-banner {
+      background: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 80px;
+    }
+
+    .bottom-cta-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(234, 202, 122, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .bottom-cta-title {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .bottom-cta-desc {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 24px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 40px 0;
+      color: var(--text-muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .disclaimer {
+      max-width: 800px;
+      margin: 0 auto 16px;
+      line-height: 1.6;
+      color: #64748B;
+    }
+
+    .copyright {
+      color: #475569;
+      font-family: var(--font-mono);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .headline {
+        font-size: 36px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .mobile-menu-toggle {
+        display: block;
+      }
+    }
+  
+    /* MOBILE RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: #0A0B0F; flex-direction: column; padding: 40px 24px 24px; gap: 8px; z-index: 999; border-left: 1px solid rgba(234,202,122,0.15); transform: translateX(100%); transition: transform 0.3s ease; }
+      .nav-links.active { display: flex; transform: translateX(0); }
+      .nav-cta > a:not(.hamburger) { display: none; }
+      .hamburger { display: flex !important; cursor: pointer; }
+      .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      .hamburger.active span:nth-child(2) { opacity: 0; }
+      .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+      .footer-content { flex-direction: column; gap: 24px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 12px !important; }
+      .container { padding-left: 16px; padding-right: 16px; }
+      main { padding-top: 100px !important; padding-bottom: 40px !important; }
+      h1, .section-headline { font-size: 28px !important; }
+      h2 { font-size: 22px !important; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr !important; }
+      .auth-card, .card, .panel { width: 100% !important; max-width: 100% !important; }
+      table { font-size: 12px; }
+      .hide-mobile { display: none !important; }
+    }
+    @media (max-width: 480px) {
+      .nav-wordmark { font-size: 16px; }
+      .footer-links { gap: 8px !important; }
+      h1, .section-headline { font-size: 24px !important; }
+      .container { padding-left: 12px; padding-right: 12px; }
+    }
+
+    </style>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/fortrex-icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/fortrex-icon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/fortrex-icon-180.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="assets/fortrex-icon-512.png">
+    <meta property="og:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
+  <meta property="og:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
+  <meta property="og:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
+  <meta name="twitter:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
+  <meta name="twitter:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
+</head>
+<body>
+
+  <!-- Background Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="app-container">
+    <!-- Navbar -->
+    <header class="navbar">
+      <a href="index.html" class="nav-brand">
+        <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 32px; height: 32px; object-fit: contain; filter: drop-shadow(0 0 6px rgba(234, 202, 122, 0.3));">
+        
+      </a>
+
+      <ul class="nav-links" id="nav-links-main">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="tools.html" class="nav-link">Tools</a></li>
+      <li><a href="contests.html" class="nav-link">Tournaments</a></li>
+      <li><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+      <li><a href="rex.html" class="nav-link">REX</a></li>
+      <li><a href="journal.html" class="nav-link">Journal</a></li>
+      <li><a href="community.html" class="nav-link">Community</a></li>
+      
+      <li><a href="dashboard.html" class="nav-link nav-internal" style="display:none">Dashboard</a></li>
+      <li><a href="invite.html" class="nav-link nav-internal" style="display:none">Invite</a></li>
+      <li><a href="profile.html" class="nav-link nav-internal" style="display:none">Profile</a></li>
+      <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
+    </ul>
+
+            <div class="nav-cta" id="nav-cta-container">
+        <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
+        <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
+        <div class="hamburger" aria-label="Toggle Menu">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Header Section -->
+    <section class="header-section">
+      <span class="label-gold">COMMUNITY WALL</span>
+      <h1 class="headline">Real trades, real setups.</h1>
+      <p class="subtext">Trades shared by members — win rate is self-reported and unaudited.</p>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-label">Shared Setups</div>
+        <div class="stat-value gold" id="stat-total-setups">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Self-Reported Win Rate</div>
+        <div class="stat-value green" id="stat-win-rate">0%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Net Points</div>
+        <div class="stat-value gold" id="stat-net-points">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Verified Members</div>
+        <div class="stat-value" id="stat-verified-count">0</div>
+      </div>
+    </section>
+
+    <!-- Filter & Search Bar -->
+    <div class="filter-bar">
+      <div class="filter-tabs">
+        <button class="filter-btn active" onclick="filterTrades('all')">All Setups</button>
+        <button class="filter-btn" onclick="filterTrades('long')">LONGs</button>
+        <button class="filter-btn" onclick="filterTrades('short')">SHORTs</button>
+        <button class="filter-btn" onclick="filterTrades('forex')">Forex</button>
+        <button class="filter-btn" onclick="filterTrades('gold')">Gold (XAU)</button>
+        <button class="filter-btn" onclick="filterTrades('crypto')">Crypto</button>
+      </div>
+      <input type="text" id="trade-search" class="search-input" placeholder="Search pair or author..." onkeyup="searchTrades()">
+    </div>
+
+    <!-- Trade Cards Grid -->
+    <main class="cards-grid" id="trade-cards-container">
+      <!-- Sample trade journal entries — populated via backend API -->
+    </main>
+
+    <!-- Bottom Action Banner -->
+    <section class="bottom-cta-banner">
+      <h2 class="bottom-cta-title">Verified Your Analysis?</h2>
+      <p class="bottom-cta-desc">Log your execution, share setups with the community, and track your performance transparently.</p>
+      <a href="profile.html" id="log-trade-btn" class="btn-primary-pill">Log your own →</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(234, 202, 122, 0.2));">
+          <span class="nav-wordmark" style="color: #EACA7A; font-weight: 700;">FORTREX</span>
+        </div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="tools.html" class="footer-link">Tools</a>
+          <a href="contests.html" class="footer-link">Tournaments</a>
+          <a href="leaderboard.html" class="footer-link">Leaderboard</a>
+          <a href="community.html" class="footer-link">Community</a>
+          
+          <a href="terms.html" class="footer-link">Terms</a>
+          <a href="privacy.html" class="footer-link">Privacy</a>
+          <a href="signin.html" class="footer-link">Sign In</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2026 FORTREX — Skill-based trading competitions. Not a broker.</div>
+        <div class="footer-disclaimer" style="font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 8px; line-height: 1.5;">
+          FORTREX organizes skill-based trading competitions and tournaments. We are not a broker, financial institution, or asset manager. REX points are competition utility tokens used for arena rankings and prize distributions.
+        </div>
+      </div>
+    </div>
+  </footer>
+  </div>
+
+  <script>
+    // Sample trade entries for demonstration
+    const placeholderTrades = [
+      {
+        id: 1,
+        pair: 'XAU/USD',
+        direction: 'LONG',
+        date: 'Aug 12, 2026 · 12:45',
+        entry: '2,410.50',
+        exit: '2,425.00',
+        points: '+145 pts',
+        isPositive: true,
+        author: 'GoldScalper',
+        verified: true,
+        category: 'gold',
+        notes: 'Clean retest of 4H support zone with bullish engulfing confirmation on 15m timeframe.',
+        likes: 42
+      },
+      {
+        id: 2,
+        pair: 'EUR/USD',
+        direction: 'SHORT',
+        date: 'Aug 12, 2026 · 11:30',
+        entry: '1.0920',
+        exit: '1.0878',
+        points: '+42 pts',
+        isPositive: true,
+        author: 'FX_Master',
+        verified: true,
+        category: 'forex',
+        notes: 'Rejection at London session Highs following US CPI revision data.',
+        likes: 28
+      },
+      {
+        id: 3,
+        pair: 'BTC/USD',
+        direction: 'LONG',
+        date: 'Aug 12, 2026 · 09:15',
+        entry: '64,200',
+        exit: '64,820',
+        points: '+620 pts',
+        isPositive: true,
+        author: 'CryptoNinja',
+        verified: true,
+        category: 'crypto',
+        notes: 'Breakout from descending wedge pattern on high volume ahead of weekly close.',
+        likes: 67
+      },
+      {
+        id: 4,
+        pair: 'GBP/JPY',
+        direction: 'LONG',
+        date: 'Aug 11, 2026 · 22:10',
+        entry: '194.50',
+        exit: '195.38',
+        points: '+88 pts',
+        isPositive: true,
+        author: 'VortexAlpha',
+        verified: true,
+        category: 'forex',
+        notes: 'Yen weakness continuation setup after BOJ monetary policy update.',
+        likes: 31
+      },
+      {
+        id: 5,
+        pair: 'ETH/USD',
+        direction: 'SHORT',
+        date: 'Aug 11, 2026 · 18:40',
+        entry: '3,450',
+        exit: '3,485',
+        points: '-35 pts',
+        isPositive: false,
+        author: 'EtherTrader',
+        verified: false,
+        category: 'crypto',
+        notes: 'Attempted short at key resistance level, stopped out on unexpected rally.',
+        likes: 12
+      },
+      {
+        id: 6,
+        pair: 'USD/JPY',
+        direction: 'LONG',
+        date: 'Aug 11, 2026 · 14:20',
+        entry: '154.20',
+        exit: '154.74',
+        points: '+54 pts',
+        isPositive: true,
+        author: '—',
+        verified: true,
+        category: 'forex',
+        notes: 'Asia session trend continuation along the 20 EMA.',
+        likes: 24
+      },
+      {
+        id: 7,
+        pair: 'AUD/USD',
+        direction: 'SHORT',
+        date: 'Aug 11, 2026 · 10:05',
+        entry: '0.6650',
+        exit: '0.6620',
+        points: '+30 pts',
+        isPositive: true,
+        author: 'AussieFx',
+        verified: false,
+        category: 'forex',
+        notes: 'RBA rate holding commentary leading to AUD weakness.',
+        likes: 19
+      },
+      {
+        id: 8,
+        pair: 'NAS100',
+        direction: 'LONG',
+        date: 'Aug 10, 2026 · 16:30',
+        entry: '19,850',
+        exit: '19,960',
+        points: '+110 pts',
+        isPositive: true,
+        author: 'QuantApex',
+        verified: true,
+        category: 'crypto',
+        notes: 'US market opening bell impulse entry off key liquidity pool.',
+        likes: 55
+      },
+      {
+        id: 9,
+        pair: 'SOL/USD',
+        direction: 'LONG',
+        date: 'Aug 10, 2026 · 13:00',
+        entry: '152.00',
+        exit: '160.50',
+        points: '+850 pts',
+        isPositive: true,
+        author: 'SolanaSurfer',
+        verified: false,
+        category: 'crypto',
+        notes: 'DeFi TVL expansion breakout on daily timeframe.',
+        likes: 39
+      }
+    ];
+
+    let currentTrades = [...placeholderTrades];
+
+    // Auth & Navigation State
+    function updateNavState() {
+      const trader = localStorage.getItem('fortrex_trader');
+      const navLinksContainer = document.getElementById('nav-links-list');
+      const navCtaContainer = document.getElementById('nav-cta-container');
+      const logTradeBtn = document.getElementById('log-trade-btn');
+
+      if (trader) {
+        let traderObj = {};
+        try { traderObj = JSON.parse(trader); } catch(e){}
+
+        if (navLinksContainer) {
+          navLinksContainer.innerHTML = `
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="contests.html" class="nav-link">Tournaments</a></li>
+            <li><a href="journal.html" class="nav-link active">Journal Wall</a></li>
+            <li><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+            <li><a href="offers.html" class="nav-link">Rewards</a></li>
+            <li><a href="resources.html" class="nav-link">Resources</a></li>
+            <li><a href="profile.html" class="nav-link">Profile</a></li>
+            <li><a href="checkin.html" class="nav-link">Check-In</a></li>
+          `;
+        }
+
+        if (navCtaContainer) {
+          navCtaContainer.innerHTML = `
+            <a href="profile.html" style="display: flex; align-items: center; gap: 8px; color: var(--gold-accent); text-decoration: none; font-weight: 600; font-size: 13px; text-transform: uppercase;">
+              <div style="width: 30px; height: 30px; border-radius: 50%; background: rgba(234, 202, 122, 0.2); border: 1px solid var(--gold-accent); display: flex; align-items: center; justify-content: center; font-size: 12px; color: #FFF;">
+                ${(traderObj.username || 'T')[0].toUpperCase()}
+              </div>
+              <span>${traderObj.username || 'Trader'}</span>
+            </a>
+            <button onclick="FORTREX_AUTH.logout()" class="btn-ghost-pill" style="padding: 6px 16px; font-size: 12px;">Logout</button>
+          `;
+        }
+
+        if (logTradeBtn) {
+          logTradeBtn.href = 'profile.html';
+          logTradeBtn.innerHTML = 'Log your own →';
+        }
+      } else {
+        if (navLinksContainer) {
+          navLinksContainer.innerHTML = `
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="contests.html" class="nav-link">Tournaments</a></li>
+            <li><a href="journal.html" class="nav-link active">Journal Wall</a></li>
+            <li><a href="offers.html" class="nav-link">Rewards</a></li>
+            <li><a href="resources.html" class="nav-link">Resources</a></li>
+          `;
+        }
+
+        if (navCtaContainer) {
+          navCtaContainer.innerHTML = `
+            <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
+            <a href="signin.html" class="btn-primary-pill">Enter Arena</a>
+          `;
+        }
+
+        if (logTradeBtn) {
+          logTradeBtn.href = 'signin.html';
+          logTradeBtn.innerHTML = 'Log in to post →';
+        }
+      }
+    }
+
+    // Render Cards
+    function renderTradeCards(trades) {
+      const container = document.getElementById('trade-cards-container');
+      if (!container) return;
+
+      if (!trades || trades.length === 0) {
+        container.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);">No trades found matching your search.</div>`;
+        return;
+      }
+
+      container.innerHTML = trades.map(t => `
+        <article class="trade-card">
+          <div>
+            <div class="card-top">
+              <span class="direction-badge ${t.direction.toLowerCase()}">
+                ${t.direction === 'LONG' ? '▲ LONG' : '▼ SHORT'}
+              </span>
+              <span class="card-date">${t.date}</span>
+            </div>
+
+            <div class="pair-title">
+              <span>${t.pair}</span>
+              <span class="pnl-badge ${t.isPositive ? 'positive' : 'negative'}">${t.points}</span>
+            </div>
+
+            <div class="trade-details">
+              <div class="detail-group">
+                <span class="detail-label">Entry</span>
+                <span class="detail-value">${t.entry}</span>
+              </div>
+              <div style="color: var(--text-muted); font-size: 14px;">→</div>
+              <div class="detail-group">
+                <span class="detail-label">Exit</span>
+                <span class="detail-value">${t.exit}</span>
+              </div>
+            </div>
+
+            <p class="setup-notes">${t.notes}</p>
+          </div>
+
+          <div class="card-author">
+            <div class="author-info">
+              <div class="author-avatar">${t.author[0].toUpperCase()}</div>
+              <div class="author-name">
+                @${t.author}
+                ${t.verified ? `
+                  <span class="verified-icon" title="Verified Trader">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                  </span>
+                ` : ''}
+              </div>
+            </div>
+            <button class="card-likes" onclick="likeTrade(${t.id}, this)">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+              <span>${t.likes}</span>
+            </button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // Filter Logic
+    function filterTrades(filter) {
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      if (filter === 'all') {
+        currentTrades = [...placeholderTrades];
+      } else if (filter === 'long' || filter === 'short') {
+        currentTrades = placeholderTrades.filter(t => t.direction.toLowerCase() === filter);
+      } else {
+        currentTrades = placeholderTrades.filter(t => t.category === filter);
+      }
+      renderTradeCards(currentTrades);
+    }
+
+    function searchTrades() {
+      const q = document.getElementById('trade-search').value.toLowerCase().trim();
+      const filtered = currentTrades.filter(t => 
+        t.pair.toLowerCase().includes(q) || 
+        t.author.toLowerCase().includes(q) ||
+        t.notes.toLowerCase().includes(q)
+      );
+      renderTradeCards(filtered);
+    }
+
+    function likeTrade(id, btnElement) {
+      const trade = placeholderTrades.find(t => t.id === id);
+      if (trade) {
+        trade.likes += 1;
+        btnElement.querySelector('span').textContent = trade.likes;
+        btnElement.style.color = '#EACA7A';
+      }
+    }
+
+    // Attempt backend fetch if available
+    async function loadCommunityTrades() {
+      try {
+        if (typeof FORTREX_AUTH !== 'undefined' && FORTREX_AUTH.callFunction) {
+          const res = await FORTREX_AUTH.callFunction('getTraderProfile', {});
+          if (res && res.success && res.trades && res.trades.length > 0) {
+            currentTrades = res.trades;
+          }
+        }
+      } catch (err) {
+        console.log('Using default community trade set');
+      }
+      renderTradeCards(currentTrades);
+    }
+
+    // Particle Canvas Animation
+    function initParticleCanvas() {
+      const canvas = document.getElementById('particle-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const particles = [];
+      const numParticles = 40;
+
+      for (let i = 0; i < numParticles; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          radius: Math.random() * 2 + 0.8,
+          color: Math.random() > 0.4 ? 'rgba(234, 202, 122, ' : 'rgba(212, 175, 55, ',
+          alpha: Math.random() * 0.5 + 0.15
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color + p.alpha + ')';
+          ctx.fill();
+
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dx = p.x - p2.x;
+            const dy = p.y - p2.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 120) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `rgba(234, 202, 122, ${0.15 * (1 - dist / 120)})`;
+              ctx.lineWidth = 0.6;
+              ctx.stroke();
+            }
+          }
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+    }
+
+    // Init page
+    document.addEventListener('DOMContentLoaded', () => {
+      updateNavState();
+      loadCommunityTrades();
+      initParticleCanvas();
+    });
+  </script>
+
+    <script>
+      (function() {
+        const trader = localStorage.getItem('fortrex_trader');
+        if (trader) document.querySelectorAll('.nav-internal').forEach(el => el.style.display = '');
+      })();
+    </script>
+
+
+<script>
+// Mobile hamburger toggle
+document.addEventListener('DOMContentLoaded', function() {
+  var hamburger = document.querySelector('.hamburger');
+  var navLinks = document.querySelector('#nav-links-main');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+    // Close on link click
+    navLinks.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+  }
+});
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var hamburger = document.querySelector('.hamburger');
+  var navLinks = document.querySelector('#nav-links-main');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+    navLinks.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+  }
+});
+</script>
+
+</body>
+</html>

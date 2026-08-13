@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resources — FORTREX</title>
+  <link rel="stylesheet" href="css/dala.css?v=4">
+  <script src="js/dala.js?v=2"></script>
+  <script src="js/auth.js?v=2"></script>
+  <script src="js/psychology.js"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/fortrex-icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/fortrex-icon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/fortrex-icon-180.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="assets/fortrex-icon-512.png">
+    <meta property="og:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
+
+<style>
+@media (max-width: 768px) {
+  .nav-links { display: none !important; }
+  .nav-links.active { display: flex !important; }
+  .hamburger { display: flex !important; }
+  .nav-cta > a:not(.hamburger) { display: none; }
+  .footer-content, .footer-grid { flex-direction: column !important; gap: 24px !important; text-align: center !important; }
+  .footer-links { flex-wrap: wrap; justify-content: center; gap: 12px !important; }
+  .container { padding-left: 16px !important; padding-right: 16px !important; }
+  main { padding-top: 100px !important; }
+  h1 { font-size: 28px !important; }
+  h2 { font-size: 22px !important; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 480px) {
+  .nav-wordmark { font-size: 16px !important; }
+  h1 { font-size: 24px !important; }
+}
+</style>
+  <meta property="og:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
+  <meta property="og:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
+  <meta name="twitter:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
+  <meta name="twitter:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
+  <style>body { overflow-x: hidden; max-width: 100vw; }</style>
+</head>
+<body>
+
+  <canvas id="particle-canvas"></canvas>
+
+    <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <a href="index.html" class="navbar-brand">
+        <div class="nav-logo"><img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 36px; height: 36px; object-fit: contain;"></div>
+      </a>
+    </div>
+    <ul class="nav-links" id="nav-links-main">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="tools.html" class="nav-link">Tools</a></li>
+      <li><a href="contests.html" class="nav-link">Tournaments</a></li>
+      <li><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+      <li><a href="rex.html" class="nav-link">REX</a></li>
+      <li><a href="journal.html" class="nav-link">Journal</a></li>
+      <li><a href="community.html" class="nav-link">Community</a></li>
+      
+      <li><a href="dashboard.html" class="nav-link nav-internal" style="display:none">Dashboard</a></li>
+      <li><a href="invite.html" class="nav-link nav-internal" style="display:none">Invite</a></li>
+      <li><a href="profile.html" class="nav-link nav-internal" style="display:none">Profile</a></li>
+      <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
+      <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
+      <div class="hamburger" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HEADER -->
+    <section class="section" style="padding-top: 60px; padding-bottom: 40px;" data-shape="galaxy">
+      <div class="container reveal">
+        <div class="section-label">THE ACADEMY</div>
+        <h1 class="display" style="margin-bottom: var(--spacing-24);">Resources</h1>
+        <p class="body-text-muted" style="max-width: 540px;">
+          Everything you need to compete. Trading fundamentals, tournament strategy, risk management, and past tournament breakdowns.
+        </p>
+      </div>
+    </section>
+
+    <!-- LEARNING PATHS -->
+    <section class="section reveal" style="padding-top: 0;" data-shape="brain">
+      <div class="container">
+        <div class="section-label" style="margin-bottom: var(--spacing-36);">LEARNING PATHS</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-60);">
+          
+          <!-- Path 1 -->
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-electric-iris);">01 — BEGINNER</div>
+            <h3 style="font-size: 27px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">Trading Fundamentals</h3>
+            <p class="float-item-body" style="margin-bottom: var(--spacing-18);">
+              Start here if you're new to forex or crypto. Learn how markets work, what moves prices, and how to place your first trade on MT5.
+            </p>
+            <div style="font-size: 14px; color: var(--color-ash-gray); margin-bottom: var(--spacing-6);">8 modules · 2 hours</div>
+            <a href="faq.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Start Learning →</a>
+          </div>
+
+          <!-- Path 2 -->
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-electric-iris);">02 — INTERMEDIATE</div>
+            <h3 style="font-size: 27px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">Tournament Strategy</h3>
+            <p class="float-item-body" style="margin-bottom: var(--spacing-18);">
+              How to maximize ROI in a sealed-results tournament. Position sizing, timing, and risk approach for competitive trading.
+            </p>
+            <div style="font-size: 14px; color: var(--color-ash-gray); margin-bottom: var(--spacing-6);">6 modules · 1.5 hours</div>
+            <a href="faq.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Start Learning →</a>
+          </div>
+
+          <!-- Path 3 -->
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-electric-iris);">03 — ADVANCED</div>
+            <h3 style="font-size: 27px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">Risk Management</h3>
+            <p class="float-item-body" style="margin-bottom: var(--spacing-18);">
+              The difference between winning and blowing up an account. Learn position sizing, stop-loss strategy, and drawdown control.
+            </p>
+            <div style="font-size: 14px; color: var(--color-ash-gray); margin-bottom: var(--spacing-6);">5 modules · 1 hour</div>
+            <a href="faq.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Start Learning →</a>
+          </div>
+
+          <!-- Path 4 -->
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-electric-iris);">04 — MASTERY</div>
+            <h3 style="font-size: 27px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">Trading Analysis</h3>
+            <p class="float-item-body" style="margin-bottom: var(--spacing-18);">
+              How to analyze your trades, identify patterns, and optimize your strategy for the next tournament.
+            </p>
+            <div style="font-size: 14px; color: var(--color-ash-gray); margin-bottom: var(--spacing-6);">4 modules · 45 min</div>
+            <a href="faq.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Start Learning →</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED GUIDES -->
+    <section class="section reveal" data-shape="discord">
+      <div class="container">
+        <div class="section-label" style="margin-bottom: var(--spacing-36);">FEATURED GUIDES</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--spacing-60);">
+          
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-saffron-spark);">TOURNAMENT STRATEGY</div>
+            <h3 style="font-size: 27px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">How to Win a Sealed Tournament</h3>
+            <p class="float-item-body" style="margin-bottom: var(--spacing-18);">
+              Why sealed results change everything. Without knowing where you stand, psychology matters more than position tracking. Learn the mindset that wins.
+            </p>
+            <div style="display: flex; align-items: center; gap: var(--spacing-24);">
+              <span style="font-size: 14px; color: var(--color-ash-gray);">8 min read</span>
+              <a href="index.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Read →</a>
+            </div>
+          </div>
+
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-saffron-spark);">RISK MANAGEMENT</div>
+            <h3 style="font-size: 27px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">The 2% Rule for Tournament Traders</h3>
+            <p class="float-item-body" style="margin-bottom: var(--spacing-18);">
+              Never risk more than 2% of your account on a single trade. This classic rule becomes critical in tournaments where one bad trade can end your run.
+            </p>
+            <div style="display: flex; align-items: center; gap: var(--spacing-24);">
+              <span style="font-size: 14px; color: var(--color-ash-gray);">6 min read</span>
+              <a href="index.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Read →</a>
+            </div>
+          </div>
+
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-saffron-spark);">GETTING STARTED</div>
+            <h3 style="font-size: 27px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">Setting Up Your XM MT5 Account</h3>
+            <p class="float-item-body" style="margin-bottom: var(--spacing-18);">
+              Step-by-step guide to opening an XM account, installing MT5, and linking it to FORTREX FX for tournament participation.
+            </p>
+            <div style="display: flex; align-items: center; gap: var(--spacing-24);">
+              <span style="font-size: 14px; color: var(--color-ash-gray);">12 min read</span>
+              <a href="index.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Read →</a>
+            </div>
+          </div>
+
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-saffron-spark);">FOREX FUNDAMENTALS</div>
+            <h3 style="font-size: 27px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">Understanding Currency Pairs</h3>
+            <p class="float-item-body" style="margin-bottom: var(--spacing-18);">
+              What EUR/USD, GBP/JPY and other pairs actually mean. How spreads, pip values, and leverage work in real trading.
+            </p>
+            <div style="display: flex; align-items: center; gap: var(--spacing-24);">
+              <span style="font-size: 14px; color: var(--color-ash-gray);">10 min read</span>
+              <a href="index.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Read →</a>
+            </div>
+          </div>
+
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-saffron-spark);">ANALYSIS</div>
+            <h3 style="font-size: 27px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">Improving Your Trade Analysis</h3>
+            <p class="float-item-body" style="margin-bottom: var(--spacing-18);">
+              Advanced Analysis analyzes your trade history and surfaces patterns. Learn how to read its insights and turn them into better tournament performance.
+            </p>
+            <div style="display: flex; align-items: center; gap: var(--spacing-24);">
+              <span style="font-size: 14px; color: var(--color-ash-gray);">7 min read</span>
+              <a href="index.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Read →</a>
+            </div>
+          </div>
+
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-saffron-spark);">CRYPTO TRADING</div>
+            <h3 style="font-size: 27px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">Crypto Markets for Forex Traders</h3>
+            <p class="float-item-body" style="margin-bottom: var(--spacing-18);">
+              How crypto differs from forex in volatility, session timing, and liquidity. What forex traders need to know before trading crypto in tournaments.
+            </p>
+            <div style="display: flex; align-items: center; gap: var(--spacing-24);">
+              <span style="font-size: 14px; color: var(--color-ash-gray);">9 min read</span>
+              <a href="index.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Read →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TOURNAMENT REPLAYS & TRADE SETUPS -->
+    <section class="section reveal" data-shape="metatrader">
+      <div class="container">
+        <div class="section-label" style="margin-bottom: var(--spacing-36);">TOURNAMENT REPLAYS</div>
+        <h2 style="font-size: 48px; font-weight: 400; letter-spacing: -1.68px; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">
+          Winning trade breakdowns
+        </h2>
+        <p class="body-text-muted" style="max-width: 480px; margin-bottom: var(--spacing-36);">
+          Real trades from past tournament winners. See exactly what they did, when they entered, and why it worked.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-60);">
+          
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-electric-iris);">SPRING SMASH 2026 — CHAMPION</div>
+            <h3 style="font-size: 24px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">TitanMaverick's +182% Run</h3>
+            <p class="float-item-body" style="margin-bottom: var(--spacing-18);">
+              58 trades over 14 days. Breakdown of the top 5 positions that drove the winning ROI. Includes entry rationale, position sizing, and exit strategy.
+            </p>
+            <div style="display: flex; align-items: center; gap: var(--spacing-24);">
+              <span style="font-size: 14px; color: var(--color-ash-gray);">15 min breakdown</span>
+              <a href="index.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Watch →</a>
+            </div>
+          </div>
+
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-electric-iris);">WINTER WARS 2025 — CHAMPION</div>
+            <h3 style="font-size: 24px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">RogueViper's Gold Setup</h3>
+            <p class="float-item-body" style="margin-bottom: var(--spacing-18);">
+              How a single XAU/USD position contributed 40% of the tournament-winning ROI. The technical setup, risk taken, and management.
+            </p>
+            <div style="display: flex; align-items: center; gap: var(--spacing-24);">
+              <span style="font-size: 14px; color: var(--color-ash-gray);">12 min breakdown</span>
+              <a href="index.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Watch →</a>
+            </div>
+          </div>
+
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-electric-iris);">SPRING SMASH 2026 — 2ND PLACE</div>
+            <h3 style="font-size: 24px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">FluxKairos' Scalping Strategy</h3>
+            <p class="float-item-body" style="margin-bottom: var(--spacing-18);">
+              A deep-dive into scalp trading EUR/USD during high-volume sessions for consistent tournament performance.
+            </p>
+            <div style="display: flex; align-items: center; gap: var(--spacing-24);">
+              <span style="font-size: 14px; color: var(--color-ash-gray);">10 min breakdown</span>
+              <a href="index.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Watch →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TRADING TOOLS & RESOURCES -->
+    <section class="section reveal" data-shape="wave">
+      <div class="container">
+        <div class="section-label" style="margin-bottom: var(--spacing-36);">TOOLS & REFERENCES</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--spacing-60);">
+          
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-electric-iris);">CALCULATOR</div>
+            <h3 style="font-size: 24px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">ROI Calculator</h3>
+            <p class="float-item-body">Calculate your tournament ROI based on starting balance and current equity.</p>
+          </div>
+
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-electric-iris);">REFERENCE</div>
+            <h3 style="font-size: 24px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">Forex Glossary</h3>
+            <p class="float-item-body">Every term you need to know — pip, spread, leverage, margin, lot size, and more.</p>
+          </div>
+
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-electric-iris);">REFERENCE</div>
+            <h3 style="font-size: 24px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">Tournament Rules</h3>
+            <p class="float-item-body">Complete rulebook for FORTREX FX tournaments. Eligibility, scoring, prohibited strategies.</p>
+          </div>
+
+          <div class="float-item">
+            <div class="float-item-label" style="color: var(--color-electric-iris);">GUIDE</div>
+            <h3 style="font-size: 24px; font-weight: 400; color: var(--color-bone-white); margin-bottom: var(--spacing-12);">Market Sessions</h3>
+            <p class="float-item-body">When forex markets open and close. Sydney, Tokyo, London, New York session timings.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section reveal" data-shape="spiral">
+      <div class="container">
+        <div class="section-label" style="margin-bottom: var(--spacing-36);">QUESTIONS</div>
+        <h2 style="font-size: 48px; font-weight: 400; letter-spacing: -1.68px; color: var(--color-bone-white); margin-bottom: var(--spacing-36);">
+          Frequently asked
+        </h2>
+
+        <div style="max-width: 720px;">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span class="accordion-question">How do I join a tournament?</span>
+              <span class="accordion-toggle">+</span>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-answer">Register on FORTREX FX with your Discord account, link your MT5 account number, and meet the entry criteria. Once eligible, you're automatically entered into the next tournament. Once eligible, you're automatically entered into the next tournament.</div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span class="accordion-question">Why are results sealed until the last day?</span>
+              <span class="accordion-toggle">+</span>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-answer">Sealed results keep the competition fair and exciting. Without live rankings, traders can't adjust their strategy based on others' performance. You trade your own game and find out where you stand on reveal day.</div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span class="accordion-question">How is ROI calculated?</span>
+              <span class="accordion-toggle">+</span>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-answer">ROI = (Final Equity - Starting Balance) / Starting Balance × 100. Your starting balance is recorded when the tournament begins, and your final equity is checked on the last day.</div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span class="accordion-question">What markets can I trade in tournaments?</span>
+              <span class="accordion-toggle">+</span>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-answer">Forex and Crypto. Primarily forex pairs (EUR/USD, GBP/USD, XAU/USD, etc.) with crypto available as secondary instruments. All trading happens on your own MT5 terminal.</div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span class="accordion-question">How are prizes paid out?</span>
+              <span class="accordion-toggle">+</span>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-answer">Prizes are distributed in REX — the FORTREX FX platform currency. REX can be used for rebates, rewards, and other platform features. Prize distribution happens after the admin verifies final results on reveal day.</div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span class="accordion-question">Do I need to pay to use FORTREX FX?</span>
+              <span class="accordion-toggle">+</span>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-answer">No. FORTREX FX is completely free. You trade with your own funds on your own MT5 terminal. The platform doesn't charge any subscription or entry fee.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section reveal" style="text-align: center;" data-shape="scattered">
+      <div class="container">
+        <div class="section-label" style="justify-content: center;">READY?</div>
+        <h2 style="font-size: clamp(36px, 5vw, 78px); font-weight: 400; letter-spacing: -0.04em; color: var(--color-bone-white); margin-bottom: var(--spacing-24);">
+          Learn. Compete. Win.
+        </h2>
+        <p class="body-text-muted" style="max-width: 500px; margin: 0 auto var(--spacing-36);">
+          Start with the fundamentals and work your way up. The arena is waiting.
+        </p>
+        <a href="signin.html" class="btn-primary">Join the Academy</a>
+      </div>
+    </section>
+  </main>
+
+
+    <!-- RISK DISCLAIMER -->
+    <section class="section reveal" style="padding-bottom: 80px;" data-shape="scattered">
+      <div class="container" style="max-width: 800px;">
+        <div style="border: 1px solid #1a1a1a; border-radius: 24px; padding: 36px;">
+          <div class="section-label" style="margin-bottom: var(--spacing-18);">RISK WARNING</div>
+          <p style="font-size: 14px; font-weight: 200; color: var(--color-silver-mist); line-height: 1.6;">
+            FORTREX organizes skill-based trading competitions and tournaments. We are not a broker, financial institution, or asset manager. REX points are competition utility tokens used for arena rankings and prize distributions.
+          </p>
+          <div style="margin-top: var(--spacing-18); display: flex; gap: var(--spacing-24); flex-wrap: wrap;">
+            <a href="terms.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Terms & Conditions</a>
+            <a href="privacy.html" class="btn-ghost" style="font-size: 14px; text-transform: uppercase;">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(234, 202, 122, 0.2));">
+          <span class="nav-wordmark" style="color: #EACA7A; font-weight: 700;">FORTREX</span>
+        </div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="tools.html" class="footer-link">Tools</a>
+          <a href="contests.html" class="footer-link">Tournaments</a>
+          <a href="leaderboard.html" class="footer-link">Leaderboard</a>
+          <a href="community.html" class="footer-link">Community</a>
+          
+          <a href="terms.html" class="footer-link">Terms</a>
+          <a href="privacy.html" class="footer-link">Privacy</a>
+          <a href="signin.html" class="footer-link">Sign In</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2026 FORTREX — Skill-based trading competitions. Not a broker.</div>
+        <div class="footer-disclaimer" style="font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 8px; line-height: 1.5;">
+          FORTREX organizes skill-based trading competitions and tournaments. We are not a broker, financial institution, or asset manager. REX points are competition utility tokens used for arena rankings and prize distributions.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+    <script>
+      (function() {
+        const trader = localStorage.getItem('fortrex_trader');
+        if (trader) document.querySelectorAll('.nav-internal').forEach(el => el.style.display = '');
+      })();
+    </script>
+
+
+<script>
+// Mobile hamburger toggle
+document.addEventListener('DOMContentLoaded', function() {
+  var hamburger = document.querySelector('.hamburger');
+  var navLinks = document.querySelector('#nav-links-main');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+    // Close on link click
+    navLinks.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+  }
+});
+</script>
+
+</body>
+</html>

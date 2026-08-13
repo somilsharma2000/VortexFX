@@ -1,0 +1,1440 @@
+<!--
+  ==========================================================================
+  FORTREX FX — REX TREASURY ADMIN MODULE
+  App ID: 6a7c208f76be9b02b86b0380
+  Aesthetic: High-Tech Fighter Jet Cockpit
+  Palette: Obsidian #06070A | Cards #0D0F18 | Gold #EACA7A | Iris #D4AF37
+  ==========================================================================
+-->
+
+<style>
+  /* Base Variables & Theme */
+  :root {
+    --bg-obsidian: #06070A;
+    --bg-card: #0D0F18;
+    --bg-card-hover: #131625;
+    --bg-sidebar: #090B12;
+    --bg-input: #121522;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-glow: rgba(212, 175, 55, 0.3);
+    --border-gold: rgba(234, 202, 122, 0.4);
+    --text-main: #FFFFFF;
+    --text-muted: #9A9A9A;
+    --text-dim: #64687A;
+    --accent-iris: #D4AF37;
+    --accent-iris-glow: rgba(212, 175, 55, 0.15);
+    --accent-gold: #EACA7A;
+    --accent-gold-glow: rgba(234, 202, 122, 0.15);
+    --status-live: #22C55E;
+    --status-paused: #F59E0B;
+    --status-completed: #3B82F6;
+  }
+
+  .rex-treasury-container {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+
+  /* Header Bar */
+  .rex-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rex-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-gold), var(--accent-iris), transparent);
+  }
+
+  .rex-title-block h2 {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .rex-title-block p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .rex-badge {
+    background: rgba(234, 202, 122, 0.1);
+    border: 1px solid var(--border-gold);
+    color: var(--accent-gold);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  .rex-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* Standard Grid Layouts */
+  .stats-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  @media (max-width: 900px) {
+    .stats-grid-3 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .two-col-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 1024px) {
+    .two-col-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Stat Cards */
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .stat-card:hover {
+    border-color: var(--border-glow);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-iris), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .stat-card:hover::before {
+    opacity: 1;
+  }
+
+  .stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  .stat-icon-wrapper {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stat-value-gold {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--accent-gold);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+
+  .stat-subtext {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .trend-up {
+    color: var(--status-live);
+    font-weight: 600;
+  }
+
+  /* Module Section Card */
+  .treasury-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-header-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* Form Elements */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .form-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .form-input,
+  .form-control {
+    background: var(--bg-input);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: var(--text-main);
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.2s ease;
+    width: 100%;
+  }
+
+  .form-input:focus,
+  .form-control:focus {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 12px rgba(234, 202, 122, 0.2);
+    background: #161928;
+  }
+
+  .form-input::placeholder,
+  .form-control::placeholder {
+    color: var(--text-dim);
+  }
+
+  select.form-input,
+  select.form-control {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%209A9A9A' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  select.form-input option,
+  select.form-control option {
+    background: #121522;
+    color: #FFFFFF;
+  }
+
+  .preset-chips {
+    display: flex;
+    gap: 8px;
+    margin-top: -6px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .preset-chip {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .preset-chip:hover {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+    background: rgba(234, 202, 122, 0.08);
+  }
+
+  /* Buttons */
+  .btn-gold,
+  .btn-gold-accent {
+    background: linear-gradient(135deg, var(--accent-gold), #C8AA78);
+    color: #000000;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 15px rgba(234, 202, 122, 0.2);
+  }
+
+  .btn-gold:hover,
+  .btn-gold-accent:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 22px rgba(234, 202, 122, 0.4);
+  }
+
+  .btn-gold:disabled,
+  .btn-gold-accent:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .btn-primary,
+  .btn-primary-accent {
+    background: linear-gradient(135deg, var(--accent-iris), #9A7B1C);
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+  }
+
+  .btn-primary:hover,
+  .btn-primary-accent:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  }
+
+  .btn-outline-sm {
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-main);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-outline-sm:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  /* REX Economy Health Section */
+  .health-metric-box {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  .health-bar-container {
+    height: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    margin: 12px 0 8px 0;
+  }
+
+  .health-bar-dist {
+    background: linear-gradient(90deg, #EACA7A, #D4AF37);
+    height: 100%;
+    transition: width 0.5s ease;
+  }
+
+  .health-bar-burn {
+    background: linear-gradient(90deg, #3B82F6, #2563EB);
+    height: 100%;
+    transition: width 0.5s ease;
+  }
+
+  .health-legend {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* Monthly Distribution Trend Bar Chart */
+  .trend-chart-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    height: 140px;
+    padding-top: 20px;
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 10px;
+  }
+
+  .chart-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    height: 100%;
+    justify-content: flex-end;
+  }
+
+  .chart-bar {
+    width: 100%;
+    max-width: 28px;
+    background: linear-gradient(180deg, var(--accent-gold), rgba(212, 175, 55, 0.3));
+    border-radius: 4px 4px 0 0;
+    transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .chart-bar:hover {
+    background: linear-gradient(180deg, #FFFFFF, var(--accent-gold));
+    box-shadow: 0 0 12px rgba(234, 202, 122, 0.5);
+  }
+
+  .chart-bar-val {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--accent-gold);
+    position: absolute;
+    top: -18px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .chart-label {
+    font-size: 11px;
+    color: var(--text-dim);
+    font-weight: 600;
+  }
+
+  /* Data Table */
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+
+  .data-table th {
+    padding: 12px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border-bottom: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.01);
+  }
+
+  .data-table td {
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: middle;
+  }
+
+  .data-table tbody tr {
+    transition: background 0.15s ease;
+  }
+
+  .data-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  /* Badges */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .status-badge.live {
+    background: rgba(34, 197, 94, 0.15);
+    color: var(--status-live);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+  }
+
+  .status-badge.completed {
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--status-completed);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+  }
+
+  .status-badge.paused {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--status-paused);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+  }
+
+  .type-badge {
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+  }
+
+  .type-badge.tournament { color: #EACA7A; border-color: rgba(234, 202, 122, 0.3); background: rgba(234, 202, 122, 0.08); }
+  .type-badge.referral { color: #A855F7; border-color: rgba(168, 85, 247, 0.3); background: rgba(168, 85, 247, 0.08); }
+  .type-badge.checkin { color: #38BDF8; border-color: rgba(56, 189, 248, 0.3); background: rgba(56, 189, 248, 0.08); }
+  .type-badge.manual { color: #F59E0B; border-color: rgba(245, 158, 11, 0.3); background: rgba(245, 158, 11, 0.08); }
+  .type-badge.genesis { color: #22C55E; border-color: rgba(34, 197, 94, 0.3); background: rgba(34, 197, 94, 0.08); }
+  .type-badge.battlepass { color: #EC4899; border-color: rgba(236, 72, 153, 0.3); background: rgba(236, 72, 153, 0.08); }
+
+  /* Alert / Banner */
+  .status-alert {
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .status-alert.success {
+    background: rgba(34, 197, 94, 0.12);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #4ADE80;
+  }
+
+  .status-alert.error {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #F87171;
+  }
+
+  /* Modal Styling */
+  .rex-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(6, 7, 10, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .rex-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .rex-modal-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-glow);
+    border-radius: 16px;
+    padding: 28px;
+    width: 100%;
+    max-width: 540px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.15);
+    position: relative;
+    transform: translateY(10px);
+    transition: transform 0.25s ease;
+  }
+
+  .rex-modal-overlay.active .rex-modal-card {
+    transform: translateY(0);
+  }
+
+  .rex-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .rex-modal-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--accent-gold);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .rex-modal-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .rex-modal-close:hover {
+    color: #FFFFFF;
+  }
+
+  .bulk-summary-box {
+    background: rgba(234, 202, 122, 0.05);
+    border: 1px solid var(--border-gold);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 16px 0;
+  }
+
+  .bulk-summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+
+  .bulk-summary-row:last-child {
+    margin-bottom: 0;
+    padding-top: 6px;
+    border-top: 1px dashed rgba(234, 202, 122, 0.2);
+    font-weight: 700;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--text-muted);
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    accent-color: var(--accent-gold);
+    width: 16px;
+    height: 16px;
+  }
+</style>
+
+<!-- Hidden Trigger Image to ensure execution when injected into innerHTML -->
+<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'></svg>" 
+     style="display:none;" 
+     onload="if(window.initRexTreasuryModule){window.initRexTreasuryModule();}" 
+     onerror="if(window.initRexTreasuryModule){window.initRexTreasuryModule();}">
+
+<div class="rex-treasury-container">
+
+  <!-- Header Banner -->
+  <div class="rex-header">
+    <div class="rex-title-block">
+      <h2>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2.2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 6v12M8 10h8M8 14h8"></path>
+        </svg>
+        REX TREASURY ADMIN CONTROL
+        <span class="rex-badge">FORTREX APP: 6a7c208f76be9b02b86b0380</span>
+      </h2>
+      <p>Manage trader reward allocations, bulk liquidity distribution, and token ecosystem equilibrium.</p>
+    </div>
+    <div class="rex-header-actions">
+      <button class="btn-gold-accent" onclick="openBulkModal()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+        Bulk Distribute REX
+      </button>
+      <button class="btn-outline-sm" onclick="exportAuditCSV()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Export Audit CSV
+      </button>
+    </div>
+  </div>
+
+  <!-- Section 1: REX Supply Dashboard (3 Stat Cards) -->
+  <div class="stats-grid-3">
+    <!-- Stat 1: Total REX in Circulation -->
+    <div class="stat-card">
+      <div class="stat-header">
+        <span class="stat-label">Total REX in Circulation</span>
+        <div class="stat-icon-wrapper">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 6v12M8 10h8M8 14h8"></path>
+          </svg>
+        </div>
+      </div>
+      <div class="stat-value-gold" id="stat-total-circulation">4,850,250 REX</div>
+      <div class="stat-subtext">
+        <span class="trend-up">●</span> Sum of all active trader balances across network
+      </div>
+    </div>
+
+    <!-- Stat 2: REX Distributed This Month -->
+    <div class="stat-card">
+      <div class="stat-header">
+        <span class="stat-label">Distributed This Month</span>
+        <div class="stat-icon-wrapper">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-iris)" stroke-width="2">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+            <polyline points="17 6 23 6 23 12"></polyline>
+          </svg>
+        </div>
+      </div>
+      <div class="stat-value-gold" id="stat-distributed-month">685,400 REX</div>
+      <div class="stat-subtext">
+        <span class="trend-up">↑ +14.2%</span> vs previous 30-day billing cycle
+      </div>
+    </div>
+
+    <!-- Stat 3: Average REX per Trader -->
+    <div class="stat-card">
+      <div class="stat-header">
+        <span class="stat-label">Average REX per Trader</span>
+        <div class="stat-icon-wrapper">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </div>
+      </div>
+      <div class="stat-value-gold" id="stat-avg-per-trader">3,819 REX</div>
+      <div class="stat-subtext">
+        Across <strong style="color:#FFF;" id="stat-trader-count">1,270</strong> verified active trader wallets
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 & 5: Distribute REX Panel + REX Economy Health Indicator -->
+  <div class="two-col-grid">
+
+    <!-- Section 2: Distribute REX Panel -->
+    <div class="treasury-card">
+      <div class="card-header-block">
+        <div>
+          <div class="card-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+            Direct REX Distribution
+          </div>
+          <div class="card-subtitle">Issue REX rewards or manual adjustments directly to a trader's vault</div>
+        </div>
+      </div>
+
+      <!-- Feedback Alert Container -->
+      <div id="distribute-status-alert" style="display: none;"></div>
+
+      <form id="distribute-rex-form" onsubmit="event.preventDefault(); handleDistributeRex();">
+        <div class="form-group">
+          <label class="form-label" for="dist-trader-id">Trader Handle or Wallet ID *</label>
+          <input type="text" id="dist-trader-id" class="form-input form-control" placeholder="e.g. @alex_trader or TRD-88219" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="dist-amount">REX Amount *</label>
+          <input type="number" id="dist-amount" class="form-input form-control" placeholder="e.g. 1000" min="1" required />
+        </div>
+
+        <!-- Quick Amount Presets -->
+        <div class="preset-chips">
+          <button type="button" class="preset-chip" onclick="setPresetAmount(100)">+100</button>
+          <button type="button" class="preset-chip" onclick="setPresetAmount(500)">+500</button>
+          <button type="button" class="preset-chip" onclick="setPresetAmount(1000)">+1,000</button>
+          <button type="button" class="preset-chip" onclick="setPresetAmount(5000)">+5,000</button>
+          <button type="button" class="preset-chip" onclick="setPresetAmount(10000)">+10,000</button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="dist-reason">Distribution Reason *</label>
+          <select id="dist-reason" class="form-input form-control" required>
+            <option value="Tournament Prize">Tournament Prize</option>
+            <option value="Referral Bonus">Referral Bonus</option>
+            <option value="Check-in Reward">Check-in Reward</option>
+            <option value="Manual Adjustment" selected>Manual Adjustment</option>
+            <option value="Genesis Bonus">Genesis Bonus</option>
+            <option value="Battle Pass Reward">Battle Pass Reward</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="dist-ref-id">Reference ID (Optional)</label>
+          <input type="text" id="dist-ref-id" class="form-input form-control" placeholder="e.g. TRN-2026-AUG, REF-9902 or Ticket #402" />
+        </div>
+
+        <div style="margin-top: 22px;">
+          <button type="submit" id="btn-distribute-submit" class="btn-gold-accent" style="width: 100%;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+            Distribute REX Now
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Section 5: REX Economy Health Indicator -->
+    <div class="treasury-card">
+      <div class="card-header-block">
+        <div>
+          <div class="card-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-iris)" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+            REX Economy Health & Trends
+          </div>
+          <div class="card-subtitle">Real-time equilibrium between liquidity minting and utility burn rate</div>
+        </div>
+        <span class="status-badge live" id="health-status-badge">OPTIMAL (1.5x Ratio)</span>
+      </div>
+
+      <!-- Health Ratio Bar -->
+      <div class="health-metric-box">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 12px; font-weight: 700; color: var(--text-main);">Distribution vs Burn Rate</span>
+          <span style="font-size: 12px; font-weight: 700; color: var(--accent-gold);" id="health-ratio-text">68% Issued / 32% Burned</span>
+        </div>
+        <div class="health-bar-container">
+          <div class="health-bar-dist" id="health-dist-bar" style="width: 68%;"></div>
+          <div class="health-bar-burn" id="health-burn-bar" style="width: 32%;"></div>
+        </div>
+        <div class="health-legend">
+          <span style="color: var(--accent-gold);">● Monthly Distributed: <strong id="health-dist-val">685.4K REX</strong></span>
+          <span style="color: #3B82F6;">● Monthly Burned: <strong id="health-burn-val">322.1K REX</strong></span>
+        </div>
+      </div>
+
+      <!-- Monthly Trend Bar Chart -->
+      <div style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
+        Monthly Distribution Trend (6 Months)
+      </div>
+      <div class="trend-chart-container" id="monthly-trend-chart">
+        <!-- Bars injected dynamically -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Section 4: Transaction Log Table -->
+  <div class="treasury-card">
+    <div class="card-header-block" style="flex-wrap: wrap; gap: 14px;">
+      <div>
+        <div class="card-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          REX Transaction Audit Log
+        </div>
+        <div class="card-subtitle">Showing recent network distribution activity and ledger events (<span id="tx-count-display">0</span> records)</div>
+      </div>
+
+      <!-- Filters & Search -->
+      <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+        <!-- Filter Dropdown -->
+        <select id="tx-filter-type" class="form-input form-control" onchange="filterTxTable()" style="width: 180px; padding: 8px 12px; font-size: 12px;">
+          <option value="all">All Types</option>
+          <option value="tournament">Tournament Prize</option>
+          <option value="referral">Referral Bonus</option>
+          <option value="checkin">Check-in Reward</option>
+          <option value="manual">Manual Adjustment</option>
+          <option value="genesis">Genesis Bonus</option>
+          <option value="battlepass">Battle Pass Reward</option>
+        </select>
+
+        <!-- Search Input -->
+        <input type="text" id="tx-search-input" class="form-input form-control" placeholder="Search Trader ID or Ref..." oninput="filterTxTable()" style="width: 220px; padding: 8px 12px; font-size: 12px;" />
+      </div>
+    </div>
+
+    <!-- Data Table -->
+    <div class="table-responsive">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Date & Time</th>
+            <th>Trader ID</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Reason</th>
+            <th>Reference ID</th>
+          </tr>
+        </thead>
+        <tbody id="tx-table-body">
+          <!-- Rows dynamically populated -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- Section 3: Bulk Distribution Modal -->
+<div class="rex-modal-overlay" id="bulk-dist-modal">
+  <div class="rex-modal-card">
+    <div class="rex-modal-header">
+      <div class="rex-modal-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2.2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+        Bulk REX Distribution Modal
+      </div>
+      <button class="rex-modal-close" onclick="closeBulkModal()">&times;</button>
+    </div>
+
+    <div id="bulk-status-alert" style="display: none;"></div>
+
+    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+      Issue REX simultaneously to <strong style="color: #FFF;">ALL verified traders</strong> currently registered on the FORTREX platform.
+    </p>
+
+    <div class="form-group">
+      <label class="form-label" for="bulk-amount">Amount per Trader *</label>
+      <input type="number" id="bulk-amount" class="form-input form-control" value="500" min="1" oninput="updateBulkSummary()" required />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="bulk-reason">Distribution Reason *</label>
+      <select id="bulk-reason" class="form-input form-control" required>
+        <option value="Genesis Bonus" selected>Genesis Bonus</option>
+        <option value="Tournament Prize">Tournament Prize</option>
+        <option value="Referral Bonus">Referral Bonus</option>
+        <option value="Check-in Reward">Check-in Reward</option>
+        <option value="Manual Adjustment">Manual Adjustment</option>
+        <option value="Battle Pass Reward">Battle Pass Reward</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="bulk-ref-id">Reference ID / Campaign Code</label>
+      <input type="text" id="bulk-ref-id" class="form-input form-control" placeholder="e.g. BULK-AUG-GENESIS-2026" />
+    </div>
+
+    <!-- Calculated Summary Box -->
+    <div class="bulk-summary-box">
+      <div class="bulk-summary-row">
+        <span>Target Traders:</span>
+        <span id="bulk-calc-traders">1,270 Verified Traders</span>
+      </div>
+      <div class="bulk-summary-row">
+        <span>Amount Per Trader:</span>
+        <span id="bulk-calc-each">500 REX</span>
+      </div>
+      <div class="bulk-summary-row">
+        <span>Total REX Issuance:</span>
+        <span style="color: var(--accent-gold);" id="bulk-calc-total">635,000 REX</span>
+      </div>
+    </div>
+
+    <!-- Confirmation Step -->
+    <label class="checkbox-label">
+      <input type="checkbox" id="bulk-confirm-check" onchange="toggleBulkSubmitBtn()" />
+      <span>I confirm issuing this bulk REX allocation to all verified traders.</span>
+    </label>
+
+    <div style="display: flex; gap: 12px; justify-content: flex-end;">
+      <button type="button" class="btn-outline-sm" onclick="closeBulkModal()">Cancel</button>
+      <button type="button" id="btn-execute-bulk" class="btn-gold-accent" disabled onclick="executeBulkDistribution()">
+        Execute Bulk Distribution
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ==========================================================================
+     REX TREASURY BACKEND AUTH INTEGRATION
+     App ID: 6a7c208f76be9b02b86b0380
+     ========================================================================== */
+  const FORTREX_AUTH = {
+    APP_ID: '6a7c208f76be9b02b86b0380',
+    callFunction: async function(name, payload) {
+      const token = localStorage.getItem('fortrex_auth_token');
+      try {
+        const res = await fetch('https://api.base44.com/v1/apps/' + this.APP_ID + '/functions/' + name, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify(payload || {})
+        });
+        return await res.json();
+      } catch (err) {
+        console.warn('Backend call fallback:', err);
+        return { success: false, error: err.message };
+      }
+    }
+  };
+
+  /* Initial State Data */
+  window.rexState = window.rexState || {
+    totalCirculation: 4850250,
+    distributedMonth: 685400,
+    burnedMonth: 322100,
+    traderCount: 1270,
+    monthlyTrend: [
+      { month: 'Mar', amount: 320000 },
+      { month: 'Apr', amount: 410000 },
+      { month: 'May', amount: 530000 },
+      { month: 'Jun', amount: 490000 },
+      { month: 'Jul', amount: 610000 },
+      { month: 'Aug', amount: 685400 }
+    ],
+    transactions: [
+      { date: '2026-08-12 21:15', trader_id: '@vortex_king', type: 'tournament', rawReason: 'Tournament Prize', amount: 25000, reference_id: 'TRN-AUG-01' },
+      { date: '2026-08-12 19:40', trader_id: '@cyber_trader', type: 'genesis', rawReason: 'Genesis Bonus', amount: 5000, reference_id: 'GEN-PHASE1' },
+      { date: '2026-08-12 18:05', trader_id: '@quantum_fx', type: 'referral', rawReason: 'Referral Bonus', amount: 1200, reference_id: 'REF-99201' },
+      { date: '2026-08-12 15:22', trader_id: '@alpha_alpha', type: 'checkin', rawReason: 'Check-in Reward', amount: 250, reference_id: 'CHK-STK7' },
+      { date: '2026-08-12 12:10', trader_id: '@nexus_trader', type: 'battlepass', rawReason: 'Battle Pass Reward', amount: 3500, reference_id: 'BP-SEASON2' },
+      { date: '2026-08-11 23:50', trader_id: '@solaris_fx', type: 'manual', rawReason: 'Manual Adjustment', amount: 10000, reference_id: 'ADJ-CLAIM-44' },
+      { date: '2026-08-11 20:15', trader_id: '@apex_legend', type: 'tournament', rawReason: 'Tournament Prize', amount: 15000, reference_id: 'TRN-AUG-01' },
+      { date: '2026-08-11 17:30', trader_id: '@lunar_trader', type: 'referral', rawReason: 'Referral Bonus', amount: 1200, reference_id: 'REF-10492' },
+      { date: '2026-08-11 14:00', trader_id: '@hyperion_fx', type: 'checkin', rawReason: 'Check-in Reward', amount: 500, reference_id: 'CHK-STK14' }
+    ]
+  };
+
+  /* Helper to format numbers with commas */
+  function formatNum(n) {
+    return Number(n || 0).toLocaleString('en-US');
+  }
+
+  /* Map Reason text to standard type key */
+  function getReasonTypeKey(reason) {
+    const r = (reason || '').toLowerCase();
+    if (r.includes('tournament')) return 'tournament';
+    if (r.includes('referral')) return 'referral';
+    if (r.includes('check')) return 'checkin';
+    if (r.includes('genesis')) return 'genesis';
+    if (r.includes('battle')) return 'battlepass';
+    return 'manual';
+  }
+
+  /* Main Initialization function */
+  window.initRexTreasuryModule = function() {
+    renderStats();
+    renderHealthChart();
+    renderTxTable();
+  };
+
+  /* Render 3 Stat Cards */
+  function renderStats() {
+    const st = window.rexState;
+    const avgPerTrader = Math.round(st.totalCirculation / (st.traderCount || 1));
+
+    document.getElementById('stat-total-circulation').textContent = formatNum(st.totalCirculation) + ' REX';
+    document.getElementById('stat-distributed-month').textContent = formatNum(st.distributedMonth) + ' REX';
+    document.getElementById('stat-avg-per-trader').textContent = formatNum(avgPerTrader) + ' REX';
+    document.getElementById('stat-trader-count').textContent = formatNum(st.traderCount);
+  }
+
+  /* Render Health Ratio & Trend Chart */
+  function renderHealthChart() {
+    const st = window.rexState;
+    const totalActivity = st.distributedMonth + st.burnedMonth;
+    const distPct = Math.round((st.distributedMonth / (totalActivity || 1)) * 100);
+    const burnPct = 100 - distPct;
+    const ratio = (st.distributedMonth / (st.burnedMonth || 1)).toFixed(1);
+
+    // Update Health Bar & Readouts
+    document.getElementById('health-dist-bar').style.width = distPct + '%';
+    document.getElementById('health-burn-bar').style.width = burnPct + '%';
+    document.getElementById('health-ratio-text').textContent = distPct + '% Issued / ' + burnPct + '% Burned';
+    document.getElementById('health-dist-val').textContent = (st.distributedMonth / 1000).toFixed(1) + 'K REX';
+    document.getElementById('health-burn-val').textContent = (st.burnedMonth / 1000).toFixed(1) + 'K REX';
+    document.getElementById('health-status-badge').textContent = 'OPTIMAL (' + ratio + 'x Ratio)';
+
+    // Render 6-Month Trend Chart
+    const chartContainer = document.getElementById('monthly-trend-chart');
+    chartContainer.innerHTML = '';
+
+    const maxVal = Math.max(...st.monthlyTrend.map(d => d.amount)) * 1.15;
+
+    st.monthlyTrend.forEach(item => {
+      const heightPct = Math.round((item.amount / maxVal) * 100);
+      const valFormatted = (item.amount / 1000).toFixed(0) + 'K';
+
+      const col = document.createElement('div');
+      col.className = 'chart-col';
+      col.innerHTML = `
+        <div class="chart-bar" style="height: ${heightPct}%;">
+          <div class="chart-bar-val">${valFormatted}</div>
+        </div>
+        <div class="chart-label">${item.month}</div>
+      `;
+      chartContainer.appendChild(col);
+    });
+  }
+
+  /* Render Transaction Table with Filter and Search */
+  function renderTxTable() {
+    const tbody = document.getElementById('tx-table-body');
+    if (!tbody) return;
+
+    const filterType = document.getElementById('tx-filter-type').value;
+    const searchVal = document.getElementById('tx-search-input').value.toLowerCase().trim();
+
+    const filtered = window.rexState.transactions.filter(item => {
+      // Category filter
+      if (filterType !== 'all' && item.type !== filterType) {
+        return false;
+      }
+      // Search filter
+      if (searchVal) {
+        const tId = (item.trader_id || '').toLowerCase();
+        const refId = (item.reference_id || '').toLowerCase();
+        const reas = (item.rawReason || '').toLowerCase();
+        if (!tId.includes(searchVal) && !refId.includes(searchVal) && !reas.includes(searchVal)) {
+          return false;
+        }
+      }
+      return true;
+    });
+
+    document.getElementById('tx-count-display').textContent = filtered.length;
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="6" style="text-align: center; color: var(--text-dim); padding: 30px;">
+            No transactions found matching your criteria.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(tx => `
+      <tr>
+        <td style="font-family: monospace; font-size: 12px; color: var(--text-muted);">${tx.date}</td>
+        <td style="font-weight: 700; color: #FFFFFF;">${escapeHtml(tx.trader_id)}</td>
+        <td><span class="type-badge ${tx.type}">${tx.rawReason}</span></td>
+        <td style="font-weight: 800; color: var(--accent-gold); font-family: monospace;">+${formatNum(tx.amount)} REX</td>
+        <td style="color: var(--text-muted); font-size: 12px;">${escapeHtml(tx.rawReason)}</td>
+        <td style="font-family: monospace; font-size: 12px; color: var(--text-dim);">${escapeHtml(tx.reference_id || '-')}</td>
+      </tr>
+    `).join('');
+  }
+
+  /* Live Filter Listener */
+  function filterTxTable() {
+    renderTxTable();
+  }
+
+  /* Quick Preset Chip Selector */
+  function setPresetAmount(val) {
+    document.getElementById('dist-amount').value = val;
+  }
+
+  /* Handle Single REX Distribution Form */
+  async function handleDistributeRex() {
+    const traderId = document.getElementById('dist-trader-id').value.trim();
+    const amount = Number(document.getElementById('dist-amount').value);
+    const reason = document.getElementById('dist-reason').value;
+    const refId = document.getElementById('dist-ref-id').value.trim();
+
+    const alertBox = document.getElementById('distribute-status-alert');
+    const btn = document.getElementById('btn-distribute-submit');
+
+    if (!traderId || !amount || amount <= 0) {
+      showAlert(alertBox, 'error', 'Please enter a valid Trader ID and an amount greater than 0.');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;">
+        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+      </svg>
+      Issuing REX...
+    `;
+
+    const payload = {
+      trader_id: traderId,
+      amount: amount,
+      reason: reason,
+      reference_id: refId || ('MAN-' + Date.now().toString().slice(-6))
+    };
+
+    // Call Backend Function distributeRex via FORTREX_AUTH
+    const res = await FORTREX_AUTH.callFunction('distributeRex', payload);
+
+    btn.disabled = false;
+    btn.innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="22" y1="2" x2="11" y2="13"></line>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+      </svg>
+      Distribute REX Now
+    `;
+
+    // Local state update & UI reflection
+    const typeKey = getReasonTypeKey(reason);
+    const nowStr = new Date().toISOString().replace('T', ' ').slice(0, 16);
+
+    window.rexState.transactions.unshift({
+      date: nowStr,
+      trader_id: traderId.startsWith('@') ? traderId : ('@' + traderId),
+      type: typeKey,
+      rawReason: reason,
+      amount: amount,
+      reference_id: payload.reference_id
+    });
+
+    window.rexState.totalCirculation += amount;
+    window.rexState.distributedMonth += amount;
+    window.rexState.monthlyTrend[5].amount += amount;
+
+    renderStats();
+    renderHealthChart();
+    renderTxTable();
+
+    showAlert(alertBox, 'success', `Successfully distributed ${formatNum(amount)} REX to ${traderId}. Ref: ${payload.reference_id}`);
+
+    // Reset Form fields except reason
+    document.getElementById('dist-trader-id').value = '';
+    document.getElementById('dist-amount').value = '';
+    document.getElementById('dist-ref-id').value = '';
+  }
+
+  /* Bulk Distribution Modal Functions */
+  function openBulkModal() {
+    document.getElementById('bulk-dist-modal').classList.add('active');
+    updateBulkSummary();
+  }
+
+  function closeBulkModal() {
+    document.getElementById('bulk-dist-modal').classList.remove('active');
+    document.getElementById('bulk-status-alert').style.display = 'none';
+    document.getElementById('bulk-confirm-check').checked = false;
+    toggleBulkSubmitBtn();
+  }
+
+  function updateBulkSummary() {
+    const amountEach = Number(document.getElementById('bulk-amount').value) || 0;
+    const traders = window.rexState.traderCount;
+    const total = amountEach * traders;
+
+    document.getElementById('bulk-calc-each').textContent = formatNum(amountEach) + ' REX';
+    document.getElementById('bulk-calc-total').textContent = formatNum(total) + ' REX';
+  }
+
+  function toggleBulkSubmitBtn() {
+    const confirmed = document.getElementById('bulk-confirm-check').checked;
+    const amountEach = Number(document.getElementById('bulk-amount').value) || 0;
+    document.getElementById('btn-execute-bulk').disabled = !(confirmed && amountEach > 0);
+  }
+
+  async function executeBulkDistribution() {
+    const amountEach = Number(document.getElementById('bulk-amount').value);
+    const reason = document.getElementById('bulk-reason').value;
+    const refId = document.getElementById('bulk-ref-id').value.trim() || ('BULK-' + Date.now().toString().slice(-6));
+    const alertBox = document.getElementById('bulk-status-alert');
+    const btn = document.getElementById('btn-execute-bulk');
+
+    const totalAllocated = amountEach * window.rexState.traderCount;
+
+    btn.disabled = true;
+    btn.textContent = 'Processing Bulk Issuance...';
+
+    const payload = {
+      is_bulk: true,
+      target: 'all_verified',
+      amount_per_trader: amountEach,
+      reason: reason,
+      reference_id: refId
+    };
+
+    // Call Backend Function distributeRex with bulk payload
+    const res = await FORTREX_AUTH.callFunction('distributeRex', payload);
+
+    const nowStr = new Date().toISOString().replace('T', ' ').slice(0, 16);
+    const typeKey = getReasonTypeKey(reason);
+
+    // Record bulk batch entry in transaction ledger
+    window.rexState.transactions.unshift({
+      date: nowStr,
+      trader_id: 'ALL VERIFIED (' + formatNum(window.rexState.traderCount) + ')',
+      type: typeKey,
+      rawReason: reason + ' [BULK]',
+      amount: totalAllocated,
+      reference_id: refId
+    });
+
+    window.rexState.totalCirculation += totalAllocated;
+    window.rexState.distributedMonth += totalAllocated;
+    window.rexState.monthlyTrend[5].amount += totalAllocated;
+
+    renderStats();
+    renderHealthChart();
+    renderTxTable();
+
+    showAlert(alertBox, 'success', `Bulk issuance completed! Total ${formatNum(totalAllocated)} REX credited to ${formatNum(window.rexState.traderCount)} verified accounts.`);
+
+    setTimeout(() => {
+      closeBulkModal();
+    }, 2000);
+  }
+
+  /* Export Audit CSV */
+  function exportAuditCSV() {
+    const rows = [
+      ['Date', 'Trader ID', 'Type', 'Amount (REX)', 'Reason', 'Reference ID']
+    ];
+
+    window.rexState.transactions.forEach(tx => {
+      rows.push([
+        tx.date,
+        tx.trader_id,
+        tx.type,
+        tx.amount,
+        `"${tx.rawReason}"`,
+        tx.reference_id || ''
+      ]);
+    });
+
+    const csvContent = 'data:text/csv;charset=utf-8,' + rows.map(e => e.join(',')).join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', 'REX_Treasury_Audit_Log_' + new Date().toISOString().slice(0,10) + '.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  /* Display Status Alert Box */
+  function showAlert(container, type, text) {
+    if (!container) return;
+    container.className = 'status-alert ' + type;
+    container.style.display = 'flex';
+    container.innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        ${type === 'success' 
+          ? '<polyline points="20 6 9 17 4 12"></polyline>' 
+          : '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>'}
+      </svg>
+      <span>${text}</span>
+    `;
+  }
+
+  /* HTML Sanitizer */
+  function escapeHtml(str) {
+    return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  /* Auto Execution logic for DOM environments */
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(window.initRexTreasuryModule, 50);
+  } else {
+    document.addEventListener('DOMContentLoaded', window.initRexTreasuryModule);
+  }
+</script>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tournament Arena — FORTREX</title>
+  <meta name="description" content="Compete for real prizes. Standings remain 100% sealed until reveal day. ROI-based, MT5 verified tournaments.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/dala.css?v=4">
+  <script src="js/dala.js?v=2"></script>
+  <script src="js/auth.js?v=2"></script>
+
+  <style>
+    body { background-color: #06070A; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    .font-display { font-family: 'Space Grotesk', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* Tournament cards */
+    .t-arena-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 28px;
+    }
+    .t-card {
+      background: linear-gradient(180deg, #0B0C0E 0%, #121317 100%);
+      border: 1px solid rgba(229, 193, 88, 0.18);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .t-card:hover {
+      border-color: rgba(229, 193, 88, 0.45);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.6), 0 0 24px rgba(229,193,88,0.08);
+    }
+    .t-card.featured {
+      border-color: rgba(229, 193, 88, 0.5);
+      background: linear-gradient(180deg, rgba(229,193,88,0.08) 0%, #0B0C0E 60%, #121317 100%);
+      box-shadow: 0 0 30px rgba(229,193,88,0.1);
+    }
+    .t-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 9999px;
+    }
+    .t-status-gates { background: rgba(229,193,88,0.18); color: #E5C158; border: 1px solid rgba(229,193,88,0.5); }
+    .t-status-open { background: rgba(16,185,129,0.15); color: #10B981; border: 1px solid rgba(16,185,129,0.4); }
+    .t-status-upcoming { background: rgba(153,153,153,0.12); color: #999999; border: 1px solid rgba(153,153,153,0.3); }
+    .t-status-live { background: rgba(16,185,129,0.15); color: #10B981; border: 1px solid rgba(16,185,129,0.4); }
+    .t-status-completed { background: rgba(153,153,153,0.1); color: #999999; border: 1px solid rgba(153,153,153,0.25); }
+
+    .t-name { font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; color: #ffffff; margin: 18px 0 6px; }
+    .t-prize { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: #E5C158; margin-bottom: 18px; letter-spacing: 0.02em; }
+    .t-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; margin-bottom: 22px; }
+    .t-meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #999999; margin-bottom: 4px; }
+    .t-meta-val { font-size: 14px; font-weight: 600; color: #ffffff; }
+    .t-format { font-size: 12px; color: #999999; line-height: 1.6; margin-bottom: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .t-register {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: #E5C158; color: #000000; font-weight: 700; font-size: 14px;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 12px 24px; border-radius: 9999px; text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1); margin-top: auto;
+    }
+    .t-register:hover { background: #F5D172; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(229,193,88,0.45); color:#000; }
+    .t-register.disabled { background: rgba(153,153,153,0.15); color: #999999; cursor: not-allowed; }
+    .t-register.disabled:hover { transform: none; box-shadow: none; background: rgba(153,153,153,0.15); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: #08090C; flex-direction: column; padding: 40px 24px 24px; gap: 8px; z-index: 999; border-left: 1px solid rgba(229,193,88,0.15); transform: translateX(100%); transition: transform 0.3s ease; }
+      .nav-links.active { display: flex; transform: translateX(0); }
+      .nav-cta > a:not(.hamburger) { display: none; }
+      .hamburger { display: flex !important; cursor: pointer; }
+      .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      .hamburger.active span:nth-child(2) { opacity: 0; }
+      .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+      .footer-content { flex-direction: column; gap: 24px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 12px !important; }
+      .container { padding-left: 16px; padding-right: 16px; }
+      main { padding-top: 100px !important; padding-bottom: 40px !important; }
+    }
+  </style>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/fortrex-icon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/fortrex-icon-32.png">
+  <meta property="og:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
+  <meta property="og:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
+  <meta property="og:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
+  <meta name="twitter:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
+  <meta name="twitter:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-icon-512.png">
+</head>
+<body>
+
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <a href="index.html" class="navbar-brand">
+        <div class="nav-logo"><img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 36px; height: 36px; object-fit: contain;"></div>
+      </a>
+    </div>
+    <ul class="nav-links" id="nav-links-main">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="tools.html" class="nav-link">Tools</a></li>
+      <li><a href="tournaments.html" class="nav-link active">Tournaments</a></li>
+      <li><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+      <li><a href="rex.html" class="nav-link">REX</a></li>
+      <li><a href="journal.html" class="nav-link">Journal</a></li>
+      <li><a href="community.html" class="nav-link">Community</a></li>
+      
+      <li><a href="dashboard.html" class="nav-link nav-internal" style="display:none">Dashboard</a></li>
+      <li><a href="invite.html" class="nav-link nav-internal" style="display:none">Invite</a></li>
+      <li><a href="profile.html" class="nav-link nav-internal" style="display:none">Profile</a></li>
+      <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
+      <a href="signin.html" class="btn-primary">Enter Arena</a>
+      <div class="hamburger" aria-label="Toggle Menu"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+
+  <main style="padding-top: 60px; padding-bottom: 80px;">
+    <div class="container" style="max-width: 1200px;">
+
+      <!-- HEADER -->
+      <section style="text-align: center; margin-bottom: 56px;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #E5C158; margin-bottom: 16px;">TOURNAMENT ARENA</div>
+        <h1 class="font-display" style="font-size: clamp(36px, 6vw, 64px); font-weight: 700; color: #ffffff; letter-spacing: -0.02em; margin-bottom: 18px;">Tournament Arena</h1>
+        <p style="font-size: 18px; color: #999999; max-width: 620px; margin: 0 auto; line-height: 1.6;">
+          Compete for real prizes. Standings remain 100% sealed until reveal day — no live rank distortion, pure trading skill.
+        </p>
+      </section>
+
+      <!-- DYNAMIC CARD GRID (populated from Tournament entity) -->
+      <div class="t-arena-grid" id="tournament-grid">
+        <div style="text-align: center; padding: 60px 24px; grid-column: 1 / -1;">
+          <div style="font-size: 14px; color: #A0A5B1;">Loading tournaments...</div>
+        </div>
+      </div>
+
+      <!-- Info strip -->
+      <section style="margin-top: 64px; padding: 36px 28px; border: 1px solid rgba(229,193,88,0.18); border-radius: 20px; background: linear-gradient(180deg, #0B0C0E 0%, #121317 100%);">
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px;">
+          <div>
+            <div style="font-size: 11px; letter-spacing:0.1em; text-transform:uppercase; color:#E5C158; font-weight:700; margin-bottom:8px;">Sealed Standings</div>
+            <p style="font-size: 14px; color:#999999; line-height:1.6; margin:0;">All positions stay locked in a zero-knowledge vault until reveal day. No rank copying, no panic trading.</p>
+          </div>
+          <div>
+            <div style="font-size: 11px; letter-spacing:0.1em; text-transform:uppercase; color:#E5C158; font-weight:700; margin-bottom:8px;">MT5 Verified</div>
+            <p style="font-size: 14px; color:#999999; line-height:1.6; margin:0;">Trades verified through MT5 investor passwords. Industry-standard TWRR performance metric.</p>
+          </div>
+          <div>
+            <div style="font-size: 11px; letter-spacing:0.1em; text-transform:uppercase; color:#E5C158; font-weight:700; margin-bottom:8px;">Variable Prize Pool</div>
+            <p style="font-size: 14px; color:#999999; line-height:1.6; margin:0;">No fixed prize cap. The pool is funded by platform revenue — it grows as the community grows.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(229, 193, 88, 0.2));">
+          <span class="nav-wordmark" style="color: #E5C158; font-weight: 700;">FORTREX</span>
+        </div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="tools.html" class="footer-link">Tools</a>
+          <a href="tournaments.html" class="footer-link">Tournaments</a>
+          <a href="leaderboard.html" class="footer-link">Leaderboard</a>
+          <a href="community.html" class="footer-link">Community</a>
+          
+          <a href="terms.html" class="footer-link">Terms</a>
+          <a href="privacy.html" class="footer-link">Privacy</a>
+          <a href="signin.html" class="footer-link">Sign In</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2026 FORTREX — Skill-based trading competitions. Not a broker.</div>
+        <div class="footer-disclaimer" style="font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 8px; line-height: 1.5;">
+          FORTREX organizes skill-based trading competitions and tournaments. We are not a broker, financial institution, or asset manager. REX points are competition utility tokens used for arena rankings and prize distributions.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const trader = localStorage.getItem('fortrex_trader');
+      if (trader) document.querySelectorAll('.nav-internal').forEach(el => el.style.display = '');
+    })();
+    document.addEventListener('DOMContentLoaded', function() {
+      var hamburger = document.querySelector('.hamburger');
+      var navLinks = document.querySelector('#nav-links-main');
+      if (hamburger && navLinks) {
+        hamburger.addEventListener('click', function() {
+          hamburger.classList.toggle('active');
+          navLinks.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+          });
+        });
+      }
+    });
+  </script>
+
+<script>
+const API_BASE = 'https://koda-a0d26f88.base44.app';
+
+async function loadTournaments() {
+  try {
+    const res = await fetch(API_BASE + '/functions/getPublicTournaments', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({})
+    });
+    const data = await res.json();
+    const tournaments = data.tournaments || [];
+
+    const grid = document.getElementById('tournament-grid');
+
+    if (!tournaments || tournaments.length === 0) {
+      grid.innerHTML = `
+        <div style="text-align: center; padding: 80px 24px; grid-column: 1 / -1;">
+          <div style="width: 48px; height: 48px; margin: 0 auto 20px; border: 2px solid #262930; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+            <svg width="24" height="24" fill="none" stroke="#6B7080" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+          </div>
+          <div style="font-size: 16px; color: #FFFFFF; font-weight: 600; margin-bottom: 8px;">No tournaments yet.</div>
+          <div style="font-size: 14px; color: #A0A5B1;">The first championship begins August 23. Be ready.</div>
+        </div>`;
+      return;
+    }
+
+    // Sort by start_date ascending
+    tournaments.sort((a, b) => new Date(a.start_date || 0) - new Date(b.start_date || 0));
+
+    grid.innerHTML = tournaments.map((t, i) => {
+      const status = t.status || 'upcoming';
+      const startDate = t.start_date ? new Date(t.start_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'TBD';
+      const endDate = t.end_date ? new Date(t.end_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'TBD';
+      const entryReq = t.entry_criteria_min_deposit ? t.entry_criteria_min_deposit + ' units' : 'Open entry';
+      const registered = t.participant_count || 0;
+      const maxP = 2500; // Genesis max or tournament-specific
+      const isFeatured = i === 0;
+
+      // Status badge logic
+      let statusBadge = '';
+      let actionButton = '';
+      if (status === 'upcoming') {
+        statusBadge = '<span class="t-status t-status-upcoming">Upcoming</span>';
+        actionButton = '<span class="t-register disabled" aria-disabled="true">Notify Me</span>';
+      } else if (status === 'active') {
+        statusBadge = '<span class="t-status" style="background: rgba(229,193,88,0.15); color: #E5C158; border: 1px solid rgba(229,193,88,0.3);">Live</span>';
+        actionButton = '<a href="signin.html" class="t-register">View Results</a>';
+      } else if (status === 'completed' || status === 'revealing') {
+        statusBadge = '<span class="t-status t-status-upcoming">Completed</span>';
+        actionButton = '<a href="leaderboard.html" class="t-register">View Results</a>';
+      } else {
+        statusBadge = '<span class="t-status t-status-open">Registration Open</span>';
+        actionButton = '<a href="signin.html" class="t-register">Register</a>';
+      }
+
+      return `
+        <div class="t-card${isFeatured ? ' featured' : ''}">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="t-status t-status-gates">⚡ ${t.type || 'Monthly'}</span>
+            ${statusBadge}
+          </div>
+          <div class="t-name">${t.name || 'Tournament'}</div>
+          <div class="t-prize">Variable Pool — funded by platform revenue</div>
+          <div class="t-meta">
+            <div>
+              <div class="t-meta-label">Start Date</div>
+              <div class="t-meta-val">${startDate}</div>
+            </div>
+            <div>
+              <div class="t-meta-label">End Date</div>
+              <div class="t-meta-val">${endDate}</div>
+            </div>
+            <div>
+              <div class="t-meta-label">Entry Requirements</div>
+              <div class="t-meta-val">MT5 verified · ${entryReq}</div>
+            </div>
+            <div>
+              <div class="t-meta-label">Registered</div>
+              <div class="t-meta-val">${registered} / ${maxP}</div>
+            </div>
+          </div>
+          <div class="t-format">${t.description || 'Compete for real prizes. Sealed standings, reveal-day payout.'}</div>
+          ${actionButton}
+        </div>`;
+    }).join('');
+  } catch (err) {
+    console.warn('Failed to load tournaments:', err);
+    document.getElementById('tournament-grid').innerHTML = `
+      <div style="text-align: center; padding: 60px 24px; grid-column: 1 / -1;">
+        <div style="font-size: 14px; color: #EF4444;">Failed to load tournaments. Refresh the page.</div>
+      </div>`;
+  }
+}
+
+loadTournaments();
+setInterval(loadTournaments, 30000); // Refresh every 30s
+</script>
+
+</body>
+</html>
