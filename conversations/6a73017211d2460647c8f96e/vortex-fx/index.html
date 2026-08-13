@@ -1269,20 +1269,20 @@
 }
 
   </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/fortrex-3d-king-32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/fortrex-3d-king-32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/fortrex-3d-king-180.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="assets/fortrex-3d-king-512.png">
-    <meta property="og:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-3d-king-512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/fortrex-king-3d-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/fortrex-king-3d-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/fortrex-king-3d-180.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="assets/fortrex-king-3d-512.png">
+    <meta property="og:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-king-3d-512.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-3d-king-512.png">
+    <meta name="twitter:image" content="https://somilsharma2000.github.io/VortexFX/assets/fortrex-king-3d-512.png">
 </head>
 <body>
 
-  <canvas id="particle-canvas"></canvas>
+  <canvas id="particle-canvas" style="display:none;"></canvas>
 
   <!-- NAVIGATION -->
   <nav class="nav">
@@ -1306,7 +1306,7 @@
       <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
+      <a href="signin.html" class="btn-primary">Enter Arena</a>
       <div class="hamburger" aria-label="Toggle Menu">
         <span></span><span></span><span></span>
       </div>
@@ -1317,7 +1317,7 @@
   <main>
 <div class="hero-brand-mark">
       <div class="king-icon-wrap">
-        <img src="assets/fortrex-3d-king.png" alt="FORTREX" style="width: 120px; height: 120px; object-fit: contain; position: relative; z-index: 1; filter: drop-shadow(0px 4px 16px rgba(212, 175, 55, 0.2));" />
+        <img src="assets/fortrex-king-3d.png" alt="FORTREX" />
       </div>
       <div class="brand-name">FORTREX</div>
       <div class="brand-tagline">Where Traders Rise</div>
@@ -1421,8 +1421,8 @@
   </section>
 
   <!-- 1. SOCIAL PROOF BAR (right after hero section, before cryptic hints) -->
-  <section class="social-proof-section" id="social-proof">
-    <div class="social-proof-container">
+  <section class="social-proof-section reveal" id="social-proof">
+    <div class="social-proof-container reveal-stagger">
       <div class="stat-card">
         <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#E5C158" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
         <div class="stat-number gold-stat">—</div>
@@ -1450,7 +1450,7 @@
 
 
   <!-- 2. GENESIS TRADER PROGRAM (updated: tiered rewards, no 10x) -->
-  <section class="genesis-section reveal-section" id="genesis">
+  <section class="genesis-section reveal" id="genesis">
     <div class="genesis-badge-tag">
       <span class="gold">LIMITED ACCESS</span> &middot; FIRST 10,000 ONLY
     </div>
@@ -1463,7 +1463,7 @@
     </p>
 
     <!-- 3 BENEFIT CARDS (updated, no 10x) -->
-    <div class="genesis-cards-grid">
+    <div class="genesis-cards-grid reveal-stagger">
       <div class="genesis-card">
         <div class="genesis-card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="#E5C158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1507,14 +1507,14 @@
   </section>
 
   <!-- 3. HOW IT WORKS (hidden for pre-launch) -->
-  <section class="how-section reveal-section" id="how-it-works" style="display: none;">
+  <section class="how-section reveal" id="how-it-works" style="display: none;">
     <div class="how-container">
       <div style="text-align: center; margin-bottom: 60px;">
         <h2 class="section-headline">How It Works</h2>
         <p class="section-subtext">Three steps. Zero friction. Maximum upside.</p>
       </div>
 
-      <div class="steps-grid">
+      <div class="steps-grid reveal-stagger">
         <!-- Step 1 -->
         <div class="step-card">
           <div class="step-header">
@@ -1568,13 +1568,13 @@
   </section>
 
   <!-- 4. TRUST SECTION (after How It Works, before final CTA) -->
-  <section class="trust-section reveal-section" id="trust">
+  <section class="trust-section reveal" id="trust">
     <div class="trust-container">
       <div style="text-align: center; margin-bottom: 60px;">
         <h2 class="section-headline">100% Non-Broker & Pure Skill Verification</h2>
       </div>
 
-      <div class="trust-grid">
+      <div class="trust-grid reveal-stagger">
         <!-- Pillar 1 -->
         <div class="trust-card">
           <div class="trust-icon-circle">
@@ -1784,9 +1784,10 @@
         signinBtns[0].textContent = 'Go to Dashboard →';
         signinBtns[0].href = 'dashboard.html';
         signinBtns[0].classList.remove('discord-cta', 'google-cta');
-        signinBtns[0].classList.add('btn-dashboard');
-        signinBtns[0].classList.remove('hero-signin-btn');
-        signinBtns[0].style = '';
+        signinBtns[0].textContent = 'Go to Dashboard →';
+        signinBtns[0].href = 'dashboard.html';
+        signinBtns[0].className = 'btn-dashboard';
+        signinBtns[0].onclick = null;
         // Hide duplicate button
         for (let i = 1; i < signinBtns.length; i++) {
           signinBtns[i].style.display = 'none';
@@ -1815,5 +1816,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<script src="js/scroll-reveal.js"></script>
 </body>
 </html>
