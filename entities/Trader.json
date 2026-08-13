@@ -1,4 +1,7 @@
 {
+  "name": "Trader",
+  "type": "object",
+  "required": [],
   "properties": {
     "avatar": {
       "type": "string"
@@ -29,20 +32,21 @@
     "discord_username": {
       "type": "string"
     },
+    "full_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
     "genesis_multiplier": {
       "type": "number",
-      "default": 1.0,
-      "description": "Genesis tier multiplier (3.0, 2.5, 2.0, or 1.5) applied to earned REX"
+      "default": 1.0
     },
     "genesis_tier": {
       "type": "string",
-      "enum": [
-        "Tier 1",
-        "Tier 2",
-        "Tier 3",
-        "Tier 4",
-        "None"
-      ],
       "default": "None"
     },
     "joined_date": {
@@ -90,8 +94,5 @@
     "verified": {
       "type": "boolean"
     }
-  },
-  "type": "object",
-  "required": [],
-  "name": "Trader"
+  }
 }
