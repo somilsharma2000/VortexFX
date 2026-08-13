@@ -1,3 +1,11 @@
+assets/fortrex-new-full.png !filter !diff !merge text
+assets/fortrex-new-hero-400.png !filter !diff !merge text
+assets/fortrex-new-icon-180.png !filter !diff !merge text
+assets/fortrex-new-icon-32.png !filter !diff !merge text
+assets/fortrex-new-icon-512.png !filter !diff !merge text
+assets/fortrex-new-icon-64.png !filter !diff !merge text
+assets/fortrex-new-lockup.png !filter !diff !merge text
+assets/fortrex-new-nav-96.png !filter !diff !merge text
 *.png filter=lfs diff=lfs merge=lfs -text
 *.jpg filter=lfs diff=lfs merge=lfs -text
 *.jpeg filter=lfs diff=lfs merge=lfs -text
