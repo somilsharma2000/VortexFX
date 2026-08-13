@@ -211,8 +211,8 @@ body.is-logged-in .nav-internal { display: block; }
 .hero-signin-cta { display: flex; gap: 14px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
 .hero-signin-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: var(--radius); font-family: var(--font-heading); font-weight: 600; font-size: 15px; text-decoration: none; transition: all var(--t-base); border: none; cursor: pointer; }
 .hero-signin-btn svg { width: 20px; height: 20px; }
-.hero-signin-btn.discord-cta { background: #5865F2; color: #fff; }
-.hero-signin-btn.discord-cta:hover { background: #4752C4; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(88, 101, 242, 0.25); }
+.hero-signin-btn.discord-cta { background: #E5C158; color: #06070A; }
+.hero-signin-btn.discord-cta:hover { background: #C99A2E; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(229, 193, 88, 0.25); }
 .hero-signin-btn.google-cta { background: #fff; color: var(--bg-canvas); }
 .hero-signin-btn.google-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15); }
 

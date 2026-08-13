@@ -33,21 +33,22 @@
     }
 
     .brand-logo {
-      width: 120px;
-      height: 120px;
-      filter: drop-shadow(0 0 20px rgba(229, 193, 88, 0.25)) drop-shadow(0 0 60px rgba(229, 193, 88, 0.1));
-      animation: logo-glow 4s ease-in-out infinite;
-      transition: transform 0.3s ease;
+      width: 200px;
+      height: 200px;
+      filter: drop-shadow(0 0 30px rgba(229, 193, 88, 0.3)) drop-shadow(0 0 80px rgba(229, 193, 88, 0.12));
+      animation: logo-float 6s ease-in-out infinite;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 50%;
+    }
+    @keyframes logo-float {
+      0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 25px rgba(229, 193, 88, 0.25)) drop-shadow(0 0 70px rgba(229, 193, 88, 0.1)); }
+      50% { transform: translateY(-6px); filter: drop-shadow(0 0 35px rgba(229, 193, 88, 0.35)) drop-shadow(0 0 90px rgba(229, 193, 88, 0.15)); }
     }
     .brand-logo:hover {
-      transform: scale(1.05);
-      filter: drop-shadow(0 0 30px rgba(229, 193, 88, 0.4)) drop-shadow(0 0 80px rgba(229, 193, 88, 0.15));
+      transform: scale(1.08) translateY(-4px);
     }
 
-    @keyframes logo-glow {
-      0%, 100% { filter: drop-shadow(0 0 8px rgba(229, 193, 88, 0.2)); }
-      50% { filter: drop-shadow(0 0 24px rgba(229, 193, 88, 0.5)); }
-    }
+/* logo-glow replaced by logo-float above */
 
     .brand-name {
       font-size: clamp(22px, 4vw, 32px);
@@ -173,8 +174,8 @@
       align-items: center;
       gap: 12px;
       padding: 18px 36px;
-      background: #5865F2;
-      color: #fff;
+      background: #E5C158;
+      color: #06070A;
       font-family: var(--font, 'Inter', sans-serif);
       font-size: 15px;
       font-weight: 600;
@@ -185,12 +186,12 @@
       cursor: pointer;
       text-decoration: none;
       transition: all 0.3s;
-      box-shadow: 0 0 30px rgba(88, 101, 242, 0.2);
+      box-shadow: 0 0 30px rgba(229, 193, 88, 0.2);
     }
 
     .stealth-cta:hover {
-      background: #4752C4;
-      box-shadow: 0 0 50px rgba(88, 101, 242, 0.4);
+      background: #D4AF37;
+      box-shadow: 0 0 50px rgba(229, 193, 88, 0.4);
       transform: translateY(-2px);
     }
 
@@ -490,13 +491,14 @@
     }
     .hero-signin-btn svg { width: 20px; height: 20px; }
     .hero-signin-btn.discord-cta {
-      background: #5865F2;
+      background: #E5C158;
+      color: #06070A;
       color: #fff;
     }
     .hero-signin-btn.discord-cta:hover {
-      background: #4752C4;
+      background: #D4AF37;
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(88, 101, 242, 0.35);
+      box-shadow: 0 8px 24px rgba(229, 193, 88, 0.35);
     }
     .hero-signin-btn.google-cta {
       background: #fff;
@@ -1068,7 +1070,7 @@
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      background: #5865F2;
+      background: #E5C158;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1621,13 +1623,13 @@
   <!-- COMMUNITY SECTION (Centered, Discord-linked) -->
   <section class="reveal-section" id="community-cta" style="padding: 40px 24px; text-align: center; position: relative; z-index: 2;">
     <div style="max-width: 600px; margin: 0 auto;">
-      <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px; padding: 8px 16px; border: 1px solid rgba(88, 101, 242, 0.4); border-radius: 999px;">
-        <span style="width: 8px; height: 8px; background: #5865F2; border-radius: 50%; display: inline-block;"></span>
-        <span style="font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: #5865F2; font-weight: 600;">Discord Community</span>
+      <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px; padding: 8px 16px; border: 1px solid rgba(229, 193, 88, 0.4); border-radius: 999px;">
+        <span style="width: 8px; height: 8px; background: #E5C158; border-radius: 50%; display: inline-block;"></span>
+        <span style="font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: #E5C158; font-weight: 600;">Discord Community</span>
       </div>
       <h2 class="section-headline" style="margin-bottom: 16px;">Where traders actually <span class="gold-text">talk.</span></h2>
       <p class="section-subtext" style="margin-bottom: 40px;">No forums. No Reddit threads. Just real-time voice, live trade setups, and direct access to the FORTREX team. Everything happens in our Discord.</p>
-      <a href="https://discord.gg/9pTSqeTbn" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 12px; background: #5865F2; color: #fff; padding: 16px 36px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: background 0.3s;">
+      <a href="https://discord.gg/9pTSqeTbn" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 12px; background: #E5C158; color: #06070A; padding: 16px 36px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: background 0.3s;">
         <svg viewBox="0 0 127.14 96.36" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.68,1.75,1.36,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.89,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.89,96.12,53,91.08,65.69,84.69,65.69Z"/>
         </svg>
