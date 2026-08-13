@@ -296,7 +296,31 @@
       .container { padding-left: 12px; padding-right: 12px; }
     }
 
-    </style>
+    
+/* Inline SVG logo — native to the design, no pasted image */
+.fortrex-logo-svg {
+  width: 36px;
+  height: 36px;
+  filter: drop-shadow(0 0 6px rgba(229, 193, 88, 0.35));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.nav-logo .fortrex-logo-svg:hover {
+  filter: drop-shadow(0 0 12px rgba(229, 193, 88, 0.6));
+  transform: scale(1.05);
+}
+.brand-logo-svg {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 0 20px rgba(229, 193, 88, 0.25)) drop-shadow(0 0 60px rgba(229, 193, 88, 0.1));
+  animation: logo-glow 4s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+.brand-logo-svg:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 30px rgba(229, 193, 88, 0.4)) drop-shadow(0 0 80px rgba(229, 193, 88, 0.15));
+}
+
+  </style>
     <link rel="icon" type="image/png" sizes="32x32" href="assets/fortrex-icon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/fortrex-icon-32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/fortrex-icon-180.png">
@@ -327,7 +351,7 @@
   <nav class="nav">
     <div class="nav-brand">
       <a href="index.html" class="navbar-brand">
-        <div class="nav-logo"><img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 36px; height: 36px; object-fit: contain;"></div>
+        <div class="nav-logo"><svg class="fortrex-logo-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="fg-faqhtml" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E5C158"/><stop offset="100%" stop-color="#B8860B"/></linearGradient><linearGradient id="fgl-faqhtml" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F0D780"/><stop offset="100%" stop-color="#E5C158"/></linearGradient></defs><path d="M32 4 L56 14 L56 36 C56 48 44 56 32 60 C20 56 8 48 8 36 L8 14 Z" stroke="url(#fg-faqhtml)" stroke-width="2" fill="none" stroke-linejoin="round"/><path d="M32 10 L50 18 L50 35 C50 44 41 50 32 53 C23 50 14 44 14 35 L14 18 Z" stroke="url(#fg-faqhtml)" stroke-width="0.8" fill="none" stroke-linejoin="round" opacity="0.4"/><path d="M20 22 L40 22" stroke="url(#fgl-faqhtml)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 22 L20 44" stroke="url(#fgl-faqhtml)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 33 L35 33" stroke="url(#fgl-faqhtml)" stroke-width="2" stroke-linecap="round"/><path d="M26 16 L29 13 L32 16 L35 13 L38 16" stroke="url(#fg-faqhtml)" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><path d="M18 48 L46 48" stroke="url(#fg-faqhtml)" stroke-width="0.6" opacity="0.3"/></svg></div>
       </a>
     </div>
     <ul class="nav-links" id="nav-links-main">
@@ -719,7 +743,7 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="assets/fortrex-icon-nav.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(234, 202, 122, 0.2));">
+          <svg class="fortrex-logo-svg footer-logo-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 28px; height: 28px; margin-right: 12px; flex-shrink: 0;"><defs><linearGradient id="ff-faqhtml" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E5C158"/><stop offset="100%" stop-color="#B8860B"/></linearGradient><linearGradient id="ffl-faqhtml" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F0D780"/><stop offset="100%" stop-color="#E5C158"/></linearGradient></defs><path d="M32 4 L56 14 L56 36 C56 48 44 56 32 60 C20 56 8 48 8 36 L8 14 Z" stroke="url(#ff-faqhtml)" stroke-width="2" fill="none" stroke-linejoin="round"/><path d="M32 10 L50 18 L50 35 C50 44 41 50 32 53 C23 50 14 44 14 35 L14 18 Z" stroke="url(#ff-faqhtml)" stroke-width="0.8" fill="none" stroke-linejoin="round" opacity="0.4"/><path d="M20 22 L40 22" stroke="url(#ffl-faqhtml)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 22 L20 44" stroke="url(#ffl-faqhtml)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 33 L35 33" stroke="url(#ffl-faqhtml)" stroke-width="2" stroke-linecap="round"/><path d="M26 16 L29 13 L32 16 L35 13 L38 16" stroke="url(#ff-faqhtml)" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><path d="M18 48 L46 48" stroke="url(#ff-faqhtml)" stroke-width="0.6" opacity="0.3"/></svg>
           <span class="nav-wordmark" style="color: #F5D172; font-weight: 700;">FORTREX</span>
         </div>
         <div class="footer-links">
