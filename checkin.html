@@ -11,7 +11,7 @@
   <style>
     /* --- CUSTOM CHECKIN STYLES --- */
     .checkin-card-box {
-      border: 1px solid #1a1a1a;
+      border: 1px solid #06070A;
       border-radius: 32px;
       padding: 48px;
       position: relative;
@@ -19,7 +19,7 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 20px 50px rgba(6, 7, 10, 0.6);
     }
 
     .top-glow-border {
@@ -35,7 +35,7 @@
       color: var(--color-bone-white);
       line-height: 1;
       letter-spacing: -4px;
-      text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+      text-shadow: 0 0 30px rgba(229, 193, 88, 0.3);
       transition: all 0.3s ease;
     }
 
@@ -52,7 +52,7 @@
 
     .metric-card-item {
       background: rgba(12, 13, 18, 0.7);
-      border: 1px solid #1a1a1a;
+      border: 1px solid #06070A;
       border-radius: 20px;
       padding: 24px;
       text-align: center;
@@ -83,8 +83,8 @@
     .progress-track {
       width: 100%;
       height: 12px;
-      background: #111218;
-      border: 1px solid #1a1a1a;
+      background: #0B0C0E;
+      border: 1px solid #06070A;
       border-radius: 999px;
       overflow: hidden;
       position: relative;
@@ -96,7 +96,7 @@
       background: linear-gradient(90deg, var(--color-electric-iris), var(--color-saffron-spark));
       border-radius: 999px;
       transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+      box-shadow: 0 0 12px rgba(229, 193, 88, 0.5);
     }
 
     /* Calendar Grid */
@@ -158,28 +158,52 @@
       letter-spacing: 0.05em;
       text-transform: uppercase;
     }
+  
+/* Inline SVG logo — native to the design, no pasted image */
+.fortrex-logo-svg {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 6px rgba(229, 193, 88, 0.35));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.nav-logo .fortrex-logo-svg:hover {
+  filter: drop-shadow(0 0 12px rgba(229, 193, 88, 0.6));
+  transform: scale(1.05);
+}
+.brand-logo-svg {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 0 20px rgba(229, 193, 88, 0.25)) drop-shadow(0 0 60px rgba(229, 193, 88, 0.1));
+  animation: logo-glow 4s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+.brand-logo-svg:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 30px rgba(229, 193, 88, 0.4)) drop-shadow(0 0 80px rgba(229, 193, 88, 0.15));
+}
+
   </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/da15f6d53_fortrex-new-icon-32.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/da15f6d53_fortrex-new-icon-32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/3b7e110dd_fortrex-new-icon-180.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/50557a7bd_fortrex-new-icon-512.png">
-    <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/7462744de_fortrex-icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/7462744de_fortrex-icon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/1fb65d179_fortrex-app-icon-180.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/4185f39e2_fortrex-app-icon-512.png">
+    <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
     <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+    <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <meta property="og:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta property="og:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta name="twitter:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
-  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <style>body { overflow-x: hidden; max-width: 100vw; }</style>
     <style>@media (max-width: 768px) { .stats-grid, .rex-shop-grid, .profile-grid, .tier-grid, .achievements-grid, .step-grid { grid-template-columns: 1fr !important; } }</style>
   <style>
@@ -189,36 +213,6 @@
 .profile-wrapper { display: flex; gap: 0.75rem; align-items: center; margin-left: auto; flex-shrink: 0; }
 .profile-wrapper .nav-link { white-space: nowrap; }
 </style>
-
-<!-- LOGO ANIMATION FIX: isolate logo from background particles -->
-<style>
-/* Logo isolation fix - prevents background animation from bleeding through */
-.brand-logo, .nav-logo, .signin-logo, .footer-brand img, 
-.hero-logo, .logo-container, [alt="FORTREX"] {
-  position: relative;
-  z-index: 100;
-  isolation: isolate;
-  -webkit-isolation: isolate;
-}
-/* Dark backdrop behind logo so particles don't show through */
-.brand-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.85) 0%, rgba(6, 7, 10, 0) 70%);
-  border-radius: 50%;
-  padding: 8px;
-}
-.nav-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.9) 0%, rgba(6, 7, 10, 0) 80%);
-  border-radius: 8px;
-  padding: 2px;
-}
-/* Ensure SVG logos are crisp */
-img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  -ms-interpolation-mode: nearest-neighbor;
-}
-</style>
-
 </head>
 <body>
 
@@ -229,7 +223,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
   <nav class="nav">
     <div class="nav-brand">
       <a href="index.html" class="navbar-brand">
-        <div class="nav-logo"><img src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/cba74eb6c_fortrex-new-nav-96.png" alt="FORTREX" style="width: 36px; height: 36px; object-fit: contain;"></div>
+        <div class="nav-logo"><img class="fortrex-logo-svg" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/78f5d4bc5_fortrex-icon-96.png" alt="FORTREX" style="object-fit:contain;" /></div>
       </a>
     </div>
     <ul class="nav-links" id="nav-links-main">
@@ -247,7 +241,6 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
       <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
       <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
       <div class="hamburger" aria-label="Toggle Menu">
         <span></span><span></span><span></span>
@@ -378,7 +371,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
         </p>
 
         <!-- Progress Bar Container -->
-        <div style="background: rgba(10, 11, 15, 0.7); border: 1px solid #1a1a1a; border-radius: 20px; padding: 28px; margin-bottom: 32px;">
+        <div style="background: rgba(10, 11, 15, 0.7); border: 1px solid #06070A; border-radius: 20px; padding: 28px; margin-bottom: 32px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
             <span style="font-size: 14px; font-weight: 600; color: var(--color-bone-white);">NEXT MILESTONE PROGRESS</span>
             <span id="milestone-percentage" style="font-size: 14px; font-weight: 600; color: var(--color-saffron-spark);">0%</span>
@@ -403,13 +396,13 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
     <!-- SECTION 6: PSYCHOLOGY & DISCIPLINE (data-shape="sphere") -->
     <section class="section reveal" data-shape="sphere">
       <div class="container" style="max-width: 840px;">
-        <div style="border: 1px solid #1a1a1a; border-radius: 28px; padding: 40px; background: rgba(8, 9, 13, 0.6);">
+        <div style="border: 1px solid #06070A; border-radius: 28px; padding: 40px; background: rgba(8, 9, 13, 0.6);">
           <div class="section-label" style="margin-bottom: var(--spacing-18);">PSYCHOLOGICAL ADVANTAGE</div>
           <h2 class="heading-sm" style="margin-bottom: 16px;">The Power of Rhythmic Discipline</h2>
           <p style="font-size: 15px; font-weight: 200; color: var(--color-silver-mist); line-height: 1.7; margin-bottom: 20px;">
             In market trading, consistency beats intensity every time. Daily check-ins build the psychological habit of daily review, risk control, and emotional grounding.
           </p>
-          <div style="padding: 16px 20px; border-left: 2px solid var(--color-electric-iris); background: rgba(212, 175, 55, 0.05); font-size: 14px; color: var(--color-silver-mist);">
+          <div style="padding: 16px 20px; border-left: 2px solid var(--color-electric-iris); background: rgba(229, 193, 88, 0.05); font-size: 14px; color: var(--color-silver-mist);">
             Traders with a 7+ day check-in streak exhibit a 23% higher tournament ROI and 3.2x greater likelihood of reaching top leaderboard ranks.
           </div>
         </div>
@@ -419,7 +412,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
     <!-- SECTION 7: RISK DISCLAIMER & FOOTER (data-shape="scattered") -->
     <section class="section reveal" style="padding-bottom: 80px;" data-shape="scattered">
       <div class="container" style="max-width: 840px;">
-        <div style="border: 1px solid #1a1a1a; border-radius: 24px; padding: 32px; background: rgba(6, 7, 10, 0.8);">
+        <div style="border: 1px solid #06070A; border-radius: 24px; padding: 32px; background: rgba(6, 7, 10, 0.8);">
           <div class="section-label" style="margin-bottom: var(--spacing-12);">RISK WARNING</div>
           <p style="font-size: 13px; font-weight: 200; color: var(--color-silver-mist); line-height: 1.6;">
             Trading forex and cryptocurrency on margin carries a high level of risk and may not be suitable for all investors. You could lose some or all of your invested capital. FORTREX is a skill-based trading competition platform and does not execute trades, hold funds, or provide investment advice. Tournament prizes are distributed as REX reward points, which have no cash value.
@@ -438,8 +431,8 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/cba74eb6c_fortrex-new-nav-96.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(234, 202, 122, 0.2));">
-          <span class="nav-wordmark" style="color: #EACA7A; font-weight: 700;">FORTREX</span>
+          <img class="fortrex-logo-svg footer-logo-svg" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/78f5d4bc5_fortrex-icon-96.png" alt="FORTREX" style="object-fit:contain;" />
+          <span class="nav-wordmark" style="color: #E5C158; font-weight: 700;">FORTREX</span>
         </div>
         <div class="footer-links">
           <a href="index.html" class="footer-link">Home</a>
@@ -652,7 +645,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
         if (data.checkedIn) {
           checkinBtn.disabled = true;
           checkinBtn.innerHTML = `Checked In Today ✓`;
-          checkinBtn.style.background = 'rgba(212, 175, 55, 0.15)';
+          checkinBtn.style.background = 'rgba(229, 193, 88, 0.15)';
           checkinBtn.style.border = '1px solid var(--color-electric-iris)';
           checkinBtn.style.color = 'var(--color-electric-iris)';
           checkinBtn.style.cursor = 'default';
@@ -677,14 +670,14 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
         if (!checkinFeedback) return;
 
         const milestoneHtml = (info.milestoneBonus > 0 || info.milestoneReached) ? `
-          <div style="margin-top: 12px; padding: 12px 20px; background: rgba(234, 202, 122, 0.15); border: 1px solid var(--color-saffron-spark); border-radius: 12px; color: var(--color-saffron-spark); font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+          <div style="margin-top: 12px; padding: 12px 20px; background: rgba(229, 193, 88, 0.15); border: 1px solid var(--color-saffron-spark); border-radius: 12px; color: var(--color-saffron-spark); font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
             <span>🎉 MILESTONE UNLOCKED!</span>
             <span>+${info.milestoneBonus || 0} BONUS REX EARNED!</span>
           </div>
         ` : '';
 
         checkinFeedback.innerHTML = `
-          <div style="border: 1px solid var(--color-saffron-spark); background: rgba(234, 202, 122, 0.08); border-radius: 20px; padding: 28px; margin-top: 24px; text-align: center; animation: fadeIn 0.4s ease;">
+          <div style="border: 1px solid var(--color-saffron-spark); background: rgba(229, 193, 88, 0.08); border-radius: 20px; padding: 28px; margin-top: 24px; text-align: center; animation: fadeIn 0.4s ease;">
             <div style="font-size: 36px; margin-bottom: 8px;">🔥</div>
             <div style="font-size: 22px; font-weight: 600; color: var(--color-saffron-spark); margin-bottom: 6px;">
               Streak Extended to ${info.newStreak} Days!
@@ -703,7 +696,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
       function showAlreadyCheckedInState(msg, streak) {
         if (!checkinFeedback) return;
         checkinFeedback.innerHTML = `
-          <div style="border: 1px solid rgba(212, 175, 55, 0.4); background: rgba(212, 175, 55, 0.08); border-radius: 20px; padding: 24px; margin-top: 24px; text-align: center; animation: fadeIn 0.4s ease;">
+          <div style="border: 1px solid rgba(229, 193, 88, 0.4); background: rgba(229, 193, 88, 0.08); border-radius: 20px; padding: 24px; margin-top: 24px; text-align: center; animation: fadeIn 0.4s ease;">
             <div style="font-size: 32px; margin-bottom: 8px;">✨</div>
             <div style="font-size: 20px; font-weight: 600; color: var(--color-bone-white); margin-bottom: 6px;">
               Come Back Tomorrow!
@@ -767,21 +760,21 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
           const isToday = (d === 30);
 
           let bg = 'rgba(255, 255, 255, 0.02)';
-          let border = '1px solid #1a1a1a';
+          let border = '1px solid #06070A';
           let color = '#555555';
 
           if (isActive) {
             if (isMilestone) {
-              bg = 'rgba(234, 202, 122, 0.2)';
+              bg = 'rgba(229, 193, 88, 0.2)';
               border = '1px solid var(--color-saffron-spark)';
               color = 'var(--color-saffron-spark)';
             } else {
-              bg = 'rgba(212, 175, 55, 0.2)';
+              bg = 'rgba(229, 193, 88, 0.2)';
               border = '1px solid var(--color-electric-iris)';
               color = '#ffffff';
             }
           } else if (isToday && !isCheckedIn) {
-            bg = 'rgba(234, 202, 122, 0.06)';
+            bg = 'rgba(229, 193, 88, 0.06)';
             border = '1px dashed var(--color-saffron-spark)';
             color = 'var(--color-saffron-spark)';
           }
@@ -877,17 +870,17 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
           const isCurrent = !unlocked && (nextM.days === m.days);
 
           let badgeHtml = `<span class="badge" style="background: rgba(255,255,255,0.05); color: var(--color-ash-gray); border: 1px solid #222;">LOCKED</span>`;
-          let cardBorder = '1px solid #1a1a1a';
+          let cardBorder = '1px solid #06070A';
           let cardBg = 'rgba(10, 11, 15, 0.6)';
 
           if (unlocked) {
-            badgeHtml = `<span class="badge" style="background: rgba(234, 202, 122, 0.18); color: var(--color-saffron-spark); border: 1px solid var(--color-saffron-spark);">UNLOCKED ✓</span>`;
-            cardBorder = '1px solid rgba(234, 202, 122, 0.4)';
-            cardBg = 'rgba(234, 202, 122, 0.05)';
+            badgeHtml = `<span class="badge" style="background: rgba(229, 193, 88, 0.18); color: var(--color-saffron-spark); border: 1px solid var(--color-saffron-spark);">UNLOCKED ✓</span>`;
+            cardBorder = '1px solid rgba(229, 193, 88, 0.4)';
+            cardBg = 'rgba(229, 193, 88, 0.05)';
           } else if (isCurrent) {
-            badgeHtml = `<span class="badge" style="background: rgba(212, 175, 55, 0.18); color: var(--color-electric-iris); border: 1px solid var(--color-electric-iris);">IN PROGRESS</span>`;
+            badgeHtml = `<span class="badge" style="background: rgba(229, 193, 88, 0.18); color: var(--color-electric-iris); border: 1px solid var(--color-electric-iris);">IN PROGRESS</span>`;
             cardBorder = '1px solid var(--color-electric-iris)';
-            cardBg = 'rgba(212, 175, 55, 0.08)';
+            cardBg = 'rgba(229, 193, 88, 0.08)';
           }
 
           return `
@@ -956,5 +949,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<script>
+// Scroll Reveal v3.0
+(function(){var e=document.querySelectorAll('.reveal, .reveal-stagger');if(!e.length)return;if(!('IntersectionObserver'in window)){e.forEach(function(el){el.classList.add('visible')});return}var o=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');o.unobserve(entry.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});e.forEach(function(el){o.observe(el)});var n=document.querySelector('.nav');if(n){var t=false;window.addEventListener('scroll',function(){if(!t){requestAnimationFrame(function(){n.classList.toggle('scrolled',window.scrollY>20);t=false});t=true}},{passive:true})}var h=document.querySelector('.hamburger'),l=document.querySelector('.nav-links');if(h&&l){h.addEventListener('click',function(){h.classList.toggle('active');l.classList.toggle('active')})}})();
+</script>
 </body>
 </html>

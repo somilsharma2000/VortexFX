@@ -109,14 +109,21 @@ const FORTREX_AUTH = {
     if (!navCta) return;
     
     if (trader) {
-      const signinLink = navCta.querySelector('a[href="signin.html"]');
-      if (signinLink) {
-        signinLink.textContent = trader.username || 'Profile';
-        signinLink.href = 'profile.html';
-      }
-      
+      // Show username as a small label before the button
       const enterBtn = navCta.querySelector('.btn-primary');
       if (enterBtn) {
+        // Create username display
+        const username = trader.username || trader.trader_username || 'Trader';
+        const userSpan = document.createElement('span');
+        userSpan.className = 'nav-username';
+        userSpan.textContent = username;
+        userSpan.style.cssText = 'color: rgba(229,193,88,0.8); font-size: 12px; font-weight: 500; padding-right: 8px; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;';
+        userSpan.title = username;
+        userSpan.onclick = () => { window.location.href = 'profile.html'; };
+        userSpan.style.cursor = 'pointer';
+        enterBtn.parentNode.insertBefore(userSpan, enterBtn);
+        
+        // Transform button to logout
         enterBtn.textContent = 'Logout';
         enterBtn.href = '#';
         enterBtn.onclick = (e) => {
@@ -124,6 +131,9 @@ const FORTREX_AUTH = {
           this.logout();
         };
       }
+      
+      // Show internal nav links
+      document.querySelectorAll('.nav-internal').forEach(el => el.style.display = '');
     }
   }
 };

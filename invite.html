@@ -14,15 +14,15 @@
   <style>
     :root {
       --color-gold: #E5C158;
-      --color-gold-deep: #D4AF37;
+      --color-gold-deep: #E5C158;
       --color-card-bg: rgba(10, 11, 16, 0.8);
-      --color-border: #1a1a24;
+      --color-border: #0B0C0E;
       --color-border-gold: rgba(229, 193, 88, 0.2);
       --color-text-muted: #8A8A9A;
       --color-text-dim: #5A5A6A;
     }
     * { box-sizing: border-box; }
-    body { background-color: #000000; color: #FFFFFF; font-family: 'Inter', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
+    body { background-color: #06070A; color: #FFFFFF; font-family: 'Inter', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
     h1, h2, h3, h4, .space-grotesk { font-family: 'Space Grotesk', 'Inter', sans-serif !important; }
     .jetbrains-mono { font-family: 'JetBrains Mono', monospace !important; }
     .section-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-gold); display: inline-block; margin-bottom: 10px; }
@@ -32,12 +32,12 @@
     .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; width: 100% !important; max-width: 100% !important; display: flex; align-items: center; justify-content: space-between; padding: 14px 2rem; box-sizing: border-box; background: rgba(6, 7, 10, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(229, 193, 88, 0.1); }
     .nav-brand { display: flex; align-items: center; flex-shrink: 0; }
     .nav-brand a { display: flex; align-items: center; text-decoration: none; }
-    .nav-logo img { width: 36px; height: 36px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(229, 193, 88, 0.35)); }
+    .nav-logo img { width: 40px; height: 40px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(229, 193, 88, 0.35)); }
     .nav-links { display: flex; list-style: none; gap: 1.25rem; align-items: center; margin: 0; padding: 0; }
     .nav-link { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.02em; white-space: nowrap; transition: color 0.2s; }
     .nav-link:hover, .nav-link.active { color: var(--color-gold); }
     .nav-cta { display: flex; align-items: center; gap: 1.25rem; flex-shrink: 0; margin-left: auto; }
-    .nav-cta .btn-primary { background: linear-gradient(135deg, #E5C158, #D4AF37); color: #0B0C0E; padding: 10px 24px; font-weight: 700; font-size: 13px; text-decoration: none; border-radius: 9999px; white-space: nowrap; transition: all 0.3s; }
+    .nav-cta .btn-primary { background: linear-gradient(135deg, #E5C158, #E5C158); color: #06070A; padding: 10px 24px; font-weight: 700; font-size: 13px; text-decoration: none; border-radius: 9999px; white-space: nowrap; transition: all 0.3s; }
     .nav-cta .btn-primary:hover { filter: brightness(1.08); box-shadow: 0 0 20px rgba(229, 193, 88, 0.35); transform: translateY(-1px); }
     .nav-internal { display: none; }
     body.is-logged-in .nav-internal { display: block !important; }
@@ -45,7 +45,7 @@
     .hamburger span { width: 24px; height: 2px; background: var(--color-gold); transition: 0.3s; }
     @media (max-width: 768px) {
       .nav { padding: 12px 16px; }
-      .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: #14161A; flex-direction: column; padding: 40px 24px 24px; gap: 8px; z-index: 999; border-left: 1px solid rgba(229,193,88,0.15); transform: translateX(100%); transition: transform 0.3s ease; }
+      .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: #0B0C0E; flex-direction: column; padding: 40px 24px 24px; gap: 8px; z-index: 999; border-left: 1px solid rgba(229,193,88,0.15); transform: translateX(100%); transition: transform 0.3s ease; }
       .nav-links.active { display: flex; transform: translateX(0); }
       .nav-cta > a:not(.hamburger) { display: none; }
       .hamburger { display: flex !important; }
@@ -53,7 +53,7 @@
     .invite-hero { padding: 140px 24px 40px; text-align: center; max-width: 800px; margin: 0 auto; }
     .invite-hero h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 700; margin: 0 0 16px; letter-spacing: -0.02em; }
     .invite-hero p { font-size: 17px; color: var(--color-text-muted); line-height: 1.7; max-width: 600px; margin: 0 auto; }
-    .ticker-bar { max-width: 800px; margin: 32px auto 0; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; border-top: 1px solid #161720; padding-top: 20px; justify-content: center; }
+    .ticker-bar { max-width: 800px; margin: 32px auto 0; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; border-top: 1px solid #0B0C0E; padding-top: 20px; justify-content: center; }
     .badge-live { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-gold); background: rgba(229, 193, 88, 0.08); padding: 4px 12px; border-radius: 100px; border: 1px solid rgba(229, 193, 88, 0.2); }
     .badge-live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--color-gold); animation: pulse-dot 2s ease-in-out infinite; }
     @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
@@ -64,10 +64,10 @@
     .link-group { display: flex; gap: 12px; margin: 20px 0; flex-wrap: wrap; }
     .link-input { flex: 1; min-width: 200px; padding: 14px 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(229,193,88,0.15); border-radius: 10px; color: #fff; font-size: 14px; font-family: 'JetBrains Mono', monospace; outline: none; transition: border 0.2s; }
     .link-input:focus { border-color: rgba(229,193,88,0.5); }
-    .copy-btn { padding: 14px 28px; background: linear-gradient(135deg, #E5C158, #D4AF37); color: #0B0C0E; font-weight: 700; font-size: 14px; border: none; border-radius: 10px; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+    .copy-btn { padding: 14px 28px; background: linear-gradient(135deg, #E5C158, #E5C158); color: #06070A; font-weight: 700; font-size: 14px; border: none; border-radius: 10px; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
     .copy-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
     .share-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
-    .share-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: #0A0B10; border: 1px solid #1a1a24; border-radius: 8px; color: #9A9A9A; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+    .share-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: #06070A; border: 1px solid #0B0C0E; border-radius: 8px; color: #9A9A9A; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; text-decoration: none; }
     .share-btn:hover { color: #fff; border-color: var(--color-gold-deep); background: rgba(229,193,88,0.08); transform: translateY(-1px); }
     .share-btn svg { width: 16px; height: 16px; }
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 24px 0; }
@@ -86,14 +86,14 @@
     .tier-card-range { font-size: 12px; color: var(--color-text-muted); margin-bottom: 10px; }
     .tier-card-desc { font-size: 13px; color: var(--color-text-muted); line-height: 1.5; }
     .progress-track { width: 100%; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
-    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--color-gold), #F5D172); border-radius: 3px; transition: width 1s cubic-bezier(0.4,0,0.2,1); box-shadow: 0 0 8px rgba(229,193,88,0.4); }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--color-gold), #E5C158); border-radius: 3px; transition: width 1s cubic-bezier(0.4,0,0.2,1); box-shadow: 0 0 8px rgba(229,193,88,0.4); }
     .empty-state { text-align: center; padding: 32px 20px; background: rgba(10,11,16,0.5); border: 1px solid var(--color-border); border-radius: 14px; margin: 20px 0; }
     .empty-state-icon { font-size: 36px; margin-bottom: 12px; }
     .empty-state-text { font-size: 15px; color: #fff; font-weight: 500; margin-bottom: 8px; }
     .empty-state-sub { font-size: 13px; color: var(--color-text-muted); line-height: 1.6; max-width: 400px; margin: 0 auto 20px; }
     .fleet-table { width: 100%; border-collapse: collapse; font-size: 14px; text-align: left; }
     .fleet-table th { padding: 12px 16px; border-bottom: 1px solid #222230; color: var(--color-text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
-    .fleet-table td { padding: 14px 16px; border-bottom: 1px solid #161722; }
+    .fleet-table td { padding: 14px 16px; border-bottom: 1px solid #0B0C0E; }
     .badge { display: inline-block; padding: 4px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
     .auth-prompt { text-align: center; padding: 48px 24px; max-width: 600px; margin: 0 auto; }
     .auth-prompt h2 { font-size: 24px; font-weight: 600; margin: 0 0 12px; }
@@ -112,55 +112,49 @@
     .footer a { color: var(--color-text-muted); text-decoration: none; font-size: 13px; margin: 0 12px; transition: color 0.2s; }
     .footer a:hover { color: var(--color-gold); }
     .footer-copyright { font-size: 12px; color: var(--color-text-dim); margin-top: 16px; }
+  
+/* Inline SVG logo — native to the design, no pasted image */
+.fortrex-logo-svg {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 6px rgba(229, 193, 88, 0.35));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.nav-logo .fortrex-logo-svg:hover {
+  filter: drop-shadow(0 0 12px rgba(229, 193, 88, 0.6));
+  transform: scale(1.05);
+}
+.brand-logo-svg {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 0 20px rgba(229, 193, 88, 0.25)) drop-shadow(0 0 60px rgba(229, 193, 88, 0.1));
+  animation: logo-glow 4s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+.brand-logo-svg:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 30px rgba(229, 193, 88, 0.4)) drop-shadow(0 0 80px rgba(229, 193, 88, 0.15));
+}
+
   </style>
   <meta property="og:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta property="og:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta name="twitter:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
-  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
-
-<!-- LOGO ANIMATION FIX: isolate logo from background particles -->
-<style>
-/* Logo isolation fix - prevents background animation from bleeding through */
-.brand-logo, .nav-logo, .signin-logo, .footer-brand img, 
-.hero-logo, .logo-container, [alt="FORTREX"] {
-  position: relative;
-  z-index: 100;
-  isolation: isolate;
-  -webkit-isolation: isolate;
-}
-/* Dark backdrop behind logo so particles don't show through */
-.brand-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.85) 0%, rgba(6, 7, 10, 0) 70%);
-  border-radius: 50%;
-  padding: 8px;
-}
-.nav-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.9) 0%, rgba(6, 7, 10, 0) 80%);
-  border-radius: 8px;
-  padding: 2px;
-}
-/* Ensure SVG logos are crisp */
-img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  -ms-interpolation-mode: nearest-neighbor;
-}
-</style>
-
+  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
 </head>
 <body>
   <canvas id="particle-canvas"></canvas>
   <nav class="nav">
     <div class="nav-brand">
       <a href="index.html" class="navbar-brand">
-        <div class="nav-logo"><img src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/cba74eb6c_fortrex-new-nav-96.png" alt="FORTREX" style="width: 36px; height: 36px; object-fit: contain;"></div>
+        <div class="nav-logo"><img class="fortrex-logo-svg" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/78f5d4bc5_fortrex-icon-96.png" alt="FORTREX" style="object-fit:contain;" /></div>
       </a>
     </div>
     <ul class="nav-links" id="nav-links-main">
@@ -177,7 +171,6 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
       <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
       <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
       <div class="hamburger" aria-label="Toggle Menu"><span></span><span></span><span></span></div>
     </div>
@@ -206,11 +199,11 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
           </div>
           <h2>Sign In to Unlock Your Referral Network</h2>
           <p>Connect your Discord account to generate your unique referral link, view real-time fleet stats, and unlock progressive REX rewards.</p>
-          <a href="signin.html" style="display: inline-flex; align-items: center; gap: 10px; font-size: 15px; padding: 14px 36px; border-radius: 9999px; background: linear-gradient(135deg, #E5C158, #D4AF37); color: #0B0C0E; font-weight: 700; text-decoration: none; transition: all 0.2s;">
+          <a href="signin.html" style="display: inline-flex; align-items: center; gap: 10px; font-size: 15px; padding: 14px 36px; border-radius: 9999px; background: linear-gradient(135deg, #E5C158, #E5C158); color: #06070A; font-weight: 700; text-decoration: none; transition: all 0.2s;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
             Sign In with Discord
           </a>
-          <div style="margin-top: 28px; max-width: 520px; margin-left: auto; margin-right: auto; background: rgba(6,7,10,0.6); border: 1px solid #1C1D2A; border-radius: 12px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+          <div style="margin-top: 28px; max-width: 520px; margin-left: auto; margin-right: auto; background: rgba(6,7,10,0.6); border: 1px solid #0B0C0E; border-radius: 12px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
             <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--color-text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">https://somilsharma2000.github.io/VortexFX/signin.html?ref=YOUR_CODE</span>
             <span style="font-size: 11px; font-weight: 600; color: var(--color-gold); background: rgba(229,193,88,0.1); padding: 4px 10px; border-radius: 999px; white-space: nowrap;">Sign In to Copy</span>
           </div>
@@ -387,5 +380,9 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
   </script>
   <script>(function() { const t = localStorage.getItem('fortrex_trader'); if (t) document.querySelectorAll('.nav-internal').forEach(el => el.style.display = ''); })();</script>
   <script>document.addEventListener('DOMContentLoaded', function() { var h = document.querySelector('.hamburger'), n = document.querySelector('#nav-links-main'); if (h && n) { h.addEventListener('click', function() { h.classList.toggle('active'); n.classList.toggle('active'); }); n.querySelectorAll('a').forEach(function(l) { l.addEventListener('click', function() { h.classList.remove('active'); n.classList.remove('active'); }); }); } });</script>
+<script>
+// Scroll Reveal v3.0
+(function(){var e=document.querySelectorAll('.reveal, .reveal-stagger');if(!e.length)return;if(!('IntersectionObserver'in window)){e.forEach(function(el){el.classList.add('visible')});return}var o=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');o.unobserve(entry.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});e.forEach(function(el){o.observe(el)});var n=document.querySelector('.nav');if(n){var t=false;window.addEventListener('scroll',function(){if(!t){requestAnimationFrame(function(){n.classList.toggle('scrolled',window.scrollY>20);t=false});t=true}},{passive:true})}var h=document.querySelector('.hamburger'),l=document.querySelector('.nav-links');if(h&&l){h.addEventListener('click',function(){h.classList.toggle('active');l.classList.toggle('active')})}})();
+</script>
 </body>
 </html>

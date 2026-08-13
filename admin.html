@@ -18,29 +18,29 @@
   <style>
     /* ==========================================================================
        FORTREX — MISSION CONTROL ADMIN DASHBOARD STYLES
-       Obsidian #06070A · Gold #EACA7A · Electric Iris #D4AF37 · Inter Font
+       Obsidian #06070A · Gold #E5C158 · Electric Iris #E5C158 · Inter Font
        ========================================================================== */
 
     :root {
       --bg-obsidian: #06070A;
-      --bg-card: #0D0F18;
-      --bg-card-hover: #131625;
-      --bg-sidebar: #090B12;
-      --bg-input: #121522;
+      --bg-card: #06070A;
+      --bg-card-hover: #0B0C0E;
+      --bg-sidebar: #06070A;
+      --bg-input: #0B0C0E;
       --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-glow: rgba(212, 175, 55, 0.3);
-      --border-gold: rgba(234, 202, 122, 0.4);
+      --border-glow: rgba(229, 193, 88, 0.3);
+      --border-gold: rgba(229, 193, 88, 0.4);
       --text-main: #FFFFFF;
       --text-muted: #9A9A9A;
       --text-dim: #64687A;
-      --accent-iris: #D4AF37;
-      --accent-iris-glow: rgba(212, 175, 55, 0.15);
-      --accent-gold: #EACA7A;
-      --accent-gold-glow: rgba(234, 202, 122, 0.15);
+      --accent-iris: #E5C158;
+      --accent-iris-glow: rgba(229, 193, 88, 0.15);
+      --accent-gold: #E5C158;
+      --accent-gold-glow: rgba(229, 193, 88, 0.15);
       --status-live: #22C55E;
-      --status-paused: #F59E0B;
+      --status-paused: #E5C158;
       --status-completed: #3B82F6;
-      --status-revealed: #EACA7A;
+      --status-revealed: #E5C158;
       --status-draft: #6B7280;
     }
 
@@ -51,7 +51,7 @@
     }
 
     body {
-      background-color: #0b0c10;
+      background-color: #06070A;
       color: var(--text-main);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       min-height: 100vh;
@@ -109,7 +109,7 @@
       background: transparent;
     }
     .sidebar::-webkit-scrollbar-thumb {
-      background: rgba(212, 175, 55, 0.25);
+      background: rgba(229, 193, 88, 0.25);
       border-radius: 3px;
     }
 
@@ -126,13 +126,13 @@
     .sidebar-brand-logo {
       width: 38px;
       height: 38px;
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(234, 202, 122, 0.2));
+      background: linear-gradient(135deg, rgba(229, 193, 88, 0.2), rgba(229, 193, 88, 0.2));
       border: 1px solid var(--accent-iris);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+      box-shadow: 0 0 15px rgba(229, 193, 88, 0.2);
     }
 
     .sidebar-brand-title {
@@ -174,7 +174,7 @@
       justify-content: center;
       font-weight: 700;
       font-size: 14px;
-      color: #000000;
+      color: #06070A;
       border: 2px solid rgba(255, 255, 255, 0.2);
     }
 
@@ -218,7 +218,7 @@
       background: transparent;
     }
     .nav-list::-webkit-scrollbar-thumb {
-      background: rgba(212, 175, 55, 0.3);
+      background: rgba(229, 193, 88, 0.3);
       border-radius: 2px;
     }
 
@@ -259,10 +259,10 @@
 
     .nav-item-btn.active {
       color: #FFFFFF;
-      background: linear-gradient(90deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.03));
-      border-color: rgba(212, 175, 55, 0.4);
+      background: linear-gradient(90deg, rgba(229, 193, 88, 0.15), rgba(229, 193, 88, 0.03));
+      border-color: rgba(229, 193, 88, 0.4);
       font-weight: 600;
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+      box-shadow: 0 0 15px rgba(229, 193, 88, 0.1);
     }
 
     .nav-item-btn.active svg {
@@ -316,7 +316,7 @@
       border-radius: 3px;
     }
     .main-content::-webkit-scrollbar-thumb:hover {
-      background: rgba(212, 175, 55, 0.3);
+      background: rgba(229, 193, 88, 0.3);
     }
 
     /* Header Bar */
@@ -440,7 +440,7 @@
     .stat-card:hover {
       border-color: var(--border-glow);
       transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 30px rgba(6, 7, 10, 0.5);
     }
 
     .stat-card::before {
@@ -538,7 +538,7 @@
     .quick-action-btn.gold-border:hover {
       background: var(--bg-card-hover);
       border-color: var(--accent-gold);
-      box-shadow: 0 0 18px rgba(234, 202, 122, 0.2);
+      box-shadow: 0 0 18px rgba(229, 193, 88, 0.2);
       transform: translateY(-2px);
     }
 
@@ -549,7 +549,7 @@
     .quick-action-btn.iris-border:hover {
       background: var(--bg-card-hover);
       border-color: var(--accent-iris);
-      box-shadow: 0 0 18px rgba(212, 175, 55, 0.2);
+      box-shadow: 0 0 18px rgba(229, 193, 88, 0.2);
       transform: translateY(-2px);
     }
 
@@ -565,12 +565,12 @@
 
     .quick-action-icon.gold-bg {
       background: var(--accent-gold-glow);
-      border: 1px solid rgba(234, 202, 122, 0.3);
+      border: 1px solid rgba(229, 193, 88, 0.3);
     }
 
     .quick-action-icon.iris-bg {
       background: var(--accent-iris-glow);
-      border: 1px solid rgba(212, 175, 55, 0.3);
+      border: 1px solid rgba(229, 193, 88, 0.3);
     }
 
     .quick-action-text {
@@ -604,20 +604,20 @@
     }
 
     .type-badge.badge-championship {
-      background: rgba(234, 202, 122, 0.15);
+      background: rgba(229, 193, 88, 0.15);
       color: var(--accent-gold);
-      border: 1px solid rgba(234, 202, 122, 0.4);
+      border: 1px solid rgba(229, 193, 88, 0.4);
     }
 
     .type-badge.badge-sprint {
-      background: rgba(212, 175, 55, 0.15);
+      background: rgba(229, 193, 88, 0.15);
       color: var(--accent-iris);
-      border: 1px solid rgba(212, 175, 55, 0.4);
+      border: 1px solid rgba(229, 193, 88, 0.4);
     }
 
     .sprint-row {
       border-left: 3px solid var(--accent-iris) !important;
-      background: rgba(212, 175, 55, 0.02);
+      background: rgba(229, 193, 88, 0.02);
     }
 
     /* Content Cards & Tables */
@@ -721,9 +721,9 @@
     }
 
     .status-badge.revealed {
-      background: rgba(234, 202, 122, 0.15);
+      background: rgba(229, 193, 88, 0.15);
       color: var(--status-revealed);
-      border: 1px solid rgba(234, 202, 122, 0.3);
+      border: 1px solid rgba(229, 193, 88, 0.3);
     }
 
     .status-badge.upcoming,
@@ -735,8 +735,8 @@
 
     /* Buttons & Form Controls */
     .btn-gold-accent {
-      background: linear-gradient(135deg, var(--accent-gold), #C8AA78);
-      color: #000000;
+      background: linear-gradient(135deg, var(--accent-gold), #E5C158);
+      color: #06070A;
       font-weight: 700;
       font-size: 13px;
       padding: 10px 18px;
@@ -747,12 +747,12 @@
       align-items: center;
       gap: 8px;
       transition: all 0.2s ease;
-      box-shadow: 0 0 15px rgba(234, 202, 122, 0.2);
+      box-shadow: 0 0 15px rgba(229, 193, 88, 0.2);
     }
 
     .btn-gold-accent:hover {
       transform: translateY(-1px);
-      box-shadow: 0 0 20px rgba(234, 202, 122, 0.4);
+      box-shadow: 0 0 20px rgba(229, 193, 88, 0.4);
     }
 
     .btn-primary-accent {
@@ -768,12 +768,12 @@
       align-items: center;
       gap: 8px;
       transition: all 0.2s ease;
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+      box-shadow: 0 0 15px rgba(229, 193, 88, 0.2);
     }
 
     .btn-primary-accent:hover {
       transform: translateY(-1px);
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+      box-shadow: 0 0 20px rgba(229, 193, 88, 0.4);
     }
 
     .btn-outline-sm {
@@ -841,7 +841,7 @@
 
     .form-control:focus {
       border-color: var(--accent-iris);
-      box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
+      box-shadow: 0 0 12px rgba(229, 193, 88, 0.25);
     }
 
     textarea.form-control {
@@ -862,7 +862,7 @@
       left: 0;
       width: 100%;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(6, 7, 10, 0.8);
       backdrop-filter: blur(8px);
       z-index: 1000;
       display: flex;
@@ -888,7 +888,7 @@
       max-height: 90vh;
       overflow-y: auto;
       padding: 32px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 20px 50px rgba(6, 7, 10, 0.8);
       transform: scale(0.95);
       transition: transform 0.25s ease;
     }
@@ -944,7 +944,7 @@
       color: #FFFFFF;
       font-size: 13px;
       font-weight: 500;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 30px rgba(6, 7, 10, 0.5);
       display: flex;
       align-items: center;
       gap: 10px;
@@ -966,7 +966,7 @@
   
     /* MOBILE RESPONSIVE */
     @media (max-width: 768px) {
-      .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: #0A0B0F; flex-direction: column; padding: 40px 24px 24px; gap: 8px; z-index: 999; border-left: 1px solid rgba(234,202,122,0.15); transform: translateX(100%); transition: transform 0.3s ease; }
+      .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: #06070A; flex-direction: column; padding: 40px 24px 24px; gap: 8px; z-index: 999; border-left: 1px solid rgba(229, 193, 88,0.15); transform: translateX(100%); transition: transform 0.3s ease; }
       .nav-links.active { display: flex; transform: translateX(0); }
       .nav-cta > a:not(.hamburger) { display: none; }
       .hamburger { display: flex !important; cursor: pointer; }
@@ -991,58 +991,52 @@
       .container { padding-left: 12px; padding-right: 12px; }
     }
 
-    </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/da15f6d53_fortrex-new-icon-32.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/da15f6d53_fortrex-new-icon-32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/3b7e110dd_fortrex-new-icon-180.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/50557a7bd_fortrex-new-icon-512.png">
-    <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+    
+/* Inline SVG logo — native to the design, no pasted image */
+.fortrex-logo-svg {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 6px rgba(229, 193, 88, 0.35));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.nav-logo .fortrex-logo-svg:hover {
+  filter: drop-shadow(0 0 12px rgba(229, 193, 88, 0.6));
+  transform: scale(1.05);
+}
+.brand-logo-svg {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 0 20px rgba(229, 193, 88, 0.25)) drop-shadow(0 0 60px rgba(229, 193, 88, 0.1));
+  animation: logo-glow 4s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+.brand-logo-svg:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 30px rgba(229, 193, 88, 0.4)) drop-shadow(0 0 80px rgba(229, 193, 88, 0.15));
+}
+
+  </style>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/7462744de_fortrex-icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/7462744de_fortrex-icon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/1fb65d179_fortrex-app-icon-180.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/4185f39e2_fortrex-app-icon-512.png">
+    <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
     <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+    <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <meta property="og:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta property="og:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta name="twitter:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
-  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
-
-<!-- LOGO ANIMATION FIX: isolate logo from background particles -->
-<style>
-/* Logo isolation fix - prevents background animation from bleeding through */
-.brand-logo, .nav-logo, .signin-logo, .footer-brand img, 
-.hero-logo, .logo-container, [alt="FORTREX"] {
-  position: relative;
-  z-index: 100;
-  isolation: isolate;
-  -webkit-isolation: isolate;
-}
-/* Dark backdrop behind logo so particles don't show through */
-.brand-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.85) 0%, rgba(6, 7, 10, 0) 70%);
-  border-radius: 50%;
-  padding: 8px;
-}
-.nav-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.9) 0%, rgba(6, 7, 10, 0) 80%);
-  border-radius: 8px;
-  padding: 2px;
-}
-/* Ensure SVG logos are crisp */
-img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  -ms-interpolation-mode: nearest-neighbor;
-}
-</style>
-
+  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
 </head>
 <body>
 
@@ -1075,7 +1069,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
       </div>
 
       <button onclick="verifyAdminPasscode()"
-        style="width: 100%; padding: 14px; background: linear-gradient(135deg, #E5C158, #D4AF37); color: #06070A; font-weight: 700; font-size: 15px; border: none; border-radius: 10px; cursor: pointer; transition: all 0.2s;">
+        style="width: 100%; padding: 14px; background: linear-gradient(135deg, #E5C158, #E5C158); color: #06070A; font-weight: 700; font-size: 15px; border: none; border-radius: 10px; cursor: pointer; transition: all 0.2s;">
         Unlock Mission Control
       </button>
 
@@ -1430,7 +1424,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
         </div>
 
         <!-- GENESIS PROGRAM TRACKER -->
-        <div class="content-card" style="border: 1px solid rgba(234, 202, 122, 0.3); background: linear-gradient(180deg, #0D0F18 0%, #12101F 100%);">
+        <div class="content-card" style="border: 1px solid rgba(229, 193, 88, 0.3); background: linear-gradient(180deg, #06070A 0%, #0B0C0E 100%);">
           <div class="card-header">
             <div>
               <h2 class="card-title" style="color: var(--accent-gold);">
@@ -1454,7 +1448,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
                 </div>
               </div>
               <div style="text-align: right;">
-                <span style="font-size: 12px; color: var(--accent-iris); font-weight: 600; background: rgba(212, 175, 55, 0.15); padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(212, 175, 55, 0.3);">
+                <span style="font-size: 12px; color: var(--accent-iris); font-weight: 600; background: rgba(229, 193, 88, 0.15); padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(229, 193, 88, 0.3);">
                   <span id="genesis-tx-count">1,842</span> Traders Received <strong style="color: var(--accent-gold);">genesis_bonus</strong> (+500 REX)
                 </span>
               </div>
@@ -1462,7 +1456,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
 
             <!-- Gold Gradient Progress Bar -->
             <div style="width: 100%; height: 12px; background: rgba(255, 255, 255, 0.05); border-radius: 999px; overflow: hidden; border: 1px solid var(--border-subtle); padding: 2px;">
-              <div id="genesis-progress-bar" style="width: 73.68%; height: 100%; background: linear-gradient(90deg, #EACA7A 0%, #D4AF37 100%); border-radius: 999px; transition: width 1s ease; box-shadow: 0 0 12px rgba(234, 202, 122, 0.5);"></div>
+              <div id="genesis-progress-bar" style="width: 73.68%; height: 100%; background: linear-gradient(90deg, #E5C158 0%, #E5C158 100%); border-radius: 999px; transition: width 1s ease; box-shadow: 0 0 12px rgba(229, 193, 88, 0.5);"></div>
             </div>
 
             <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-dim);">
@@ -2332,7 +2326,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
           vx: (Math.random() - 0.5) * 0.4,
           vy: (Math.random() - 0.5) * 0.4,
           radius: Math.random() * 2 + 1,
-          color: Math.random() > 0.5 ? 'rgba(234, 202, 122, ' : 'rgba(212, 175, 55, ',
+          color: Math.random() > 0.5 ? 'rgba(229, 193, 88, ' : 'rgba(229, 193, 88, ',
           alpha: Math.random() * 0.5 + 0.2
         });
       }
@@ -3120,7 +3114,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
           ? '<span class="status-badge" style="background: rgba(239,68,68,0.15); color: #EF4444; border: 1px solid rgba(239,68,68,0.3);">BANNED</span>'
           : t.verified
           ? '<span class="status-badge live">VERIFIED</span>'
-          : '<span class="status-badge" style="background: rgba(245,158,11,0.15); color: #F59E0B; border: 1px solid rgba(245,158,11,0.3);">UNVERIFIED</span>';
+          : '<span class="status-badge" style="background: rgba(245,158,11,0.15); color: #E5C158; border: 1px solid rgba(245,158,11,0.3);">UNVERIFIED</span>';
 
         return `
           <tr onclick="openTraderDetail('${t.id}')" style="cursor: pointer;">
@@ -3172,7 +3166,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
         <div><span style="color: var(--text-dim); font-size: 12px;">MT4 Account</span><div style="font-family: monospace;">${trader.mt4_account || 'Not linked'}</div></div>
         <div><span style="color: var(--text-dim); font-size: 12px;">Referral Code</span><div style="font-family: monospace;">${trader.referral_code || '—'}</div></div>
         <div><span style="color: var(--text-dim); font-size: 12px;">Joined Date</span><div>${trader.joined_date ? new Date(trader.joined_date).toLocaleDateString() : '—'}</div></div>
-        <div><span style="color: var(--text-dim); font-size: 12px;">Status</span><div>${trader.banned ? '<span style="color: #EF4444;">BANNED</span>' : trader.verified ? '<span style="color: #22C55E;">VERIFIED</span>' : '<span style="color: #F59E0B;">UNVERIFIED</span>'}</div></div>
+        <div><span style="color: var(--text-dim); font-size: 12px;">Status</span><div>${trader.banned ? '<span style="color: #EF4444;">BANNED</span>' : trader.verified ? '<span style="color: #22C55E;">VERIFIED</span>' : '<span style="color: #E5C158;">UNVERIFIED</span>'}</div></div>
         ${trader.banned ? `<div style="grid-column: 1 / -1;"><span style="color: var(--text-dim); font-size: 12px;">Ban Reason</span><div style="color: #EF4444;">${escapeHtml(trader.banned_reason || 'Not specified')}</div></div>` : ''}
       `;
 
@@ -3417,14 +3411,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   <!-- FOOTER -->
-  <footer style="background: #06070A; padding: 16px 24px; border-top: 1px solid rgba(234,202,122,0.1); text-align: center; margin-top: auto; flex-shrink: 0;">
+  <footer style="background: #06070A; padding: 16px 24px; border-top: 1px solid rgba(229, 193, 88,0.1); text-align: center; margin-top: auto; flex-shrink: 0;">
     <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px;">
-      <img src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/cba74eb6c_fortrex-new-nav-96.png" alt="FORTREX" style="width: 24px; height: 24px; border-radius: 4px;">
-      <span style="color: #EACA7A; font-weight: 700; font-size: 14px; letter-spacing: 0.05em;">FORTREX</span>
+      <img class="fortrex-logo-svg" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/78f5d4bc5_fortrex-icon-96.png" alt="FORTREX" style="object-fit:contain;" />
+      <span style="color: #E5C158; font-weight: 700; font-size: 14px; letter-spacing: 0.05em;">FORTREX</span>
     </div>
     <div style="font-size: 11px; color: rgba(255,255,255,0.3);">© 2026 FORTREX — Mission Control Admin. Internal use only.</div>
   <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:8px;line-height:1.5;">FORTREX organizes skill-based trading competitions and tournaments. We are not a broker, financial institution, or asset manager.</div>
   </footer>
 
+<script>
+// Scroll Reveal v3.0
+(function(){var e=document.querySelectorAll('.reveal, .reveal-stagger');if(!e.length)return;if(!('IntersectionObserver'in window)){e.forEach(function(el){el.classList.add('visible')});return}var o=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');o.unobserve(entry.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});e.forEach(function(el){o.observe(el)});var n=document.querySelector('.nav');if(n){var t=false;window.addEventListener('scroll',function(){if(!t){requestAnimationFrame(function(){n.classList.toggle('scrolled',window.scrollY>20);t=false});t=true}},{passive:true})}var h=document.querySelector('.hamburger'),l=document.querySelector('.nav-links');if(h&&l){h.addEventListener('click',function(){h.classList.toggle('active');l.classList.toggle('active')})}})();
+</script>
 </body>
 </html>

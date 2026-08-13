@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="css/fortrex-theme.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign In — FORTREX</title>
@@ -28,9 +29,9 @@
       align-items: center;
       gap: 12px;
       padding: 8px 20px;
-      border: 1px solid rgba(212, 175, 55, 0.3);
+      border: 1px solid rgba(229, 193, 88, 0.3);
       border-radius: 100px;
-      background: rgba(212, 175, 55, 0.05);
+      background: rgba(229, 193, 88, 0.05);
       margin-bottom: var(--spacing-24);
       font-size: 13px;
       letter-spacing: 0.04em;
@@ -47,14 +48,14 @@
 
     .auth-card {
       overflow: hidden;
-      background: rgba(10, 10, 10, 0.85);
-      border: 1px solid #1a1a1a;
+      background: rgba(6, 7, 10, 0.85);
+      border: 1px solid #06070A;
       border-radius: 8px;
       padding: var(--spacing-36) var(--spacing-36);
       width: 100%;
       max-width: 480px;
       margin: 0 auto;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+      box-shadow: 0 20px 50px rgba(6, 7, 10, 0.85);
       position: relative;
       backdrop-filter: blur(12px);
     }
@@ -108,7 +109,7 @@
       width: 100%;
       padding: 18px 24px;
       background-color: #ffffff;
-      color: #1a1a1a;
+      color: #06070A;
       font-family: var(--font);
       font-size: 15px;
       font-weight: 600;
@@ -197,8 +198,8 @@
     .profile-form-submit {
       width: 100%;
       padding: 16px;
-      background: linear-gradient(135deg, #E5C158, #F5D172);
-      color: #0B0C0E;
+      background: linear-gradient(135deg, #E5C158, #E5C158);
+      color: #06070A;
       font-weight: 700;
       font-size: 15px;
       text-transform: uppercase;
@@ -222,7 +223,7 @@
     .reassurance-list {
       margin-top: var(--spacing-24);
       padding-top: var(--spacing-24);
-      border-top: 1px solid #1a1a1a;
+      border-top: 1px solid #06070A;
       text-align: left;
       font-size: 13px;
       color: var(--color-ash-gray);
@@ -267,8 +268,8 @@
     .auth-spinner {
       width: 48px;
       height: 48px;
-      border: 3px solid rgba(212, 175, 55, 0.2);
-      border-top-color: #D4AF37;
+      border: 3px solid rgba(229, 193, 88, 0.2);
+      border-top-color: #E5C158;
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
@@ -381,59 +382,53 @@
     body.user-logged-in .nav-link {
       font-size: 12px;
     }
+  
+/* Inline SVG logo — native to the design, no pasted image */
+.fortrex-logo-svg {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 6px rgba(229, 193, 88, 0.35));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.nav-logo .fortrex-logo-svg:hover {
+  filter: drop-shadow(0 0 12px rgba(229, 193, 88, 0.6));
+  transform: scale(1.05);
+}
+.brand-logo-svg {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 0 20px rgba(229, 193, 88, 0.25)) drop-shadow(0 0 60px rgba(229, 193, 88, 0.1));
+  animation: logo-glow 4s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+.brand-logo-svg:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 30px rgba(229, 193, 88, 0.4)) drop-shadow(0 0 80px rgba(229, 193, 88, 0.15));
+}
+
   </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/da15f6d53_fortrex-new-icon-32.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/da15f6d53_fortrex-new-icon-32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/3b7e110dd_fortrex-new-icon-180.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/50557a7bd_fortrex-new-icon-512.png">
-    <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/7462744de_fortrex-icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/7462744de_fortrex-icon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/1fb65d179_fortrex-app-icon-180.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/4185f39e2_fortrex-app-icon-512.png">
+    <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
     <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+    <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <meta property="og:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta property="og:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta name="twitter:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
-  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <style>body { overflow-x: hidden; max-width: 100vw; }</style>
-
-<!-- LOGO ANIMATION FIX: isolate logo from background particles -->
-<style>
-/* Logo isolation fix - prevents background animation from bleeding through */
-.brand-logo, .nav-logo, .signin-logo, .footer-brand img, 
-.hero-logo, .logo-container, [alt="FORTREX"] {
-  position: relative;
-  z-index: 100;
-  isolation: isolate;
-  -webkit-isolation: isolate;
-}
-/* Dark backdrop behind logo so particles don't show through */
-.brand-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.85) 0%, rgba(6, 7, 10, 0) 70%);
-  border-radius: 50%;
-  padding: 8px;
-}
-.nav-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.9) 0%, rgba(6, 7, 10, 0) 80%);
-  border-radius: 8px;
-  padding: 2px;
-}
-/* Ensure SVG logos are crisp */
-img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  -ms-interpolation-mode: nearest-neighbor;
-}
-</style>
-
 </head>
 <body>
 
@@ -443,7 +438,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
   <nav class="nav">
     <div class="nav-brand">
       <a href="index.html" class="navbar-brand">
-        <div class="nav-logo"><img src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/cba74eb6c_fortrex-new-nav-96.png" alt="FORTREX" style="width: 36px; height: 36px; object-fit: contain;"></div>
+        <div class="nav-logo"><img class="fortrex-logo-svg" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/78f5d4bc5_fortrex-icon-96.png" alt="FORTREX" style="object-fit:contain;" /></div>
       </a>
     </div>
     <ul class="nav-links" id="nav-links-main">
@@ -461,7 +456,6 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
       <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
       <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
       <div class="hamburger" aria-label="Toggle Menu">
         <span></span><span></span><span></span>
@@ -478,14 +472,14 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
 
           <!-- URGENCY TRIGGER -->
           <div class="urgency-badge">
-            <span class="live-dot" style="background: #ffb829;"></span>
+            <span class="live-dot" style="background: #E5C158;"></span>
             <span>Next Tournament Starts Soon · Reveal In:</span>
             <span id="signin-countdown" class="urgency-timer" data-countdown="2026-08-23T23:59:59">14d : 08h : 32m : 15s</span>
           </div>
 
           <!-- CINEMATIC LOGO -->
           <div style="margin-bottom: 32px;">
-            <img src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/107d6d1da_fortrex-new-lockup.png" alt="FORTREX" style="width:220px;max-width:90%;height:auto;margin:0 auto;display:block;filter:drop-shadow(0 0 20px rgba(229,193,88,0.25)) drop-shadow(0 0 50px rgba(229,193,88,0.1))">
+            <img class="fortrex-logo-svg" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/78f5d4bc5_fortrex-icon-96.png" alt="FORTREX" style="object-fit:contain;" />
           </div>
 
           <!-- IDENTITY TRIGGER -->
@@ -504,7 +498,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
             <div id="login-view">
               <div style="margin-bottom: var(--spacing-24);">
                 <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px;">
-                  <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-electric-iris); background: rgba(212, 175, 55, 0.12); padding: 4px 12px; border-radius: 12px;">
+                  <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-electric-iris); background: rgba(229, 193, 88, 0.12); padding: 4px 12px; border-radius: 12px;">
                     ⚡ 30 Seconds to Join
                   </span>
                 </div>
@@ -517,25 +511,22 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
               <!-- MANUAL REGISTRATION FORM -->
               <form id="manual-reg-form" onsubmit="return submitManualRegistration(event)" style="display: flex; flex-direction: column; gap: 16px;">
                 <div>
-                  <label style="display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ash-gray); margin-bottom: 6px;">Full Name</label>
+                  <label class="form-label">Full Name</label>
                   <input type="text" id="reg-full-name" placeholder="e.g. Alex Morgan" required
-                    style="width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(229,193,88,0.15); border-radius: 8px; color: #fff; font-size: 15px; font-family: 'Inter', sans-serif; transition: border 0.2s;"
-                    onfocus="this.style.borderColor='rgba(229,193,88,0.5)'" onblur="this.style.borderColor='rgba(229,193,88,0.15)'" />
+                    class="form-input" style="border-radius: 12px; padding: 14px 18px;" />
                 </div>
                 <div>
-                  <label style="display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ash-gray); margin-bottom: 6px;">Email Address</label>
+                  <label class="form-label">Email Address</label>
                   <input type="email" id="reg-email" placeholder="you@example.com" required
-                    style="width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(229,193,88,0.15); border-radius: 8px; color: #fff; font-size: 15px; font-family: 'Inter', sans-serif; transition: border 0.2s;"
-                    onfocus="this.style.borderColor='rgba(229,193,88,0.5)'" onblur="this.style.borderColor='rgba(229,193,88,0.15)'" />
+                    class="form-input" style="border-radius: 12px; padding: 14px 18px;" />
                 </div>
                 <div>
-                  <label style="display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ash-gray); margin-bottom: 6px;">Phone Number</label>
+                  <label class="form-label">Phone Number</label>
                   <input type="tel" id="reg-phone" placeholder="+1 (555) 000-0000" required
-                    style="width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(229,193,88,0.15); border-radius: 8px; color: #fff; font-size: 15px; font-family: 'Inter', sans-serif; transition: border 0.2s;"
-                    onfocus="this.style.borderColor='rgba(229,193,88,0.5)'" onblur="this.style.borderColor='rgba(229,193,88,0.15)'" />
+                    class="form-input" style="border-radius: 12px; padding: 14px 18px;" />
                 </div>
                 <button type="submit"
-                  style="width: 100%; padding: 14px 24px; background: linear-gradient(135deg, #E5C158, #D4AF37); color: #0B0C0E; font-weight: 700; font-size: 15px; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.02em;">
+                  style="width: 100%; padding: 14px 24px; background: linear-gradient(135deg, #E5C158, #E5C158); color: #06070A; font-weight: 700; font-size: 15px; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.02em;">
                   Reserve My Genesis Spot →
                 </button>
               </form>
@@ -827,14 +818,14 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
         <p style="font-size: 17px; color: var(--color-ash-gray); line-height: 1.7; max-width: 580px; margin: 0 auto 2.5rem;">
           No tournament details, broker connections, or platform mechanics will be revealed until the 10,000 Genesis milestone is reached. Secure your position early.
         </p>
-        <div style="display: inline-flex; align-items: center; gap: 16px; padding: 20px 32px; background: rgba(212, 175, 55, 0.04); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 12px;">
-          <div style="width: 8px; height: 8px; border-radius: 50%; background: #D4AF37; box-shadow: 0 0 12px rgba(212, 175, 55, 0.6); animation: pulse-glow 2s ease-in-out infinite;"></div>
+        <div style="display: inline-flex; align-items: center; gap: 16px; padding: 20px 32px; background: rgba(229, 193, 88, 0.04); border: 1px solid rgba(229, 193, 88, 0.15); border-radius: 12px;">
+          <div style="width: 8px; height: 8px; border-radius: 50%; background: #E5C158; box-shadow: 0 0 12px rgba(229, 193, 88, 0.6); animation: pulse-glow 2s ease-in-out infinite;"></div>
           <span style="font-size: 14px; font-weight: 500; color: #9A9A9A; letter-spacing: 0.03em;">Genesis spots are limited. The clock is ticking.</span>
         </div>
         <style>
           @keyframes pulse-glow {
-            0%, 100% { opacity: 1; box-shadow: 0 0 12px rgba(212, 175, 55, 0.6); }
-            50% { opacity: 0.5; box-shadow: 0 0 20px rgba(212, 175, 55, 0.8); }
+            0%, 100% { opacity: 1; box-shadow: 0 0 12px rgba(229, 193, 88, 0.6); }
+            50% { opacity: 0.5; box-shadow: 0 0 20px rgba(229, 193, 88, 0.8); }
           }
         </style>
       </div>
@@ -890,7 +881,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
 
   
     <!-- RISK DISCLAIMER -->
-    <div style="padding: 20px 24px; border-top: 1px solid #0a0a0a; text-align: center;">
+    <div style="padding: 20px 24px; border-top: 1px solid #06070A; text-align: center;">
       <p style="font-size: 11px; color: #444; max-width: 600px; margin: 0 auto; line-height: 1.5;">
         Trading foreign exchange, CFDs and other leveraged products carries a high level of risk and may not be suitable for all investors. 
         You could lose some or all of your invested capital. Past performance does not guarantee future results. 
@@ -903,8 +894,8 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/cba74eb6c_fortrex-new-nav-96.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(234, 202, 122, 0.2));">
-          <span class="nav-wordmark" style="color: #EACA7A; font-weight: 700;">FORTREX</span>
+          <img class="fortrex-logo-svg footer-logo-svg" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/78f5d4bc5_fortrex-icon-96.png" alt="FORTREX" style="object-fit:contain;" />
+          <span class="nav-wordmark" style="color: #E5C158; font-weight: 700;">FORTREX</span>
         </div>
         <div class="footer-links">
           <a href="index.html" class="footer-link">Home</a>
@@ -1049,5 +1040,9 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .catch(() => {});
   </script>
+<script>
+// Scroll Reveal v3.0
+(function(){var e=document.querySelectorAll('.reveal, .reveal-stagger');if(!e.length)return;if(!('IntersectionObserver'in window)){e.forEach(function(el){el.classList.add('visible')});return}var o=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');o.unobserve(entry.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});e.forEach(function(el){o.observe(el)});var n=document.querySelector('.nav');if(n){var t=false;window.addEventListener('scroll',function(){if(!t){requestAnimationFrame(function(){n.classList.toggle('scrolled',window.scrollY>20);t=false});t=true}},{passive:true})}var h=document.querySelector('.hamburger'),l=document.querySelector('.nav-links');if(h&&l){h.addEventListener('click',function(){h.classList.toggle('active');l.classList.toggle('active')})}})();
+</script>
 </body>
 </html>

@@ -12,17 +12,17 @@
   
 <style>
   :root {
-    --bg: #050508;
-    --violet: #D4AF37;
-    --violet-bright: #EACA7A;
-    --violet-deep: #AA7C11;
+    --bg: #06070A;
+    --violet: #E5C158;
+    --violet-bright: #E5C158;
+    --violet-deep: #B8860B;
     --cyan: #06B6D4;
     --cyan-bright: #22D3EE;
     --magenta: #EC4899;
     --text: #FFFFFF;
     --text-dim: #94A3B8;
-    --border: rgba(212, 175, 55, 0.2);
-    --glow: rgba(212, 175, 55, 0.4);
+    --border: rgba(229, 193, 88, 0.2);
+    --glow: rgba(229, 193, 88, 0.4);
     --font-heading: 'Orbitron', sans-serif;
     --font-body: 'Space Grotesk', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
@@ -149,7 +149,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 20px rgba(229, 193, 88, 0.4);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
@@ -162,7 +162,7 @@
   }
 
   .btn-ghost {
-    background: rgba(212, 175, 55, 0.05);
+    background: rgba(229, 193, 88, 0.05);
     color: var(--text);
     font-family: var(--font-heading);
     font-size: 0.85rem;
@@ -229,23 +229,23 @@
     border-radius: 12px;
     padding: 24px;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    box-shadow: 0 8px 32px 0 rgba(6, 7, 10, 0.37);
   }
 
   .glass:hover {
-    border-color: rgba(212, 175, 55, 0.5);
-    box-shadow: 0 8px 32px 0 rgba(212, 175, 55, 0.2);
+    border-color: rgba(229, 193, 88, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(229, 193, 88, 0.2);
   }
 
   .holo-panel {
     background: linear-gradient(135deg, rgba(20, 15, 38, 0.8) 0%, rgba(10, 20, 35, 0.8) 100%);
     backdrop-filter: blur(16px);
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    border: 1px solid rgba(229, 193, 88, 0.3);
     border-radius: 16px;
     padding: 32px;
     position: relative;
     overflow: hidden;
-    box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.1), 0 10px 40px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 20px rgba(229, 193, 88, 0.1), 0 10px 40px rgba(6, 7, 10, 0.5);
   }
 
   .holo-panel::before {
@@ -285,7 +285,7 @@
   }
 
   .badge-diamond {
-    background: rgba(212, 175, 55, 0.2);
+    background: rgba(229, 193, 88, 0.2);
     color: var(--violet-bright);
     border: 1px solid var(--violet);
   }
@@ -304,8 +304,8 @@
 
   .badge-gold {
     background: rgba(234, 179, 8, 0.2);
-    color: #fde047;
-    border: 1px solid #eab308;
+    color: #E5C158;
+    border: 1px solid #E5C158;
   }
 
   .badge-silver {
@@ -316,8 +316,8 @@
 
   .badge-bronze {
     background: rgba(217, 119, 6, 0.2);
-    color: #fdba74;
-    border: 1px solid #d97706;
+    color: #E5C158;
+    border: 1px solid #E5C158;
   }
 
   /* Animations & FX */
@@ -335,7 +335,7 @@
   }
 
   @keyframes glowPulse {
-    from { box-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
+    from { box-shadow: 0 0 10px rgba(229, 193, 88, 0.3); }
     to { box-shadow: 0 0 25px rgba(34, 211, 238, 0.6); }
   }
 
@@ -358,7 +358,7 @@
 
   /* Footer */
   .footer {
-    background: #020204;
+    background: #06070A;
     border-top: 1px solid var(--border);
     padding: 60px 32px 30px;
     margin-top: 80px;
@@ -464,7 +464,31 @@
       text-align: center;
     }
   }
-</style>
+
+/* Inline SVG logo — native to the design, no pasted image */
+.fortrex-logo-svg {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 6px rgba(229, 193, 88, 0.35));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.nav-logo .fortrex-logo-svg:hover {
+  filter: drop-shadow(0 0 12px rgba(229, 193, 88, 0.6));
+  transform: scale(1.05);
+}
+.brand-logo-svg {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 0 20px rgba(229, 193, 88, 0.25)) drop-shadow(0 0 60px rgba(229, 193, 88, 0.1));
+  animation: logo-glow 4s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+.brand-logo-svg:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 30px rgba(229, 193, 88, 0.4)) drop-shadow(0 0 80px rgba(229, 193, 88, 0.15));
+}
+
+  </style>
 
   <style>
     /* Leaderboard Page Specific Styles */
@@ -483,7 +507,7 @@
     }
 
     .podium-card.rank-1 {
-      border-color: #eab308;
+      border-color: #E5C158;
       box-shadow: 0 0 35px rgba(234, 179, 8, 0.3);
       padding-bottom: 48px;
     }
@@ -516,7 +540,7 @@
 
     .rank-table th, .rank-table td {
       padding: 14px 18px;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      border-bottom: 1px solid rgba(229, 193, 88, 0.15);
       font-size: 0.9rem;
     }
 
@@ -533,7 +557,7 @@
     }
 
     .rank-table tr:hover {
-      background: rgba(212, 175, 55, 0.1);
+      background: rgba(229, 193, 88, 0.1);
       transform: translateX(4px);
     }
 
@@ -566,7 +590,7 @@
     }
 
     .timer-block {
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(6, 7, 10, 0.5);
       border: 1px solid var(--border);
       padding: 8px 12px;
       border-radius: 6px;
@@ -598,57 +622,27 @@
 <link rel="stylesheet" href="css/space-theme.css">
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="css/dala.css?v=4">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/da15f6d53_fortrex-new-icon-32.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/da15f6d53_fortrex-new-icon-32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/3b7e110dd_fortrex-new-icon-180.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/50557a7bd_fortrex-new-icon-512.png">
-    <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/7462744de_fortrex-icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/7462744de_fortrex-icon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/1fb65d179_fortrex-app-icon-180.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/4185f39e2_fortrex-app-icon-512.png">
+    <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
     <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+    <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <meta property="og:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta property="og:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta name="twitter:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
-  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
-
-<!-- LOGO ANIMATION FIX: isolate logo from background particles -->
-<style>
-/* Logo isolation fix - prevents background animation from bleeding through */
-.brand-logo, .nav-logo, .signin-logo, .footer-brand img, 
-.hero-logo, .logo-container, [alt="FORTREX"] {
-  position: relative;
-  z-index: 100;
-  isolation: isolate;
-  -webkit-isolation: isolate;
-}
-/* Dark backdrop behind logo so particles don't show through */
-.brand-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.85) 0%, rgba(6, 7, 10, 0) 70%);
-  border-radius: 50%;
-  padding: 8px;
-}
-.nav-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.9) 0%, rgba(6, 7, 10, 0) 80%);
-  border-radius: 8px;
-  padding: 2px;
-}
-/* Ensure SVG logos are crisp */
-img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  -ms-interpolation-mode: nearest-neighbor;
-}
-</style>
-
+  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
 </head>
 <body>
 
@@ -656,7 +650,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
   <nav class="nav">
     <div class="nav-brand">
       <a href="index.html" class="navbar-brand">
-        <div class="nav-logo"><img src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/cba74eb6c_fortrex-new-nav-96.png" alt="FORTREX" style="width: 36px; height: 36px; object-fit: contain;"></div>
+        <div class="nav-logo"><img class="fortrex-logo-svg" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/78f5d4bc5_fortrex-icon-96.png" alt="FORTREX" style="object-fit:contain;" /></div>
       </a>
     </div>
     <ul class="nav-links" id="nav-links-main">
@@ -674,7 +668,6 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
       <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
       <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
       <div class="hamburger" aria-label="Toggle Menu">
         <span></span><span></span><span></span>
@@ -716,7 +709,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
         <span class="podium-rank-tag badge-gold">👑 #1 CHAMPION</span>
         <div style="font-size: 3.2rem; margin-bottom: 8px;">🏆</div>
         <h3 class="glitch-text" style="color: #fff; font-size: 1.5rem;" data-text="VoidMaster">VoidMaster</h3>
-        <div style="font-family: var(--font-mono); font-size: 2.2rem; color: #fde047; margin: 8px 0;" data-ticker="+156.2%">+156.2%</div>
+        <div style="font-family: var(--font-mono); font-size: 2.2rem; color: #E5C158; margin: 8px 0;" data-ticker="+156.2%">+156.2%</div>
         <div style="font-size: 0.85rem; color: var(--text-dim);">Win Rate: 82% • 47 Trades</div>
       </div>
 
@@ -928,7 +921,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
           <div style="display: flex; flex-direction: column; gap: 12px;">
             <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: rgba(234,179,8,0.1); border: 1px solid rgba(234,179,8,0.3); border-radius: 8px;">
               <span>🥇 1st Place</span>
-              <strong style="font-family: var(--font-mono); color: #fde047;">$25,000 + Title</strong>
+              <strong style="font-family: var(--font-mono); color: #E5C158;">$25,000 + Title</strong>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: rgba(148,163,184,0.1); border: 1px solid rgba(148,163,184,0.3); border-radius: 8px;">
               <span>🥈 2nd Place</span>
@@ -936,7 +929,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: rgba(217,119,6,0.1); border: 1px solid rgba(217,119,6,0.3); border-radius: 8px;">
               <span>🥉 3rd Place</span>
-              <strong style="font-family: var(--font-mono); color: #fdba74;">10,000 REX</strong>
+              <strong style="font-family: var(--font-mono); color: #E5C158;">10,000 REX</strong>
             </div>
           </div>
         </div>
@@ -958,8 +951,8 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/cba74eb6c_fortrex-new-nav-96.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(234, 202, 122, 0.2));">
-          <span class="nav-wordmark" style="color: #EACA7A; font-weight: 700;">FORTREX</span>
+          <img class="fortrex-logo-svg footer-logo-svg" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/78f5d4bc5_fortrex-icon-96.png" alt="FORTREX" style="object-fit:contain;" />
+          <span class="nav-wordmark" style="color: #E5C158; font-weight: 700;">FORTREX</span>
         </div>
         <div class="footer-links">
           <a href="index.html" class="footer-link">Home</a>
@@ -1009,7 +1002,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
           vx: (Math.random() - 0.5) * 0.6,
           vy: (Math.random() - 0.5) * 0.6,
           radius: Math.random() * 2 + 1,
-          color: Math.random() > 0.5 ? '#D4AF37' : '#06B6D4',
+          color: Math.random() > 0.5 ? '#E5C158' : '#06B6D4',
           alpha: Math.random() * 0.5 + 0.2
         }));
 
@@ -1037,7 +1030,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
                 ctx.beginPath();
                 ctx.moveTo(p.x, p.y);
                 ctx.lineTo(p2.x, p2.y);
-                ctx.strokeStyle = '#D4AF37';
+                ctx.strokeStyle = '#E5C158';
                 ctx.globalAlpha = (1 - dist / 110) * 0.18;
                 ctx.lineWidth = 0.8;
                 ctx.stroke();
@@ -1128,5 +1121,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<script>
+// Scroll Reveal v3.0
+(function(){var e=document.querySelectorAll('.reveal, .reveal-stagger');if(!e.length)return;if(!('IntersectionObserver'in window)){e.forEach(function(el){el.classList.add('visible')});return}var o=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');o.unobserve(entry.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});e.forEach(function(el){o.observe(el)});var n=document.querySelector('.nav');if(n){var t=false;window.addEventListener('scroll',function(){if(!t){requestAnimationFrame(function(){n.classList.toggle('scrolled',window.scrollY>20);t=false});t=true}},{passive:true})}var h=document.querySelector('.hamburger'),l=document.querySelector('.nav-links');if(h&&l){h.addEventListener('click',function(){h.classList.toggle('active');l.classList.toggle('active')})}})();
+</script>
 </body>
 </html>

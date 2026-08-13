@@ -20,21 +20,21 @@
   <style>
     /* --- DESIGN SYSTEM OVERRIDES & CUSTOM REX STYLES --- */
     :root {
-      --color-gold: #EACA7A;
-      --color-gold-glow: rgba(234, 202, 122, 0.25);
-      --color-purple: #D4AF37;
-      --color-purple-glow: rgba(212, 175, 55, 0.25);
+      --color-gold: #E5C158;
+      --color-gold-glow: rgba(229, 193, 88, 0.25);
+      --color-purple: #E5C158;
+      --color-purple-glow: rgba(229, 193, 88, 0.25);
       --color-emerald: #10B981;
       --color-blue: #3B82F6;
-      --color-amber: #F59E0B;
-      --color-card-bg: linear-gradient(145deg, #111111 0%, #1A1A1A 100%);
+      --color-amber: #E5C158;
+      --color-card-bg: linear-gradient(145deg, #06070A 0%, #06070A 100%);
       --border-card: 1px solid #222222;
       --radius-xl: 16px;
       --radius-pill: 9999px;
     }
 
     body {
-      background-color: #000000;
+      background-color: #06070A;
       color: #FFFFFF;
       font-family: 'Inter', sans-serif;
       margin: 0;
@@ -81,16 +81,16 @@
     }
 
     .btn-gold {
-      background: linear-gradient(135deg, #EACA7A 0%, #AA820A 100%);
-      color: #000000;
+      background: linear-gradient(135deg, #E5C158 0%, #B8860B 100%);
+      color: #06070A;
       border: none;
-      box-shadow: 0 0 20px rgba(234, 202, 122, 0.3);
+      box-shadow: 0 0 20px rgba(229, 193, 88, 0.3);
     }
 
     .btn-gold:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 30px rgba(234, 202, 122, 0.5);
-      color: #000000;
+      box-shadow: 0 0 30px rgba(229, 193, 88, 0.5);
+      color: #06070A;
     }
 
     .btn-outline-gold {
@@ -100,7 +100,7 @@
     }
 
     .btn-outline-gold:hover {
-      background: rgba(234, 202, 122, 0.1);
+      background: rgba(229, 193, 88, 0.1);
       transform: translateY(-2px);
     }
 
@@ -118,17 +118,17 @@
     .rex-card:hover {
       border-color: #333333;
       transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 10px 30px rgba(6, 7, 10, 0.8);
     }
 
     .rex-card-glow-gold {
-      border-color: rgba(234, 202, 122, 0.4);
-      box-shadow: 0 0 25px rgba(234, 202, 122, 0.15);
+      border-color: rgba(229, 193, 88, 0.4);
+      box-shadow: 0 0 25px rgba(229, 193, 88, 0.15);
     }
 
     .rex-card-glow-gold:hover {
       border-color: var(--color-gold);
-      box-shadow: 0 0 35px rgba(234, 202, 122, 0.25);
+      box-shadow: 0 0 35px rgba(229, 193, 88, 0.25);
     }
 
     /* Top ambient gradient glow */
@@ -198,8 +198,8 @@
       position: absolute;
       top: 16px;
       right: 16px;
-      background: rgba(212, 175, 55, 0.15);
-      border: 1px solid rgba(212, 175, 55, 0.4);
+      background: rgba(229, 193, 88, 0.15);
+      border: 1px solid rgba(229, 193, 88, 0.4);
       color: var(--color-purple);
       font-size: 10px;
       font-weight: 700;
@@ -213,8 +213,8 @@
       width: 48px;
       height: 48px;
       border-radius: 12px;
-      background: rgba(234, 202, 122, 0.1);
-      border: 1px solid rgba(234, 202, 122, 0.2);
+      background: rgba(229, 193, 88, 0.1);
+      border: 1px solid rgba(229, 193, 88, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -227,13 +227,13 @@
     .earning-bar-container {
       width: 100%;
       height: 18px;
-      background: #0A0A0A;
+      background: #06070A;
       border: 1px solid #222222;
       border-radius: var(--radius-pill);
       overflow: hidden;
       display: flex;
       margin: 20px 0 24px;
-      box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+      box-shadow: inset 0 2px 6px rgba(6, 7, 10,0.8);
     }
 
     .earning-segment {
@@ -248,7 +248,7 @@
       bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
-      background: #1A1A1A;
+      background: #06070A;
       border: 1px solid #333;
       color: #FFF;
       padding: 4px 8px;
@@ -265,15 +265,15 @@
       align-items: center;
       justify-content: space-between;
       padding: 14px 20px;
-      background: #0D0D0D;
-      border: 1px solid #1F1F1F;
+      background: #06070A;
+      border: 1px solid #06070A;
       border-radius: 12px;
       margin-bottom: 10px;
       transition: border-color 0.2s ease;
     }
 
     .burn-row:hover {
-      border-color: rgba(234, 202, 122, 0.3);
+      border-color: rgba(229, 193, 88, 0.3);
     }
 
     /* Rarity Distribution Bars */
@@ -291,7 +291,7 @@
     .rarity-track {
       width: 100%;
       height: 12px;
-      background: #0A0A0A;
+      background: #06070A;
       border: 1px solid #222222;
       border-radius: var(--radius-pill);
       overflow: hidden;
@@ -355,58 +355,52 @@
     .section {
       padding: 2rem 0 !important;
     }
+  
+/* Inline SVG logo — native to the design, no pasted image */
+.fortrex-logo-svg {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 6px rgba(229, 193, 88, 0.35));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.nav-logo .fortrex-logo-svg:hover {
+  filter: drop-shadow(0 0 12px rgba(229, 193, 88, 0.6));
+  transform: scale(1.05);
+}
+.brand-logo-svg {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 0 20px rgba(229, 193, 88, 0.25)) drop-shadow(0 0 60px rgba(229, 193, 88, 0.1));
+  animation: logo-glow 4s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+.brand-logo-svg:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 30px rgba(229, 193, 88, 0.4)) drop-shadow(0 0 80px rgba(229, 193, 88, 0.15));
+}
+
   </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/da15f6d53_fortrex-new-icon-32.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/da15f6d53_fortrex-new-icon-32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/3b7e110dd_fortrex-new-icon-180.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/50557a7bd_fortrex-new-icon-512.png">
-    <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/7462744de_fortrex-icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/7462744de_fortrex-icon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/1fb65d179_fortrex-app-icon-180.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/4185f39e2_fortrex-app-icon-512.png">
+    <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
     <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+    <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <meta property="og:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta property="og:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta name="twitter:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
-  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
-
-<!-- LOGO ANIMATION FIX: isolate logo from background particles -->
-<style>
-/* Logo isolation fix - prevents background animation from bleeding through */
-.brand-logo, .nav-logo, .signin-logo, .footer-brand img, 
-.hero-logo, .logo-container, [alt="FORTREX"] {
-  position: relative;
-  z-index: 100;
-  isolation: isolate;
-  -webkit-isolation: isolate;
-}
-/* Dark backdrop behind logo so particles don't show through */
-.brand-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.85) 0%, rgba(6, 7, 10, 0) 70%);
-  border-radius: 50%;
-  padding: 8px;
-}
-.nav-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.9) 0%, rgba(6, 7, 10, 0) 80%);
-  border-radius: 8px;
-  padding: 2px;
-}
-/* Ensure SVG logos are crisp */
-img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  -ms-interpolation-mode: nearest-neighbor;
-}
-</style>
-
+  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
 </head>
 <body>
 
@@ -417,7 +411,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
   <nav class="nav">
     <div class="nav-brand">
       <a href="index.html" class="navbar-brand">
-        <div class="nav-logo"><img src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/cba74eb6c_fortrex-new-nav-96.png" alt="FORTREX" style="width: 36px; height: 36px; object-fit: contain;"></div>
+        <div class="nav-logo"><img class="fortrex-logo-svg" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/78f5d4bc5_fortrex-icon-96.png" alt="FORTREX" style="object-fit:contain;" /></div>
       </a>
     </div>
     <ul class="nav-links" id="nav-links-main">
@@ -435,7 +429,6 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
       <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
       <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
       <div class="hamburger" aria-label="Toggle Menu">
         <span></span><span></span><span></span>
@@ -467,7 +460,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
             <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px;">
               <div>
                 <div class="section-label" style="color: var(--color-gold);">YOUR CURRENT REX BALANCE</div>
-                <div class="stat-number jetbrains-mono" id="user-rex-balance" style="font-size: clamp(40px, 6vw, 72px); text-shadow: 0 0 30px rgba(234, 202, 122, 0.3);">
+                <div class="stat-number jetbrains-mono" id="user-rex-balance" style="font-size: clamp(40px, 6vw, 72px); text-shadow: 0 0 30px rgba(229, 193, 88, 0.3);">
                   12,500 <span style="font-size: 28px; color: #888;">REX</span>
                 </div>
                 <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #AAAAAA; margin-top: 8px;">
@@ -475,7 +468,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
                 </div>
               </div>
               <div style="text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 12px;">
-                <span class="coming-soon-badge" style="background: rgba(234,202,122,0.15); border-color: rgba(234,202,122,0.4); color: var(--color-gold);">
+                <span class="coming-soon-badge" style="background: rgba(229, 193, 88,0.15); border-color: rgba(229, 193, 88,0.4); color: var(--color-gold);">
                   ACTIVE TRADER
                 </span>
                 <a href="offers.html" class="btn-pill btn-gold">
@@ -486,7 +479,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
           </div>
 
           <!-- LOGGED OUT VIEW -->
-          <div id="logged-out-balance-card" class="rex-card" style="text-align: center; padding: 48px 24px; background: linear-gradient(135deg, #0A0A0A 0%, #141414 100%);">
+          <div id="logged-out-balance-card" class="rex-card" style="text-align: center; padding: 48px 24px; background: linear-gradient(135deg, #06070A 0%, #06070A 100%);">
             <div style="font-size: 40px; margin-bottom: 12px;">🔐</div>
             <h3 class="space-grotesk" style="font-size: 24px; margin-bottom: 8px;">Sign In to View Your REX Balance</h3>
             <p style="color: #888; max-width: 480px; margin: 0 auto 24px; font-size: 14px; line-height: 1.6;">
@@ -524,7 +517,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
           </div>
 
           <!-- Stat Card 3 -->
-          <div class="rex-card" style="border-color: rgba(234, 202, 122, 0.3);">
+          <div class="rex-card" style="border-color: rgba(229, 193, 88, 0.3);">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-gold);">PERMANENTLY BURNED</div>
               <span style="font-size: 18px;" title="Deflationary Fire">🔥</span>
@@ -555,32 +548,32 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
 
           <!-- Multi-segment visual bar -->
           <div class="earning-bar-container">
-            <div class="earning-segment" style="width: 55%; background: #EACA7A; box-shadow: 0 0 10px rgba(234, 202, 122, 0.5);" data-tooltip="Tournaments: 8,000 REX (55%)"></div>
-            <div class="earning-segment" style="width: 20%; background: #D4AF37; box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);" data-tooltip="Check-ins: 3,500 REX (20%)"></div>
+            <div class="earning-segment" style="width: 55%; background: #E5C158; box-shadow: 0 0 10px rgba(229, 193, 88, 0.5);" data-tooltip="Tournaments: 8,000 REX (55%)"></div>
+            <div class="earning-segment" style="width: 20%; background: #E5C158; box-shadow: 0 0 10px rgba(229, 193, 88, 0.5);" data-tooltip="Check-ins: 3,500 REX (20%)"></div>
             <div class="earning-segment" style="width: 12%; background: #10B981; box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);" data-tooltip="Referrals: 1,500 REX (12%)"></div>
             <div class="earning-segment" style="width: 8%; background: #3B82F6; box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);" data-tooltip="Tasks: 1,000 REX (8%)"></div>
-            <div class="earning-segment" style="width: 5%; background: #F59E0B; box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);" data-tooltip="Bonuses: 500 REX (5%)"></div>
+            <div class="earning-segment" style="width: 5%; background: #E5C158; box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);" data-tooltip="Bonuses: 500 REX (5%)"></div>
           </div>
 
           <!-- Legend Table -->
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 24px;">
-            <div style="background: #0D0D0D; padding: 14px; border-radius: 12px; border: 1px solid #1A1A1A;">
+            <div style="background: #06070A; padding: 14px; border-radius: 12px; border: 1px solid #06070A;">
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                <span style="width: 10px; height: 10px; border-radius: 50%; background: #EACA7A;"></span>
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #E5C158;"></span>
                 <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #AAA;">Tournaments</span>
               </div>
               <div class="jetbrains-mono" style="font-size: 18px; font-weight: 700; color: #FFF;">8,000 REX</div>
             </div>
 
-            <div style="background: #0D0D0D; padding: 14px; border-radius: 12px; border: 1px solid #1A1A1A;">
+            <div style="background: #06070A; padding: 14px; border-radius: 12px; border: 1px solid #06070A;">
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                <span style="width: 10px; height: 10px; border-radius: 50%; background: #D4AF37;"></span>
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #E5C158;"></span>
                 <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #AAA;">Check-ins</span>
               </div>
               <div class="jetbrains-mono" style="font-size: 18px; font-weight: 700; color: #FFF;">3,500 REX</div>
             </div>
 
-            <div style="background: #0D0D0D; padding: 14px; border-radius: 12px; border: 1px solid #1A1A1A;">
+            <div style="background: #06070A; padding: 14px; border-radius: 12px; border: 1px solid #06070A;">
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
                 <span style="width: 10px; height: 10px; border-radius: 50%; background: #10B981;"></span>
                 <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #AAA;">Referrals</span>
@@ -588,7 +581,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
               <div class="jetbrains-mono" style="font-size: 18px; font-weight: 700; color: #FFF;">1,500 REX</div>
             </div>
 
-            <div style="background: #0D0D0D; padding: 14px; border-radius: 12px; border: 1px solid #1A1A1A;">
+            <div style="background: #06070A; padding: 14px; border-radius: 12px; border: 1px solid #06070A;">
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
                 <span style="width: 10px; height: 10px; border-radius: 50%; background: #3B82F6;"></span>
                 <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #AAA;">Tasks</span>
@@ -596,9 +589,9 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
               <div class="jetbrains-mono" style="font-size: 18px; font-weight: 700; color: #FFF;">1,000 REX</div>
             </div>
 
-            <div style="background: #0D0D0D; padding: 14px; border-radius: 12px; border: 1px solid #1A1A1A;">
+            <div style="background: #06070A; padding: 14px; border-radius: 12px; border: 1px solid #06070A;">
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                <span style="width: 10px; height: 10px; border-radius: 50%; background: #F59E0B;"></span>
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #E5C158;"></span>
                 <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #AAA;">Bonuses</span>
               </div>
               <div class="jetbrains-mono" style="font-size: 18px; font-weight: 700; color: #FFF;">500 REX</div>
@@ -620,7 +613,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
         <div class="shop-grid">
           <!-- Product Card 1 -->
           <div class="rex-card shop-card">
-            <span class="coming-soon-badge" style="background: rgba(234, 202, 122, 0.15); color: #EACA7A; border: 1px solid rgba(234, 202, 122, 0.3);">UNLOCK AFTER 1ST TOURNAMENT</span>
+            <span class="coming-soon-badge" style="background: rgba(229, 193, 88, 0.15); color: #E5C158; border: 1px solid rgba(229, 193, 88, 0.3);">UNLOCK AFTER 1ST TOURNAMENT</span>
             <div>
               <div class="shop-card-icon">🏆</div>
               <h3 class="space-grotesk" style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">Funded Account Challenge</h3>
@@ -634,7 +627,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
 
           <!-- Product Card 2 -->
           <div class="rex-card shop-card">
-            <span class="coming-soon-badge" style="background: rgba(234, 202, 122, 0.15); color: #EACA7A; border: 1px solid rgba(234, 202, 122, 0.3);">UNLOCK AFTER 1ST TOURNAMENT</span>
+            <span class="coming-soon-badge" style="background: rgba(229, 193, 88, 0.15); color: #E5C158; border: 1px solid rgba(229, 193, 88, 0.3);">UNLOCK AFTER 1ST TOURNAMENT</span>
             <div>
               <div class="shop-card-icon">⚡</div>
               <h3 class="space-grotesk" style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">Contest Boost</h3>
@@ -648,7 +641,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
 
           <!-- Product Card 3 -->
           <div class="rex-card shop-card">
-            <span class="coming-soon-badge" style="background: rgba(234, 202, 122, 0.15); color: #EACA7A; border: 1px solid rgba(234, 202, 122, 0.3);">UNLOCK AFTER 1ST TOURNAMENT</span>
+            <span class="coming-soon-badge" style="background: rgba(229, 193, 88, 0.15); color: #E5C158; border: 1px solid rgba(229, 193, 88, 0.3);">UNLOCK AFTER 1ST TOURNAMENT</span>
             <div>
               <div class="shop-card-icon">👑</div>
               <h3 class="space-grotesk" style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">VIP Discord Role</h3>
@@ -662,7 +655,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
 
           <!-- Product Card 4 -->
           <div class="rex-card shop-card">
-            <span class="coming-soon-badge" style="background: rgba(234, 202, 122, 0.15); color: #EACA7A; border: 1px solid rgba(234, 202, 122, 0.3);">UNLOCK AFTER 1ST TOURNAMENT</span>
+            <span class="coming-soon-badge" style="background: rgba(229, 193, 88, 0.15); color: #E5C158; border: 1px solid rgba(229, 193, 88, 0.3);">UNLOCK AFTER 1ST TOURNAMENT</span>
             <div>
               <div class="shop-card-icon">🎓</div>
               <h3 class="space-grotesk" style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">Trading Course</h3>
@@ -680,7 +673,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
     <!-- SECTION 5: ACTIVE TRADER STATUS -->
     <section class="rex-section">
       <div class="container reveal">
-        <div class="rex-card" style="background: linear-gradient(135deg, #0f120e 0%, #111a14 100%); border-color: rgba(16, 185, 129, 0.3);">
+        <div class="rex-card" style="background: linear-gradient(135deg, #0B0C0E 0%, #0B0C0E 100%); border-color: rgba(16, 185, 129, 0.3);">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
             <div style="max-width: 620px;">
               <div class="section-label" style="color: var(--color-emerald);">ELIGIBILITY RULE</div>
@@ -794,7 +787,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
     <!-- SECTION 7: MYSTERY DROPS -->
     <section class="rex-section">
       <div class="container reveal">
-        <div class="rex-card" style="background: linear-gradient(145deg, #120e1a 0%, #1a1228 100%); border-color: rgba(212, 175, 55, 0.3);">
+        <div class="rex-card" style="background: linear-gradient(145deg, #0B0C0E 0%, #0B0C0E 100%); border-color: rgba(229, 193, 88, 0.3);">
           <div style="margin-bottom: 24px;">
             <div class="section-label" style="color: var(--color-purple);">GAMIFIED REWARDS</div>
             <h2 class="subheading space-grotesk" style="font-size: 32px; font-weight: 700;">Mystery Drops</h2>
@@ -812,7 +805,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
                 <span class="jetbrains-mono" style="color: var(--color-gold); font-weight: 700;">2%</span>
               </div>
               <div class="rarity-track">
-                <div class="rarity-fill" style="width: 2%; background: linear-gradient(90deg, #EACA7A, #FFF); box-shadow: 0 0 10px #EACA7A;"></div>
+                <div class="rarity-fill" style="width: 2%; background: linear-gradient(90deg, #E5C158, #FFF); box-shadow: 0 0 10px #E5C158;"></div>
               </div>
             </div>
 
@@ -823,7 +816,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
                 <span class="jetbrains-mono" style="color: var(--color-purple); font-weight: 700;">12%</span>
               </div>
               <div class="rarity-track">
-                <div class="rarity-fill" style="width: 12%; background: linear-gradient(90deg, #D4AF37, #EACA7A); box-shadow: 0 0 10px #D4AF37;"></div>
+                <div class="rarity-fill" style="width: 12%; background: linear-gradient(90deg, #E5C158, #E5C158); box-shadow: 0 0 10px #E5C158;"></div>
               </div>
             </div>
 
@@ -869,8 +862,8 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/cba74eb6c_fortrex-new-nav-96.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(234, 202, 122, 0.2));">
-          <span class="nav-wordmark" style="color: #EACA7A; font-weight: 700;">FORTREX</span>
+          <img class="fortrex-logo-svg footer-logo-svg" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/78f5d4bc5_fortrex-icon-96.png" alt="FORTREX" style="object-fit:contain;" />
+          <span class="nav-wordmark" style="color: #E5C158; font-weight: 700;">FORTREX</span>
         </div>
         <div class="footer-links">
           <a href="index.html" class="footer-link">Home</a>
@@ -947,7 +940,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
 
         if (activeTraderBadge) {
           activeTraderBadge.innerHTML = `
-            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); padding: 10px 20px; border-radius: 9999px; color: #F59E0B; font-weight: 700; font-size: 14px;">
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); padding: 10px 20px; border-radius: 9999px; color: #E5C158; font-weight: 700; font-size: 14px;">
               <span>⚠</span> Trade this week to maintain status
             </div>
           `;
@@ -995,5 +988,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<script>
+// Scroll Reveal v3.0
+(function(){var e=document.querySelectorAll('.reveal, .reveal-stagger');if(!e.length)return;if(!('IntersectionObserver'in window)){e.forEach(function(el){el.classList.add('visible')});return}var o=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');o.unobserve(entry.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});e.forEach(function(el){o.observe(el)});var n=document.querySelector('.nav');if(n){var t=false;window.addEventListener('scroll',function(){if(!t){requestAnimationFrame(function(){n.classList.toggle('scrolled',window.scrollY>20);t=false});t=true}},{passive:true})}var h=document.querySelector('.hamburger'),l=document.querySelector('.nav-links');if(h&&l){h.addEventListener('click',function(){h.classList.toggle('active');l.classList.toggle('active')})}})();
+</script>
 </body>
 </html>

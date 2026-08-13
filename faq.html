@@ -17,7 +17,7 @@
   <style>
     /* DESIGN SYSTEM OVERRIDES & EXTENSIONS */
     body {
-      background-color: #000000;
+      background-color: #06070A;
       color: #ffffff;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       overflow-x: hidden;
@@ -40,7 +40,7 @@
     }
 
     /* GOLD & PURPLE ACCENTS */
-    .text-gold { color: #F5D172; }
+    .text-gold { color: #E5C158; }
     .text-purple { color: #E5C158; }
 
     .uppercase-label {
@@ -59,7 +59,7 @@
 
     .search-input {
       width: 100%;
-      background: #0D0D0D;
+      background: #06070A;
       border: 1px solid #282828;
       border-radius: 9999px;
       padding: 16px 24px 16px 52px;
@@ -67,14 +67,14 @@
       font-size: 16px;
       font-family: 'Inter', sans-serif;
       transition: all 0.25s ease;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 30px rgba(6, 7, 10, 0.5);
     }
 
     .search-input:focus {
       outline: none;
-      border-color: #F5D172;
-      box-shadow: 0 0 20px rgba(234, 202, 122, 0.25);
-      background: #121212;
+      border-color: #E5C158;
+      box-shadow: 0 0 20px rgba(229, 193, 88, 0.25);
+      background: #06070A;
     }
 
     .search-icon {
@@ -82,7 +82,7 @@
       left: 20px;
       top: 50%;
       transform: translateY(-50%);
-      color: #F5D172;
+      color: #E5C158;
       pointer-events: none;
     }
 
@@ -106,7 +106,7 @@
     }
 
     .clear-search:hover {
-      background: #F5D172;
+      background: #E5C158;
       color: #000;
     }
 
@@ -120,7 +120,7 @@
     }
 
     .cat-pill {
-      background: #111111;
+      background: #06070A;
       border: 1px solid #222222;
       color: #9A9A9A;
       padding: 8px 18px;
@@ -134,9 +134,9 @@
     }
 
     .cat-pill:hover, .cat-pill.active {
-      background: rgba(234, 202, 122, 0.12);
-      border-color: #F5D172;
-      color: #F5D172;
+      background: rgba(229, 193, 88, 0.12);
+      border-color: #E5C158;
+      color: #E5C158;
     }
 
     /* ACCORDION CATEGORIES */
@@ -148,7 +148,7 @@
       font-family: 'Space Grotesk', sans-serif;
       font-size: 20px;
       font-weight: 700;
-      color: #F5D172;
+      color: #E5C158;
       margin-bottom: 16px;
       display: flex;
       align-items: center;
@@ -161,7 +161,7 @@
 
     /* ACCORDION ITEMS */
     .faq-item {
-      background: linear-gradient(145deg, #111111 0%, #1A1A1A 100%);
+      background: linear-gradient(145deg, #06070A 0%, #06070A 100%);
       border: 1px solid #222222;
       border-radius: 12px;
       margin-bottom: 12px;
@@ -170,12 +170,12 @@
     }
 
     .faq-item:hover {
-      border-color: rgba(234, 202, 122, 0.35);
+      border-color: rgba(229, 193, 88, 0.35);
     }
 
     .faq-item.active {
-      border-color: #F5D172;
-      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(234, 202, 122, 0.08);
+      border-color: #E5C158;
+      box-shadow: 0 4px 25px rgba(6, 7, 10, 0.6), 0 0 15px rgba(229, 193, 88, 0.08);
     }
 
     .faq-question {
@@ -198,7 +198,7 @@
     .faq-chevron {
       width: 20px;
       height: 20px;
-      color: #F5D172;
+      color: #E5C158;
       transition: transform 0.3s ease;
       flex-shrink: 0;
     }
@@ -227,7 +227,7 @@
       display: none;
       text-align: center;
       padding: 60px 20px;
-      background: #111111;
+      background: #06070A;
       border: 1px solid #222;
       border-radius: 16px;
       margin-top: 20px;
@@ -235,8 +235,8 @@
 
     /* BUTTONS & CTA */
     .btn-pill-gold {
-      background: #F5D172;
-      color: #000000;
+      background: #E5C158;
+      color: #06070A;
       font-weight: 700;
       padding: 14px 32px;
       border-radius: 9999px;
@@ -253,14 +253,14 @@
     }
 
     .btn-pill-gold:hover {
-      background: #F5D172;
+      background: #E5C158;
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(234, 202, 122, 0.35);
+      box-shadow: 0 10px 25px rgba(229, 193, 88, 0.35);
     }
 
     .cta-banner {
-      background: linear-gradient(135deg, #0A0A0A 0%, #151320 50%, #0A0A0A 100%);
-      border: 1px solid rgba(234, 202, 122, 0.3);
+      background: linear-gradient(135deg, #06070A 0%, #0B0C0E 50%, #06070A 100%);
+      border: 1px solid rgba(229, 193, 88, 0.3);
       border-radius: 24px;
       padding: 48px 32px;
       text-align: center;
@@ -271,7 +271,7 @@
   
     /* MOBILE RESPONSIVE */
     @media (max-width: 768px) {
-      .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: #0A0B0F; flex-direction: column; padding: 40px 24px 24px; gap: 8px; z-index: 999; border-left: 1px solid rgba(234,202,122,0.15); transform: translateX(100%); transition: transform 0.3s ease; }
+      .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: #06070A; flex-direction: column; padding: 40px 24px 24px; gap: 8px; z-index: 999; border-left: 1px solid rgba(229, 193, 88,0.15); transform: translateX(100%); transition: transform 0.3s ease; }
       .nav-links.active { display: flex; transform: translateX(0); }
       .nav-cta > a:not(.hamburger) { display: none; }
       .hamburger { display: flex !important; cursor: pointer; }
@@ -296,58 +296,52 @@
       .container { padding-left: 12px; padding-right: 12px; }
     }
 
-    </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/da15f6d53_fortrex-new-icon-32.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/da15f6d53_fortrex-new-icon-32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/3b7e110dd_fortrex-new-icon-180.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/50557a7bd_fortrex-new-icon-512.png">
-    <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+    
+/* Inline SVG logo — native to the design, no pasted image */
+.fortrex-logo-svg {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 6px rgba(229, 193, 88, 0.35));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.nav-logo .fortrex-logo-svg:hover {
+  filter: drop-shadow(0 0 12px rgba(229, 193, 88, 0.6));
+  transform: scale(1.05);
+}
+.brand-logo-svg {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 0 20px rgba(229, 193, 88, 0.25)) drop-shadow(0 0 60px rgba(229, 193, 88, 0.1));
+  animation: logo-glow 4s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+.brand-logo-svg:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 30px rgba(229, 193, 88, 0.4)) drop-shadow(0 0 80px rgba(229, 193, 88, 0.15));
+}
+
+  </style>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/7462744de_fortrex-icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/7462744de_fortrex-icon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/1fb65d179_fortrex-app-icon-180.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/4185f39e2_fortrex-app-icon-512.png">
+    <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
     <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+    <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <meta property="og:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta property="og:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta name="twitter:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
-  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
-
-<!-- LOGO ANIMATION FIX: isolate logo from background particles -->
-<style>
-/* Logo isolation fix - prevents background animation from bleeding through */
-.brand-logo, .nav-logo, .signin-logo, .footer-brand img, 
-.hero-logo, .logo-container, [alt="FORTREX"] {
-  position: relative;
-  z-index: 100;
-  isolation: isolate;
-  -webkit-isolation: isolate;
-}
-/* Dark backdrop behind logo so particles don't show through */
-.brand-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.85) 0%, rgba(6, 7, 10, 0) 70%);
-  border-radius: 50%;
-  padding: 8px;
-}
-.nav-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.9) 0%, rgba(6, 7, 10, 0) 80%);
-  border-radius: 8px;
-  padding: 2px;
-}
-/* Ensure SVG logos are crisp */
-img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  -ms-interpolation-mode: nearest-neighbor;
-}
-</style>
-
+  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
 </head>
 <body>
 
@@ -357,7 +351,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
   <nav class="nav">
     <div class="nav-brand">
       <a href="index.html" class="navbar-brand">
-        <div class="nav-logo"><img src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/cba74eb6c_fortrex-new-nav-96.png" alt="FORTREX" style="width: 36px; height: 36px; object-fit: contain;"></div>
+        <div class="nav-logo"><img class="fortrex-logo-svg" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/78f5d4bc5_fortrex-icon-96.png" alt="FORTREX" style="object-fit:contain;" /></div>
       </a>
     </div>
     <ul class="nav-links" id="nav-links-main">
@@ -375,7 +369,6 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
       <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
       <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
       <div class="hamburger" aria-label="Toggle Menu">
         <span></span><span></span><span></span>
@@ -389,7 +382,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
       <!-- HEADER -->
       <div style="text-align: center; margin-bottom: 40px;">
         <div class="uppercase-label text-gold" style="margin-bottom: 12px; display: inline-flex; align-items: center; gap: 8px;">
-          <span style="width: 8px; height: 8px; background: #F5D172; border-radius: 50%; display: inline-block;"></span>
+          <span style="width: 8px; height: 8px; background: #E5C158; border-radius: 50%; display: inline-block;"></span>
           FAQ
         </div>
         <h1 class="font-display" style="font-size: clamp(36px, 5vw, 60px); font-weight: 700; margin-bottom: 16px; color: #ffffff;">
@@ -719,7 +712,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
 
       <!-- EMPTY SEARCH RESULT -->
       <div id="faq-empty" class="faq-empty">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#F5D172" stroke-width="1.5" style="margin-bottom: 12px;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#E5C158" stroke-width="1.5" style="margin-bottom: 12px;">
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
@@ -749,8 +742,8 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/cba74eb6c_fortrex-new-nav-96.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(234, 202, 122, 0.2));">
-          <span class="nav-wordmark" style="color: #F5D172; font-weight: 700;">FORTREX</span>
+          <img class="fortrex-logo-svg footer-logo-svg" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/78f5d4bc5_fortrex-icon-96.png" alt="FORTREX" style="object-fit:contain;" />
+          <span class="nav-wordmark" style="color: #E5C158; font-weight: 700;">FORTREX</span>
         </div>
         <div class="footer-links">
           <a href="index.html" class="footer-link">Home</a>
@@ -885,5 +878,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<script>
+// Scroll Reveal v3.0
+(function(){var e=document.querySelectorAll('.reveal, .reveal-stagger');if(!e.length)return;if(!('IntersectionObserver'in window)){e.forEach(function(el){el.classList.add('visible')});return}var o=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');o.unobserve(entry.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});e.forEach(function(el){o.observe(el)});var n=document.querySelector('.nav');if(n){var t=false;window.addEventListener('scroll',function(){if(!t){requestAnimationFrame(function(){n.classList.toggle('scrolled',window.scrollY>20);t=false});t=true}},{passive:true})}var h=document.querySelector('.hamburger'),l=document.querySelector('.nav-links');if(h&&l){h.addEventListener('click',function(){h.classList.toggle('active');l.classList.toggle('active')})}})();
+</script>
 </body>
 </html>

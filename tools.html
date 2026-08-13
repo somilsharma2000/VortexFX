@@ -97,7 +97,7 @@
 
     /* CARD DESIGN SYSTEM */
     .tool-card {
-      background: linear-gradient(145deg, #0C0E15 0%, #121520 100%);
+      background: linear-gradient(145deg, #06070A 0%, #0B0C0E 100%);
       border: 1px solid rgba(229, 193, 88, 0.12);
       border-radius: 16px;
       padding: 28px;
@@ -110,14 +110,14 @@
 
     .tool-card:hover {
       border-color: rgba(229, 193, 88, 0.4);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(229, 193, 88, 0.08);
+      box-shadow: 0 10px 30px rgba(6, 7, 10, 0.8), 0 0 20px rgba(229, 193, 88, 0.08);
       transform: translateY(-2px);
     }
 
     .tool-header {
       margin-bottom: 20px;
       padding-bottom: 16px;
-      border-bottom: 1px solid #1E2330;
+      border-bottom: 1px solid #0B0C0E;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -205,7 +205,7 @@
     }
 
     .quick-lot-btn {
-      background: #141822;
+      background: #0B0C0E;
       border: 1px solid #242A3A;
       color: #A0AEC0;
       font-size: 10px;
@@ -225,8 +225,8 @@
 
     .form-control, .form-select {
       width: 100%;
-      background: #0A0C12;
-      border: 1px solid #1E2330;
+      background: #06070A;
+      border: 1px solid #0B0C0E;
       border-radius: 8px;
       padding: 10px 14px;
       color: #ffffff;
@@ -240,11 +240,11 @@
       outline: none;
       border-color: #E5C158;
       box-shadow: 0 0 12px rgba(229, 193, 88, 0.25);
-      background: #0F121A;
+      background: #06070A;
     }
 
     .form-select option {
-      background: #0C0E15;
+      background: #06070A;
       color: #ffffff;
     }
 
@@ -253,7 +253,7 @@
       width: 100%;
       accent-color: #E5C158;
       height: 6px;
-      background: #1E2330;
+      background: #0B0C0E;
       border-radius: 3px;
       cursor: pointer;
     }
@@ -272,7 +272,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 8px 0;
-      border-bottom: 1px solid #181C28;
+      border-bottom: 1px solid #0B0C0E;
     }
 
     .output-row:last-child {
@@ -318,8 +318,8 @@
     /* TOGGLE BUTTON GROUPS */
     .toggle-group {
       display: flex;
-      background: #0A0C12;
-      border: 1px solid #1E2330;
+      background: #06070A;
+      border: 1px solid #0B0C0E;
       border-radius: 8px;
       padding: 3px;
       gap: 4px;
@@ -350,7 +350,7 @@
       max-height: 220px;
       overflow-y: auto;
       margin-top: 16px;
-      border: 1px solid #1E2330;
+      border: 1px solid #0B0C0E;
       border-radius: 8px;
     }
 
@@ -370,19 +370,19 @@
     }
 
     .sim-table th {
-      background: #0A0C12;
+      background: #06070A;
       color: #9A9A9A;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       padding: 8px 12px;
       position: sticky;
       top: 0;
-      border-bottom: 1px solid #1E2330;
+      border-bottom: 1px solid #0B0C0E;
     }
 
     .sim-table td {
       padding: 8px 12px;
-      border-bottom: 1px solid #141822;
+      border-bottom: 1px solid #0B0C0E;
       font-family: 'JetBrains Mono', monospace;
     }
 
@@ -434,7 +434,7 @@
 
     /* CTA SECTION */
     .cta-banner {
-      background: linear-gradient(135deg, #080A10 0%, #151824 50%, #080A10 100%);
+      background: linear-gradient(135deg, #06070A 0%, #0B0C0E 50%, #06070A 100%);
       border: 1px solid rgba(229, 193, 88, 0.3);
       border-radius: 24px;
       padding: 48px 32px;
@@ -455,7 +455,7 @@
 
     /* MOBILE RESPONSIVE */
     @media (max-width: 768px) {
-      .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: #0A0B0F; flex-direction: column; padding: 40px 24px 24px; gap: 8px; z-index: 999; border-left: 1px solid rgba(229,193,88,0.15); transform: translateX(100%); transition: transform 0.3s ease; }
+      .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: #06070A; flex-direction: column; padding: 40px 24px 24px; gap: 8px; z-index: 999; border-left: 1px solid rgba(229,193,88,0.15); transform: translateX(100%); transition: transform 0.3s ease; }
       .nav-links.active { display: flex; transform: translateX(0); }
       .nav-cta > a:not(.hamburger) { display: none; }
       .hamburger { display: flex !important; cursor: pointer; }
@@ -479,59 +479,53 @@
       h1, .section-headline { font-size: 24px !important; }
       .container { padding-left: 12px; padding-right: 12px; }
     }
+  
+/* Inline SVG logo — native to the design, no pasted image */
+.fortrex-logo-svg {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 6px rgba(229, 193, 88, 0.35));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.nav-logo .fortrex-logo-svg:hover {
+  filter: drop-shadow(0 0 12px rgba(229, 193, 88, 0.6));
+  transform: scale(1.05);
+}
+.brand-logo-svg {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 0 20px rgba(229, 193, 88, 0.25)) drop-shadow(0 0 60px rgba(229, 193, 88, 0.1));
+  animation: logo-glow 4s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+.brand-logo-svg:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 30px rgba(229, 193, 88, 0.4)) drop-shadow(0 0 80px rgba(229, 193, 88, 0.15));
+}
+
   </style>
 
-  <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/da15f6d53_fortrex-new-icon-32.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/da15f6d53_fortrex-new-icon-32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/3b7e110dd_fortrex-new-icon-180.png">
-  <link rel="apple-touch-icon" sizes="192x192" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/50557a7bd_fortrex-new-icon-512.png">
-  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/7462744de_fortrex-icon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/7462744de_fortrex-icon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/1fb65d179_fortrex-app-icon-180.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/4185f39e2_fortrex-app-icon-512.png">
+  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <meta property="og:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta property="og:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta name="twitter:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
-  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
-
-<!-- LOGO ANIMATION FIX: isolate logo from background particles -->
-<style>
-/* Logo isolation fix - prevents background animation from bleeding through */
-.brand-logo, .nav-logo, .signin-logo, .footer-brand img, 
-.hero-logo, .logo-container, [alt="FORTREX"] {
-  position: relative;
-  z-index: 100;
-  isolation: isolate;
-  -webkit-isolation: isolate;
-}
-/* Dark backdrop behind logo so particles don't show through */
-.brand-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.85) 0%, rgba(6, 7, 10, 0) 70%);
-  border-radius: 50%;
-  padding: 8px;
-}
-.nav-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.9) 0%, rgba(6, 7, 10, 0) 80%);
-  border-radius: 8px;
-  padding: 2px;
-}
-/* Ensure SVG logos are crisp */
-img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  -ms-interpolation-mode: nearest-neighbor;
-}
-</style>
-
+  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
 </head>
 <body>
 
@@ -541,7 +535,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
   <nav class="nav">
     <div class="nav-brand">
       <a href="index.html" class="navbar-brand">
-        <div class="nav-logo"><img src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/cba74eb6c_fortrex-new-nav-96.png" alt="FORTREX" style="width: 36px; height: 36px; object-fit: contain;"></div>
+        <div class="nav-logo"><img class="fortrex-logo-svg" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/78f5d4bc5_fortrex-icon-96.png" alt="FORTREX" style="object-fit:contain;" /></div>
       </a>
     </div>
     <ul class="nav-links" id="nav-links-main">
@@ -559,7 +553,6 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
       <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
       <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
       <div class="hamburger" aria-label="Toggle Menu">
         <span></span><span></span><span></span>
@@ -1205,7 +1198,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
   </main>
 
   <!-- RISK DISCLAIMER -->
-  <section style="padding: 40px 0; border-top: 1px solid #1A1A1A;">
+  <section style="padding: 40px 0; border-top: 1px solid #06070A;">
     <div class="container" style="max-width: 900px; text-align: center; margin: 0 auto;">
       <div class="uppercase-label" style="color: #666; margin-bottom: 12px;">RISK WARNING</div>
       <p style="font-size: 12px; color: #777; line-height: 1.7; font-weight: 300;">
@@ -1219,8 +1212,8 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/cba74eb6c_fortrex-new-nav-96.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(234, 202, 122, 0.2));">
-          <span class="nav-wordmark" style="color: #EACA7A; font-weight: 700;">FORTREX</span>
+          <img class="fortrex-logo-svg footer-logo-svg" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/78f5d4bc5_fortrex-icon-96.png" alt="FORTREX" style="object-fit:contain;" />
+          <span class="nav-wordmark" style="color: #E5C158; font-weight: 700;">FORTREX</span>
         </div>
         <div class="footer-links">
           <a href="index.html" class="footer-link">Home</a>
@@ -1975,5 +1968,9 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
     });
   </script>
 
+<script>
+// Scroll Reveal v3.0
+(function(){var e=document.querySelectorAll('.reveal, .reveal-stagger');if(!e.length)return;if(!('IntersectionObserver'in window)){e.forEach(function(el){el.classList.add('visible')});return}var o=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');o.unobserve(entry.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});e.forEach(function(el){o.observe(el)});var n=document.querySelector('.nav');if(n){var t=false;window.addEventListener('scroll',function(){if(!t){requestAnimationFrame(function(){n.classList.toggle('scrolled',window.scrollY>20);t=false});t=true}},{passive:true})}var h=document.querySelector('.hamburger'),l=document.querySelector('.nav-links');if(h&&l){h.addEventListener('click',function(){h.classList.toggle('active');l.classList.toggle('active')})}})();
+</script>
 </body>
 </html>

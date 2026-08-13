@@ -74,7 +74,7 @@
 
 /* Gold Gradient Text */
 .text-gold-gradient {
-    background: linear-gradient(135deg, #FFD700 0%, #F0B90B 50%, #D4AF37 100%);
+    background: linear-gradient(135deg, #E5C158 0%, #E5C158 50%, #E5C158 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -82,13 +82,13 @@
 
 /* Gold Button with Shimmer */
 .btn-gold-royal {
-    background: linear-gradient(135deg, #FFD700 0%, #F0B90B 50%, #D4AF37 100%);
-    color: #000000;
+    background: linear-gradient(135deg, #E5C158 0%, #E5C158 50%, #E5C158 100%);
+    color: #06070A;
     font-weight: 700;
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(255, 215, 0, 0.5);
-    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 4px 20px rgba(229, 193, 88, 0.3);
     transition: all 0.3s ease;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -117,21 +117,21 @@
 
 /* Double Gold Border — vault door effect */
 .double-border-gold {
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.15), 0 0 40px rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(229, 193, 88, 0.4);
+    box-shadow: inset 0 0 0 1px rgba(229, 193, 88, 0.15), 0 0 40px rgba(229, 193, 88, 0.1);
 }
 
 /* Vault Door Effect — for treasury sections */
 .vault-door {
     background: linear-gradient(135deg, rgba(13, 15, 24, 0.95) 0%, rgba(6, 7, 10, 0.98) 100%);
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.1), 0 10px 60px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(229, 193, 88, 0.4);
+    box-shadow: inset 0 0 0 1px rgba(229, 193, 88, 0.1), 0 10px 60px rgba(6, 7, 10, 0.8);
 }
 
 /* Royal Card — enhanced card with gold accents */
 .royal-card {
     background: linear-gradient(135deg, rgba(13, 15, 24, 0.95) 0%, rgba(10, 8, 18, 0.98) 100%);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(229, 193, 88, 0.2);
     position: relative;
     overflow: hidden;
 }
@@ -143,7 +143,7 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+    background: linear-gradient(90deg, transparent, rgba(229, 193, 88, 0.5), transparent);
 }
 
 /* Filigree Divider — ornamental section divider */
@@ -160,12 +160,12 @@
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(229, 193, 88, 0.3), transparent);
 }
 
 /* Gold Shadow Glow */
 .shadow-royal-gold {
-    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25), 0 0 40px rgba(212, 175, 55, 0.1);
+    box-shadow: 0 4px 20px rgba(229, 193, 88, 0.25), 0 0 40px rgba(229, 193, 88, 0.1);
 }
 
 /* Crown Pulse — for icons/badges */
@@ -195,9 +195,9 @@
     gap: 6px;
     padding: 4px 12px;
     border-radius: 999px;
-    background: rgba(212, 175, 55, 0.1);
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    color: #EACA7A;
+    background: rgba(229, 193, 88, 0.1);
+    border: 1px solid rgba(229, 193, 88, 0.4);
+    color: #E5C158;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.05em;
@@ -209,13 +209,13 @@
     background: rgba(6, 7, 10, 0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-color: rgba(212, 175, 55, 0.25);
+    border-color: rgba(229, 193, 88, 0.25);
 }
 
 /* Tournament Proclamation Card */
 .proclamation-card {
     background: linear-gradient(135deg, rgba(13, 15, 24, 0.95), rgba(10, 8, 18, 0.98));
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    border: 1px solid rgba(229, 193, 88, 0.3);
     border-radius: 16px;
     padding: 24px;
     position: relative;
@@ -224,8 +224,8 @@
 }
 
 .proclamation-card:hover {
-    border-color: rgba(234, 202, 122, 0.6);
-    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.2);
+    border-color: rgba(229, 193, 88, 0.6);
+    box-shadow: 0 8px 30px rgba(229, 193, 88, 0.2);
     transform: translateY(-2px);
 }
 
@@ -236,14 +236,14 @@
     left: 0;
     width: 100%;
     height: 3px;
-    background: linear-gradient(90deg, #D4AF37, #EACA7A, #D4AF37);
+    background: linear-gradient(90deg, #E5C158, #E5C158, #E5C158);
 }
 
 /* Tier Badges — for leaderboard ranking */
 .tier-apex {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(212, 175, 55, 0.1));
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(229, 193, 88, 0.1));
     border: 1px solid rgba(255, 215, 0, 0.5);
-    color: #FFD700;
+    color: #E5C158;
 }
 
 .tier-duke {
@@ -255,7 +255,7 @@
 .tier-knight {
     background: linear-gradient(135deg, rgba(205, 127, 50, 0.15), rgba(184, 115, 51, 0.05));
     border: 1px solid rgba(205, 127, 50, 0.4);
-    color: #CD7F32;
+    color: #E5C158;
 }
 
 /* Verified Trader Badge */

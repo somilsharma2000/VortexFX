@@ -315,9 +315,9 @@ main, section, footer, .nav {
 
 /* Rank-colored avatar rings */
 .avatar-ring.gold::before {
-  background: conic-gradient(from 0deg, #FFD700, #FFA500, #FFD700, #FFE875, #FFD700);
+  background: conic-gradient(from 0deg, #E5C158, #E5C158, #E5C158, #E5C158, #E5C158);
 }
-.avatar-ring.gold .avatar-inner { color: #FFD700; text-shadow: 0 0 20px #FFD700; }
+.avatar-ring.gold .avatar-inner { color: #E5C158; text-shadow: 0 0 20px #E5C158; }
 
 .avatar-ring.silver::before {
   background: conic-gradient(from 0deg, #E5E7EB, #B0B8C4, #E5E7EB, #F0F2F6, #E5E7EB);
@@ -325,13 +325,13 @@ main, section, footer, .nav {
 .avatar-ring.silver .avatar-inner { color: #E5E7EB; text-shadow: 0 0 20px #E5E7EB; }
 
 .avatar-ring.bronze::before {
-  background: conic-gradient(from 0deg, #CD7F32, #B8860B, #CD7F32, #DDA15E, #CD7F32);
+  background: conic-gradient(from 0deg, #E5C158, #B8860B, #E5C158, #E5C158, #E5C158);
 }
-.avatar-ring.bronze .avatar-inner { color: #CD7F32; text-shadow: 0 0 20px #CD7F32; }
+.avatar-ring.bronze .avatar-inner { color: #E5C158; text-shadow: 0 0 20px #E5C158; }
 
 /* ===== METALLIC ACCENTS ===== */
 .metallic-gold {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #FFD700 50%, #FFE875 75%, #FFD700 100%);
+  background: linear-gradient(135deg, #E5C158 0%, #E5C158 25%, #E5C158 50%, #E5C158 75%, #E5C158 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -347,7 +347,7 @@ main, section, footer, .nav {
 }
 
 .metallic-bronze {
-  background: linear-gradient(135deg, #DDA15E 0%, #CD7F32 25%, #B8860B 50%, #DDA15E 75%, #CD7F32 100%);
+  background: linear-gradient(135deg, #E5C158 0%, #E5C158 25%, #B8860B 50%, #E5C158 75%, #E5C158 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -369,7 +369,7 @@ main, section, footer, .nav {
 
 .rank-badge.gold {
   background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,165,0,0.1));
-  color: #FFD700;
+  color: #E5C158;
   box-shadow: 0 0 15px rgba(255,215,0,0.4), inset 0 0 10px rgba(255,215,0,0.1);
   border: 1px solid rgba(255,215,0,0.5);
 }
@@ -383,7 +383,7 @@ main, section, footer, .nav {
 
 .rank-badge.bronze {
   background: linear-gradient(135deg, rgba(205,127,50,0.2), rgba(184,134,11,0.1));
-  color: #CD7F32;
+  color: #E5C158;
   box-shadow: 0 0 15px rgba(205,127,50,0.3), inset 0 0 10px rgba(205,127,50,0.1);
   border: 1px solid rgba(205,127,50,0.4);
 }

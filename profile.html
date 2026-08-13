@@ -10,15 +10,15 @@
   <link rel="stylesheet" href="css/dala.css?v=4">
   <script src="js/dala.js?v=3"></script>
   <script src="js/auth.js?v=3"></script>
-  <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/da15f6d53_fortrex-new-icon-32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/3b7e110dd_fortrex-new-icon-180.png">
-  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/7462744de_fortrex-icon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/1fb65d179_fortrex-app-icon-180.png">
+  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <style>
     :root {
       --color-obsidian: #06070A;
-      --color-gold: #D4AF37;
+      --color-gold: #E5C158;
       --color-electric-iris: #6366f1;
-      --color-saffron-spark: #f59e0b;
+      --color-saffron-spark: #E5C158;
       --color-bone-white: #f8fafc;
       --color-silver-mist: #94a3b8;
       --color-ash-gray: #475569;
@@ -45,8 +45,8 @@
     }
 
     .profile-card {
-      background: rgba(10,10,10,0.85);
-      border: 1px solid #1a1a1a;
+      background: rgba(6, 7, 10,0.85);
+      border: 1px solid #06070A;
       border-radius: 16px;
       padding: 28px 24px;
       text-align: center;
@@ -54,9 +54,9 @@
     }
     .profile-avatar {
       width: 96px; height: 96px; border-radius: 50%;
-      margin: 0 auto 16px; border: 3px solid #D4AF37;
+      margin: 0 auto 16px; border: 3px solid #E5C158;
       object-fit: cover;
-      box-shadow: 0 0 16px rgba(212,175,55,0.25);
+      box-shadow: 0 0 16px rgba(229, 193, 88,0.25);
     }
     .profile-name { font-size: 22px; font-weight: 600; color: #fff; margin-bottom: 4px; }
     .profile-role { font-size: 13px; color: var(--color-silver-mist, #666); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
@@ -69,11 +69,11 @@
       margin-bottom: 12px;
     }
     .status-badge.verified, .badge.verified, .badge.genesis-verified {
-      background: rgba(212,175,55,0.12); color: #D4AF37; border: 1px solid #D4AF37;
-      box-shadow: 0 0 10px rgba(212,175,55,0.2);
+      background: rgba(229, 193, 88,0.12); color: #E5C158; border: 1px solid #E5C158;
+      box-shadow: 0 0 10px rgba(229, 193, 88,0.2);
     }
     .status-badge.pending, .badge.pending {
-      background: rgba(245,158,11,0.12); color: var(--color-saffron-spark, #f59e0b); border: 1px solid rgba(245,158,11,0.4);
+      background: rgba(245,158,11,0.12); color: var(--color-saffron-spark, #E5C158); border: 1px solid rgba(245,158,11,0.4);
     }
     .status-badge.unverified, .badge.unverified {
       background: rgba(102,102,102,0.12); color: #999; border: 1px solid rgba(102,102,102,0.3);
@@ -87,27 +87,27 @@
       text-transform: uppercase; letter-spacing: 0.05em;
       margin-bottom: 16px;
     }
-    .class-badge.sniper { background: rgba(212,175,55,0.15); color: #D4AF37; border: 1px solid rgba(212,175,55,0.3); }
-    .class-badge.scalper { background: rgba(234,202,122,0.15); color: #EACA7A; border: 1px solid rgba(234,202,122,0.3); }
+    .class-badge.sniper { background: rgba(229, 193, 88,0.15); color: #E5C158; border: 1px solid rgba(229, 193, 88,0.3); }
+    .class-badge.scalper { background: rgba(229, 193, 88,0.15); color: #E5C158; border: 1px solid rgba(229, 193, 88,0.3); }
     .class-badge.swing { background: rgba(16,185,129,0.15); color: #10B981; border: 1px solid rgba(16,185,129,0.3); }
     .class-badge.rookie { background: rgba(102,102,102,0.15); color: #999; border: 1px solid rgba(102,102,102,0.3); }
 
     .genesis-tier-badge {
       display: flex; align-items: center; justify-content: space-between;
       padding: 14px 18px; border-radius: 12px;
-      background: linear-gradient(135deg, #D4AF37 0%, #E5C158 50%, #B8860B 100%);
-      border: 1px solid #F5D172;
-      box-shadow: 0 4px 18px rgba(212,175,55,0.35);
+      background: linear-gradient(135deg, #E5C158 0%, #E5C158 50%, #B8860B 100%);
+      border: 1px solid #E5C158;
+      box-shadow: 0 4px 18px rgba(229, 193, 88,0.35);
       margin: 16px 0;
-      color: #0B0C0E;
+      color: #06070A;
       text-align: left;
     }
     .genesis-tier-badge .tier-label {
-      font-size: 10px; color: rgba(11,12,14,0.75); text-transform: uppercase;
+      font-size: 10px; color: rgba(6, 7, 10,0.75); text-transform: uppercase;
       letter-spacing: 0.08em; font-weight: 700;
     }
     .genesis-tier-badge .tier-value {
-      font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 800; color: #0B0C0E;
+      font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 800; color: #06070A;
       margin-top: 2px;
     }
 
@@ -117,16 +117,16 @@
     }
     .stat-tile {
       background: rgba(255,255,255,0.02);
-      border: 1px solid #1a1a1a;
+      border: 1px solid #06070A;
       border-radius: 10px;
       padding: 14px 12px; text-align: center;
     }
-    .stat-tile .val { font-size: 24px; font-weight: 700; color: #D4AF37; }
+    .stat-tile .val { font-size: 24px; font-weight: 700; color: #E5C158; }
     .stat-tile .lbl { font-size: 11px; color: var(--color-silver-mist, #666); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
 
     .info-card {
-      background: rgba(10,10,10,0.85);
-      border: 1px solid #1a1a1a;
+      background: rgba(6, 7, 10,0.85);
+      border: 1px solid #06070A;
       border-radius: 12px;
       padding: 20px;
       margin-top: 16px;
@@ -164,16 +164,16 @@
       transition: all 0.2s ease;
     }
     .info-input:focus {
-      border-color: #D4AF37;
-      background: rgba(212, 175, 55, 0.05);
-      box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+      border-color: #E5C158;
+      background: rgba(229, 193, 88, 0.05);
+      box-shadow: 0 0 8px rgba(229, 193, 88, 0.2);
     }
     .save-contact-btn {
       width: 100%;
       padding: 9px 14px;
-      background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(229,193,88,0.1));
+      background: linear-gradient(135deg, rgba(229, 193, 88,0.2), rgba(229,193,88,0.1));
       color: #E5C158;
-      border: 1px solid rgba(212,175,55,0.4);
+      border: 1px solid rgba(229, 193, 88,0.4);
       border-radius: 8px;
       font-size: 12px;
       font-weight: 600;
@@ -181,14 +181,14 @@
       transition: all 0.2s ease;
     }
     .save-contact-btn:hover {
-      background: linear-gradient(135deg, #E5C158, #D4AF37);
-      color: #0B0C0E;
+      background: linear-gradient(135deg, #E5C158, #E5C158);
+      color: #06070A;
     }
 
     .referral-section {
       margin-top: 16px;
-      background: rgba(10,10,10,0.85);
-      border: 1px solid #1a1a1a;
+      background: rgba(6, 7, 10,0.85);
+      border: 1px solid #06070A;
       border-radius: 12px;
       padding: 20px;
       text-align: left;
@@ -196,7 +196,7 @@
     .referral-code {
       font-family: 'JetBrains Mono', monospace;
       font-size: 20px; font-weight: 700;
-      color: #D4AF37; letter-spacing: 0.05em;
+      color: #E5C158; letter-spacing: 0.05em;
       margin: 8px 0;
     }
     .referral-link-box {
@@ -212,8 +212,8 @@
     }
     .copy-link-btn {
       padding: 10px 18px;
-      background: linear-gradient(135deg, #E5C158, #D4AF37);
-      color: #0B0C0E; font-weight: 700; font-size: 12px;
+      background: linear-gradient(135deg, #E5C158, #E5C158);
+      color: #06070A; font-weight: 700; font-size: 12px;
       border: none; border-radius: 8px;
       cursor: pointer; white-space: nowrap;
       transition: all 0.2s;
@@ -222,8 +222,8 @@
 
     .right-col > div { margin-bottom: 24px; }
     .content-card {
-      background: rgba(10,10,10,0.85);
-      border: 1px solid #1a1a1a;
+      background: rgba(6, 7, 10,0.85);
+      border: 1px solid #06070A;
       border-radius: 16px;
       padding: 28px;
     }
@@ -231,29 +231,29 @@
     .section-sub { font-size: 13px; color: var(--color-silver-mist, #666); margin-bottom: 16px; }
 
     .bp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .bp-level { font-size: 48px; font-weight: 700; color: #D4AF37; line-height: 1; }
+    .bp-level { font-size: 48px; font-weight: 700; color: #E5C158; line-height: 1; }
     .bp-level-label { font-size: 13px; color: var(--color-silver-mist, #666); text-transform: uppercase; letter-spacing: 0.05em; }
     .bp-xp-text { font-size: 14px; color: #999; text-align: right; }
-    .bp-bar-container { position: relative; height: 40px; background: #0a0a0a; border-radius: 8px; overflow: hidden; margin: 16px 0; border: 1px solid #1a1a1a; }
-    .bp-bar-fill { height: 100%; background: linear-gradient(90deg, #D4AF37, #F5D172); border-radius: 8px; transition: width 1.5s ease; box-shadow: 0 0 12px rgba(212,175,55,0.4); }
+    .bp-bar-container { position: relative; height: 40px; background: #06070A; border-radius: 8px; overflow: hidden; margin: 16px 0; border: 1px solid #06070A; }
+    .bp-bar-fill { height: 100%; background: linear-gradient(90deg, #E5C158, #E5C158); border-radius: 8px; transition: width 1.5s ease; box-shadow: 0 0 12px rgba(229, 193, 88,0.4); }
     .bp-milestones { display: flex; justify-content: space-between; position: relative; margin-top: 12px; }
     .bp-milestone { display: flex; flex-direction: column; align-items: center; gap: 4px; }
     .bp-milestone-dot { width: 12px; height: 12px; border-radius: 50%; background: #222; border: 2px solid #333; }
-    .bp-milestone-dot.reached { background: #D4AF37; border-color: #D4AF37; box-shadow: 0 0 8px rgba(212,175,55,0.6); }
+    .bp-milestone-dot.reached { background: #E5C158; border-color: #E5C158; box-shadow: 0 0 8px rgba(229, 193, 88,0.6); }
     .bp-milestone-label { font-size: 10px; color: #555; }
-    .bp-milestone-label.reached { color: #D4AF37; }
+    .bp-milestone-label.reached { color: #E5C158; }
     .bp-milestone-reward { font-size: 9px; color: #444; }
-    .bp-milestone-reward.reached { color: #D4AF37; }
-    .bp-next-req { font-size: 12px; color: var(--color-silver-mist, #888); margin-top: 16px; text-align: center; background: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: 6px; border: 1px solid #1a1a1a; }
+    .bp-milestone-reward.reached { color: #E5C158; }
+    .bp-next-req { font-size: 12px; color: var(--color-silver-mist, #888); margin-top: 16px; text-align: center; background: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: 6px; border: 1px solid #06070A; }
 
     .achievements-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 16px; }
     @media (max-width: 600px) { .achievements-grid { grid-template-columns: repeat(2,1fr); } }
-    .achievement { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 20px 12px; background: rgba(255,255,255,0.02); border: 1px solid #1a1a1a; border-radius: 12px; text-align: center; transition: all 0.3s; }
-    .achievement.unlocked { border-color: rgba(212,175,55,0.4); background: rgba(212,175,55,0.03); }
-    .achievement.unlocked:hover { border-color: #D4AF37; transform: translateY(-2px); box-shadow: 0 4px 16px rgba(212,175,55,0.15); }
+    .achievement { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 20px 12px; background: rgba(255,255,255,0.02); border: 1px solid #06070A; border-radius: 12px; text-align: center; transition: all 0.3s; }
+    .achievement.unlocked { border-color: rgba(229, 193, 88,0.4); background: rgba(229, 193, 88,0.03); }
+    .achievement.unlocked:hover { border-color: #E5C158; transform: translateY(-2px); box-shadow: 0 4px 16px rgba(229, 193, 88,0.15); }
     .achievement.locked { opacity: 0.4; }
     .achievement-icon { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; }
-    .achievement.unlocked .achievement-icon { background: rgba(212,175,55,0.15); border: 2px solid #D4AF37; }
+    .achievement.unlocked .achievement-icon { background: rgba(229, 193, 88,0.15); border: 2px solid #E5C158; }
     .achievement.locked .achievement-icon { background: rgba(255,255,255,0.03); border: 2px solid #222; }
     .achievement-title { font-size: 12px; font-weight: 600; color: #ddd; }
     .achievement.locked .achievement-title { color: #555; }
@@ -275,12 +275,12 @@
     .flex-btn {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 12px 24px;
-      background: linear-gradient(135deg, #E5C158, #D4AF37);
-      color: #0B0C0E; font-weight: 600; font-size: 14px;
+      background: linear-gradient(135deg, #E5C158, #E5C158);
+      color: #06070A; font-weight: 600; font-size: 14px;
       border: none; border-radius: 8px; cursor: pointer;
       transition: all 0.3s;
     }
-    .flex-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,175,55,0.3); }
+    .flex-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(229, 193, 88,0.3); }
     #flex-card-canvas { display: none; max-width: 100%; border-radius: 12px; margin-top: 16px; }
     #flex-card-download, #flex-card-share { display: none; }
 
@@ -288,14 +288,38 @@
       position: fixed; bottom: 30px; left: 50%;
       transform: translateX(-50%) translateY(100px);
       background: rgba(10,11,16,0.95);
-      border: 1px solid rgba(212,175,55,0.3);
+      border: 1px solid rgba(229, 193, 88,0.3);
       color: #fff; padding: 14px 24px;
       border-radius: 100px; font-size: 14px;
       font-weight: 500; z-index: 9999;
       transition: transform 0.3s ease;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      box-shadow: 0 10px 30px rgba(6, 7, 10,0.8);
     }
     .toast.show { transform: translateX(-50%) translateY(0); }
+  
+/* Inline SVG logo — native to the design, no pasted image */
+.fortrex-logo-svg {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 6px rgba(229, 193, 88, 0.35));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.nav-logo .fortrex-logo-svg:hover {
+  filter: drop-shadow(0 0 12px rgba(229, 193, 88, 0.6));
+  transform: scale(1.05);
+}
+.brand-logo-svg {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 0 20px rgba(229, 193, 88, 0.25)) drop-shadow(0 0 60px rgba(229, 193, 88, 0.1));
+  animation: logo-glow 4s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+.brand-logo-svg:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 30px rgba(229, 193, 88, 0.4)) drop-shadow(0 0 80px rgba(229, 193, 88, 0.15));
+}
+
   </style>
   <style>
   
@@ -308,45 +332,15 @@
   <meta property="og:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta property="og:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+  <meta property="og:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FORTREX — Master the Charts. Reclaim Your Throne.">
   <meta name="twitter:description" content="The ultimate skill-based trading tournament platform. Compete, prove your edge, and earn REX rewards.">
-  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/e28e531ce_fortrex-new-full.png">
+  <meta name="twitter:image" content="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/0c00ec235_fortrex-og-image.png">
   <style>@media (max-width: 768px) { .stats-grid, .rex-shop-grid, .profile-grid, .metric-box-grid, .tier-grid, .achievements-grid, .step-grid { grid-template-columns: 1fr !important; } }</style>
-
-<!-- LOGO ANIMATION FIX: isolate logo from background particles -->
-<style>
-/* Logo isolation fix - prevents background animation from bleeding through */
-.brand-logo, .nav-logo, .signin-logo, .footer-brand img, 
-.hero-logo, .logo-container, [alt="FORTREX"] {
-  position: relative;
-  z-index: 100;
-  isolation: isolate;
-  -webkit-isolation: isolate;
-}
-/* Dark backdrop behind logo so particles don't show through */
-.brand-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.85) 0%, rgba(6, 7, 10, 0) 70%);
-  border-radius: 50%;
-  padding: 8px;
-}
-.nav-logo {
-  background: radial-gradient(circle at center, rgba(6, 7, 10, 0.9) 0%, rgba(6, 7, 10, 0) 80%);
-  border-radius: 8px;
-  padding: 2px;
-}
-/* Ensure SVG logos are crisp */
-img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  -ms-interpolation-mode: nearest-neighbor;
-}
-</style>
-
 </head>
 <body>
   <canvas id="particle-canvas"></canvas>
@@ -355,7 +349,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
   <nav class="nav">
     <div class="nav-brand">
       <a href="index.html" class="navbar-brand">
-        <div class="nav-logo"><img src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/cba74eb6c_fortrex-new-nav-96.png" alt="FORTREX" style="width: 36px; height: 36px; object-fit: contain;"></div>
+        <div class="nav-logo"><img class="fortrex-logo-svg" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/78f5d4bc5_fortrex-icon-96.png" alt="FORTREX" style="object-fit:contain;" /></div>
       </a>
     </div>
     <ul class="nav-links" id="nav-links-main">
@@ -372,7 +366,6 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
       <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
       <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
       <div class="hamburger" aria-label="Toggle Menu"><span></span><span></span><span></span></div>
     </div>
@@ -385,7 +378,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
         <div class="left-col">
           <!-- Profile Card -->
           <div class="profile-card" id="profile-card">
-            <img class="profile-avatar" id="p-avatar" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/50557a7bd_fortrex-new-icon-512.png" alt="Profile Avatar">
+            <img class="profile-avatar" id="p-avatar" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/5b51b016d_fortrex-icon-512.png" alt="Profile Avatar">
             <div class="profile-name" id="p-name">SomilFX</div>
             <div class="profile-role" id="p-role">PRO TRADER</div>
 
@@ -417,7 +410,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
             <!-- Contact Information Card with Editable Inputs (Requirement 1b) -->
             <div class="info-card">
               <div class="info-card-title">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E5C158" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 Contact Information
               </div>
               <div class="info-field-group">
@@ -442,7 +435,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
             <!-- Referral Code Section (Requirement 1d) -->
             <div class="referral-section">
               <div class="info-card-title">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E5C158" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
                 Unique Referral Code
               </div>
               <div class="referral-code" id="p-refcode">FORTREX-ABC123</div>
@@ -474,7 +467,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
                 <div class="bp-level-label">Battle Pass Level</div>
               </div>
               <div class="bp-xp-text">
-                <div id="bp-xp" style="font-weight:600;color:#D4AF37;">1,250 XP</div>
+                <div id="bp-xp" style="font-weight:600;color:#E5C158;">1,250 XP</div>
                 <div style="font-size:11px;color:#888;" id="bp-next">250 XP to Level 4</div>
               </div>
             </div>
@@ -510,7 +503,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
             <canvas id="flex-card-canvas" width="600" height="340"></canvas>
             <div style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap;">
               <button id="flex-card-download" class="flex-btn" style="background: rgba(255,255,255,0.05); color: #fff; border: 1px solid #333;" onclick="downloadFlexCard()">Download Image</button>
-              <button id="flex-card-share" class="flex-btn" style="background: rgba(212,175,55,0.15); color: #D4AF37; border: 1px solid #D4AF37;" onclick="shareFlexCard()">Share Card</button>
+              <button id="flex-card-share" class="flex-btn" style="background: rgba(229, 193, 88,0.15); color: #E5C158; border: 1px solid #E5C158;" onclick="shareFlexCard()">Share Card</button>
             </div>
           </div>
         </div>
@@ -523,8 +516,8 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/cba74eb6c_fortrex-new-nav-96.png" alt="FORTREX" style="width: 28px; height: 28px; object-fit: contain; margin-right: 12px; filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.3));">
-          <span class="nav-wordmark" style="color: #D4AF37; font-weight: 700;">FORTREX</span>
+          <img class="fortrex-logo-svg footer-logo-svg" src="https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/78f5d4bc5_fortrex-icon-96.png" alt="FORTREX" style="object-fit:contain;" />
+          <span class="nav-wordmark" style="color: #E5C158; font-weight: 700;">FORTREX</span>
         </div>
         <div class="footer-links">
           <a href="index.html" class="footer-link">Home</a>
@@ -669,7 +662,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
       document.querySelectorAll('.nav-internal').forEach(el => el.style.display = '');
 
       // Basic profile header
-      document.getElementById('p-avatar').src = trader.avatar || 'https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/50557a7bd_fortrex-new-icon-512.png';
+      document.getElementById('p-avatar').src = trader.avatar || 'https://base44.app/api/apps/6a73016f9b626430a0d26f88/files/mp/public/6a73016f9b626430a0d26f88/5b51b016d_fortrex-icon-512.png';
       document.getElementById('p-name').textContent = trader.username || 'SomilFX';
       document.getElementById('p-role').textContent = (trader.role || 'trader').toUpperCase();
       document.getElementById('p-rex').textContent = (trader.rex_balance || 1250).toLocaleString();
@@ -791,23 +784,23 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
       // Dark obsidian background gradient
       const grad = ctx.createLinearGradient(0,0,W,H);
       grad.addColorStop(0,'#06070A');
-      grad.addColorStop(0.5, '#0e111a');
+      grad.addColorStop(0.5, '#0B0C0E');
       grad.addColorStop(1,'#06070A');
       ctx.fillStyle = grad;
       ctx.fillRect(0,0,W,H);
 
       // Gold frame
-      ctx.strokeStyle = '#D4AF37';
+      ctx.strokeStyle = '#E5C158';
       ctx.lineWidth = 2;
       ctx.strokeRect(12,12,W-24,H-24);
 
       // Inner accent frame
-      ctx.strokeStyle = 'rgba(212, 175, 55, 0.15)';
+      ctx.strokeStyle = 'rgba(229, 193, 88, 0.15)';
       ctx.lineWidth = 1;
       ctx.strokeRect(18,18,W-36,H-36);
 
       // FORTREX Brand
-      ctx.fillStyle = '#D4AF37';
+      ctx.fillStyle = '#E5C158';
       ctx.font = 'bold 20px "Space Grotesk", sans-serif';
       ctx.fillText('FORTREX FX', 36, 54);
 
@@ -820,7 +813,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
       ctx.font = 'bold 26px "Space Grotesk", sans-serif';
       ctx.fillText(trader.username || 'SomilFX', 36, 125);
 
-      ctx.fillStyle = '#D4AF37';
+      ctx.fillStyle = '#E5C158';
       ctx.font = '600 13px "Inter", sans-serif';
       ctx.fillText((trader.trader_class || 'Sniper') + ' · ' + (trader.role || 'Trader').toUpperCase(), 36, 146);
 
@@ -848,7 +841,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
       const colWidth = (W - 72) / 3;
       stats.forEach(function(s, i) {
         const x = 36 + i * colWidth;
-        ctx.fillStyle = '#D4AF37';
+        ctx.fillStyle = '#E5C158';
         ctx.font = 'bold 26px "JetBrains Mono", monospace';
         ctx.fillText(s.value, x, 222);
 
@@ -858,7 +851,7 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
       });
 
       // Tagline Footer
-      ctx.fillStyle = 'rgba(212, 175, 55, 0.7)';
+      ctx.fillStyle = 'rgba(229, 193, 88, 0.7)';
       ctx.font = '11px "Inter", sans-serif';
       ctx.fillText('FORTREX — Master the Charts. Reclaim Your Throne.', 36, H - 32);
 
@@ -913,5 +906,9 @@ img[src*="fortrex-logo.svg"], img[src*="fortrex-favicon.svg"] {
       }
     });
   </script>
+<script>
+// Scroll Reveal v3.0
+(function(){var e=document.querySelectorAll('.reveal, .reveal-stagger');if(!e.length)return;if(!('IntersectionObserver'in window)){e.forEach(function(el){el.classList.add('visible')});return}var o=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');o.unobserve(entry.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});e.forEach(function(el){o.observe(el)});var n=document.querySelector('.nav');if(n){var t=false;window.addEventListener('scroll',function(){if(!t){requestAnimationFrame(function(){n.classList.toggle('scrolled',window.scrollY>20);t=false});t=true}},{passive:true})}var h=document.querySelector('.hamburger'),l=document.querySelector('.nav-links');if(h&&l){h.addEventListener('click',function(){h.classList.toggle('active');l.classList.toggle('active')})}})();
+</script>
 </body>
 </html>
