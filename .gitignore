@@ -4,3 +4,5 @@ node_modules/
 __pycache__/
 .cache/
 blobs/
+
+# Nested git repos - don't track as submodules
