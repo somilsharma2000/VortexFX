@@ -13,16 +13,16 @@
 <style>
   :root {
     --bg: #050508;
-    --violet: #D4AF37;
-    --violet-bright: #EACA7A;
-    --violet-deep: #AA7C11;
+    --violet: #E5C158;
+    --violet-bright: #E5C158;
+    --violet-deep: #B8860B;
     --cyan: #06B6D4;
     --cyan-bright: #22D3EE;
     --magenta: #EC4899;
     --text: #FFFFFF;
     --text-dim: #94A3B8;
-    --border: rgba(212, 175, 55, 0.2);
-    --glow: rgba(212, 175, 55, 0.4);
+    --border: rgba(229, 193, 88, 0.2);
+    --glow: rgba(229, 193, 88, 0.4);
     --font-heading: 'Orbitron', sans-serif;
     --font-body: 'Space Grotesk', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
@@ -149,7 +149,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 20px rgba(229, 193, 88, 0.4);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
@@ -162,7 +162,7 @@
   }
 
   .btn-ghost {
-    background: rgba(212, 175, 55, 0.05);
+    background: rgba(229, 193, 88, 0.05);
     color: var(--text);
     font-family: var(--font-heading);
     font-size: 0.85rem;
@@ -229,23 +229,23 @@
     border-radius: 12px;
     padding: 24px;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    box-shadow: 0 8px 32px 0 rgba(6, 7, 10, 0.37);
   }
 
   .glass:hover {
-    border-color: rgba(212, 175, 55, 0.5);
-    box-shadow: 0 8px 32px 0 rgba(212, 175, 55, 0.2);
+    border-color: rgba(229, 193, 88, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(229, 193, 88, 0.2);
   }
 
   .holo-panel {
     background: linear-gradient(135deg, rgba(20, 15, 38, 0.8) 0%, rgba(10, 20, 35, 0.8) 100%);
     backdrop-filter: blur(16px);
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    border: 1px solid rgba(229, 193, 88, 0.3);
     border-radius: 16px;
     padding: 32px;
     position: relative;
     overflow: hidden;
-    box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.1), 0 10px 40px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 20px rgba(229, 193, 88, 0.1), 0 10px 40px rgba(6, 7, 10, 0.5);
   }
 
   .holo-panel::before {
@@ -285,7 +285,7 @@
   }
 
   .badge-diamond {
-    background: rgba(212, 175, 55, 0.2);
+    background: rgba(229, 193, 88, 0.2);
     color: var(--violet-bright);
     border: 1px solid var(--violet);
   }
@@ -304,8 +304,8 @@
 
   .badge-gold {
     background: rgba(234, 179, 8, 0.2);
-    color: #fde047;
-    border: 1px solid #eab308;
+    color: #E5C158;
+    border: 1px solid #E5C158;
   }
 
   .badge-silver {
@@ -316,8 +316,8 @@
 
   .badge-bronze {
     background: rgba(217, 119, 6, 0.2);
-    color: #fdba74;
-    border: 1px solid #d97706;
+    color: #E5C158;
+    border: 1px solid #E5C158;
   }
 
   /* Animations & FX */
@@ -335,7 +335,7 @@
   }
 
   @keyframes glowPulse {
-    from { box-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
+    from { box-shadow: 0 0 10px rgba(229, 193, 88, 0.3); }
     to { box-shadow: 0 0 25px rgba(34, 211, 238, 0.6); }
   }
 
@@ -507,7 +507,7 @@
     }
 
     .podium-card.rank-1 {
-      border-color: #eab308;
+      border-color: #E5C158;
       box-shadow: 0 0 35px rgba(234, 179, 8, 0.3);
       padding-bottom: 48px;
     }
@@ -540,7 +540,7 @@
 
     .rank-table th, .rank-table td {
       padding: 14px 18px;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      border-bottom: 1px solid rgba(229, 193, 88, 0.15);
       font-size: 0.9rem;
     }
 
@@ -557,7 +557,7 @@
     }
 
     .rank-table tr:hover {
-      background: rgba(212, 175, 55, 0.1);
+      background: rgba(229, 193, 88, 0.1);
       transform: translateX(4px);
     }
 
@@ -590,7 +590,7 @@
     }
 
     .timer-block {
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(6, 7, 10, 0.5);
       border: 1px solid var(--border);
       padding: 8px 12px;
       border-radius: 6px;
@@ -668,7 +668,6 @@
       <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
       <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
       <div class="hamburger" aria-label="Toggle Menu">
         <span></span><span></span><span></span>
@@ -710,7 +709,7 @@
         <span class="podium-rank-tag badge-gold">👑 #1 CHAMPION</span>
         <div style="font-size: 3.2rem; margin-bottom: 8px;">🏆</div>
         <h3 class="glitch-text" style="color: #fff; font-size: 1.5rem;" data-text="VoidMaster">VoidMaster</h3>
-        <div style="font-family: var(--font-mono); font-size: 2.2rem; color: #fde047; margin: 8px 0;" data-ticker="+156.2%">+156.2%</div>
+        <div style="font-family: var(--font-mono); font-size: 2.2rem; color: #E5C158; margin: 8px 0;" data-ticker="+156.2%">+156.2%</div>
         <div style="font-size: 0.85rem; color: var(--text-dim);">Win Rate: 82% • 47 Trades</div>
       </div>
 
@@ -922,7 +921,7 @@
           <div style="display: flex; flex-direction: column; gap: 12px;">
             <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: rgba(234,179,8,0.1); border: 1px solid rgba(234,179,8,0.3); border-radius: 8px;">
               <span>🥇 1st Place</span>
-              <strong style="font-family: var(--font-mono); color: #fde047;">$25,000 + Title</strong>
+              <strong style="font-family: var(--font-mono); color: #E5C158;">$25,000 + Title</strong>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: rgba(148,163,184,0.1); border: 1px solid rgba(148,163,184,0.3); border-radius: 8px;">
               <span>🥈 2nd Place</span>
@@ -930,7 +929,7 @@
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: rgba(217,119,6,0.1); border: 1px solid rgba(217,119,6,0.3); border-radius: 8px;">
               <span>🥉 3rd Place</span>
-              <strong style="font-family: var(--font-mono); color: #fdba74;">10,000 REX</strong>
+              <strong style="font-family: var(--font-mono); color: #E5C158;">10,000 REX</strong>
             </div>
           </div>
         </div>
@@ -953,7 +952,7 @@
       <div class="footer-content">
         <div class="footer-brand">
           <svg class="fortrex-logo-svg footer-logo-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 28px; height: 28px; margin-right: 12px; flex-shrink: 0;"><defs><linearGradient id="ff-leaderbo" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E5C158"/><stop offset="100%" stop-color="#B8860B"/></linearGradient><linearGradient id="ffl-leaderbo" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F0D780"/><stop offset="100%" stop-color="#E5C158"/></linearGradient></defs><path d="M32 4 L56 14 L56 36 C56 48 44 56 32 60 C20 56 8 48 8 36 L8 14 Z" stroke="url(#ff-leaderbo)" stroke-width="2" fill="none" stroke-linejoin="round"/><path d="M32 10 L50 18 L50 35 C50 44 41 50 32 53 C23 50 14 44 14 35 L14 18 Z" stroke="url(#ff-leaderbo)" stroke-width="0.8" fill="none" stroke-linejoin="round" opacity="0.4"/><path d="M20 22 L40 22" stroke="url(#ffl-leaderbo)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 22 L20 44" stroke="url(#ffl-leaderbo)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 33 L35 33" stroke="url(#ffl-leaderbo)" stroke-width="2" stroke-linecap="round"/><path d="M26 16 L29 13 L32 16 L35 13 L38 16" stroke="url(#ff-leaderbo)" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><path d="M18 48 L46 48" stroke="url(#ff-leaderbo)" stroke-width="0.6" opacity="0.3"/></svg>
-          <span class="nav-wordmark" style="color: #EACA7A; font-weight: 700;">FORTREX</span>
+          <span class="nav-wordmark" style="color: #E5C158; font-weight: 700;">FORTREX</span>
         </div>
         <div class="footer-links">
           <a href="index.html" class="footer-link">Home</a>
@@ -1003,7 +1002,7 @@
           vx: (Math.random() - 0.5) * 0.6,
           vy: (Math.random() - 0.5) * 0.6,
           radius: Math.random() * 2 + 1,
-          color: Math.random() > 0.5 ? '#D4AF37' : '#06B6D4',
+          color: Math.random() > 0.5 ? '#E5C158' : '#06B6D4',
           alpha: Math.random() * 0.5 + 0.2
         }));
 
@@ -1031,7 +1030,7 @@
                 ctx.beginPath();
                 ctx.moveTo(p.x, p.y);
                 ctx.lineTo(p2.x, p2.y);
-                ctx.strokeStyle = '#D4AF37';
+                ctx.strokeStyle = '#E5C158';
                 ctx.globalAlpha = (1 - dist / 110) * 0.18;
                 ctx.lineWidth = 0.8;
                 ctx.stroke();

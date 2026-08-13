@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="css/fortrex-theme.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign In — FORTREX</title>
@@ -28,9 +29,9 @@
       align-items: center;
       gap: 12px;
       padding: 8px 20px;
-      border: 1px solid rgba(212, 175, 55, 0.3);
+      border: 1px solid rgba(229, 193, 88, 0.3);
       border-radius: 100px;
-      background: rgba(212, 175, 55, 0.05);
+      background: rgba(229, 193, 88, 0.05);
       margin-bottom: var(--spacing-24);
       font-size: 13px;
       letter-spacing: 0.04em;
@@ -47,14 +48,14 @@
 
     .auth-card {
       overflow: hidden;
-      background: rgba(10, 10, 10, 0.85);
-      border: 1px solid #1a1a1a;
+      background: rgba(6, 7, 10, 0.85);
+      border: 1px solid #06070A;
       border-radius: 8px;
       padding: var(--spacing-36) var(--spacing-36);
       width: 100%;
       max-width: 480px;
       margin: 0 auto;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+      box-shadow: 0 20px 50px rgba(6, 7, 10, 0.85);
       position: relative;
       backdrop-filter: blur(12px);
     }
@@ -108,7 +109,7 @@
       width: 100%;
       padding: 18px 24px;
       background-color: #ffffff;
-      color: #1a1a1a;
+      color: #06070A;
       font-family: var(--font);
       font-size: 15px;
       font-weight: 600;
@@ -197,8 +198,8 @@
     .profile-form-submit {
       width: 100%;
       padding: 16px;
-      background: linear-gradient(135deg, #E5C158, #F5D172);
-      color: #0B0C0E;
+      background: linear-gradient(135deg, #E5C158, #E5C158);
+      color: #06070A;
       font-weight: 700;
       font-size: 15px;
       text-transform: uppercase;
@@ -222,7 +223,7 @@
     .reassurance-list {
       margin-top: var(--spacing-24);
       padding-top: var(--spacing-24);
-      border-top: 1px solid #1a1a1a;
+      border-top: 1px solid #06070A;
       text-align: left;
       font-size: 13px;
       color: var(--color-ash-gray);
@@ -267,8 +268,8 @@
     .auth-spinner {
       width: 48px;
       height: 48px;
-      border: 3px solid rgba(212, 175, 55, 0.2);
-      border-top-color: #D4AF37;
+      border: 3px solid rgba(229, 193, 88, 0.2);
+      border-top-color: #E5C158;
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
@@ -455,7 +456,6 @@
       <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
       <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
       <div class="hamburger" aria-label="Toggle Menu">
         <span></span><span></span><span></span>
@@ -472,14 +472,14 @@
 
           <!-- URGENCY TRIGGER -->
           <div class="urgency-badge">
-            <span class="live-dot" style="background: #ffb829;"></span>
+            <span class="live-dot" style="background: #E5C158;"></span>
             <span>Next Tournament Starts Soon · Reveal In:</span>
             <span id="signin-countdown" class="urgency-timer" data-countdown="2026-08-23T23:59:59">14d : 08h : 32m : 15s</span>
           </div>
 
           <!-- CINEMATIC LOGO -->
           <div style="margin-bottom: 32px;">
-            <img src="assets/fortrex-icon-512.png" alt="FORTREX" style="width: 100px; height: 100px; object-fit: contain; margin: 0 auto; display: block; filter: drop-shadow(0 0 20px rgba(234, 202, 122, 0.25)) drop-shadow(0 0 50px rgba(234, 202, 122, 0.1));">
+            <svg class="brand-logo-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100px; height: 100px; margin: 0 auto; display: block;"><defs><linearGradient id="fh-signin" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E5C158"/><stop offset="100%" stop-color="#B8860B"/></linearGradient><linearGradient id="fhl-signin" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F0D780"/><stop offset="100%" stop-color="#E5C158"/></linearGradient></defs><path d="M32 4 L56 14 L56 36 C56 48 44 56 32 60 C20 56 8 48 8 36 L8 14 Z" stroke="url(#fh-signin)" stroke-width="1.8" fill="none" stroke-linejoin="round"/><path d="M32 10 L50 18 L50 35 C50 44 41 50 32 53 C23 50 14 44 14 35 L14 18 Z" stroke="url(#fh-signin)" stroke-width="0.7" fill="none" stroke-linejoin="round" opacity="0.4"/><path d="M20 22 L40 22" stroke="url(#fhl-signin)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 22 L20 44" stroke="url(#fhl-signin)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 33 L35 33" stroke="url(#fhl-signin)" stroke-width="2" stroke-linecap="round"/><path d="M26 16 L29 13 L32 16 L35 13 L38 16" stroke="url(#fh-signin)" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><path d="M18 48 L46 48" stroke="url(#fh-signin)" stroke-width="0.6" opacity="0.3"/></svg>
           </div>
 
           <!-- IDENTITY TRIGGER -->
@@ -498,7 +498,7 @@
             <div id="login-view">
               <div style="margin-bottom: var(--spacing-24);">
                 <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px;">
-                  <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-electric-iris); background: rgba(212, 175, 55, 0.12); padding: 4px 12px; border-radius: 12px;">
+                  <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-electric-iris); background: rgba(229, 193, 88, 0.12); padding: 4px 12px; border-radius: 12px;">
                     ⚡ 30 Seconds to Join
                   </span>
                 </div>
@@ -511,25 +511,22 @@
               <!-- MANUAL REGISTRATION FORM -->
               <form id="manual-reg-form" onsubmit="return submitManualRegistration(event)" style="display: flex; flex-direction: column; gap: 16px;">
                 <div>
-                  <label style="display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ash-gray); margin-bottom: 6px;">Full Name</label>
+                  <label class="form-label">Full Name</label>
                   <input type="text" id="reg-full-name" placeholder="e.g. Alex Morgan" required
-                    style="width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(229,193,88,0.15); border-radius: 8px; color: #fff; font-size: 15px; font-family: 'Inter', sans-serif; transition: border 0.2s;"
-                    onfocus="this.style.borderColor='rgba(229,193,88,0.5)'" onblur="this.style.borderColor='rgba(229,193,88,0.15)'" />
+                    class="form-input" style="border-radius: 12px; padding: 14px 18px;" />
                 </div>
                 <div>
-                  <label style="display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ash-gray); margin-bottom: 6px;">Email Address</label>
+                  <label class="form-label">Email Address</label>
                   <input type="email" id="reg-email" placeholder="you@example.com" required
-                    style="width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(229,193,88,0.15); border-radius: 8px; color: #fff; font-size: 15px; font-family: 'Inter', sans-serif; transition: border 0.2s;"
-                    onfocus="this.style.borderColor='rgba(229,193,88,0.5)'" onblur="this.style.borderColor='rgba(229,193,88,0.15)'" />
+                    class="form-input" style="border-radius: 12px; padding: 14px 18px;" />
                 </div>
                 <div>
-                  <label style="display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ash-gray); margin-bottom: 6px;">Phone Number</label>
+                  <label class="form-label">Phone Number</label>
                   <input type="tel" id="reg-phone" placeholder="+1 (555) 000-0000" required
-                    style="width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(229,193,88,0.15); border-radius: 8px; color: #fff; font-size: 15px; font-family: 'Inter', sans-serif; transition: border 0.2s;"
-                    onfocus="this.style.borderColor='rgba(229,193,88,0.5)'" onblur="this.style.borderColor='rgba(229,193,88,0.15)'" />
+                    class="form-input" style="border-radius: 12px; padding: 14px 18px;" />
                 </div>
                 <button type="submit"
-                  style="width: 100%; padding: 14px 24px; background: linear-gradient(135deg, #E5C158, #D4AF37); color: #0B0C0E; font-weight: 700; font-size: 15px; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.02em;">
+                  style="width: 100%; padding: 14px 24px; background: linear-gradient(135deg, #E5C158, #E5C158); color: #06070A; font-weight: 700; font-size: 15px; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.02em;">
                   Reserve My Genesis Spot →
                 </button>
               </form>
@@ -821,14 +818,14 @@
         <p style="font-size: 17px; color: var(--color-ash-gray); line-height: 1.7; max-width: 580px; margin: 0 auto 2.5rem;">
           No tournament details, broker connections, or platform mechanics will be revealed until the 10,000 Genesis milestone is reached. Secure your position early.
         </p>
-        <div style="display: inline-flex; align-items: center; gap: 16px; padding: 20px 32px; background: rgba(212, 175, 55, 0.04); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 12px;">
-          <div style="width: 8px; height: 8px; border-radius: 50%; background: #D4AF37; box-shadow: 0 0 12px rgba(212, 175, 55, 0.6); animation: pulse-glow 2s ease-in-out infinite;"></div>
+        <div style="display: inline-flex; align-items: center; gap: 16px; padding: 20px 32px; background: rgba(229, 193, 88, 0.04); border: 1px solid rgba(229, 193, 88, 0.15); border-radius: 12px;">
+          <div style="width: 8px; height: 8px; border-radius: 50%; background: #E5C158; box-shadow: 0 0 12px rgba(229, 193, 88, 0.6); animation: pulse-glow 2s ease-in-out infinite;"></div>
           <span style="font-size: 14px; font-weight: 500; color: #9A9A9A; letter-spacing: 0.03em;">Genesis spots are limited. The clock is ticking.</span>
         </div>
         <style>
           @keyframes pulse-glow {
-            0%, 100% { opacity: 1; box-shadow: 0 0 12px rgba(212, 175, 55, 0.6); }
-            50% { opacity: 0.5; box-shadow: 0 0 20px rgba(212, 175, 55, 0.8); }
+            0%, 100% { opacity: 1; box-shadow: 0 0 12px rgba(229, 193, 88, 0.6); }
+            50% { opacity: 0.5; box-shadow: 0 0 20px rgba(229, 193, 88, 0.8); }
           }
         </style>
       </div>
@@ -884,7 +881,7 @@
 
   
     <!-- RISK DISCLAIMER -->
-    <div style="padding: 20px 24px; border-top: 1px solid #0a0a0a; text-align: center;">
+    <div style="padding: 20px 24px; border-top: 1px solid #06070A; text-align: center;">
       <p style="font-size: 11px; color: #444; max-width: 600px; margin: 0 auto; line-height: 1.5;">
         Trading foreign exchange, CFDs and other leveraged products carries a high level of risk and may not be suitable for all investors. 
         You could lose some or all of your invested capital. Past performance does not guarantee future results. 
@@ -898,7 +895,7 @@
       <div class="footer-content">
         <div class="footer-brand">
           <svg class="fortrex-logo-svg footer-logo-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 28px; height: 28px; margin-right: 12px; flex-shrink: 0;"><defs><linearGradient id="ff-signinht" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E5C158"/><stop offset="100%" stop-color="#B8860B"/></linearGradient><linearGradient id="ffl-signinht" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F0D780"/><stop offset="100%" stop-color="#E5C158"/></linearGradient></defs><path d="M32 4 L56 14 L56 36 C56 48 44 56 32 60 C20 56 8 48 8 36 L8 14 Z" stroke="url(#ff-signinht)" stroke-width="2" fill="none" stroke-linejoin="round"/><path d="M32 10 L50 18 L50 35 C50 44 41 50 32 53 C23 50 14 44 14 35 L14 18 Z" stroke="url(#ff-signinht)" stroke-width="0.8" fill="none" stroke-linejoin="round" opacity="0.4"/><path d="M20 22 L40 22" stroke="url(#ffl-signinht)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 22 L20 44" stroke="url(#ffl-signinht)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 33 L35 33" stroke="url(#ffl-signinht)" stroke-width="2" stroke-linecap="round"/><path d="M26 16 L29 13 L32 16 L35 13 L38 16" stroke="url(#ff-signinht)" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><path d="M18 48 L46 48" stroke="url(#ff-signinht)" stroke-width="0.6" opacity="0.3"/></svg>
-          <span class="nav-wordmark" style="color: #EACA7A; font-weight: 700;">FORTREX</span>
+          <span class="nav-wordmark" style="color: #E5C158; font-weight: 700;">FORTREX</span>
         </div>
         <div class="footer-links">
           <a href="index.html" class="footer-link">Home</a>

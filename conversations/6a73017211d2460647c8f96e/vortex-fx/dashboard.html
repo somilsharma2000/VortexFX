@@ -19,14 +19,14 @@
        Pure Black Void · Gold & Purple Accents · Monolithic Design
        ========================================================================== */
     :root {
-      --bg-dark: #000000;
-      --card-bg: #111111;
-      --card-bg-gradient: linear-gradient(180deg, #121212 0%, #0A0A0A 100%);
+      --bg-dark: #06070A;
+      --card-bg: #06070A;
+      --card-bg-gradient: linear-gradient(180deg, #06070A 0%, #06070A 100%);
       --card-border: #222222;
-      --gold-primary: #EACA7A;
-      --gold-glow: rgba(234, 202, 122, 0.25);
-      --purple-accent: #D4AF37;
-      --purple-glow: rgba(212, 175, 55, 0.25);
+      --gold-primary: #E5C158;
+      --gold-glow: rgba(229, 193, 88, 0.25);
+      --purple-accent: #E5C158;
+      --purple-glow: rgba(229, 193, 88, 0.25);
       --text-muted: #888888;
       --text-bright: #FFFFFF;
       --font-body: 'Inter', -apple-system, sans-serif;
@@ -96,7 +96,7 @@
       border-radius: 16px;
       padding: 24px;
       backdrop-filter: blur(12px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 30px rgba(6, 7, 10,0.5);
       position: relative;
       overflow: hidden;
       display: flex;
@@ -154,15 +154,15 @@
     }
 
     .btn-gold {
-      background: linear-gradient(135deg, #EACA7A 0%, #C8AA78 100%);
-      color: #000000;
+      background: linear-gradient(135deg, #E5C158 0%, #E5C158 100%);
+      color: #06070A;
       box-shadow: 0 4px 15px var(--gold-glow);
     }
 
     .btn-gold:hover {
-      background: linear-gradient(135deg, #EACA7A 0%, #EACA7A 100%);
+      background: linear-gradient(135deg, #E5C158 0%, #E5C158 100%);
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(234, 202, 122, 0.4);
+      box-shadow: 0 6px 20px rgba(229, 193, 88, 0.4);
     }
 
     .btn-gold-rex {
@@ -175,7 +175,7 @@
     .btn-gold-rex:hover {
       background: #7C3AED;
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+      box-shadow: 0 6px 20px rgba(229, 193, 88, 0.4);
     }
 
     .btn-ghost {
@@ -211,7 +211,7 @@
 
     .form-input, .form-select {
       width: 100%;
-      background: #080808;
+      background: #06070A;
       border: 1px solid #222222;
       border-radius: 8px;
       padding: 12px 14px;
@@ -228,7 +228,7 @@
     }
 
     .form-select option {
-      background: #111111;
+      background: #06070A;
       color: #FFFFFF;
     }
 
@@ -246,7 +246,7 @@
     }
 
     .status-unsubmitted { background: rgba(136, 138, 143, 0.15); color: #888888; border: 1px solid #333; }
-    .status-pending { background: rgba(234, 179, 8, 0.15); color: #EAB308; border: 1px solid rgba(234, 179, 8, 0.3); }
+    .status-pending { background: rgba(234, 179, 8, 0.15); color: #E5C158; border: 1px solid rgba(234, 179, 8, 0.3); }
     .status-approved { background: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3); }
     .status-rejected { background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3); }
 
@@ -264,10 +264,10 @@
     }
 
     .class-badge.unrated { background: rgba(136, 138, 143, 0.15); color: #888888; border: 1px solid #333; }
-    .class-badge.bronze { background: rgba(180, 83, 9, 0.15); color: #CD7F32; border: 1px solid rgba(180, 83, 9, 0.4); }
+    .class-badge.bronze { background: rgba(180, 83, 9, 0.15); color: #E5C158; border: 1px solid rgba(180, 83, 9, 0.4); }
     .class-badge.silver { background: rgba(156, 163, 175, 0.15); color: #C0C0C0; border: 1px solid rgba(156, 163, 175, 0.4); }
-    .class-badge.gold { background: rgba(234, 202, 122, 0.15); color: #EACA7A; border: 1px solid rgba(234, 202, 122, 0.4); }
-    .class-badge.platinum { background: rgba(212, 175, 55, 0.15); color: #D4AF37; border: 1px solid rgba(212, 175, 55, 0.4); }
+    .class-badge.gold { background: rgba(229, 193, 88, 0.15); color: #E5C158; border: 1px solid rgba(229, 193, 88, 0.4); }
+    .class-badge.platinum { background: rgba(229, 193, 88, 0.15); color: #E5C158; border: 1px solid rgba(229, 193, 88, 0.4); }
     .class-badge.diamond { background: rgba(56, 189, 248, 0.15); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.4); }
 
     /* Grid Formats */
@@ -323,7 +323,7 @@
     }
 
     .shop-card-item {
-      background: #080808;
+      background: #06070A;
       border: 1px solid #222222;
       border-radius: 12px;
       padding: 16px;
@@ -334,7 +334,7 @@
     .shop-card-overlay {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.82);
+      background: rgba(6, 7, 10, 0.82);
       backdrop-filter: blur(3px);
       display: flex;
       align-items: center;
@@ -343,7 +343,7 @@
       font-weight: 700;
       letter-spacing: 0.1em;
       color: var(--gold-primary);
-      border: 1px solid rgba(234, 202, 122, 0.3);
+      border: 1px solid rgba(229, 193, 88, 0.3);
       border-radius: 12px;
       text-transform: uppercase;
     }
@@ -352,7 +352,7 @@
     .bp-progress-track {
       width: 100%;
       height: 16px;
-      background: #080808;
+      background: #06070A;
       border: 1px solid #222222;
       border-radius: 9999px;
       overflow: hidden;
@@ -362,10 +362,10 @@
 
     .bp-progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #EACA7A, #FFD700);
+      background: linear-gradient(90deg, #E5C158, #E5C158);
       border-radius: 9999px;
       transition: width 1s ease;
-      box-shadow: 0 0 12px rgba(234, 202, 122, 0.5);
+      box-shadow: 0 0 12px rgba(229, 193, 88, 0.5);
     }
 
     /* Task Board */
@@ -379,7 +379,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #080808;
+      background: #06070A;
       border: 1px solid #222222;
       border-radius: 12px;
       padding: 12px 16px;
@@ -394,8 +394,8 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: rgba(234, 202, 122, 0.1);
-      border: 1px solid rgba(234, 202, 122, 0.2);
+      background: rgba(229, 193, 88, 0.1);
+      border: 1px solid rgba(229, 193, 88, 0.2);
       color: var(--gold-primary);
       display: flex;
       align-items: center;
@@ -417,7 +417,7 @@
       text-align: center;
       border-radius: 8px;
       border: 1px solid #222;
-      background: #080808;
+      background: #06070A;
       color: #888;
       cursor: pointer;
       font-weight: 600;
@@ -454,12 +454,12 @@
       letter-spacing: 0.05em;
       color: var(--text-muted);
       padding: 8px 12px;
-      border-bottom: 1px solid #1a1a1a;
+      border-bottom: 1px solid #06070A;
     }
 
     .trades-table td {
       padding: 10px 12px;
-      border-bottom: 1px solid #0f0f0f;
+      border-bottom: 1px solid #06070A;
     }
 
     /* Canvas Card */
@@ -476,13 +476,13 @@
     .toast-popup {
       position: fixed;
       bottom: 24px; right: 24px;
-      background: #111111;
+      background: #06070A;
       border: 1px solid var(--gold-primary);
       color: #ffffff;
       padding: 14px 24px;
       border-radius: 12px;
       z-index: 9999;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      box-shadow: 0 10px 30px rgba(6, 7, 10,0.8);
       font-size: 13px;
       display: flex;
       align-items: center;
@@ -544,16 +544,16 @@
 <body>
   <!-- AUTH CHECK OVERLAY -->
   <div id="auth-overlay" style="position: fixed; inset: 0; z-index: 99999; background: #06070A; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 20px; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; text-align: center; padding: 24px; color: #FFFFFF;">
-    <div id="auth-overlay-card" style="max-width: 440px; width: 100%; padding: 40px 32px; background: rgba(18, 20, 29, 0.85); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 20px; backdrop-filter: blur(16px); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(212, 175, 55, 0.1); display: flex; flex-direction: column; align-items: center; gap: 16px;">
+    <div id="auth-overlay-card" style="max-width: 440px; width: 100%; padding: 40px 32px; background: rgba(18, 20, 29, 0.85); border: 1px solid rgba(229, 193, 88, 0.25); border-radius: 20px; backdrop-filter: blur(16px); box-shadow: 0 20px 50px rgba(6, 7, 10, 0.85), 0 0 30px rgba(229, 193, 88, 0.1); display: flex; flex-direction: column; align-items: center; gap: 16px;">
       <!-- Brand Logo -->
       <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
         <svg class="fortrex-logo-svg footer-logo-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 28px; height: 28px; margin-right: 12px; flex-shrink: 0;"><defs><linearGradient id="ff-dashboar" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E5C158"/><stop offset="100%" stop-color="#B8860B"/></linearGradient><linearGradient id="ffl-dashboar" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F0D780"/><stop offset="100%" stop-color="#E5C158"/></linearGradient></defs><path d="M32 4 L56 14 L56 36 C56 48 44 56 32 60 C20 56 8 48 8 36 L8 14 Z" stroke="url(#ff-dashboar)" stroke-width="2" fill="none" stroke-linejoin="round"/><path d="M32 10 L50 18 L50 35 C50 44 41 50 32 53 C23 50 14 44 14 35 L14 18 Z" stroke="url(#ff-dashboar)" stroke-width="0.8" fill="none" stroke-linejoin="round" opacity="0.4"/><path d="M20 22 L40 22" stroke="url(#ffl-dashboar)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 22 L20 44" stroke="url(#ffl-dashboar)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 33 L35 33" stroke="url(#ffl-dashboar)" stroke-width="2" stroke-linecap="round"/><path d="M26 16 L29 13 L32 16 L35 13 L38 16" stroke="url(#ff-dashboar)" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><path d="M18 48 L46 48" stroke="url(#ff-dashboar)" stroke-width="0.6" opacity="0.3"/></svg>
-        <span style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: #D4AF37; letter-spacing: 1px;">FORTREX</span>
+        <span style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: #E5C158; letter-spacing: 1px;">FORTREX</span>
       </div>
 
       <!-- Status Icon -->
-      <div id="auth-status-icon" style="width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(212, 175, 55, 0.12); border: 1px solid rgba(212, 175, 55, 0.35);">
-        <div class="auth-spinner" style="width: 24px; height: 24px; border: 3px solid rgba(212, 175, 55, 0.2); border-top-color: #D4AF37; border-radius: 50%; animation: auth-spin 0.9s linear infinite;"></div>
+      <div id="auth-status-icon" style="width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(229, 193, 88, 0.12); border: 1px solid rgba(229, 193, 88, 0.35);">
+        <div class="auth-spinner" style="width: 24px; height: 24px; border: 3px solid rgba(229, 193, 88, 0.2); border-top-color: #E5C158; border-radius: 50%; animation: auth-spin 0.9s linear infinite;"></div>
       </div>
 
       <!-- Status Title -->
@@ -601,7 +601,6 @@
       <li><a href="checkin.html" class="nav-link nav-internal" style="display:none">Check-In</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="signin.html" class="nav-link" style="text-transform: uppercase;">Sign In</a>
       <a href="signin.html" class="btn-primary" style="border-radius: 9999px;">Enter Arena</a>
       <div class="hamburger" aria-label="Toggle Menu">
         <span></span><span></span><span></span>
@@ -616,7 +615,7 @@
     <div class="dash-header-row">
       <div>
         <div class="welcome-title">
-          Welcome <span style="color: #EACA7A;">back.</span> <span id="dash-user-name">Trader</span>
+          Welcome <span style="color: #E5C158;">back.</span> <span id="dash-user-name">Trader</span>
         </div>
         <div class="welcome-subtitle">FORTREX Member Dashboard · Command Center</div>
       </div>
@@ -633,14 +632,14 @@
         <div>
           <div class="card-title-bar">
             <span class="card-label"><span class="icon">⚡</span> REX BALANCE</span>
-            <span class="status-badge" style="background: rgba(234,202,122,0.1); color: #EACA7A; border: 1px solid rgba(234,202,122,0.3);">ACTIVE</span>
+            <span class="status-badge" style="background: rgba(229, 193, 88,0.1); color: #E5C158; border: 1px solid rgba(229, 193, 88,0.3);">ACTIVE</span>
           </div>
           <div style="margin: 12px 0;">
             <span class="font-mono text-gold" id="dash-balance-num" style="font-size: 42px; font-weight: 700; line-height: 1;">0</span>
             <span class="text-gold" style="font-size: 20px; font-weight: 700; margin-left: 6px;">REX</span>
           </div>
         </div>
-        <div style="border-top: 1px solid #1a1a1a; padding-top: 14px; font-size: 12px; color: var(--text-muted);">
+        <div style="border-top: 1px solid #06070A; padding-top: 14px; font-size: 12px; color: var(--text-muted);">
           Earned <span class="font-mono text-bright" id="dash-rex-earned">0</span> / 
           Spent <span class="font-mono text-bright" id="dash-rex-spent">0</span> / 
           Streak <span class="font-mono text-gold" id="dash-rex-streak">0</span> days
@@ -652,7 +651,7 @@
         <div>
           <div class="card-title-bar">
             <span class="card-label"><span class="icon">🔥</span> DAILY CHECK-IN</span>
-            <span id="dash-checkin-streak-badge" class="font-mono" style="font-size: 12px; color: #EACA7A;">🔥 <span id="dash-checkin-streak-count">0</span> Days</span>
+            <span id="dash-checkin-streak-badge" class="font-mono" style="font-size: 12px; color: #E5C158;">🔥 <span id="dash-checkin-streak-count">0</span> Days</span>
           </div>
           <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
             Claim your daily +20 REX ritual reward. Keep your streak alive!
@@ -730,7 +729,7 @@
         <div>
           <div class="card-title-bar">
             <span class="card-label"><span class="icon">🎯</span> PROFILE COMPLETION</span>
-            <span id="profile-complete-badge" class="status-badge" style="background: rgba(234,202,122,0.1); color: #EACA7A;">+250 REX BONUS</span>
+            <span id="profile-complete-badge" class="status-badge" style="background: rgba(229, 193, 88,0.1); color: #E5C158;">+250 REX BONUS</span>
           </div>
           <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
             Complete your trader personality parameters to earn a one-time +250 REX bonus.
@@ -777,7 +776,7 @@
             <span id="dash-class-badge" class="class-badge gold">UNRATED</span>
           </div>
           
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; background: #080808; padding: 14px 18px; border-radius: 12px; border: 1px solid #1f1f1f;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; background: #06070A; padding: 14px 18px; border-radius: 12px; border: 1px solid #06070A;">
             <div>
               <div style="font-size: 14px; font-weight: 600; color: #fff;">Class Unlock Progression</div>
               <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Log 5 trades in 30 days to unlock</div>
@@ -802,7 +801,7 @@
         <div>
           <div class="card-title-bar">
             <span class="card-label"><span class="icon">💸</span> SEND REX</span>
-            <span class="status-badge" style="background: rgba(212,175,55,0.15); color: #D4AF37;">DEFLATIONARY</span>
+            <span class="status-badge" style="background: rgba(229, 193, 88,0.15); color: #E5C158;">DEFLATIONARY</span>
           </div>
           <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
             Transfer REX to peer traders. Note: 10% of every send is permanently burned (deflationary).
@@ -928,7 +927,7 @@
             <span class="status-badge" style="background: rgba(16,185,129,0.15); color: #10B981;">LIVE</span>
           </div>
 
-          <div style="background: rgba(234,202,122,0.08); border: 1px dashed rgba(234,202,122,0.3); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; text-align: center;">
+          <div style="background: rgba(229, 193, 88,0.08); border: 1px dashed rgba(229, 193, 88,0.3); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; text-align: center;">
             <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Community Prize Pool</div>
             <div style="font-size: 16px; font-weight: 700; color: var(--gold-primary); margin-top: 2px;">
               40% of partnership revenue, split top 10
@@ -951,7 +950,7 @@
         <div>
           <div class="card-title-bar">
             <span class="card-label"><span class="icon">🚀</span> SQUAD INVITE</span>
-            <span class="status-badge" style="background: rgba(234,202,122,0.1); color: #EACA7A;">3 PASSES LEFT THIS MONTH</span>
+            <span class="status-badge" style="background: rgba(229, 193, 88,0.1); color: #E5C158;">3 PASSES LEFT THIS MONTH</span>
           </div>
 
           <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
@@ -969,12 +968,12 @@
             <button onclick="shareSocial('x')" class="btn-pill btn-ghost btn-sm" style="flex: 1;">X Post</button>
           </div>
 
-          <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #1a1a1a;">
+          <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #06070A;">
             <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">
               <span>Referral Tier Ladder</span>
               <span id="ref-progress-text" style="color: #fff;">2 / 5 Referrals</span>
             </div>
-            <div style="height: 6px; background: #080808; border-radius: 999px; overflow: hidden;">
+            <div style="height: 6px; background: #06070A; border-radius: 999px; overflow: hidden;">
               <div id="ref-progress-fill" style="width: 40%; height: 100%; background: var(--gold-primary);"></div>
             </div>
           </div>
@@ -986,7 +985,7 @@
         <div>
           <div class="card-title-bar">
             <span class="card-label"><span class="icon">🛍️</span> REX SHOP</span>
-            <span class="status-badge" style="background: rgba(212,175,55,0.15); color: #D4AF37;">PREVIEW</span>
+            <span class="status-badge" style="background: rgba(229, 193, 88,0.15); color: #E5C158;">PREVIEW</span>
           </div>
 
           <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
@@ -1110,7 +1109,7 @@
       <div class="footer-content">
         <div class="footer-brand">
           <svg class="fortrex-logo-svg footer-logo-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 28px; height: 28px; margin-right: 12px; flex-shrink: 0;"><defs><linearGradient id="ff-dashboar" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E5C158"/><stop offset="100%" stop-color="#B8860B"/></linearGradient><linearGradient id="ffl-dashboar" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F0D780"/><stop offset="100%" stop-color="#E5C158"/></linearGradient></defs><path d="M32 4 L56 14 L56 36 C56 48 44 56 32 60 C20 56 8 48 8 36 L8 14 Z" stroke="url(#ff-dashboar)" stroke-width="2" fill="none" stroke-linejoin="round"/><path d="M32 10 L50 18 L50 35 C50 44 41 50 32 53 C23 50 14 44 14 35 L14 18 Z" stroke="url(#ff-dashboar)" stroke-width="0.8" fill="none" stroke-linejoin="round" opacity="0.4"/><path d="M20 22 L40 22" stroke="url(#ffl-dashboar)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 22 L20 44" stroke="url(#ffl-dashboar)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 33 L35 33" stroke="url(#ffl-dashboar)" stroke-width="2" stroke-linecap="round"/><path d="M26 16 L29 13 L32 16 L35 13 L38 16" stroke="url(#ff-dashboar)" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><path d="M18 48 L46 48" stroke="url(#ff-dashboar)" stroke-width="0.6" opacity="0.3"/></svg>
-          <span class="nav-wordmark" style="color: #EACA7A; font-weight: 700;">FORTREX</span>
+          <span class="nav-wordmark" style="color: #E5C158; font-weight: 700;">FORTREX</span>
         </div>
         <div class="footer-links">
           <a href="index.html" class="footer-link">Home</a>
@@ -1169,7 +1168,7 @@
         }
         if (statusAction) {
           statusAction.innerHTML = `
-            <button onclick="window.location.reload()" style="background: linear-gradient(135deg, #D4AF37, #AA820A); color: #06070A; border: none; padding: 12px 28px; border-radius: 9999px; font-weight: 700; cursor: pointer; font-size: 14px; font-family: inherit; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); transition: transform 0.2s, opacity 0.2s; margin-top: 4px;">
+            <button onclick="window.location.reload()" style="background: linear-gradient(135deg, #E5C158, #B8860B); color: #06070A; border: none; padding: 12px 28px; border-radius: 9999px; font-weight: 700; cursor: pointer; font-size: 14px; font-family: inherit; box-shadow: 0 4px 15px rgba(229, 193, 88, 0.3); transition: transform 0.2s, opacity 0.2s; margin-top: 4px;">
               Retry Page
             </button>
           `;
@@ -1198,13 +1197,13 @@
           console.warn('User not logged in. Showing Authentication Required overlay...');
           
           if (statusIcon) {
-            statusIcon.style.background = 'rgba(212, 175, 55, 0.12)';
-            statusIcon.style.borderColor = 'rgba(212, 175, 55, 0.35)';
+            statusIcon.style.background = 'rgba(229, 193, 88, 0.12)';
+            statusIcon.style.borderColor = 'rgba(229, 193, 88, 0.35)';
             statusIcon.innerHTML = '<span style="font-size:24px;">🔒</span>';
           }
           if (statusTitle) {
             statusTitle.textContent = 'Authentication Required';
-            statusTitle.style.color = '#D4AF37';
+            statusTitle.style.color = '#E5C158';
           }
           if (statusDesc) {
             statusDesc.textContent = 'You must be signed in to access the FORTREX trading dashboard.';
@@ -1215,10 +1214,10 @@
           const updateCountdownUI = () => {
             if (statusAction) {
               statusAction.innerHTML = `
-                <div id="auth-countdown-msg" style="font-size: 15px; font-weight: 600; color: #D4AF37; margin-bottom: 12px; font-family: 'Space Grotesk', sans-serif;">
+                <div id="auth-countdown-msg" style="font-size: 15px; font-weight: 600; color: #E5C158; margin-bottom: 12px; font-family: 'Space Grotesk', sans-serif;">
                   Redirecting to sign in in ${countdownSeconds}...
                 </div>
-                <a href="signin.html" style="display: inline-block; background: linear-gradient(135deg, #D4AF37, #AA820A); color: #06070A; padding: 10px 26px; border-radius: 9999px; font-weight: 700; text-decoration: none; font-size: 13px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);">
+                <a href="signin.html" style="display: inline-block; background: linear-gradient(135deg, #E5C158, #B8860B); color: #06070A; padding: 10px 26px; border-radius: 9999px; font-weight: 700; text-decoration: none; font-size: 13px; box-shadow: 0 4px 15px rgba(229, 193, 88, 0.25);">
                   Sign In Now
                 </a>
               `;
@@ -1235,7 +1234,7 @@
               clearInterval(timer);
               if (statusAction) {
                 statusAction.innerHTML = `
-                  <div style="font-size: 15px; font-weight: 600; color: #D4AF37; font-family: 'Space Grotesk', sans-serif;">
+                  <div style="font-size: 15px; font-weight: 600; color: #E5C158; font-family: 'Space Grotesk', sans-serif;">
                     Redirecting to sign in...
                   </div>
                 `;
@@ -1570,7 +1569,7 @@
         const res = await FORTREX_AUTH.callFunction('getPublicTournaments', {});
         if (res && res.success && res.tournaments && res.tournaments.length > 0) {
           container.innerHTML = res.tournaments.slice(0, 3).map(t => `
-            <div style="display: flex; justify-content: space-between; align-items: center; background: #080808; border: 1px solid #1f1f1f; border-radius: 12px; padding: 12px 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; background: #06070A; border: 1px solid #06070A; border-radius: 12px; padding: 12px 16px;">
               <div>
                 <div style="font-size: 13px; font-weight: 600; color: #fff;">${t.title || 'Weekly Sprint'}</div>
                 <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Prize: ${t.prize_pool || '$500 Pool'}</div>
@@ -1586,14 +1585,14 @@
 
       // Default Tournaments
       container.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; background: #080808; border: 1px solid #1f1f1f; border-radius: 12px; padding: 12px 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: #06070A; border: 1px solid #06070A; border-radius: 12px; padding: 12px 16px;">
           <div>
             <div style="font-size: 13px; font-weight: 600; color: #fff;">XAUUSD Gold Sprint</div>
             <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Top 10 split 40% revenue share</div>
           </div>
           <button onclick="enterTournament('gold-sprint')" class="btn-pill btn-gold btn-sm">ENTER · FREE</button>
         </div>
-        <div style="display: flex; justify-content: space-between; align-items: center; background: #080808; border: 1px solid #1f1f1f; border-radius: 12px; padding: 12px 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: #06070A; border: 1px solid #06070A; border-radius: 12px; padding: 12px 16px;">
           <div>
             <div style="font-size: 13px; font-weight: 600; color: #fff;">Forex Majors Showdown</div>
             <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Monthly Leaderboard Battle</div>
@@ -1697,12 +1696,12 @@
       ctx.fillRect(0, 0, W, H);
 
       // Gold Border
-      ctx.strokeStyle = '#EACA7A';
+      ctx.strokeStyle = '#E5C158';
       ctx.lineWidth = 2;
       ctx.strokeRect(12, 12, W - 24, H - 24);
 
       // Hexagon Logo Graphic
-      ctx.strokeStyle = '#EACA7A';
+      ctx.strokeStyle = '#E5C158';
       ctx.lineWidth = 2;
       ctx.beginPath();
       const cx = 50, cy = 50, r = 18;
@@ -1716,7 +1715,7 @@
       ctx.stroke();
 
       // Header Text
-      ctx.fillStyle = '#EACA7A';
+      ctx.fillStyle = '#E5C158';
       ctx.font = 'bold 18px Space Grotesk, sans-serif';
       ctx.fillText('FORTREX', 80, 52);
 
@@ -1730,7 +1729,7 @@
       ctx.font = 'bold 24px Space Grotesk, sans-serif';
       ctx.fillText(t.username || t.discord_username || 'Active Trader', 32, 130);
 
-      ctx.fillStyle = '#EACA7A';
+      ctx.fillStyle = '#E5C158';
       ctx.font = '700 13px Inter, sans-serif';
       ctx.fillText((t.trader_class || 'UNRATED').toUpperCase() + ' CLASS', 32, 150);
 
@@ -1743,7 +1742,7 @@
 
       stats.forEach((s, i) => {
         const x = 32 + i * 180;
-        ctx.fillStyle = '#EACA7A';
+        ctx.fillStyle = '#E5C158';
         ctx.font = 'bold 24px JetBrains Mono, monospace';
         ctx.fillText(s.value, x, 220);
 
