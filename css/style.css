@@ -162,6 +162,10 @@ img, svg {
 }
 
 /* --- NAVIGATION --- */
+
+/* Global: push content below fixed nav */
+main { padding-top: 90px; }
+
 .nav {
   position: fixed;
   top: 0;
@@ -1455,4 +1459,8 @@ img, svg {
   html {
     scroll-behavior: auto;
   }
+}
+
+@media (max-width: 768px) {
+  main { padding-top: 80px !important; }
 }

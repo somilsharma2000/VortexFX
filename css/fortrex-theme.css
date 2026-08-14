@@ -1,3 +1,6 @@
+/* Global: ensure content sits below fixed nav */
+main { padding-top: 90px !important; }
+
 /* ═══════════════════════════════════════════════════════════════
    FORTREX FX — Ultra-Premium Trading Portal
    Production CSS · v3.0 — Full Re-Architecture
