@@ -111,11 +111,11 @@ body.is-logged-in .nav-internal { display: block; }
 .card-featured { border-color: var(--border-glow); background: linear-gradient(180deg, rgba(229,193,88,0.04), var(--bg-surface)); }
 
 /* HERO */
-.hero-brand-mark { display: flex; flex-direction: column; align-items: center; margin-bottom: 40px; }
-.hero-brand-mark .king-icon-wrap { position: relative; width: 100%; max-width: 520px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+.hero-brand-mark { display: flex; flex-direction: column; align-items: center; margin-top: 24px; margin-bottom: 40px; }
+.hero-brand-mark .king-icon-wrap { position: relative; width: 100%; max-width: 440px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
 .hero-brand-mark .king-icon-wrap::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 140%; height: 140%; background: radial-gradient(ellipse, rgba(229,193,88,0.10) 0%, transparent 65%); pointer-events: none; }
-.hero-brand-mark .king-icon-wrap img { width: 100%; max-width: 520px; height: auto; object-fit: contain; position: relative; z-index: 1; filter: drop-shadow(0 8px 24px rgba(212, 175, 55, 0.2)); }
-@media (max-width: 640px) { .hero-brand-mark .king-icon-wrap { max-width: 340px; } .hero-brand-mark .king-icon-wrap img { max-width: 340px; } }
+.hero-brand-mark .king-icon-wrap img { width: 100%; max-width: 440px; height: auto; object-fit: contain; position: relative; z-index: 1; filter: drop-shadow(0 8px 24px rgba(212, 175, 55, 0.2)); }
+@media (max-width: 640px) { .hero-brand-mark .king-icon-wrap { max-width: 280px; } .hero-brand-mark .king-icon-wrap img { max-width: 280px; } }
 .brand-name { font-family: var(--font-heading); font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 800; letter-spacing: 0.15em; background: linear-gradient(135deg, #FFFFFF 0%, var(--gold) 50%, #FFFFFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .brand-tagline { font-size: 13px; color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 8px; font-weight: 500; }
 
